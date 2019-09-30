@@ -10,9 +10,9 @@
         Inspiration by the work of alarm9k @ https://forums.bohemia.net/forums/topic/172270-smarter-tanks-script/
 
     Arguments:
-        0, vehicle which will do the movement 	[Object]
-        1, Direction which we wish to end up 	[Array] (Default -- nearest enemy)
-        2, acceptable threshold 				[Number] (Default : 18 degrees)
+        0, vehicle which will do the movement     [Object]
+        1, Direction which we wish to end up     [Array] (Default -- nearest enemy)
+        2, acceptable threshold                 [Number] (Default : 18 degrees)
 
     Other:
         Also thanks to Natalie.

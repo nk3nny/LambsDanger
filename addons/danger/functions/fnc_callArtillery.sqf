@@ -8,8 +8,8 @@
     Calls friendly artillery on target location! 
 
     Arguments 
-        0, unit doing the calling 	[Object]
-        1, target of artillery 		[Object or Object]
+        0, unit doing the calling     [Object]
+        1, target of artillery         [Object or Object]
 
     Other 
         Thanks Alex2k for doing the basic grunt work 
