@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 // Checks if unit is indoors
 // version 1.01
-// by nkenny 
+// by nkenny
 
 
 // init

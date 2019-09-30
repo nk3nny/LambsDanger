@@ -25,10 +25,10 @@ Arguments
 */
 
 // init
-params ["_pos",["_side",[100,100]],["_color","colorEAST"],["_brush","FDiagonal"],["_shape",false]]]; 
+params ["_pos",["_side",[100,100]],["_color","colorEAST"],["_brush","FDiagonal"],["_shape",false]]];
 _pos = _pos call bis_fnc_position;
 
-// create 
+// create
 private _m = createMarker [format["mzone_%1%2%3",(floor(_pos select 0)),(floor(_pos select 1)),count allmapMarkers],_pos];
 _m setMarkerShape "ELLIPSE";
 _m setmarkerColor _color;

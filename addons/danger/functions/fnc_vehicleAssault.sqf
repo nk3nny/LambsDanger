@@ -4,7 +4,7 @@
 // by nkenny
 
 /*
-    Arguments 
+    Arguments
     0, vehicle suppressing        [Object]
     1, position being suppressed  [Array]
     2, target of suppression      [Object]
@@ -36,8 +36,8 @@ if (!canFire _veh) exitWith {false};
 if (count _buildings > 0) then {
     _buildings = [_buildings,[],{_unit distance _x},"ASCEND"] call BIS_fnc_sortBy;
     _buildings = if (random 1 > 0.4) then {_buildings select 0} else {selectRandom _buildings};
-    _buildings = _buildings buildingPos -1; 
-}; 
+    _buildings = _buildings buildingPos -1;
+};
 
 // add predicted location -- just to ensure shots fired!
 _buildings pushBack _pos;

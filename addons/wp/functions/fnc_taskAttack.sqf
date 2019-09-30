@@ -7,7 +7,7 @@
   ** WAYPOINT EDITION ** 
   Design
     Creates 2-3 Search adnd Destroy waypoint 
-	Makes unit check buildings at site 
+    Makes unit check buildings at site 
 */
 
 // init 
@@ -28,15 +28,15 @@ _grp setSpeedMode "NORMAL";
 
 // add WP  
 for "_i" from 0 to 2 do {
-	_wp = _grp addWaypoint [_pos,_range * _i]; 
-	_wp setWaypointType (["MOVE","MOVE","SAD"] select _i); 
-	_wp setWaypointStatements ["true","
-		if (local this) then {
-			_buildings = [this,28,true] call EFUNC(danger,nearBuildings); 
-			_buildings pushBack getpos this; 
-			{_x doMove selectRandom _buildings;true} count thisList; 
-		};
-	"];
+    _wp = _grp addWaypoint [_pos,_range * _i]; 
+    _wp setWaypointType (["MOVE","MOVE","SAD"] select _i); 
+    _wp setWaypointStatements ["true","
+        if (local this) then {
+            _buildings = [this,28,true] call EFUNC(danger,nearBuildings); 
+            _buildings pushBack getpos this; 
+            {_x doMove selectRandom _buildings;true} count thisList; 
+        };
+    "];
 }; 
 
 // end 

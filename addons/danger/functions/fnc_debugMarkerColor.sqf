@@ -3,7 +3,7 @@
 // version 1.01
 // by nkenny
 
-// init 
+// init
 params ["_unit"];
 
 // return

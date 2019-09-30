@@ -6,7 +6,7 @@
 // init
 params ["_unit","_target",["_units",[]]];
 
-// find units 
+// find units
 if (_units isEqualTo []) then {
     _units = units group _unit;
 };
@@ -30,7 +30,7 @@ _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 40, g
 
         doStop _x;
         _x forceSpeed 25;
-        _x doMove (_pos getPos [10 + random 20,random 360]); 
+        _x doMove (_pos getPos [10 + random 20,random 360]);
         if !(stance _x isEqualTo "PRONE") then {
             _x switchMove selectRandom [
                 "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf",

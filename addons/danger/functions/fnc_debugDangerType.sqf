@@ -1,12 +1,12 @@
 #include "script_component.hpp"
 // DEBUG : return danger type
 // version 1.01
-// by nkenny 
+// by nkenny
 
 // init
 params ["_select"];
 
-// return 
+// return
 if (_select isEqualTo 0) exitWith {"Enemy Detected"};
 if (_select isEqualTo 1) exitWith {"Fire"};
 if (_select isEqualTo 2) exitWith {"Hit"};

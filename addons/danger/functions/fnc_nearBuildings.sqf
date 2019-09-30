@@ -5,10 +5,10 @@
 
 /*
     Arguments
-    0, _unit 		Unit in question			[Object]
-    1, _range 		Range buildings are found 	[Number] (Default 100m)
-    2, _housePos	Return house positions 		[Boolean] (default false)
-    3, _indoor		sort indoor house positions [Boolean] (default false)
+    0, _unit         Unit in question            [Object]
+    1, _range         Range buildings are found     [Number] (Default 100m)
+    2, _housePos    Return house positions         [Boolean] (default false)
+    3, _indoor        sort indoor house positions [Boolean] (default false)
 */
 
 // init
@@ -34,5 +34,3 @@ if (_housePos) then {
 
 // return
 _houses
-
-

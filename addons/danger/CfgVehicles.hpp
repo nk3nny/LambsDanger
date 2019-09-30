@@ -11,5 +11,5 @@ class CfgVehicles {
     };
     class Civilian_F : CAManBase {
         fsmDanger = QUOTE(PATHTOF2_SYS(PREFIX,COMPONENT,scripts\lambs_dangerCivilian.fsm));
-    }; 
+    };
 };

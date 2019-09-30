@@ -25,14 +25,14 @@ _unit forceSpeed selectRandom [-1,24,25];
 
 // Randomly scatter into buildings or hide!
 if (count _buildings > 0 && {random 1 > 0.05}) then {
-    doStop _unit; 
+    doStop _unit;
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4,0.7 - random 1.4,0]);
     _unit setUnitPosWeak "MIDDLE";
     if (GVAR(debug_functions)) then {systemchat format ["%1 hide in building",side _unit];};
 
 } else {
     _unit setUnitPosWeak "DOWN";
-    _newPos = (_unit getPos [50 + random _range,(_danger getDir _unit) + 45 - random 90]); 
+    _newPos = (_unit getPos [50 + random _range,(_danger getDir _unit) + 45 - random 90]);
     if (surfaceIsWater _newPos) exitWith {_unit suppressFor 5;};
     _unit doMove _newPos;
     if (GVAR(debug_functions)) then {systemchat format ["%1 hide in bush",side _unit];};

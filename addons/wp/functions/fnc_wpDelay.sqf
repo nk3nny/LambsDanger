@@ -4,13 +4,13 @@
 // by nkenny 
 
 /*
-	Arguments
-		0, Group				[Group]
-		1, Destination 			[array, object]
-		2, Distance threshold 	[Number]
+    Arguments
+        0, Group                [Group]
+        1, Destination             [array, object]
+        2, Distance threshold     [Number]
 
-	Returns 
-		true -- reached or dead! 
+    Returns 
+        true -- reached or dead! 
 
 */
 
