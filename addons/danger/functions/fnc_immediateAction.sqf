@@ -41,7 +41,7 @@ if (random 1 > 0.5) exitWith {
 if (random 1 > 0.9) exitWith {
     _unit switchMove "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon";
     _unit setUnitPosWeak "DOWN";
-    true
+    true 
 };
 
 // standing to crouched

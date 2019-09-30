@@ -18,7 +18,6 @@
 */
 
 // init
-// init
 params ["_unit","_target",["_pos",[]]];
 
 if (_pos isEqualTo []) then {

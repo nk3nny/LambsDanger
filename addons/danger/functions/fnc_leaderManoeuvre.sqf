@@ -41,8 +41,8 @@ _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 40, g
         };
     };
 
-  // end
-  true
+    // end
+    true
 
 } count (_units select {_x distance2d _unit < 300});
 
