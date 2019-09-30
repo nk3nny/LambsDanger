@@ -11,6 +11,9 @@ if (_units isEqualTo []) then {
     _units = units group _unit;
 };
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
+
 // find overwatch positions
 _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 40, getPosATL _unit] call BIS_fnc_findOverwatch;
 

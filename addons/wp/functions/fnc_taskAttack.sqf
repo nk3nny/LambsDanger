@@ -4,10 +4,10 @@
 // by nkenny
 
 /*
-  ** WAYPOINT EDITION **
-  Design
-    Creates 2-3 Search adnd Destroy waypoint
-    Makes unit check buildings at site
+    ** WAYPOINT EDITION **
+    Design
+        Creates 2-3 Search adnd Destroy waypoint
+        Makes unit check buildings at site
 */
 
 // init

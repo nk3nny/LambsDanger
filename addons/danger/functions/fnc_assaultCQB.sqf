@@ -120,6 +120,8 @@ _grp allowFleeing 0;
   _x disableAI "AUTOCOMBAT";
   _x disableAI "SUPPRESSION";
   _x enableIRLasers true;
+  _x setVariable [QGVAR(currentTarget), objNull];
+  _x setVariable [QGVAR(currentTask), "Assault CQB"];
   true
 } count units _grp;
 

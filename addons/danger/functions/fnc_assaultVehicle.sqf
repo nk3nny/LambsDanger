@@ -12,6 +12,9 @@ if (gunner vehicle _unit != _unit) exitWith {false};
 if !(_target isKindOf "Man") exitWith {false};
 if (speed vehicle _unit > 15) exitWith {false};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Assault Vehicle"];
+
 // settings
 vehicle _unit setVariable ["lastAction",time + 9 + random 20];
 private _veh = vehicle _unit;

@@ -37,7 +37,10 @@ _artillery select {
 };
 
 // exit on no ready artillery
-if (count _artillery < 1) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- no available artillery",side _unit]}};
+if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- no available artillery",side _unit]}};
+
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 
 // settings
 [_unit,["MountOptic"]] call FUNC(gesture);

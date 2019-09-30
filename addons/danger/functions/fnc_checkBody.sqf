@@ -24,9 +24,11 @@ doStop _this;
 
 // Not checked? Move in close
 if (count _body > 0) exitWith {
-
     // one body
     _body = _body select 0;
+
+    _unit setVariable [QGVAR(currentTarget), _body];
+    _unit setVariable [QGVAR(currentTask), "Check Body"];
 
     // do it
     [_unit,_body] spawn {

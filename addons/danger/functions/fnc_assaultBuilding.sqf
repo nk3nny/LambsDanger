@@ -19,6 +19,9 @@ if (count _buildings < 1) exitWith {
     _unit doFollow leader group _unit;
 };
 
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Assault Building"];
+
 // define building
 private _building = (_buildings select 0);
 

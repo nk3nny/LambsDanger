@@ -27,6 +27,9 @@ if (speed vehicle _unit > 10) exitWith {false};
 // Target dead? A little random to keep things interesting
 if (!alive _target && {random 1 > 0.8}) exitWith {false};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Suppress Vehicle"];
+
 // settings
 vehicle _unit setVariable ["lastAction",time + 9 + random 16];
 

@@ -21,6 +21,9 @@ if (_mode isEqualTo "disabled") exitWith {false};
 private ["_enemy","_targets","_units","_weapons"];
 _enemy = _unit targets [true,600,[],0,_pos];
 
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Leader Assess"];
+
 // update minimum delay
 [_unit,99,30] call FUNC(leaderModeUpdate);
 
@@ -30,6 +33,7 @@ if (count _enemy > 0) then {
     // Enemy is lower than ours
     _targets = _enemy select {(getposASL _x select 2) < ((getposASL _unit select 2) - 21)};
     if (count _targets > 0) then {
+        _unit setVariable [QGVAR(currentTarget), _targets select 0];
         [_unit,3,(_unit getHideFrom (_targets select 0))] call FUNC(leaderMode);
     };
 

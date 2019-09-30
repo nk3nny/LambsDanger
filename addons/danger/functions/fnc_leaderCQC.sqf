@@ -13,6 +13,9 @@ _inCQC = _inCQC select {_x distance2d _unit < 250};
 // buildings present? ignore
 if (count _inCQC > 0) exitWith {};
 
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Leader CQC"];
+
 // define buildings
 private _buildings = [_unit,_range] call FUNC(nearBuildings);
 _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit),[0,0]]) > 0};

@@ -20,6 +20,9 @@ if (vehicle _unit getVariable ["isArtillery",getNumber (configFile >> "CfgVehicl
     false
 };
 
+_unit setVariable [QGVAR(currentTarget), _pos];
+_unit setVariable [QGVAR(currentTask), "Vehicle Suppress"];
+
 // do it
 vehicle _unit doSuppressiveFire ((AGLtoASL _pos) vectorAdd [0.5 - random 1,0.5 - random 1,0.3 + random 1.3]);
 

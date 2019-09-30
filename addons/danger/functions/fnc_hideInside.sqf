@@ -20,6 +20,9 @@ if (_unit call FUNC(indoor)) exitWith {
     false
 };
 
+_unit setVariable [QGVAR(currentTarget), _danger];
+_unit setVariable [QGVAR(currentTask), "Hide"];
+
 // settings
 _unit forceSpeed selectRandom [-1,24,25];
 

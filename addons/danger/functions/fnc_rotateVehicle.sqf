@@ -34,6 +34,9 @@ if (_unit distance _target < GVAR(CQB_range)) exitWith {true};
 // within acceptble limits
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {true};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Rotate Vehicle"];
+
 // settings
 private _pos = [];
 private _min = 20;      // Minimum range

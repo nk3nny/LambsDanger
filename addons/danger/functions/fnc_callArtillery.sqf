@@ -27,6 +27,9 @@ if (!GVAR(WP)) exitWith {if (GVAR(debug_functions)) then {systemchat format ["Da
 _pos = _target call bis_fnc_position;
 if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 Artillery failed -- target too close",side _unit]}};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Call Artillery"];
+
 // settings
 private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit),[]];
 _artillery select {

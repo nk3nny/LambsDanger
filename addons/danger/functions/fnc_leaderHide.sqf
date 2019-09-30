@@ -10,6 +10,9 @@ if (_buildings isEqualTo []) then {
     _buildings = [_unit getPos [10,_target getDir _unit],45,true,true] call FUNC(nearBuildings);
 };
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Leader Hide"];
+
 // gesture
 [_unit,["gestureCover"]] call FUNC(gesture);
 
