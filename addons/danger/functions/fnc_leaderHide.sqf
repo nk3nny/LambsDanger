@@ -24,7 +24,7 @@ _units = _units select {isNull ObjectParent _x && {secondaryWeapon _x isEqualTo 
 
     // hide
     [_x,_target,45,_buildings] call FUNC(hideInside);
-    
+
     // end
     true
 

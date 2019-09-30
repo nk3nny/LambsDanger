@@ -25,10 +25,10 @@ if (count _units > count _buildings) then {_units resize (count _buildings);};
 
     // stance
     _x setUnitPosWeak selectRandom ["UP","UP","MIDDLE"];
-  
+
     // speed
     _x forceSpeed 24;
-  
+
     // move
     _x doMove (_buildings select _forEachIndex);
 

@@ -4,7 +4,7 @@
 // by nkenny 
 
 /*
-	Vehicle suppression
+    Vehicle suppression
 */
 
 // init 
@@ -16,9 +16,9 @@ if (gunner vehicle _unit != _unit) exitWith {false};
 
 // artillery (no tactical options)
 if (vehicle _unit getVariable ["isArtillery",getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
-		vehicle _unit setVariable ["lastAction",time + 999];
-		vehicle _unit setVariable ["isArtillery",true];
-		false
+        vehicle _unit setVariable ["lastAction",time + 999];
+        vehicle _unit setVariable ["isArtillery",true];
+        false
 };
 
 // high speed?

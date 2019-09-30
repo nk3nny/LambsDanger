@@ -5,10 +5,10 @@
 
 /*
 Arguments
-  0 position    [Array or Object]
-  1 text        [String] (Default "none")
-  2 colour      [String] (Default Black)
-  3 type        [String] (Default military dot)
+    0 position    [Array or Object]
+    1 text        [String] (Default "none")
+    2 colour      [String] (Default Black)
+    3 type        [String] (Default military dot)
 */
 
 // init

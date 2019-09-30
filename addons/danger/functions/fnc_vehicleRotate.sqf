@@ -39,8 +39,8 @@ if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_thr
 
 // settings 
 private _pos = [];
-private _min = 20;	// Minimum range
-private _i = 0; 	// iterations
+private _min = 20;      // Minimum range
+private _i = 0;         // iterations
 
 while {count _pos < 1} do {
     _pos = (_unit getPos [_min,_unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
