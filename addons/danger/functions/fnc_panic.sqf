@@ -25,6 +25,9 @@ if ((_unit getVariable ["ace_captives_isHandcuffed",false]) || {_unit getVariabl
 // settings
 private _indoor = _unit call FUNC(indoor);
 
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Panic"];
+
 // debug
 if (GVAR(debug_functions)) then {systemchat format ["%1 - %2 in panic",side _unit,name _unit];};
 

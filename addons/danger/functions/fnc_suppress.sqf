@@ -9,6 +9,9 @@ params ["_unit","_pos"];
 // no primary weapons exit?
 if (primaryWeapon _unit isEqualTo "") exitWith {false};
 
+_unit setVariable [QGVAR(currentTarget), _pos];
+_unit setVariable [QGVAR(currentTask), "Suppress"];
+
 // do it!
 _unit doSuppressiveFire ((AGLToASL _pos) vectorAdd [0,0,0.2 + random 1.2]);
 

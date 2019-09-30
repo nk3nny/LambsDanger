@@ -9,6 +9,9 @@ params ["_unit",["_range",25 + random [0,25,150]]];
 // settings
 private _veh = vehicle _unit;
 
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Jink Vehicle"];
+
 // refresh ready
 effectiveCommander _unit doMove getPosASL _unit;
 

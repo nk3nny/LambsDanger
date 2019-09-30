@@ -20,7 +20,11 @@ _enemyVehicle = _target isKindOf "Tank" || {_target isKindOf "Air"};
 _noLauncher = secondaryWeapon _unit isEqualTo "";
 
 // tough vehicle and no launcher
-if (_enemyVehicle && {_noLauncher}) exitWith {true};
+if (_enemyVehicle && {_noLauncher}) exitWith {
+    _unit setVariable [QGVAR(currentTarget), _target];
+    _unit setVariable [QGVAR(currentTask), "Cowardice"];
+    true
+};
 
 // else
 false

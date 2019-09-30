@@ -21,6 +21,9 @@ params ["_unit",["_target",ObjNull],["_range",350],["_override",false]];
 if (_unit distance _target > 3000) exitWith {false};
 if ((_unit getVariable ["ace_captives_isHandcuffed",false]) || {_unit getVariable ["ace_captives_issurrendering",false]}) exitWith {false};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Share Information"];
+
 // range
 _range = [rank _unit,_range,_override] call {
     params ["_rank","_range"];

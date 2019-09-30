@@ -12,7 +12,7 @@
 */
 
 // init
-params ["_unit","_pos","_target",["_buildings",[]]];
+params ["_unit","_pos",["_target",objNull],["_buildings",[]]];
 
 if (_buildings isEqualTo []) then {
     _buildings = [_pos,28,false,false] call FUNC(nearBuildings);
@@ -21,6 +21,9 @@ if (_buildings isEqualTo []) then {
 //  target on foot
 if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 if !(_target isKindOf "Man") exitWith {false};
+
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
 
 // tweaks target to remain usefully close
 if (_pos distance2d _unit < 50) then {_pos = (_unit getHideFrom _target)};

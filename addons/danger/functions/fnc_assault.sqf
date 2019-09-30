@@ -10,6 +10,9 @@ params ["_unit", ["_target", objNull], ["_range",30]];
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
 if (stopped _unit || {!(attackEnabled _unit)}) exitWith {false};
 
+_unit setVariable [QGVAR(currentTarget), _target];
+_unit setVariable [QGVAR(currentTask), "Assault"];
+
 // settings
 _unit setUnitPosWeak "UP";
 
