@@ -1,0 +1,8 @@
+name = "LAMBS Mods"
+prefix = "lambs"
+author = "LAMBS Dev Team"
+sigversion = 3
+reuse_private_key = false
+files = [
+    "mod.cpp"
+]

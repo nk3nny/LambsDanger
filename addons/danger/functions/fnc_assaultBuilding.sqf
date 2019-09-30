@@ -10,7 +10,7 @@ params ["_unit"];
 _unit setUnitPosWeak "UP";
 
 // get buildings
-private _buildings = group _unit getVariable ["inCQC",[]];
+private _buildings = group _unit getVariable ["inCQC", []];
 _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit),[0,0]]) > 0};
 
 // exit on no buildings -- middle unit pos

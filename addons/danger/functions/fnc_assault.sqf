@@ -28,7 +28,7 @@ if (count _buildings < 2 || { random 1 > 0.8 }) exitWith {
         //_unit moveTo (_unit getHideFrom _target); //-- testing moveTo for lower level order
 
         // debug
-        if (GVAR(debug_functions)) then {systemchat format ["%1 assaulting position (%2m)",side _unit,round (_unit distance2d _target)];};
+        if (GVAR(debug_functions)) then {systemchat format ["%1 assaulting position (%2m)", side _unit, round (_unit distance2d _target)];};
     };
 };
 
@@ -36,7 +36,7 @@ if (count _buildings < 2 || { random 1 > 0.8 }) exitWith {
 _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4,0.7 - random 1.4,0]);
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 checking buildings (%2m)",side _unit,round (_unit distance2d _target)];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 checking buildings (%2m)", side _unit, round (_unit distance2d _target)];};
 
 // end
 true
