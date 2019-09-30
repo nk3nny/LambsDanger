@@ -1,7 +1,7 @@
 PREP(taskArtillery);
 PREP(taskArtilleryRegister);
 PREP(taskAttack);
-PREP(TaskCamp);
+PREP(taskCamp);
 PREP(taskCQB);
 PREP(taskCreep);
 PREP(taskGarrison);
