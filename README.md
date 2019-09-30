@@ -6,6 +6,7 @@ The project is open source. It was initially developed as an internal mod for us
 The stated goal of the mod is: 
 1. Make buildings part of the AI tactical landscape
 2. Improve AI feedback by creating clearly distinct AI states
+3. Seamless integration with vanilla, ACE3 and modded assets
 
 The mod requires: Community Base Addons
 
