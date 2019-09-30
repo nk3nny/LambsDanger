@@ -5,14 +5,14 @@
 
 /*
 
-	Calls friendly artillery on target location! 
+    Calls friendly artillery on target location! 
 
-	Arguments 
-		0, unit doing the calling 	[Object]
-		1, target of artillery 		[Object or Object]
+    Arguments 
+        0, unit doing the calling 	[Object]
+        1, target of artillery 		[Object or Object]
 
-	Other 
-		Thanks Alex2k for doing the basic grunt work 
+    Other 
+        Thanks Alex2k for doing the basic grunt work 
 
 */
 
@@ -30,7 +30,7 @@ if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {system
 // settings 
 private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit),[]]; 
 _artillery select {
-	canFire _x && {unitReady _x} && {_pos inRangeOfArtillery [[_x],getArtilleryAmmo [_gun] select 0]};
+    canFire _x && {unitReady _x} && {_pos inRangeOfArtillery [[_x],getArtilleryAmmo [_gun] select 0]};
 }; 
 
 // exit on no ready artillery 
