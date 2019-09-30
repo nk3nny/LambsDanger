@@ -1,0 +1,10 @@
+{
+  "name": "LAMBS Mods",
+  "prefix": "lambs",
+  "author": "LAMBS Dev Team",
+  "files": [
+    "mod.cpp"
+  ],
+  "sigversion": 3,
+  "reuse_private_key": false
+}
