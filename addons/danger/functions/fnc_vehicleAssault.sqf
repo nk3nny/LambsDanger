@@ -4,7 +4,7 @@
 // by nkenny
 
 /*
-    Arguments 
+    Arguments
     0, vehicle suppressing        [Object]
     1, position being suppressed  [Array]
     2, target of suppression      [Object]

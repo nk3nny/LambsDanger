@@ -35,7 +35,7 @@ if (_indoor) exitWith {
     _unit forceSpeed 0;
     _unit playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared","AmovPercMstpSnonWnonDnon_Scared2"];
 
-    // chance action 
+    // chance action
     _unit setUnitPos selectRandom ["MIDDLE","MIDDLE","PRONE"];
 
     // return
@@ -47,11 +47,11 @@ if (_indoor) exitWith {
 if (random 1 > (skill _unit)) exitWith {
 
     // action
-    _unit dowatch objNull;  
+    _unit dowatch objNull;
     _unit setUnitPos "DOWN";
     [_unit,["FastB","FastLB","FastRB"]] call FUNC(gesture);
-    
-    // return 
+
+    // return
     _delay = 6 + random 6;
     _delay
 };

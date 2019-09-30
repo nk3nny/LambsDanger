@@ -34,7 +34,7 @@ if (_unit distance _target < GVAR(CQB_range)) exitWith {true};
 // within acceptble limits
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {true};
 
-// settings 
+// settings
 private _pos = [];
 private _min = 20;      // Minimum range 
 private _i = 0;         // iterations 
@@ -51,8 +51,11 @@ while {count _pos < 1} do {
     if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0,-100,0]}; 
 }; 
 
-// move 
-_unit doMove _pos; 
+    // update
+    _min = _min + 15;
+    _i = _i + 1;
+    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0,-100,0]};
+};
 
 // delay
 _time = time + (5 + random 8); 
@@ -67,5 +70,5 @@ effectiveCommander _unit doMove getPosASL _unit;
 // refresh formation
 group _unit setFormDir (_unit getDir _target); 
 
-// end 
-true 
+// end
+true

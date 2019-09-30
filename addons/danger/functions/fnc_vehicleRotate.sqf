@@ -10,9 +10,9 @@
         Inspiration by the work of alarm9k @ https://forums.bohemia.net/forums/topic/172270-smarter-tanks-script/
 
     Arguments:
-        0, vehicle which will do the movement 	[Object]
-        1, Direction which we wish to end up 	[Array] (Default -- nearest enemy)
-        2, acceptable threshold 				[Number] (Default : 18 degrees)
+        0, vehicle which will do the movement     [Object]
+        1, Direction which we wish to end up     [Array] (Default -- nearest enemy)
+        2, acceptable threshold                 [Number] (Default : 18 degrees)
 
     Other:
         Also thanks to Natalie.
@@ -37,14 +37,14 @@ if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_thr
     true
 };
 
-// settings 
+// settings
 private _pos = [];
 private _min = 20;      // Minimum range
 private _i = 0;         // iterations
 
 while {count _pos < 1} do {
     _pos = (_unit getPos [_min,_unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
-    
+
     // water
     if (count _pos > 0) then {if (surfaceIsWater _pos) then {_pos = []};};
 
@@ -52,14 +52,14 @@ while {count _pos < 1} do {
     _min = _min + 15;
     _i = _i + 1;
     if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0,-100,0]};
-}; 
+};
 
 // move
 _unit doMove _pos;
 
-// delay 
+// delay
 _time = time + (4 + random 6);
-waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}}; 
+waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}};
 
 // check vehicle
 if (!canMove _unit || {count crew _unit < 1}) exitWith {false};

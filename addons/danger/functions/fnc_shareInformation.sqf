@@ -6,12 +6,12 @@
 /*
     Design
         Rank increases range information is shared
-    
-    Arguments 
-        0, unit in question 		[Object]
-        1, target being reported	[Object]
-        2, default range 			[Number] (default 350m)
-        3, override range and rank?	[Boolean] (default false)
+
+    Arguments
+        0, unit in question         [Object]
+        1, target being reported    [Object]
+        2, default range             [Number] (default 350m)
+        3, override range and rank?    [Boolean] (default false)
 */
 
 // init
@@ -44,7 +44,7 @@ private _grp = allGroups select {local _x && {side _x isEqualTo side _unit} && {
 } count _grp;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)",side _unit,_unit knowsAbout _target,count _grp,round _range];}; 
+if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)",side _unit,_unit knowsAbout _target,count _grp,round _range];};
 
 // end
 true

@@ -26,4 +26,3 @@ group _unit setVariable ["inCQC",_inCQC];
 
 // end
 _buildings
-

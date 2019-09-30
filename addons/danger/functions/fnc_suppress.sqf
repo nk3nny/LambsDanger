@@ -17,6 +17,3 @@ if (GVAR(debug_functions)) then {systemchat format ["%1 Suppression (%2 @ %3m)",
 
 // end
 true
-
-
-

@@ -13,8 +13,8 @@ _grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
 
 // find all vehicles 
 {
-	if !(isNull objectParent _x) then {_artillery pushBackUnique vehicle _x};
-	true 
+    if !(isNull objectParent _x) then {_artillery pushBackUnique vehicle _x};
+    true 
 } count units _grp; 
 
 // identify artillery 

@@ -37,7 +37,7 @@ if (random 1 > 0.5) exitWith {
     true
 };
 
-// standing to prone 
+// standing to prone
 if (random 1 > 0.9) exitWith {
     _unit switchMove "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon";
     _unit setUnitPosWeak "DOWN";

@@ -27,8 +27,8 @@ if (count _body > 0) exitWith {
 
     // one body
     _body = _body select 0;
-    
-    // do it 
+
+    // do it
     [_unit,_body] spawn {
         params ["_unit","_body","_bodyPos"];
         _bodyPos = getPosATL _body;
@@ -42,7 +42,7 @@ if (count _body > 0) exitWith {
 
     // debug
     if (GVAR(debug_functions)) then {systemchat format ["%1 checking body (%2 %3m)",side _unit,name _unit,round (_unit distance _body)];};
-    
+
     // end
     true
 };

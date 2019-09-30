@@ -10,7 +10,7 @@ private _curCat = "General";
 ] call CBA_Settings_fnc_init;
 
 //you cannot do arrays in cba settings, only select one entry from an array
-GVAR(CQB_formations) = ["FILE","DIAMOND"]; 	// Special CQB Formations )
+GVAR(CQB_formations) = ["FILE","DIAMOND"];     // Special CQB Formations )
 
 // Minimum range for suppression
 [
@@ -20,7 +20,7 @@ GVAR(CQB_formations) = ["FILE","DIAMOND"]; 	// Special CQB Formations )
     [COMPONENT_NAME, _curCat],
     [1, 500, 25, 0],
     true
-] call CBA_Settings_fnc_init;		
+] call CBA_Settings_fnc_init;
 
 // Chance of panic  1 out of this number.  (i.e., 1 out of 20 is 5%)
 [
@@ -30,10 +30,10 @@ GVAR(CQB_formations) = ["FILE","DIAMOND"]; 	// Special CQB Formations )
     [COMPONENT_NAME, _curCat],
     [0, 20, 15, 0],
     true
-] call CBA_Settings_fnc_init;	
+] call CBA_Settings_fnc_init;
 
 // debug
-_curCat = "Debug";			
+_curCat = "Debug";
 // FSM level debug messages
 [
     QGVAR(debug_FSM),

@@ -11,10 +11,10 @@ if (_pos isEqualTo []) then {
     _pos = getPos _unit;
 };
 
-// settings 
+// settings
 private _mode = toLower (group _unit getVariable ["dangerAI","enabled"]);
 
-// check mode 
+// check mode
 if (_mode isEqualTo "disabled") exitWith {false};
 
 // enemy
@@ -65,7 +65,7 @@ if ((_unit distance _pos > 150) && {!(binocular _unit isEqualTo "") && {random 1
 _weapons = nearestobjects [_pos,["StaticWeapon"],60,true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
-// give orders 
+// give orders
 _units = units group _unit select {unitReady _x && {_x distance2d _pos < 70}};
 
 if (count _weapons > 0 && {count _units > 0}) then {
