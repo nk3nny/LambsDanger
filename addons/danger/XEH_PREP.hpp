@@ -31,3 +31,4 @@ PREP(vehicleAssault);
 PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
+PREP(findCover);
