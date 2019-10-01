@@ -72,5 +72,15 @@ _curCat = "Debug";
     ["Debug Draw", "Draws 3d Text over Units with AI Informations"],
     [COMPONENT_NAME, _curCat],
     false,
-    true
+    true,
+    {
+        {
+            ctrlDelete _x;
+        } count GVAR(drawRectCacheGame);
+        {
+            ctrlDelete _x;
+        } count GVAR(drawRectCacheEGSpectator);
+        GVAR(drawRectCacheEGSpectator) = [];
+        GVAR(drawRectCacheGame) = [];
+    }
 ] call CBA_Settings_fnc_init;

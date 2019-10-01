@@ -2,14 +2,7 @@
 // DEBUG : Draw Icons and Lines over Units Head
 // version 1.01
 // by jokoho482
-if !(GVAR(debug_Drawing)) exitWith {
-    {
-        ctrlDelete _x;
-    } count GVAR(drawRectCacheGame);
-    {
-        ctrlDelete _x;
-    } count GVAR(drawRectCacheEGSpectator);
-};
+if !(GVAR(debug_Drawing)) exitWith {};
 
 {
     _x ctrlSetFade 1;
@@ -33,6 +26,30 @@ private _fnc_getEyePos = {
         eyePos _this
     } else {
         _this;
+    };
+};
+
+private _fnc_dangerModeTypes = {
+    params ["_type"];
+    switch (_type) do {
+        case (1): {
+            "Contact";
+        };
+        case (2): {
+            "Hide from tank/air craft";
+        };
+        case (3): {
+            "Manoeuvre";
+        };
+        case (4): {
+            "?"
+        };
+        case (5): {
+            "Check nearby buildings"
+        };
+        case (6): {
+            "Call artillery"
+        };
     };
 };
 
@@ -60,31 +77,11 @@ private _fnc_getRect = {
     };
     _control
 };
-private _fnc_dangerModeTypes = {
-    params ["_type"];
-    switch (_type) do {
-        case (1): {
-            "Contact";
-        };
-        case (2): {
-            "Hide from tank/air craft";
-        };
-        case (3): {
-            "Manoeuvre";
-        };
-        case (4): {
-            "?"
-        };
-        case (5): {
-            "Check nearby buildings"
-        };
-        case (6): {
-            "Call artillery"
-        };
-    };
-};
+
 private _fnc_DrawRect = {
     params ["_pos", "_textData"];
+    private _pos2D = worldToScreen _pos;
+    if (_pos2D isEqualTo []) exitWith {};
     private _control = call _fnc_getRect;
     _textData pushback "</t>";
 
@@ -96,12 +93,10 @@ private _fnc_DrawRect = {
 
     private _w = (ctrlPosition _control) select 2;
     private _h = (ctrlPosition _control) select 3;
-    private _pos2D = worldToScreen _pos;
-    if !(_pos2D isEqualTo []) then {
-        _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.7];
-        _control ctrlSetFade 0;
-        _control ctrlCommit 0;
-    };
+
+    _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.7];
+    _control ctrlSetFade 0;
+    _control ctrlCommit 0;
 };
 
 {
