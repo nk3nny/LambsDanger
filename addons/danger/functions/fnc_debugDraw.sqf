@@ -60,7 +60,7 @@ private _fnc_getRect = {
     if (isNull _displayEGSpectator) then {
         if (GVAR(drawRectCacheGame) isEqualTo []) then {
             _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
-            // _control ctrlSetBackgroundColor [0,0,0,0.1];
+            _control ctrlSetBackgroundColor [0,0,0,0.1];
         } else {
             _control = GVAR(drawRectCacheGame) deleteAt 0;
         };
@@ -68,8 +68,7 @@ private _fnc_getRect = {
     } else {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
-            // _control ctrlSetBackgroundColor [0,0,0,0.1];
-
+            _control ctrlSetBackgroundColor [0,0,0,0.1];
         } else {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
@@ -91,10 +90,10 @@ private _fnc_DrawRect = {
     } count _textData;
     _control ctrlSetStructuredText parseText _text;
 
-    private _w = (ctrlPosition _control) select 2;
-    private _h = (ctrlPosition _control) select 3;
+    private _w = ctrlTextWidth _control;
+    private _h = ctrlTextHeight _control;
 
-    _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.7];
+    _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h, _w, _h];
     _control ctrlSetFade 0;
     _control ctrlCommit 0;
 };
