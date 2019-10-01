@@ -35,10 +35,18 @@ if (count _buildings > 0 && {random 1 > 0.05}) then {
 
 } else {
     _unit setUnitPosWeak "DOWN";
-    _newPos = (_unit getPos [50 + random _range,(_danger getDir _unit) + 45 - random 90]);
-    if (surfaceIsWater _newPos) exitWith {_unit suppressFor 5;};
-    _unit doMove _newPos;
-    if (GVAR(debug_functions)) then {systemchat format ["%1 hide in bush",side _unit];};
+    // Get General Target Position
+    private _targetPos = (_unit getPos [50 + random _range,(_target getDir _unit) + 45 - random 90]);
+    // Find Surrounding Bushes and Rocks
+    private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "ROCK", "ROCKS"], 5];
+    if !(_objs isEqualTo []) then {
+        // if a Rock or Bush is found set it as target Pos
+        _targetPos = getPos (selectRandom _objs);
+    };
+
+    if (surfaceIsWater _targetPos) exitWith {_unit suppressFor 5;};
+    _unit doMove _targetPos;
+    if (GVAR(debug_functions)) then {systemchat format ["%1 hide in bush", side _unit];};
 };
 
 // end

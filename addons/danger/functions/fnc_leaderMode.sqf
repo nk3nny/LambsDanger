@@ -7,7 +7,7 @@
 params ["_unit",["_setting",0],["_target",ObjNull]];
 
 // get variable
-private _dangerMode = group _unit getVariable ["dangerMode",[[],[],true,time]];
+private _dangerMode = group _unit getVariable [QGVAR(dangerMode),[[],[],true,time]];
 
 // old dangers discarded
 if ((_dangerMode select 3) < time) then {_dangerMode = [[],[],true,0]};
@@ -19,7 +19,7 @@ _dangerMode set [2,false];
 _dangerMode set [3,time + 360];
 
 // update variable
-group _unit setVariable ["dangerMode",_dangerMode,false];
+group _unit setVariable [QGVAR(dangerMode),_dangerMode,false];
 
 // end
 true

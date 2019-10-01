@@ -15,9 +15,9 @@ private _target = param [1];
 if (gunner vehicle _unit != _unit) exitWith {false};
 
 // artillery (no tactical options)
-if (vehicle _unit getVariable ["isArtillery",getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
-        vehicle _unit setVariable ["lastAction",time + 999];
-        vehicle _unit setVariable ["isArtillery",true];
+if (vehicle _unit getVariable [QGVAR(isArtillery),getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
+        vehicle _unit setVariable [QGVAR(lastAction),time + 999];
+        vehicle _unit setVariable [QGVAR(isArtillery),true];
         false
 };
 
@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Suppress Vehicle"];
 
 // settings
-vehicle _unit setVariable ["lastAction",time + 9 + random 16];
+vehicle _unit setVariable [QGVAR(lastAction),time + 9 + random 16];
 
 // find
 _tpos = (ATLtoASL (_unit getHideFrom _target)) vectorAdd [0.5 - random 1,0.5 - random 1,random 1.3];
@@ -40,7 +40,7 @@ _tpos = (ATLtoASL (_unit getHideFrom _target)) vectorAdd [0.5 - random 1,0.5 - r
 _unit doSuppressiveFire _tPos;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 suppression (%2s)",getText (configFile >> "CfgVehicles" >> (typeOf vehicle _unit) >> "displayName"),round (time - (vehicle _unit getVariable ["lastAction",0]))];};
+if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 suppression (%2s)",getText (configFile >> "CfgVehicles" >> (typeOf vehicle _unit) >> "displayName"),round (time - (vehicle _unit getVariable [QGVAR(lastAction),0]))];};
 
 // end
 true

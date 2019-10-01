@@ -1,14 +1,14 @@
-/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "H:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"DEFINE_ENUM_BEG",-1,250,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
+item0[] = {"DEFINE_ENUM_BEG",-1,4346,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item1[] = {"Init",0,250,-820.000000,-360.000000,-720.000000,-320.000000,0.000000,"Init"};
 item2[] = {"End",1,250,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
 item3[] = {"Causes__7",4,218,-840.000000,-60.000000,-700.000000,0.000000,1.000000,"Causes:" \n "7"};
 item4[] = {"Rest",4,218,-100.000000,-160.000000,0.000000,-100.000000,0.000000,"Rest"};
 item5[] = {"Causes__1__2__4",4,218,-620.000000,-60.000000,-500.000000,0.000000,1.000000,"Causes:" \n "1, 2, 4"};
 item6[] = {"Not_careless",4,218,-820.000000,-260.000000,-720.000000,-200.000000,0.000000,"Not careless"};
-item7[] = {"Clean_up",2,4346,-679.741028,1077.190918,-579.741028,1137.190918,0.000000,"Clean-up"};
+item7[] = {"Clean_up",2,250,-679.741028,1077.190918,-579.741028,1137.190918,0.000000,"Clean-up"};
 item8[] = {"Always",8,218,-318.201965,1112.264404,-218.201965,1172.264404,0.000000,"Always"};
 item9[] = {"Time_up__Safe",4,218,-680.000000,932.602539,-580.000000,992.602539,0.000000,"Time up " \n "Safe"};
 item10[] = {"Drop_down",2,250,-680.304871,826.383789,-580.304871,886.383789,0.000000,"Drop down"};
@@ -201,8 +201,8 @@ link75[] = {65,13};
 link76[] = {66,67};
 link77[] = {67,2};
 link78[] = {68,66};
-globals[] = {0.000000,0,0,0,0,640,480,1,213,6316128,1,-1711.390259,204.143066,1826.618408,98.728920,980,884,1};
-window[] = {2,-1,-1,-1,-1,1026,208,1372,208,3,998};
+globals[] = {0.000000,0,0,0,0,640,480,1,213,6316128,1,-1361.025635,-676.242371,75.788635,-541.914185,980,884,1};
+window[] = {2,-1,-1,-32000,-32000,896,78,1242,78,3,998};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -495,7 +495,7 @@ class FSM
                          "" \n
                          "// settings " \n
                          "private _orderedOut = false;" \n
-                         "private _lastAction = _this getVariable [""lastAction"",0]; " \n
+                         "private _lastAction = _this getVariable [""lambs_danger_lastAction"",0]; " \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links

@@ -12,7 +12,7 @@ item7[] = {"Next__cause",4,218,850.000000,-375.000000,925.000000,-325.000000,1.0
 item8[] = {"Always",8,218,850.000000,775.000000,925.000000,825.000000,0.000000,"Always"};
 item9[] = {"Fleeing_Unconscious",4,218,925.000000,-450.000000,1025.000000,-400.000000,12.000000,"Fleeing" \n "Unconscious "};
 item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.000000,"Begin"};
-item11[] = {"Ready",2,4346,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
+item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
@@ -78,6 +78,7 @@ item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000
 item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
+item77[] = {"____VARIABLES__lambs",-1,250,-1630.300171,-578.637817,-1293.179321,-406.645874,0.000000,"// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
 version=1;
 class LayoutItems
 {
@@ -117,6 +118,16 @@ class LayoutItems
 			FontFace="Arial";
 			FontHeight=10;
 			lStyle=1;
+		};
+	};
+	class Item77
+	{
+		class ItemInfo
+		{
+			FontFace="Arial";
+			FontHeight=10;
+			lStyle=1;
+			Align=0;
 		};
 	};
 };
@@ -218,8 +229,8 @@ link94[] = {71,70};
 link95[] = {72,4};
 link96[] = {73,74};
 link97[] = {74,18};
-globals[] = {0.000000,0,0,0,0,640,480,1,398,6316128,1,-1306.162476,-317.665039,87.259918,-839.392578,894,830,1};
-window[] = {2,-1,-1,-32000,-32000,1330,2378,3180,517,3,912};
+globals[] = {0.000000,0,0,0,0,640,480,2,398,6316128,1,-1771.002319,-1161.225830,-311.609467,-634.196167,1671,884,1};
+window[] = {2,-1,-1,-1,-1,865,53,855,52,3,1689};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -364,7 +375,7 @@ class FSM
                          "" \n
                          "// settings" \n
                          "private _onFoot = isNull ObjectParent _this;" \n
-                         "private _dangerMode = group _this getVariable [""dangerMode"",[[],[],true,time]]; " \n
+                         "private _dangerMode = group _this getVariable [""lambs_danger_dangerMode"",[[],[],true,time]]; " \n
                          "" \n
                          "// other settings " \n
                          "private _CQCmode = (formation group _this) in lambs_danger_CQB_formations;" \n

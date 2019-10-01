@@ -17,7 +17,7 @@ if (_unit call FUNC(indoor) && {random 1 > 0.5}) exitWith {false};
 
 // find body
 _body = allDeadMen select {_x distance _pos < _range};
-_body = _body select {!(_x getVariable ["isChecked",false])};
+_body = _body select {!(_x getVariable [QGVAR(isChecked),false])};
 
 // ready
 doStop _this;
@@ -35,12 +35,12 @@ if (count _body > 0) exitWith {
         params ["_unit","_body","_bodyPos"];
         _bodyPos = getPosATL _body;
         _unit doMove _bodyPos;
-        waitUntil {(_unit distance _bodyPos < 0.5) || {_unit getVariable ["lastAction",0] < time} || {!alive _unit}};
+        waitUntil {(_unit distance _bodyPos < 0.5) || {_unit getVariable [QGVAR(lastAction),0] < time} || {!alive _unit}};
         if (alive _unit && {!isNil str _body} && {_unit distance _bodyPos < 0.4}) then {_unit action ["rearm",_body];};
     };
 
     // update variable
-    _body setVariable ["isChecked",true,true];
+    _body setVariable [QGVAR(isChecked), true, true];
 
     // debug
     if (GVAR(debug_functions)) then {systemchat format ["%1 checking body (%2 %3m)",side _unit,name _unit,round (_unit distance _body)];};

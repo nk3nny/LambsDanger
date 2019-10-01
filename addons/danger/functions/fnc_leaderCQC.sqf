@@ -7,7 +7,7 @@
 params ["_unit",["_range",GVAR(CQB_range)]];
 
 // new variable + distance check
-_inCQC = group _unit getVariable ["inCQC",[]];
+_inCQC = group _unit getVariable [QGVAR(inCQC),[]];
 _inCQC = _inCQC select {_x distance2d _unit < 250};
 
 // buildings present? ignore
@@ -25,7 +25,7 @@ _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + st
     _inCQC pushBackUnique _x;
     true
 } count _buildings;
-group _unit setVariable ["inCQC",_inCQC];
+group _unit setVariable [QGVAR(inCQC),_inCQC];
 
 // end
 _buildings
