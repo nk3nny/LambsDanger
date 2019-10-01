@@ -1229,8 +1229,10 @@ class FSM
                          "// change formation " \n
                          "group _this setFormation (group _this getVariable [""dangerFormation"",formation _this]);" \n
                          "" \n
-                         "// execute code " \n
-                         "[_this,units group _this] call ((group _this) getVariable [""dangerCode"", {}]);" \n
+                         "// execute code and handlers" \n
+                         "private _units = units group _this;" \n
+                         "[_this, _units] call ((group _this) getVariable [""dangerCode"", {}]);" \n
+                         "[""lambs_danger"", [_this, _units]] call CBA_fnc_localEvent;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
