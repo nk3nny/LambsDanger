@@ -25,7 +25,7 @@ private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0,0,1.8];
 if !(_dangerPos isEqualTo [0,0,1.8]) then {
     _dangerPos = AGLToASL _dangerPos;
     private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
-    private _vehicles = (_unit nearObjects ["Car", _range]) select {isNull (driver _x)};
+    private _vehicles = nearestObjects  [_unit, ["building","Car"], _range];
 
     private _allObjs = (_terrainObjects + _vehicles) apply { [_x distance2d _unit, _x] };
     _allObjs sort false;
@@ -48,7 +48,8 @@ if !(_dangerPos isEqualTo [0,0,1.8]) then {
             _pos set [2, 0.1];
             _buildingPos = [_pos];
         };
-        { 
+
+        {
             if !(_ret isEqualTo []) exitWith {};
             if ((_dangerPos distance2d _x) > 20) then {
                 _pos = _x;
