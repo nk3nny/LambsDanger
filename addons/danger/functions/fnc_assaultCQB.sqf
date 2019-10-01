@@ -102,8 +102,8 @@ if (!local _grp) exitWith {};
 _grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
 
 // variable -- script should only run once!
-if (_grp getVariable ["inCQB",false]) exitWith {};
-_grp setVariable ["inCQB",true];
+if (_grp getVariable [QGVAR(inCQB),false]) exitWith {};
+_grp setVariable [QGVAR(inCQB),true];
 
 // store group settings
 _speed = speedMode _grp;
@@ -146,7 +146,7 @@ while {{alive _x} count units _grp > 0} do {
 };
 
 // reset variable
-_grp setVariable ["inCQB",false];
+_grp setVariable [QGVAR(inCQB),false];
 
 // reset modes
 _grp setSpeedMode _speed;

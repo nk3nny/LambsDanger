@@ -7,6 +7,7 @@
 params ["_select"];
 
 // return
+if (_select isEqualTo -1) exitWith {"No Danger"};
 if (_select isEqualTo 0) exitWith {"Enemy Detected"};
 if (_select isEqualTo 1) exitWith {"Fire"};
 if (_select isEqualTo 2) exitWith {"Hit"};

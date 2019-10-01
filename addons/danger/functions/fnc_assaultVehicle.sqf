@@ -16,7 +16,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Assault Vehicle"];
 
 // settings
-vehicle _unit setVariable ["lastAction",time + 9 + random 20];
+vehicle _unit setVariable [QGVAR(lastAction),time + 9 + random 20];
 private _veh = vehicle _unit;
 private _indoor = !(lineIntersects [eyepos _target,(eyePos _target) vectorAdd [0,0,4]]);
 

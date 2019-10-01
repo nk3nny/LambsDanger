@@ -10,7 +10,7 @@ params ["_unit"];
 _unit setUnitPosWeak "UP";
 
 // get buildings
-private _buildings = group _unit getVariable ["inCQC", []];
+private _buildings = group _unit getVariable [QGVAR(inCQC), []];
 _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit),[0,0]]) > 0};
 
 // exit on no buildings -- middle unit pos
@@ -53,7 +53,7 @@ if (_unit distance (_buildingPos select 0) < 3.3) then {
 
 // update group variable
 if (count _buildingPos < 1) then {
-    group _unit setVariable ["inCQC",_buildings - [_building]];
+    group _unit setVariable [QGVAR(inCQC),_buildings - [_building]];
 };
 
 // debug

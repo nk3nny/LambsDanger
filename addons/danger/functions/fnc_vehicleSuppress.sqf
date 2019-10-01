@@ -15,8 +15,8 @@ if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 if (speed (vehicle _unit) > 12) exitWith {false};
 
 // artillery (no tactical options)
-if (vehicle _unit getVariable ["isArtillery",getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
-    vehicle _unit setVariable ["isArtillery",true];
+if (vehicle _unit getVariable [QGVAR(isArtillery),getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
+    vehicle _unit setVariable [QGVAR(isArtillery),true];
     false
 };
 
