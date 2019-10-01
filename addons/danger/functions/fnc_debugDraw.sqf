@@ -37,13 +37,13 @@ private _fnc_getEyePos = {
 };
 
 private _fnc_getRect = {
-    diag_log "Get Rect";
     private _displayEGSpectator = findDisplay 60492;
     private _displayGame = findDisplay 46;
     private _control = controlNull;
     if (isNull _displayEGSpectator) then {
         if (GVAR(drawRectCacheGame) isEqualTo []) then {
             _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
+            // _control ctrlSetBackgroundColor [0,0,0,0.1];
         } else {
             _control = GVAR(drawRectCacheGame) deleteAt 0;
         };
@@ -51,6 +51,8 @@ private _fnc_getRect = {
     } else {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
+            // _control ctrlSetBackgroundColor [0,0,0,0.1];
+
         } else {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
@@ -60,15 +62,21 @@ private _fnc_getRect = {
 };
 
 private _fnc_DrawRect = {
-    params ["_pos", "_text"];
+    params ["_pos", "_textData"];
     private _control = call _fnc_getRect;
-    _control ctrlSetStructuredText parseText format [ "<t align='left' size='0.5'>%1</t>", _text];
+    _textData pushback "</t>";
+
+    private _text = "";
+    {
+        _text = format ["%1%2", _text, _x];
+    } count _textData;
+    _control ctrlSetStructuredText parseText _text;
 
     private _w = (ctrlPosition _control) select 2;
     private _h = (ctrlPosition _control) select 3;
     private _pos2D = worldToScreen _pos;
     if !(_pos2D isEqualTo []) then {
-        _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.6];
+        _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.7];
         _control ctrlSetFade 0;
         _control ctrlCommit 0;
     };
@@ -79,35 +87,41 @@ private _fnc_DrawRect = {
     private _headPos = _unit call _fnc_getPos;
     // if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
     if (true) then {
-        private _currentTarget = _unit getVariable [QGVAR(currentTarget), objNull];
-        private _targetKnowledge = "";
-        private _name = if (_currentTarget isEqualType objNull) then {
-             private _knowledge = _unit targetKnowledge _currentTarget;
-             if ((_knowledge select 2) == time) then {
-                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6];
-             };
-             private _lastSeen = _currentTarget getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
-            _targetKnowledge = format [
-                "Target Knowledge:<br/>    Last Seen: %1 (%2)<br/>    Position Error: %3<br/>    Current Estimated Position: %4",
-                _knowledge select 2,
-                _lastSeen,
-                _knowledge select 5,
-                _knowledge select 6
-            ];
-            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0,1,0,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
-            
-            ["None", name _currentTarget] select (isNull _currentTarget);
-        } else {
-            _targetKnowledge = "Target Knowledge:<br/>    Last Seen: N/A (N/A)<br/>    Position Error: N/A<br/>    Current Estimated Position: N/A";
-            format ["POS %1", _currentTarget];
-        };
+        private _textData =  ["<t align='bottom' valign='center' size='0.5'>"];
 
         if (_unit == leader _unit) then {
             {
                 private _pos2 = _x call _fnc_getPos;
                 drawLine3D [_headPos, _pos2, [1,1,1,0.5]]; // TODO: Color
             } count (units _x);
+            _textData pushBack "<t size='0.75' color='#ff0000'>Squad Leader</t><br/>"
+        };
+
+        private _currentTarget = _unit getVariable [QGVAR(currentTarget), objNull];
+        private _targetKnowledge = [];
+        private _name = if (_currentTarget isEqualType objNull) then {
+             private _knowledge = _unit targetKnowledge _currentTarget;
+             if ((_knowledge select 2) == time) then {
+                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6];
+             };
+             private _lastSeen = _currentTarget getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
+             _targetKnowledge append [
+                "Target Knowledge:<br/>",
+                "    Last Seen: ", _lastSeen, " (", _knowledge select 2, ")<br/>",
+                "    Position Error: ",_knowledge select 5,"<br/>"
+            ];
+
+            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0,1,0,0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
+
+            ["None", name _currentTarget] select (isNull _currentTarget);
+        } else {
+            _targetKnowledge append [
+               "Target Knowledge:<br/>",
+               "    Last Seen: ", _knowledge select 2, " (", lastSeen, ")<br/>",
+               "    Position Error: ",_knowledge select 5,"<br/>"
+           ];
+           format ["POS %1", _currentTarget];
         };
         private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
         private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
@@ -115,34 +129,36 @@ private _fnc_DrawRect = {
         drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1,0,0,1]]; // TODO: Color
 
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1]];
-        private _text = format [
-"Vanilla Behaviour: %1
- <br/>Behaviour: %2
- <br/>Danger Cause: %3
- <br/>    Danger Pos: %4
- <br/>    Danger Until: %5
- <br/>Current Target: %6
- <br/>Visibility: %7
- <br/>%8
- <br/>Supression: %9
- <br/>SpotDistance: %10
- <br/>SpotTime: %11
- <br/>Enemy QueueSize: %12
-",
-            behaviour _unit, // %1
-            _unit getVariable [QGVAR(currentTask), "None"], // %2
-            _dangerType call FUNC(debugDangerType), // %3
-            _pos, // %4
-            _time, // %5
-            _name, // %6
-            [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos], // %7
-            _targetKnowledge, // %8
-            getSuppression _unit, // %9
-            _spotDistance, // %10
-            _spotTime, // %11
-            _targetCount // %12
+
+        _textData append [
+            "Vanilla Behaviour: ", behaviour _unit, "<br/>",
+            "Behaviour: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
         ];
-         [_headPos, _text] call _fnc_DrawRect;
+        if (_unit == leader _unit) then {
+            private _dangeModeData = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
+            private _queue = (_dangeModeData select 0) apply { _x call FUNC(debugDangerType) };
+            _textData append [
+                "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",
+                "Danger Mode Timeout: ", _dangeModeData select 3, "<br/>"
+            ];
+        };
+        _textData append [
+            "Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
+            "    Danger Pos:", _pos, "<br/>",
+            "    Danger Until: ", _time, "<br/>",
+            "Current Target: ", _name, "<br/>",
+            "Visibility:", [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos], "<br/>"
+        ];
+
+        _textData append _targetKnowledge;
+
+        _textData append [
+            "Supression: ", getSuppression _unit, "<br/>",
+            "SpotDistance: ", _spotDistance, "<br/>",
+            "SpotTime: ", _spotTime, "<br/>",
+            "Enemy QueueSize: ", _targetCount, "<br/>"
+        ];
+        [_headPos, _textData] call _fnc_DrawRect;
     };
 } count (allUnits select {!(isPlayer _x)});
 
