@@ -85,8 +85,9 @@ private _fnc_DrawRect = {
     _textData pushback "</t>";
 
     private _text = "";
+    private _size = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
     {
-        _text = format ["%1%2", _text, _x];
+        _text = format ["%1%2", _text, format [_x, _size * 1, _size * 1.5]];
     } count _textData;
     _control ctrlSetStructuredText parseText _text;
 
@@ -103,14 +104,14 @@ private _fnc_DrawRect = {
     private _headPos = _unit call _fnc_getPos;
     // if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
     if (true) then {
-        private _textData =  ["<t align='bottom' valign='center' size='0.5'>"];
+        private _textData =  ["<t align='bottom' valign='center' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
                 private _pos2 = _x call _fnc_getPos;
                 drawLine3D [_headPos, _pos2, [1,1,1,0.5]]; // TODO: Color
             } count (units _x);
-            _textData pushBack "<t size='0.75' color='#ff0000'>Group Leader</t><br/>"
+            _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
 
@@ -181,8 +182,8 @@ private _fnc_DrawRect = {
     };
 } count (allUnits select {!(isPlayer _x)});
 
-GVAR(drawRectCacheGame) = +GVAR(drawRectInUseGame);
-GVAR(drawRectInUseGame) = +[];
+GVAR(drawRectCacheGame) = GVAR(drawRectInUseGame);
+GVAR(drawRectInUseGame) = [];
 
-GVAR(drawRectCacheEGSpectator) = +GVAR(drawRectInUseEGSpectator);
-GVAR(drawRectInUseEGSpectator) = +[];
+GVAR(drawRectCacheEGSpectator) = GVAR(drawRectInUseEGSpectator);
+GVAR(drawRectInUseEGSpectator) = [];
