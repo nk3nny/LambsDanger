@@ -68,7 +68,7 @@ private _fnc_DrawRect = {
     private _h = (ctrlPosition _control) select 3;
     private _pos2D = worldToScreen _pos;
     if !(_pos2D isEqualTo []) then {
-        _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.2, 0.6];
+        _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h/2, 0.22, 0.6];
         _control ctrlSetFade 0;
         _control ctrlCommit 0;
     };
@@ -83,7 +83,7 @@ private _fnc_DrawRect = {
         private _targetKnowledge = "";
         private _name = if (_currentTarget isEqualType objNull) then {
              private _knowledge = _unit targetKnowledge _currentTarget;
-             if (_knowledge select 2 == time) then {
+             if ((_knowledge select 2) == time) then {
                 _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6];
              };
              private _lastSeen = _currentTarget getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
@@ -96,13 +96,11 @@ private _fnc_DrawRect = {
             ];
             drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0,1,0,0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
-            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0,0,1,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Target Seen Position"];
-
+            
             ["None", name _currentTarget] select (isNull _currentTarget);
         } else {
             _targetKnowledge = "Target Knowledge:<br/>    Last Seen: N/A (N/A)<br/>    Position Error: N/A<br/>    Current Estimated Position: N/A";
-            format ["POS ", _currentTarget];
+            format ["POS %1", _currentTarget];
         };
 
         if (_unit == leader _unit) then {
@@ -113,7 +111,7 @@ private _fnc_DrawRect = {
         };
         private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
         private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
-        private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {((side _unit) isEqualTo (side (_x select 1))) && !((side (_x select 1)) isEqualTo civilian)});
+        private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
         drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1,0,0,1]]; // TODO: Color
 
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1]];
