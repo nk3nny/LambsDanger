@@ -6,6 +6,7 @@ PREP(callArtillery);
 PREP(checkBody);
 PREP(coward);
 PREP(debugDangerType);
+PREP(debugDraw);
 PREP(debugMarkerColor);
 PREP(dotMarker);
 PREP(gesture);

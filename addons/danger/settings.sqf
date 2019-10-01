@@ -9,7 +9,7 @@ private _curCat = "General";
     true
 ] call CBA_Settings_fnc_init;
 
-//you cannot do arrays in cba settings, only select one entry from an array
+// you cannot do arrays in cba settings, only select one entry from an array
 GVAR(CQB_formations) = ["FILE","DIAMOND"];     // Special CQB Formations )
 
 // Minimum range for suppression
@@ -59,6 +59,17 @@ _curCat = "Debug";
     QGVAR(debug_FSM_civ),
     "CHECKBOX",
     ["Debug Civ", "FSM level debug messages for civilian fsm"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    true
+] call CBA_Settings_fnc_init;
+
+
+// FSM level debug messages for civilian fsm
+[
+    QGVAR(debug_Drawing),
+    "CHECKBOX",
+    ["Debug Draw", "Draws 3d Text over Units with AI Informations"],
     [COMPONENT_NAME, _curCat],
     false,
     true
