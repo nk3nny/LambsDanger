@@ -12,7 +12,7 @@ item7[] = {"Next__cause",4,218,850.000000,-375.000000,925.000000,-325.000000,1.0
 item8[] = {"Always",8,218,850.000000,775.000000,925.000000,825.000000,0.000000,"Always"};
 item9[] = {"Fleeing_Unconscious",4,218,925.000000,-450.000000,1025.000000,-400.000000,12.000000,"Fleeing" \n "Unconscious "};
 item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.000000,"Begin"};
-item11[] = {"Ready",2,4346,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
+item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
@@ -78,7 +78,7 @@ item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000
 item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
-item77[] = {"____VARIABLES__lambs",-1,250,-1630.300171,-578.637817,-1293.179321,-406.645874,0.000000,"// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
+item77[] = {"____VARIABLES__lambs",-1,250,-1630.300171,-578.637817,-1293.179321,-406.645874,0.000000,"// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
 version=1;
 class LayoutItems
 {
@@ -229,8 +229,8 @@ link94[] = {71,70};
 link95[] = {72,4};
 link96[] = {73,74};
 link97[] = {74,18};
-globals[] = {0.000000,0,0,0,0,640,480,2,398,6316128,1,-1031.032349,-235.839905,-121.223824,-734.085144,1088,830,1};
-window[] = {2,-1,-1,-32000,-32000,904,1970,2772,91,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,398,6316128,1,-1763.453369,-919.400635,-87.589478,-773.378967,1088,884,1};
+window[] = {2,-1,-1,-32000,-32000,1428,870,1672,615,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1227,10 +1227,10 @@ class FSM
                          "[_this,_target] call lambs_danger_fnc_shareInformation; " \n
                          "" \n
                          "// change formation " \n
-                         "group _this setFormation (group _this getVariable [""dangerFormation"",formation _this]);" \n
+                         "group _this setFormation (group _this getVariable [""lambs_danger_dangerFormation"",formation _this]);" \n
                          "" \n
                          "// execute code " \n
-                         "[_this,units group _this] call ((group _this) getVariable [""dangerCode"", {}]);" \n
+                         "[_this,units group _this] call ((group _this) getVariable [""lambs_danger_dangerCode"", {}]);" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
