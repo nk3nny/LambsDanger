@@ -12,7 +12,7 @@ if (_pos isEqualTo []) then {
 };
 
 // settings
-private _mode = toLower (group _unit getVariable ["dangerAI","enabled"]);
+private _mode = toLower (group _unit getVariable [QGVAR(dangerAI),"enabled"]);
 
 // check mode
 if (_mode isEqualTo "disabled") exitWith {false};
