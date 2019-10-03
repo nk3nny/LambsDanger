@@ -21,7 +21,7 @@ private _fnc_rushOrders = {
     // Helicopters -- supress it!
     if (((leader _grp) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
-            _x commandSuppressiveFire (getPosASL _target);
+            _x commandSuppressiveFire getPosASL _target;
             true
         } count (units _grp);
     };
@@ -30,7 +30,7 @@ private _fnc_rushOrders = {
     if ((leader _grp distance2d _target < 80) && {vehicle _target isKindOf "Tank"}) exitWith {
         {
             if (secondaryWeapon _x != "") then {
-                _x setUnitpos "Middle";
+                _x setUnitPos "Middle";
                 _x selectWeapon (secondaryweapon _x);
             } else {
                 _x setUnitPos "DOWN";
@@ -42,7 +42,7 @@ private _fnc_rushOrders = {
     };
 
     // Default -- run for it!
-    {_x setUnitPos "UP";_x doMove (getPosATL _t);true} count units _grp;
+    { _x setUnitPos "UP"; _x doMove (getPosATL _t); true } count units _grp;
     _grp enableGunLights "forceOn";
 };
 // functions end ---
@@ -54,9 +54,9 @@ private _cycle = 15;
 
 // sort grp
 if (!local _grp) exitWith {};
-    if (_grp isEqualType objNull) then {
-        _grp = group _grp;
-    };
+if (_grp isEqualType objNull) then {
+    _grp = group _grp;
+};
 
 // wp fix
 if (_radius isEqualTo 0) then {_radius = 500;};
@@ -65,13 +65,13 @@ if (_radius isEqualTo 0) then {_radius = 500;};
 _grp setSpeedMode "FULL";
 _grp setFormation "DIAMOND";
 _grp enableAttack false;
-{_x disableAI "AUTOCOMBAT"; doStop _x; true} count units _grp;
+{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _grp;
 
 // Hunting loop
 while {{alive _x} count units _grp > 0} do {
 
     // performance
-    waitUntil {sleep 1; simulationenabled leader _grp};
+    waitUntil { sleep 1; simulationenabled leader _grp; };
 
     // find
     private _target = [_grp, _radius] call FUNC(findClosedTarget);

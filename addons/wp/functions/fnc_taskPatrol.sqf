@@ -17,7 +17,7 @@
 
 // init
 params ["_grp", "_pos"];
-private _radius = waypointCompletionRadius [_grp,currentwaypoint _grp];
+private _radius = waypointCompletionRadius [_grp, currentWaypoint _grp];
 
 // sort grp
 if (!local _grp) exitWith {};
@@ -59,7 +59,7 @@ _wpX setWaypointType "CYCLE";
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["danger.wp taskPatrol: %1 Patrols",groupID _grp];
+    systemchat format ["danger.wp taskPatrol: %1 Patrols", groupID _grp];
 };
 
 // end

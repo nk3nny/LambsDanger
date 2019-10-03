@@ -21,9 +21,9 @@ private _cycle = 60 + random 30;
 
 // sort grp
 if (!local _grp) exitWith {};
-    if (_grp isEqualType objNull) then {
-        _grp = group _grp;
-    };
+if (_grp isEqualType objNull) then {
+    _grp = group _grp;
+};
 
 // wp fix
 if (_radius isEqualTo 0) then { _radius= 500; };
@@ -45,7 +45,7 @@ private _fnc_flare = {
 while {{alive _x} count units _grp > 0} do {
 
     // performance
-    waitUntil {sleep 1; simulationenabled leader _grp};
+    waitUntil { sleep 1; simulationenabled leader _grp };
 
     // find
     private _target = [_grp, _radius] call FUNC(findClosedTarget);

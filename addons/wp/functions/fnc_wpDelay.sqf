@@ -15,9 +15,7 @@
 */
 
 // init
-private _grp = param [0];
-private _pos = param [1];
-private _threshold = param [2]; 
+params ["_grp", "_pos", "_threshold"];
 
 // return
 (leader _grp distance _pos < _threshold) || {{alive _x} count units _grp < 1}
