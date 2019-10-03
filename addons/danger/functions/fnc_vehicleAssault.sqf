@@ -12,10 +12,10 @@
 */
 
 // init
-params ["_unit","_pos",["_target",objNull],["_buildings",[]]];
+params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
-    _buildings = [_pos,28,false,false] call FUNC(nearBuildings);
+    _buildings = [_pos, 28, false, false] call FUNC(nearBuildings);
 };
 
 //  target on foot
@@ -37,8 +37,8 @@ if (!canFire _veh) exitWith {false};
 
 // find closest building
 if (count _buildings > 0) then {
-    _buildings = [_buildings,[],{_unit distance _x},"ASCEND"] call BIS_fnc_sortBy;
-    _buildings = if (random 1 > 0.4) then {_buildings select 0} else {selectRandom _buildings};
+    _buildings = [_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy;
+    _buildings = if (random 1 > 0.4) then { _buildings select 0 } else { selectRandom _buildings };
     _buildings = _buildings buildingPos -1;
 };
 
@@ -46,7 +46,7 @@ if (count _buildings > 0) then {
 _buildings pushBack _pos;
 
 // pos
-_pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1,0.5 - random 1,0.2 + random 1.2];
+_pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2];
 
 // minor manoeuvres -- moved to FSM
 //[_veh,_unit getHideFrom _target] spawn FUNC(vehicleRotate);
@@ -57,14 +57,14 @@ _veh doWatch _pos;
 // shoot cannon
 _cannon = count _buildings > 2 && {random 1 > 0.2} && {_veh distance _pos > 100};
 if (_cannon) then {
-    _veh action ["useWeapon", _veh, gunner _veh,random 2];
+    _veh action ["useWeapon", _veh, gunner _veh, random 2];
 };
 
 // suppression
 _veh doSuppressiveFire _pos;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)",side _unit,count _buildings,_cannon];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings,_cannon];};
 
 // end
 true

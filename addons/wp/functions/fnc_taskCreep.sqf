@@ -18,19 +18,7 @@
 
 // functions ---
 
-private _fn_findTarget = {
-    _nd = _r;
-    _all = (switchableUnits + playableUnits - entities "HeadlessClient_F");
-    _t = objNull;
-    {
-        _d = (leader _grp) distance2d _x;
-        if (_d < _nd && {side _x != civilian} && {side _x != side _grp} && {getpos _x select 2 < 200}) then {_t = _x;_nd = _d;};
-        true
-    } count _all;
-    _t
-};
-
-private _fn_creepOrders = {
+private _fnc_creepOrders = {
     // distance
     _nd = leader _grp distance2d _t;
     _in_forest = ((selectBestPlaces [getpos leader _grp, 2,"(forest + trees)/2", 1, 1]) select 0) select 1;
@@ -56,7 +44,7 @@ private _fn_creepOrders = {
    } count units _grp;
 };
 
-_fn_debug = {
+private _fnc_debug = {
     if !EGVAR(danger,debug_functions) exitWith {};
     systemchat format ["danger.wp taskCreep: %1 targets %2 (%3) at %4 Meters -- Stealth %5/%6",groupID _grp,name _t,_grp knowsAbout _t,floor (leader _grp distance2d _t),((selectBestPlaces [getpos leader _grp, 2,"(forest + trees)/2", 1, 1]) select 0) select 1,str(unitPos leader _grp)];
 };
@@ -65,20 +53,21 @@ _fn_debug = {
 // functions end ---
 
 // init
-private _grp = param [0];
-private _pos = param [1];
-private _r = waypointCompletionRadius [_grp,currentwaypoint _grp];
+params ["_grp", "_pos"];
+private _radius= waypointCompletionRadius [_grp, currentwaypoint _grp];
 private _cycle = 15;
 
 // sort grp
 if (!local _grp) exitWith {};
-_grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
+if (_grp isEqualType objNull) then {
+    _grp = group _grp;
+};
 
 // wp fix
-if (_r isEqualTo 0) then {_r = 500;};
+if (_radiusisEqualTo 0) then { _radius= 500; };
 
 // orders
-_grp setbehaviour "AWARE";
+_grp setBehaviour "AWARE";
 _grp setFormation "DIAMOND";
 _grp setSpeedMode "LIMITED";
 _grp setCombatMode "GREEN";
@@ -88,13 +77,13 @@ _grp enableAttack false;
 // failsafe!
 {
   doStop _x;
-  _x addEventhandler ["FiredNear",{
+  _x addEventhandler ["FiredNear", {
       params ["_unit"];
       doStop _x;
       _unit setCombatMode "RED";
       _unit suppressFor 4;
-      group _unit enableAttack true;
-      _unit removeEventHandler ["FiredNear",_thisEventHandler];
+      (group _unit) enableAttack true;
+      _unit removeEventHandler ["FiredNear", _thisEventHandler];
     }];
   true
 } count units _grp;
@@ -106,7 +95,7 @@ while {{alive _x} count units _grp > 0} do {
     waitUntil {sleep 1; simulationenabled leader _grp};
 
     // find
-    _t = call _fn_findTarget;
+    privat _target = [_grp, _radius] call FUNC(findClosedTarget);
 
     // act
     if (!isNull _t) then {

@@ -47,7 +47,7 @@ if (_indoor) exitWith {
 };
 
 // outdoor -- crawl
-if (random 1 > (skill _unit)) exitWith {
+if (random 1 > (skill _unit)) exitWith { // joko: @nKenny maybe use endurance skill for this?
 
     // action
     _unit dowatch objNull;
@@ -62,8 +62,8 @@ if (random 1 > (skill _unit)) exitWith {
 // outdoor -- hide
 
 // action
-_unit dowatch objNull;
-[_unit,_unit getPos [100,direction _unit],55] call FUNC(hideInside);
+_unit doWatch objNull;
+[_unit, _unit getPos [100, direction _unit], 55] call FUNC(hideInside); // joko: @nKenny maybe dont change pos and just use hideInside?
 
 // chance to randomly fire weapon
 if ((random 1 > 0.7) && {!(primaryWeapon _unit isEqualTo "")}) then {
@@ -72,9 +72,8 @@ if ((random 1 > 0.7) && {!(primaryWeapon _unit isEqualTo "")}) then {
 
 // chance to randomly wave
 if (random 1 > 0.4) then {
-    [_unit,["GestureCover"]] call FUNC(gesture);
+    [_unit, ["GestureCover"]] call FUNC(gesture);
 };
 
 // return
-_delay = 12 + random 12;
-_delay
+12 + random 12

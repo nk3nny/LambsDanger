@@ -25,14 +25,14 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
-_range = [rank _unit,_range,_override] call {
+_range = [rank _unit, _range] call {
     params ["_rank","_range"];
     if (_override) exitWith {_range};  // to allow for custom short range updates
-    if (_rank isEqualTo "SERGEANT") exitWith {500};
-    if (_rank isEqualTo "LIEUTENANT") exitWith {800};
-    if (_rank isEqualTo "CAPTAIN") exitWith {1000};
-    if (_rank isEqualTo "MAJOR") exitWith {2000};
-    if (_rank isEqualTo "COLONEL") exitWith {3000};
+    if (_rank isEqualTo "SERGEANT") exitWith { 500 };
+    if (_rank isEqualTo "LIEUTENANT") exitWith { 800 };
+    if (_rank isEqualTo "CAPTAIN") exitWith { 1000 };
+    if (_rank isEqualTo "MAJOR") exitWith { 2000 };
+    if (_rank isEqualTo "COLONEL") exitWith { 3000 };
     _range
 };
 
@@ -44,8 +44,8 @@ private _grp = allGroups select {local _x && {side _x isEqualTo side _unit} && {
 
 // share information
 {
-    if (!isNull _target) then {_x reveal [_target,_unit knowsAbout _target];};
-    if (leader _x distance _unit < (250 min _range)) then {_x setBehaviour "COMBAT";_x setFormDir ((leader _x) getDir _unit);};
+    if (!isNull _target) then {_x reveal [_target, _unit knowsAbout _target];};
+    if (leader _x distance _unit < (250 min _range)) then {_x setBehaviour "COMBAT"; _x setFormDir ((leader _x) getDir _unit);};
     true
 } count _grp;
 

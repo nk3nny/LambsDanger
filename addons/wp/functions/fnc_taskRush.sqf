@@ -16,73 +16,56 @@
 
 // functions ---
 
-private _fn_findTarget = {
-    _nd = _r;
-    _all = (switchableUnits + playableUnits - entities "HeadlessClient_F");
-    _t = objNull;
-    {
-        //_d = (leader _grp) distance2d _x;
-        _d = _pos distance2d _x;
-        if (_d < _nd && {side _x != civilian} && {side _x != side _grp} && {getpos _x select 2 < 200}) then {_t = _x;_nd = _d;};
-        true
-    } count _all;
-    _t
-};
-
-private _fn_rushOrders = {
+private _fnc_rushOrders = {
+    params ["_grp", "_target"];
     // Helicopters -- supress it!
-    if ((leader _grp distance2d _t < 200) && {vehicle _t isKindOf "Air"}) exitWith {
+    if (((leader _grp) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
-            _x commandSuppressiveFire getposASL _t;
+            (_x commandSuppressiveFire) getPosASL _target;
             true
         } count units _grp;
     };
 
     // Tank -- hide or ready AT
-    if ((leader _grp distance2d _t < 80) && {vehicle _t isKindOf "Tank"}) exitWith {
+    if ((leader _grp distance2d _target < 80) && {vehicle _target isKindOf "Tank"}) exitWith {
         {
             if (secondaryWeapon _x != "") then {
                 _x setUnitpos "Middle";
                 _x selectWeapon (secondaryweapon _x);
             } else {
                 _x setUnitPos "DOWN";
-                _x commandSuppressiveFire getposASL _t;
+                _x commandSuppressiveFire getPosASL _target;
             };
             true
-        } count units _grp;
+        } count (units _grp);
         _grp enableGunLights "forceOff";
     };
 
     // Default -- run for it!
-    {_x setunitpos "UP";_x domove (getposATL _t);true} count units _grp;
+    {_x setUnitPos "UP";_x doMove (getPosATL _t);true} count units _grp;
     _grp enableGunLights "forceOn";
 };
-
-private _fn_debug = {
-    if (!EGVAR(danger,debug_functions)) exitWith {};
-    systemchat format ["danger.wp taskRush: %1 targets %2 (%3) at %4 Meters",groupID _grp,name _t,_grp knowsAbout _t,floor (leader _grp distance2d _t)];
-};
-
 // functions end ---
 
 // init
-private _grp = param [0];
-private _pos = param [1];
-private _r = waypointCompletionRadius [_grp,currentwaypoint _grp];
+params ["_grp", "_pos"];
+private _radius = waypointCompletionRadius [_grp, currentwaypoint _grp];
 private _cycle = 15;
 
 // sort grp
 if (!local _grp) exitWith {};
-_grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
+    if (_grp isEqualType objNull) then {
+        _grp = group _grp;
+    };
 
 // wp fix
-if (_r isEqualTo 0) then {_r = 500;};
+if (_radius isEqualTo 0) then {_radius = 500;};
 
 // orders
 _grp setSpeedMode "FULL";
 _grp setFormation "DIAMOND";
 _grp enableAttack false;
-{_x disableAI "AUTOCOMBAT";dostop _x;true} count units _grp;
+{_x disableAI "AUTOCOMBAT"; doStop _x; true} count units _grp;
 
 // Hunting loop
 while {{alive _x} count units _grp > 0} do {
@@ -91,12 +74,12 @@ while {{alive _x} count units _grp > 0} do {
     waitUntil {sleep 1; simulationenabled leader _grp};
 
     // find
-    _t = call _fn_findTarget;
+    private _target = [_grp, _radius] call FUNC(findClosedTarget);
 
     // act
-    if (!isNull _t) then  {
-        call _fn_rushOrders;
-        call _fn_debug;
+    if (!isNull _target) then  {
+        [_grp, _target] call _fnc_rushOrders;
+        if (!EGVAR(danger,debug_functions)) then { systemchat format ["danger.wp taskRush: %1 targets %2 (%3) at %4 Meters", groupID _grp, name _target, _grp knowsAbout _target, floor (leader _grp distance2d _target)]; };
         _cycle = 15;
     } else {
         _cycle = 60;

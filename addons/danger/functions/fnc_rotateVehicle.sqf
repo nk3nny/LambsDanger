@@ -19,7 +19,7 @@
 */
 
 // init
-params ["_unit",["_target",[]],["_threshold",18]];
+params ["_unit", ["_target", []], ["_threshold", 18]];
 
 if (_targets isEqualTo []) then {
     _targets = _unit findNearestEnemy _unit;
@@ -32,7 +32,7 @@ if (!canMove _unit || {currentCommand _unit == "MOVE"}) exitWith {true};
 if (_unit distance _target < GVAR(CQB_range)) exitWith {true};
 
 // within acceptble limits
-if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {true};
+if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360 - _threshold)}) exitWith {true};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Rotate Vehicle"];
@@ -51,12 +51,12 @@ while {count _pos < 1} do {
     // update
     _min = _min + 15;
     _i = _i + 1;
-    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0,-100,0]};
+    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0, -100, 0]};
 };
 
 // delay
 _time = time + (5 + random 8);
-waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}};
+waitUntil {sleep 0.1; (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360 - _threshold)}) || {time > _time}};
 
 // check vehicle
 if (!canMove _unit || {count crew _unit < 1}) exitWith {false};
