@@ -4,8 +4,8 @@
 // by jokoho482
 params ["_grp", "_radius"];
 private _newdist = _radius;
-_all = (switchableUnits + playableUnits - entities "HeadlessClient_F");
-_all = _all select {side _x != side _grp && {side _x != civilian}};
+private _players = (switchableUnits + playableUnits - entities "HeadlessClient_F");
+_players = _players select {side _x != side _grp && {side _x != civilian}};
 private _target = objNull;
 {
     private _dist = (leader _grp) distance2d _x;

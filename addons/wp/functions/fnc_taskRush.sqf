@@ -54,9 +54,7 @@ private _cycle = 15;
 
 // sort grp
 if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then {
-    _grp = group _grp;
-};
+if (_grp isEqualType objNull) then { _grp = group _grp; };
 
 // wp fix
 if (_radius isEqualTo 0) then {_radius = 500;};

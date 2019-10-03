@@ -5,19 +5,20 @@
 
 // init
 params ["_grp"];
+private _artillery = [];
 
 // sort grp
 if (!local _grp) exitWith {};
-_grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
+if (_grp isEqualType objNull) then { _grp = (group _grp); };
 
 // find all vehicles
 {
-    if !(isNull objectParent _x) then { _artillery pushBackUnique (vehicle _x)};
+    if !(isNull objectParent _x) then { _artillery pushBackUnique (vehicle _x); };
     true
 } count units _grp;
 
 // identify artillery
-_artillery = _artillery select { getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0 };
+private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0 };
 if (count _artillery < 1) exitWith {false};
 
 // add to faction global

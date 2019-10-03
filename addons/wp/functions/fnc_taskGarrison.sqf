@@ -27,9 +27,7 @@ private _range = waypointCompletionRadius [_grp, currentwaypoint _grp];
 
 // sort grp
 if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then {
-    _grp = group _grp;
-};
+if (_grp isEqualType objNull) then { _grp = group _grp; };
 
 // wp fix
 if (_range isEqualTo 0) then {_range = 50;};
