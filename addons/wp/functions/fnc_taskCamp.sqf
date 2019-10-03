@@ -46,13 +46,12 @@ future?
 */
 
 // init
-private _grp = param [0];
-private _r = param [1,62];
+params ["_grp", ["_range", 62]];
 
 // sort grp ---
 if (!local _grp) exitWith {};
-_grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
-_units = units _grp;
+if (_grp isEqualType grpNull) then {_grp = group _grp};
+private _units = units _grp;
 
 // orders ---
 _grp setBehaviour "SAFE";
@@ -62,23 +61,23 @@ _grp setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT",
 //_grp enableGunLights "forceOn";
 
 // pos
-private _p = getpos leader _grp;
+private _p = getPos (leader _grp);
 
 // find buildings ---
-_b = nearestobjects [_p,["house","strategic"],_r,true];
-_b = _b select {count (_x buildingpos -1) > 0};
-_b = _b call BIS_fnc_arrayShuffle;
+private _building = nearestObjects [_p, ["house", "strategic"], _range, true];
+_building = _building select {count (_x buildingpos -1) > 0};
+_building = _building call BIS_fnc_arrayShuffle;
 
 // find guns ---
-_g = nearestobjects [_p,["Landvehicle"],_r,true];
-_g = _g select {(_x emptyPositions "Gunner") > 0};
+private _gun = nearestObjects [_p, ["Landvehicle"], _range, true];
+_gun = _gun select {(_x emptyPositions "Gunner") > 0};
 
 // STAGE 1 - PATROL --------------------------
 
 if (count _units > 4) then {
     _grp2 = createGroup (side _grp);
-    [selectRandom units _grp] join _grp2;
-    if (count _units > 6)  then {[selectRandom units _grp] join _grp2;};
+    [selectRandom _units] join _grp2;
+    if (count _units > 6)  then { [selectRandom units _grp] join _grp2; };
 
     // performance
     _grp2 enableDynamicSimulation true;
@@ -88,7 +87,7 @@ if (count _units > 4) then {
     _grp2 setGroupIDGlobal [format ["Patrol (%1)",groupId _grp2]];
 
     // orders
-    [_grp2,_r*2] spawn nk_fnc_taskPatrol;
+    [_grp2, _range * 2] spawn nk_fnc_taskPatrol; // FUNCTION NOT FOUND?
 
     // update
     _units = units _grp;
@@ -97,9 +96,9 @@ if (count _units > 4) then {
 // STAGE 2 - GUNS & BUILDINGS ---------------
 {
     // gun
-    if (count _g > 0) then {
-        _x moveInGunner (_g select 0);
-        _g deleteAt 0;
+    if (count _gun > 0) then {
+        _x moveInGunner (_gun select 0);
+        _gun deleteAt 0;
         _units deleteAt _foreachIndex;
     };
 
@@ -107,7 +106,7 @@ if (count _units > 4) then {
         doStop _x;
         _x setUnitPos "UP";
         _x setPos selectRandom ((_b select 0) buildingPos -1);
-        _b deleteAt 0;
+        _building deleteAt 0;
         _units deleteAt _foreachIndex;
     };
 
@@ -117,26 +116,30 @@ if (count _units > 4) then {
 
 // STAGE 3 - STAND ABOUT ----------------
 {
-    _d = random 360;
-    _r = 1.3 + random 3.3;
-    _p2 = [(_p select 0) + (sin _d) * _r, (_p select 1) + (cos _d) * _r, 0];
-    _x setdir (random 360);
-    _x setpos _p2;
+    private _dir = random 360;
+    private _range = 1.3 + random 3.3;
+    private _pos2 = [(_p select 0) + (sin _d) * _r, (_p select 1) + (cos _d) * _r, 0];
+    _x setDir (random 360);
+    _x setPos _pos2;
     _x disableAI "ANIM";
     _anim = selectRandom ["SitDown","SitDown","SitDown","Relax","stand"];
     _x playActionNow _anim;
-    _x addEventHandler ["Hit",{(_this select 0) enableSimulation true; (_this select 0) enableAI "ANIM";_x switchmove "";}];
+    _x addEventHandler ["Hit", {
+        _x switchmove "";
+        (_this select 0) enableSimulation true;
+        (_this select 0) enableAI "ANIM";
+    }];
     true
 } count _units;
 
 // TRIGGER!
-waitUntil {behaviour leader _grp == "COMBAT" || {!alive leader _grp}};
+waitUntil { (behaviour (leader _grp)) == "COMBAT" || {!alive (leader _grp) }};
 _grp setCombatMode "RED";
 {
     //_x switchmove "";
-    _x playActionNow selectRandom ["Stand","Up","EvasiveLeft","EvasiveRight","MountOptic","MountSide","Down","Default"];
+    _x playActionNow selectRandom ["Stand", "Up", "EvasiveLeft", "EvasiveRight", "MountOptic", "MountSide", "Down", "Default"];
     _x enableAI "ANIM";
-    if (random 1 > 0.5) then {_x suppressFor (3 + random 7);};
+    if (random 1 > 0.5) then { _x suppressFor (3 + random 7); };
     true
 } count _units;
 

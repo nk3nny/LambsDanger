@@ -1,7 +1,7 @@
 #include "script_component.hpp"
-// Delays triggering WP until group close 
+// Delays triggering WP until group close
 // version 1.0
-// by nkenny 
+// by nkenny
 
 /*
     Arguments
@@ -9,14 +9,14 @@
         1, Destination             [array, object]
         2, Distance threshold     [Number]
 
-    Returns 
-        true -- reached or dead! 
+    Returns
+        true -- reached or dead!
 
 */
 
-// init 
+// init
 private _grp = param [0];
-private _pos = param [1]; 
+private _pos = param [1];
 private _threshold = param [2]; 
 
 // return

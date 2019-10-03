@@ -26,15 +26,15 @@ _unit setVariable [QGVAR(currentTarget), _danger];
 _unit setVariable [QGVAR(currentTask), "Hide"];
 
 // settings
-_unit forceSpeed selectRandom [-1,24,25];
+_unit forceSpeed selectRandom [-1, 24, 25];
 
 // Randomly scatter into buildings or hide!
 if (count _buildings > 0 && {random 1 > 0.05}) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
     doStop _unit;
-    _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4,0.7 - random 1.4,0]);
+    _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
     _unit setUnitPosWeak "MIDDLE";
-    if (GVAR(debug_functions)) then {systemchat format ["%1 hide in building",side _unit];};
+    if (GVAR(debug_functions)) then {systemchat format ["%1 hide in building", side _unit];};
 
 } else {
     _unit setUnitPosWeak "DOWN";

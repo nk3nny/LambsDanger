@@ -18,7 +18,7 @@
 */
 
 // init
-params ["_unit","_target",["_pos",[]]];
+params ["_unit", "_target", ["_pos", []]];
 
 if (_pos isEqualTo []) then {
     _pos = _target call bis_fnc_position;
@@ -43,10 +43,10 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 
 // settings
-[_unit,["MountOptic"]] call FUNC(gesture);
+[_unit, ["MountOptic"]] call FUNC(gesture);
 
 // pick closest artillery
-_artillery = [_artillery,[],{_target distance _x},"ASCEND"] call BIS_fnc_sortBy;
+_artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
 
 // perform it
 [_artillery select 0,_pos,_unit] spawn lambs_wp_fnc_taskArtillery;

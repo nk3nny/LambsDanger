@@ -13,7 +13,7 @@ _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];
 
 // do it!
-_unit doSuppressiveFire ((AGLToASL _pos) vectorAdd [0,0,0.2 + random 1.2]);
+_unit doSuppressiveFire ((AGLToASL _pos) vectorAdd [0, 0, 0.2 + random 1.2]);
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {

@@ -12,24 +12,22 @@
 */
 
 // init
-params ["_unit",["_range",100],["_housePos",false],["_indoor",false]];
+params ["_unit", ["_range", 100], ["_housePos", false], ["_onlyIndoor", false]];
 
 // houses
-_houses = nearestObjects [_unit,["House","Strategic","Ruins"],_range,true];
+_houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];
 _houses = _houses select {count (_x buildingPos -1) > 0};
 
 // house pos
-if (_housePos) then {
-    _housePos = [];
-    {_housePos append (_x buildingPos -1);true} count _houses;
+if (_housePos) exitWith {
+    _housePos = _houses apply { (_x buildingPos -1) };
 
     // sort indoor
-    if (_indoor) then {
-        _housePos = _housePos select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0,0,6]]};
+    if (_onlyIndoor) then {
+        _housePos = _housePos select { lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] };
     };
-
-    // update array
-    _houses = _housePos;
+    // return
+    _housePos;
 };
 
 // return

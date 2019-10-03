@@ -27,9 +27,9 @@ if !(_dangerPos isEqualTo [0,0,1.8]) then {
     private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
     private _vehicles = nearestObjects  [_unit, ["building","Car"], _range];
 
-    private _allObjs = (_terrainObjects + _vehicles) apply { [_x distance2d _unit, _x] };
-    _allObjs sort false;
-    _allObjs = _allObjs apply {_x select 1};
+
+
+    private _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, "ASCEND"] call BIS_fnc_sortBy;
 
     private _found = false;
     private _obj = objNull;

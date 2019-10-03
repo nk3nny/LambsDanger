@@ -31,17 +31,22 @@ if (count _body > 0) exitWith {
     _unit setVariable [QGVAR(currentTask), "Check Body"];
 
     // do it
-    [_unit,_body] spawn {
-        params ["_unit","_body","_bodyPos","_time"];
-        _bodyPos = getPosATL _body;
-        _unit doMove _bodyPos;
-        _time = time + 20;
-        waitUntil {(_unit distance _bodyPos < 0.6) || {_time < time} || {!alive _unit}};
-        if (alive _unit && {!isNil str _body} && {_unit distance _bodyPos < 0.4}) then {
-            _unit action ["rearm",_body];
-            _unit doFollow leader group _unit;
-        };
-    };
+    private _bodyPos = getPosATL _body;
+    _unit doMove _bodyPos;
+    [
+        {
+            params ["_unit", "_bodyPos", "_time"];
+            ((_unit distance _bodyPos) < 0.6) || {_time < time} || {!alive _unit}
+        },
+        {
+            params ["_unit", "_bodyPos", "_time", "_body"];
+            if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.4}) then {
+                _unit action ["rearm",_body];
+                _unit doFollow leader group _unit;
+            };
+        },
+        [_unit, _bodyPos, time + 20, _body]
+    ] call CBA_fnc_waitUntilAndExecute;
 
     // update variable
     _body setVariable [QGVAR(isChecked), true, true];

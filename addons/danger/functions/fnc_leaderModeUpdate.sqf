@@ -4,17 +4,17 @@
 // by nkenny
 
 // init
-params ["_unit",["_setting",0],["_delay",1]];
+params ["_unit", ["_setting", 0], ["_delay", 1]];
 
 // get variable
-private _dangerMode = group _unit getVariable [QGVAR(dangerMode),[[],[],true,time]];
+private _dangerMode = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
 
 // Update danger type and target/position
-_dangerMode set [0,(_dangerMode select 0) - [_setting]];
-_dangerMode set [3,time + 360 + random _delay];
+_dangerMode set [0, (_dangerMode select 0) - [_setting]];
+_dangerMode set [3, time + 360 + random _delay];
 
 // update variable
-group _unit setVariable [QGVAR(dangerMode),_dangerMode,false];
+(group _unit) setVariable [QGVAR(dangerMode), _dangerMode, false];
 
 // return
 true

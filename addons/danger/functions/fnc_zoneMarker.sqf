@@ -25,7 +25,7 @@ Arguments
 */
 
 // init
-params ["_pos",["_side",[100,100]],["_color","colorEAST"],["_brush","FDiagonal"],["_shape",false]]];
+params ["_pos", ["_side", [100, 100]], ["_color", "colorEAST"],["_brush", "FDiagonal"], ["_shape", false]]];
 _pos = _pos call bis_fnc_position;
 
 // create
