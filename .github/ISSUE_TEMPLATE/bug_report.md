@@ -29,7 +29,7 @@ A clear and concise description of what you expected to happen.
 
 **Where did the issue occur?**
 
-- Dedicated / Self-Hosted Multiplayer / Singleplayer / Editor (Singleplayer) / Editor (Multiplayer) / Virtual Arsenal
+- Dedicated / Self-Hosted Multiplayer / Singleplayer / Editor (Singleplayer) / Editor (Multiplayer)
 
 **Additional context:**
 
