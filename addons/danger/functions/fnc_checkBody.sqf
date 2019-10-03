@@ -32,11 +32,15 @@ if (count _body > 0) exitWith {
 
     // do it
     [_unit,_body] spawn {
-        params ["_unit","_body","_bodyPos"];
+        params ["_unit","_body","_bodyPos","_time"];
         _bodyPos = getPosATL _body;
         _unit doMove _bodyPos;
-        waitUntil {(_unit distance _bodyPos < 0.5) || {_unit getVariable [QGVAR(lastAction),0] < time} || {!alive _unit}};
-        if (alive _unit && {!isNil str _body} && {_unit distance _bodyPos < 0.4}) then {_unit action ["rearm",_body];};
+        _time = time + 20;
+        waitUntil {(_unit distance _bodyPos < 0.6) || {_time < time} || {!alive _unit}};
+        if (alive _unit && {!isNil str _body} && {_unit distance _bodyPos < 0.4}) then {
+            _unit action ["rearm",_body];
+            _unit doFollow leader group _unit;
+        };
     };
 
     // update variable

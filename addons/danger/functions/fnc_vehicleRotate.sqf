@@ -21,7 +21,7 @@
 // init
 params ["_unit",["_target", []],["_threshold",18]];
 
-if (_targets isEqualTo []) then {
+if (_target isEqualTo []) then {
     _target = _unit findNearestEnemy _unit;
 };
 

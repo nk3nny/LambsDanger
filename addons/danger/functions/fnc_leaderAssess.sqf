@@ -25,7 +25,7 @@ _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Leader Assess"];
 
 // update minimum delay
-[_unit,99,30] call FUNC(leaderModeUpdate);
+[_unit,99,66] call FUNC(leaderModeUpdate);
 
 // leadership assessment
 if (count _enemy > 0) then {
@@ -55,7 +55,7 @@ if (count _enemy > 0) then {
 };
 
 // Check nearby houses?
-if (random 1 > 0.4 && {_unit distance (nearestBuilding _pos) < 25}) then {
+if (random 1 > 0.4 && {_unit distance (nearestBuilding _pos) < 80}) then {
         [_unit,4,_pos] call FUNC(leaderMode);
 };
 
@@ -73,10 +73,18 @@ _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}
 _units = units group _unit select {unitReady _x && {_x distance2d _pos < 70}};
 
 if (count _weapons > 0 && {count _units > 0}) then {
+    
+    // pick a random unit 
     _units = selectRandom _units;
-    _unit doWatch ObjNull;
-    _units assignAsGunner (selectRandom _weapons);
+    _weapons = selectRandom _weapons; 
+    
+    // asign no target 
+    _units doWatch ObjNull;
+
+    // order to man the vehicle 
+    _units assignAsGunner _weapons;
     [_units] orderGetIn true;
+    group _unit addVehicle _weapons;
 };
 
 // end
