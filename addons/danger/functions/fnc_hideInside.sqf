@@ -41,7 +41,7 @@ if (count _buildings > 0 && {random 1 > 0.05}) then {
     // Get General Target Position
     private _targetPos = (_unit getPos [50 + random _range, (_danger getDir _unit) + 45 - random 90]);
     // Find Surrounding Bushes and Rocks
-    private _objs = nearestTerrainObjects [_newPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true];
+    private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true];
     if !(_objs isEqualTo []) then {
         // if a Rock or Bush is found set it as target Pos
         _targetPos = getPos (selectRandom _objs);
