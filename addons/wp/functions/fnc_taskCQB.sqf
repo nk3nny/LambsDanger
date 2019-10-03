@@ -18,8 +18,8 @@
 
 // find buildings
 private _fnc_find = {
-    params ["_pos", "_range", "_grp"]
-    private _building = nearestObjects [_pos, ["house","strategic","ruins"], _range, true];
+    params ["_pos", "_range", "_grp"];
+    private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _range, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _grp), [0, 0]]) > 0};
     if (count _building > 0) exitWith { _building select 0 };
@@ -45,12 +45,12 @@ private _fnc_act = {
         // debug
         if (EGVAR(danger,debug_functions)) then {
             systemchat "danger.wp taskCQB: RUSH ENEMY!";
-            createVehicle ["Sign_Arrow_Large_F", getposATL _enemy, [],0,"CAN_COLLIDE"];
+            createVehicle ["Sign_Arrow_Large_F", getposATL _enemy, [], 0, "CAN_COLLIDE"];
         };
 
         // posture
         doStop (units _grp);
-        (leader _grp) playAction selectRandom ["gestureAttack","gestureGo","gestureGoB"];
+        (leader _grp) playAction selectRandom ["gestureAttack", "gestureGo", "gestureGoB"];
 
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
@@ -65,13 +65,13 @@ private _fnc_act = {
     };
 
     // clear and check buildings
-    private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _grp),(_buildingbuildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0,0,10]]}];
-    //_buildingPos = _buildinggetVariable ["nk_CQB_cleared",(_buildingbuildingPos -1)];
+    private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _grp), (_buildingbuildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+    //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
         // the assault
         if ((count _buildingPos > 0) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1,0.5 - random 1,0]);
+            _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
@@ -83,13 +83,13 @@ private _fnc_act = {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
-                if (lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0,0,10]] && {_x distance (_buildingPos select 0) > 45} && {random 1 > 0.6}) then {
+                if (lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0, 0, 10]] && {_x distance (_buildingPos select 0) > 45} && {random 1 > 0.6}) then {
                     _x setVehiclePosition [getPos _x, [], 3.5];
                 };
 
                 // distance to building is too far?
                 //if (_x distance (_buildingPos select 0) > 100) then {
-                //  _x doMove (_buildinggetPos [-10,(_x getDir _b)]);
+                //  _x doMove (_buildinggetPos [-10, (_x getDir _b)]);
                 //};
             };
         } else {
@@ -121,7 +121,7 @@ private _cycle = 21;
 if (!local _grp) exitWith {};
 if (_grp isEqualType objNull) then {
     _grp = group _grp;
-}
+};
 
 // wp fix
 if (_radius isEqualTo 0) then {_radius = 50;};

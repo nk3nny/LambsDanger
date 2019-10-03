@@ -4,7 +4,7 @@
 //by nkenny
 
 // init
-params ["_unit","_target",["_buildings",[]]];
+params ["_unit", "_target", ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
     _buildings = [_unit getPos [random 100, _unit getDir _target], 35, true, false] call FUNC(nearBuildings);

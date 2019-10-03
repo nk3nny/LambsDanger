@@ -69,7 +69,7 @@ while {{alive _x} count units _grp > 0} do {
         if (!_combat && {_onFoot} && {random 1 > 0.8}) then { [_grp] call _fnc_flare; };
 
         // BUILDING SUPPRESSION!  <-- should be unecessary in danger.fsm
-        //if (_combat && {(nearestBuilding _t distance2d _t < 25)}) then {{_x doSuppressiveFire ((getposASL _t) vectorAdd [random 2,random 2,0.5 + random 3]);true} count units _grp;};
+        //if (_combat && {(nearestBuilding _t distance2d _t < 25)}) then { { _x doSuppressiveFire ((getposASL _t) vectorAdd [random 2, random 2, 0.5 + random 3]); true } count units _grp;};
     };
 
     // WAIT FOR IT!

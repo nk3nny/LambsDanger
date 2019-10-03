@@ -38,7 +38,7 @@ _grp enableGunLights "forceOn";
 // pos
 if (isNil "_pos") then { _pos = getPos (leader _grp); };
 //private _p = getpos leader _grp;
-//private _debug_color = selectRandom ["colorBlue","colorYellow","colorOrange","ColorBrown"];  <-- fn_dotMarkers not part of this release
+//private _debug_color = selectRandom ["colorBlue", "colorYellow", "colorOrange", "ColorBrown"];  <-- fn_dotMarkers not part of this release
 
 // Waypoints - Move
 for "_i" from 1 to 4 do  {
@@ -48,14 +48,14 @@ for "_i" from 1 to 4 do  {
     _wp setWaypointType "MOVE";
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
-    _wp setWaypointStatements ["true","(group this) enableGunLights 'forceOn';"];
-    //if (var_debug) then {[getWPPos _wp,format ["wp%1",_i],_debug_color] call nk_fnc_dotMarker;};
+    _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
+    //if (var_debug) then {[getWPPos _wp, format ["wp%1", _i], _debug_color] call nk_fnc_dotMarker;};
 };
 
 // CYCLE
 private _wpX = _grp addWaypoint [_pos, 10];
 _wpX setWaypointType "CYCLE";
-//if (var_debug) then {[getWPPos _wpX,"cycle","colorBLUE"] call nk_fnc_dotMarker;};
+//if (var_debug) then {[getWPPos _wpX, "cycle", "colorBLUE"] call nk_fnc_dotMarker;};
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

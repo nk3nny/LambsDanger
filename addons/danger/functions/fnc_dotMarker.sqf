@@ -12,11 +12,11 @@ Arguments
 */
 
 // init
-params ["_pos",["_text",""],["_color","colorBlack"],["_type","mil_dot"]];
+params ["_pos", ["_text", ""], ["_color", "colorBlack"], ["_type", "mil_dot"]];
 _pos = _pos call bis_fnc_position;
 
 // create
-_m = createMarkerLocal [format["mdot_%1%2%3",(floor(_pos select 0)),(floor(_pos select 1)),count allmapMarkers],_pos];
+_m = createMarkerLocal [format["mdot_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
 _m setMarkerShapeLocal "Icon";
 _m setMarkerColorLocal _color;
 _m setMarkerTypeLocal _type;

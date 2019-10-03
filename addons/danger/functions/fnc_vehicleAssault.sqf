@@ -49,7 +49,7 @@ _buildings pushBack _pos;
 _pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2];
 
 // minor manoeuvres -- moved to FSM
-//[_veh,_unit getHideFrom _target] spawn FUNC(vehicleRotate);
+//[_veh, _unit getHideFrom _target] spawn FUNC(vehicleRotate);
 
 // look at position
 _veh doWatch _pos;
@@ -64,7 +64,7 @@ if (_cannon) then {
 _veh doSuppressiveFire _pos;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings,_cannon];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings, _cannon];};
 
 // end
 true

@@ -53,7 +53,7 @@ if (_cannon) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc vehicle assault building (cannon: %1)",_cannon];};
+if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc vehicle assault building (cannon: %1)", _cannon];};
 
 // end
 true

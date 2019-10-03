@@ -4,7 +4,7 @@
 //by nkenny
 
 // init
-params ["_unit","_target",["_units",[]]];
+params ["_unit", "_target", ["_units", []]];
 
 // find units
 if (_units isEqualTo []) then {

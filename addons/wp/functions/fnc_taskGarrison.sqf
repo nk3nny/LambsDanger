@@ -36,7 +36,7 @@ if (_range isEqualTo 0) then {_range = 50;};
 
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _range, true, false] call EFUNC(danger,nearBuildings);
-_houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0,0,6]] || {random 1 > 0.5}};
+_houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
 _houses = _houses call BIS_fnc_arrayShuffle;
 
 // find guns
@@ -98,7 +98,7 @@ if (count _units > 4) then {
         };
         case 2: {
             _x addEventHandler ["FiredNear", {
-                params ["_unit","_shooter","_distance"];
+                params ["_unit", "_shooter", "_distance"];
                 if (side _unit != side _shooter && {_distance < 10 + random 10}) then {
                     _unit enableAI "PATH";
                     _unit doMove getposATL _shooter;
@@ -136,7 +136,7 @@ _wp setWaypointCompletionRadius _range;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["danger.wp taskGarrison: %1 garrisoned",groupID _grp];
+    systemchat format ["danger.wp taskGarrison: %1 garrisoned", groupID _grp];
 };
 
 

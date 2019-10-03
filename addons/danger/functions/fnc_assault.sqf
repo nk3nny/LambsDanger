@@ -4,7 +4,7 @@
 // by nkenny
 
 // init
-params ["_unit", ["_target", objNull], ["_range",30]];
+params ["_unit", ["_target", objNull], ["_range", 30]];
 
 // check if stopped
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
@@ -36,7 +36,7 @@ if (count _buildings < 2 || { random 1 > 0.8 }) exitWith {
 };
 
 // execute move
-_unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4,0]);
+_unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
 // debug
 if (GVAR(debug_functions)) then {systemchat format ["%1 checking buildings (%2m)", side _unit, round (_unit distance2d _target)];};

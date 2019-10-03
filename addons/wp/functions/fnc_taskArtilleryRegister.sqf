@@ -21,9 +21,9 @@ _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" >> (type
 if (count _artillery < 1) exitWith {false};
 
 // add to faction global
-private _global = missionNamespace getVariable ["lambs_artillery_" + str (side _grp),[]];
+private _global = missionNamespace getVariable ["lambs_artillery_" + str (side _grp), []];
 { _global pushBackUnique _x; true } count _artillery;
-missionNamespace setVariable ["lambs_artillery_" + str (side _grp),_global,false];
+missionNamespace setVariable ["lambs_artillery_" + str (side _grp), _global, false];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

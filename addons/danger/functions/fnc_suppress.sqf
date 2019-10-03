@@ -4,7 +4,7 @@
 // by nkenny
 
 // init
-params ["_unit","_pos"];
+params ["_unit", "_pos"];
 
 // no primary weapons exit?
 if (primaryWeapon _unit isEqualTo "") exitWith {false};
@@ -21,7 +21,7 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Suppression (%2 @ %3m)",side _unit,name _unit,round (_unit distance _pos)];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];};
 
 // end
 true

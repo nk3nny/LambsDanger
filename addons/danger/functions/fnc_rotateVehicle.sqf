@@ -43,7 +43,7 @@ private _min = 20;      // Minimum range
 private _i = 0;         // iterations
 
 while {count _pos < 1} do {
-    _pos = (_unit getPos [_min,_unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
+    _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
 
     // water
     if (count _pos > 0) then {if (surfaceIsWater _pos) then {_pos = []};};

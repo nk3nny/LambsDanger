@@ -4,7 +4,7 @@
 //by nkenny
 
 // init
-params ["_unit",["_pos",[]],"_enemy","_targets","_units","_weapons"];
+params ["_unit", ["_pos", []], "_enemy", "_targets", "_units", "_weapons"];
 
 // get pos
 if (_pos isEqualTo []) then {
@@ -18,7 +18,7 @@ private _mode = toLower (group _unit getVariable [QGVAR(dangerAI), "enabled"]); 
 if (_mode isEqualTo "disabled") exitWith {false};
 
 // enemy
-private ["_enemy","_targets","_units","_weapons"];
+private ["_enemy", "_targets", "_units", "_weapons"];
 _enemy = _unit targets [true, 600, [], 0, _pos];
 
 _unit setVariable [QGVAR(currentTarget), objNull];
@@ -50,7 +50,7 @@ if (count _enemy > 0) then {
     };
 
     // communicate <-- possible remove?
-    [_unit,selectRandom _enemy] call FUNC(shareInformation);
+    [_unit, selectRandom _enemy] call FUNC(shareInformation);
 
 };
 

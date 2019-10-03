@@ -84,7 +84,7 @@ if (count _units > 4) then {
     _grp2 deleteGroupWhenEmpty true;
 
     // id
-    _grp2 setGroupIDGlobal [format ["Patrol (%1)",groupId _grp2]];
+    _grp2 setGroupIDGlobal [format ["Patrol (%1)", groupId _grp2]];
 
     // orders
     [_grp2, _range * 2] spawn nk_fnc_taskPatrol; // FUNCTION NOT FOUND?
@@ -122,7 +122,7 @@ if (count _units > 4) then {
     _x setDir (random 360);
     _x setPos _pos2;
     _x disableAI "ANIM";
-    _anim = selectRandom ["SitDown","SitDown","SitDown","Relax","stand"];
+    _anim = selectRandom ["SitDown", "SitDown", "SitDown", "Relax", "stand"];
     _x playActionNow _anim;
     _x addEventHandler ["Hit", {
         _x switchmove "";

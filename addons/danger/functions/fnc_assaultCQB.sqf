@@ -12,9 +12,9 @@
 
 // find buildings
 _fn_find = {
-  _buildings = nearestobjects [getpos (leader _grp),["house","strategic","ruins"],_range,true];
+  _buildings = nearestobjects [getpos (leader _grp), ["house", "strategic", "ruins"], _range, true];
   _buildings = _buildings select {count (_x buildingPos -1) > 0};
-  _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _grp),[0,0]]) > 0};
+  _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _grp), [0, 0]]) > 0};
   if (count _buildings > 0) exitWith {_buildings select 0};
   ObjNull
 };
@@ -36,33 +36,33 @@ _fn_act = {
     // debug
     if (GVAR(debug_functions)) then {
       systemchat "danger.fnc taskCQB: RUSH ENEMY!";
-      _veh = createVehicle ["Sign_Arrow_Large_F",getposATL _enemy,[],0,"CAN_COLLIDE"];
+      _veh = createVehicle ["Sign_Arrow_Large_F", getposATL _enemy, [], 0, "CAN_COLLIDE"];
     };
 
     // posture
     doStop units _grp;
-    leader _grp playAction selectRandom ["gestureAttack","gestureGo","gestureGoB"];
+    leader _grp playAction selectRandom ["gestureAttack", "gestureGo", "gestureGoB"];
 
     // location
     _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
     _buildingPos pushBack getPosATL _enemy;
 
     // act
-      {_x doMove selectRandom _buildingPos;_x doWatch _enemy;true} count units _grp;
+      { _x doMove selectRandom _buildingPos; _x doWatch _enemy; true} count units _grp;
   };
 
   // clear and check buildings
-  _buildingPos = _buildings getVariable ["LAMBS_CQB_cleared_" + str (side _grp),(_buildings buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0,0,10]]}];
-  //_bp = _b getVariable ["nk_CQB_cleared",(_b buildingPos -1)];
+  _buildingPos = _buildings getVariable ["LAMBS_CQB_cleared_" + str (side _grp), (_buildings buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+  //_bp = _b getVariable ["nk_CQB_cleared", (_b buildingPos -1)];
   {
     // the assault
     if ((count _buildingPos > 0) && {unitReady _x}) then {
         _x setUnitPos "UP";
-        _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1,0.5 - random 1,0]);
+        _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
     // debug
     if (GVAR(debug_functions)) then {
-            _veh = createVehicle ["Sign_Arrow_Large_Blue_F",_buildingPos select 0,[],0,"CAN_COLLIDE"];
+            _veh = createVehicle ["Sign_Arrow_Large_Blue_F", _buildingPos select 0, [], 0, "CAN_COLLIDE"];
     };
 
     // Update building list when soldiers are close -- random chance to update regardless as bugfix
@@ -80,7 +80,7 @@ _fn_act = {
       _x setUnitPos "MIDDLE";
 
       // Unit is ready and outside -- try suppressive fire
-      if (unitReady _x && {!(lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0,0,10]])}) then {
+      if (unitReady _x && {!(lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0, 0, 10]])}) then {
                 _x doSuppressiveFire _buildings;
                 _x doFollow leader _grp;
             };
@@ -89,21 +89,21 @@ _fn_act = {
   } count units _grp;
 
   // update variable
-  _buildings setVariable ["LAMBS_CQB_cleared_" + str (side _grp),_buildingPos];
+  _buildings setVariable ["LAMBS_CQB_cleared_" + str (side _grp), _buildingPos];
 };
 
 // init
 private _grp = param [0];
-private _range = param [1,GVAR(CQB_range)];
-private _cycle = param [2,21];
+private _range = param [1, GVAR(CQB_range)];
+private _cycle = param [2, 21];
 
 // sort grp
 if (!local _grp) exitWith {};
 _grp = [_grp] call {if (typeName _grp == "OBJECT") exitWith {group _grp};_grp};
 
 // variable -- script should only run once!
-if (_grp getVariable [QGVAR(inCQB),false]) exitWith {};
-_grp setVariable [QGVAR(inCQB),true];
+if (_grp getVariable [QGVAR(inCQB), false]) exitWith {};
+_grp setVariable [QGVAR(inCQB), true];
 
 // store group settings
 _speed = speedMode _grp;
@@ -142,11 +142,11 @@ while {{alive _x} count units _grp > 0} do {
 
   // wait
   sleep _cycle;
-  if (GVAR(debug_functions)) then {systemchat format ["danger.fnc taskCQB: (team: %1) (units: %2) (enemies: %3)",groupID _grp,count units _grp,!isNull _enemy];};
+  if (GVAR(debug_functions)) then {systemchat format ["danger.fnc taskCQB: (team: %1) (units: %2) (enemies: %3)", groupID _grp, count units _grp, !isNull _enemy];};
 };
 
 // reset variable
-_grp setVariable [QGVAR(inCQB),false];
+_grp setVariable [QGVAR(inCQB), false];
 
 // reset modes
 _grp setSpeedMode _speed;

@@ -4,7 +4,7 @@
 // by nkenny
 
 // init
-params ["_unit", ["_setting",0], ["_target",ObjNull]];
+params ["_unit", ["_setting", 0], ["_target", objNull]];
 
 // get variable
 private _dangerMode = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];

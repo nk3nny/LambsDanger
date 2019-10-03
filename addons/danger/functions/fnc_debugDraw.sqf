@@ -60,7 +60,7 @@ private _fnc_getRect = {
     if (isNull _displayEGSpectator) then {
         if (GVAR(drawRectCacheGame) isEqualTo []) then {
             _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0,0,0,0.1];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.1];
         } else {
             _control = GVAR(drawRectCacheGame) deleteAt 0;
         };
@@ -68,7 +68,7 @@ private _fnc_getRect = {
     } else {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0,0,0,0.1];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.1];
         } else {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
@@ -104,12 +104,12 @@ private _fnc_DrawRect = {
     private _headPos = _unit call _fnc_getPos;
     // if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
     if (true) then {
-        private _textData =  ["<t align='bottom' valign='center' size='%1'>"];
+        private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
                 private _pos2 = _x call _fnc_getPos;
-                drawLine3D [_headPos, _pos2, [1,1,1,0.5]]; // TODO: Color
+                drawLine3D [_headPos, _pos2, [1, 1, 1, 0.5]]; // TODO: Color
             } count (units _x);
             _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
         };
@@ -126,14 +126,14 @@ private _fnc_DrawRect = {
              _targetKnowledge append [
                 "Target Knowledge:<br/>",
                 "    Last Seen: ", _lastSeen, " (", _knowledge select 2, ")<br/>",
-                "    Position Error: ",_knowledge select 5,"<br/>"
+                "    Position Error: ", _knowledge select 5, "<br/>"
             ];
 
-            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0,1,0,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
+            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
 
-            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0,1,0,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
+            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0, 1, 0, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
 
             ["None", name _currentTarget] select (isNull _currentTarget);
         } else {
@@ -147,7 +147,7 @@ private _fnc_DrawRect = {
         private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
         private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
         private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
-        drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1,0,0,1]]; // TODO: Color
+        drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1, 0, 0, 1]]; // TODO: Color
 
 
         _textData append [

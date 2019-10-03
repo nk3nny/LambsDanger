@@ -4,7 +4,7 @@
 // by nkenny
 
 // init
-params ["_unit","_target"];
+params ["_unit", "_target"];
 
 // vehicles exit
 if (!isNull objectParent _unit) exitWith {false};
@@ -13,7 +13,7 @@ if (!isNull objectParent _unit) exitWith {false};
 if (side _unit isEqualTo side _target) exitWith {false};
 
 // no weapons? exit
-if (count weapons _unit < 1) exitWith {true}; 
+if (count weapons _unit < 1) exitWith {true};
 
 // Enemy vehicles?
 _enemyVehicle = _target isKindOf "Tank" || {_target isKindOf "Air"};

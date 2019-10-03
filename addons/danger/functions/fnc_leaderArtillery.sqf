@@ -25,19 +25,19 @@ if (_pos isEqualTo []) then {
 };
 
 // check if mod active
-if (!GVAR(WP)) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- mod not enabled",side _unit]}};
+if (!GVAR(WP)) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- mod not enabled", side _unit]}};
 
 // sort target
-if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- target too close",side _unit]}};
+if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- target too close", side _unit]}};
 
 // settings
-private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit),[]];
+private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit), []];
 _artillery select {
-    canFire _x && {unitReady _x} && {_pos inRangeOfArtillery [[_x],getArtilleryAmmo [_x] select 0]};
+    canFire _x && {unitReady _x} && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
 };
 
 // exit on no ready artillery
-if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- no available artillery",side _unit]}};
+if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- no available artillery", side _unit]}};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
@@ -49,7 +49,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 _artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
 
 // perform it
-[_artillery select 0,_pos,_unit] spawn lambs_wp_fnc_taskArtillery;
+[_artillery select 0, _pos, _unit] spawn lambs_wp_fnc_taskArtillery;
 
 // end
 true

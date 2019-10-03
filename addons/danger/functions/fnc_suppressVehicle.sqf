@@ -40,7 +40,7 @@ _tpos = (ATLtoASL (_unit getHideFrom _target)) vectorAdd [0.5 - random 1, 0.5 - 
 _unit doSuppressiveFire _tPos;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 suppression (%2s)",getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (time - (_vehicle getVariable [QGVAR(lastAction), 0]))];};
+if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 suppression (%2s)", getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (time - (_vehicle getVariable [QGVAR(lastAction), 0]))];};
 
 // end
 true

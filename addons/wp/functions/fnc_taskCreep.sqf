@@ -21,7 +21,7 @@
 private _fnc_creepOrders = {
     // distance
     _nd = leader _grp distance2d _t;
-    _in_forest = ((selectBestPlaces [getpos leader _grp, 2,"(forest + trees)/2", 1, 1]) select 0) select 1;
+    _in_forest = ((selectBestPlaces [getpos leader _grp, 2, "(forest + trees)/2", 1, 1]) select 0) select 1;
 
    // danger mode? go for it!
    if (behaviour leader _grp isEqualTo "COMBAT") exitWith {_grp setCombatMode "RED";{_x setUnitpos "MIDDLE";_x domove (getposATL _t);true} count units _grp;};
@@ -38,7 +38,7 @@ private _fnc_creepOrders = {
    // move
    _i = 0;
    {
-    _x doMove (_t getPos [_i,random 360]);
+    _x doMove (_t getPos [_i, random 360]);
     _i = _i + random 10;
     true
    } count units _grp;
@@ -46,7 +46,7 @@ private _fnc_creepOrders = {
 
 private _fnc_debug = {
     if !EGVAR(danger,debug_functions) exitWith {};
-    systemchat format ["danger.wp taskCreep: %1 targets %2 (%3) at %4 Meters -- Stealth %5/%6",groupID _grp,name _t,_grp knowsAbout _t,floor (leader _grp distance2d _t),((selectBestPlaces [getpos leader _grp, 2,"(forest + trees)/2", 1, 1]) select 0) select 1,str(unitPos leader _grp)];
+    systemchat format ["danger.wp taskCreep: %1 targets %2 (%3) at %4 Meters -- Stealth %5/%6", groupID _grp, name _t, _grp knowsAbout _t, floor (leader _grp distance2d _t), ((selectBestPlaces [getpos leader _grp, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _grp)];
 };
 
 
@@ -64,7 +64,7 @@ if (_grp isEqualType objNull) then {
 };
 
 // wp fix
-if (_radiusisEqualTo 0) then { _radius= 500; };
+if (_radius isEqualTo 0) then { _radius= 500; };
 
 // orders
 _grp setBehaviour "AWARE";
@@ -95,7 +95,7 @@ while {{alive _x} count units _grp > 0} do {
     waitUntil {sleep 1; simulationenabled leader _grp};
 
     // find
-    privat _target = [_grp, _radius] call FUNC(findClosedTarget);
+    private _target = [_grp, _radius] call FUNC(findClosedTarget);
 
     // act
     if (!isNull _t) then {

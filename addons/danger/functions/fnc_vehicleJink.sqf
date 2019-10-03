@@ -20,7 +20,7 @@ _unit setVariable [QGVAR(currentTask), "Jink Vehicle"];
 private _destination = [];
 _destination pushBack (_veh modelToWorldVisual [_range, -(random 10), 0]);
 _destination pushBack (_veh modelToWorldVisual [_range * -1, -(random 10), 0]);
-//_destination pushBack (_veh modelToWorldVisual [0,(20 + random 50) * -1,0]);  <-- rear movement just confuses AI
+//_destination pushBack (_veh modelToWorldVisual [0, (20 + random 50) * -1, 0]);  <-- rear movement just confuses AI
 
 // near enemy?
 if (!isNull (_unit findNearestEnemy _unit)) then {
@@ -28,7 +28,7 @@ if (!isNull (_unit findNearestEnemy _unit)) then {
 };
 
 // tweak
-_destination apply {_x findEmptyPosition [0,25,typeOf _veh];};
+_destination apply {_x findEmptyPosition [0, 25, typeOf _veh];};
 
 // actual position and no water
 _destination = _destination select {count _x > 0 && {!(surfaceIsWater _x)}};
@@ -44,7 +44,7 @@ _destination = selectRandom _destination;
 _veh doMove _destination;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName"),round (_unit distance _destination)];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName"), round (_unit distance _destination)];};
 
 // end
 _destination

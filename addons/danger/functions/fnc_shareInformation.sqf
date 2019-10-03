@@ -15,18 +15,18 @@
 */
 
 // init
-params ["_unit",["_target",ObjNull],["_range",350],["_override",false]];
+params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 
 // nil or captured
 if (_unit distance _target > 3000) exitWith {false};
-if ((_unit getVariable ["ace_captives_isHandcuffed",false]) || {_unit getVariable ["ace_captives_issurrendering",false]}) exitWith {false};
+if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
 _range = [rank _unit, _range] call {
-    params ["_rank","_range"];
+    params ["_rank", "_range"];
     if (_override) exitWith {_range};  // to allow for custom short range updates
     if (_rank isEqualTo "SERGEANT") exitWith { 500 };
     if (_rank isEqualTo "LIEUTENANT") exitWith { 800 };
@@ -50,7 +50,7 @@ private _grp = allGroups select {local _x && {side _x isEqualTo side _unit} && {
 } count _grp;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)",side _unit,_unit knowsAbout _target,count _grp,round _range];};
+if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _grp, round _range];};
 
 // end
 true
