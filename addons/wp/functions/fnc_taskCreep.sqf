@@ -64,7 +64,7 @@ if (_grp isEqualType objNull) then {
 };
 
 // wp fix
-if (_radius isEqualTo 0) then { _radius= 500; };
+if (_radiusisEqualTo 0) then { _radius= 500; };
 
 // orders
 _grp setBehaviour "AWARE";
@@ -95,7 +95,7 @@ while {{alive _x} count units _grp > 0} do {
     waitUntil {sleep 1; simulationenabled leader _grp};
 
     // find
-    private _target = [_grp, _radius] call FUNC(findClosedTarget);
+    privat _target = [_grp, _radius] call FUNC(findClosedTarget);
 
     // act
     if (!isNull _t) then {

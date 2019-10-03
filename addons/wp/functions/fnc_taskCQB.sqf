@@ -18,7 +18,7 @@
 
 // find buildings
 private _fnc_find = {
-    params ["_pos", "_range", "_grp"];
+    params ["_pos", "_range", "_grp"]
     private _building = nearestObjects [_pos, ["house","strategic","ruins"], _range, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _grp), [0, 0]]) > 0};
@@ -121,7 +121,7 @@ private _cycle = 21;
 if (!local _grp) exitWith {};
 if (_grp isEqualType objNull) then {
     _grp = group _grp;
-};
+}
 
 // wp fix
 if (_radius isEqualTo 0) then {_radius = 50;};
