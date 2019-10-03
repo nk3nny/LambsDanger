@@ -19,13 +19,13 @@ _unit setUnitPosWeak "UP";
 // Near buildings + sort near positions + add target actual location
 _buildings = [_target, _range, true, true] call FUNC(nearBuildings);
 _buildings pushBack (getPosATL _target);
-_buildings = _buildings select { _x distance2d _target < 5 };
+_buildings = _buildings select { _x distance2d _target < ( 4 + random 3 ) };
 
 // exit without buildings? -- Assault or delay!
 if (count _buildings < 2 || { random 1 > 0.8 }) exitWith {
 
     // Outdoors or indoors with 5% chance to move out
-    if (!(_unit call FUNC(indoor)) || { random 1 > 0.95 }) then {
+    if (!(_unit call FUNC(indoor)) || { random 1 > 0.8 }) then {
         // execute move
         _unit doMove (_unit getHideFrom _target);
         //_unit moveTo (_unit getHideFrom _target); //-- testing moveTo for lower level order

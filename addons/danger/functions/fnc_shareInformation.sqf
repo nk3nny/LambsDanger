@@ -36,6 +36,10 @@ _range = [rank _unit,_range,_override] call {
     _range
 };
 
+
+// limit by viewdistance
+_range = _range min viewDistance;
+
 // find units
 private _grp = allGroups select {local _x && {side _x isEqualTo side _unit} && {leader _x distance2d _unit < _range} && {_x != group _unit}};
 

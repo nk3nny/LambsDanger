@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "H:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Player_or__not_l",4,218,1025.000000,-525.000000,1150.000000,-450.000000,12.000000,"Player or " \n "not local"};
@@ -71,14 +71,16 @@ item66[] = {"Pre_attack",2,250,25.000000,75.000000,125.000000,125.000000,0.00000
 item67[] = {"Always",4,218,-50.000000,150.000000,50.000000,200.000000,0.000000,"Always"};
 item68[] = {"Coward",4,218,50.000000,150.000000,150.000000,200.000000,1.000000,"Coward"};
 item69[] = {"Coward",2,250,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
-item70[] = {"Clear_buildings",2,250,150.000000,225.000000,250.000000,275.000000,0.000000,"Clear buildings"};
-item71[] = {"Cycle_",4,218,200.000000,325.000000,300.000000,375.000000,1.000000,"Cycle!"};
+item70[] = {"Clear_buildings",2,4346,150.000000,225.000000,250.000000,275.000000,0.000000,"Clear buildings"};
+item71[] = {"Cycle_",4,218,225.000000,325.000000,325.000000,375.000000,1.000000,"Cycle!"};
 item72[] = {"",7,210,-466.500000,-54.000000,-458.500000,-46.000000,0.000000,""};
 item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000,"Static"};
 item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
-item77[] = {"____VARIABLES__lambs",-1,250,-1630.300171,-578.637817,-1293.179321,-406.645874,0.000000,"// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
+item77[] = {"____VARIABLES__lambs",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
+item78[] = {"LAMBS_DANGER_FSM",-1,250,-1700.000000,-925.000000,-800.000000,-800.000000,0.000000,"LAMBS DANGER FSM 1.5.0"};
+item79[] = {"Player_formation",4,218,175.000000,350.000000,275.000000,400.000000,0.000000,"Player" \n "formationleader"};
 version=1;
 class LayoutItems
 {
@@ -128,6 +130,15 @@ class LayoutItems
 			FontHeight=10;
 			lStyle=1;
 			Align=0;
+		};
+	};
+	class Item78
+	{
+		class ItemInfo
+		{
+			FontFace="Arial";
+			FontHeight=20;
+			lStyle=1;
 		};
 	};
 };
@@ -225,12 +236,14 @@ link90[] = {68,69};
 link91[] = {69,26};
 link92[] = {70,26};
 link93[] = {70,71};
-link94[] = {71,70};
-link95[] = {72,4};
-link96[] = {73,74};
-link97[] = {74,18};
-globals[] = {0.000000,0,0,0,0,640,480,2,398,6316128,1,-1763.453369,-919.400635,-87.589478,-773.378967,1088,884,1};
-window[] = {2,-1,-1,-1,-1,865,52,854,52,3,1106};
+link94[] = {70,79};
+link95[] = {71,70};
+link96[] = {72,4};
+link97[] = {73,74};
+link98[] = {74,18};
+link99[] = {79,29};
+globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-383.016113,520.118774,626.818359,-106.978394,1088,884,1};
+window[] = {2,-1,-1,-1,-1,891,78,880,78,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -479,7 +492,7 @@ class FSM
                                         priority = 3.000000;
                                         to="Investigate__Unload";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_investigate && {_commander}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_investigate && {_commander} && {!_tank}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -517,7 +530,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {systemchat format [""%1 - Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType]};" \n
                          "" \n
                          "// immediate action" \n
-                         "if ((_dangerCause isEqualTo 2)  && {random 1 > 0.65}) then {" \n
+                         "if ((_dangerCause isEqualTo 2)  && {random 1 > 0.6}) then {" \n
                          "	[_this] call lambs_danger_fnc_immediateAction;" \n
                          "}; " \n
                          "" \n
@@ -696,8 +709,7 @@ class FSM
                 {
                         name = "Panic_";
                         itemno = 22;
-                        init = /*%FSM<STATEINIT""">*/"// Panic happens here" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// suppression code " \n
                          "_delay = [_this,_dangerCausedBy] call lambs_danger_fnc_panic; " \n
                          "" \n
@@ -895,6 +907,7 @@ class FSM
                          "	private _buildings = [_this,45,true,true] call lambs_danger_fnc_nearBuildings;" \n
                          "	{" \n
                          "		[_x,_dangerPos,45,_buildings] call lambs_danger_fnc_hideInside;" \n
+                         "		_timeout = _timeout + 3; " \n
                          "		true" \n
                          "	} count ((units group _this) select {_x distance2d _this < 80 && {unitReady _x} && {isNull objectParent _x}}); " \n
                          "} else {" \n
@@ -949,13 +962,9 @@ class FSM
                 {
                         name = "Investigate";
                         itemno = 34;
-                        init = /*%FSM<STATEINIT""">*/"// investigation happens here " \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
                          "_timeout = time + 5 + random 4; " \n
-                         "" \n
-                         "// storePos " \n
-                         "private _oldPos = getposATL _this; " \n
                          "" \n
                          "// look at it " \n
                          "_this lookAt _dangerPos; " \n
@@ -1020,9 +1029,7 @@ class FSM
                          "" \n
                          "// join" \n
                          "_this doFollow (leader group _this); " \n
-                         "" \n
-                         "// pos " \n
-                         "_this moveTo _oldPos; "/*%FSM</STATEINIT""">*/;
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1168,11 +1175,8 @@ class FSM
                         name = "Assess___Continu";
                         itemno = 43;
                         init = /*%FSM<STATEINIT""">*/"" \n
-                         "// storePos " \n
-                         "private _oldPos = getposATL _this; " \n
-                         "" \n
                          "// time out " \n
-                         "_timeout = time  + random 4; " \n
+                         "_timeout = time  + 2 + random 4; " \n
                          "" \n
                          "// leader assessment " \n
                          "[_this,_dangerPos] call lambs_danger_fnc_leaderAssess; " \n
@@ -1221,7 +1225,8 @@ class FSM
                          "[_this,[""gestureFreeze""]] call lambs_danger_fnc_gesture;" \n
                          "" \n
                          "// find target " \n
-                         "_target = (_dangerMode select 1) select 1;" \n
+                         "//_target = (_dangerMode select 1) select 1; <-- disabled. Produced bugged results " \n
+                         "_target = _this findNearestEnemy _this;" \n
                          "" \n
                          "// share information " \n
                          "[_this,_target] call lambs_danger_fnc_shareInformation; " \n
@@ -1268,7 +1273,7 @@ class FSM
                          "_timeout = time + 20 + random 10; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation,70] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this,_evaluation,120] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find target " \n
                          "_target = (_dangerMode select 1) select 2;" \n
@@ -1366,7 +1371,7 @@ class FSM
                          "_timeout = time + 15 + random 10; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation,30] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this,_evaluation,70] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find target " \n
                          "_target = (_dangerMode select 1) select 3;" \n
@@ -1416,7 +1421,7 @@ class FSM
                          "_timeout = time + 15 + random 10; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation,10] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this,_evaluation,30] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find pos" \n
                          "_pos = (_dangerMode select 1) select 3;" \n
@@ -1561,11 +1566,6 @@ class FSM
                          "// timeout " \n
                          "_timeout = _timeout + random 4; " \n
                          "" \n
-                         "// do watch? " \n
-                         "if (!isNull (_this findNearestEnemy _this)) then {" \n
-                         "	vehicle _this doWatch (_this findNearestEnemy _this); " \n
-                         "}; " \n
-                         "" \n
                          "// execute jink " \n
                          "_destination = [_this] call lambs_danger_fnc_vehicleJink; " \n
                          "" \n
@@ -1595,17 +1595,17 @@ class FSM
                         name = "Pre_attack";
                         itemno = 66;
                         init = /*%FSM<STATEINIT""">*/"" \n
-                         "// timeout " \n
+                         "// time out " \n
                          "_timeout = time + 4 + random 4;" \n
                          "" \n
                          "// look at " \n
                          "_this lookAt _dangerCausedBy; " \n
                          "" \n
                          "// assault " \n
-                         "_assault = _this distance2d _dangerPos < (lambs_danger_CQB_range + random 30) && {_this distance2d _dangerCausedBy < 210};" \n
+                         "_assault = _this distance2d _dangerPos < (lambs_danger_CQB_range + random 30) && {_this distance2d _dangerCausedBy < (lambs_danger_CQB_range + 150)};" \n
                          "" \n
                          "// coward" \n
-                         "_coward = [_this,_dangerCausedBy] call lambs_danger_fnc_coward;"/*%FSM</STATEINIT""">*/;
+                         "_coward = (!_CQCmode) && {[_this,_dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1652,7 +1652,7 @@ class FSM
                         itemno = 69;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// hide " \n
-                         "[_this,_dangerCausedBy] call lambs_danger_fnc_hideInside; " \n
+                         "//[_this,_dangerCausedBy] call lambs_danger_fnc_hideInside; // disabled to reduce break up of squad formation" \n
                          "" \n
                          "// update leader-mode" \n
                          "[_this,2,_dangerCausedby] call lambs_danger_fnc_leaderMode;" \n
@@ -1685,7 +1685,7 @@ class FSM
                         name = "Clear_buildings";
                         itemno = 70;
                         init = /*%FSM<STATEINIT""">*/"" \n
-                         "// timeout " \n
+                         "// time out " \n
                          "_timeout = time + 20;" \n
                          "_timeoutCQC = time + 1 + random 4; " \n
                          "" \n
@@ -1712,6 +1712,17 @@ class FSM
                                         to="Clear_buildings";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"unitReady _this || {time > _timeoutCQC}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Player_formation">*/
+                                class Player_formation
+                                {
+                                        itemno = 79;
+                                        priority = 0.000000;
+                                        to="Timeout__Continu";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isPlayer formationLeader _this"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

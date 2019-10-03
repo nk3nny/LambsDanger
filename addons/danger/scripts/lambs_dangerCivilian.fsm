@@ -1,9 +1,9 @@
-/*%FSM<COMPILE "H:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"DEFINE_ENUM_BEG",-1,4346,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
+item0[] = {"DEFINE_ENUM_BEG",-1,250,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item1[] = {"Init",0,250,-820.000000,-360.000000,-720.000000,-320.000000,0.000000,"Init"};
-item2[] = {"End",1,250,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
+item2[] = {"End",1,4346,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
 item3[] = {"Causes__7",4,218,-840.000000,-60.000000,-700.000000,0.000000,1.000000,"Causes:" \n "7"};
 item4[] = {"Rest",4,218,-100.000000,-160.000000,0.000000,-100.000000,0.000000,"Rest"};
 item5[] = {"Causes__1__2__4",4,218,-620.000000,-60.000000,-500.000000,0.000000,1.000000,"Causes:" \n "1, 2, 4"};
@@ -201,8 +201,8 @@ link75[] = {65,13};
 link76[] = {66,67};
 link77[] = {67,2};
 link78[] = {68,66};
-globals[] = {0.000000,0,0,0,0,640,480,1,213,6316128,1,-1361.025635,-676.242371,75.788635,-541.914185,980,884,1};
-window[] = {2,-1,-1,-32000,-32000,896,78,1242,78,3,998};
+globals[] = {0.000000,0,0,0,0,640,480,1,213,6316128,1,-1804.290039,-132.080322,1955.943970,447.542603,980,884,1};
+window[] = {2,-1,-1,-1,-1,974,156,1320,156,3,998};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -307,7 +307,7 @@ class FSM
                         name = "End";
                         itemno = 2;
                         init = /*%FSM<STATEINIT""">*/"_this setBehaviour _behaviour;" \n
-                         "_this setVariable [""DC"",false];"/*%FSM</STATEINIT""">*/;
+                         "_this setVariable [""DC"",false];		// from vanilla. Uncertain what it does "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1116,7 +1116,7 @@ class FSM
                 {
                         name = "Debug";
                         itemno = 66;
-                        init = /*%FSM<STATEINIT""">*/"debugLog format [""DC: %1, Action: none"",_dangerCause];"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
