@@ -21,9 +21,9 @@ private _fnc_rushOrders = {
     // Helicopters -- supress it!
     if (((leader _grp) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
-            (_x commandSuppressiveFire) getPosASL _target;
+            _x commandSuppressiveFire (getPosASL _target);
             true
-        } count units _grp;
+        } count (units _grp);
     };
 
     // Tank -- hide or ready AT
