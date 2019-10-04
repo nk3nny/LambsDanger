@@ -11,5 +11,5 @@ private _target = objNull;
     private _dist = (leader _grp) distance2d _x;
     if (_dist < _newdist && {getposATL _x select 2 < 200}) then { _target = _x; _newdist = _dist; };
     true
-} count _all;
+} count _players;
 _target

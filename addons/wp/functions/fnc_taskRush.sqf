@@ -42,13 +42,13 @@ private _fnc_rushOrders = {
     };
 
     // Default -- run for it!
-    { _x setUnitPos "UP"; _x doMove (getPosATL _t); true } count units _grp;
+    { _x setUnitPos "UP"; _x doMove (getPosATL _target); true } count units _grp;
     _grp enableGunLights "forceOn";
 };
 // functions end ---
 
 // init
-params ["_grp", "_pos"];
+params ["_grp"];
 private _radius = waypointCompletionRadius [_grp, currentwaypoint _grp];
 private _cycle = 15;
 

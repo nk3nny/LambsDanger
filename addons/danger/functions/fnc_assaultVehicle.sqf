@@ -45,7 +45,7 @@ private _pos = AGLToASL ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.
 _unit doSuppressiveFire _pos;
 
 // shoot cannon
-_cannon = random 1 > 0.2;
+private _cannon = random 1 > 0.2;
 if (_cannon) then {
     _veh doWatch _pos;
     sleep (0.5 + random 1);

@@ -35,7 +35,7 @@ _grp setSpeedMode "LIMITED";
 // FLARE SCRIPT
 private _fnc_flare = {
     params ["_grp"];
-    _shootflare = "F_20mm_Red" createvehicle (_grp ModelToWorld [0, 0, 200]);
+    private _shootflare = "F_20mm_Red" createvehicle (_grp ModelToWorld [0, 0, 200]);
     _shootflare setVelocity [0, 0, -10];
 };
 
@@ -49,8 +49,8 @@ while {{alive _x} count units _grp > 0} do {
     private _target = [_grp, _radius] call FUNC(findClosedTarget);
 
     // settings
-    _combat = behaviour leader _grp isEqualTo "COMBAT";
-    _onFoot = (isNull objectParent (leader _grp));
+    private _combat = behaviour leader _grp isEqualTo "COMBAT";
+    private _onFoot = (isNull objectParent (leader _grp));
 
     // GIVE ORDERS  ~~ Or double wait
     if (!isNull _target) then {
@@ -61,7 +61,7 @@ while {{alive _x} count units _grp > 0} do {
         _grp enableIRLasers true;
 
         // DEBUG
-        if (EGVAR(danger,debug_functions)) then {systemchat format ["danger.wp taskHunt: %1 targets %2 at %3 Meters", _grp, name _t, floor (leader _grp distance _t)]};
+        if (EGVAR(danger,debug_functions)) then {systemchat format ["danger.wp taskHunt: %1 targets %2 at %3 Meters", _grp, name _target, floor (leader _grp distance _target)]};
 
         // FLARE HERE
         if (!_combat && {_onFoot} && {random 1 > 0.8}) then { [_grp] call _fnc_flare; };

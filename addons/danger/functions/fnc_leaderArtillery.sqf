@@ -49,7 +49,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 _artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
 
 // perform it
-[_artillery select 0, _pos, _unit] spawn lambs_wp_fnc_taskArtillery;
+[_artillery select 0, _pos, _unit] spawn EFUNC(WP,taskArtillery);
 
 // end
 true

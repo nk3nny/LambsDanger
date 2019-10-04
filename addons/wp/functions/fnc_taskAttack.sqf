@@ -27,7 +27,7 @@ _grp setSpeedMode "NORMAL";
 
 // add WP
 for "_i" from 0 to 2 do {
-    _wp = _grp addWaypoint [_pos, _range * _i];
+    private _wp = _grp addWaypoint [_pos, _range * _i];
     _wp setWaypointType (["MOVE", "MOVE", "SAD"] select _i);
     _wp setWaypointStatements ["true", format ["
         if (local this) then {

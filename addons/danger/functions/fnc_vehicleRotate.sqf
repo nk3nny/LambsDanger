@@ -61,7 +61,7 @@ while {count _pos < 1} do {
 _unit doMove _pos;
 
 // delay
-_time = time + (4 + random 6);
+private _time = time + (4 + random 6);
 waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}};
 
 // check vehicle

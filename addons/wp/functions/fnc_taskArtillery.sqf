@@ -23,9 +23,9 @@ params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accurac
 if (!canFire _gun || {!alive _caller}) exitWith {false};
 
 // settings
-_direction = _gun getDir _pos;
-_center = _pos getpos [(_accuracy/3) * -1, _direction];
-_offset = 0;
+private _direction = _gun getDir _pos;
+private _center = _pos getpos [(_accuracy/3) * -1, _direction];
+private _offset = 0;
 
 // higher class artillery fire more rounds? Less accurate?
 if !(vehicle _gun isKindOf "StaticMortar") then {
@@ -34,7 +34,7 @@ if !(vehicle _gun isKindOf "StaticMortar") then {
 };
 
 // remove from list
-_artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _gun), []];
+private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _gun), []];
 _artillery = _artillery - [_gun];
 missionNamespace setVariable ["lambs_artillery_" + str (side _gun), _artillery, false];
 
@@ -45,7 +45,7 @@ sleep (((_gun distance _pos) / 8) min 90);
 if (canFire _gun && {alive _caller}) then {
 
     // debug marker list
-    _mlist = [];
+    private _mlist = [];
 
     // check rounds
     for "_check" from 1 to (1 + random 2) do {
@@ -54,14 +54,14 @@ if (canFire _gun && {alive _caller}) then {
         for "_i" from 1 to (1 + random 1) do {
 
             // Randomize target location
-            _target = _center getPos [(450 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
+            private _target = _center getPos [(450 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
             // Fire round
             _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+                private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
                 _mlist pushBack _m;
             };
 
@@ -81,7 +81,7 @@ if (canFire _gun && {alive _caller}) then {
     for "_i" from 1 to _rounds do {
 
         // Randomize target location
-        _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
+        private _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
         _offset = _offset + _accuracy/3;
 
         // Fire round
@@ -89,7 +89,7 @@ if (canFire _gun && {alive _caller}) then {
 
         // debug
         if (EGVAR(danger,debug_functions)) then {
-            _m = [_target, format ["%1 (Round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+            private _m = [_target, format ["%1 (Round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
             _mlist pushBack _m;
         };
 

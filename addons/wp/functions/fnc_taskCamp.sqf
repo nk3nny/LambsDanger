@@ -61,21 +61,21 @@ _grp setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT",
 //_grp enableGunLights "forceOn";
 
 // pos
-private _p = getPos (leader _grp);
+private _pos = getPos (leader _grp);
 
 // find buildings ---
-private _building = nearestObjects [_p, ["house", "strategic"], _range, true];
-_building = _building select {count (_x buildingpos -1) > 0};
-_building = _building call BIS_fnc_arrayShuffle;
+private _buildings = nearestObjects [_pos, ["house", "strategic"], _range, true];
+_buildings = _buildings select {count (_x buildingpos -1) > 0};
+_buildings = _buildings call BIS_fnc_arrayShuffle;
 
 // find guns ---
-private _gun = nearestObjects [_p, ["Landvehicle"], _range, true];
+private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _gun = _gun select {(_x emptyPositions "Gunner") > 0};
 
 // STAGE 1 - PATROL --------------------------
 
 if (count _units > 4) then {
-    _grp2 = createGroup (side _grp);
+    private _grp2 = createGroup (side _grp);
     [selectRandom _units] join _grp2;
     if (count _units > 6)  then { [selectRandom units _grp] join _grp2; };
 
@@ -102,11 +102,11 @@ if (count _units > 4) then {
         _units deleteAt _foreachIndex;
     };
 
-    if (count _b > 0 && {random 1 > 0.3}) then {
+    if (count _buildings > 0 && {random 1 > 0.3}) then {
         doStop _x;
         _x setUnitPos "UP";
-        _x setPos selectRandom ((_b select 0) buildingPos -1);
-        _building deleteAt 0;
+        _x setPos selectRandom ((_buildings select 0) buildingPos -1);
+        _buildings deleteAt 0;
         _units deleteAt _foreachIndex;
     };
 
@@ -118,11 +118,11 @@ if (count _units > 4) then {
 {
     private _dir = random 360;
     private _range = 1.3 + random 3.3;
-    private _pos2 = [(_p select 0) + (sin _d) * _r, (_p select 1) + (cos _d) * _r, 0];
+    private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
     _x setDir (random 360);
     _x setPos _pos2;
     _x disableAI "ANIM";
-    _anim = selectRandom ["SitDown", "SitDown", "SitDown", "Relax", "stand"];
+    private _anim = selectRandom ["SitDown", "SitDown", "SitDown", "Relax", "stand"];
     _x playActionNow _anim;
     _x addEventHandler ["Hit", {
         _x switchmove "";

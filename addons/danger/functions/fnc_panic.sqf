@@ -42,8 +42,7 @@ if (_indoor) exitWith {
     _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "PRONE"];
 
     // return
-    _delay = 6 + random 4;
-    _delay
+    6 + random 4;
 };
 
 // outdoor -- crawl
@@ -55,8 +54,7 @@ if (random 1 > (skill _unit)) exitWith { // joko: @nKenny maybe use endurance sk
     [_unit, ["FastB", "FastLB", "FastRB"]] call FUNC(gesture);
 
     // return
-    _delay = 6 + random 6;
-    _delay
+    6 + random 6;
 };
 
 // outdoor -- hide

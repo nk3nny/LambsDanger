@@ -38,7 +38,7 @@ private _fnc_enemy = {
 
 // compile actions
 private _fnc_act = {
-    params ["_enemy", "_grp"];
+    params ["_enemy", "_grp", "_building"];
     // deal with close enemy
     if (!isNull _enemy) exitWith {
 
@@ -65,7 +65,7 @@ private _fnc_act = {
     };
 
     // clear and check buildings
-    private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _grp), (_buildingbuildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+    private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _grp), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
         // the assault
@@ -144,18 +144,18 @@ while {{alive _x} count units _grp > 0} do {
     waitUntil {sleep 1; simulationenabled leader _grp};
 
     // find building
-    _building = [_pos, _range, _grp] call _fnc_find;
+    private _building = [_pos, _radius, _grp] call _fnc_find;
 
     // find enemy
-    _enemy = [_building, _grp] call _fnc_enemy;
+    private _enemy = [_building, _grp] call _fnc_enemy;
 
     // act!
-    if (isNull _building&& {isNull _e}) exitWith {};
-    [_enemy, _grp] call _fnc_act;
+    if (isNull _building && {isNull _enemy}) exitWith {};
+    [_enemy, _grp, _building] call _fnc_act;
 
     // wait
     sleep _cycle;
-    if (EGVAR(danger,debug_functions)) then {systemchat format ["danger.wp taskCQB: (team: %1) (units: %2) (enemies: %3)", groupID _grp, count units _grp, !isNull _e];};
+    if (EGVAR(danger,debug_functions)) then {systemchat format ["danger.wp taskCQB: (team: %1) (units: %2) (enemies: %3)", groupID _grp, count units _grp, !isNull _enemy];};
 
 };
 

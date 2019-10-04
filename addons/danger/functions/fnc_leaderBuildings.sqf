@@ -17,8 +17,8 @@ _unit setVariable [QGVAR(currentTask), "Leader Buildings"];
 [_unit, ["gestureGo", "gestureGoB"]] call FUNC(gesture);
 
 // units
-_units = units group _unit;
-_units = _units select {isNull ObjectParent _x};
+private _units = units group _unit;
+_units = _units select {isNull objectParent _x};
 
 // no more spots than units
 if (count _units > count _buildings) then {_units resize (count _buildings);};

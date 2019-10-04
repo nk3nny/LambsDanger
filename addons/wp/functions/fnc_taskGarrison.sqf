@@ -38,14 +38,14 @@ _houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [
 _houses = _houses call BIS_fnc_arrayShuffle;
 
 // find guns
-_weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // orders
 _grp enableAttack false;
 
 // declare units + tweak count
-_units = units _grp;
+private _units = units _grp;
 _units = _units select {isNull objectParent _x};
 if (count _units > count _houses) then {_units resize (count _houses);};
 
@@ -60,7 +60,7 @@ if (count _units > 4) then {
     // last man mans guns
     for "_i" from 0 to (count _weapons - 1) do {
         if (random 1 > _statics) then {
-            _gunner = (_units deleteAt (count _units - 1));
+            private _gunner = (_units deleteAt (count _units - 1));
             _gunner assignAsGunner (_weapons deleteAt _i);
             [_gunner] orderGetIn true;
         };
@@ -84,7 +84,7 @@ if (count _units > 4) then {
     };
 
     // add handlers
-    _type = selectRandom [1, 2, 3];
+    private _type = selectRandom [1, 2, 3];
     switch (_type) do {
         case 1: {
             _x addEventHandler ["Fired", {

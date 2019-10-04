@@ -15,7 +15,7 @@
 params ["_unit", ["_range", 100], ["_useHousePos", false], ["_onlyIndoor", false]];
 
 // houses
-_houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];
+private _houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];
 _houses = _houses select {count (_x buildingPos -1) > 0};
 
 // house pos

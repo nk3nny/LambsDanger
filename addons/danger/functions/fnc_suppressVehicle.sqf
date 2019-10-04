@@ -34,10 +34,10 @@ _unit setVariable [QGVAR(currentTask), "Suppress Vehicle"];
 _vehicle setVariable [QGVAR(lastAction), time + 9 + random 16];
 
 // find
-_tpos = (ATLtoASL (_unit getHideFrom _target)) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.3];
+private _targetPos = (ATLtoASL (_unit getHideFrom _target)) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.3];
 
 // do it
-_unit doSuppressiveFire _tPos;
+_unit doSuppressiveFire _targetPos;
 
 // debug
 if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 suppression (%2s)", getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (time - (_vehicle getVariable [QGVAR(lastAction), 0]))];};

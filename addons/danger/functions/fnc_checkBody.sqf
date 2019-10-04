@@ -16,7 +16,7 @@ if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
 if (_unit call FUNC(indoor) && {random 1 > 0.5}) exitWith {false};
 
 // find body
-_body = allDeadMen select {_x distance _pos < _range};
+private _body = allDeadMen select {_x distance _pos < _range};
 _body = _body select {!(_x getVariable [QGVAR(isChecked), false])};
 
 // ready
@@ -39,7 +39,7 @@ if (count _body > 0) exitWith {
             ((_unit distance _bodyPos) < 0.6) || {_time < time} || {!alive _unit}
         },
         {
-            params ["_unit", "_bodyPos", "_time", "_body"];
+            params ["_unit", "", "", "_body"];
             if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.4}) then {
                 _unit action ["rearm", _body];
                 _unit doFollow leader group _unit;

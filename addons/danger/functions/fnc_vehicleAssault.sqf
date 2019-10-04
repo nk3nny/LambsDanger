@@ -55,7 +55,7 @@ _pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1, 0.5 - ran
 _veh doWatch _pos;
 
 // shoot cannon
-_cannon = count _buildings > 2 && {random 1 > 0.2} && {_veh distance _pos > 100};
+private _cannon = count _buildings > 2 && {random 1 > 0.2} && {_veh distance _pos > 100};
 if (_cannon) then {
     _veh action ["useWeapon", _veh, gunner _veh, random 2];
 };

@@ -21,8 +21,8 @@
 // init
 params ["_unit", ["_target", []], ["_threshold", 18]];
 
-if (_targets isEqualTo []) then {
-    _targets = _unit findNearestEnemy _unit;
+if (_target isEqualTo []) then {
+    _target = _unit findNearestEnemy _unit;
 };
 
 // cannot move or moving
@@ -55,7 +55,7 @@ while {count _pos < 1} do {
 };
 
 // delay
-_time = time + (5 + random 8);
+private _time = time + (5 + random 8);
 waitUntil {sleep 0.1; (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360 - _threshold)}) || {time > _time}};
 
 // check vehicle

@@ -17,7 +17,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 [_unit, ["gestureCover"]] call FUNC(gesture);
 
 // units
-_units = units group _unit;
+private _units = units group _unit;
 _units = _units select {isNull ObjectParent _x && {secondaryWeapon _x isEqualTo ""}};
 
 // units without launchers hide!
