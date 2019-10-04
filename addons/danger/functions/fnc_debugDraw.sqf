@@ -91,7 +91,7 @@ private _fnc_DrawRect = {
         if !(_str isEqualType "") then {
             _str = str _x;
         };
-        _text = format ["%1%2", _text, format [_x, _size * 1, _size * 1.5]];
+        _text = format ["%1%2", _text, format [_str, _size * 1, _size * 1.5]];
     } count _textData;
     _control ctrlSetStructuredText parseText _text;
 
