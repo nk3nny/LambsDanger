@@ -87,6 +87,10 @@ private _fnc_DrawRect = {
     private _text = "";
     private _size = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
     {
+        private _str = _x;
+        if !(_str isEqualType "") then {
+            _str = str _x;
+        };
         _text = format ["%1%2", _text, format [_x, _size * 1, _size * 1.5]];
     } count _textData;
     _control ctrlSetStructuredText parseText _text;
