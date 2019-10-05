@@ -61,7 +61,7 @@ if (random 1 > (skill _unit)) exitWith { // joko: @nKenny maybe use endurance sk
 
 // action
 _unit doWatch objNull;
-[_unit, _unit getPos [100, direction _unit], 55] call FUNC(hideInside); // joko: @nKenny maybe dont change pos and just use hideInside?
+[_unit, _unit getPos [100, direction _unit], 55] call FUNC(hideInside);
 
 // chance to randomly fire weapon
 if ((random 1 > 0.7) && {!(primaryWeapon _unit isEqualTo "")}) then {
