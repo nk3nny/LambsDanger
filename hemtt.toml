@@ -5,5 +5,5 @@ sigversion = 3
 reuse_private_key = false
 files = [
     "mod.cpp",
-	"LICENSE"
+    "LICENSE"
 ]
