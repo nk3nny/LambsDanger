@@ -3,6 +3,10 @@
 // version 1.01
 // by jokoho482
 if !(GVAR(debug_Drawing)) exitWith {};
+GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
+
+GVAR(debug_GameDisplay) = findDisplay 46;
+GVAR(debug_SpectatorDisplay) = findDisplay 60492;
 
 {
     _x ctrlSetFade 1;
@@ -54,21 +58,19 @@ private _fnc_dangerModeTypes = {
 };
 
 private _fnc_getRect = {
-    private _displayEGSpectator = findDisplay 60492;
-    private _displayGame = findDisplay 46;
     private _control = controlNull;
-    if (isNull _displayEGSpectator) then {
+    if (isNull GVAR(debug_SpectatorDisplay)) then {
         if (GVAR(drawRectCacheGame) isEqualTo []) then {
-            _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0, 0, 0, 0.1];
+            _control = GVAR(debug_GameDisplay) ctrlCreate [ "RscStructuredText", -1 ];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
             _control = GVAR(drawRectCacheGame) deleteAt 0;
         };
         GVAR(drawRectInUseGame) pushback _control;
     } else {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
-            _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0, 0, 0, 0.1];
+            _control = GVAR(debug_SpectatorDisplay) ctrlCreate [ "RscStructuredText", -1 ];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
@@ -85,13 +87,12 @@ private _fnc_DrawRect = {
     _textData pushback "</t>";
 
     private _text = "";
-    private _size = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
     {
         private _str = _x;
         if !(_str isEqualType "") then {
             _str = str _x;
         };
-        _text = format ["%1%2", _text, format [_str, _size * 1, _size * 1.5]];
+        _text = _text + format [_str, GVAR(debug_TextFactor) * 1, GVAR(debug_TextFactor) * 1.5];
     } count _textData;
     _control ctrlSetStructuredText parseText _text;
 
@@ -119,7 +120,6 @@ private _fnc_DrawRect = {
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
 
-        // private _currentTarget = _unit getVariable [QGVAR(currentTarget), objNull];
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull) then {
              private _knowledge = _unit targetKnowledge _currentTarget;
