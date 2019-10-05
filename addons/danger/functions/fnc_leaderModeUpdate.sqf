@@ -11,7 +11,7 @@ private _dangerMode = (group _unit) getVariable [QGVAR(dangerMode), [[], [], tru
 
 // Update danger type and target/position
 _dangerMode set [0, (_dangerMode select 0) - [_setting]];
-_dangerMode set [3, time + 360 + random _delay];
+_dangerMode set [3, time + 360 + (_delay/2) + random (_delay/2)];
 
 // update variable
 (group _unit) setVariable [QGVAR(dangerMode), _dangerMode, false];

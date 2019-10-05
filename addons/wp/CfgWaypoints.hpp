@@ -25,9 +25,9 @@ class CfgWaypoints {
         class EGVAR(danger,Rush) {
             displayName = "3 TASK RUSH";
             displayNameDebug = QEGVAR(danger,Rush);
-            file = QPATHTOF(functions\fnc_taskRush.sqf);
+            file = QPATHTOF(scripts\fnc_wpRush.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Rushes towards enemy with WP completion radius (Default 500m)";
+            tooltip = "Rushes towards enemy with WP completion radius (Default 1000m)";
         };
         class EGVAR(danger,Hunt) {
             displayName = "4 TASK HUNT";

@@ -13,7 +13,7 @@ Arguments
 
 // init
 params ["_pos", ["_text", ""], ["_color", "colorBlack"], ["_type", "mil_dot"]];
-_pos = _pos call bis_fnc_position;
+_pos = _pos call CBA_fnc_getPos;
 
 // create
 private _m = createMarkerLocal [format["mdot_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
