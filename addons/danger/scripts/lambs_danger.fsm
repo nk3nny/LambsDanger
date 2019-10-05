@@ -10,7 +10,7 @@ item5[] = {"Reacting_on_danger",0,250,-575.000000,-675.000000,-425.000000,-625.0
 item6[] = {"Check_queue__and",2,250,850.000000,600.000000,925.000000,650.000000,0.000000,"Check queue " \n "and " \n "clean-up"};
 item7[] = {"Next__cause",4,218,850.000000,-375.000000,925.000000,-325.000000,1.000000,"Next  cause"};
 item8[] = {"Always",8,218,850.000000,775.000000,925.000000,825.000000,0.000000,"Always"};
-item9[] = {"Fleeing_Unconscious",4,218,925.000000,-450.000000,1025.000000,-400.000000,12.000000,"Fleeing" \n "Unconscious "};
+item9[] = {"Exit_Variables",4,4314,925.000000,-450.000000,1025.000000,-400.000000,12.000000,"Exit Variables"};
 item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.000000,"Begin"};
 item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
@@ -26,7 +26,7 @@ item21[] = {"Panic",4,218,-450.000000,0.000000,-350.000000,50.000000,8.000000,"P
 item22[] = {"Panic_",2,250,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Panic!"};
 item23[] = {"Timeout",4,218,-450.000000,175.000000,-350.000000,225.000000,0.000000,"Timeout"};
 item24[] = {"Reset_Panic___Co",2,250,-450.000000,275.000000,-350.000000,325.000000,0.000000,"Reset Panic: " \n "Continue"};
-item25[] = {"Attack___Suppress",2,4346,-50.000000,225.000000,50.000000,275.000000,0.000000,"Attack" \n "+ Suppress" \n "+ Assault"};
+item25[] = {"Attack___Suppress",2,250,-50.000000,225.000000,50.000000,275.000000,0.000000,"Attack" \n "+ Suppress" \n "+ Assault"};
 item26[] = {"Timeout",4,218,50.000000,325.000000,150.000000,375.000000,0.000000,"Timeout"};
 item27[] = {"Killed",4,218,-100.000000,325.000000,0.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,-100.000000,425.000000,0.000000,475.000000,0.000000,"Killed: " \n "Continue"};
@@ -78,9 +78,10 @@ item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000
 item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
-item77[] = {"____VARIABLES__lambs",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
+item77[] = {"OUTDATED_______VARIABLES",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"OUTDATED!" \n "" \n "" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
 item78[] = {"LAMBS_DANGER_FSM",-1,250,-1700.000000,-925.000000,-800.000000,-800.000000,0.000000,"LAMBS DANGER FSM 2.0.0"};
 item79[] = {"Player_formation",4,218,175.000000,350.000000,275.000000,400.000000,0.000000,"Player" \n "formationleader"};
+item80[] = {"EXIT_VARIABLES_Unconcious",-1,250,1125.000000,-425.000000,1350.000000,-350.000000,0.000000,"EXIT VARIABLES" \n "Unconcious" \n "Fleeing" \n "Danger_disabled"};
 version=1;
 class LayoutItems
 {
@@ -138,6 +139,15 @@ class LayoutItems
 		{
 			FontFace="Arial";
 			FontHeight=20;
+			lStyle=1;
+		};
+	};
+	class Item80
+	{
+		class ItemInfo
+		{
+			FontFace="Arial";
+			FontHeight=10;
 			lStyle=1;
 		};
 	};
@@ -242,7 +252,7 @@ link96[] = {72,4};
 link97[] = {73,74};
 link98[] = {74,18};
 link99[] = {79,29};
-globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-188.643188,393.367889,406.388123,-66.495911,1088,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-175.198853,1813.294556,455.506165,-1160.144897,1088,884,1};
 window[] = {2,-1,-1,-1,-1,995,182,984,182,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
@@ -406,14 +416,14 @@ class FSM
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
-                                /*%FSM<LINK "Fleeing_Unconscious">*/
-                                class Fleeing_Unconscious
+                                /*%FSM<LINK "Exit_Variables">*/
+                                class Exit_Variables
                                 {
                                         itemno = 9;
                                         priority = 12.000000;
                                         to="End";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"fleeing _this || {(_this getVariable [""ACE_isUnconscious"",false])}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"fleeing _this || {(_this getVariable [""ACE_isUnconscious"",false])} || {_this getVariable [""lambs_danger_dangerDisabled"",false]}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

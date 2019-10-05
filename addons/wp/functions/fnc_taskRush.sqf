@@ -57,7 +57,7 @@ if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
 _group setSpeedMode "FULL";
-_group setFormation "DIAMOND";
+_group setFormation "LINE";
 _group enableAttack false;
 { _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _group;
 

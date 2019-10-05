@@ -13,23 +13,28 @@
 */
 
 // init
-params ["_unit","_pos",["_radius",0]];
+params ["_group","_pos",["_radius",0]];
 
 // get radius
-_radius = waypointCompletionRadius [group _unit, currentwaypoint group _unit];
+_radius = waypointCompletionRadius [_group, currentwaypoint _group];
 if (_radius isEqualTo 0) then {_radius = 1000;};
 
 // get other settings
 
 // prepare troops ~ pre-set for raid!
-[_unit,99,999999] call lambs_danger_fnc_leaderModeUpdate;       // diwako/jok: Could this be 'FUNC(leaderModeUpdate)'; being from different packages? -nkenny
-group _unit setVariable ["lambs_danger_dangerAI","disabled"];   // same
+[leader _group,99,999999] call FUNC(danger,leaderModeUpdate);
+
+// group 
+_group setVariable [QEGVAR(danger,dangerAI),"disabled"];
+
+// individual units
+{_x setVariable [QEGVAR(danger,dangerDisabled), true];} foreach units _group;
 
 // execute script
-[_unit,_radius] spawn FUNC(taskRush);
+[_group,_radius] spawn FUNC(taskRush);
 
 // low level move order
-group _unit move _pos;
+_group move _pos;
 
 // end
 true
