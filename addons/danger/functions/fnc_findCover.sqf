@@ -17,19 +17,19 @@
  *
  * Public: Yes
 */
-params ["_unit", ["_enemy", objNull, [objNull,[]]], ["_range", 15, [0]]];
+params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]]];
 
 private _ret = [];
-private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0,0,1.8];
+private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8];
 
-if !(_dangerPos isEqualTo [0,0,1.8]) then {
+if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
     _dangerPos = AGLToASL _dangerPos;
     private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
-    private _vehicles = nearestObjects  [_unit, ["building","Car"], _range];
+    private _vehicles = nearestObjects  [_unit, ["building", "Car"], _range];
 
-    private _allObjs = (_terrainObjects + _vehicles) apply { [_x distance2d _unit, _x] };
-    _allObjs sort false;
-    _allObjs = _allObjs apply {_x select 1};
+
+
+    private _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, "ASCEND"] call BIS_fnc_sortBy;
 
     private _found = false;
     private _obj = objNull;
@@ -56,13 +56,13 @@ if !(_dangerPos isEqualTo [0,0,1.8]) then {
                 _posASL = AGLToASL _x;
 
                 // check down position
-                if (lineIntersects [_dangerPos, _posASL vectorAdd [0,0,0.1], _unit]) exitWith {
+                if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 0.1], _unit]) exitWith {
                     private _stances = ["DOWN"];
                     // check middle position
-                    if (lineIntersects [_dangerPos, _posASL vectorAdd [0,0,1], _unit]) then {
+                    if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 1], _unit]) then {
                         _stances pushBack "MIDDLE";
                         // check up position
-                        if (lineIntersects [_dangerPos, _posASL vectorAdd [0,0,1], _unit]) then {
+                        if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 1], _unit]) then {
                             _stances pushBack "UP";
                         };
                     };
@@ -75,9 +75,9 @@ if !(_dangerPos isEqualTo [0,0,1.8]) then {
 };
 
 if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
-	private _stance = _ret select 1;
-	systemchat format ["Found cover %1m away for stance %2", _unit distance (_ret select 0), _stance];
-    createVehicle ["Sign_Arrow_Large_F", (_enemy call CBA_fnc_getPos) vectorAdd [0,0,1.8],[],0,"CAN_COLLIDE"];
+    private _stance = _ret select 1;
+    systemchat format ["Found cover %1m away for stance %2", _unit distance (_ret select 0), _stance];
+    createVehicle ["Sign_Arrow_Large_F", (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8], [], 0, "CAN_COLLIDE"];
     private _add = if ((_stance) isEqualTo "UP") then {
         2
     } else {
@@ -87,7 +87,7 @@ if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
             0.2
         };
     };
-    createVehicle ["Sign_Arrow_Large_Blue_F",(_ret select 0) vectorAdd [0,0,_add],[],0,"CAN_COLLIDE"];
+    createVehicle ["Sign_Arrow_Large_Blue_F", (_ret select 0) vectorAdd [0, 0, _add], [], 0, "CAN_COLLIDE"];
 };
 
 _ret

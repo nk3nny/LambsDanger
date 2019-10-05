@@ -10,7 +10,7 @@ private _curCat = "General";
 ] call CBA_Settings_fnc_init;
 
 // you cannot do arrays in cba settings, only select one entry from an array
-GVAR(CQB_formations) = ["FILE","DIAMOND"];     // Special CQB Formations )
+GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 // Minimum range for suppression
 [

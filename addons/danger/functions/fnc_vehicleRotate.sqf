@@ -19,7 +19,7 @@
 */
 
 // init
-params ["_unit",["_target", []],["_threshold",18]];
+params ["_unit", ["_target", []], ["_threshold", 18]];
 
 if (_target isEqualTo []) then {
     _target = _unit findNearestEnemy _unit;
@@ -36,7 +36,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Rotate"];
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    [_unit,(_target call bis_fnc_position)] call FUNC(vehicleSuppress);
+    [_unit, (_target call bis_fnc_position)] call FUNC(vehicleSuppress);
     true
 };
 
@@ -46,7 +46,7 @@ private _min = 20;      // Minimum range
 private _i = 0;         // iterations
 
 while {count _pos < 1} do {
-    _pos = (_unit getPos [_min,_unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
+    _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
 
     // water
     if (count _pos > 0) then {if (surfaceIsWater _pos) then {_pos = []};};
@@ -54,24 +54,24 @@ while {count _pos < 1} do {
     // update
     _min = _min + 15;
     _i = _i + 1;
-    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0,-100,0]};
+    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0, -100, 0]};
 };
 
 // move
 _unit doMove _pos;
 
 // delay
-_time = time + (4 + random 6);
+private _time = time + (4 + random 6);
 waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}};
 
 // check vehicle
 if (!canMove _unit || {count crew _unit < 1}) exitWith {false};
 
 // refresh ready (For HC apparently)
-effectiveCommander _unit doMove getPosASL _unit;
+(effectiveCommander _unit) doMove (getPosASL _unit);
 
 // refresh formation
-group _unit setFormDir (_unit getDir _target);
+(group _unit) setFormDir (_unit getDir _target);
 
 // end
 true

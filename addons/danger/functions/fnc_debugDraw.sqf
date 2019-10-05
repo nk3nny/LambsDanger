@@ -3,6 +3,9 @@
 // version 1.01
 // by jokoho482
 if !(GVAR(debug_Drawing)) exitWith {};
+GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
+private _displayGame = findDisplay 46;
+private _displayEGSpectator = findDisplay 60492;
 
 {
     _x ctrlSetFade 1;
@@ -54,13 +57,11 @@ private _fnc_dangerModeTypes = {
 };
 
 private _fnc_getRect = {
-    private _displayEGSpectator = findDisplay 60492;
-    private _displayGame = findDisplay 46;
     private _control = controlNull;
     if (isNull _displayEGSpectator) then {
         if (GVAR(drawRectCacheGame) isEqualTo []) then {
             _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0,0,0,0.1];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
             _control = GVAR(drawRectCacheGame) deleteAt 0;
         };
@@ -68,7 +69,7 @@ private _fnc_getRect = {
     } else {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
-            _control ctrlSetBackgroundColor [0,0,0,0.1];
+            _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
@@ -85,10 +86,14 @@ private _fnc_DrawRect = {
     _textData pushback "</t>";
 
     private _text = "";
-    private _size = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
     {
-        _text = format ["%1%2", _text, format [_x, _size * 1, _size * 1.5]];
+        private _str = _x;
+        if !(_str isEqualType "") then {
+            _str = str _x;
+        };
+        _text = _text + format [_str, GVAR(debug_TextFactor) * 1, GVAR(debug_TextFactor) * 1.5];
     } count _textData;
+
     _control ctrlSetStructuredText parseText _text;
 
     private _w = ctrlTextWidth _control;
@@ -102,22 +107,21 @@ private _fnc_DrawRect = {
 {
     private _unit = _x;
     private _headPos = _unit call _fnc_getPos;
-    // if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
-    if (true) then {
-        private _textData =  ["<t align='bottom' valign='center' size='%1'>"];
+    if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
+    // if (true) then {
+        private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
                 private _pos2 = _x call _fnc_getPos;
-                drawLine3D [_headPos, _pos2, [1,1,1,0.5]]; // TODO: Color
+                drawLine3D [_headPos, _pos2, [1, 1, 1, 0.5]];
             } count (units _x);
             _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
 
-        // private _currentTarget = _unit getVariable [QGVAR(currentTarget), objNull];
         private _targetKnowledge = [];
-        private _name = if (_currentTarget isEqualType objNull) then {
+        private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
              private _knowledge = _unit targetKnowledge _currentTarget;
              if (_knowledge select 2 == time) then {
                 _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6];
@@ -125,16 +129,17 @@ private _fnc_DrawRect = {
              private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
              _targetKnowledge append [
                 "Target Knowledge:<br/>",
-                "    Last Seen: ", _lastSeen, " (", _knowledge select 2, ")<br/>",
-                "    Position Error: ",_knowledge select 5,"<br/>"
+                "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
+                "    Position Error: ", round ((_knowledge select 5) *100)/100, "<br/>"
             ];
 
-            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0,1,0,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
+            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
 
-            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0,1,0,0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1,1,1,1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
+            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
 
+            drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1, 0, 0, 1]];
             ["None", name _currentTarget] select (isNull _currentTarget);
         } else {
             _targetKnowledge append [
@@ -142,13 +147,13 @@ private _fnc_DrawRect = {
                "    Last Seen: N/A (N/A)<br/>",
                "    Position Error: N/A<br/>"
            ];
-           format ["POS %1", _currentTarget];
+            if (_currentTarget isEqualType []) then {
+                drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1, 0, 0, 1]];
+                format ["POS %1", _currentTarget];
+            } else {
+                format ["N/A"];
+            }
         };
-        private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
-        private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
-        private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
-        drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1,0,0,1]]; // TODO: Color
-
 
         _textData append [
             "Vanilla Behaviour: ", behaviour _unit, "<br/>",
@@ -159,18 +164,22 @@ private _fnc_DrawRect = {
             private _queue = (_dangeModeData select 0) apply { _x call _fnc_dangerModeTypes };
             _textData append [
                 "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",
-                "Danger Mode Timeout: ", _dangeModeData select 3, "<br/>"
+                "Danger Mode Timeout: ", round ((_dangeModeData select 3) *100)/100, "<br/>"
             ];
         };
         _textData append [
             "Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
             "    Danger Pos:", _pos, "<br/>",
-            "    Danger Until: ", _time, "<br/>",
+            "    Danger Until: ", round (_time *100)/100, "<br/>",
             "Current Target: ", _name, "<br/>",
-            "Visibility:", [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos], "<br/>"
+            "Visibility:", round (([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) *100)/100, "<br/>"
         ];
 
         _textData append _targetKnowledge;
+
+        private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
+        private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
+        private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",

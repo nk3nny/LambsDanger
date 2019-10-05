@@ -1,3 +1,4 @@
+PREP(findClosedTarget);
 PREP(taskArtillery);
 PREP(taskArtilleryRegister);
 PREP(taskAttack);
