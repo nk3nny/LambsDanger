@@ -10,7 +10,7 @@ The stated goal of the mod is:
 
 The mod requires: Community Base Addons
 
-Check the ([Wiki](https://github.com/nk3nny/LambsDanger/wiki)) for additional information. Have fun!
+Check the [Wiki](https://github.com/nk3nny/LambsDanger/wiki) for additional information. Have fun!
 
 Ken, 
 01.10.19
