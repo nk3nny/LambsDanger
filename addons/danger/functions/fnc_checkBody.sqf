@@ -40,7 +40,7 @@ if (count _body > 0) exitWith {
         },
         {
             params ["_unit", "", "", "_body"];
-            if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.4}) then {
+            if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.6}) then {
                 _unit action ["rearm", _body];
                 _unit doFollow leader group _unit;
             };
