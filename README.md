@@ -17,4 +17,4 @@ Ken,
 
 -- 
 
-LAMBS Danger fsm is licensed under the GNU General Public License ([GPLv2](https://github.com/nk3nny/LambsDanger/blob/master/LICENSE)) with two ammendments listed in the documentation. 
+LAMBS Danger fsm is licensed under the GNU General Public License ([GPLv2](https://github.com/nk3nny/LambsDanger/blob/master/LICENSE)) with two amendments listed in the documentation. 
