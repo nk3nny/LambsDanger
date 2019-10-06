@@ -7,6 +7,7 @@
  * 0: Unit seeking cover <OBJECT>
  * 1: Enemy <OBJECT> or Enemy Position (AGL) <ARRAY>
  * 2: Range to find cover, default 15 <NUMBER>
+ * 3: Sort mode <STRING>, default "ASCEND", possible values: ASCEND, DESCEND, RANDOM. ASCEND returns closest possible location
  *
  * Return Value:
  * Array of format [_posAGL, _stance], when no cover found then an empty array is returned
@@ -17,7 +18,7 @@
  *
  * Public: Yes
 */
-params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]]];
+params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]], ["_sortMode", "ASCEND", [""]]];
 
 private _ret = [];
 private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8];
@@ -29,7 +30,12 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
 
 
 
-    private _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, "ASCEND"] call BIS_fnc_sortBy;
+    private _allObjs = [];
+    if(_sortMode isEqualTo "ASCEND" || {_sortMode isEqualTo "DESCEND"}) then {
+        _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, _sortMode] call BIS_fnc_sortBy;
+    } else {
+       _allObjs = (_terrainObjects + _vehicles) call BIS_fnc_arrayShuffle;
+    };
 
     private _found = false;
     private _obj = objNull;
