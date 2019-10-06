@@ -39,8 +39,11 @@ _artillery select {
 // exit on no ready artillery
 if (count _artillery < 1) exitWith {if (GVAR(debug_functions)) then {systemchat format ["Danger.fnc %1 Artillery failed -- no available artillery", side _unit]}};
 
+private _gun = selectRandom _artillery;
+[QGVAR(OnPanic), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
+
 // perform it
-[selectRandom _artillery, _pos] spawn FUNC(taskArtillery);
+[_gun, _pos] spawn FUNC(taskArtillery);
 
 // end
 true

@@ -21,6 +21,7 @@ params ["_unit"];
 if (_unit distance (_unit findNearestEnemy _unit) < 35) exitWith {3};
 if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {22};
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
+[QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
 
 // settings
 private _indoor = _unit call FUNC(indoor);
@@ -49,7 +50,7 @@ if (_indoor) exitWith {
 if (random 1 > (skill _unit)) exitWith { // joko: @nKenny maybe use endurance skill for this?
 
     // action
-    _unit dowatch objNull;
+    _unit doWatch objNull;
     _unit setUnitPos "DOWN";
     [_unit, ["FastB", "FastLB", "FastRB"]] call FUNC(gesture);
 

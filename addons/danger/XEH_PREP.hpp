@@ -9,6 +9,7 @@ PREP(debugDangerType);
 PREP(debugDraw);
 PREP(debugMarkerColor);
 PREP(dotMarker);
+PREP(eventCallback);
 PREP(gesture);
 PREP(hideInside);
 PREP(immediateAction);
