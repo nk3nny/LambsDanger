@@ -22,13 +22,18 @@ if (_radius isEqualTo 0) then {_radius = 1000;};
 // get other settings
 
 // prepare troops ~ pre-set for raid!
-[leader _group,99,999999] call FUNC(danger,leaderModeUpdate);
+[leader _group,99,999999] call EFUNC(danger,leaderModeUpdate);
 
 // group 
 _group setVariable [QEGVAR(danger,dangerAI),"disabled"];
 
 // individual units
-{_x setVariable [QEGVAR(danger,dangerDisabled), true];} foreach units _group;
+{
+    _x setVariable [QEGVAR(danger,dangerDisabled), true];
+    _x disableAI "SUPPRESSION"; // these are here because the script probably works 'best' with some intelligence enabled. That said. Users expect dumb bots. To preserve utility, I disable these here instead of core script.  -nkenny
+    _x disableAI "FSM";
+    _x forceSpeed 24;
+} foreach units _group;
 
 // execute script
 [_group,_radius] spawn FUNC(taskRush);

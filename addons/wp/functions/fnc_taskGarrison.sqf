@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 // Creep up close
-// version 4.1
+// version 4.2
 // by nkenny
 
 /*
@@ -20,32 +20,30 @@
 
 
 // init
-params ["_grp", "_pos"];
-private _patrol = false;
-private _statics = 0.2;
-private _range = waypointCompletionRadius [_grp, currentwaypoint _grp];
+params ["_group", "_pos",["_radius",50]];
 
 // sort grp
-if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then { _grp = group _grp; };
+if (!local _group) exitWith {};
+if (_group isEqualType objNull) then { _group = group _group; };
 
-// wp fix
-if (_range isEqualTo 0) then {_range = 50;};
+// settings
+private _patrol = false;    // disabled for now
+private _statics = 0.8;
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _range, true, false] call EFUNC(danger,nearBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(danger,nearBuildings);
 _houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
-_houses = _houses call BIS_fnc_arrayShuffle;
+[_houses,true] call cba_fnc_Shuffle;
 
 // find guns
-private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // orders
-_grp enableAttack false;
+_group enableAttack false;
 
-// declare units + tweak count
-private _units = units _grp;
+// declare units + sort vehicles + tweak count to match house positions
+private _units = units _group;
 _units = _units select {isNull objectParent _x};
 if (count _units > count _houses) then {_units resize (count _houses);};
 
@@ -125,16 +123,16 @@ if (count _units > 4) then {
 // end with patrol
 
 // orders
-_grp setBehaviour "SAFE";
+_group setBehaviour "SAFE";
 
 // waypoint
-private _wp = _grp addWaypoint [_pos, _range / 5];
+private _wp = _group addWaypoint [_pos, _radius / 5];
 _wp setWaypointType "SENTRY";
-_wp setWaypointCompletionRadius _range;
+_wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["danger.wp taskGarrison: %1 garrisoned", groupID _grp];
+    systemchat format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group];
 };
 
 

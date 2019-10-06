@@ -48,8 +48,7 @@ private _fnc_rushOrders = {
 // functions end ---
 
 // init
-params ["_group",["_radius",500]];
-private _cycle = 15;
+params ["_group",["_radius",500],["_cycle",15]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -57,7 +56,7 @@ if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
 _group setSpeedMode "FULL";
-_group setFormation "LINE";
+_group setFormation "DIAMOND";
 _group enableAttack false;
 { _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _group;
 
@@ -73,7 +72,7 @@ while {{alive _x} count units _group > 0} do {
     // act
     if (!isNull _target) then  {
         [_group, _target] call _fnc_rushOrders;
-        if (!EGVAR(danger,debug_functions)) then { systemchat format ["danger.wp taskRush: %1 targets %2 (%3) at %4 Meters", groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target)]; };
+        if (EGVAR(danger,debug_functions)) then { systemchat format ["%1 taskRush: %2 targets %3 (%4) at %5 Meters", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target)]; };
         _cycle = 15;
     } else {
         _cycle = 60;

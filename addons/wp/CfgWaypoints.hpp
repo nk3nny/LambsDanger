@@ -11,14 +11,14 @@ class CfgWaypoints {
         class EGVAR(danger,Garrison) {
             displayName = "1 TASK GARRISON";
             displayNameDebug = QEGVAR(danger,Garrison);
-            file = QPATHTOF(functions\fnc_taskGarrison.sqf);
+            file = QPATHTOF(scripts\fnc_wpGarrison.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
             tooltip = "Garrisons units in buildings around waypoint out to WP completion radius (default 50m)";
         };
         class EGVAR(danger,Patrol) {
             displayName = "2 TASK PATROL";
             displayNameDebug = QEGVAR(danger,Patrol);
-            file = QPATHTOF(functions\fnc_taskPatrol.sqf);
+            file = QPATHTOF(scripts\fnc_wpPatrol.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
             tooltip = "Randomised patrol within WP completion radius (Default 200m)";
         };
@@ -32,21 +32,21 @@ class CfgWaypoints {
         class EGVAR(danger,Hunt) {
             displayName = "4 TASK HUNT";
             displayNameDebug = QEGVAR(danger,Hunt);
-            file = QPATHTOF(functions\fnc_taskHunt.sqf);
+            file = QPATHTOF(scripts\fnc_wpHunt.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Hunts the AI around group leader out to WP completion radius (Default 500m)";
+            tooltip = "Hunts the AI around group leader out to WP completion radius (Default 1000m)";
         };
         class EGVAR(danger,Creep) {
             displayName = "5 TASK CREEP";
             displayNameDebug = QEGVAR(danger,Creep);
-            file = QPATHTOF(functions\fnc_taskCreep.sqf);
+            file = QPATHTOF(scripts\fnc_wpCreep.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Stalks the AI around group leader out to WP completion radius (Default 500m)";
+            tooltip = "Stalks the AI around group leader out to WP completion radius (Default 1000m)";
         };
         class EGVAR(danger,CQB) {
             displayName = "6 TASK CQB [Experimental]";
             displayNameDebug = QEGVAR(danger,CQB);
-            file = QPATHTOF(functions\fnc_taskCQB.sqf);
+            file = QPATHTOF(scripts\fnc_wpCQB.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
             tooltip = "Clears buildings around the waypoint out to WP completion radius (Default 50m)";
         };
