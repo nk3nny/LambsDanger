@@ -48,8 +48,11 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 // pick closest artillery
 _artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
 
+private _gun = _artillery select 0;
+[QGVAR(OnArtilleryCalled), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
+
 // perform it
-[_artillery select 0, _pos, _unit] spawn EFUNC(WP,taskArtillery);
+[_gun, _pos, _unit] spawn EFUNC(WP,taskArtillery);
 
 // end
 true
