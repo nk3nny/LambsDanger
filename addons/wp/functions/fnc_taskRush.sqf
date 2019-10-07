@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 // Aggressive Attacker script
-// version 4.3
+// version 5.0
 // by nkenny
 
 /*
@@ -11,23 +11,23 @@
   Arguments
     1, Group or object tracker  [Object or Group]
     2, position                 [Array]
-    //2, Range of tracking        [Number]              <-- not for this version
+    //2, Range of tracking      [Number]              <-- not for this version
 */
 
 // functions ---
 
 private _fnc_rushOrders = {
-    params ["_grp", "_target"];
+    params ["_group", "_target"];
     // Helicopters -- supress it!
-    if (((leader _grp) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
+    if (((leader _group) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
             _x commandSuppressiveFire getPosASL _target;
             true
-        } count (units _grp);
+        } count (units _group);
     };
 
     // Tank -- hide or ready AT
-    if ((leader _grp distance2d _target < 80) && {vehicle _target isKindOf "Tank"}) exitWith {
+    if ((leader _group distance2d _target < 80) && {vehicle _target isKindOf "Tank"}) exitWith {
         {
             if (secondaryWeapon _x != "") then {
                 _x setUnitPos "Middle";
@@ -37,47 +37,42 @@ private _fnc_rushOrders = {
                 _x commandSuppressiveFire getPosASL _target;
             };
             true
-        } count (units _grp);
-        _grp enableGunLights "forceOff";
+        } count (units _group);
+        _group enableGunLights "forceOff";
     };
 
     // Default -- run for it!
-    { _x setUnitPos "UP"; _x doMove (getPosATL _target); true } count units _grp;
-    _grp enableGunLights "forceOn";
+    { _x setUnitPos "UP"; _x doMove (getPosATL _target); true } count units _group;
+    _group enableGunLights "forceOn";
 };
 // functions end ---
 
 // init
-params ["_grp"];
-private _radius = waypointCompletionRadius [_grp, currentwaypoint _grp];
-private _cycle = 15;
+params ["_group",["_radius",500],["_cycle",15]];
 
 // sort grp
-if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then { _grp = group _grp; };
-
-// wp fix
-if (_radius isEqualTo 0) then {_radius = 500;};
+if (!local _group) exitWith {};
+if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
-_grp setSpeedMode "FULL";
-_grp setFormation "DIAMOND";
-_grp enableAttack false;
-{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _grp;
+_group setSpeedMode "FULL";
+_group setFormation "DIAMOND";
+_group enableAttack false;
+{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _group;
 
 // Hunting loop
-while {{alive _x} count units _grp > 0} do {
+while {{alive _x} count units _group > 0} do {
 
     // performance
-    waitUntil { sleep 1; simulationenabled leader _grp; };
+    waitUntil { sleep 1; simulationenabled leader _group; };
 
     // find
-    private _target = [_grp, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosedTarget);
 
     // act
     if (!isNull _target) then  {
-        [_grp, _target] call _fnc_rushOrders;
-        if (!EGVAR(danger,debug_functions)) then { systemchat format ["danger.wp taskRush: %1 targets %2 (%3) at %4 Meters", groupID _grp, name _target, _grp knowsAbout _target, floor (leader _grp distance2d _target)]; };
+        [_group, _target] call _fnc_rushOrders;
+        if (EGVAR(danger,debug_functions)) then { systemchat format ["%1 taskRush: %2 targets %3 (%4) at %5 Meters", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target)]; };
         _cycle = 15;
     } else {
         _cycle = 60;

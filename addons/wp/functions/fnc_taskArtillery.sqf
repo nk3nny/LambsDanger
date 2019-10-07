@@ -61,7 +61,7 @@ if (canFire _gun && {alive _caller}) then {
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+                private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
                 _mlist pushBack _m;
             };
 
@@ -99,7 +99,7 @@ if (canFire _gun && {alive _caller}) then {
 
     // debug
     if (EGVAR(danger,debug_functions)) then {
-        systemchat format ["danger.wp Artillery strike complete: %1 fired %2 shots at %3m", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)];
+        systemchat format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)];
     };
 
     // clean markers!

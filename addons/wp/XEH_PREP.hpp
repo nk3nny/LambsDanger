@@ -9,4 +9,3 @@ PREP(taskGarrison);
 PREP(taskHunt);
 PREP(taskPatrol);
 PREP(taskRush);
-PREP(wpDelay);

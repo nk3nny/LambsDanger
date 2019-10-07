@@ -11,23 +11,23 @@
 */
 
 // init
-params ["_grp", "_pos"];
-private _range = waypointCompletionRadius [_grp, currentwaypoint _grp];
+params ["_group", "_pos"];
+private _range = waypointCompletionRadius [_group, currentwaypoint _group];
 
 // sort grp
-if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then {_grp = (group _grp)};
+if (!local _group) exitWith {};
+if (_group isEqualType objNull) then {_group = (group _group)};
 
 // wp fix
 if (_range isEqualTo 0) then { _range = 25; };
 
 // orders
-_grp setBehaviour "AWARE";
-_grp setSpeedMode "NORMAL";
+_group setBehaviour "AWARE";
+_group setSpeedMode "NORMAL";
 
 // add WP
 for "_i" from 0 to 2 do {
-    private _wp = _grp addWaypoint [_pos, _range * _i];
+    private _wp = _group addWaypoint [_pos, _range * _i];
     _wp setWaypointType (["MOVE", "MOVE", "SAD"] select _i);
     _wp setWaypointStatements ["true", format ["
         if (local this) then {
@@ -35,7 +35,7 @@ for "_i" from 0 to 2 do {
             _buildings pushBack getpos this;
             {_x doMove selectRandom _buildings;true} count thisList;
         };
-    ", QEFUNC(danger,nearBuildings)]];
+    ", QEFUNC(danger,findBuildings)]];
 };
 
 // end

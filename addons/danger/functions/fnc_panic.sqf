@@ -46,7 +46,7 @@ if (_indoor) exitWith {
 };
 
 // outdoor -- crawl
-if (random 1 > (skill _unit)) exitWith { // joko: @nKenny maybe use endurance skill for this?
+if (random 1 > 0.5) exitWith {
 
     // action
     _unit dowatch objNull;

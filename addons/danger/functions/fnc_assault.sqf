@@ -17,7 +17,7 @@ _unit setVariable [QGVAR(currentTask), "Assault"];
 _unit setUnitPosWeak "UP";
 
 // Near buildings + sort near positions + add target actual location
-private _buildings = [_target, _range, true, true] call FUNC(nearBuildings);
+private _buildings = [_target, _range, true, true] call FUNC(findBuildings);
 _buildings pushBack (getPosATL _target);
 _buildings = _buildings select { _x distance2d _target < ( 4 + random 3 ) };
 
