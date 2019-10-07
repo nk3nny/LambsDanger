@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 // Creep up close
-// version 4.1
+// version 4.2
 // by nkenny
 
 /*
@@ -18,34 +18,31 @@
         3, Group set to patrol        [Boolean]            <-- not implemented -- always true
 */
 
-
 // init
-params ["_grp", "_pos"];
-private _patrol = false;
-private _statics = 0.2;
-private _range = waypointCompletionRadius [_grp, currentwaypoint _grp];
+params ["_group", "_pos",["_radius",50]];
 
 // sort grp
-if (!local _grp) exitWith {};
-if (_grp isEqualType objNull) then { _grp = group _grp; };
+if (!local _group) exitWith {};
+if (_group isEqualType objNull) then { _group = group _group; };
 
-// wp fix
-if (_range isEqualTo 0) then {_range = 50;};
+// settings
+private _patrol = false;    // disabled for now
+private _statics = 0.8;
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _range, true, false] call EFUNC(danger,nearBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
 _houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
-_houses = _houses call BIS_fnc_arrayShuffle;
+[_houses,true] call cba_fnc_Shuffle;
 
 // find guns
-private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // orders
-_grp enableAttack false;
+_group enableAttack false;
 
-// declare units + tweak count
-private _units = units _grp;
+// declare units + sort vehicles + tweak count to match house positions
+private _units = units _group;
 _units = _units select {isNull objectParent _x};
 if (count _units > count _houses) then {_units resize (count _houses);};
 
@@ -73,15 +70,19 @@ if (count _units > 4) then {
     doStop _x;
 
     // move and delay stopping + stance
-    [_x, (_houses select 0)] spawn {
-        params ["_unit", "_pos"];
-        _unit doMove (_pos vectorAdd [0.25 - random 0.5, 0.25 - random 0.5, 0]);
-        waitUntil {unitReady _unit && {canMove _unit}};
-        if (!alive _unit) exitWith {};                                                    // dead? exit
-        if (surfaceIsWater getpos _unit) exitWith { _unit doFollow leader _unit};    // surface is water? rejoin formation
-        _unit disableAI "PATH";
-        _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-    };
+    _x doMove (_houses select 0);
+    [
+        {
+            unitReady _this && {canMove _this}
+        },
+        {
+            params ["_unit","_pos"];
+            if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
+            _this disableAI "PATH";
+            _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+        }, 
+        _x
+    ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
     private _type = selectRandom [1, 2, 3];
@@ -125,16 +126,16 @@ if (count _units > 4) then {
 // end with patrol
 
 // orders
-_grp setBehaviour "SAFE";
+_group setBehaviour "SAFE";
 
 // waypoint
-private _wp = _grp addWaypoint [_pos, _range / 5];
+private _wp = _group addWaypoint [_pos, _radius / 5];
 _wp setWaypointType "SENTRY";
-_wp setWaypointCompletionRadius _range;
+_wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["danger.wp taskGarrison: %1 garrisoned", groupID _grp];
+    systemchat format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group];
 };
 
 

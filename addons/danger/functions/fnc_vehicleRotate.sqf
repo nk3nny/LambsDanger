@@ -60,18 +60,21 @@ while {count _pos < 1} do {
 // move
 _unit doMove _pos;
 
-// delay
-private _time = time + (4 + random 6);
-waitUntil {sleep 0.1;(_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) || {time > _time}};
+// waitUntil
+[
+    {
+        (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)})
+    },{
+        // check vehicle
+        if (canMove _unit && {count crew _unit > 0}) then {
+        // refresh ready (For HC apparently)
+        (effectiveCommander _unit) doMove (getPosASL _unit);
 
-// check vehicle
-if (!canMove _unit || {count crew _unit < 1}) exitWith {false};
-
-// refresh ready (For HC apparently)
-(effectiveCommander _unit) doMove (getPosASL _unit);
-
-// refresh formation
-(group _unit) setFormDir (_unit getDir _target);
+        // refresh formation
+        (group _unit) setFormDir (_unit getDir _target);
+        };
+    }, [_unit,_target,_threshold], (4 + random 6)
+] call CBA_fnc_waitUntilAndExecute;
 
 // end
 true
