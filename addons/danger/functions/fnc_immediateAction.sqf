@@ -1,9 +1,8 @@
 #include "script_component.hpp"
 // Immediate reaction on getting hit
-// version 1.41
+// version 1.5
 // by nkenny
 
-// init
 // init
 params ["_unit", ["_stance", ""]];
 
@@ -34,13 +33,6 @@ if (random 1 > 0.5) exitWith {
         "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
         "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
     ];
-    true
-};
-
-// standing to prone
-if (random 1 > 0.9) exitWith {
-    _unit switchMove "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon";
-    _unit setUnitPosWeak "DOWN";
     true
 };
 

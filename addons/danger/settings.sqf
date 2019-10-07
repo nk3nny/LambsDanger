@@ -3,20 +3,20 @@ private _curCat = "General";
 [
     QGVAR(CQB_range),
     "SLIDER",
-    ["CQB Range", "Range at which units consider themselves in CQB"],
+    ["CQB Range", "Range at which units consider themselves in assault range"],
     [COMPONENT_NAME, _curCat],
     [25, 100, 50, 0],
     true
 ] call CBA_Settings_fnc_init;
 
 // you cannot do arrays in cba settings, only select one entry from an array
-GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
+GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 // Minimum range for suppression
 [
     QGVAR(minSuppression_range),
     "SLIDER",
-    ["Minimum Suppression Range", "Minimum range for suppression"],
+    ["Minimum Suppression Range", "Within this range AI will not perform suppression fire"],
     [COMPONENT_NAME, _curCat],
     [1, 500, 25, 0],
     true
@@ -38,7 +38,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_FSM),
     "CHECKBOX",
-    ["Debug", "FSM level debug messages"],
+    ["Debug", "FSM debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
     true
@@ -48,7 +48,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_functions),
     "CHECKBOX",
-    ["Debug Functions", "Function level debug messages"],
+    ["Debug Functions", "Function debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
     true
@@ -58,7 +58,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_FSM_civ),
     "CHECKBOX",
-    ["Debug Civ", "FSM level debug messages for civilian fsm"],
+    ["Debug Civ", "FSM debug messages for civilian fsm"],
     [COMPONENT_NAME, _curCat],
     false,
     true

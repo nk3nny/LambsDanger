@@ -40,7 +40,7 @@ if (count _body > 0) exitWith {
         },
         {
             params ["_unit", "", "_body"];
-            if (alive _unit && {!isNil str _body} && {_unit distance _body < 0.6}) then {
+            if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.8}) then {
                 [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
                 _unit action ["rearm", _body];
                 _unit doFollow leader group _unit;
@@ -59,11 +59,5 @@ if (count _body > 0) exitWith {
     true
 };
 
-// checked? Move in close
-_unit doMove (_pos getPos [2 + random 10, random 360]);
-
-// debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 checking body area (%2m)", side _unit, round (_unit distance _pos)];};
-
 // end
-true
+false
