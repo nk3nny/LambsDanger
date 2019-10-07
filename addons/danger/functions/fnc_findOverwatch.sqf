@@ -8,45 +8,71 @@
  *
  * Arguments:
  * 0: Target Position <Vector3>
- * 1: Position from where to search from <Vector3>
- * 2: Mininal Distance From Position <Number>
- * 3: Maximal Distance From Position <Number>
- * 4: Respect incidence Angle <Boolean> (Default: false)
- * 5: Incidence Angle MinMax <Vector2> (Default: [15, 60])
- * 6: Max Results <Number> (Default: -1)
+ * 1: Maximum distance from Target in meters <Vector3>
+ * 2: Minimum distance from Target in meters <Number>
+ * 3: Minimum height in relation to Target in meters <Number>
+ * 4: Position to start looking from <Number>
  *
  * Return Value:
- * Array of Position of a Possible Overwatch Position
+ * Position of a Possible Overwatch Position
  *
  * Example:
- * [bob, 10, 50] call lambs_danger_fnc_findOverwatch;
+ * [getPos bob, 10, 50, 8, getPos jonny] call lambs_danger_fnc_findOverwatch;
  *
  * Public: Yes
 */
 scriptName QGVAR(findOverwatch);
 scopeName QGVAR(findOverwatch);
 
-params ["_targetPos", "_originPos", "_min", "_max", ["_respectIncidenceAngle", false], ["_incidenceAngleMinMax", [15, 60]], ["_maxResults", -1]];
+params ["_targetPos", "_maxRange", "_minRange", "_minHeight", "_centerPos"];
+private _refObj = nearestObject [_targetPos, "All"];
+private _result = [];
+private _selectedPositions = [];
 
-private _posASL = (AGLToASL(_targetPos) vectorAdd [0,0, getTerrainHeightASL _targetPos + 1]);
-private _possiblePos = [];
-{
-    private _checkPos = locationPosition _x;
-    private _distance = _checkPos distance2D _targetPos;
-    private _validPos = (_distance > _min) && {_distance < _max};
-    if (_validPos && _respectIncidenceAngle) then {
-        private _height = (getTerrainHeightASL _checkPos) - (getTerrainHeightASL _targetPos);
-        private _incidenceAngle = _height atan2 _distance;
-        _validPos = _validPos && _height > 20 || (_incidenceAngle < (_incidenceAngleMinMax select 1) && _incidenceAngle > (_incidenceAngleMinMax select 0));
-    };
-    if (_validPos) then {
-        private _lis = lineIntersectsSurfaces [_posASL, AGLToASL(_checkPos), objNull, objNull, true, -1, "NONE", "NONE"];
-        if (_lis isEqualTo []) then {
-            _possiblePos pushback _checkPos;
-            if (_maxResults != -1 && {(count _possiblePos) == _maxResults}) then {
-                _possiblePos breakOut QGVAR(findOverwatch);
-            };
+private _fnc_selectResult = {
+    //Found position(s)
+    _result = _selectedPositions select 0;
+    private _maximum = (_refObj worldToModel _result) select 2;
+    {
+        private _height = (_refObj worldToModel _x) select 2;
+        if (_height > _maximum) then {
+            _result = _x;
+            _maximum = _height;
+        };
+    } forEach _selectedPositions;
+    _result breakOut QGVAR(findOverwatch);
+};
+
+for "_i" from 0 to 300 do {
+    private _checkPos = [_centerPos, 0, _maxRange, 3, 0, 50, 0, [], []] call BIS_fnc_findSafePos;
+    private _height = (_refObj worldToModel _checkPos) select 2;
+    private _dis = _checkPos distance _targetPos;
+
+    private _terrainBlocked = terrainIntersect [_targetPos,_checkPos];
+
+    private _distCheck = (_dis > _minRange);
+    // Get atleast one Fallback Position
+    if (_result isEqualTo [] && _distCheck) then {
+        if !(_terrainBlocked) then {
+            _result = _checkPos;
         };
     };
-} count (nearestLocations [_originPos, ["Hill", "Mount"], _max]);
-_possiblePos
+
+    if ((_height > _minHeight) && _distCheck) then {
+        if !(_terrainBlocked) then {
+            _selectedPositions pushback _checkPos;
+        };
+    };
+    if (count _selectedPositions >= 5) then {
+        call _fnc_selectResult;
+    };
+};
+
+if !(_selectedPositions isEqualTo []) then {
+    call _fnc_selectResult;
+} else {
+    if (_result isEqualTo []) then {
+        _result = _centerPos;
+    };
+};
+_result
