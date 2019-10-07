@@ -8,6 +8,7 @@
  * 1: Enemy <OBJECT> or Enemy Position (AGL) <ARRAY>
  * 2: Range to find cover, default 15 <NUMBER>
  * 3: Sort mode <STRING>, default "ASCEND", possible values: ASCEND, DESCEND, RANDOM. ASCEND returns closest possible location
+ * 4: Max Results <Number>, default 1, Maximum amount of results that can be returned, -1 for all (warning may be slow)
  *
  * Return Value:
  * Array of format [_posAGL, _stance], when no cover found then an empty array is returned
@@ -18,9 +19,13 @@
  *
  * Public: Yes
 */
-params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]], ["_sortMode", "ASCEND", [""]]];
+params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]], ["_sortMode", "ASCEND", [""]], ["_maxResults", 1, [0]]];
 
+_maxResults = floor _maxResults;
 private _ret = [];
+
+if (_maxResults isEqualTo 0) exitWith {_ret};
+
 private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8];
 
 if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
@@ -38,6 +43,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
     };
 
     private _found = false;
+    private _numFound = 0;
     private _obj = objNull;
     private _pos = [];
     private _posASL = [];
@@ -56,7 +62,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
         };
 
         {
-            if !(_ret isEqualTo []) exitWith {};
+            if (_found) exitWith {};
             if ((_dangerPos distance2d _x) > 20) then {
                 _pos = _x;
                 _posASL = AGLToASL _x;
@@ -72,8 +78,10 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
                             _stances pushBack "UP";
                         };
                     };
-                    _ret = [_pos, selectRandom _stances];
-                    _found = true;
+                    _ret pushback [_pos, selectRandom _stances];
+                    _numFound = _numFound + 1;
+
+                    _found = (!(_maxResults isEqualTo -1) && {_numFound isEqualTo _maxResults});
                 };
             };
         } forEach _buildingPos
@@ -81,19 +89,20 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
 };
 
 if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
-    private _stance = _ret select 1;
-    systemchat format ["Found cover %1m away for stance %2", _unit distance (_ret select 0), _stance];
-    createVehicle ["Sign_Arrow_Large_F", (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8], [], 0, "CAN_COLLIDE"];
-    private _add = if ((_stance) isEqualTo "UP") then {
-        2
-    } else {
-        if ((_stance) isEqualTo "MIDDLE") then {
-            1
+    systemchat format ["Found %1 cover positions", count _ret];
+    {
+        createVehicle ["Sign_Arrow_Large_F", (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8], [], 0, "CAN_COLLIDE"];
+        private _add = if ((_x select 1) isEqualTo "UP") then {
+            2
         } else {
-            0.2
+            if ((_x select 1) isEqualTo "MIDDLE") then {
+                1
+            } else {
+                0.2
+            };
         };
-    };
-    createVehicle ["Sign_Arrow_Large_Blue_F", (_ret select 0) vectorAdd [0, 0, _add], [], 0, "CAN_COLLIDE"];
+        createVehicle ["Sign_Arrow_Large_Blue_F", (_x select 0) vectorAdd [0, 0, _add], [], 0, "CAN_COLLIDE"];
+    } forEach _ret;
 };
 
 _ret
