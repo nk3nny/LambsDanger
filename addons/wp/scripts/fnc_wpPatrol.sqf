@@ -22,7 +22,7 @@ if (_radius isEqualTo 0) then {_radius = 200;};
 // get other settings
 
 // execute script
-[_group,_pos,_radius] spawn FUNC(taskPatrol);
+[_group,_pos,_radius] call FUNC(taskPatrol);
 
 // end
 true

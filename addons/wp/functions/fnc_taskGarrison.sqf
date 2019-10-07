@@ -18,7 +18,6 @@
         3, Group set to patrol        [Boolean]            <-- not implemented -- always true
 */
 
-
 // init
 params ["_group", "_pos",["_radius",50]];
 
@@ -31,7 +30,7 @@ private _patrol = false;    // disabled for now
 private _statics = 0.8;
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _radius, true, false] call EFUNC(danger,nearBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
 _houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
 [_houses,true] call cba_fnc_Shuffle;
 
@@ -71,15 +70,19 @@ if (count _units > 4) then {
     doStop _x;
 
     // move and delay stopping + stance
-    [_x, (_houses select 0)] spawn {
-        params ["_unit", "_pos"];
-        _unit doMove (_pos vectorAdd [0.25 - random 0.5, 0.25 - random 0.5, 0]);
-        waitUntil {unitReady _unit && {canMove _unit}};
-        if (!alive _unit) exitWith {};                                                    // dead? exit
-        if (surfaceIsWater getpos _unit) exitWith { _unit doFollow leader _unit};    // surface is water? rejoin formation
-        _unit disableAI "PATH";
-        _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-    };
+    _x doMove (_houses select 0);
+    [
+        {
+            unitReady _this && {canMove _this}
+        },
+        {
+            params ["_unit","_pos"];
+            if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
+            _this disableAI "PATH";
+            _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+        }, 
+        _x
+    ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
     private _type = selectRandom [1, 2, 3];

@@ -15,7 +15,7 @@ item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.0000
 item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
-item14[] = {"Ready_Vehicle",2,4346,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
+item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
 item15[] = {"Ready_Infantry",2,250,-300.000000,-75.000000,-200.000000,-25.000000,0.000000,"Ready Infantry"};
 item16[] = {"Tank_Attack",4,218,-925.000000,25.000000,-825.000000,75.000000,4.000000,"Tank" \n "Attack"};
 item17[] = {"Attack____Suppress",2,250,-925.000000,150.000000,-825.000000,200.000000,0.000000,"Attack " \n "+ Suppress" \n ""};
@@ -252,8 +252,8 @@ link96[] = {72,4};
 link97[] = {73,74};
 link98[] = {74,18};
 link99[] = {79,29};
-globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-996.626709,-581.204590,197.846069,-139.684265,1088,884,1};
-window[] = {2,-1,-1,-1,-1,1047,234,1036,234,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-1369.458008,-483.875183,503.740479,-215.795547,1088,884,1};
+window[] = {2,-1,-1,-32000,-32000,1047,234,1036,234,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -665,12 +665,16 @@ class FSM
                          "if (speed (vehicle _this) < 10) then {" \n
                          "" \n
                          "	// rotate +  suppression (internal to vehicle rotate) " \n
-                         "	[vehicle _this,_dangerCausedBy] spawn lambs_danger_fnc_vehicleRotate; " \n
+                         "	[vehicle _this,_dangerCausedBy] call lambs_danger_fnc_vehicleRotate; " \n
                          "	" \n
                          "	// assault " \n
                          "	private _buildings = [_dangerPos,28,false,false] call lambs_danger_fnc_findBuildings;" \n
                          "	if (count _buildings > 0) then {" \n
-                         "		[_this,_dangerPos,_dangerCausedBy,_buildings] spawn lambs_danger_fnc_vehicleAssault;" \n
+                         "		[" \n
+                         "			{" \n
+                         "				_this call lambs_danger_fnc_vehicleAssault;" \n
+                         "			}, [_this,_dangerPos,_dangerCausedBy,_buildings], ( 3 + random 3 )" \n
+                         "		] call CBA_fnc_waitAndExecute;" \n
                          "	};" \n
                          "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

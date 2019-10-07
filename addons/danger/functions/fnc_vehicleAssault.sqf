@@ -14,26 +14,25 @@
 // init
 params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
-if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
-};
+// settings + check
+private _veh = vehicle _unit;
+if (!canFire _veh) exitWith {false};
+
+// tweaks target to remain usefully close
+if (_pos distance2d _unit < 50) then {_pos = (_unit getHideFrom _target)};
 
 //  target on foot
 if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 if !(_target isKindOf "Man") exitWith {false};
 
+// define buildings
+if (_buildings isEqualTo []) then {
+    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
+};
+
+// variables 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
-
-// tweaks target to remain usefully close
-if (_pos distance2d _unit < 50) then {_pos = (_unit getHideFrom _target)};
-
-// settings
-private _veh = vehicle _unit;
-
-// delay
-sleep (3 + random 3);
-if (!canFire _veh) exitWith {false};
 
 // find closest building
 if (count _buildings > 0) then {
