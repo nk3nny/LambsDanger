@@ -7,7 +7,7 @@
 params ["_unit", "_target", ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
-    _buildings = [_unit getPos [random 100, _unit getDir _target], 35, true, false] call FUNC(nearBuildings);
+    _buildings = [_unit getPos [random 100, _unit getDir _target], 35, true, false] call FUNC(findBuildings);
 };
 
 _unit setVariable [QGVAR(currentTarget), _target];

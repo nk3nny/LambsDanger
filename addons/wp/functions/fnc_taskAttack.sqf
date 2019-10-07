@@ -35,7 +35,7 @@ for "_i" from 0 to 2 do {
             _buildings pushBack getpos this;
             {_x doMove selectRandom _buildings;true} count thisList;
         };
-    ", QEFUNC(danger,nearBuildings)]];
+    ", QEFUNC(danger,findBuildings)]];
 };
 
 // end

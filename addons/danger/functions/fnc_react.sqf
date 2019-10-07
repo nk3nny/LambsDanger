@@ -23,7 +23,7 @@ _unit setUnitPos _stance;
 if (_leader) then {
 
     // leaders get their subordinates to hide!
-    private _buildings = [_unit,_range,true,true] call FUNC(nearBuildings);
+    private _buildings = [_unit,_range,true,true] call FUNC(findBuildings);
     {
         [_x,_pos,_range,_buildings] call FUNC(hideInside);
         _timeout = _timeout + 3;

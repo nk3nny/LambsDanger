@@ -15,7 +15,7 @@
 params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 28, false, false] call FUNC(nearBuildings);
+    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
 };
 
 //  target on foot

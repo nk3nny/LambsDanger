@@ -7,7 +7,7 @@
 params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
-    _buildings = [_unit, _range, true, true] call FUNC(nearBuildings);
+    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
 };
 
 // stopped -- exit
