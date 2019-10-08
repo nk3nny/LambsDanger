@@ -25,20 +25,34 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
-_range = [rank _unit, _range] call {
-    params ["_rank", "_range"];
-    if (_override) exitWith {_range};  // to allow for custom short range updates
-    if (_rank isEqualTo "SERGEANT") exitWith { 500 };
-    if (_rank isEqualTo "LIEUTENANT") exitWith { 800 };
-    if (_rank isEqualTo "CAPTAIN") exitWith { 1000 };
-    if (_rank isEqualTo "MAJOR") exitWith { 2000 };
-    if (_rank isEqualTo "COLONEL") exitWith { 3000 };
-    _range
+if (!_override) then {
+    _range = switch (rank _unit) do {
+        case ("SERGEANT"): {
+            500
+        };
+        case ("LIEUTENANT"): {
+            800
+        };
+        case ("CAPTAIN"): {
+            1000
+        };
+        case ("MAJOR"): {
+            2000
+        };
+        case ("COLONEL"): {
+            3000
+        };
+        default {
+            _range
+        };
+    };
 };
 
 // limit by viewdistance
 _range = _range min viewDistance;
 
+private _side = side _unit;
+private _grp = group _unit;
 // find units
 private _groups = allGroups select {
     local _x && 
@@ -48,6 +62,7 @@ private _groups = allGroups select {
     {!(behaviour leader _x isEqualTo "CARELESS")}
 };
 
+private _knowsAbout = _unit knowsAbout _target;
 // share information
 {
     if (!isNull _target) then {
@@ -59,6 +74,8 @@ private _groups = allGroups select {
         _x setFormDir ((leader _x) getDir _unit);
     };
 } foreach _groups;
+
+[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 
 // debug
 if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];};

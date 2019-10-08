@@ -9,6 +9,7 @@ PREP(dotMarker);
 PREP(findBuildings);
 PREP(findCover);
 PREP(findOverwatch);
+PREP(eventCallback);
 PREP(gesture);
 PREP(hideInside);
 PREP(immediateAction);

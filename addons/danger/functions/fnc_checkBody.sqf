@@ -20,12 +20,12 @@ private _body = allDeadMen select {_x distance _pos < _range};
 _body = _body select {!(_x getVariable [QGVAR(isChecked), false])};
 
 // ready
-doStop _this;
+doStop _unit;
 
 // Not checked? Move in close
 if (count _body > 0) exitWith {
     // one body
-    _body = _body select 0;
+    _body = selectRandom _body;
 
     _unit setVariable [QGVAR(currentTarget), _body];
     _unit setVariable [QGVAR(currentTask), "Check Body"];
@@ -35,17 +35,18 @@ if (count _body > 0) exitWith {
     _unit doMove _bodyPos;
     [
         {
-            params ["_unit", "_bodyPos", "_time"];
-            ((_unit distance _bodyPos) < 0.6) || {_time < time} || {!alive _unit}
+            params ["_unit", "_time", "_body"];
+            ((_unit distance _body) < 0.6) || {_time < time} || {!alive _unit}
         },
         {
-            params ["_unit", "", "", "_body"];
+            params ["_unit", "", "_body"];
             if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.8}) then {
+                [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
                 _unit action ["rearm", _body];
                 _unit doFollow leader group _unit;
             };
         },
-        [_unit, _bodyPos, time + 20, _body]
+        [_unit, time + 20, _body]
     ] call CBA_fnc_waitUntilAndExecute;
 
     // update variable

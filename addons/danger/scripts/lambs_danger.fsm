@@ -31,7 +31,7 @@ item26[] = {"Timeout",4,218,50.000000,325.000000,150.000000,375.000000,0.000000,
 item27[] = {"Killed",4,218,-100.000000,325.000000,0.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,-100.000000,425.000000,0.000000,475.000000,0.000000,"Killed: " \n "Continue"};
 item29[] = {"Timeout__Continu",2,250,50.000000,425.000000,150.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
-item30[] = {"____FUNCTIONS__lambs",-1,250,-1275.000000,-575.000000,-1025.000000,-50.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_nearbuildings " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderBuildings  " \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
+item30[] = {"____FUNCTIONS__lambs",-1,250,-1275.000000,-575.000000,-1025.000000,-50.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_nearbuildings " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderBuildings  " \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-350.000000,0.000000,-250.000000,50.000000,4.000000,"React"};
 item32[] = {"Reaction__to_contact",2,250,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
 item33[] = {"Investigate",4,218,-225.000000,0.000000,-125.000000,50.000000,2.000000,"Investigate"};
@@ -1234,10 +1234,10 @@ class FSM
                          "[_this,_target] call lambs_danger_fnc_shareInformation; " \n
                          "" \n
                          "// change formation " \n
-                         "group _this setFormation (group _this getVariable [""lambs_danger_dangerFormation"",formation _this]);" \n
+                         "(group _this) setFormation (group _this getVariable [""lambs_danger_dangerFormation"",formation _this]);" \n
                          "" \n
-                         "// execute code " \n
-                         "[_this,units group _this] call ((group _this) getVariable [""lambs_danger_dangerCode"", {}]);" \n
+                         "// call event system" \n
+                         "[""lambs_danger_onContact"", [_this, group _this, units _this]] call lambs_danger_fnc_eventCallback;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
