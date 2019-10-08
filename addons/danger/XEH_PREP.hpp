@@ -8,6 +8,7 @@ PREP(debugMarkerColor);
 PREP(dotMarker);
 PREP(findBuildings);
 PREP(findCover);
+PREP(findOverwatch);
 PREP(eventCallback);
 PREP(gesture);
 PREP(hideInside);
@@ -31,3 +32,4 @@ PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
 PREP(zoneMarker);
+

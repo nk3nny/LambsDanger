@@ -70,7 +70,7 @@ item65[] = {"Timeout__Destina",4,218,-1050.000000,500.000000,-950.000000,550.000
 item66[] = {"Pre_attack",2,250,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
 item67[] = {"Always",4,218,-50.000000,150.000000,50.000000,200.000000,0.000000,"Always"};
 item68[] = {"Coward",4,218,50.000000,150.000000,150.000000,200.000000,1.000000,"Coward"};
-item69[] = {"Coward",2,250,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
+item69[] = {"Coward",2,4346,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
 item70[] = {"Clear_buildings",2,250,150.000000,225.000000,250.000000,275.000000,0.000000,"Clear buildings"};
 item71[] = {"Cycle_",4,218,225.000000,325.000000,325.000000,375.000000,1.000000,"Cycle!"};
 item72[] = {"",7,210,-466.500000,-54.000000,-458.500000,-46.000000,0.000000,""};
@@ -252,8 +252,8 @@ link96[] = {72,4};
 link97[] = {73,74};
 link98[] = {74,18};
 link99[] = {79,29};
-globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-1369.458008,-483.875183,503.740479,-215.795547,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,1047,234,1036,234,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,400,6316128,1,-728.846985,567.734924,726.715027,-326.756714,1088,884,1};
+window[] = {2,-1,-1,-1,-1,1021,208,1010,208,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1654,9 +1654,12 @@ class FSM
                         itemno = 69;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// testing Diwako hide " \n
-                         "private _hide = [_this,_dangerCausedBy] call lambs_danger_fnc_findCover; " \n
-                         "_this doMove (_hide select 0); " \n
-                         "_this setUnitPosWeak (_hide select 1);" \n
+                         "private _hide = [_this,_dangerCausedBy] call lambs_danger_fnc_findCover;" \n
+                         "if !(_hide isEqualTo []) then {" \n
+                         "    private _coverPos = _hide select 0;" \n
+                         "    _this doMove (_coverPos select 0);" \n
+                         "    _this setUnitPosWeak (_coverPos select 1);" \n
+                         "};" \n
                          "" \n
                          "//[_this,_dangerCausedBy] call lambs_danger_fnc_hideInside; // disabled to reduce break up of squad formation" \n
                          "" \n
