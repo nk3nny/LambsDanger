@@ -30,7 +30,7 @@ private _offset = 0;
 // higher class artillery fire more rounds? Less accurate?
 if !(vehicle _gun isKindOf "StaticMortar") then {
     _rounds = _rounds * 2;
-    _accuracy = _accuracy + random 100;
+    _accuracy = _accuracy / 2;
 };
 
 // remove from list
@@ -39,7 +39,11 @@ _artillery = _artillery - [_gun];
 missionNamespace setVariable ["lambs_artillery_" + str (side _gun), _artillery, false];
 
 // delay
-sleep (((_gun distance _pos) / 8) min 90);
+private _mainStrike = linearConversion [100,2000,(_gun distance _pos),30,90,true];
+private _checkRounds = (25 + random 35);
+
+// delay
+sleep _mainStrike;
 
 // initate attack (gun and caller must be alive)
 if (canFire _gun && {alive _caller}) then {
@@ -54,7 +58,7 @@ if (canFire _gun && {alive _caller}) then {
         for "_i" from 1 to (1 + random 1) do {
 
             // Randomize target location
-            private _target = _center getPos [(450 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
+            private _target = _center getPos [(250 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
             // Fire round
             _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
@@ -70,7 +74,7 @@ if (canFire _gun && {alive _caller}) then {
         };
 
         // delay
-        sleep (35 + random 35);
+        sleep _checkRounds;
 
     };
 
@@ -107,7 +111,7 @@ if (canFire _gun && {alive _caller}) then {
 };
 
 // delay
-sleep (10 + random [10, 40, 180]);
+sleep _checkRounds;
 
 // re-add to list
 if (!canFire _gun) exitWith {false};

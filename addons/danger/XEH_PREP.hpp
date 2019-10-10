@@ -27,6 +27,7 @@ PREP(leaderModeUpdate);
 PREP(panic);
 PREP(react);
 PREP(shareInformation);
+PREP(shareInformationRange);
 PREP(suppress);
 PREP(vehicleAssault);
 PREP(vehicleJink);

@@ -14,7 +14,7 @@ _stance = (if (_unit distance2d (nearestBuilding _unit) < ( 20 + random 20 ) || 
 _unit setUnitPos _stance;
 
 // Share information!
-[_unit, (_unit findNearestEnemy _pos), 50 + random 100, true] call FUNC(shareInformation);	// shout range defined somewhere. 
+[_unit, (_unit findNearestEnemy _pos), GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
 
 // leaders gestures
 [formationLeader _unit,["GestureCover","GestureCeaseFire"]] call FUNC(gesture);
