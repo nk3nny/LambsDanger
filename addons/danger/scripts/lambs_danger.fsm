@@ -59,7 +59,7 @@ item54[] = {"CQC",4,218,150.000000,150.000000,250.000000,200.000000,4.000000,"CQ
 item55[] = {"Check_houses__Co",2,250,650.000000,375.000000,750.000000,425.000000,0.000000,"Check houses:" \n "Continue"};
 item56[] = {"Panic",4,218,-350.000000,175.000000,-250.000000,225.000000,0.000000,"Panic"};
 item57[] = {"Cargo_or__driver",4,218,-725.000000,25.000000,-625.000000,75.000000,0.000000,"Cargo or " \n "driver"};
-item58[] = {"Ready_1",2,4346,-725.000000,150.000000,-625.000000,200.000000,0.000000,"Ready"};
+item58[] = {"Ready_1",2,250,-725.000000,150.000000,-625.000000,200.000000,0.000000,"Ready"};
 item59[] = {"Investigate",4,218,-825.000000,25.000000,-725.000000,75.000000,3.000000,"Investigate"};
 item60[] = {"Investigate__Unload",2,250,-825.000000,150.000000,-725.000000,200.000000,0.000000,"Investigate" \n "+Unload cargo"};
 item61[] = {"Reached__destina",4,218,-825.000000,300.000000,-725.000000,350.000000,0.000000,"Reached " \n "destination"};
@@ -75,7 +75,7 @@ item70[] = {"Clear_buildings",2,250,150.000000,225.000000,250.000000,275.000000,
 item71[] = {"Cycle_",4,218,225.000000,325.000000,325.000000,375.000000,1.000000,"Cycle!"};
 item72[] = {"",7,210,-466.500000,-54.000000,-458.500000,-46.000000,0.000000,""};
 item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000,"Static"};
-item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
+item74[] = {"Suppression",2,4346,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
 item77[] = {"OUTDATED_______VARIABLES",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"OUTDATED!" \n "" \n "" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
@@ -258,8 +258,8 @@ link100[] = {79,29};
 link101[] = {81,82};
 link102[] = {82,18};
 link103[] = {82,63};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1396.668701,753.234375,1159.953613,-586.842590,1088,884,1};
-window[] = {2,-1,-1,-1,-1,1047,234,1036,234,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1369.512451,-585.604431,489.414795,-147.510574,1088,884,1};
+window[] = {2,-1,-1,-32000,-32000,1047,234,1036,234,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1780,7 +1780,15 @@ class FSM
                          "_timeout = 15 + random 8; " \n
                          "" \n
                          "// suppression " \n
-                         "[_this,_dangerPos] call lambs_danger_fnc_vehicleSuppress;"/*%FSM</STATEINIT""">*/;
+                         "if (_attack) then {" \n
+                         "	[_this,_dangerPos] call lambs_danger_fnc_vehicleSuppress;" \n
+                         "}; " \n
+                         "" \n
+                         "// get out if enemy near" \n
+                         "if ((_this findNearestEnemy _dangerPos) distance _this < (6 + random 15)) then {" \n
+                         "	[_this] orderGetIn false;" \n
+                         "	_this setSuppression 0.94; 	// to prevent instant laser aim on exiting vehicle" \n
+                         "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1808,7 +1816,7 @@ class FSM
                          "_health = damage _this; " \n
                          "" \n
                          "// timeout " \n
-                         "_timeout = 15 + random 8; "/*%FSM</STATEINIT""">*/;
+                         "_timeout = 20 + random 8; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
