@@ -35,12 +35,13 @@ private _pos = [_target, _unit distance _target, 100 min (_unit distance _target
         _x forceSpeed 25;
         _x doMove (_pos getPos [10 + random 20, random 360]);
         if !(stance _x isEqualTo "PRONE") then {
-            _x switchMove selectRandom [
+            private _anim = selectRandom [
                 "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf",
                 "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDfr",
                 "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
                 "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
             ];
+            [_x,_anim] remoteExec ["switchMove",0];
         };
     };
 

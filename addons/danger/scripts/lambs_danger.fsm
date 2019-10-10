@@ -75,7 +75,7 @@ item70[] = {"Clear_buildings",2,250,150.000000,225.000000,250.000000,275.000000,
 item71[] = {"Cycle_",4,218,225.000000,325.000000,325.000000,375.000000,1.000000,"Cycle!"};
 item72[] = {"",7,210,-466.500000,-54.000000,-458.500000,-46.000000,0.000000,""};
 item73[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000,"Static"};
-item74[] = {"Suppression",2,4346,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
+item74[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item75[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item76[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
 item77[] = {"OUTDATED_______VARIABLES",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"OUTDATED!" \n "" \n "" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
@@ -258,8 +258,8 @@ link100[] = {79,29};
 link101[] = {81,82};
 link102[] = {82,18};
 link103[] = {82,63};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1369.512451,-585.604431,489.414795,-147.510574,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,1047,234,1036,234,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-752.303345,1338.957031,1094.402100,-604.746826,1088,884,1};
+window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -298,7 +298,7 @@ class FSM
                                         priority = 12.000000;
                                         to="End";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!local _this || {isPlayer _this}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!local _this || {isPlayer _this} || {behaviour _this isEqualTo ""CARELESS""}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -325,10 +325,7 @@ class FSM
                          "	" \n
                          "// reset " \n
                          "_this lookAt objNull;" \n
-                         "_this forceSpeed -1;" \n
-                         "" \n
-                         "// end " \n
-                         "true "/*%FSM</STATEINIT""">*/;
+                         "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -429,7 +426,7 @@ class FSM
                                         priority = 12.000000;
                                         to="End";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"fleeing _this || {(_this getVariable [""ACE_isUnconscious"",false])} || {_this getVariable [""lambs_danger_disableAI"",false]}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_this call lambs_danger_fnc_fsmExitVariables"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -564,11 +561,6 @@ class FSM
                          "// immediate action" \n
                          "if ((_dangerCause isEqualTo 2)  && {random 1 > 0.2}) then {" \n
                          "	[_this,stance _this] call lambs_danger_fnc_immediateAction;" \n
-                         "}; " \n
-                         "" \n
-                         "//  immediate action - explosion! " \n
-                         "if (_explosive  &&  {damage _this > 0.1}) then {" \n
-                         "	[_this,_dangerPos] call lambs_danger_fnc_immediateActionExp;" \n
                          "}; " \n
                          "" \n
                          "// Panic when suppression level is high " \n
@@ -1248,14 +1240,8 @@ class FSM
                          "//_target = (_dangerMode select 1) select 1; <-- disabled. Produced bugged results " \n
                          "_target = _this findNearestEnemy _dangerPos;" \n
                          "" \n
-                         "// share information " \n
-                         "[_this,_target] call lambs_danger_fnc_shareInformation; " \n
-                         "" \n
-                         "// change formation " \n
-                         "(group _this) setFormation (group _this getVariable [""lambs_danger_dangerFormation"",formation _this]);" \n
-                         "" \n
-                         "// call event system" \n
-                         "[""lambs_danger_onContact"", [_this, group _this, units _this]] call lambs_danger_fnc_eventCallback;" \n
+                         "// execute group hide " \n
+                         "[_this,_target] call lambs_danger_fnc_leaderContact;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1339,9 +1325,6 @@ class FSM
                          "// find target " \n
                          "_target = (_dangerMode select 1) select 6;" \n
                          "" \n
-                         "// gesture" \n
-                         "[_this,[""gestureGo""]] call lambs_danger_fnc_gesture;" \n
-                         "" \n
                          "// call artillery if available " \n
                          "if (_this distance _target  > 100 && {count (missionNameSpace getVariable [""lambs_artillery_"" + str (side _this),[]]) > 0}) then {" \n
                          "" \n
@@ -1398,9 +1381,6 @@ class FSM
                          "" \n
                          "// execute group Manoeuvre" \n
                          "[_this,_target] call lambs_danger_fnc_leaderManoeuvre;" \n
-                         "" \n
-                         "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {systemchat format [""%1 - LEADER ACTION! - Manoeuvre"",side _this];};" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1741,7 +1721,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Clear_buildings";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"unitReady _this || {time > _timeoutCQC}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _timeoutCQC"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

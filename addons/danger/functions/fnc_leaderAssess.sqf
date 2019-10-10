@@ -56,7 +56,7 @@ if (count _enemy > 0) then {
 
 // Check nearby houses?
 if (random 1 > 0.4 && {_unit distance (nearestBuilding _pos) < 80}) then {
-        [_unit, 4, _pos] call FUNC(leaderMode);
+    [_unit, 5, _pos] call FUNC(leaderMode);
 };
 
 // binoculars if appropriate!
