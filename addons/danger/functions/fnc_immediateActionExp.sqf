@@ -13,23 +13,27 @@
 // init
 params ["_unit","_pos"];
 
-// Standing or recent explosions ignored
-if !(stance _unit isEqualTo "STAND" || {_unit getVariable [QGVAR(isExploded),0] > time}) exitWith {false};
+// Standing or recent explosions ignored // probably want to add more checks for captive states or similar static behaviour.
+if (
+    isplayer _unit 
+    || {stance _unit isEqualTo "PRONE"}
+    || {_unit getVariable [QGVAR(isExploded),0] > time}
+) exitWith {false};
 
 // settings
 private _dir = 360 - (_unit getRelDir _pos);
-_unit setVariable [QGVAR(isExploded), time + 20];
+_unit setVariable [QGVAR(isExploded), time + 10];
 
 // standing to Right prone
 if (_dir > 330 && {random 1 > 0.2}) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";
-    [{if (alive _this) then {_this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"};}, _unit, 3 + random 2] call CBA_fnc_waitAndExecute;
+    [{if (alive _this) then {_this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"};}, _unit, 4 + random 3] call CBA_fnc_waitAndExecute;
 };
 
 // standing to Left prone
 if (_dir < 30 && {random 1 > 0.2}) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright";
-    [{if (alive _this) then {_this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"};}, _unit, 3 + random 2] call CBA_fnc_waitAndExecute;
+    [{if (alive _this) then {_this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"};}, _unit, 4 + random 3] call CBA_fnc_waitAndExecute;
 };
 
 // update pos
@@ -44,7 +48,7 @@ _unit switchMove "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon";// straight
 _unit setUnitPos "DOWN";
 
 // get back
-[{if (alive _this) then {_this setUnitPos "AUTO"};}, _unit, 3 + random 2] call CBA_fnc_waitAndExecute;
+[{if (alive _this) then {_this setUnitPos "AUTO"};}, _unit, 5 + random 3] call CBA_fnc_waitAndExecute;
 
 // end
 true

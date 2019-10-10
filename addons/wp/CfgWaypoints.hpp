@@ -27,21 +27,21 @@ class CfgWaypoints {
             displayNameDebug = QEGVAR(danger,Rush);
             file = QPATHTOF(scripts\fnc_wpRush.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Rushes towards enemy with WP completion radius (Default 1000m)";
+            tooltip = "Rushes players within WP completion radius (Default 1000m)\nOnly targets players!";
         };
         class EGVAR(danger,Hunt) {
             displayName = "4 TASK HUNT";
             displayNameDebug = QEGVAR(danger,Hunt);
             file = QPATHTOF(scripts\fnc_wpHunt.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Hunts the AI around group leader out to WP completion radius (Default 1000m)";
+            tooltip = "Hunts players within WP completion radius (Default 1000m)\nOnly targets players!";
         };
         class EGVAR(danger,Creep) {
             displayName = "5 TASK CREEP";
             displayNameDebug = QEGVAR(danger,Creep);
             file = QPATHTOF(scripts\fnc_wpCreep.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-            tooltip = "Stalks the AI around group leader out to WP completion radius (Default 1000m)";
+            tooltip = "Stalks players within WP completion radius (Default 1000m)\nOnly targets players!";
         };
         class EGVAR(danger,CQB) {
             displayName = "6 TASK CQB [Experimental]";

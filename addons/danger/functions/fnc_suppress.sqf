@@ -17,7 +17,7 @@ _unit doSuppressiveFire ((AGLToASL _pos) vectorAdd [0, 0, 0.2 + random 1.2]);
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {
-    _unit suppressFor (2 + random 7);
+    _unit suppressFor (3 + random 7);
 };
 
 // debug
