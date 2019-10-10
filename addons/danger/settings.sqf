@@ -88,7 +88,7 @@ private _curCat = "Share information";
 [
     QGVAR(radio_backpack),
     "SLIDER",
-    ["Backpack radios", "Range added to units wearing backpack radios (Vanilla,TFAR, or variable)"],
+    ["Backpack radios", "Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)"],
     [COMPONENT_NAME, _curCat],
     [500, 6000, 2000, 0],
     true
