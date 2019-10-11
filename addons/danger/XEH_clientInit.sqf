@@ -1,5 +1,18 @@
 #include "script_component.hpp"
 
+/*
+Here three buttons are added: 
+    Toggle AI for the player group
+    Easy suppress
+    Easy hide
+
+These functions and buttons could conceivably be moved to their own module.
+They might also benefit from added interface and more nuanced functions handling.
+That said: within the current scope of the AI mod. They can make a comfortable 
+home here. Until revisited by more capable personnell.
+- nkenny 
+*/
+
 // adopted from ACE3 -- not sure if necessary?
 if (!hasInterface) exitWith {};
 
@@ -12,7 +25,7 @@ _toggle_AI = {
 
 // functions ~ easy suppress
 _suppress_AI = {
-    private _units = allUnits select {side _x isEqualTo side player && {_x distance player < 20} && {!isPlayer _x}};
+    private _units = allUnits select {side _x isEqualTo side player && {_x distance player < 22} && {!isPlayer _x}};
     {
         private _target = if (isNull cursorObject) then {_x findNearestEnemy _x} else {cursorObject};
         _x doSuppressiveFire getposASL _target;
