@@ -17,7 +17,6 @@ PREP(immediateAction);
 PREP(indoor);
 PREP(leaderArtillery);
 PREP(leaderAssess);
-PREP(leaderBuildings);
 PREP(leaderContact);
 PREP(leaderCQC);
 PREP(leaderHide);
