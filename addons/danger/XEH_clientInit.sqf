@@ -27,7 +27,7 @@ _toggle_AI = {
 _suppress_AI = {
     private _units = allUnits select {side _x isEqualTo side player && {_x distance player < 22} && {!isPlayer _x}};
     {
-        private _target = if (isNull cursorObject) then {_x findNearestEnemy _x} else {cursorObject};
+        private _target = _x findNearestEnemy _x;
         _x doSuppressiveFire getposASL _target;
         _x suppressFor 6 + (random 5);
     } foreach _units;

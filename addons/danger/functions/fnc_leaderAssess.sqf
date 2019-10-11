@@ -21,14 +21,17 @@ if (_mode isEqualTo "disabled") exitWith {false};
 private ["_enemy", "_targets", "_units", "_weapons"];
 _enemy = _unit targets [true, 600, [], 0, _pos];
 
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Leader Assess"];
-
 // update minimum delay
 [_unit, 99, 66] call FUNC(leaderModeUpdate);
 
 // leadership assessment
 if (count _enemy > 0) then {
+
+    // Enemy is in buildings
+    _targets = _enemy findIf {_x isKindOf "Man" && {_x call FUNC(indoor)}};
+    if (_targets != -1) then {
+        [_unit, 5, getpos (_enemy select _targets)] call FUNC(leaderMode);
+    };
 
     // Enemy is lower than ours
     _targets = _enemy select {(getposASL _x select 2) < ((getposASL _unit select 2) - 21)};
@@ -56,7 +59,7 @@ if (count _enemy > 0) then {
 
 // Check nearby houses?
 if (random 1 > 0.4 && {_unit distance (nearestBuilding _pos) < 80}) then {
-    [_unit, 5, _pos] call FUNC(leaderMode);
+    
 };
 
 // binoculars if appropriate!
@@ -86,6 +89,10 @@ if (count _weapons > 0 && {count _units > 0}) then {
     [_units] orderGetIn true;
     group _unit addVehicle _weapons;
 };
+
+// set current task -- moved here so it is not interfered by things happening above
+_unit setVariable [QGVAR(currentTarget), objNull];
+_unit setVariable [QGVAR(currentTask), "Leader Assess"];
 
 // end
 true

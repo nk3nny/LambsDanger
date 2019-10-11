@@ -33,7 +33,7 @@ item28[] = {"Killed___Continu",2,250,-100.000000,425.000000,0.000000,475.000000,
 item29[] = {"Timeout__Continu",2,250,50.000000,425.000000,150.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
 item30[] = {"____FUNCTIONS__lambs",-1,250,-1275.000000,-575.000000,-1025.000000,-50.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_nearbuildings " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderBuildings  " \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-350.000000,0.000000,-250.000000,50.000000,4.000000,"React"};
-item32[] = {"Reaction__to_contact",2,4346,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
+item32[] = {"Reaction__to_contact",2,250,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
 item33[] = {"Investigate",4,218,-225.000000,0.000000,-125.000000,50.000000,2.000000,"Investigate"};
 item34[] = {"Investigate",2,250,-225.000000,75.000000,-125.000000,125.000000,0.000000,"Investigate"};
 item35[] = {"Timeout",4,218,-225.000000,175.000000,-125.000000,225.000000,0.000000,"Timeout"};
@@ -56,7 +56,7 @@ item51[] = {"Artillery___Cont",2,250,750.000000,425.000000,850.000000,475.000000
 item52[] = {"___Manoeuvre",4,218,525.000000,200.000000,625.000000,250.000000,1.000000,"3" \n "Manoeuvre"};
 item53[] = {"Manoeuvre___Cont",2,250,525.000000,325.000000,625.000000,375.000000,0.000000,"Manoeuvre: " \n "Continue"};
 item54[] = {"CQC",4,218,150.000000,150.000000,250.000000,200.000000,4.000000,"CQC"};
-item55[] = {"Check_houses__Co",2,250,650.000000,375.000000,750.000000,425.000000,0.000000,"Check houses:" \n "Continue"};
+item55[] = {"Check_houses__Co",2,4346,650.000000,375.000000,750.000000,425.000000,0.000000,"Check houses:" \n "Continue"};
 item56[] = {"Panic",4,218,-350.000000,175.000000,-250.000000,225.000000,0.000000,"Panic"};
 item57[] = {"Cargo_or__driver",4,218,-725.000000,25.000000,-625.000000,75.000000,0.000000,"Cargo or " \n "driver"};
 item58[] = {"Ready_1",2,250,-725.000000,150.000000,-625.000000,200.000000,0.000000,"Ready"};
@@ -258,7 +258,7 @@ link100[] = {79,29};
 link101[] = {81,82};
 link102[] = {82,18};
 link103[] = {82,63};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-749.446533,-20.269165,501.279602,-91.177032,1088,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,198.856323,953.758667,550.657227,-62.700897,1088,884,1};
 window[] = {2,-1,-1,-32000,-32000,839,26,828,26,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
@@ -1424,7 +1424,7 @@ class FSM
                          "[_this,_evaluation,30] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find pos" \n
-                         "_target = (_dangerMode select 1) select 3;" \n
+                         "_target = (_dangerMode select 1) select 5;" \n
                          "" \n
                          "// execute check buildings " \n
                          "[_this,_target] call lambs_danger_fnc_leaderBuildings;" \n

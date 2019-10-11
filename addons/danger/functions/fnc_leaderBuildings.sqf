@@ -4,10 +4,11 @@
 //by nkenny
 
 // init
-params ["_unit", "_target", ["_buildings", []]];
+params ["_unit", "_target", ["_units", []],["_cycle",3]];
 
-if (_buildings isEqualTo []) then {
-    _buildings = [_unit getPos [random 100, _unit getDir _target], 35, true, false] call FUNC(findBuildings);
+// find units
+if (_units isEqualTo []) then {
+    _units = units _unit;
 };
 
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -16,26 +17,54 @@ _unit setVariable [QGVAR(currentTask), "Leader Buildings"];
 // gesture
 [_unit, ["gestureGo", "gestureGoB"]] call FUNC(gesture);
 
-// units
-private _units = units group _unit;
-_units = _units select {isNull objectParent _x};
+// sort building locations
+private _pos = ([_target, 12, true, false] call FUNC(findBuildings)); 
+_pos pushBack (_target call cba_fnc_getPos);
 
-// no more spots than units
-if (count _units > count _buildings) then {_units resize (count _buildings);};
+// gesture
+[_unit, ["gestureAdvance"]] call lambs_danger_fnc_gesture;
+[selectRandom _units, ["gestureGoB"]] call lambs_danger_fnc_gesture;
 
-// orders
-{
+// ready units -- half suppress -- half cover
+_fnc_manoeuvre = {
+    params ["_cycle","_units","_pos","_fnc_manoeuvre","_target"];
 
-    // stance
-    _x setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+    // select
+    _target = selectRandom _pos;
 
-    // speed
-    _x forceSpeed 2;
+    // update
+    _units = _units select {alive _x && _x distance _target > 50};
+    _cycle = _cycle - 1;
 
-    // move
-    _x doMove (_buildings select _forEachIndex);
+    {
+        // pos
+        _x doWatch _target;
 
-} forEach _units;
+        // Half suppress -- Half manoeuvre
+        if (random 1 > 0.6) then {
+            [_x, _target] call FUNC(Suppress);
+            _x suppressFor 12; 
+
+        // manoeuvre
+        } else {
+            _x setUnitPosWeak "MIDDLE";
+            _x forceSpeed 25;
+            _x doMove _target;
+        };
+    } foreach _units;
+
+    // recursive cyclic
+    if (_cycle > 0 && {count _units > 0}) then {
+        [
+            _fnc_manoeuvre,
+            [_cycle,_units,_pos,_fnc_manoeuvre],
+            12
+        ] call cba_fnc_waitAndExecute;
+    };
+};
+
+// execute recursive cycle
+[_cycle,_units,_pos,_fnc_manoeuvre] call _fnc_manoeuvre;
 
 // end
 true

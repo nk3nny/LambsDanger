@@ -3,12 +3,14 @@
 // version 1.41
 //by nkenny
 
+hint "LEADER MAOEUVRE";
+
 // init
 params ["_unit", "_target", ["_units", []]];
 
 // find units
 if (_units isEqualTo []) then {
-    _units = units group _unit;
+    _units = units _unit;
 };
 
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -17,16 +19,23 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 // find overwatch positions
 private _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 25, getPosATL _unit] call FUNC(findOverwatch);
 
+
+[_pos,"overwatch"] call lambs_danger_fnc_dotMarker;
+
 // gesture
 [_unit, ["gestureAdvance"]] call FUNC(gesture);
 [selectRandom _units, ["gestureGoB"]] call FUNC(gesture);
 
 // ready units -- half suppress -- half cover
 {
+    // ready
+    _x doFollow leader _x;
+
     // Half suppress -- Half manoeuvre
     if (random 1 > 0.6) then {
 
         [_x, _target] call FUNC(suppress);
+        _x suppressFor 12; 
 
     // manoeuvre
     } else {

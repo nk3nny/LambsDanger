@@ -50,7 +50,7 @@ _radio = false;
 } foreach (units _unit select {alive _x && {_x distance2d _unit < 150}});
 
 // tweak by height above sea-level
-_range = _range + (linearConversion [-200,600,(getposASL _unit) select 2,-400,2000,true]);
+_range = _range + (linearConversion [ -200, 600, (getposASL _unit) select 2, -400, 2000, true ] );
 
 // return unit and range
 [_unit,_range,_radio]
