@@ -33,7 +33,7 @@ if (random 1 > 0.5) exitWith {
         "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
         "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
     ];
-    [_unit,_anim] remoteExec ["switchMove",0];
+    _unit switchMove _anim;
     true
 };
 
@@ -44,7 +44,7 @@ _anim = selectRandom [
     "AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon",
     "AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"
 ];
-[_unit,_anim] remoteExec ["switchMove",0];
+_unit switchMove _anim;
 
 // end
 true

@@ -14,7 +14,7 @@ if (_buildings isEqualTo []) then {
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
 //if (attackEnabled _unit) exitWith {false};
 
-// alreayd inside -- exit
+// already inside -- exit
 if (_unit call FUNC(indoor)) exitWith {
     if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
     _unit doWatch _danger;

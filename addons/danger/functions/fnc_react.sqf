@@ -27,7 +27,7 @@ if (_leader) then {
     {
         [_x,_pos,_range,_buildings] call FUNC(hideInside);
         _timeout = _timeout + 3;
-    } foreach ((units group _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});
+    } foreach ((units _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});
 } else {
     [_unit,_pos,_range] call FUNC(hideInside);
 };

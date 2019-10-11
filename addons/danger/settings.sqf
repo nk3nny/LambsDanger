@@ -5,7 +5,7 @@ private _curCat = "Settings";
     "CHECKBOX",
     ["Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
     [COMPONENT_NAME, _curCat],
-    true,
+    false,
     nil         // players may configure their own preferences
 ] call CBA_fnc_addSetting;
 

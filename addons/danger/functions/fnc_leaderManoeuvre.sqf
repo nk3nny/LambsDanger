@@ -15,7 +15,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // find overwatch positions
-private _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 40, getPosATL _unit] call BIS_fnc_findOverwatch; // joko: @nKenny I have a Better and faster Function for that if you want it i can port it over.
+private _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 25, getPosATL _unit] call FUNC(findOverwatch);
 
 // gesture
 [_unit, ["gestureAdvance"]] call FUNC(gesture);
@@ -41,7 +41,7 @@ private _pos = [_target, _unit distance _target, 100 min (_unit distance _target
                 "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
                 "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
             ];
-            [_x,_anim] remoteExec ["switchMove",0];
+            _x switchMove _anim;
         };
     };
 
