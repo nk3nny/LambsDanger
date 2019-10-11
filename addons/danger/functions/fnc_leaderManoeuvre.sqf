@@ -3,8 +3,6 @@
 // version 1.41
 //by nkenny
 
-hint "LEADER MAOEUVRE";
-
 // init
 params ["_unit", "_target", ["_units", []]];
 
@@ -18,9 +16,6 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // find overwatch positions
 private _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 25, getPosATL _unit] call FUNC(findOverwatch);
-
-
-[_pos,"overwatch"] call lambs_danger_fnc_dotMarker;
 
 // gesture
 [_unit, ["gestureAdvance"]] call FUNC(gesture);

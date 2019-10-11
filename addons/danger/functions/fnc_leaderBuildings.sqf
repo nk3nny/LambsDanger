@@ -14,18 +14,18 @@ if (_units isEqualTo []) then {
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Buildings"];
 
-// gesture
-[_unit, ["gestureGo", "gestureGoB"]] call FUNC(gesture);
-
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings)); 
 _pos pushBack (_target call cba_fnc_getPos);
 
 // gesture
-[_unit, ["gestureAdvance"]] call lambs_danger_fnc_gesture;
+[_unit, ["gestureGo"]] call lambs_danger_fnc_gesture;
 [selectRandom _units, ["gestureGoB"]] call lambs_danger_fnc_gesture;
 
-// ready units -- half suppress -- half cover
+// ready group
+{_x doFollow leader _x} foreach _units;
+
+// manoeuvre function
 _fnc_manoeuvre = {
     params ["_cycle","_units","_pos","_fnc_manoeuvre","_target"];
 
@@ -33,7 +33,7 @@ _fnc_manoeuvre = {
     _target = selectRandom _pos;
 
     // update
-    _units = _units select {alive _x && _x distance _target > 50};
+    _units = _units select {alive _x && {_x distance _target > GVAR(CQB_range)}};
     _cycle = _cycle - 1;
 
     {
@@ -58,7 +58,7 @@ _fnc_manoeuvre = {
         [
             _fnc_manoeuvre,
             [_cycle,_units,_pos,_fnc_manoeuvre],
-            12
+            12 + random 4
         ] call cba_fnc_waitAndExecute;
     };
 };
