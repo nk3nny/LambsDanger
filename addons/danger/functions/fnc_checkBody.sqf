@@ -36,11 +36,11 @@ if (count _body > 0) exitWith {
     [
         {
             params ["_unit", "_time", "_body"];
-            ((_unit distance _body) < 0.6) || {_time < time} || {!alive _unit}
+            ((_unit distance _body) < 0.7) || {_time < time} || {!alive _unit}
         },
         {
             params ["_unit", "", "_body"];
-            if (alive _unit && {!isNil str _body} && {_unit distance _pos < 0.8}) then {
+            if (alive _unit && {_unit distance _pos < 0.8}) then {
                 [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
                 _unit action ["rearm", _body];
                 _unit doFollow leader group _unit;

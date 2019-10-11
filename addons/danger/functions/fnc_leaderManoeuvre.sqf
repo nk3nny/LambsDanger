@@ -4,50 +4,69 @@
 //by nkenny
 
 // init
-params ["_unit", "_target", ["_units", []]];
+params ["_unit", "_target", ["_units", []],["_cycle",4]];
 
 // find units
 if (_units isEqualTo []) then {
-    _units = units group _unit;
+    _units = units _unit;
 };
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
-// find overwatch positions
-private _pos = [_target, _unit distance _target, 100 min (_unit distance _target), 40, getPosATL _unit] call BIS_fnc_findOverwatch; // joko: @nKenny I have a Better and faster Function for that if you want it i can port it over.
+// sort building locations
+private _pos = ([_target, 12, true, false] call FUNC(findBuildings)); 
+_pos pushBack (_target call cba_fnc_getPos);
 
 // gesture
-[_unit, ["gestureAdvance"]] call FUNC(gesture);
-[selectRandom _units, ["gestureGoB"]] call FUNC(gesture);
+[_unit, ["gestureGo"]] call lambs_danger_fnc_gesture;
+[selectRandom _units, ["gestureGoB"]] call lambs_danger_fnc_gesture;
 
-// ready units -- half suppress -- half cover
-{
-    // Half suppress -- Half manoeuvre
-    if (random 1 > 0.6) then {
+// ready group
+{_x doFollow leader _x} foreach _units;
+group _unit setFormDir (_unit getDir (_pos select 0));
 
-        [_x, _target] call FUNC(suppress);
+// manoeuvre function
+_fnc_manoeuvre = {
+    params ["_cycle","_units","_pos","_fnc_manoeuvre","_target"];
 
-    // manoeuvre
-    } else {
+    // select
+    _target = selectRandom _pos;
 
-        doStop _x;
-        _x forceSpeed 25;
-        _x doMove (_pos getPos [10 + random 20, random 360]);
-        if !(stance _x isEqualTo "PRONE") then {
-            _x switchMove selectRandom [
-                "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf",
-                "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDfr",
-                "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
-                "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
-            ];
+    // update
+    _units = _units select {alive _x && {_x distance _target > GVAR(CQB_range)}};
+    _cycle = _cycle - 1;
+
+    {
+        // pos
+        _x doWatch _target;
+
+        // Half suppress -- Half manoeuvre
+        if (random 1 > 0.6) then {
+            [_x, _target] call FUNC(Suppress);
+            _x suppressFor 12; 
+
+        // manoeuvre
+        } else {
+            _x setUnitPosWeak selectRandom ["UP","MIDDLE"];
+            _x forceSpeed 25;
+            _x doMove _target;
+            _x setVariable [QGVAR(currentTask), "Manoeuvre"];
         };
+    } foreach _units;
+
+    // recursive cyclic
+    if (_cycle > 0 && {count _units > 0}) then {
+        [
+            _fnc_manoeuvre,
+            [_cycle,_units,_pos,_fnc_manoeuvre],
+            12 + random 4
+        ] call cba_fnc_waitAndExecute;
     };
+};
 
-    // end
-    true
-
-} count (_units select {_x distance2d _unit < 300});
+// execute recursive cycle
+[_cycle,_units,_pos,_fnc_manoeuvre] call _fnc_manoeuvre;
 
 // end
 true

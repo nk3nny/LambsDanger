@@ -21,7 +21,7 @@
 params ["_unit", "_target", ["_pos", []]];
 
 if (_pos isEqualTo []) then {
-    _pos = _target call bis_fnc_position;
+    _pos = _target call cba_fnc_getPos;
 };
 
 // check if mod active
@@ -33,7 +33,9 @@ if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {system
 // settings
 private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit), []];
 _artillery select {
-    canFire _x && {unitReady _x} && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
+    canFire _x 
+    && {unitReady _x} 
+    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
 };
 
 // exit on no ready artillery
@@ -42,14 +44,20 @@ if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {systemch
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 
-// settings
-[_unit, ["MountOptic"]] call FUNC(gesture);
-
 // pick closest artillery
 _artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
 
 private _gun = _artillery select 0;
 [QGVAR(OnArtilleryCalled), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
+
+// find caller
+private _unit = ([_unit,nil,false] call FUNC(shareInformationRange)) select 0;
+_unit setVariable [QGVAR(currentTask), "Call Artillery"];
+
+// Gesture
+if (stance _unit != "PRONE") then {
+    [_unit, ["MountOptic"]] call FUNC(gesture);
+};
 
 // perform it
 [_gun, _pos, _unit] spawn EFUNC(WP,taskArtillery);

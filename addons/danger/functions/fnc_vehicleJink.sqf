@@ -24,7 +24,7 @@ _destination pushBack (_veh modelToWorldVisual [_range * -1, -(random 10), 0]);
 
 // near enemy?
 if (!isNull (_unit findNearestEnemy _unit)) then {
-    _destination pushBack ([getpos (_unit findNearestEnemy _unit), 120 + _range, _range, 8, getpos _veh] call BIS_fnc_findOverwatch);
+    _destination pushBack ([getpos (_unit findNearestEnemy _unit), 120 + _range, _range, 8, getpos _veh] call FUNC(findOverwatch));
 };
 
 // tweak

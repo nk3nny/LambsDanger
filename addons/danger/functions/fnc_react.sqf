@@ -14,7 +14,7 @@ _stance = (if (_unit distance2d (nearestBuilding _unit) < ( 20 + random 20 ) || 
 _unit setUnitPos _stance;
 
 // Share information!
-[_unit, (_unit findNearestEnemy _pos), 50 + random 100, true] call FUNC(shareInformation);	// shout range defined somewhere. 
+[_unit, (_unit findNearestEnemy _pos), GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
 
 // leaders gestures
 [formationLeader _unit,["GestureCover","GestureCeaseFire"]] call FUNC(gesture);
@@ -27,7 +27,7 @@ if (_leader) then {
     {
         [_x,_pos,_range,_buildings] call FUNC(hideInside);
         _timeout = _timeout + 3;
-    } foreach ((units group _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});
+    } foreach ((units _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});
 } else {
     [_unit,_pos,_range] call FUNC(hideInside);
 };

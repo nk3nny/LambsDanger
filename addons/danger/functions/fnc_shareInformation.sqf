@@ -25,48 +25,25 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
-if (!_override) then {
-    _range = switch (rank _unit) do {
-        case ("SERGEANT"): {
-            500
-        };
-        case ("LIEUTENANT"): {
-            800
-        };
-        case ("CAPTAIN"): {
-            1000
-        };
-        case ("MAJOR"): {
-            2000
-        };
-        case ("COLONEL"): {
-            3000
-        };
-        default {
-            _range
-        };
-    };
-};
+private _radio = [_unit,_range,_override] call FUNC(shareInformationRange);
+_unit = _radio select 0;
+_range = _radio select 1;
+_radio = _radio select 2;   // has backpack radio -nk
 
-// limit by viewdistance
-_range = _range min viewDistance;
-
-private _side = side _unit;
-private _grp = group _unit;
 // find units
 private _groups = allGroups select {
-    local _x && 
-    {side _x isEqualTo side _unit} && 
-    {leader _x distance2d _unit < _range} && 
-    {_x != group _unit} && 
-    {!(behaviour leader _x isEqualTo "CARELESS")}
+    local _x
+    && {side _x isEqualTo side _unit}
+    && {leader _x distance2d _unit < _range}
+    && {behaviour leader _x != "CARELESS"}
+    && {_x != group _unit}
 };
 
 private _knowsAbout = _unit knowsAbout _target;
 // share information
 {
     if (!isNull _target) then {
-        _x reveal [_target, _unit knowsAbout _target];
+        _x reveal [_target, _knowsAbout];
     };
     
     if (leader _x distance _unit < (250 min _range)) then {
