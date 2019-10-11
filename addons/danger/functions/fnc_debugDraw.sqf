@@ -48,7 +48,7 @@ private _fnc_dangerModeTypes = {
             "?"
         };
         case (5): {
-            "Check nearby buildings"
+            "?"
         };
         case (6): {
             "Call artillery"

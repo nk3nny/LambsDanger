@@ -9,6 +9,11 @@ params ["_unit", "_target"];
 // share information 
 [_unit,_target] call lambs_danger_fnc_shareInformation;
 
+// gather the stray flock
+{
+    _x doFollow _unit;
+} foreach (( units _unit ) select { _x distance _unit > 45 });
+
 // change formation 
 (group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation),formation _unit]);
 
@@ -17,4 +22,3 @@ params ["_unit", "_target"];
 
 // end
 true
-

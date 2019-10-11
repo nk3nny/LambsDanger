@@ -27,27 +27,20 @@ _enemy = _unit targets [true, 600, [], 0, _pos];
 // leadership assessment
 if (count _enemy > 0) then {
 
-    // Enemy is in buildings
-    _targets = _enemy findIf {_x isKindOf "Man" && {_x call FUNC(indoor)}};
+    // Enemy is in buildings or at lower position
+    _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
     if (_targets != -1) then {
-        [_unit, 5, getpos (_enemy select _targets)] call FUNC(leaderMode);
-    };
-
-    // Enemy is lower than ours
-    _targets = _enemy select {(getposASL _x select 2) < ((getposASL _unit select 2) - 21)};
-    if (count _targets > 0) then {
-        _unit setVariable [QGVAR(currentTarget), _targets select 0];
-        [_unit, 3, (_unit getHideFrom (_targets select 0))] call FUNC(leaderMode);
+        [_unit, 3, getpos (_enemy select _targets)] call FUNC(leaderMode);
     };
 
     // Enemy is Tank/Air?
-    _targets = _enemy select {_x isKindOf "Air" || {_x isKindOf "Tank" && {_x distance2d _unit < 400}}};
+    _targets = _enemy select {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 400 }}};
     if (count _targets > 0) then {
         [_unit, 2, _targets select 0] call FUNC(leaderMode);
     };
 
     // Artillery
-    _targets = _enemy select {_x distance _unit > 250};
+    _targets = _enemy select {_x distance _unit > 200};
     if (count _targets > 0 && {count (missionNameSpace getVariable ["lambs_artillery_" + str (side _unit), []]) > 0}) then {
         [_unit, 6, (_unit getHideFrom (_targets select 0))] call FUNC(leaderMode);
     };
@@ -55,11 +48,6 @@ if (count _enemy > 0) then {
     // communicate <-- possible remove?
     [_unit, selectRandom _enemy] call FUNC(shareInformation);
 
-};
-
-// Check nearby houses?
-if (random 1 > 0.4 && {_unit distance (nearestBuilding _pos) < 80}) then {
-    
 };
 
 // binoculars if appropriate!
