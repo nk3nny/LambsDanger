@@ -2,6 +2,7 @@
 // Find Closed Target to Group
 // version 3.6
 // by jokoho482
+
 params ["_group", "_radius"];
 private _newdist = _radius;
 private _players = (switchableUnits + playableUnits - entities "HeadlessClient_F");

@@ -27,7 +27,7 @@ private _fnc_find = {
 // check for enemies
 private _fnc_enemy = {
     params ["_building", "_group"];
-    private _pos = [ getpos _building, getpos leader _group] select isNull _building; 
+    private _pos = [ getpos _building, getpos leader _group] select isNull _building;
     private _enemy = (leader _group) findNearestEnemy _pos;
     if (isNull _enemy || {_pos distance2d _enemy < 25}) exitWith {_enemy};
     (leader _group) doSuppressiveFire _enemy;

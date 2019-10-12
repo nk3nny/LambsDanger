@@ -5,6 +5,6 @@ ADDON = false;
 #include "settings.sqf"
 
 // mod check
-GVAR(WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
+GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
 ADDON = true;

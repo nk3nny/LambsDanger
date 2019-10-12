@@ -84,7 +84,7 @@ private _curCat = "Share information";
     true
 ] call CBA_fnc_addSetting;
 
-// Base range of INDEPENDENT side
+// Base range of RadioBackpack
 [
     QGVAR(radio_backpack),
     "SLIDER",

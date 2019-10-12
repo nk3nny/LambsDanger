@@ -4,9 +4,9 @@
 // by nkenny
 
 // init
-params ["_unit", "_damage"];
+params ["_unit"];
 
-// Standing or recent explosions ignored 
+// Standing or recent explosions ignored
 if (
     isplayer _unit
     || {!isNull objectParent _unit}

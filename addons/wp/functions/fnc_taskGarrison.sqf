@@ -76,11 +76,10 @@ if (count _units > 4) then {
             unitReady _this && {canMove _this}
         },
         {
-            params ["_unit","_pos"];
             if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
             _this disableAI "PATH";
             _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-        }, 
+        },
         _x
     ] call CBA_fnc_waitUntilAndExecute;
 

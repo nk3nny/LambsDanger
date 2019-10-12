@@ -3,9 +3,6 @@
 // version 1.0
 // nkenny
 
-// init
-params ["_unit"];
-
 // check
 fleeing _this
 || {(_this getVariable ["ACE_isUnconscious",false])}

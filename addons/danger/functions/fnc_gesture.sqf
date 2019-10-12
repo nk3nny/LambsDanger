@@ -6,7 +6,7 @@
 // init
 params ["_unit", ["_gesture", ["gestureFreeze"]]];
 
-// not for players 
+// not for players
 if (isPlayer _unit) exitWith {false};
 
 // do it

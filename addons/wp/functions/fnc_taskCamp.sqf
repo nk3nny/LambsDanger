@@ -5,7 +5,7 @@
 
 
 /*
-** NOT CURRENTLY IMPLEMENTED ** 
+** NOT CURRENTLY IMPLEMENTED **
 
 Nice little halfcircle of troops
 populate one turret and one building if nearby.
@@ -33,7 +33,7 @@ private _pos = getPos (leader _group);
 // find buildings ---
 private _buildings = nearestObjects [_pos, ["house", "strategic"], _range, true];
 _buildings = _buildings select {count (_x buildingpos -1) > 0};
-[_buildings,true] call cba_fnc_shuffle; 
+[_buildings, true] call CBA_fnc_shuffle;
 
 // find guns ---
 private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];

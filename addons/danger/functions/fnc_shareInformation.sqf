@@ -25,10 +25,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
-private _radio = [_unit,_range,_override] call FUNC(shareInformationRange);
-_unit = _radio select 0;
-_range = _radio select 1;
-_radio = _radio select 2;   // has backpack radio -nk
+[_unit, _range, _override] call FUNC(shareInformationRange) params ["_unit", "_range"];
 
 // find units
 private _groups = allGroups select {
@@ -45,7 +42,7 @@ private _knowsAbout = _unit knowsAbout _target;
     if (!isNull _target) then {
         _x reveal [_target, _knowsAbout];
     };
-    
+
     if (leader _x distance _unit < (250 min _range)) then {
         _x setBehaviour "COMBAT";
         _x setFormDir ((leader _x) getDir _unit);

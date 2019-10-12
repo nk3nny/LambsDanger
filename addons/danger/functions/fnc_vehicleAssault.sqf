@@ -30,7 +30,7 @@ if (_buildings isEqualTo []) then {
     _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
 };
 
-// variables 
+// variables
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
 
@@ -57,8 +57,8 @@ _veh doWatch _pos;
 _veh doSuppressiveFire _pos;
 
 // cannon direction ~ threshold 30 degrees
-_fn_turretDir = {
-    params ["_veh","_pos",["_threshold",30]];
+private _fnc_turretDir = {
+    params ["_veh", "_pos", ["_threshold", 30]];
     private _array = _veh weaponDirection currentWeapon _veh;
     private _atan = ((_array select 0) atan2 (_array select 1));
     _atan = [ _atan, _atan + 360 ] select ( _atan < 0 );
@@ -68,7 +68,7 @@ _fn_turretDir = {
 };
 
 // shoot cannon
-private _cannon = count _buildings > 2 && {random 1 > 0.2} && {_veh distance _pos > 80} && {[_veh,_pos] call _fn_turretDir};
+private _cannon = count _buildings > 2 && {random 1 > 0.2} && {_veh distance _pos > 80} && {[_veh,_pos] call _fnc_turretDir};
 if (_cannon) then {
     _veh action ["useWeapon", _veh, gunner _veh, random 2];
 };
