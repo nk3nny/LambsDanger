@@ -188,7 +188,17 @@ private _fnc_DrawRect = {
             "Enemy QueueSize: ", _targetCount, "<br/>"
         ];
         [_headPos, _textData] call _fnc_DrawRect;
+
+
+        if (GVAR(RenderExpectedDestination)) then {
+            {
+                _x params ["_pos", "_planingMode", "_forceReplan"];
+                drawLine3D [_headPos, _pos, [0, 0, 1, 0.5]];
+                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Mode: %1 ForceReplan: %2", _planingMode, _forceReplan]];
+            } count (expectedDestination _x);
+        };
     };
+    false;
 } count (allUnits select {!(isPlayer _x)});
 
 GVAR(drawRectCacheGame) = GVAR(drawRectInUseGame);

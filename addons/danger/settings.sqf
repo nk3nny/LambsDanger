@@ -127,7 +127,7 @@ _curCat = "Debug";
 ] call CBA_fnc_addSetting;
 
 
-// FSM level debug messages for civilian fsm
+// Debug Renderer
 [
     QGVAR(debug_Drawing),
     "CHECKBOX",
@@ -144,5 +144,17 @@ _curCat = "Debug";
         } count GVAR(drawRectCacheEGSpectator);
         GVAR(drawRectCacheEGSpectator) = [];
         GVAR(drawRectCacheGame) = [];
+    }
+] call CBA_fnc_addSetting;
+
+// Debug Renderer for Expected Destination
+[
+    QGVAR(RenderExpectedDestination),
+    "CHECKBOX",
+    ["Debug Draw Expected Destination", "Draws Expected Destinations of AI Units"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    true, {
+        GVAR(debug_Drawing) = true; // Force on Debug Renderer
     }
 ] call CBA_fnc_addSetting;
