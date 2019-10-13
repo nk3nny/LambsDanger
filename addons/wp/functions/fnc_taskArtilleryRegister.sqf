@@ -15,11 +15,11 @@ if (_group isEqualType objNull) then { _group = (group _group); };
 {
     if !(isNull objectParent _x) then { _artillery pushBackUnique (vehicle _x); };
     true
-} count units _group;
+} count (units _group);
 
 // identify artillery
 private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0 };
-if (count _artillery < 1) exitWith {false};
+if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global
 private _global = missionNamespace getVariable ["lambs_artillery_" + str (side _group), []];

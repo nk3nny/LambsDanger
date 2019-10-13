@@ -7,7 +7,7 @@
 params ["_unit", "_pos"];
 
 // no primary weapons exit?
-if (primaryWeapon _unit isEqualTo "") exitWith {false};
+if ((primaryWeapon _unit) isEqualTo "") exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];

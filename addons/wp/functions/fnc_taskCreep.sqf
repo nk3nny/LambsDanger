@@ -36,14 +36,14 @@ private _fnc_creepOrders = {
     // vehicle? wait for it
     if (_newDist < 150 && {vehicle _target isKindOf "Landvehicle"}) exitWith {
         _group reveal _target;
-        { _x setunitpos "DOWN"; true } count (units _group);
+        { _x setUnitPos "DOWN"; true } count (units _group);
     };
 
     // adjust behaviour
-    if (_in_forest > 0.9 || _newDist > 200) then { { _x setUnitpos "UP"; true} count (units _group); };
-    if (_in_forest < 0.6 || _newDist < 100) then { { _x setUnitpos "MIDDLE"; true} count (units _group); };
-    if (_in_forest < 0.4 || _newDist < 50) then { { _x setUnitpos "DOWN"; true} count (units _group); };
-    if (_newDist < 40) exitWith { _group setCombatMode "RED"; _group setbehaviour "STEALTH"; };
+    if (_in_forest > 0.9 || _newDist > 200) then { { _x setUnitPos "UP"; true} count (units _group); };
+    if (_in_forest < 0.6 || _newDist < 100) then { { _x setUnitPos "MIDDLE"; true} count (units _group); };
+    if (_in_forest < 0.4 || _newDist < 50) then { { _x setUnitPos "DOWN"; true} count (units _group); };
+    if (_newDist < 40) exitWith { _group setCombatMode "RED"; _group setBehaviour "STEALTH"; };
 
     // move
     private _i = 0;
@@ -51,14 +51,14 @@ private _fnc_creepOrders = {
         _x doMove (_target getPos [_i, random 360]);
         _i = _i + random 10;
         true
-    } count units _group;
+    } count (units _group);
 };
 
 
 // functions end ---
 
 // init
-params ["_group",["_radius",500],["_cycle",15]];
+params ["_group", ["_radius", 500], ["_cycle", 15]];
 
 // sort grp
 if (!local _group) exitWith {};

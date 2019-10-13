@@ -21,7 +21,7 @@ class CfgFSMs {
             class Search_path__Covering {
                 class Init {
                     function = "searchPath";
-                    parameters[] = {30,6};   // 6 works well 
+                    parameters[] = {30,6};   // 6 works well
                     thresholds[] = {};
                 };
             };

@@ -5,7 +5,7 @@
 
 
 /*
-** NOT CURRENTLY IMPLEMENTED ** 
+** NOT CURRENTLY IMPLEMENTED **
 
 Nice little halfcircle of troops
 populate one turret and one building if nearby.
@@ -33,7 +33,7 @@ private _pos = getPos (leader _group);
 // find buildings ---
 private _buildings = nearestObjects [_pos, ["house", "strategic"], _range, true];
 _buildings = _buildings select {count (_x buildingpos -1) > 0};
-[_buildings,true] call cba_fnc_shuffle; 
+[_buildings, true] call CBA_fnc_shuffle;
 
 // find guns ---
 private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
@@ -69,7 +69,7 @@ if (count _units > 4) then {
         _units deleteAt _foreachIndex;
     };
 
-    if (count _buildings > 0 && {random 1 > 0.3}) then {
+    if (!(_buildings isEqualTo []) && {random 1 > 0.3}) then {
         doStop _x;
         _x setUnitPos "UP";
         _x setPos selectRandom ((_buildings select 0) buildingPos -1);
@@ -79,7 +79,7 @@ if (count _units > 4) then {
 
     if (count _units < count units _group/2) exitWith {};
 
-} foreach _units;
+} forEach _units;
 
 // STAGE 3 - STAND ABOUT ----------------
 {

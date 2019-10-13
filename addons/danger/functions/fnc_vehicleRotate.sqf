@@ -63,17 +63,19 @@ _unit doMove _pos;
 // waitUntil
 [
     {
-        (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)})
-    },{
+        params ["_unit", "_target", "_threshold"];
+        ((_unit getRelDir _target) < _threshold || {(_unit getRelDir _target) > (360 - _threshold)})
+    }, {
+        params ["_unit", "_target"];
         // check vehicle
-        if (canMove _unit && {count crew _unit > 0}) then {
-        // refresh ready (For HC apparently)
-        (effectiveCommander _unit) doMove (getPosASL _unit);
+        if (canMove _unit && {!((crew _unit) isEqualTo [])}) then {
+            // refresh ready (For HC apparently)
+            (effectiveCommander _unit) doMove (getPosASL _unit);
 
-        // refresh formation
-        (group _unit) setFormDir (_unit getDir _target);
+            // refresh formation
+            (group _unit) setFormDir (_unit getDir _target);
         };
-    }, [_unit,_target,_threshold], (4 + random 6)
+    }, [_unit, _target, _threshold], (4 + random 6)
 ] call CBA_fnc_waitUntilAndExecute;
 
 // end
