@@ -16,7 +16,7 @@ if (_buildings isEqualTo []) then {
 
 // already inside -- exit
 if (_unit call FUNC(indoor)) exitWith {
-    if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
+    if (stance _unit isEqualTo "STAND") then { _unit setUnitPosWeak "MIDDLE"; };
     _unit doWatch _danger;
     false
 };
@@ -26,10 +26,10 @@ _unit setVariable [QGVAR(currentTarget), _danger];
 _unit setVariable [QGVAR(currentTask), "Hide"];
 
 // settings
-_unit forceSpeed selectRandom [-1, 24, 25];
+_unit forceSpeed (selectRandom [-1, 24, 25]);
 
 // Randomly scatter into buildings or hide!
-if (count _buildings > 0 && {random 1 > 0.05}) then {
+if (!(_buildings isEqualTo []) && { random 1 > 0.05 }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
     doStop _unit;
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
@@ -47,7 +47,7 @@ if (count _buildings > 0 && {random 1 > 0.05}) then {
         _targetPos = getPos (selectRandom _objs);
     };
 
-    if (surfaceIsWater _targetPos) exitWith {_unit suppressFor 5;};
+    if (surfaceIsWater _targetPos) exitWith { _unit suppressFor 5; };
     _unit doMove _targetPos;
     if (GVAR(debug_functions)) then {systemchat format ["%1 hide in bush", side _unit];};
 };

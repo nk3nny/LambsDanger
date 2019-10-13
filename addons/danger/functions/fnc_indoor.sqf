@@ -7,8 +7,5 @@
 // init
 params ["_unit"];
 
-// check
-_unit = lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]];
-
-// return
-_unit
+// check and Return
+lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]];

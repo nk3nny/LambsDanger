@@ -13,7 +13,7 @@ if (!isNull objectParent _unit) exitWith {false};
 if (side _unit isEqualTo side _target) exitWith {false};
 
 // no weapons? exit
-if (count weapons _unit < 1) exitWith {true};
+if ((weapons _unit) isEqualTo []) exitWith {true};
 
 // Enemy vehicles?
 private _enemyVehicle = _target isKindOf "Tank" || {_target isKindOf "Air"};

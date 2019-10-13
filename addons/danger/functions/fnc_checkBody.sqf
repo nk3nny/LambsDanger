@@ -13,17 +13,17 @@ if (stopped _unit || {!(attackEnabled _unit)}) exitWith {false};
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
 
 // half chance-- indoors
-if (_unit call FUNC(indoor) && {random 1 > 0.5}) exitWith {false};
+if ((random 1 > 0.5) && { _unit call FUNC(indoor) }) exitWith {false};
 
 // find body
-private _body = allDeadMen select {_x distance _pos < _range};
+private _body = allDeadMen select { (_x distance _pos) < _range };
 _body = _body select {!(_x getVariable [QGVAR(isChecked), false])};
 
 // ready
 doStop _unit;
 
 // Not checked? Move in close
-if (count _body > 0) exitWith {
+if !(_body isEqualTo []) exitWith {
     // one body
     _body = selectRandom _body;
 

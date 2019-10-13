@@ -19,7 +19,7 @@
 */
 
 // init
-params ["_group", "_pos",["_radius",50]];
+params ["_group", "_pos", ["_radius", 50]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -32,7 +32,7 @@ private _statics = 0.8;
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
 _houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
-[_houses,true] call cba_fnc_Shuffle;
+[_houses, true] call CBA_fnc_Shuffle;
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
@@ -76,11 +76,10 @@ if (count _units > 4) then {
             unitReady _this && {canMove _this}
         },
         {
-            params ["_unit","_pos"];
             if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
             _this disableAI "PATH";
             _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-        }, 
+        },
         _x
     ] call CBA_fnc_waitUntilAndExecute;
 

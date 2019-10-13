@@ -13,7 +13,7 @@
 */
 
 // 1. FIND TRACKER
-params ["_group",["_radius",500],["_cycle",60 + random 30]];
+params ["_group", ["_radius", 500], ["_cycle", 60 + random 30]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -37,18 +37,18 @@ private _fnc_flare = {
 while {{alive _x} count units _group > 0} do {
 
     // performance
-    waitUntil { sleep 1; simulationenabled leader _group };
+    waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
     private _target = [_group, _radius] call FUNC(findClosedTarget);
 
     // settings
-    private _combat = behaviour leader _group isEqualTo "COMBAT";
+    private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";
     private _onFoot = (isNull objectParent (leader _group));
 
     // GIVE ORDERS  ~~ Or double wait
     if (!isNull _target) then {
-        _group move (_target getPos [random (linearConversion [50,1000,leader _group distance _target,25,300,true]), random 360]);
+        _group move (_target getPos [random (linearConversion [50, 1000, (leader _group) distance _target, 25, 300, true]), random 360]);
         _group setFormDir ((leader _group) getDir _target);
         _group setSpeedMode "NORMAL";
         _group enableGunLights "forceOn";

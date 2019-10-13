@@ -4,7 +4,7 @@
 //by nkenny
 
 // init
-params ["_unit", ["_pos", []], "_enemy", "_targets", "_units", "_weapons"];
+params ["_unit", ["_pos", []]];
 
 // get pos
 if (_pos isEqualTo []) then {
@@ -12,23 +12,22 @@ if (_pos isEqualTo []) then {
 };
 
 // settings
-private _mode = toLower (group _unit getVariable [QGVAR(dangerAI), "enabled"]);
+private _mode = toLower ((group _unit) getVariable [QGVAR(dangerAI), "enabled"]);
 
 // check mode
 if (_mode isEqualTo "disabled") exitWith {false};
 
 // enemy
-private ["_enemy", "_targets", "_units", "_weapons"];
-_enemy = _unit targets [true, 600, [], 0, _pos];
+private _enemy = _unit targets [true, 600, [], 0, _pos];
 
 // update minimum delay
 [_unit, 99, 66] call FUNC(leaderModeUpdate);
 
 // leadership assessment
-if (count _enemy > 0) then {
+if !(_enemy isEqualTo []) then {
 
     // Enemy is in buildings or at lower position
-    _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
+    private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
     if (_targets != -1) then {
         [_unit, 3, getpos (_enemy select _targets)] call FUNC(leaderMode);
     };
@@ -57,13 +56,13 @@ if ((_unit distance _pos > 150) && {!(binocular _unit isEqualTo "") && {random 1
 };
 
 // man empty statics?
-_weapons = nearestobjects [_pos, ["StaticWeapon"], 60, true];
+private _weapons = nearestObjects [_pos, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-_units = units group _unit select {unitReady _x && {_x distance2d _pos < 70}};
+private _units = units group _unit select {unitReady _x && {_x distance2d _pos < 70}};
 
-if (count _weapons > 0 && {count _units > 0}) then {
+if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
 
     // pick a random unit
     _units = selectRandom _units;

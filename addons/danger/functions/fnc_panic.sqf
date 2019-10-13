@@ -62,7 +62,7 @@ if (random 1 > 0.5) exitWith {
 
 // action
 _unit doWatch objNull;
-[_unit, _unit getPos [100, direction _unit], 55] call FUNC(hideInside);
+[_unit, _unit getPos [100, getDir _unit], 55] call FUNC(hideInside);
 
 // chance to randomly fire weapon
 if ((random 1 > 0.7) && {!(primaryWeapon _unit isEqualTo "")}) then {

@@ -6,11 +6,11 @@
 // init
 params ["_unit", ["_gesture", ["gestureFreeze"]]];
 
-// not for players 
+// not for players
 if (isPlayer _unit) exitWith {false};
 
 // do it
-_unit playActionNow selectRandom _gesture;
+_unit playActionNow (selectRandom _gesture);
 
 // end
 true

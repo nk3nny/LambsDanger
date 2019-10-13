@@ -16,10 +16,10 @@ private _range = waypointCompletionRadius [_group, currentwaypoint _group];
 
 // sort grp
 if (!local _group) exitWith {};
-if (_group isEqualType objNull) then {_group = (group _group)};
+if (_group isEqualType objNull) then { _group = (group _group); };
 
 // wp fix
-if (_range isEqualTo 0) then { _range = 25; };
+if (_range == 0) then { _range = 25; };
 
 // orders
 _group setBehaviour "AWARE";
