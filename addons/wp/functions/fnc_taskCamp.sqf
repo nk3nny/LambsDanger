@@ -69,7 +69,7 @@ if (count _units > 4) then {
         _units deleteAt _foreachIndex;
     };
 
-    if (count _buildings > 0 && {random 1 > 0.3}) then {
+    if (!(_buildings isEqualTo []) && {random 1 > 0.3}) then {
         doStop _x;
         _x setUnitPos "UP";
         _x setPos selectRandom ((_buildings select 0) buildingPos -1);
@@ -79,7 +79,7 @@ if (count _units > 4) then {
 
     if (count _units < count units _group/2) exitWith {};
 
-} foreach _units;
+} forEach _units;
 
 // STAGE 3 - STAND ABOUT ----------------
 {

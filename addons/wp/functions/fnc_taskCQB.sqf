@@ -67,7 +67,7 @@ private _fnc_act = {
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
         // the assault
-        if ((count _buildingPos > 0) && {unitReady _x}) then {
+        if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
             _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
@@ -102,7 +102,7 @@ private _fnc_act = {
             };
         };
         true
-    } count units _group;
+    } count (units _group);
 
     // update variable
     _building setVariable ["LAMBS_CQB_cleared_" + str (side _group), _buildingPos];
@@ -135,7 +135,7 @@ _group allowFleeing 0;
 // loop
 while {{alive _x} count units _group > 0} do {
     // performance
-    waitUntil {sleep 1; simulationenabled leader _group};
+    waitUntil {sleep 1; simulationenabled (leader _group)};
 
     // find building
     private _building = [_pos, _radius, _group] call _fnc_find;

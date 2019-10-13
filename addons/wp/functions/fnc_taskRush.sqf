@@ -21,20 +21,20 @@ private _fnc_rushOrders = {
     // Helicopters -- supress it!
     if (((leader _group) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
-            _x commandSuppressiveFire getPosASL _target;
+            _x commandSuppressiveFire (getPosASL _target);
             true
         } count (units _group);
     };
 
     // Tank -- hide or ready AT
-    if ((leader _group distance2d _target < 80) && {vehicle _target isKindOf "Tank"}) exitWith {
+    if (((leader _group) distance2d _target < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
             if (secondaryWeapon _x != "") then {
                 _x setUnitPos "Middle";
-                _x selectWeapon (secondaryweapon _x);
+                _x selectWeapon (secondaryWeapon _x);
             } else {
                 _x setUnitPos "DOWN";
-                _x commandSuppressiveFire getPosASL _target;
+                _x commandSuppressiveFire (getPosASL _target);
             };
             true
         } count (units _group);
@@ -42,13 +42,13 @@ private _fnc_rushOrders = {
     };
 
     // Default -- run for it!
-    { _x setUnitPos "UP"; _x doMove (getPosATL _target); true } count units _group;
+    { _x setUnitPos "UP"; _x doMove (getPosATL _target); true } count (units _group);
     _group enableGunLights "forceOn";
 };
 // functions end ---
 
 // init
-params ["_group",["_radius",500],["_cycle",15]];
+params ["_group", ["_radius", 500], ["_cycle", 15]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -58,13 +58,13 @@ if (_group isEqualType objNull) then { _group = group _group; };
 _group setSpeedMode "FULL";
 _group setFormation "DIAMOND";
 _group enableAttack false;
-{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count units _group;
+{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count (units _group);
 
 // Hunting loop
-while {{alive _x} count units _group > 0} do {
+while {(units _group) findIf {alive _x} != -1 } do {
 
     // performance
-    waitUntil { sleep 1; simulationenabled leader _group; };
+    waitUntil { sleep 1; simulationEnabled leader _group; };
 
     // find
     private _target = [_group, _radius] call FUNC(findClosedTarget);

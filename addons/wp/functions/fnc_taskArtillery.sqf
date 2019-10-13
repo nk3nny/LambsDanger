@@ -24,11 +24,11 @@ if (!canFire _gun || {!alive _caller}) exitWith {false};
 
 // settings
 private _direction = _gun getDir _pos;
-private _center = _pos getpos [(_accuracy/3) * -1, _direction];
+private _center = _pos getPos [(_accuracy / 3) * -1, _direction];
 private _offset = 0;
 
 // higher class artillery fire more rounds? Less accurate?
-if !(vehicle _gun isKindOf "StaticMortar") then {
+if !((vehicle _gun) isKindOf "StaticMortar") then {
     _rounds = _rounds * 2;
     _accuracy = _accuracy / 2;
 };
@@ -86,7 +86,7 @@ if (canFire _gun && {alive _caller}) then {
 
         // Randomize target location
         private _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
-        _offset = _offset + _accuracy/3;
+        _offset = _offset + _accuracy / 3;
 
         // Fire round
         _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
