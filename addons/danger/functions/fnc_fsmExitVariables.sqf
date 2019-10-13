@@ -5,6 +5,6 @@
 
 // check
 fleeing _this
-|| {(_this getVariable ["ACE_isUnconscious",false])}
-|| {_this getVariable [QGVAR(disableAI),false]}
-|| {isplayer leader _this && {_this getVariable [QGVAR(disableAIPlayerGroup),false]}}
+|| {(_this getVariable ["ACE_isUnconscious", false])}
+|| {_this getVariable [QGVAR(disableAI), false]}
+|| {isplayer leader _this && {_this getVariable [QGVAR(disableAIPlayerGroup), false]}}

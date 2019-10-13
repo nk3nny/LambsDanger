@@ -16,15 +16,15 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
-_pos pushBack (_target call cba_fnc_getPos);
+_pos pushBack (_target call CBA_fnc_getPos);
 
 // gesture
 [_unit, ["gestureGo"]] call FUNC(gesture);
 [selectRandom _units, ["gestureGoB"]] call FUNC(gesture);
 
 // ready group
-{_x doFollow leader _x} foreach _units;
-group _unit setFormDir (_unit getDir (_pos select 0));
+{ _x doFollow (leader _x) } forEach _units;
+(group _unit) setFormDir (_unit getDir (_pos select 0));
 
 // manoeuvre function
 private _fnc_manoeuvre = {
@@ -55,7 +55,7 @@ private _fnc_manoeuvre = {
     } foreach _units;
 
     // recursive cyclic
-    if (_cycle > 0 && {count _units > 0}) then {
+    if (_cycle > 0 && {!(_units isEqualTo [])}) then {
         [
             _fnc_manoeuvre,
             [_cycle, _units, _pos, _fnc_manoeuvre],

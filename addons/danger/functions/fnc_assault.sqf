@@ -22,10 +22,10 @@ _buildings pushBack (getPosATL _target);
 _buildings = _buildings select { _x distance2d _target < ( 4 + random 3 ) };
 
 // exit without buildings? -- Assault or delay!
-if (count _buildings < 2 || { random 1 > 0.8 }) exitWith {
+if ((random 1 > 0.8) || { count _buildings < 2 }) exitWith {
 
     // Outdoors or indoors with 5% chance to move out
-    if (!(_unit call FUNC(indoor)) || { random 1 > 0.8 }) then {
+    if ((random 1 > 0.8) || { !(_unit call FUNC(indoor)) }) then {
         // execute move
         _unit doMove (_unit getHideFrom _target);
         //_unit moveTo (_unit getHideFrom _target); //-- testing moveTo for lower level order

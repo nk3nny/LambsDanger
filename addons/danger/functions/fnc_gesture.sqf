@@ -10,7 +10,7 @@ params ["_unit", ["_gesture", ["gestureFreeze"]]];
 if (isPlayer _unit) exitWith {false};
 
 // do it
-_unit playActionNow selectRandom _gesture;
+_unit playActionNow (selectRandom _gesture);
 
 // end
 true

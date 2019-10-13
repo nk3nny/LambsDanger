@@ -17,15 +17,15 @@
 // init
 params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 
-// nil or captured
 if (_unit distance _target > viewDistance) exitWith {false};
+// nil or captured
 if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // range
-[_unit, _range, _override] call FUNC(shareInformationRange) params ["_unit", "_range"];
+([_unit, _range, _override] call FUNC(shareInformationRange)) params ["_unit", "_range"];
 
 // find units
 private _groups = allGroups select {
@@ -47,7 +47,7 @@ private _knowsAbout = _unit knowsAbout _target;
         _x setBehaviour "COMBAT";
         _x setFormDir ((leader _x) getDir _unit);
     };
-} foreach _groups;
+} forEach _groups;
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 

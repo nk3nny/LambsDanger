@@ -45,13 +45,13 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 
 // pick closest artillery
-_artillery = [_artillery, [], {_target distance _x}, "ASCEND"] call BIS_fnc_sortBy;
+_artillery = [_artillery, [], { _target distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 
 private _gun = _artillery select 0;
 [QGVAR(OnArtilleryCalled), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
 
 // find caller
-private _unit = ([_unit,nil,false] call FUNC(shareInformationRange)) select 0;
+private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit setVariable [QGVAR(currentTask), "Call Artillery"];
 
 // Gesture

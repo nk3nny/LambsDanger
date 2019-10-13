@@ -4,7 +4,7 @@
 // by nkenny
 
 // init
-params ["_unit","_pos","_leader"];
+params ["_unit", "_pos", "_leader"];
 
 // set range
 private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 55, true];
@@ -23,7 +23,7 @@ _unit setUnitPos _stance;
 if (_leader) then {
 
     // leaders get their subordinates to hide!
-    private _buildings = [_unit,_range,true,true] call FUNC(findBuildings);
+    private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
     {
         [_x, _pos, _range, _buildings] call FUNC(hideInside);
     } foreach ((units _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});

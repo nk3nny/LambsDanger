@@ -17,13 +17,13 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 [_unit, ["gestureCover"]] call FUNC(gesture);
 
 // units
-private _units = units group _unit;
-_units = _units select {isNull ObjectParent _x && {secondaryWeapon _x isEqualTo ""}};
+private _units = units _unit;
+_units = _units select {isNull ObjectParent _x && {(secondaryWeapon _x) isEqualTo ""}};
 
 // units without launchers hide!
 {
     // add suppression
-    _x setSuppression (getSuppression _x + random 1);
+    _x setSuppression ((getSuppression _x) + random 1);
 
     // hide
     [_x, _target, 45, _buildings] call FUNC(hideInside);

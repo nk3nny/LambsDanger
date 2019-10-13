@@ -37,10 +37,10 @@ private _fnc_suppress_AI = {
 
 // functions ~ easy hide
 private _fnc_hide_AI = {
-    private _buildings = [player,38,true,true] call FUNC(findBuildings);
+    private _buildings = [player, 38, true, true] call FUNC(findBuildings);
     private _units = (units player) select {_x distance player < 55 && {!isPlayer _x}};
     {
-        [_x, getPos _x, 45, _buildings] call FUNC(hideInside); // What should be the Default Distance here? @nkenny?
+        [_x, getPos _x, 10, _buildings] call FUNC(hideInside); // What should be the Default Distance here? @nkenny?
     } foreach _units;
     systemchat format ["%1 quick hide (%2 units)",side player,count _units];
     true
