@@ -155,6 +155,6 @@ _curCat = "Debug";
     [COMPONENT_NAME, _curCat],
     false,
     true, {
-        GVAR(debug_Drawing) = true; // Force on Debug Renderer
+        //GVAR(debug_Drawing) = true; // Force on Debug Renderer
     }
 ] call CBA_fnc_addSetting;

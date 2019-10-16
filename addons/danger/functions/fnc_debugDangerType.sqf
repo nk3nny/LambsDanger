@@ -1,9 +1,19 @@
 #include "script_component.hpp"
-// DEBUG : return danger type
-// version 1.01
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Returns danger type as string
+ *
+ * Arguments:
+ * 0: Danger type number <NUMBER>
+  *
+ * Return Value:
+ * String value of type of danger
+ *
+ * Example:
+ * [0] call lambs_danger_fnc_debugDangerType;
+ *
+ * Public: Yes
+*/
 params ["_select"];
 
 // return

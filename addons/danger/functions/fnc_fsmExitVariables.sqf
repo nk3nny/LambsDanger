@@ -1,9 +1,19 @@
 #include "script_component.hpp"
-// Exit variables -- returns whether or not FSM should exit
-// version 1.0
-// nkenny
-
-// check
+/*
+ * Author: nkenny
+ * Checks if FSM should be exited
+ *
+ * Arguments:
+ * 0: Unit being checked <OBJECT>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * bob call lambs_danger_fnc_fsmExitVariables;
+ *
+ * Public: Yes
+*/
 fleeing _this
 || {(_this getVariable ["ACE_isUnconscious", false])}
 || {_this getVariable [QGVAR(disableAI), false]}

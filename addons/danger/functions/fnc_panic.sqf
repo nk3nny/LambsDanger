@@ -1,20 +1,19 @@
 #include "script_component.hpp"
-// Panic soldier
-// version 1.41
-// by nkenny
-
 /*
-    Types
-    0 indoors
-    1 crawl
-    2 hide
-      - chance for accidental weapons discharge
-
-    // returns
-    delay in seconds
+ * Author: nkenny
+ * Panic soldier
+ *
+ * Arguments:
+ * 0: Unit in panic <OBJECT>
+ *
+ * Return Value:
+ * delay in seconds
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_panic;
+ *
+ * Public: Yes
 */
-
-// init
 params ["_unit"];
 
 // near enemy + ace check

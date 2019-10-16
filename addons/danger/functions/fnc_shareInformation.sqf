@@ -1,25 +1,30 @@
 #include "script_component.hpp"
-// Share information
-// version 1.41
-// by nkenny
-
 /*
-    Design
-        Rank increases range information is shared
-
-    Arguments
-        0, unit in question         [Object]
-        1, target being reported    [Object]
-        2, default range             [Number] (default 350m)
-        3, override range and rank?    [Boolean] (default false)
+ * Author: nkenny
+ * Unit shares information with nearby allies modified by current radio settings
+ *
+ * Arguments:
+ * 0: Unit sharing information <OBJECT>
+ * 1: Enemy target <OBJECT>
+ * 2: Range to share information, default 350 <NUMBER>
+ * 3: Override radio ranges, default false <BOOLEAN>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, angryJoe, 350, false] call lambs_danger_fnc_shareInformation;
+ *
+ * Public: Yes
 */
-
-// init
 params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 
-if (_unit distance _target > viewDistance) exitWith {false};
 // nil or captured
-if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {false};
+if (
+    _unit distance _target > viewDistance
+    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
+    || {_unit getVariable ["ace_captives_issurrendering", false]}
+) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Share Information"];

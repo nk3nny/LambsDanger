@@ -1,9 +1,22 @@
 #include "script_component.hpp"
-// Leader calls for aggresive manoeuvres
-// version 1.41
-//by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Leader calls for extended aggresive manoeuvres towards buildings or location
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Group threat unit <OBJECT> or position <ARRAY>
+ * 2: Units in group, default all <ARRAY>
+ * 3: How many assault cycles, default four <NUMBER>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, angryJoe] call lambs_danger_fnc_leaderManoeuvre;
+ *
+ * Public: Yes
+*/
 params ["_unit", "_target", ["_units", []],["_cycle",4]];
 
 // find units

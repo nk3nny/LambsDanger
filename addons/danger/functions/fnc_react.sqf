@@ -1,10 +1,22 @@
 #include "script_component.hpp"
-// React to contact
-// version 1.43
-// by nkenny
-
-// init
-params ["_unit", "_pos", "_leader"];
+/*
+ * Author: nkenny
+ * FSM level reaction to contact
+ *
+ * Arguments:
+ * 0: Unit in panic <OBJECT>
+ * 1: Position of danger <ARRAY>
+ * 2: Is unit the leader, default false <BOOLEAN>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob,getpos angryJoe, false] call lambs_danger_fnc_react;
+ *
+ * Public: Yes
+*/
+params ["_unit", "_pos", ["_leader",false]];
 
 // set range
 private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 55, true];
@@ -22,16 +34,19 @@ _unit setUnitPos _stance;
 // leaders tell their subordinates!
 if (_leader) then {
 
+    // get units
+    private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x }});
+
     // leaders get their subordinates to hide!
     private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
     {
         [_x, _pos, _range, _buildings] call FUNC(hideInside);
-    } foreach ((units _unit) select {_x distance2d _unit < 80 && { unitReady _x } && { isNull objectParent _x }});
+    } foreach _units;
 } else {
     [_unit, _pos, _range] call FUNC(hideInside);
 };
 
-// delcare contact!
+// declare contact!
 [_unit, 1, _pos] call FUNC(leaderMode);
 
 // end

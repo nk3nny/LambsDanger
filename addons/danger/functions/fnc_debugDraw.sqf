@@ -1,7 +1,20 @@
 #include "script_component.hpp"
-// DEBUG : Draw Icons and Lines over Units Head
-// version 1.01
-// by jokoho482
+/*
+ * Author: jokoho482
+ * Enables Draw Icons and Lines over units head containing debug information
+ *
+ * Arguments:
+ * none
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [] call lambs_danger_fnc_debugDraw;
+ *
+ * Public: Yes
+*/
+
 if !(GVAR(debug_Drawing)) exitWith {};
 GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
 private _displayGame = findDisplay 46;

@@ -1,9 +1,21 @@
 #include "script_component.hpp"
-// Check Body
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Unit moves to check a dead body within given range
+ *
+ * Arguments:
+ * 0: Unit assault cover <OBJECT>
+ * 1: Position of dead body <ARRAY>
+ * 2: Range to find bodies, default 10 <NUMBER>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob, getpos angryJoe, 10] call lambs_danger_fnc_checkBody;
+ *
+ * Public: Yes
+*/
 params ["_unit", "_pos", ["_range", 10]];
 
 // check if stopped

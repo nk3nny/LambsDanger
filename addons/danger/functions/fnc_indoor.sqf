@@ -1,11 +1,18 @@
 #include "script_component.hpp"
-// Checks if unit is indoors
-// version 1.01
-// by nkenny
-
-
-// init
+/*
+ * Author: nkenny
+ * Checks if unit is indoors
+ *
+ * Arguments:
+ * 0: Unit checked <OBJECT>
+ *
+ * Return Value:
+ * unit indoor or not
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_inside;
+ *
+ * Public: Yes
+*/
 params ["_unit"];
-
-// check and Return
-lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]];
+lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]]

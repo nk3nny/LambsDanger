@@ -1,10 +1,21 @@
 #include "script_component.hpp"
-// Jink vehicle shifts the vehicle 50-150 meters left or right or rear
-// version 1.41
-// by nkenny
-
-// init
-params ["_unit", ["_range", 25 + random [0, 25, 150]]];
+/*
+ * Author: nkenny
+ * Jink vehicle shifts the vehicle 25-150 meters left or right or rear, in response to danger
+ *
+ * Arguments:
+ * 0: Vehicle moving <OBJECT>
+ * 1: Max range to move, default is 25 to 150 meters <NUMBER>
+ *
+ * Return Value:
+ * destination to move
+ *
+ * Example:
+ * [bob, 100] call lambs_danger_fnc_vehicleJink;
+ *
+ * Public: Yes
+*/
+params ["_unit", ["_range", 25 + random [0, 25, 125]]];
 
 // settings
 private _veh = vehicle _unit;

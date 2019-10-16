@@ -1,9 +1,21 @@
 #include "script_component.hpp"
-// Add to group leader modes
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Add to group leader modes
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Setting <NUMBER>
+ * 2: Target information, unit <OBJECT> or position <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, 0, angryJoe] call lambs_danger_fnc_leaderMode;
+ *
+ * Public: Yes
+*/
 params ["_unit", ["_setting", 0], ["_target", objNull]];
 
 // get variable

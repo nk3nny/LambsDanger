@@ -1,9 +1,20 @@
 #include "script_component.hpp"
-// Leader Declares Contact!
-// version 1.5
-//by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Leader Declares Contact!
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Dangerous target <OBJECT>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_leaderAssess;
+ *
+ * Public: Yes
+*/
 params ["_unit", "_target"];
 
 // share information

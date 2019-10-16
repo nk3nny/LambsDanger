@@ -1,13 +1,20 @@
 #include "script_component.hpp"
-// Suppression Vehicle
-// version 1.41
-// by nkenny
-
 /*
-    Vehicle suppression
+ * Author: nkenny
+ * Vehicle performs suppressive fire on target location
+ *
+ * Arguments:
+ * 0: vehicle suppressing <OBJECT>
+ * 1: Target position <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_vehicleSuppress;
+ *
+ * Public: Yes
 */
-
-// init
 params ["_unit", "_pos"];
 
 // too close + high speed

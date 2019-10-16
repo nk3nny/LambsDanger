@@ -1,9 +1,19 @@
 #include "script_component.hpp"
-// DEBUG : return marker color suitable to side
-// version 1.01
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Returns marker colour appropriate to unit
+ *
+ * Arguments:
+ * 0: unit being checked <OBJECT>
+  *
+ * Return Value:
+ * String value with marker colour
+ *
+ * Example:
+ * [0] call lambs_danger_fnc_debugMarkerColor;
+ *
+ * Public: Yes
+*/
 params ["_unit"];
 
 // return

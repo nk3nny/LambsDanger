@@ -1,9 +1,20 @@
 #include "script_component.hpp"
-// Leader Assesses situation
-// version 1.41
-//by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Leader makes an assessment of current situation adding new tactics to group list if needed
+ *
+ * Arguments:
+ * 0: Group leader making assessment <OBJECT>
+ * 1: Position of danger, default none <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_leaderAssess;
+ *
+ * Public: Yes
+*/
 params ["_unit", ["_pos", []]];
 
 // get pos

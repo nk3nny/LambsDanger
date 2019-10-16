@@ -1,15 +1,26 @@
 #include "script_component.hpp"
-// Zone marker
-// version 1.0
-// nkenny
+/*
+ * Author: nkenny
+ * Creates a zone map marker at location
+ *
+ * Arguments:
+ * 0: Position to place dot, either as position <ARRAY>, unit <OBJECT> or group <GROUP>
+ * 1: Size of marker expressed as an array of two numbers, default [100,100], <ARRAY>
+ * 2: Color of marker, default is black <STRING>
+ * 3: brush type of marker, default Diagonal lines <STRING>
+ * 4: Rectangle, default false <BOOLEAN>
+ *
+ * Return Value:
+ * marker
+ *
+ * Example:
+ * [bob, [200,200],"colorBLUE","Cross",false] call lambs_danger_fnc_zoneMarker;
+ *
+ * Public: Yes
+*/
 
 /*
-Create a marker Zone
-Arguments
-  0, position    [Array or Object]
-  1, size        [Array]
-  2, colour      [String]
-  3, brush type: [String]
+  BRUSH LISTS:
     "Solid"
     "SolidFull"
     "Horizontal"
@@ -21,10 +32,7 @@ Arguments
     "Cross"
     "Border"
     "SolidBorder"
-  4, rectangle -- [Boolean] (Default false)
 */
-
-// init
 params ["_pos", ["_size", [100, 100]], ["_color", "colorEAST"], ["_brush", "FDiagonal"], ["_shape", false]];
 _pos = _pos call CBA_fnc_getPos;
 

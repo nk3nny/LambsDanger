@@ -1,23 +1,20 @@
 #include "script_component.hpp"
-// Call friendly artillery
-// version 1.01
-// by nkenny
-
 /*
-
-    Calls friendly artillery on target location!
-
-    Arguments
-        0, unit doing the calling     [Object]
-        1, target of artillery         [Object or Array]
-
-    Other
-        Thanks Alex2k for doing the basic grunt work
-        Thanks to AnAngrySalad for refinement of idea
-
+ * Author: nkenny
+ * Unit calls friendly artillery if available
+ *
+ * Arguments:
+ * 0: Unit calling artillery <OBJECT>
+ * 1: Target of artillery, unit <OBJECT> or position <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, angryJoe] call lambs_danger_fnc_leaderArtillery;
+ *
+ * Public: Yes
 */
-
-// init
 params ["_unit", "_target", ["_pos", []]];
 
 if (_pos isEqualTo []) then {

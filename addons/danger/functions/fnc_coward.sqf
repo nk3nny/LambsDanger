@@ -1,25 +1,36 @@
 #include "script_component.hpp"
-// check to see if unit should be coward
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * check to see if unit should be coward based on own and enemy situation
+ *
+ * Arguments:
+ * 0: Unit assault cover <OBJECT>
+ * 1: Enemy <OBJECT>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob, angryJoe] call lambs_danger_fnc_coward;
+ *
+ * Public: Yes
+*/
 params ["_unit", "_target"];
 
-// vehicles exit
+// vehicles are never coward
 if (!isNull objectParent _unit) exitWith {false};
 
-// same side? stay
+// units of same side do not trigger
 if (side _unit isEqualTo side _target) exitWith {false};
 
-// no weapons? exit
+// Units without weapons are always cowards
 if ((weapons _unit) isEqualTo []) exitWith {true};
 
-// Enemy vehicles?
+// Sort enemy tanks and air assets and own launcher
 private _enemyVehicle = _target isKindOf "Tank" || {_target isKindOf "Air"};
 private _noLauncher = secondaryWeapon _unit isEqualTo "";
 
-// tough vehicle and no launcher
+// tough vehicle and no launcher? hide
 if (_enemyVehicle && {_noLauncher}) exitWith {
     _unit setVariable [QGVAR(currentTarget), _target];
     _unit setVariable [QGVAR(currentTask), "Cowardice"];

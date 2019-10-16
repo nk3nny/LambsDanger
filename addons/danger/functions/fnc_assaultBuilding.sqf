@@ -1,9 +1,19 @@
 #include "script_component.hpp"
-// Assault Buildings
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Unit in CQC mode moves to clear nearest free building location as declared by group leader
+ *
+ * Arguments:
+ * 0: Unit assault cover <OBJECT>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_assaultBuilding;
+ *
+ * Public: Yes
+*/
 params ["_unit"];
 
 // settings
