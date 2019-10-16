@@ -18,7 +18,7 @@
  * Example:
  * [bob, 100] call lambs_danger_fnc_vehicleRotate;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_target", []], ["_threshold", 18]];
 

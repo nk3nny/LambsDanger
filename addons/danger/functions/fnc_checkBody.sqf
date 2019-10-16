@@ -14,7 +14,7 @@
  * Example:
  * [bob, getpos angryJoe, 10] call lambs_danger_fnc_checkBody;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_pos", ["_range", 10]];
 

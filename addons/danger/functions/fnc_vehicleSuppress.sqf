@@ -13,7 +13,7 @@
  * Example:
  * [bob, getpos angryJoe] call lambs_danger_fnc_vehicleSuppress;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_pos"];
 

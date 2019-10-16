@@ -13,13 +13,13 @@
  * Example:
  * [bob, getpos angryJoe] call lambs_danger_fnc_suppress;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_pos"];
 
 // no primary weapons exit? Player led groups do not auto-suppress
 if ((primaryWeapon _unit) isEqualTo "") exitWith {false};
-if (isPlayer (leader _unit)) exitWith {false};
+//if (isPlayer (leader _unit)) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];

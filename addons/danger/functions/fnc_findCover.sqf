@@ -17,7 +17,7 @@
  * Example:
  * [bob, angryJoe, 50] call lambs_danger_fnc_findCover
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]], ["_sortMode", "ASCEND", [""]], ["_maxResults", 1, [0]]];
 

@@ -12,7 +12,7 @@
  * Example:
  * [bob] call lambs_danger_fnc_assaultBuilding;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit"];
 
@@ -34,6 +34,17 @@ _unit setVariable [QGVAR(currentTask), "Assault Building"];
 
 // define building
 private _building = (_buildings select 0);
+
+// break out of CQC loop
+private _enemy = _unit findNearestEnemy getpos _building; 
+if ((_unit distance _enemy) < 4) exitWith {
+
+    // movement
+    _unit doMove ((getposATL _enemy) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
+
+    // return
+    true
+};
 
 // find spots
 private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];

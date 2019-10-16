@@ -13,7 +13,7 @@
  * Example:
  * [] call lambs_danger_fnc_eventCallback; <-- fill me in @joko
  *
- * Public: Yes
+ * Public: No
 */
 params ["_eventName", "_eventParameter"];
 

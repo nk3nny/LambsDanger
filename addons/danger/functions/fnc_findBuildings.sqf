@@ -15,7 +15,7 @@
  * Example:
  * [bob, 100, true, true] call lambs_danger_fnc_findBuildings;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_range", 100], ["_useHousePos", false], ["_onlyIndoor", false]];
 

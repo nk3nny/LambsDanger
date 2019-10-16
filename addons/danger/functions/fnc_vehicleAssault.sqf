@@ -15,7 +15,7 @@
  * Example:
  * [bob, getpos angryJoe, angryJoe] call lambs_danger_fnc_vehicleAssault;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 

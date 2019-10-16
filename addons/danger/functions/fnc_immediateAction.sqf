@@ -13,7 +13,7 @@
  * Example:
  * [bob] call lambs_danger_fnc_immediateAction;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_stance", ""],"_anim"];
 

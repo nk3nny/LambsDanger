@@ -13,7 +13,7 @@
  * Example:
  * [bob, 100] call lambs_danger_fnc_vehicleJink;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_range", 25 + random [0, 25, 125]]];
 

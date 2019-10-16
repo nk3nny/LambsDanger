@@ -12,7 +12,7 @@
  * Example:
  * [0] call lambs_danger_fnc_debugDangerType;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_select"];
 

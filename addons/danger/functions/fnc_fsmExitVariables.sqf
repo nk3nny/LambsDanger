@@ -12,7 +12,7 @@
  * Example:
  * bob call lambs_danger_fnc_fsmExitVariables;
  *
- * Public: Yes
+ * Public: No
 */
 fleeing _this
 || {(_this getVariable ["ACE_isUnconscious", false])}

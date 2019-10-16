@@ -15,7 +15,7 @@
  * Example:
  * [bob, angryJoe, 30] call lambs_danger_fnc_hideInside;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
 
@@ -52,7 +52,7 @@ if (!(_buildings isEqualTo []) && { random 1 > 0.05 }) then {
 } else {
     _unit setUnitPosWeak "DOWN";
     // Get General Target Position
-    private _targetPos = (_unit getPos [3 + random _range, (_danger getDir _unit) + 45 - random 90]);
+    private _targetPos = (_unit getPos [25 + random _range, (_danger getDir _unit) + 45 - random 90]);
     // Find Surrounding Bushes and Rocks
     private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true];
     if !(_objs isEqualTo []) then {

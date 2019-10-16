@@ -15,7 +15,7 @@
  * Example:
  * [bob, angryJoe] call lambs_danger_fnc_leaderManoeuvre;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_target", ["_units", []],["_cycle",4]];
 
@@ -28,7 +28,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // sort building locations
-private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
+private _pos = ([_target, 12, true, true] call FUNC(findBuildings));
 _pos pushBack (_target call CBA_fnc_getPos);
 
 // gesture
@@ -43,26 +43,22 @@ _pos pushBack (_target call CBA_fnc_getPos);
 private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_pos", "_fnc_manoeuvre"];
 
-    // select
-    private _target = selectRandom _pos;
-
     // update
-    _units = _units select {alive _x && {_x distance _target > GVAR(CQB_range)}};
+    //_units = _units select {alive _x && {_x distance _target > GVAR(CQB_range)}};
+    _units = _units select {alive _x && { _x distance (selectRandom _pos) > 20 }};
     _cycle = _cycle - 1;
 
     {
-        // pos
-        _x doWatch _target;
-
         // Half suppress -- Half manoeuvre
         if (random 1 > 0.6) then {
-            [_x, _target] call FUNC(Suppress);
+            _x forceSpeed 2;
             _x suppressFor 12;
+            [_x, selectRandom _pos] call FUNC(Suppress);
         } else {
             // manoeuvre
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
             _x forceSpeed 25;
-            _x doMove _target;
+            _x commandMove selectRandom _pos;
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
         };
     } foreach _units;
@@ -72,7 +68,7 @@ private _fnc_manoeuvre = {
         [
             _fnc_manoeuvre,
             [_cycle, _units, _pos, _fnc_manoeuvre],
-            12 + random 4
+            12 + random 6
         ] call cba_fnc_waitAndExecute;
     };
 };

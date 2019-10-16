@@ -12,7 +12,7 @@
  * Example:
  * [] call lambs_danger_fnc_debugDraw;
  *
- * Public: Yes
+ * Public: No
 */
 
 if !(GVAR(debug_Drawing)) exitWith {};

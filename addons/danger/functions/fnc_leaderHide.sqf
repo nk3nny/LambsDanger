@@ -9,12 +9,12 @@
  * 2: Predefined buildings, default none <ARRAY>
  *
  * Return Value:
- * buildings found
+ * success
  *
  * Example:
  * [bob, getpos angryJoe] call lambs_danger_fnc_leaderHide;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_target", ["_buildings", []]];
 

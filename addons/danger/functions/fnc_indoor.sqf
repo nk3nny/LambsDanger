@@ -12,7 +12,7 @@
  * Example:
  * [bob] call lambs_danger_fnc_inside;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit"];
 lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]]

@@ -14,7 +14,7 @@
  * Example:
  * [bob, 0, angryJoe] call lambs_danger_fnc_leaderMode;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_setting", 0], ["_target", objNull]];
 

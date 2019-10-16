@@ -14,7 +14,7 @@
  * Example:
  * [bob,getpos angryJoe, false] call lambs_danger_fnc_react;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_pos", ["_leader",false]];
 

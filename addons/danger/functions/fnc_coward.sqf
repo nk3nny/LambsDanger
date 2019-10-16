@@ -13,7 +13,7 @@
  * Example:
  * [bob, angryJoe] call lambs_danger_fnc_coward;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", "_target"];
 

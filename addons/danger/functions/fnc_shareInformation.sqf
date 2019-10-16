@@ -15,7 +15,7 @@
  * Example:
  * [bob, angryJoe, 350, false] call lambs_danger_fnc_shareInformation;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 

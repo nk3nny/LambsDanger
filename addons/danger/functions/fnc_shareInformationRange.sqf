@@ -12,7 +12,7 @@
  * Example:
  * [bob] call lambs_danger_fnc_shareInformationRange;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_range",1000], ["_override",false], ["_radio",false]];
 

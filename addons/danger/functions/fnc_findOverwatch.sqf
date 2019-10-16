@@ -19,7 +19,7 @@
  * Example:
  * [getPos bob, 10, 50, 8, getPos jonny] call lambs_danger_fnc_findOverwatch;
  *
- * Public: Yes
+ * Public: No
 */
 scriptName QGVAR(findOverwatch);
 scopeName QGVAR(findOverwatch);

@@ -12,7 +12,7 @@
  * Example:
  * [bob] call lambs_danger_fnc_panic;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit"];
 
