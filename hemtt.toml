@@ -2,7 +2,7 @@ name = "LAMBS Mods"
 prefix = "lambs"
 author = "LAMBS Dev Team"
 sigversion = 3
-version = "0.0.0" # NB: this is not the real version number. We use git tags.
+version = "2.0.0" # NB: this is not the real version number. We use git tags.
 reuse_private_key = false
 files = [
     "mod.cpp",
