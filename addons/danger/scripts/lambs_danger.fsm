@@ -65,7 +65,7 @@ item60[] = {"Unload",2,250,-825.000000,400.000000,-725.000000,450.000000,0.00000
 item61[] = {"Got_hit__Danger",4,218,-1050.000000,300.000000,-950.000000,350.000000,2.000000,"Got hit!" \n "Danger close!"};
 item62[] = {"Jink_",2,250,-1050.000000,400.000000,-950.000000,450.000000,0.000000,"Jink!"};
 item63[] = {"Timeout__Destina",4,218,-1050.000000,500.000000,-950.000000,550.000000,0.000000,"Timeout " \n "Destination"};
-item64[] = {"Pre_attack",2,250,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
+item64[] = {"Pre_attack",2,4346,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
 item65[] = {"Always",4,218,-50.000000,150.000000,50.000000,200.000000,0.000000,"Always"};
 item66[] = {"Coward",4,218,50.000000,150.000000,150.000000,200.000000,1.000000,"Coward"};
 item67[] = {"Coward",2,250,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
@@ -253,8 +253,8 @@ link97[] = {77,29};
 link98[] = {79,80};
 link99[] = {80,18};
 link100[] = {80,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-363.249512,1092.637207,701.610352,-481.297546,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,839,26,828,26,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-613.173584,645.493164,785.859863,-236.806763,1088,884,1};
+window[] = {2,-1,-1,-1,-1,969,156,958,156,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -267,7 +267,12 @@ class FSM
                         name = "End";
                         itemno = 3;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "//systemchat format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this]; "/*%FSM</STATEINIT""">*/;
+                         "//systemchat format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this]; " \n
+                         "" \n
+                         "// fleeing" \n
+                         "if (fleeing _this) then {" \n
+                         "	[_this] call lambs_danger_fnc_fleeing;" \n
+                         "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1536,7 +1541,7 @@ class FSM
                         itemno = 64;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
-                         "_timeout = time + 4 + random 4;" \n
+                         "_timeout = time + 5 + random 4;" \n
                          "" \n
                          "// look at " \n
                          "_this lookAt _dangerCausedBy; " \n

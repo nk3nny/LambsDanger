@@ -4,7 +4,8 @@
 // by nkenny
 
 /*
-    ** WAYPOINT EDITION **
+    ** THESE ARE CURRENTLY UNUSED OR SLATED FOR REMOVAL **
+    ** WAYPOINT EDITION **  
     Design
         Creates 2-3 Search adnd Destroy waypoint
         Makes unit check buildings at site

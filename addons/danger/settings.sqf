@@ -9,6 +9,17 @@ private _curCat = "Settings";
     nil         // players may configure their own preferences
 ] call CBA_fnc_addSetting;
 
+// Toggle advanced danger.fsm features on player group
+[
+    QGVAR(disableAIPlayerGroupSuppression),
+    "CHECKBOX",
+    ["Autonomous Suppression from player group", "Toggle autonomous suppression for units in player group"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    nil
+] call CBA_fnc_addSetting;
+
+
 private _curCat = "General";
 // Range at which units consider themselves in CQB
 [
@@ -60,7 +71,7 @@ private _curCat = "Share information";
     "SLIDER",
     ["Base West", "Base range side WEST share information"],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 1000, 0],
+    [200, 3000, 500, 0],
     true
 ] call CBA_fnc_addSetting;
 
@@ -70,7 +81,7 @@ private _curCat = "Share information";
     "SLIDER",
     ["Base East", "Base range side EAST share information"],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 1000, 0],
+    [200, 3000, 500, 0],
     true
 ] call CBA_fnc_addSetting;
 
@@ -80,7 +91,7 @@ private _curCat = "Share information";
     "SLIDER",
     ["Base East", "Base range independent and civilian sides share information"],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 1000, 0],
+    [200, 3000, 500, 0],
     true
 ] call CBA_fnc_addSetting;
 

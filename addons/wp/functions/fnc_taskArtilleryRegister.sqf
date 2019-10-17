@@ -1,7 +1,19 @@
 #include "script_component.hpp"
-// register units as ready artillery pieces
-// version 1.0
-// by nkenny
+/*
+ * Author: nkenny
+ * Register units as ready artillery pieces
+ *
+ * Arguments:
+ * 0: Group to check either unit <OBJECT> or group <GROUP>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [group bob] call lambs_wp_fnc_taskArtilleryRegister;
+ *
+ * Public: No
+*/
 
 // init
 params ["_group"];

@@ -1,15 +1,21 @@
 #include "script_component.hpp"
-// Tracker script
-// version 5.0
-// by nkenny
-
 /*
-    Slower more deliberate tracking and attacking script
-    Spawns flares to coordinate
-
-    Arguments
-        1, Group or object tracker  [Object or Group]
-        2, Range of tracking        [Number]
+ * Author: nkenny
+ * Tracker script
+ *        Slower more deliberate tracking and attacking script
+ *        Spawns flares to coordinate
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Range of tracking, default is 500 meters <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, 500] call lambs_wp_fnc_taskHunt;
+ *
+ * Public: No
 */
 
 // 1. FIND TRACKER

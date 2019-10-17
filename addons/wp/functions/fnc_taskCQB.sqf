@@ -1,15 +1,26 @@
 #include "script_component.hpp"
-// CQB script
-// version 0.28
-// by nkenny
-
 /*
-    Design
-        Group identifies buildings
-        Clears them methodically
-        marks building safe
-        moves to next building
-        repeat until no buildings left
+ * Author: nkenny
+ * CQB script v0.28
+ *        Group identifies buildings
+ *        Clears them methodically
+ *        marks building safe
+ *        moves to next building
+ *        repeat until no buildings left
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Position targeted <ARRAY>
+ * 2: Radius of search, default 50 <NUMBER>
+ * 3: Delay of cycle, default 21 seconds <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, getpos angryJoe, 50] call lambs_wp_fnc_taskCQB;
+ *
+ * Public: No
 */
 
 // functions ---
