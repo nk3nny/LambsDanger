@@ -17,14 +17,14 @@
 params ["_unit"];
 
 // check disabled
-if (_this getVariable [QGVAR(disableAI), false]) exitWith {false};
+if (_unit getVariable [QGVAR(disableAI), false]) exitWith {false};
 
 // variable
 _unit setVariable [QGVAR(currentTask), "Fleeing"];
 // this could have an event attached to it too - nkenny
 
 // play gesture
-if (random 1 > 0.8) then {[_unit, ["GestureCeaseFire","FastF","FastF","FastRF","FastLF"]] call FUNC(gesture);}
+if (random 1 > 0.8) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // update path

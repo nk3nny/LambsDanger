@@ -19,6 +19,22 @@ params ["_unit"];
 // settings
 _unit setUnitPosWeak "UP";
 
+// emergency break out of CQC loop
+private _enemy = _unit findNearestEnemy _unit; 
+if ((_unit distance _enemy) < 12) exitWith {
+
+    _unit setVariable [QGVAR(currentTarget), _enemy];
+    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)"];
+
+    // movement
+    _unit doWatch objNull;
+    _unit lookAt _enemy;
+    _unit doMove (_unit getHideFrom _enemy);
+
+    // return
+    true
+};
+
 // get buildings
 private _buildings = (group _unit) getVariable [QGVAR(inCQC), []];
 _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit), [0, 0]]) > 0};
@@ -35,17 +51,6 @@ _unit setVariable [QGVAR(currentTask), "Assault Building"];
 // define building
 private _building = (_buildings select 0);
 
-// break out of CQC loop
-private _enemy = _unit findNearestEnemy getpos _building; 
-if ((_unit distance _enemy) < 4) exitWith {
-
-    // movement
-    _unit doMove ((getposATL _enemy) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
-
-    // return
-    true
-};
-
 // find spots
 private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
 
@@ -55,7 +60,7 @@ _unit lookAt (_buildingPos select 0);
 _unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
 // Close range cleanups
-if (_unit distance (_buildingPos select 0) < 3.3) then {
+if (_unit distance (_buildingPos select 0) < 3.2 || {random 1 > 0.95}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;
