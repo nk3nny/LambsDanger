@@ -1,9 +1,21 @@
 #include "script_component.hpp"
-// Leader Calls for group to hide
-// version 1.41
-//by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Leader calls for group to hide. Units with launchers are unaffected
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Group threat unit <OBJECT> or position <ARRAY>
+ * 2: Predefined buildings, default none <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_leaderHide;
+ *
+ * Public: No
+*/
 params ["_unit", "_target", ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {

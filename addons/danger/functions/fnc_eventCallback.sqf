@@ -1,7 +1,20 @@
 #include "script_component.hpp"
-// Event Callback Wrapper
-// version 1.01
-// by jokoho482
+/*
+ * Author: jokoho482
+ * Event Callback Wrapper
+ *
+ * Arguments:
+ * 0: Event name <STRING>
+ * 1: Event parameters <ARRAY>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [] call lambs_danger_fnc_eventCallback; <-- fill me in @joko
+ *
+ * Public: No
+*/
 params ["_eventName", "_eventParameter"];
 
 [_eventName, _eventParameter] spawn { // TODO: Check if we realy need this.

@@ -1,24 +1,25 @@
 #include "script_component.hpp"
-// Rotate tank to face enemy
-// version 1.41
-// by nkenny
-
 /*
-    Design:
-        Find a spot to turn towards
-        End script when Tank reasonably turned
-        Inspiration by the work of alarm9k @ https://forums.bohemia.net/forums/topic/172270-smarter-tanks-script/
-
-    Arguments:
-        0, vehicle which will do the movement     [Object]
-        1, Direction which we wish to end up     [Array] (Default -- nearest enemy)
-        2, acceptable threshold                 [Number] (Default : 18 degrees)
-
-    Other:
-        Also thanks to Natalie.
+ * Author: nkenny
+ * Rotate tank to face enemy
+ *
+ * Remarks:
+ * Inspiration by the work of alarm9k @ https://forums.bohemia.net/forums/topic/172270-smarter-tanks-script/
+ * Also thanks to Natalie
+ *
+ * Arguments:
+ * 0: Vehicle rotating <OBJECT>
+ * 1: Direction which to turn towards, default is nearest enemy, position <ARRAY>
+ * 2: Acceptible threshold in degrees, default 18 <NUMBER>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, 100] call lambs_danger_fnc_vehicleRotate;
+ *
+ * Public: No
 */
-
-// init
 params ["_unit", ["_target", []], ["_threshold", 18]];
 
 if (_target isEqualTo []) then {

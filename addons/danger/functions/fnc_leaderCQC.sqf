@@ -1,9 +1,20 @@
 #include "script_component.hpp"
-// Finds and declares nearest building as assault position
-// version 1.0
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Leader finds and declares nearest building as assault position
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Range to check buildings, default is CQB range <NUMBER>
+ *
+ * Return Value:
+ * buildings found
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_leaderCQC;
+ *
+ * Public: No
+*/
 params ["_unit", ["_range", GVAR(CQB_range)]];
 
 // new variable + distance check

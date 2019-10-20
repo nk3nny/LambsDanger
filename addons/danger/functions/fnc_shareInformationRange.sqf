@@ -1,19 +1,19 @@
 #include "script_component.hpp"
-// Share information Range
-// version 1.43
-// by nkenny
-
 /*
-    Design
-        Returns an array with Unit doing the call and a radio range.
-
-    Returns
-        Unit doing the call
-        Radio range
-        Has backpack radio
+ * Author: nkenny
+ * Determines range which information is shared
+ *
+ * Arguments:
+ * 0: Unit sharing information <OBJECT>
+ *
+ * Return Value:
+ * Array containing, unit doing the call, radio range, and presence of backpack radio
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_shareInformationRange;
+ *
+ * Public: No
 */
-
-// init
 params ["_unit", ["_range",1000], ["_override",false], ["_radio",false]];
 
 // override

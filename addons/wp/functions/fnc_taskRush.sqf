@@ -1,17 +1,19 @@
 #include "script_component.hpp"
-// Aggressive Attacker script
-// version 5.0
-// by nkenny
-
 /*
-  ** WAYPOINT EDITION **
-
-  Aggressive tracking and attacking script
-
-  Arguments
-    1, Group or object tracker  [Object or Group]
-    2, position                 [Array]
-    //2, Range of tracking      [Number]              <-- not for this version
+ * Author: nkenny
+ * Aggressive Attacker script
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Range of tracking, default is 500 meters <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, 500] call lambs_wp_fnc_taskRush;
+ *
+ * Public: No
 */
 
 // functions ---

@@ -1,17 +1,23 @@
 #include "script_component.hpp"
-// Creep up close
-// version 5.0
-// by nkenny
-
 /*
-    Unit creeps up as close as possible before opening fire.
-    Stance is based on distance
-    Speed is always limited
-    Hold fire for as long as possible.
-
-    Arguments
-        1, Group or object tracker  [Object or Group]
-        2, Range of tracking        [Number]
+ * Author: nkenny
+ * Creep up close
+ *        Unit creeps up as close as possible before opening fire.
+ *        Stance is based on distance
+ *        Speed is always limited
+ *        Hold fire for as long as possible.
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Range of tracking, default is 500 meters <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, 500] call lambs_wp_fnc_taskCreep;
+ *
+ * Public: No
 */
 
 // functions ---

@@ -1,9 +1,21 @@
 #include "script_component.hpp"
-// remove from group leader modes
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Remove from group leader modes
+ *
+ * Arguments:
+ * 0: Group leader <OBJECT>
+ * 1: Setting <NUMBER>
+ * 2: New delay until leaderAssessment can be made, default 1 <NUMBER>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, 0, 33] call lambs_danger_fnc_leaderMode;
+ *
+ * Public: No
+*/
 params ["_unit", ["_setting", 0], ["_delay", 1]];
 
 // get variable

@@ -1,17 +1,22 @@
 #include "script_component.hpp"
-// Dot marker
-// pilfered from somewhere, tweaked, rewritten, tweaked again.
-// nkenny
-
 /*
-Arguments
-    0 position    [Array or Object]
-    1 text        [String] (Default "none")
-    2 colour      [String] (Default Black)
-    3 type        [String] (Default military dot)
+ * Author: nkenny
+ * Creates a map marker at location
+ *
+ * Arguments:
+ * 0: Position to place dot, either as position <ARRAY>, unit <OBJECT> or group <GROUP>
+ * 1: Text to display at location, default is none <STRING>
+ * 2: Color of marker, default is black <STRING>
+ * 3: Type of dot, default is military dot, <STRING>
+ *
+ * Return Value:
+ * marker
+ *
+ * Example:
+ * [bob, "Here is bob","colorRED","mil_dot"] call lambs_danger_fnc_dotMarker;
+ *
+ * Public: Yes
 */
-
-// init
 params ["_pos", ["_text", ""], ["_color", "colorBlack"], ["_type", "mil_dot"]];
 _pos = _pos call CBA_fnc_getPos;
 

@@ -1,19 +1,22 @@
 #include "script_component.hpp"
-// Dynamic artillery attack
-// version 1.0
-// by nkenny
-
 /*
-    Performs artillery strike at location
-    Artillery strike has a cone-like 'beaten zone'
-
-    Arguments
-    0, Which weapon is used     [Object]
-    1, Position targeted        [Array]
-    2, Caller                    [Object]
-    3, Rounds fired             [Number] (default: 3 - 7)
-    4, Dispersion                 [Number] (default: 100m)
-
+ * Author: nkenny
+ * Performs artillery strike at location. Artillery strike has a cone-like 'beaten zone'
+ *
+ * Arguments:
+ * 0: Artillery unit <OBJECT>
+ * 1: Position targeted <ARRAY>
+ * 2: Caller of strike <OBJECT>
+ * 3: Rounds fired, default 3 - 7 <NUMBER>
+ * 4: Dispersion accuracy, default 100 <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [cannonbob, getpos angryJoe, bob] call lambs_wp_fnc_taskArtillery;
+ *
+ * Public: No
 */
 
 // init

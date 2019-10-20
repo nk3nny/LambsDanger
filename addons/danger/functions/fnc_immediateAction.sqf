@@ -1,9 +1,20 @@
 #include "script_component.hpp"
-// Immediate reaction on getting hit
-// version 1.5
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Plays an immediate reaction unit getting hit (Internal to FSM)
+ *
+ * Arguments:
+ * 0: Unit hit <OBJECT>
+ * 1: Current stance of unit, default none <STRING>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_immediateAction;
+ *
+ * Public: No
+*/
 params ["_unit", ["_stance", ""],"_anim"];
 
 if (_stance isEqualTo "") then {

@@ -1,7 +1,20 @@
 #include "script_component.hpp"
-// Find Closed Target to Group
-// version 3.6
-// by jokoho482
+/*
+ * Author: jokoho482
+ * Find Closed Target to Group
+ *
+ * Arguments:
+ * 0: Group to check <GROUP>
+ * 1: Radius <NUMBER>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [group bob, 500] call lambs_wp_fnc_findClosedTarget;
+ *
+ * Public: Yes
+*/
 
 params ["_group", "_radius"];
 private _newdist = _radius;

@@ -1,17 +1,22 @@
 #include "script_component.hpp"
-// Assault with vehicle
-// version 1.41
-// by nkenny
-
 /*
-    Arguments
-    0, vehicle suppressing        [Object]
-    1, position being suppressed  [Array]
-    2, target of suppression      [Object]
-    3, buildings nearby           [Array] (Default all buildings with 28m of position)
+ * Author: nkenny
+ * Vehicle suppresses building locations and shoots main weapon
+ *
+ * Arguments:
+ * 0: vehicle suppressing <OBJECT>
+ * 1: Target position <ARRAY>
+ * 2: Target of suppressing <OBJECT>
+ * 3: Predefined buildings, default none, <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe, angryJoe] call lambs_danger_fnc_vehicleAssault;
+ *
+ * Public: No
 */
-
-// init
 params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
 // settings + check

@@ -1,9 +1,22 @@
 #include "script_component.hpp"
-// Hide in buildings
-// verison 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Unit hides inside building or in nearby cover position
+ *
+ * Arguments:
+ * 0: Unit hiding <OBJECT>
+ * 1: Source of danger <OBJECT> or position <ARRAY>
+ * 2: Range to search for cover and concealment, default is 50 <NUMBER>
+ * 3: Array of predetermined building positions <ARRAY>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob, angryJoe, 30] call lambs_danger_fnc_hideInside;
+ *
+ * Public: No
+*/
 params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
 
 if (_buildings isEqualTo []) then {
@@ -39,7 +52,7 @@ if (!(_buildings isEqualTo []) && { random 1 > 0.05 }) then {
 } else {
     _unit setUnitPosWeak "DOWN";
     // Get General Target Position
-    private _targetPos = (_unit getPos [50 + random _range, (_danger getDir _unit) + 45 - random 90]);
+    private _targetPos = (_unit getPos [35 + random _range, (_danger getDir _unit) + 45 - random 90]);
     // Find Surrounding Bushes and Rocks
     private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true];
     if !(_objs isEqualTo []) then {

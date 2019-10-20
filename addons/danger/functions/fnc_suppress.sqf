@@ -1,13 +1,25 @@
 #include "script_component.hpp"
-// Suppression
-// version 1.4
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Unit performs suppressive fire on target location
+ *
+ * Arguments:
+ * 0: Unit suppressing <OBJECT>
+ * 1: Target position <ARRAY>
+ *
+ * Return Value:
+ * success
+ *
+ * Example:
+ * [bob, getpos angryJoe] call lambs_danger_fnc_suppress;
+ *
+ * Public: No
+*/
 params ["_unit", "_pos"];
 
-// no primary weapons exit?
+// no primary weapons exit? Player led groups do not auto-suppress
 if ((primaryWeapon _unit) isEqualTo "") exitWith {false};
+if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}) exitWith {false};   // possibly add a more intelligent systme here -nkenny
 
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];

@@ -1,15 +1,15 @@
 #include "script_component.hpp"
 /*
-* Author: nkenny
-* Creates taskCreep WP at target location and prepares units
-*
-* Arguments:
-* 0: Unit
-* 1: Unit position
-*
-* Return Value:
-* none
-*
+ * Author: nkenny
+ * Creates taskCreep WP at target location and prepares units
+ *
+ * Arguments:
+ * 0: Unit
+ * 1: Unit position
+ *
+ * Return Value:
+ * none
+ *
 */
 
 // init

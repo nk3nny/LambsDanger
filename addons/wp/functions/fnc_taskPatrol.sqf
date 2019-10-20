@@ -1,11 +1,30 @@
 #include "script_component.hpp"
+/*
+ * Author: nkenny
+ * Simple dynamic patrol script by nkenny
+ *          Suitable for infantry units (not so much vehicles, boats or air-- that will have to wait!)
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Position being searched, default group position <OBJECT or ARRAY>
+ * 1: Range of tracking, default is 200 meters <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, 500] call lambs_wp_fnc_taskRush;
+ *
+ * Public: No
+*/
+
 // Patrol script
 // version 1.1
 // by nkenny
 
 /*
-    Simple dynamic patrol script by nkenny
-    Suitable for infantry units (not so much vehicles, boats or air-- that will have to wait!)
+    
+    
 
     Arguments:
         1. group or leader unit
@@ -14,11 +33,15 @@
 */
 
 // init
-params ["_group", "_pos", ["_radius", 200]];
+params ["_group", ["_pos",[]], ["_radius", 200]];
 
 // sort grp
 if (!local _group) exitWith {};
 if (_group isEqualType objNull) then { _group = group _group; };
+
+// sort pos
+if (_pos isEqualTo []) then {_pos = _group;};
+_pos = _pos call cba_fnc_getPos;
 
 // orders
 _group setBehaviour "SAFE";

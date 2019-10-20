@@ -1,29 +1,35 @@
 #include "script_component.hpp"
-// Creep up close
-// version 4.2
-// by nkenny
-
 /*
-    ** WAYPOINT EDITION **
-
-    Simple garrison script for Arma3
-    Each garrisoned solider has one movement trigger (hit, fired, or fired Near)
-
-    Would like arguments for:
-        only indoors
-
-    Arguments
-        1, Group or object            [Object or Group]
-        2, Range to find buildings    [Number]            <-- not for this version
-        3, Group set to patrol        [Boolean]            <-- not implemented -- always true
+ * Author: nkenny
+ * Garrison
+ *        Simple garrison script for Arma3
+ *        Units may use static weapons
+ *        Each garrisoned solider has one movement trigger (hit, fired, or fired Near)
+ *
+ * Arguments:
+ * 0: Group performing action, either unit <OBJECT> or group <GROUP>
+ * 1: Position to occupy, default group location <ARRAY or OBJECT>
+ * 2: Range of tracking, default is 50 meters <NUMBER>
+ *
+ * Return Value:
+ * none
+ *
+ * Example:
+ * [bob, bob, 50] call lambs_wp_fnc_taskGarrison;
+ *
+ * Public: No
 */
 
 // init
-params ["_group", "_pos", ["_radius", 50]];
+params ["_group", ["_pos",[]], ["_radius", 50]];
 
 // sort grp
 if (!local _group) exitWith {};
 if (_group isEqualType objNull) then { _group = group _group; };
+
+// sort pos
+if (_pos isEqualTo []) then {_pos = _group;};
+_pos = _pos call cba_fnc_getPos;
 
 // settings
 private _patrol = false;    // disabled for now

@@ -1,13 +1,39 @@
 #include "script_component.hpp"
-// Assault Buildings
-// version 1.41
-// by nkenny
-
-// init
+/*
+ * Author: nkenny
+ * Unit in CQC mode moves to clear nearest free building location as declared by group leader
+ *
+ * Arguments:
+ * 0: Unit assault cover <OBJECT>
+ *
+ * Return Value:
+ * boolean
+ *
+ * Example:
+ * [bob] call lambs_danger_fnc_assaultBuilding;
+ *
+ * Public: No
+*/
 params ["_unit"];
 
 // settings
 _unit setUnitPosWeak "UP";
+
+// emergency break out of CQC loop
+private _enemy = _unit findNearestEnemy _unit; 
+if ((_unit distance _enemy) < 12) exitWith {
+
+    _unit setVariable [QGVAR(currentTarget), _enemy];
+    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)"];
+
+    // movement
+    _unit doWatch objNull;
+    _unit lookAt _enemy;
+    _unit doMove (_unit getHideFrom _enemy);
+
+    // return
+    true
+};
 
 // get buildings
 private _buildings = (group _unit) getVariable [QGVAR(inCQC), []];
@@ -34,7 +60,7 @@ _unit lookAt (_buildingPos select 0);
 _unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
 // Close range cleanups
-if (_unit distance (_buildingPos select 0) < 3.3) then {
+if (_unit distance (_buildingPos select 0) < 3.2 || {random 1 > 0.95}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;
