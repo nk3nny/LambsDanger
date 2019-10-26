@@ -3,7 +3,7 @@
 /*
 item0[] = {"DEFINE_ENUM_BEG",-1,250,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item1[] = {"Init",0,250,-820.000000,-360.000000,-720.000000,-320.000000,0.000000,"Init"};
-item2[] = {"End",1,4346,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
+item2[] = {"End",1,250,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
 item3[] = {"Causes__7",4,218,-840.000000,-60.000000,-700.000000,0.000000,1.000000,"Causes:" \n "7"};
 item4[] = {"Rest",4,218,-100.000000,-160.000000,0.000000,-100.000000,0.000000,"Rest"};
 item5[] = {"Causes__1__2__4",4,218,-620.000000,-60.000000,-500.000000,0.000000,1.000000,"Causes:" \n "1, 2, 4"};
@@ -18,7 +18,7 @@ item13[] = {"Always",4,218,-200.000000,1060.000000,-100.000000,1120.000000,0.000
 item14[] = {"Vehicle",4,218,-920.000000,360.000000,-820.000000,420.000000,1.000000,"Vehicle"};
 item15[] = {"Man",4,218,-700.000000,360.000000,-600.000000,420.000000,0.000000,"Man"};
 item16[] = {"Man",2,250,-680.000000,600.000000,-580.000000,660.000000,0.000000,"Man"};
-item17[] = {"Order_out",2,250,-940.000000,600.000000,-840.000000,660.000000,0.000000,"Order out"};
+item17[] = {"Order_out",2,4346,-940.000000,600.000000,-840.000000,660.000000,0.000000,"Order out"};
 item18[] = {"Always",8,218,-800.000000,600.000000,-700.000000,660.000000,0.000000,"Always"};
 item19[] = {"Select_danger",2,250,-820.000000,-160.000000,-720.000000,-100.000000,0.000000,"Select danger"};
 item20[] = {"Hide",2,250,-820.000000,240.000000,-720.000000,300.000000,0.000000,"Hide"};
@@ -201,8 +201,8 @@ link75[] = {65,13};
 link76[] = {66,67};
 link77[] = {67,2};
 link78[] = {68,66};
-globals[] = {0.000000,0,0,0,0,640,480,1,213,6316128,1,-1804.290039,-132.080322,1955.943970,447.542603,980,884,1};
-window[] = {2,-1,-1,-1,-1,974,156,1320,156,3,998};
+globals[] = {0.000000,0,0,0,0,640,480,1,215,6316128,1,-1511.644775,-490.073181,883.070557,-38.428284,980,884,1};
+window[] = {2,-1,-1,-1,-1,883,177,798,65,3,998};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -227,50 +227,46 @@ class FSM
                          "comment ""9  DCBulletClose"";" \n
                          "*/" \n
                          "" \n
-                         "" \n
-                         "private [""_vehicle"", ""_commander""];" \n
                          "private _vehicle = vehicle _this;" \n
                          "private _commander = effectiveCommander _vehicle;" \n
                          "_behaviour = behaviour _this;" \n
                          "" \n
-                         "private [""_maxTime"", ""_timeNow""];" \n
-                         "_maxTime = 360;" \n
+                         "private _timeNow = time;" \n
+                         "private _maxTime = 360;" \n
                          "" \n
                          "// settings " \n
                          "_this setUnitPosWeak ""UP"";" \n
-                         "_this setVariable [""DC"",true];" \n
+                         "_this setVariable [""DC"", true];" \n
                          "" \n
                          "" \n
                          "// Function to retrieve the highest priority event from the _queue" \n
                          "private _priors = [0, 3, 4, 0, 2, 1, 1, 5, 4, 1];" \n
                          "private _oldDangerCause = -1;" \n
                          "" \n
-                         "private [""_funcBiggestDanger""];" \n
-                         "_funcBiggestDanger = " \n
+                         "private _fnc_BiggestDanger = " \n
                          "{" \n
                          "	private _priorCur = _priors select _dangerCause;" \n
-                         "" \n
-                         "	for ""_i"" from 0 to ((count _queue) - 1) do {" \n
-                         "		private [""_event"", ""_cause"", ""_priorNew""];" \n
-                         "		_event = _queue select _i;" \n
-                         "		_cause = _event select 0;" \n
-                         "		_priorNew = _priors select _cause;" \n
+                         "	{" \n
+                         "		private _cause = _x select 0;" \n
+                         "		private _priorNew = _priors select _cause;" \n
                          "" \n
                          "		if (_priorNew > _priorCur) exitWith {" \n
                          "			_oldDangerCause = _dangerCause;" \n
                          "			_dangerCause = _cause;" \n
-                         "			_dangerPos = _event select 1;" \n
-                         "			_dangerUntil = _event select 2;" \n
+                         "			_dangerPos = _x select 1;" \n
+                         "			_dangerUntil = _x select 2;" \n
                          "		};" \n
-                         "	};" \n
+                         "	} forEach _queue;" \n
                          "" \n
                          "	_queue = [];" \n
                          "};" \n
                          "" \n
-                         "//_this setvariable [""BIS_danger"",_dangerCause];" \n
-                         "_dangerCode = _this getvariable ""BIS_dangerHandler"";" \n
-                         "if !(isnil ""_dangerCode"") then {" \n
-                         "	{[_this,_dangerCause] spawn _x} foreach _dangerCode;" \n
+                         "//_this setVariable [""BIS_danger"",_dangerCause];" \n
+                         "_dangerCode = _this getVariable ""BIS_dangerHandler"";" \n
+                         "if !(isNil ""_dangerCode"") then {" \n
+                         "	{" \n
+                         "		[_this, _dangerCause] spawn _x;" \n
+                         "	} foreach _dangerCode;" \n
                          "}" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -352,7 +348,7 @@ class FSM
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,_dangerPos] call lambs_danger_fnc_hideInside; " \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_hideInside; " \n
                          "" \n
                          "// animation" \n
                          "if (count weapons _this < 1) then { " \n
@@ -406,7 +402,7 @@ class FSM
                                         priority = 3.000000;
                                         to="Debug";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_this getVariable [""ACE_isUnconscious"",false])"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_this getVariable [""ACE_isUnconscious"",false]) || ((lifeState _this) in [""DEAD"", ""INCAPACITATED""])"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -491,7 +487,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"// init BEGIN " \n
                          "" \n
                          "// find greatest danger " \n
-                         "call _funcBiggestDanger;" \n
+                         "call _fnc_BiggestDanger;" \n
                          "" \n
                          "// settings " \n
                          "private _orderedOut = false;" \n
@@ -567,7 +563,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Order_out";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!(isNull objectParent _this) && {canunloadincombat _vehicle}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(isNull objectParent _this) && {canUnloadInCombat _vehicle}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -605,7 +601,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Order_out_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!(isNull objectParent _this) && {canunloadincombat _vehicle}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(isNull objectParent _this) && {canUnloadInCombat _vehicle}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -631,14 +627,12 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// Distance settings  " \n
                          "private _minDist = 30;" \n
-                         "private _maxdist = switch _dangerCause do {" \n
-                         "	case 1: {100};" \n
-                         "	case 2: {50};" \n
-                         "	case 3: {200};" \n
-                         "	case 5: {100};" \n
-                         "	case 6: {100};" \n
-                         "	default {300}; " \n
-                         "}; " \n
+                         "private _maxdist = switch (_dangerCause) do {" \n
+                         "	case 2: { 50 };" \n
+                         "	case 3: { 200 };" \n
+                         "	case 1; case 5; case 6: { 100 };" \n
+                         "	default { 300 }; " \n
+                         "};" \n
                          "" \n
                          "// define new pos! " \n
                          "_pos = getPos _this;" \n
@@ -842,7 +836,7 @@ class FSM
                         itemno = 44;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,getpos _this,25] call lambs_danger_fnc_checkBody; " \n
+                         "[_this, getPos _this, 25] call lambs_danger_fnc_checkBody; " \n
                          "" \n
                          "// stance " \n
                          "_this setUnitPosWeak ""Middle"";" \n
@@ -934,7 +928,7 @@ class FSM
                 {
                         name = "End_1";
                         itemno = 54;
-                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""DC"",false];"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""DC"", false];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -946,7 +940,7 @@ class FSM
                 {
                         name = "Check_of_dangers";
                         itemno = 56;
-                        init = /*%FSM<STATEINIT""">*/"call _funcBiggestDanger;" \n
+                        init = /*%FSM<STATEINIT""">*/"call _fnc_BiggestDanger;" \n
                          "_checkTime = time;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -992,7 +986,7 @@ class FSM
                 {
                         name = "Check_of_dangers_1";
                         itemno = 59;
-                        init = /*%FSM<STATEINIT""">*/"call _funcBiggestDanger;" \n
+                        init = /*%FSM<STATEINIT""">*/"call _fnc_BiggestDanger;" \n
                          "_checkTime = time;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
