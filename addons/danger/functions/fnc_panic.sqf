@@ -32,7 +32,7 @@ _unit setVariable [QGVAR(currentTask), "Panic"];
 if (GVAR(debug_functions)) then {systemchat format ["%1 - %2 in panic", side _unit, name _unit];};
 
 // indoor -- gesture
-if (_indoor || random 1 > 0.8) exitWith {
+if (_indoor || RND(0.8)) exitWith {
 
     // action
     _unit forceSpeed 0;
@@ -46,7 +46,7 @@ if (_indoor || random 1 > 0.8) exitWith {
 };
 
 // outdoor -- crawl
-if (random 1 > 0.5) exitWith {
+if (RND(0.5)) exitWith {
 
     // action
     _unit doWatch objNull;
@@ -67,12 +67,12 @@ _unit doWatch objNull;
 _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];
 
 // chance to randomly fire weapon
-if ((random 1 > 0.7) && {!(primaryWeapon _unit isEqualTo "")}) then {
+if ((RND(0.7)) && {!(primaryWeapon _unit isEqualTo "")}) then {
     _unit forceWeaponFire [(weapons _unit) select 0, selectRandom (getArray (configFile >> "CfgWeapons" >> ((weapons _unit) select 0) >> "modes"))];
 };
 
 // chance to randomly wave
-if (random 1 > 0.4) then {
+if (RND(0.4)) then {
     [_unit, ["GestureCover"]] call FUNC(gesture);
 };
 

@@ -24,7 +24,7 @@ _unit setVariable [QGVAR(currentTask), "Fleeing"];
 // this could have an event attached to it too - nkenny
 
 // play gesture
-if (random 1 > 0.8) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
+if (RND(0.8)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // update path
