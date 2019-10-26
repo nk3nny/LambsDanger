@@ -34,3 +34,5 @@ PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
 PREP(zoneMarker);
+
+SUBPREP(ZeusModules,moduleSetRadio);

@@ -19,6 +19,7 @@ if !(GVAR(debug_Drawing)) exitWith {};
 GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
 private _displayGame = findDisplay 46;
 private _displayEGSpectator = findDisplay 60492;
+private _displayCurator = findDisplay 312;
 
 {
     _x ctrlSetFade 1;
@@ -29,6 +30,10 @@ private _displayEGSpectator = findDisplay 60492;
     _x ctrlSetFade 1;
     _x ctrlCommit 0;
 } count GVAR(drawRectCacheEGSpectator);
+{
+    _x ctrlSetFade 1;
+    _x ctrlCommit 0;
+} count GVAR(drawRectCacheCurator);
 
 private _fnc_getPos = {
     if (_this isEqualType objNull) then {
@@ -71,15 +76,17 @@ private _fnc_dangerModeTypes = {
 
 private _fnc_getRect = {
     private _control = controlNull;
-    if (isNull _displayEGSpectator) then {
-        if (GVAR(drawRectCacheGame) isEqualTo []) then {
-            _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
+    if (!isNull _displayCurator) exitWith {
+        if (GVAR(drawRectCacheCurator) isEqualTo []) then {
+            _control = _displayCurator ctrlCreate [ "RscStructuredText", -1 ];
             _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
-            _control = GVAR(drawRectCacheGame) deleteAt 0;
+            _control = GVAR(drawRectCacheCurator) deleteAt 0;
         };
-        GVAR(drawRectInUseGame) pushback _control;
-    } else {
+        GVAR(drawRectInUseCurator) pushback _control;
+        _control
+    };
+    if (!isNull _displayEGSpectator) exitWith {
         if (GVAR(drawRectCacheEGSpectator) isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
             _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
@@ -87,7 +94,15 @@ private _fnc_getRect = {
             _control = GVAR(drawRectCacheEGSpectator) deleteAt 0;
         };
         GVAR(drawRectInUseEGSpectator) pushback _control;
+        _control
     };
+    if (GVAR(drawRectCacheGame) isEqualTo []) then {
+        _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
+        _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
+    } else {
+        _control = GVAR(drawRectCacheGame) deleteAt 0;
+    };
+    GVAR(drawRectInUseGame) pushback _control;
     _control
 };
 
@@ -216,3 +231,6 @@ GVAR(drawRectInUseGame) = [];
 
 GVAR(drawRectCacheEGSpectator) = GVAR(drawRectInUseEGSpectator);
 GVAR(drawRectInUseEGSpectator) = [];
+
+GVAR(drawRectCacheCurator) = GVAR(drawRectInUseCurator);
+GVAR(drawRectInUseCurator) = [];

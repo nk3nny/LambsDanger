@@ -10,3 +10,4 @@ class CfgPatches {
         VERSION_CONFIG;
     };
 };
+#include "CfgFactionClasses.hpp"
