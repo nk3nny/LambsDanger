@@ -76,6 +76,7 @@ private _fnc_act = {
     // clear and check buildings
     private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
+    private _leader = leader _group;
     {
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
@@ -88,7 +89,7 @@ private _fnc_act = {
             };
 
             // clean list
-            if (_x distance (_buildingPos select 0) < 30 || {(leader _group isEqualTo _x) && {RND(0.5)}}) then {
+            if (_x distance (_buildingPos select 0) < 30 || { RND(0.5) && {(_leader isEqualTo _x)}}) then {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )

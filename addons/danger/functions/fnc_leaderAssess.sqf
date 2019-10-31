@@ -61,7 +61,7 @@ if !(_enemy isEqualTo []) then {
 };
 
 // binoculars if appropriate!
-if ((_unit distance _pos > 150) && {!(binocular _unit isEqualTo "") && {RND(0.2)}}) then {
+if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
     _unit selectWeapon (binocular _unit);
     _unit doWatch _pos;
 };

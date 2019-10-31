@@ -23,7 +23,6 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 [QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
 
 // settings
-private _indoor = _unit call FUNC(indoor);
 
 _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Panic"];
@@ -32,7 +31,7 @@ _unit setVariable [QGVAR(currentTask), "Panic"];
 if (GVAR(debug_functions)) then {systemchat format ["%1 - %2 in panic", side _unit, name _unit];};
 
 // indoor -- gesture
-if (_indoor || RND(0.8)) exitWith {
+if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;

@@ -60,7 +60,7 @@ _unit lookAt (_buildingPos select 0);
 _unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
 // Close range cleanups
-if (_unit distance (_buildingPos select 0) < 3.2 || {RND(0.95)}) then {
+if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;
