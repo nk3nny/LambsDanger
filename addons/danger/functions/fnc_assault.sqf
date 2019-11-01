@@ -21,7 +21,7 @@ params ["_unit", ["_target", objNull], ["_range", 30]];
 // check if stopped or busy
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
 if (
-    stopped _unit 
+    stopped _unit
     || {!(attackEnabled _unit)}
     || {currentCommand _unit in ["GET IN","ACTION","HEAL"]}
 ) exitWith {false};
@@ -38,10 +38,10 @@ _buildings pushBack (getPosATL _target);
 _buildings = _buildings select { _x distance _target < 4.5 };
 
 // exit without buildings? -- Assault or delay!
-if ((random 1 > 0.8) || { count _buildings < 2 }) exitWith {
+if (RND(0.8) || { count _buildings < 2 }) exitWith {
 
     // Outdoors or indoors with 20% chance to move out
-    if ((random 1 > 0.8) || { !(_unit call FUNC(indoor)) }) then {
+    if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
         // execute move
         _unit doMove (_unit getHideFrom _target);
         //_unit moveTo (_unit getHideFrom _target); //-- testing moveTo for lower level order

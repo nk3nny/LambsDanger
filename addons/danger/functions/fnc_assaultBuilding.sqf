@@ -20,7 +20,7 @@ params ["_unit"];
 _unit setUnitPosWeak "UP";
 
 // emergency break out of CQC loop
-private _enemy = _unit findNearestEnemy _unit; 
+private _enemy = _unit findNearestEnemy _unit;
 if ((_unit distance _enemy) < 12) exitWith {
 
     _unit setVariable [QGVAR(currentTarget), _enemy];
@@ -60,7 +60,7 @@ _unit lookAt (_buildingPos select 0);
 _unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
 // Close range cleanups
-if (_unit distance (_buildingPos select 0) < 3.2 || {random 1 > 0.95}) then {
+if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;

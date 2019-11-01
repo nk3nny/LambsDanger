@@ -50,7 +50,7 @@ private _fnc_manoeuvre = {
 
     {
         // Half suppress -- Half manoeuvre
-        if (random 1 > 0.6) then {
+        if (RND(0.6)) then {
             _x forceSpeed 2;
             _x suppressFor 12;
             [_x, selectRandom _pos] call FUNC(Suppress);

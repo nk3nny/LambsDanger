@@ -42,7 +42,7 @@ _unit setVariable [QGVAR(currentTask), "Hide"];
 _unit forceSpeed (selectRandom [-1, 24, 25]);
 
 // Randomly scatter into buildings or hide!
-if (!(_buildings isEqualTo []) && { random 1 > 0.05 }) then {
+if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
     doStop _unit;
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);

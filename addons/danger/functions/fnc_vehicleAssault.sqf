@@ -42,7 +42,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
 // find closest building
 if !(_buildings isEqualTo []) then {
     _buildings = [_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy;
-    _buildings = if (random 1 > 0.4) then { _buildings select 0 } else { selectRandom _buildings };
+    _buildings = if (RND(0.4)) then { _buildings select 0 } else { selectRandom _buildings };
     _buildings = _buildings buildingPos -1;
 };
 
@@ -73,7 +73,7 @@ private _fnc_turretDir = {
 };
 
 // shoot cannon
-private _cannon = (count _buildings > 2) && {random 1 > 0.2} && {(_veh distance _pos) > 80} && {[_veh, _pos] call _fnc_turretDir};
+private _cannon = (count _buildings > 2) && {RND(0.2)} && {(_veh distance _pos) > 80} && {[_veh, _pos] call _fnc_turretDir};
 if (_cannon) then {
     _veh action ["useWeapon", _veh, gunner _veh, random 2];
 };

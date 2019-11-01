@@ -37,7 +37,7 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 //if (stopped _unit) exitWith {false};
 
 // standing to rush
-if (random 1 > 0.5) exitWith {
+if (RND(0.5)) exitWith {
     _anim = selectRandom [
         "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf",
         "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDfr",
