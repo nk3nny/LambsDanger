@@ -1,7 +1,7 @@
 PREP(findClosedTarget);
 PREP(taskArtillery);
 PREP(taskArtilleryRegister);
-PREP(taskAttack);
+PREP(taskAssault);
 PREP(taskCamp);
 PREP(taskCQB);
 PREP(taskCreep);

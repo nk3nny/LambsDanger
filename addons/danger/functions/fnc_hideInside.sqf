@@ -24,7 +24,12 @@ if (_buildings isEqualTo []) then {
 };
 
 // stopped -- exit
-//if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
+if (
+    stopped _unit
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
+    || {currentCommand _unit in ["GET IN","ACTION","HEAL"]}
+) exitWith {false};
 //if (attackEnabled _unit) exitWith {false};
 
 // already inside -- exit

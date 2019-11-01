@@ -40,7 +40,7 @@ private _buildings = (group _unit) getVariable [QGVAR(inCQC), []];
 _buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit), [0, 0]]) > 0};
 
 // exit on no buildings -- middle unit pos
-if (count _buildings < 1) exitWith {
+if (_buildings isEqualTo []) exitWith {
     _unit setUnitPosWeak "MIDDLE";
     _unit doFollow leader group _unit;
 };
@@ -78,7 +78,7 @@ if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
 };
 
 // update group variable
-if (count _buildingPos < 1) then {
+if (_buildingPos isEqualTo []) then {
     (group _unit) setVariable [QGVAR(inCQC), _buildings - [_building]];
 };
 

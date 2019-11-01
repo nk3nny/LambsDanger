@@ -19,9 +19,10 @@
 params ["_unit", ["_target", objNull], ["_range", 30]];
 
 // check if stopped or busy
-//if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
 if (
     stopped _unit
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
     || {!(attackEnabled _unit)}
     || {currentCommand _unit in ["GET IN","ACTION","HEAL"]}
 ) exitWith {false};

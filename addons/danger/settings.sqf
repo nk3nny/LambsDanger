@@ -48,9 +48,9 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
 [
     QGVAR(panic_chance),
     "SLIDER",
-    ["Panic Chance", "Chance of panic 1 out of this number.  (i.e., 1 out of 20 is 5%)"],
+    ["Panic Chance", "Chance to panic in percentage"],
     [COMPONENT_NAME, _curCat],
-    [0, 20, 15, 0],
+    [1, 100, 8, 0],
     true
 ] call CBA_fnc_addSetting;
 
