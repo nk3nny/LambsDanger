@@ -23,7 +23,7 @@ if (_unit getVariable [QGVAR(disableAI), false]) exitWith {false};
 if (RND(0.8)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
-// update path
+// update path ~ Should probably write a hideOutside function for this! Why hide outside? Because it is impossible to get fleeing units inside buildings. - nkenny
 [_unit, _unit findNearestEnemy _unit, 45] call FUNC(hideInside);
 
 // variable

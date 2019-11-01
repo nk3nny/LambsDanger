@@ -31,7 +31,7 @@ item26[] = {"Timeout",4,218,50.000000,325.000000,150.000000,375.000000,0.000000,
 item27[] = {"Killed",4,218,-100.000000,325.000000,0.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,-100.000000,425.000000,0.000000,475.000000,0.000000,"Killed: " \n "Continue"};
 item29[] = {"Timeout__Continu",2,250,50.000000,425.000000,150.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
-item30[] = {"____FUNCTIONS__lambs",-1,250,-1275.000000,-575.000000,-1025.000000,-50.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_nearbuildings " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderBuildings  " \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
+item30[] = {"____FUNCTIONS__lambs",-1,250,-1550.000000,-775.000000,-1300.000000,-225.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-350.000000,0.000000,-250.000000,50.000000,4.000000,"React"};
 item32[] = {"Reaction__to_contact",2,250,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
 item33[] = {"Investigate",4,218,-225.000000,0.000000,-125.000000,50.000000,2.000000,"Investigate"};
@@ -76,12 +76,11 @@ item71[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000
 item72[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item73[] = {"LEADER_EVALUATIONS",-1,250,575.000000,25.000000,800.000000,75.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item74[] = {"Close_Quarters_C",-1,250,175.000000,75.000000,300.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
-item75[] = {"OUTDATED_______VARIABLES",-1,250,-1625.000000,-575.000000,-1300.000000,-250.000000,0.000000,"OUTDATED!" \n "" \n "" \n "// VARIABLES " \n "lambs_danger_inCQB" \n "lambs_danger_lastAction" \n "lambs_danger_isChecked" \n "lambs_danger_dangerMode" \n "lambs_danger_dangerFormation" \n "lambs_danger_dangerCode" \n "lambs_danger_dangerAI" \n "" \n "// VARIABLES ~ debug" \n "lambs_danger_currentTarget" \n "lambs_danger_currentTask" \n "lambs_danger_lambs_danger_FSMDangerCauseData"};
-item76[] = {"LAMBS_DANGER_FSM",-1,250,-1700.000000,-925.000000,-800.000000,-800.000000,0.000000,"LAMBS DANGER FSM 2.0.0"};
-item77[] = {"Player_formation",4,218,175.000000,350.000000,275.000000,400.000000,0.000000,"Player" \n "formationleader"};
-item78[] = {"EXIT_VARIABLES_Unconcious",-1,250,1125.000000,-425.000000,1350.000000,-350.000000,0.000000,"EXIT VARIABLES" \n "Unconcious" \n "Fleeing" \n "Danger_disabled"};
-item79[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
-item80[] = {"Artillery__none",2,250,-1125.000000,150.000000,-1025.000000,200.000000,0.000000,"Artillery:" \n "none"};
+item75[] = {"LAMBS_DANGER_FSM",-1,250,-1700.000000,-925.000000,-800.000000,-800.000000,0.000000,"LAMBS DANGER FSM 2.0.0"};
+item76[] = {"Player_formation",4,218,175.000000,350.000000,275.000000,400.000000,0.000000,"Player" \n "formationleader"};
+item77[] = {"EXIT_VARIABLES_Unconcious",-1,250,1125.000000,-425.000000,1350.000000,-350.000000,0.000000,"EXIT VARIABLES" \n "Unconcious" \n "Fleeing" \n "Danger_disabled"};
+item78[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
+item79[] = {"Artillery__none",2,250,-1125.000000,150.000000,-1025.000000,200.000000,0.000000,"Artillery:" \n "none"};
 version=1;
 class LayoutItems
 {
@@ -128,21 +127,11 @@ class LayoutItems
 		class ItemInfo
 		{
 			FontFace="Arial";
-			FontHeight=10;
-			lStyle=1;
-			Align=0;
-		};
-	};
-	class Item76
-	{
-		class ItemInfo
-		{
-			FontFace="Arial";
 			FontHeight=20;
 			lStyle=1;
 		};
 	};
-	class Item78
+	class Item77
 	{
 		class ItemInfo
 		{
@@ -173,7 +162,7 @@ link17[] = {14,16};
 link18[] = {14,55};
 link19[] = {14,57};
 link20[] = {14,71};
-link21[] = {14,79};
+link21[] = {14,78};
 link22[] = {15,20};
 link23[] = {15,21};
 link24[] = {15,31};
@@ -244,16 +233,16 @@ link88[] = {66,67};
 link89[] = {67,26};
 link90[] = {68,26};
 link91[] = {68,69};
-link92[] = {68,77};
+link92[] = {68,76};
 link93[] = {69,68};
 link94[] = {70,4};
 link95[] = {71,72};
 link96[] = {72,18};
-link97[] = {77,29};
-link98[] = {79,80};
-link99[] = {80,18};
-link100[] = {80,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-358.863892,1389.499268,817.834473,-602.710571,1088,884,1};
+link97[] = {76,29};
+link98[] = {78,79};
+link99[] = {79,18};
+link100[] = {79,61};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1937.966919,-708.087524,-113.530090,-1112.809692,1088,884,1};
 window[] = {2,-1,-1,-32000,-32000,995,182,984,182,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
@@ -498,7 +487,7 @@ class FSM
                                 /*%FSM<LINK "Artillery">*/
                                 class Artillery
                                 {
-                                        itemno = 79;
+                                        itemno = 78;
                                         priority = 5.000000;
                                         to="Artillery__none";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -1686,7 +1675,7 @@ class FSM
                                 /*%FSM<LINK "Player_formation">*/
                                 class Player_formation
                                 {
-                                        itemno = 77;
+                                        itemno = 76;
                                         priority = 0.000000;
                                         to="Timeout__Continu";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -1748,7 +1737,7 @@ class FSM
                 class Artillery__none
                 {
                         name = "Artillery__none";
-                        itemno = 80;
+                        itemno = 79;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// health " \n
                          "_health = damage _this; " \n
