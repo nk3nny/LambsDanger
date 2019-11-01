@@ -25,7 +25,7 @@ _group setSpeedMode "FULL";
 // individual units
 {
     _x enableAI "MOVE";
-	_x enableAI "PATH";
+    _x enableAI "PATH";
     _x forceSpeed 24;
 } foreach units _group;
 

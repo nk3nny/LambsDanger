@@ -24,7 +24,7 @@ if (
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {!(attackEnabled _unit)}
-    || {currentCommand _unit in ["GET IN","ACTION","HEAL"]}
+    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];

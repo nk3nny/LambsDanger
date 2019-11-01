@@ -28,9 +28,8 @@ if (
     stopped _unit
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
-    || {currentCommand _unit in ["GET IN","ACTION","HEAL"]}
+    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
-//if (attackEnabled _unit) exitWith {false};
 
 // already inside -- exit
 if (_unit call FUNC(indoor)) exitWith {
