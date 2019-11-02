@@ -20,7 +20,7 @@ if (_activated && local _logic) then {
     private _error = "";
 
     if (_error == "") then {
-        // TODO: DO things
+        ["test", [0,0,0,0,0,0,0,0], {}, {}, {}] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
     };

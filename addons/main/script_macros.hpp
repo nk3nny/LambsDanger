@@ -17,3 +17,10 @@
     #undef SUBPREP
     #define SUBPREP(sub,fncName) [QPATHTOF(functions\sub\DOUBLES(fnc,fncName).sqf), QFUNC(fncName)] call CBA_fnc_compileFunction
 #endif
+
+#undef PYN
+#define PYN 108
+#undef PX
+#define PX(X) ((X)/PYN*safeZoneH/(4/3))
+#undef PY
+#define PY(Y) ((Y)/PYN*safeZoneH)

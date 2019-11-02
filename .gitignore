@@ -1,5 +1,6 @@
 *.biprivatekey
-
+releases/*
+keys/*
 hemtt\.exe
 armake2\.exe
 keys/
