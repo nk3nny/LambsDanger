@@ -242,8 +242,8 @@ link97[] = {76,29};
 link98[] = {78,79};
 link99[] = {79,18};
 link100[] = {79,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1937.966919,-708.087524,-113.530090,-1112.809692,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,995,182,984,182,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-190.062683,761.927979,683.080322,-90.411591,1088,884,1};
+window[] = {2,-1,-1,-32000,-32000,839,26,828,26,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -469,7 +469,8 @@ class FSM
                          "// settings " \n
                          "_tank = (vehicle _this) isKindOf ""Tank"" || {(vehicle _this) isKindOf ""Wheeled_APC_F""}; " \n
                          "_static = (vehicle _this) isKindOf ""StaticWeapon""; " \n
-                         "_artillery = getNumber (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""artilleryScanner"") > 0;" \n
+                         "_artillery = (vehicle _this) getVariable [""lambs_danger_isArtillery"", getNumber (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""artilleryScanner"") > 0];" \n
+                         "" \n
                          "" \n
                          "// commander" \n
                          "_commander = (effectiveCommander (vehicle _this)) isEqualTo _this; " \n
@@ -567,7 +568,7 @@ class FSM
                          "private _investigate = _dangerCause in [5,6] && {_this distance2d _dangerPos < (20 + random  10)};" \n
                          "" \n
                          "// identify leader" \n
-                         "private _leader = leader group _this isEqualTo _this && {count units group _this > 1} && {getSuppression _this < 0.5};" \n
+                         "private _leader = leader group _this isEqualTo _this && {count units _this > 1} && {getSuppression _this < 0.5};" \n
                          "private _assess = _leader && {(_dangerMode select 3) < (time + 300)}; " \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -592,7 +593,7 @@ class FSM
                                         to="Ready_Leader__";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_leader " \n
-                                         "&&  {count (_dangerMode select 0) > 0}"/*%FSM</CONDITION""">*/;
+                                         "&&  {!((_dangerMode select 0) isEqualTo [])}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1310,11 +1311,15 @@ class FSM
                          "// time out " \n
                          "_timeout = time + 20 + random 10; " \n
                          "" \n
+                         "// movement" \n
+                         "_this forceSpeed 0;" \n
+                         "_this setUnitPosWeak selectRandom [""DOWN"",""MIDDLE""];	" \n
+                         "" \n
                          "// find target " \n
                          "_target = (_dangerMode select 1) select 6;" \n
                          "" \n
                          "// call artillery if available " \n
-                         "if (_this distance _target  > 100 && {count (missionNameSpace getVariable [""lambs_artillery_"" + str (side _this),[]]) > 0}) then {" \n
+                         "if !((missionNameSpace getVariable [""lambs_danger_artillery_"" + str (side _this),[]]) isEqualTo []) then {" \n
                          "" \n
                          "	// do artillery " \n
                          "	[_this,_target] call lambs_danger_fnc_leaderArtillery; " \n
@@ -1739,6 +1744,9 @@ class FSM
                         name = "Artillery__none";
                         itemno = 79;
                         init = /*%FSM<STATEINIT""">*/"" \n
+                         "// variable" \n
+                         "(vehicle _this) setVariable [""lambs_danger_isArtillery"", true];" \n
+                         "" \n
                          "// health " \n
                          "_health = damage _this; " \n
                          "" \n

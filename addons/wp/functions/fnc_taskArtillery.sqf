@@ -37,9 +37,9 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
 };
 
 // remove from list
-private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _gun), []];
+private _artillery = missionNamespace getVariable [QEGVAR(danger,artillery_) + str (side _gun), []];
 _artillery = _artillery - [_gun];
-missionNamespace setVariable ["lambs_artillery_" + str (side _gun), _artillery, false];
+missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _gun), _artillery, false];
 
 // delay
 private _mainStrike = linearConversion [100, 2000, (_gun distance _pos), 30, 90, true];
@@ -61,7 +61,7 @@ if (canFire _gun && {alive _caller}) then {
         for "_i" from 1 to (1 + random 1) do {
 
             // Randomize target location
-            private _target = _center getPos [(250 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
+            private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
             // Fire round
             _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
@@ -123,9 +123,9 @@ if (!canFire _gun) exitWith {false};
 _gun doMove getposASL _gun;
 
 // register gun
-_artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _gun), []];
+_artillery = missionNamespace getVariable [QEGVAR(danger,artillery_) + str (side _gun), []];
 _artillery pushBackUnique _gun;
-missionNamespace setVariable ["lambs_artillery_" + str (side _gun), _artillery, false];
+missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _gun), _artillery, false];
 
 // end
 true

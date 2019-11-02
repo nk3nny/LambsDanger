@@ -29,7 +29,7 @@ if ((_unit distance _enemy) < 12) exitWith {
     // movement
     _unit doWatch objNull;
     _unit lookAt _enemy;
-    _unit doMove (_unit getHideFrom _enemy);
+    _unit doMove getposATL _enemy; // changed from getHideFrom as this tends to pick a spot outside building - nkenny
 
     // return
     true
@@ -37,7 +37,7 @@ if ((_unit distance _enemy) < 12) exitWith {
 
 // get buildings
 private _buildings = (group _unit) getVariable [QGVAR(inCQC), []];
-_buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit), [0, 0]]) > 0};
+_buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) > 0};
 
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
@@ -52,7 +52,7 @@ _unit setVariable [QGVAR(currentTask), "Assault Building"];
 private _building = (_buildings select 0);
 
 // find spots
-private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
+private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
 
 // remove current target and do move
 _unit doWatch objNull;
@@ -66,7 +66,7 @@ if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
     _buildingPos deleteAt 0;
 
     // update variable
-    _building setVariable ["LAMBS_CQB_cleared_" + str (side _unit), _buildingPos];
+    _building setVariable [QGVAR(CQB_cleared_) + str (side _unit), _buildingPos];
 
 } else {
     // distant units crouch

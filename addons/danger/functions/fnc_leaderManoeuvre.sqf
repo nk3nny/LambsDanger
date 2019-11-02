@@ -44,8 +44,7 @@ private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_pos", "_fnc_manoeuvre"];
 
     // update
-    //_units = _units select {alive _x && {_x distance _target > GVAR(CQB_range)}};
-    _units = _units select {alive _x && { _x distance (selectRandom _pos) > 20 }};
+    _units = _units select {alive _x && {_x distance (selectRandom _pos) > GVAR(CQB_range)}};
     _cycle = _cycle - 1;
 
     {

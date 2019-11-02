@@ -35,8 +35,8 @@ _pos = _pos call CBA_fnc_getPos;
 private _units = units _group; 
 
 // override
-if ((_group getVariable [QGVAR(forcedMovement),-1]) != -1) then {
-    (_group getVariable QGVAR(forcedMovement)) call CBA_fnc_removePerFrameHandler;
+if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
+    (_group getVariable QEGVAR(danger,forcedMovement)) call CBA_fnc_removePerFrameHandler;
 };
 
 // individuals
@@ -83,7 +83,7 @@ private _fnc_reached = {
 // Function ~ restore
 private _fnc_restore = {
     params ["_unit","_handle"];
-    if (_handle != (_group getVariable [QGVAR(forcedMovement),-1])) exitWith {};
+    if (_handle != (_group getVariable [QEGVAR(danger,forcedMovement),-1])) exitWith {};
     _unit forceSpeed -1;
     _unit setUnitPos "AUTO";
     _unit doFollow leader _unit;
@@ -119,7 +119,7 @@ private _handle = [
         // end or override
         if (count _units < 1) then {
             _handle call CBA_fnc_removePerFrameHandler;
-            _group setVariable [QGVAR(forcedMovement),-1];
+            _group setVariable [QEGVAR(danger,forcedMovement),-1];
             _group setVariable [QEGVAR(danger,dangerAI), "enabled"];
             _group setBehaviour "AWARE";
         };
@@ -127,7 +127,7 @@ private _handle = [
 ] call CBA_fnc_addPerFrameHandler;
 
 // handle
-_group setVariable [QGVAR(forcedMovement),_handle];
+_group setVariable [QEGVAR(danger,forcedMovement),_handle];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 %2: Unit moving %3m",side _group, ["taskAssault", "taskRetreat"] select _retreat, round (leader _group distance _pos)];};
