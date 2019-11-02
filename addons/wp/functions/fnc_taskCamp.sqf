@@ -69,7 +69,7 @@ if (count _units > 4) then {
         _units deleteAt _foreachIndex;
     };
 
-    if (!(_buildings isEqualTo []) && {random 1 > 0.3}) then {
+    if (!(_buildings isEqualTo []) && { RND(0.3) }) then {
         doStop _x;
         _x setUnitPos "UP";
         _x setPos selectRandom ((_buildings select 0) buildingPos -1);
@@ -100,7 +100,7 @@ _group setCombatMode "RED";
     //_x switchmove "";
     _x playActionNow selectRandom ["Stand", "Up", "EvasiveLeft", "EvasiveRight", "MountOptic", "MountSide", "Down", "Default"];
     _x enableAI "ANIM";
-    if (random 1 > 0.5) then { _x suppressFor (3 + random 7); };
+    if (RND(0.5)) then { _x suppressFor (3 + random 7); };
     true
 } count _units;
 

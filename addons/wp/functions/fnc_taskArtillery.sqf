@@ -42,7 +42,7 @@ _artillery = _artillery - [_gun];
 missionNamespace setVariable ["lambs_artillery_" + str (side _gun), _artillery, false];
 
 // delay
-private _mainStrike = linearConversion [100,2000,(_gun distance _pos),30,90,true];
+private _mainStrike = linearConversion [100, 2000, (_gun distance _pos), 30, 90, true];
 private _checkRounds = (25 + random 35);
 
 // delay

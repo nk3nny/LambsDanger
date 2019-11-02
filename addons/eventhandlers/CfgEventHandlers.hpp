@@ -18,7 +18,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_Explosion_Eventhandlers {
     class CAManBase {
         class LAMBS_CAManBase_Explosion {
-            Explosion = "_this call lambs_eventhandlers_fnc_explosionEH;";  // can this be compiled as FUNC() even within quotes? -nk
+            Explosion = QUOTE(_this call FUNC(explosionEH));
         };
     };
 };

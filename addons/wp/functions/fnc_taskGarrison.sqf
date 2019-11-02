@@ -37,7 +37,7 @@ private _statics = 0.8;
 
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
-_houses = _houses select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]] || {random 1 > 0.5}};
+_houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 [_houses, true] call CBA_fnc_Shuffle;
 
 // find guns
@@ -57,7 +57,7 @@ if (count _units > 4) then {
 
     // consider patrol
     if (_patrol) then {
-        while {count _units > 5 && {random 1 > 0.8}} do { _units deleteAt 0 };
+        while {RND(0.8) && {count _units > 5}} do { _units deleteAt 0 };
     };
 
     // last man mans guns

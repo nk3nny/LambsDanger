@@ -8,19 +8,19 @@ params ["_unit"];
 
 // Standing or recent explosions ignored
 if (
-    isplayer _unit
+    isPlayer _unit
     || {!isNull objectParent _unit}
-    || {stance _unit isEqualTo "PRONE"}
-    || {_unit getVariable [QGVAR(isExploded),0] > time}
+    || {(stance _unit) isEqualTo "PRONE"}
+    || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}
 ) exitWith {false};
 
 // settings
-private _pos = _unit getPos [4,random 360];
+private _pos = _unit getPos [4, random 360];
 private _dir = 360 - (_unit getRelDir _pos);
-_unit setVariable [QGVAR(isExploded), time + 9];
+_unit setVariable [QGVAR(explosionReactionTime), time + 9];
 
 // standing to Right prone
-if (_dir > 330 && { random 1 > 0.2 }) exitWith {
+if (_dir > 330 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";
     [
         {
@@ -32,7 +32,7 @@ if (_dir > 330 && { random 1 > 0.2 }) exitWith {
 };
 
 // standing to Left prone
-if (_dir < 30 && { random 1 > 0.2 }) exitWith {
+if (_dir < 30 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright";
     [
         {

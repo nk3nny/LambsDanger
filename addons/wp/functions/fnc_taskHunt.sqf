@@ -64,7 +64,7 @@ while {{alive _x} count units _group > 0} do {
         if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskHunt: %2 targets %3 at %4 Meters", side _group, groupID _group, name _target, floor (leader _group distance _target)]};
 
         // FLARE HERE
-        if (!_combat && {_onFoot} && {random 1 > 0.8}) then { [leader _group] call _fnc_flare; };
+        if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };
 
         // BUILDING SUPPRESSION! <-- BRING IT!
         if (_combat && {(nearestBuilding _target distance2d _target < 25)}) then { { _x doSuppressiveFire ((getposASL _target) vectorAdd [random 2, random 2, 0.5 + random 3]); true } count units _group;};

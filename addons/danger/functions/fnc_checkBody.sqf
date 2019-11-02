@@ -25,7 +25,7 @@ if (stopped _unit || {!(attackEnabled _unit)}) exitWith {false};
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
 
 // half chance-- indoors
-if ((random 1 > 0.5) && { _unit call FUNC(indoor) }) exitWith {false};
+if (RND(0.5) && { _unit call FUNC(indoor) }) exitWith {false};
 
 // find body
 private _body = allDeadMen select { (_x distance _pos) < _range };

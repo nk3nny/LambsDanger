@@ -1,5 +1,6 @@
 #include "\x\cba\addons\main\script_macros_common.hpp"
 #define DFUNC(var1) TRIPLES(ADDON,fnc,var1)
+#define RND(var) random 1 > var
 // #define DISABLE_COMPILE_CACHE
 #ifdef DISABLE_COMPILE_CACHE
     #undef PREP
