@@ -42,21 +42,23 @@ _header ctrlSetBackgroundColor COLOR_RGBA;
 _header ctrlCommit 0;
 
 private _fnc_CreateLabel = {
-    params ["_text"];
+    params ["_text", "_tooltip"];
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
     _label ctrlSetPosition [_basePositionX + PY(0.5), _basePositionY, PX(45), PY(5)];
     _label ctrlSetFontHeight PY(2.5);
     _label ctrlSetText _text;
+    _label ctrlSetTooltip _tooltip;
     _label ctrlCommit 0;
 };
 
 private _fnc_AddTextField = {
     params ["_text", "", "_tooltip", "_default"];
     _basePositionY = _basePositionY + PY(5.5);
-    _text call _fnc_CreateLabel;
+    [_text, _tooltip] call _fnc_CreateLabel;
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
     _textField ctrlSetPosition [_basePositionX + PX(45), _basePositionY, PX(44.5), PY(5)];
+    _textField ctrlSetTooltip _tooltip;
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
 };
@@ -64,9 +66,11 @@ private _fnc_AddTextField = {
 private _fnc_AddBoolean = {
     params ["_text", "", "_tooltip", ["_default", false, [false]]];
     _basePositionY = _basePositionY + PY(5.5);
-    _text call _fnc_CreateLabel;
+    [_text, _tooltip] call _fnc_CreateLabel;
+    
     private _checkbox = _display ctrlCreate ["RscCheckBox", -1, _globalGroup];
     _checkbox ctrlSetPosition [_basePositionX + PX(84.5), _basePositionY, PX(5), PY(5)];
+    _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
     _checkbox ctrlCommit 0;
 };
