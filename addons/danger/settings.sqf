@@ -3,7 +3,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroup),
     "CHECKBOX",
-    ["Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
+    ["Disable Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
     [COMPONENT_NAME, _curCat],
     false,
     nil         // players may configure their own preferences
@@ -13,12 +13,11 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupSuppression),
     "CHECKBOX",
-    ["Autonomous Suppression from player group", "Toggle autonomous suppression for units in player group"],
+    ["Disable Suppression from player group", "Toggle autonomous suppression for units in player group"],
     [COMPONENT_NAME, _curCat],
     false,
     nil
 ] call CBA_fnc_addSetting;
-
 
 private _curCat = "General";
 // Range at which units consider themselves in CQB
@@ -38,7 +37,7 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
 [
     QGVAR(minSuppression_range),
     "SLIDER",
-    ["Minimum Suppression Range", "Within this range AI will not perform suppression fire"],
+    ["Minimum Distance for Suppression Fire", "Within this distance AI will not perform suppression fire"],
     [COMPONENT_NAME, _curCat],
     [1, 500, 25, 0],
     true
@@ -50,7 +49,7 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
     "SLIDER",
     ["Panic Chance", "Chance to panic in percentage"],
     [COMPONENT_NAME, _curCat],
-    [1, 100, 8, 0],
+    [1, 100, 10, 0],
     true
 ] call CBA_fnc_addSetting;
 

@@ -41,7 +41,7 @@ private _index = _units findIf {
 };
 _radio = _index != -1;
 if (_radio) then {
-    _target = _unit select _index;
+    _target = _units select _index;
     _range = _range + GVAR(radio_Backpack);
 };
 // tweak by height above sea-level

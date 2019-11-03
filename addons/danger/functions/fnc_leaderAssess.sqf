@@ -74,7 +74,7 @@ private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units group _unit select {unitReady _x && {_x distance2d _pos < 70}};
+private _units = units _unit select {unitReady _x && {_x distance2d _unit < 70}};
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
 
@@ -88,7 +88,7 @@ if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's law
     // order to man the vehicle
     _units assignAsGunner _weapons;
     [_units] orderGetIn true;
-    group _unit addVehicle _weapons;
+    (group _unit) addVehicle _weapons;
 };
 
 // set current task -- moved here so it is not interfered by things happening above

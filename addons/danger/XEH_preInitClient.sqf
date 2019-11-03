@@ -23,7 +23,7 @@ private _fnc_toggle_AI = {
             {_x setUnitPosWeak "AUTO"} foreach units player;
         } else {
             GVAR(disableAIPlayerGroup) = true;
-            };
+        };
     systemchat format ["%1 toggled AI %2",side player, if (GVAR(disableAIPlayerGroup)) then {"on"} else {"off"}];
     true
 };
@@ -45,7 +45,7 @@ private _fnc_hide_AI = {
     private _buildings = [player, 38, true, true] call FUNC(findBuildings);
     private _units = (units player) select {_x distance player < 55 && {!isPlayer _x}};
     {
-        [_x, getPos _x, 10, _buildings] call FUNC(hideInside);
+        [_x, _x getPos [25,random 360], 10, _buildings] call FUNC(hideInside);
     } foreach _units;
     systemchat format ["%1 quick hide (%2 units)",side player,count _units];
     true

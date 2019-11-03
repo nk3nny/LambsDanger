@@ -17,18 +17,50 @@
 params ["_unit"];
 
 // check disabled
-if (_unit getVariable [QGVAR(disableAI), false]) exitWith {false};
+if (
+    _unit getVariable [QGVAR(disableAI), false]
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
+    ) exitWith {false};
+
+// variable
+_unit setVariable [QGVAR(currentTask), "Fleeing"];
+// this could have an event attached to it too - nkenny
 
 // play gesture
 if (RND(0.8)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
-// update path ~ Should probably write a hideOutside function for this! Why hide outside? Because it is impossible to get fleeing units inside buildings. - nkenny
-[_unit, _unit findNearestEnemy _unit, 45] call FUNC(hideInside);
+// indoor just hide
+if (_unit call FUNC(indoor)) exitWith {
+    doStop _unit;
+    _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
+};
 
-// variable
-_unit setVariable [QGVAR(currentTask), "Fleeing"];
-// this could have an event attached to it too - nkenny
+// update path
+private _enemy = _unit findNearestEnemy _unit;
+if (!isNull _enemy) then {
+
+    // newpos
+    private _pos = (_unit getPos [20 + random 40, (_enemy getDir _unit) - 35 + random 70]);
+
+    // check for water
+    if (surfaceIsWater _pos) then {_pos = getposASL _unit};
+
+    // concealment + pick bushes and rocks if possible
+    private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 9, false, true];
+    if !(_objs isEqualTo []) then {
+        _pos = getPos (selectRandom _objs);
+    };
+
+    // stance based on distance
+    if (_unit distance _enemy > 180) then {_unit setUnitPosWeak "DOWN"};
+    if (_unit distance _enemy < 50) then {_unit setUnitPosWeak "MIDDLE"};
+
+    // move away
+    _unit doMove _pos;
+
+};
 
 // debug
 if (GVAR(debug_functions)) then {systemchat format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))];};
