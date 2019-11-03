@@ -9,7 +9,7 @@ if (_activated && local _logic) then {
     if !(isNull (missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", objNull])) exitWith {};
 
     //--- Get unit under cursor
-    private _unit = grpNull;
+    private _unit = objNull;
     private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]];
     if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _unit = _mouseOver select 1; };
 
@@ -20,7 +20,16 @@ if (_activated && local _logic) then {
     private _error = "";
 
     if (_error == "") then {
-        ["test", [0,0,0,0,0,0,0,0], {}, {}, {}] call EFUNC(main,showDialog);
+        ["test",
+            [
+                ["test 1", "STRING"],
+                ["test 2", "STRING"],
+                ["test 3", "STRING"],
+                ["test 4", "NUMBER"],
+                ["test 5", "NUMBER"],
+                ["test 6", "NUMBER"]
+            ], {}, {}, {}
+        ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
     };

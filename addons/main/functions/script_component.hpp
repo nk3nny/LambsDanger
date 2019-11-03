@@ -1,5 +1,14 @@
 #include "\z\lambs\addons\main\script_component.hpp"
 
+#undef PYN
+#define PYN 108
+#undef PX
+// PX(1) is 10 Pixels in a 1920x1080 Resolution on the X Axis
+#define PX(X) ((X)/PYN*safeZoneH/(4/3))
+#undef PY
+// PX(1) is 10 Pixels in a 1920x1080 Resolution on the X Axis
+#define PY(Y) ((Y)/PYN*safeZoneH)
+
 #define COLOR_A profileNamespace getVariable ["gui_bcg_rgb_a", 0.8]
 #define COLOR_R profileNamespace getVariable ["gui_bcg_rgb_r", 0.13]
 #define COLOR_G profileNamespace getVariable ["gui_bcg_rgb_g", 0.54]
