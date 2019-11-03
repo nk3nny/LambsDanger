@@ -24,28 +24,28 @@ _display displayAddEventHandler ["Unload",  {
     call (_display getVariable [QGVAR(OnClose), {}]); // Call On Close Handler
 }];
 
-private _heigth = ((count _data) + 1) * (PY(5.5));
+private _heigth = ((count _data) + 1) * (PY(CONST_HEIGHT + CONST_SPACE_HEIGHT));
 
-private _basePositionX = 0.5 - (PX(90) / 2);
+private _basePositionX = 0.5 - (PX(CONST_WIDTH) / 2);
 private _basePositionY = 0.5 - (_heigth / 2);
 
 private _globalGroup = _display ctrlCreate ["RscText", -1];
 _globalGroup ctrlSetBackgroundColor BACKGROUND_RGB(0.8);
-_globalGroup ctrlSetPosition [_basePositionX, 0.5 - (_heigth / 2), PX(90), _heigth];
+_globalGroup ctrlSetPosition [_basePositionX, 0.5 - (_heigth / 2), PX(CONST_WIDTH), _heigth];
 _globalGroup ctrlCommit 0;
 
 private _header = _display ctrlCreate ["RscText", -1, _globalGroup];
 _header ctrlSetText _name;
-_header ctrlSetFontHeight PY(5);
-_header ctrlSetPosition [0.5 - (PX(90) / 2), _basePositionY, PX(90), PY(5)];
+_header ctrlSetFontHeight PY(CONST_HEIGHT);
+_header ctrlSetPosition [0.5 - (PX(CONST_WIDTH / 2)), _basePositionY, PX(CONST_WIDTH), PY(5)];
 _header ctrlSetBackgroundColor COLOR_RGBA;
 _header ctrlCommit 0;
 
 private _fnc_CreateLabel = {
     params ["_text", "_tooltip"];
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
-    _label ctrlSetPosition [_basePositionX + PY(0.5), _basePositionY, PX(45), PY(5)];
-    _label ctrlSetFontHeight PY(2.5);
+    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT)];
+    _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
     _label ctrlSetText _text;
     _label ctrlSetTooltip _tooltip;
     _label ctrlCommit 0;
@@ -53,11 +53,11 @@ private _fnc_CreateLabel = {
 
 private _fnc_AddTextField = {
     params ["_text", "", "_tooltip", "_default"];
-    _basePositionY = _basePositionY + PY(5.5);
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
-    _textField ctrlSetPosition [_basePositionX + PX(45), _basePositionY, PX(44.5), PY(5)];
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT)];
     _textField ctrlSetTooltip _tooltip;
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
@@ -65,11 +65,11 @@ private _fnc_AddTextField = {
 
 private _fnc_AddBoolean = {
     params ["_text", "", "_tooltip", ["_default", false, [false]]];
-    _basePositionY = _basePositionY + PY(5.5);
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
-    
+
     private _checkbox = _display ctrlCreate ["RscCheckBox", -1, _globalGroup];
-    _checkbox ctrlSetPosition [_basePositionX + PX(84.5), _basePositionY, PX(5), PY(5)];
+    _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT - CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)];
     _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
     _checkbox ctrlCommit 0;

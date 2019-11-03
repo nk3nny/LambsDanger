@@ -29,3 +29,7 @@
 #define BACKGROUND_B profileNamespace getVariable ["igui_bcg_rgb_b", 0.2]
 #define BACKGROUND_RGB(A) [BACKGROUND_R, BACKGROUND_G, BACKGROUND_B, A]
 #define BACKGROUND_RGBA BACKGROUND_RGB(BACKGROUND_A)
+
+#define CONST_WIDTH 90
+#define CONST_HEIGHT 5
+#define CONST_SPACE_HEIGHT 0.5
