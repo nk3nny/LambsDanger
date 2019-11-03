@@ -65,7 +65,7 @@ item60[] = {"Unload",2,250,-825.000000,400.000000,-725.000000,450.000000,0.00000
 item61[] = {"Got_hit__Danger",4,218,-1050.000000,300.000000,-950.000000,350.000000,2.000000,"Got hit!" \n "Danger close!"};
 item62[] = {"Jink_",2,250,-1050.000000,400.000000,-950.000000,450.000000,0.000000,"Jink!"};
 item63[] = {"Timeout__Destina",4,218,-1050.000000,500.000000,-950.000000,550.000000,0.000000,"Timeout " \n "Destination"};
-item64[] = {"Pre_attack",2,250,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
+item64[] = {"Pre_attack",2,4346,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
 item65[] = {"Always",4,218,-50.000000,150.000000,50.000000,200.000000,0.000000,"Always"};
 item66[] = {"Coward",4,218,50.000000,150.000000,150.000000,200.000000,1.000000,"Coward"};
 item67[] = {"Coward",2,250,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
@@ -242,8 +242,8 @@ link97[] = {76,29};
 link98[] = {78,79};
 link99[] = {79,18};
 link100[] = {79,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-190.062683,761.927979,683.080322,-90.411591,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,839,26,828,26,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-148.241699,433.927124,467.876709,-5.135437,1088,884,1};
+window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1551,7 +1551,7 @@ class FSM
                          "_this lookAt _dangerCausedBy; " \n
                          "" \n
                          "// assault " \n
-                         "private _assault = _this distance2d _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
+                         "private _assault = _this distance _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
                          "" \n
                          "// coward" \n
                          "private _coward = (!_CQCmode) && {[_this,_dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
@@ -1601,17 +1601,10 @@ class FSM
                         itemno = 67;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out" \n
-                         "_timeout = _timeout + 4;" \n
+                         "_timeout = _timeout + 5;" \n
                          "" \n
-                         "// testing Diwako hide " \n
-                         "private _hide = [_this,_dangerCausedBy] call lambs_danger_fnc_findCover;" \n
-                         "if !(_hide isEqualTo []) then {" \n
-                         "    private _coverPos = _hide select 0;" \n
-                         "    _this doMove (_coverPos select 0);" \n
-                         "    _this setUnitPosWeak (_coverPos select 1);" \n
-                         "};" \n
-                         "" \n
-                         "//[_this,_dangerCausedBy] call lambs_danger_fnc_hideInside; // disabled to reduce break up of squad formation" \n
+                         "// fleeing" \n
+                         "[_this] call lambs_danger_fnc_fleeing;" \n
                          "" \n
                          "// update leader-mode" \n
                          "[_this,2,_dangerCausedby] call lambs_danger_fnc_leaderMode;" \n
