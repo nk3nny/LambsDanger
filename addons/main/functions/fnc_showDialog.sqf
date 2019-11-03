@@ -6,13 +6,12 @@ private _display = (findDisplay 46) createDisplay "RscDisplayEmpty";
 
 _display setVariable [QGVAR(OnAbort), _OnAbort];
 _display setVariable [QGVAR(OnUnload), _OnUnload];
-_display setVariable [QGVAR(OnComplete), _OnComplete];
 
 _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
     if (_dikCode == DIK_ESCAPE) then {
-        call (_display getVariable [QGVAR(OnClose), {}]); // Call On Close Handler
+        call (_display getVariable [QGVAR(OnAbort), {}]); // Call On Close Handler
         _display closeDisplay 1;
         _handled = true;
     };
@@ -42,7 +41,7 @@ _header ctrlSetBackgroundColor COLOR_RGBA;
 _header ctrlCommit 0;
 
 private _fnc_CreateLabel = {
-    params ["_text", "_tooltip"];
+    params ["_text", ["_tooltip", ""]];
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
     _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
@@ -52,7 +51,7 @@ private _fnc_CreateLabel = {
 };
 
 private _fnc_AddTextField = {
-    params ["_text", "", "_tooltip", "_default"];
+    params ["_text", "", ["_tooltip", ""], ["_default", ""]];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -61,10 +60,11 @@ private _fnc_AddTextField = {
     _textField ctrlSetTooltip _tooltip;
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
+    _textField;
 };
 
 private _fnc_AddBoolean = {
-    params ["_text", "", "_tooltip", ["_default", false, [false]]];
+    params ["_text", "", ["_tooltip", ""], ["_default", false, [false]]];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -73,16 +73,70 @@ private _fnc_AddBoolean = {
     _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
     _checkbox ctrlCommit 0;
+    _checkbox;
 };
 
+private _controls = [];
 {
     switch (toUpper (_x select 1)) do {
         case ("BOOLEAN");
         case ("BOOL"): {
-            _x call _fnc_AddBoolean;
+            _controls pushback [(_x call _fnc_AddBoolean), _x select 1];
         };
         default {
-            _x call _fnc_AddTextField;
+            _controls pushback [(_x call _fnc_AddTextField), _x select 1];
         };
     };
 } forEach _data;
+
+_basePositionY = _basePositionY + PY(CONST_HEIGHT + (CONST_SPACE_HEIGHT*2));
+
+private _cancelButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
+_cancelButton ctrlSetText "CANCEL";
+
+_cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / 2)];
+
+_cancelButton ctrlAddEventHandler ["ButtonClick", {
+    params ["_ctrl"];
+    call (_ctrl getVariable [QGVAR(OnAbort), {}]);
+    (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
+}];
+_cancelButton setVariable [QGVAR(OnAbort), _OnAbort];
+_cancelButton setVariable [QGVAR(Display), _display];
+
+_cancelButton ctrlCommit 0;
+
+private _okButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
+_okButton ctrlSetText "OK";
+_okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / 2)];
+
+_okButton ctrlAddEventHandler ["ButtonClick", {
+    params ["_ctrl"];
+    private _data = [];
+    {
+        switch (_x select 1) do {
+            case ("BOOLEAN");
+            case ("BOOL"): {
+                _data pushback (cbChecked (_x select 0));
+            };
+            case ("NUMBER"): {
+                _data pushback (parseNumber (ctrlText (_x select 0)));
+            };
+            case ("INT");
+            case ("INTEGER"): {
+                _data pushback (round (parseNumber (ctrlText (_x select 0))));
+            };
+            default {
+                _data pushback (ctrlText (_x select 0));
+            };
+        };
+    } forEach (_ctrl getVariable [QGVAR(ControlData), {}]);
+    _data call (_ctrl getVariable [QGVAR(OnComplete), {}]);
+    (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
+
+}];
+_okButton setVariable [QGVAR(OnComplete), _OnComplete];
+_okButton setVariable [QGVAR(ControlData), _controls];
+_okButton setVariable [QGVAR(Display), _display];
+
+_okButton ctrlCommit 0;
