@@ -2,10 +2,6 @@ PREP(assault);
 PREP(assaultBuilding);
 PREP(checkBody);
 PREP(coward);
-PREP(debugDangerType);
-PREP(debugDraw);
-PREP(debugMarkerColor);
-PREP(dotMarker);
 PREP(findBuildings);
 PREP(findCover);
 PREP(findOverwatch);
@@ -33,6 +29,11 @@ PREP(vehicleAssault);
 PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
-PREP(zoneMarker);
+
+SUBPREP(Debug,zoneMarker);
+SUBPREP(Debug,debugDangerType);
+SUBPREP(Debug,debugDraw);
+SUBPREP(Debug,debugMarkerColor);
+SUBPREP(Debug,dotMarker);
 
 SUBPREP(ZeusModules,moduleSetRadio);
