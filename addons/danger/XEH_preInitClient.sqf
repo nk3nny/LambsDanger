@@ -64,7 +64,7 @@ private _fnc_hide_AI = {
 [
     COMPONENT_NAME,
     QGVAR(quickSuppression),
-    ["Toggle suppressive fire","Friendly units within 20 meters of the player suppress target location"],
+    ["Toggle Suppressive fire","Friendly units within 20 meters of the player suppress target location"],
     _fnc_suppress_AI,
     ""
 ] call CBA_fnc_addKeybind;
@@ -73,7 +73,7 @@ private _fnc_hide_AI = {
 [
     COMPONENT_NAME,
     QGVAR(quickHide),
-    ["Toggle hiding","Friendly units within 50 meters of the player quickly seek cover"],
+    ["Toggle Hiding","Friendly units within 50 meters of the player quickly seek cover"],
     _fnc_hide_AI,
     ""
 ] call CBA_fnc_addKeybind;

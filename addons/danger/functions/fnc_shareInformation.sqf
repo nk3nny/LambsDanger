@@ -57,7 +57,16 @@ private _knowsAbout = _unit knowsAbout _target;
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];};
+if (GVAR(debug_functions)) then {
+    
+    // debug message
+    systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];
+
+    // debug marker
+    _m = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
+    //[{deleteMarker _this}, _m, 10] call cba_fnc_waitAndExecute;
+
+    };
 
 // end
 true
