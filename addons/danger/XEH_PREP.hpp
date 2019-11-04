@@ -29,8 +29,8 @@ PREP(vehicleAssault);
 PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
-PREP(zoneMarker);
 
+SUBPREP(Debug,zoneMarker);
 SUBPREP(Debug,debugDangerType);
 SUBPREP(Debug,debugDraw);
 SUBPREP(Debug,debugMarkerColor);
