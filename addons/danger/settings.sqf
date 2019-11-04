@@ -43,7 +43,7 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
     true
 ] call CBA_fnc_addSetting;
 
-// Chance of panic  1 out of this number.  (i.e., 1 out of 20 is 5%)
+// Chance of panic expressed as percentage
 [
     QGVAR(panic_chance),
     "SLIDER",

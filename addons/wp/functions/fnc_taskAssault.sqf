@@ -42,7 +42,7 @@ if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
 // individuals
 {
     _x setVariable [QEGVAR(danger,dangerDisabled),true];
-    _x forceSpeed 25;
+    _x forceSpeed 24;
     _x setUnitPos "UP";
     _x disableAI "FSM";
     _x disableAI "AUTOTARGET";

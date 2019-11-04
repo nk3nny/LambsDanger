@@ -56,7 +56,7 @@ private _fnc_manoeuvre = {
         } else {
             // manoeuvre
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
-            _x forceSpeed 25;
+            _x forceSpeed 24;
             _x commandMove selectRandom _pos;
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
         };
