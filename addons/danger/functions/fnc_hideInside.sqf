@@ -32,7 +32,7 @@ if (
 ) exitWith {false};
 
 // already inside -- exit
-if (_unit call FUNC(indoor)) exitWith {
+if (RND(0.05) && {_unit call FUNC(indoor)}) exitWith {
     if (stance _unit isEqualTo "STAND") then { _unit setUnitPosWeak "MIDDLE"; };
     _unit doWatch _danger;
     false
@@ -43,7 +43,7 @@ _unit setVariable [QGVAR(currentTarget), _danger];
 _unit setVariable [QGVAR(currentTask), "Hide"];
 
 // settings
-_unit forceSpeed (selectRandom [-1, 24, 25]);
+_unit forceSpeed (selectRandom [-1, 24, 24]);
 
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {

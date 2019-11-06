@@ -26,7 +26,7 @@ item21[] = {"Panic",4,218,-450.000000,0.000000,-350.000000,50.000000,8.000000,"P
 item22[] = {"Panic_",2,250,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Panic!"};
 item23[] = {"Timeout",4,218,-450.000000,175.000000,-350.000000,225.000000,0.000000,"Timeout"};
 item24[] = {"Reset_Panic___Co",2,250,-450.000000,275.000000,-350.000000,325.000000,0.000000,"Reset Panic: " \n "Continue"};
-item25[] = {"Attack___Suppress",2,250,-50.000000,225.000000,50.000000,275.000000,0.000000,"Attack" \n "+ Suppress" \n "+ Assault"};
+item25[] = {"Attack___Suppress",2,4346,-50.000000,225.000000,50.000000,275.000000,0.000000,"Attack" \n "+ Suppress" \n "+ Assault"};
 item26[] = {"Timeout",4,218,50.000000,325.000000,150.000000,375.000000,0.000000,"Timeout"};
 item27[] = {"Killed",4,218,-100.000000,325.000000,0.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,-100.000000,425.000000,0.000000,475.000000,0.000000,"Killed: " \n "Continue"};
@@ -65,7 +65,7 @@ item60[] = {"Unload",2,250,-825.000000,400.000000,-725.000000,450.000000,0.00000
 item61[] = {"Got_hit__Danger",4,218,-1050.000000,300.000000,-950.000000,350.000000,2.000000,"Got hit!" \n "Danger close!"};
 item62[] = {"Jink_",2,250,-1050.000000,400.000000,-950.000000,450.000000,0.000000,"Jink!"};
 item63[] = {"Timeout__Destina",4,218,-1050.000000,500.000000,-950.000000,550.000000,0.000000,"Timeout " \n "Destination"};
-item64[] = {"Pre_attack",2,4346,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
+item64[] = {"Pre_attack",2,250,25.000000,75.000000,125.000000,125.000000,0.000000,"Pre-attack"};
 item65[] = {"Always",4,218,-50.000000,150.000000,50.000000,200.000000,0.000000,"Always"};
 item66[] = {"Coward",4,218,50.000000,150.000000,150.000000,200.000000,1.000000,"Coward"};
 item67[] = {"Coward",2,250,50.000000,225.000000,150.000000,275.000000,0.000000,"Coward"};
@@ -242,8 +242,8 @@ link97[] = {76,29};
 link98[] = {78,79};
 link99[] = {79,18};
 link100[] = {79,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-148.241699,433.927124,467.876709,-5.135437,1088,884,1};
-window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-934.203979,820.303955,860.907959,-564.629700,1088,884,1};
+window[] = {2,-1,-1,-1,-1,917,104,906,104,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -478,8 +478,8 @@ class FSM
                          "// attack is appropriate " \n
                          "_attack = _dangerCause in [0,2,8,9]; " \n
                          "" \n
-                         "// investigate bodies? " \n
-                         "_investigate = _dangerCause in [5,6];" \n
+                         "// investigate bodies?  <-- disabled for now" \n
+                         "//_investigate = _dangerCause in [5,6];" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -554,21 +554,21 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {systemchat format [""%1 - Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType]};" \n
                          "" \n
                          "// immediate action" \n
-                         "if ((_dangerCause isEqualTo 2)  && {random 1 > 0.2}) then {" \n
+                         "if (random 1 > 0.2  && {_dangerCause isEqualTo 2}) then {" \n
                          "	[_this,stance _this] call lambs_danger_fnc_immediateAction;" \n
                          "}; " \n
                          "" \n
                          "// Panic when suppression level is high " \n
-                         "private _panic = ((getSuppression _this) >.80) && {random 100 < lambs_danger_panic_chance};" \n
+                         "private _panic = random 100 < lambs_danger_panic_chance && {((getSuppression _this) >.80)};" \n
                          "" \n
                          "// React to fire when source of danger is distant or unkown" \n
-                         "private _react = (_dangerMode select 2) && {!_CQCmode};" \n
+                         "private _react = !_CQCmode && {_dangerMode select 2};" \n
                          "" \n
                          "// Investigate dead bodies when enemies are out of sight " \n
                          "private _investigate = _dangerCause in [5,6] && {_this distance2d _dangerPos < (20 + random  10)};" \n
                          "" \n
                          "// identify leader" \n
-                         "private _leader = leader group _this isEqualTo _this && {count units _this > 1} && {getSuppression _this < 0.5};" \n
+                         "private _leader = leader group _this isEqualTo _this && { count units _this > 1} && { getSuppression _this < 0.5};" \n
                          "private _assess = _leader && {(_dangerMode select 3) < (time + 300)}; " \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -672,15 +672,15 @@ class FSM
                          "if (speed (vehicle _this) < 10) then {" \n
                          "" \n
                          "	// rotate +  suppression (internal to vehicle rotate) " \n
-                         "	[vehicle _this,_dangerCausedBy] call lambs_danger_fnc_vehicleRotate; " \n
+                         "	[vehicle _this, _dangerCausedBy] call lambs_danger_fnc_vehicleRotate; " \n
                          "	" \n
                          "	// assault " \n
-                         "	private _buildings = [_dangerPos,28,false,false] call lambs_danger_fnc_findBuildings;" \n
+                         "	private _buildings = [_dangerPos, 28, false, false] call lambs_danger_fnc_findBuildings;" \n
                          "	if (count _buildings > 0) then {" \n
                          "		[" \n
                          "			{" \n
                          "				_this call lambs_danger_fnc_vehicleAssault;" \n
-                         "			}, [_this,_dangerPos,_dangerCausedBy,_buildings], ( 3 + random 3 )" \n
+                         "			}, [_this, _dangerPos,_dangerCausedBy,_buildings], ( 3 + random 3 )" \n
                          "		] call CBA_fnc_waitAndExecute;" \n
                          "	};" \n
                          "}; "/*%FSM</STATEINIT""">*/;
@@ -742,7 +742,7 @@ class FSM
                         itemno = 22;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// suppression code " \n
-                         "_delay = [_this,_dangerCausedBy] call lambs_danger_fnc_panic; " \n
+                         "_delay = [_this, _dangerCausedBy] call lambs_danger_fnc_panic; " \n
                          "" \n
                          "// time out " \n
                          "_timeout = time + _delay; " \n
@@ -806,15 +806,15 @@ class FSM
                         itemno = 25;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// Can fire -- delay for a bit  " \n
-                         "if ((_dangerCause in [8,9]) && {random 1 > 0.3}) then {" \n
+                         "if (random 1 > 0.3 && { (_dangerCause in [8,9])}) then {" \n
                          "" \n
                          "	// movement" \n
                          "	_this forceSpeed 0;" \n
-                         "	_this setUnitPosWeak selectRandom [""DOWN"",""MIDDLE""];" \n
+                         "	_this setUnitPosWeak selectRandom [""DOWN"", ""MIDDLE""];" \n
                          "" \n
                          "	// suppress " \n
                          "	if (_this distance _dangerCausedBy > lambs_danger_minSuppression_range) then {" \n
-                         "		[_this,_dangerPos] call lambs_danger_fnc_suppress;" \n
+                         "		[_this, _dangerPos] call lambs_danger_fnc_suppress;" \n
                          "	}; " \n
                          "};" \n
                          "" \n
@@ -822,10 +822,10 @@ class FSM
                          "if (_assault && {_this knowsAbout _dangerCausedBy > 2}) then {" \n
                          "" \n
                          "	// movement" \n
-                         "	_this forceSpeed selectRandom [2,2,3];" \n
+                         "	_this forceSpeed 2;" \n
                          "" \n
                          "	// Check buildings near enemy" \n
-                         "	[_this,_dangerCausedBy,20] call lambs_danger_fnc_assault;" \n
+                         "	[_this, _dangerCausedBy, 20] call lambs_danger_fnc_assault;" \n
                          "" \n
                          "	// small delay!" \n
                          "	_timeout = time + 1 + random 4; " \n
@@ -924,7 +924,7 @@ class FSM
                          "}; " \n
                          "" \n
                          "// react " \n
-                         "[_this,_dangerPos,_leader] call lambs_danger_fnc_react;" \n
+                         "[_this, _dangerPos, _leader] call lambs_danger_fnc_react;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -979,10 +979,10 @@ class FSM
                          "_this lookAt _dangerPos; " \n
                          "" \n
                          "// leaders gesture " \n
-                         "[formationLeader _this,[""gesturePoint""]] call lambs_danger_fnc_gesture; " \n
+                         "[formationLeader _this, [""gesturePoint""]] call lambs_danger_fnc_gesture; " \n
                          "" \n
                          "// check body" \n
-                         "[_this,_dangerPos] call lambs_danger_fnc_checkBody; " \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_checkBody; " \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1180,7 +1180,7 @@ class FSM
                          "_this forceSpeed 0;" \n
                          "" \n
                          "// leader assessment " \n
-                         "[_this,_dangerPos] call lambs_danger_fnc_leaderAssess; " \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_leaderAssess; " \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1220,17 +1220,17 @@ class FSM
                          "_timeout = -1; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this, _evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// gesture" \n
-                         "[_this,[""gestureFreeze""]] call lambs_danger_fnc_gesture;" \n
+                         "[_this, [""gestureFreeze""]] call lambs_danger_fnc_gesture;" \n
                          "" \n
                          "// find target " \n
                          "//_target = (_dangerMode select 1) select 1; <-- disabled. Produced bugged results " \n
                          "_target = _this findNearestEnemy _dangerPos;" \n
                          "" \n
                          "// execute group hide " \n
-                         "[_this,_target] call lambs_danger_fnc_leaderContact;" \n
+                         "[_this, _target] call lambs_danger_fnc_leaderContact;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1268,13 +1268,13 @@ class FSM
                          "_timeout = time + 20 + random 10; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation,120] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this, _evaluation, 120] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find target " \n
                          "_target = (_dangerMode select 1) select 2;" \n
                          "" \n
                          "// execute group hide " \n
-                         "[_this,_target] call lambs_danger_fnc_leaderHide;" \n
+                         "[_this, _target] call lambs_danger_fnc_leaderHide;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1322,10 +1322,10 @@ class FSM
                          "if !((missionNameSpace getVariable [""lambs_danger_artillery_"" + str (side _this),[]]) isEqualTo []) then {" \n
                          "" \n
                          "	// do artillery " \n
-                         "	[_this,_target] call lambs_danger_fnc_leaderArtillery; " \n
+                         "	[_this, _target] call lambs_danger_fnc_leaderArtillery; " \n
                          "" \n
                          "	// clean array " \n
-                         "	[_this,_evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "	[_this, _evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "}; " \n
                          "" \n
@@ -1367,13 +1367,13 @@ class FSM
                          "_timeout = time + 20 + random 10; " \n
                          "" \n
                          "// clean array " \n
-                         "[_this,_evaluation,100] call lambs_danger_fnc_leaderModeUpdate;" \n
+                         "[_this, _evaluation, 100] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
                          "// find pos " \n
                          "_target = (_dangerMode select 1) select 3;" \n
                          "" \n
                          "// execute group Manoeuvre" \n
-                         "[_this,_target] call lambs_danger_fnc_leaderManoeuvre;" \n
+                         "[_this, _target] call lambs_danger_fnc_leaderManoeuvre;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n
@@ -1519,7 +1519,7 @@ class FSM
                          "_destination = [_this] call lambs_danger_fnc_vehicleJink; " \n
                          "" \n
                          "// Share information!" \n
-                         "[_this,(_this findNearestEnemy _this),lambs_danger_CQB_range + random 100,true] call lambs_danger_fnc_shareInformation;" \n
+                         "[_this, (_this findNearestEnemy _dangerPos),lambs_danger_CQB_range + random 100,true] call lambs_danger_fnc_shareInformation;" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1607,7 +1607,7 @@ class FSM
                          "[_this] call lambs_danger_fnc_fleeing;" \n
                          "" \n
                          "// update leader-mode" \n
-                         "[_this,2,_dangerCausedby] call lambs_danger_fnc_leaderMode;" \n
+                         "[_this, 2, _dangerCausedby] call lambs_danger_fnc_leaderMode;" \n
                          "" \n
                          "// Share information!" \n
                          "//[_this,_dangerCausedBy,lambs_danger_CQB_range + random 100,true] call lambs_danger_fnc_shareInformation;" \n
@@ -1643,7 +1643,7 @@ class FSM
                          "" \n
                          "// leaders update buildings " \n
                          "if (isFormationLeader _this || {(group _this getVariable [""lambs_danger_inCQC"",[]])  isEqualTo []}) then {" \n
-                         "	[_this,100] call lambs_danger_fnc_leaderCQC; " \n
+                         "	[_this, 100] call lambs_danger_fnc_leaderCQC; " \n
                          "}; " \n
                          "" \n
                          "// set speed" \n
@@ -1706,7 +1706,7 @@ class FSM
                          "" \n
                          "// suppression " \n
                          "if (_attack) then {" \n
-                         "	[_this,_dangerPos] call lambs_danger_fnc_vehicleSuppress;" \n
+                         "	[_this, _dangerPos] call lambs_danger_fnc_vehicleSuppress;" \n
                          "}; " \n
                          "" \n
                          "// get out if enemy near" \n
