@@ -20,11 +20,18 @@ if (!hasInterface) exitWith {};
 private _fnc_toggle_AI = {
     if (GVAR(disableAIPlayerGroup)) then {
             GVAR(disableAIPlayerGroup) = false;
-            {_x setUnitPosWeak "AUTO"} foreach units player;
+            {
+                _x setVariable [QGVAR(disableAI),false];    // added to ensure it triggers -- nkenny
+            } foreach units player;
         } else {
             GVAR(disableAIPlayerGroup) = true;
+            {
+                _x setUnitPosWeak "AUTO";
+                _x setVariable [QGVAR(disableAI),true];
+            } foreach units player;
         };
-    systemchat format ["%1 toggled AI %2",side player, if (GVAR(disableAIPlayerGroup)) then {"on"} else {"off"}];
+    private _txt = format ["%1 toggled AI %2",side player, ["on","off"] select (GVAR(disableAIPlayerGroup))];
+    [["LAMBS Danger.fsm"], [_txt, 1.4], true] call CBA_fnc_notify;
     true
 };
 
@@ -33,21 +40,25 @@ private _fnc_suppress_AI = {
     private _units = allUnits select {side _x isEqualTo side player && {_x distance player < 22} && {!isPlayer _x}};
     {
         private _target = _x findNearestEnemy _x;
+        if (isNull _target) then {_target = cursorObject};  // added to get a target more commonly. - nkenny
+        _x setBehaviour "COMBAT";
         _x doSuppressiveFire getposASL _target;
         _x suppressFor 6 + (random 5);
     } foreach _units;
-    systemchat format ["%1 quick suppression (%2 units)",side player,count _units];
+    private _txt = format ["%1 quick suppression (%2 units)",side player,count _units];
+    [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;
     true
 };
 
 // functions ~ easy hide
 private _fnc_hide_AI = {
-    private _buildings = [player, 38, true, true] call FUNC(findBuildings);
+    private _buildings = [player getpos [15, getdir player], 38, true, true] call FUNC(findBuildings);
     private _units = (units player) select {_x distance player < 55 && {!isPlayer _x}};
     {
         [_x, _x getPos [25,random 360], 10, _buildings] call FUNC(hideInside);
     } foreach _units;
-    systemchat format ["%1 quick hide (%2 units)",side player,count _units];
+    private _txt = format ["%1 quick hide (%2 units)",side player,count _units];
+    [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;
     true
 };
 

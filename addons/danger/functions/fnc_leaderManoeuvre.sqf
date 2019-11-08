@@ -28,7 +28,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // sort building locations
-private _pos = ([_target, 12, true, true] call FUNC(findBuildings));
+private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
 _pos pushBack (_target call CBA_fnc_getPos);
 
 // gesture
@@ -39,24 +39,32 @@ _pos pushBack (_target call CBA_fnc_getPos);
 { _x doFollow (leader _x) } forEach _units;
 (group _unit) setFormDir (_unit getDir (_pos select 0));
 
+// manoeuvre CQB // within close combat - nkenny
+if (_unit distance2D (_pos select 0) < GVAR(CQB_range)) exitWith {
+    {
+        _x forceSpeed 2;
+        _x commandMove selectRandom _pos;
+    } foreach _units;
+};
+
 // manoeuvre function
 private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_pos", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select {alive _x && {_x distance (selectRandom _pos) > GVAR(CQB_range)}};
+    _units = _units select {alive _x && {_x distance2d (_pos select 0) > GVAR(CQB_range)}};
     _cycle = _cycle - 1;
 
     {
         // Half suppress -- Half manoeuvre
         if (RND(0.6)) then {
-            _x forceSpeed 2;
+            _x forceSpeed 0;
             _x suppressFor 12;
             [_x, selectRandom _pos] call FUNC(Suppress);
         } else {
             // manoeuvre
+            _x forceSpeed -1;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
-            _x forceSpeed 24;
             _x commandMove selectRandom _pos;
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
         };

@@ -16,6 +16,14 @@
 */
 params ["_unit"];
 
+// check if stopped or busy
+if (
+    stopped _unit
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
+    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
+) exitWith {false};
+
 // settings
 _unit setUnitPosWeak "UP";
 

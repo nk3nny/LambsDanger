@@ -51,9 +51,6 @@ if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!
     _unit doMove ((selectRandom _buildings) vectorAdd [-1 + random 2, -1 + random 2, 0]);
-
-    // debug
-    systemchat format ["%1 FOUND BUILDING %2",side _unit, name _unit];
 };
 
 // update path
