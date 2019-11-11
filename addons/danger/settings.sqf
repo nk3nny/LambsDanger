@@ -19,6 +19,16 @@ private _curCat = "Settings";
     nil
 ] call CBA_fnc_addSetting;
 
+// Toggle reaction state danger.fsm features on player group
+[
+    QGVAR(disableAIPlayerGroupReaction),
+    "CHECKBOX",
+    ["Disable Reaction state on player group", "Toggle Reaction phase on units in player group"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    nil
+] call CBA_fnc_addSetting;
+
 private _curCat = "General";
 // Range at which units consider themselves in CQB
 [

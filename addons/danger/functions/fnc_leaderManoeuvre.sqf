@@ -39,6 +39,9 @@ _pos pushBack (_target call CBA_fnc_getPos);
 { _x doFollow (leader _x) } forEach _units;
 (group _unit) setFormDir (_unit getDir (_pos select 0));
 
+// adds movement order
+(group _unit) move (_pos select 0);
+
 // manoeuvre CQB // within close combat - nkenny
 if (_unit distance2D (_pos select 0) < GVAR(CQB_range)) exitWith {
     {

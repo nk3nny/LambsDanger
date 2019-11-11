@@ -18,6 +18,9 @@
 */
 params ["_unit", "_pos", ["_leader",false]];
 
+// disable Reaction phase for player group
+if (isplayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
+
 // set range
 private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 55, true];
 

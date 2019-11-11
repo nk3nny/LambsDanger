@@ -18,8 +18,11 @@
 params ["_unit", "_pos"];
 
 // no primary weapons exit? Player led groups do not auto-suppress
-if ((primaryWeapon _unit) isEqualTo "") exitWith {false};
-if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}) exitWith {false};   // possibly add a more intelligent system here -nkenny
+if (
+    getSuppression _unit > 0.5
+    || {(primaryWeapon _unit) isEqualTo ""}
+    || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
+) exitWith {false}; // possibly add a more intelligent system here -nkenny
 
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];
