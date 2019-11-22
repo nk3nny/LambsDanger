@@ -1,4 +1,4 @@
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 /*
  * Author: jokoho482
  * Enables Draw Icons and Lines over units head containing debug information
