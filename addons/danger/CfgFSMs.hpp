@@ -2,7 +2,7 @@ class CfgFSMs {
     class Formation {
         class States {
             // drop to ground ~ do nothing instead!
-            
+            // <-- TOP ONE IS THE ONE WE'VE GENERALLY USED!! - nkenny
             class Drop_to_ground {
                 class Init {
                     function = "nothing";
@@ -10,22 +10,19 @@ class CfgFSMs {
                     thresholds[] = {};
                 };
             };
-            
             // drop to ground in cover
-            
+            /*
             class Drop_to_ground_1 {
                 class Init {
                     function = "nothing";
                     parameters[] = {};
                     thresholds[] = {};
                 };
-            };
-            /* <-- TOP ONE IS THE ONE WE'VE TRADITIONALLY USED!! - nkenny
-            */
+            };*/
             class Search_path__Covering {
                 class Init {
                     function = "searchPath";
-                    parameters[] = {36,12};   // 30,6 works well 26,8 -- current Lets go crazy!
+                    parameters[] = {26,8};   // 30,6 works, also 26,8 -- tested 36,12 for longer bounds -- Lets go crazy! -- nkenny
                     thresholds[] = {};
                 };
             };

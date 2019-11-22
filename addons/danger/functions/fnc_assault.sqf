@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 30], "_rangeBuilding"];
+params ["_unit", ["_target", objNull], ["_range", 30]];
 
 // check if stopped or busy
 if (
@@ -32,7 +32,7 @@ _unit setVariable [QGVAR(currentTask), "Assault"];
 
 // settings
 _unit setUnitPosWeak "UP";
-_rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 1.5, 20, true];
+private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 1.5, 20, true];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, true] call FUNC(findBuildings);

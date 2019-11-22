@@ -46,7 +46,11 @@ _pos pushBack (_target call CBA_fnc_getPos);
 if (_unit distance2D (_pos select 0) < GVAR(CQB_range)) exitWith {
     {
         _x forceSpeed 2;
-        _x commandMove selectRandom _pos;
+        _x doMove selectRandom _pos;
+
+        // force movement
+        if !(_x call FUNC(indoor)) then {_x playActionNow selectRandom ["FastF", "FastF", "FastLF", "FastRF"];};
+
     } foreach _units;
 };
 
@@ -63,13 +67,16 @@ private _fnc_manoeuvre = {
         if (RND(0.6)) then {
             _x forceSpeed 0;
             _x suppressFor 12;
-            [_x, selectRandom _pos] call FUNC(Suppress);
+            [_x, selectRandom _pos] call FUNC(suppress);
         } else {
             // manoeuvre
             _x forceSpeed -1;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
             _x commandMove selectRandom _pos;
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
+
+            // force movement
+            if !(_x call FUNC(indoor)) then {_x playActionNow "FastF"};
         };
     } foreach _units;
 

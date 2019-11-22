@@ -52,7 +52,7 @@ if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
     _x disableAI "CHECKVISIBLE";
     _x doMove _pos;
     _x doWatch _pos;
-    if (_retreat) then {
+    if ((random 1 > 0.5) && {_retreat}) then {
         _x playMoveNow selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
