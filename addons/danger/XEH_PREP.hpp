@@ -30,8 +30,8 @@ PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
 
-SUBPREP(Debug,zoneMarker);
-SUBPREP(Debug,debugDangerType);
-SUBPREP(Debug,debugDraw);
-SUBPREP(Debug,debugMarkerColor);
-SUBPREP(Debug,dotMarker);
+SUBPREP(debug,zoneMarker);
+SUBPREP(debug,debugDangerType);
+SUBPREP(debug,debugDraw);
+SUBPREP(debug,debugMarkerColor);
+SUBPREP(debug,dotMarker);
