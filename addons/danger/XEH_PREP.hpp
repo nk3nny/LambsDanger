@@ -6,6 +6,7 @@ PREP(findBuildings);
 PREP(findCover);
 PREP(findOverwatch);
 PREP(fleeing);
+PREP(fsmAllowAnimation);
 PREP(fsmExitVariables);
 PREP(eventCallback);
 PREP(gesture);

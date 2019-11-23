@@ -45,7 +45,7 @@ item40[] = {"Inspect_body",2,250,-1280.000000,240.000000,-1180.000000,300.000000
 item41[] = {"Go_to_body",2,250,-1160.000000,780.000000,-1060.000000,840.000000,0.000000,"Go to body"};
 item42[] = {"Always",8,218,-1160.000000,700.000000,-1060.000000,760.000000,0.000000,"Always"};
 item43[] = {"Body_reached",4,218,-1160.000000,1020.000000,-1060.000000,1080.000000,0.000000,"Body reached"};
-item44[] = {"Look_at_body",2,250,-1160.000000,1100.000000,-1060.000000,1160.000000,0.000000,"Look at body"};
+item44[] = {"Look_at_body",2,4346,-1160.000000,1100.000000,-1060.000000,1160.000000,0.000000,"Look at body"};
 item45[] = {"Higher_priority",4,218,-1340.000000,1100.000000,-1240.000000,1160.000000,1.000000,"Higher priority " \n "danger"};
 item46[] = {"Time_up",4,218,-1160.000000,1340.000000,-1060.000000,1400.000000,0.000000,"Time up"};
 item47[] = {"Clean_up_1",2,250,-1520.000000,1100.000000,-1420.000000,1160.000000,0.000000,"Clean-up"};
@@ -201,8 +201,8 @@ link75[] = {65,13};
 link76[] = {66,67};
 link77[] = {67,2};
 link78[] = {68,66};
-globals[] = {0.000000,0,0,0,0,640,480,1,215,6316128,1,-1672.763916,-108.674797,666.183289,-744.688965,980,884,1};
-window[] = {2,-1,-1,-1,-1,1026,208,829,208,3,998};
+globals[] = {0.000000,0,0,0,0,640,480,1,215,6316128,1,-1530.752319,-840.913696,1369.760010,747.497803,980,884,1};
+window[] = {2,-1,-1,-1,-1,974,156,777,156,3,998};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -243,8 +243,8 @@ class FSM
                          "private _priors = [0, 3, 4, 0, 2, 1, 1, 5, 4, 1];" \n
                          "private _oldDangerCause = -1;" \n
                          "" \n
-                         "private _fnc_BiggestDanger = " \n
-                         "{" \n
+                         "// vanilla function ~ finds most dangerous threat " \n
+                         "private _fnc_biggestDanger = {" \n
                          "	private _priorCur = _priors select _dangerCause;" \n
                          "	{" \n
                          "		private _cause = _x select 0;" \n
@@ -348,10 +348,10 @@ class FSM
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this, _dangerPos] call lambs_danger_fnc_hideInside; " \n
+                         "[_this,  _dangerPos, 55 + random 50] call lambs_danger_fnc_hideInside; " \n
                          "" \n
                          "// animation" \n
-                         "if (count weapons _this < 1) then { " \n
+                         "if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
                          "	_this playMoveNow selectRandom ['ApanPknlMsprSnonWnonDf','ApanPercMsprSnonWnonDf','ApanPpneMsprSnonWnonDf','ApanPpneMrunSnonWnonDf'];" \n
                          "}; " \n
                          "" \n
@@ -641,7 +641,7 @@ class FSM
                          "(group _this) setSpeedMode ""FULL"";" \n
                          "" \n
                          "// Animation" \n
-                         "if (count weapons _this < 1) then {  " \n
+                         "if (_this call lambs_danger_fnc_fsmAllowAnimation) then {  " \n
                          "	_this playMoveNow selectRandom ['ApanPknlMsprSnonWnonDf','ApanPercMsprSnonWnonDf'];" \n
                          "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -836,7 +836,7 @@ class FSM
                         itemno = 44;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this, getPos _this, 25] call lambs_danger_fnc_checkBody; " \n
+                         "[_this,  getPos _this,  25] call lambs_danger_fnc_checkBody; " \n
                          "" \n
                          "// stance " \n
                          "_this setUnitPosWeak ""Middle"";" \n
@@ -1039,7 +1039,7 @@ class FSM
                          "// Chance to stop + animation " \n
                          "if (random 1 > 0.6) then {" \n
                          "	_this stop true;" \n
-                         "	if (count weapons _this < 1) then { " \n
+                         "	if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
                          "		_this playMoveNow selectRandom ['ApanPpneMsprSnonWnonDf','ApanPpneMrunSnonWnonDf',""ApanPpneMstpSnonWnonDnon_G01"",""ApanPpneMstpSnonWnonDnon_G02"",""ApanPpneMstpSnonWnonDnon_G03""];" \n
                          "	}; " \n
                          "}; " \n
