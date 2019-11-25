@@ -50,7 +50,7 @@ while {_pos isEqualTo []} do {
     _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
 
     // water
-    if (!(_pos isEqualTo [])) then {if (surfaceIsWater _pos) then {_pos = []};};
+    if !(_pos isEqualTo []) then {if (surfaceIsWater _pos) then {_pos = []};};
 
     // update
     _min = _min + 15;

@@ -32,7 +32,7 @@ _group setBehaviourStrong "CARELESS";
 _pos = _pos call CBA_fnc_getPos;
 
 // sort group
-private _units = units _group; 
+private _units = units _group;
 
 // override
 if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
@@ -52,7 +52,7 @@ if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
     _x disableAI "CHECKVISIBLE";
     _x doMove _pos;
     _x doWatch _pos;
-    if ((random 1 > 0.5) && {_retreat}) then {
+    if (RND(0.5) && {_retreat}) then {
         _x playMoveNow selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",

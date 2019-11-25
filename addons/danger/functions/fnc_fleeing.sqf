@@ -55,7 +55,7 @@ if !(_buildings isEqualTo []) exitWith {
 
 // update path
 private _enemy = _unit findNearestEnemy _unit;
-if (!isNull _enemy) then {
+if !(isNull _enemy) then {
 
     // newpos
     private _pos = (_unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70]);

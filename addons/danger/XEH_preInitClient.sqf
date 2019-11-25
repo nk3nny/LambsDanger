@@ -40,10 +40,24 @@ private _fnc_suppress_AI = {
     private _units = allUnits select {side _x isEqualTo side player && {_x distance player < 22} && {!isPlayer _x}};
     {
         private _target = _x findNearestEnemy _x;
-        if (isNull _target) then {_target = cursorObject};  // added to get a target more commonly. - nkenny
-        _x setBehaviour "COMBAT";
-        _x doSuppressiveFire getposASL _target;
-        _x suppressFor 6 + (random 5);
+        if (isNull _target) then { _target = cursorObject };  // added to get a target more commonly. - nkenny
+        private _firePos = [0, 0, 0];
+        if (isNull _target) then {
+            private _intersections = lineIntersectsSurfaces [positionCameraToWorld [0, 0, 0], positionCameraToWorld [0, 0, 10000], player, chopper, true, -1];
+            if !(_intersections isEqualTo []) then {
+                _firePos = (_intersections select 0) select 0;
+                _target = _x findNearestEnemy _firePos;
+                if !(isNull _target) then {
+                    _firePos = getPosASL _target;
+                };
+            };
+        } else {
+            _firePos = getPosASL _target;
+        };
+        if !(_firePos isEqualTo [0, 0, 0]) then {
+            _x doSuppressiveFire _firePos;
+            _x suppressFor 6 + (random 5);
+        };
     } foreach _units;
     private _txt = format ["%1 quick suppression (%2 units)",side player,count _units];
     [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;

@@ -1,4 +1,4 @@
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 /*
  * Author: nkenny
  * Creates a map marker at location
