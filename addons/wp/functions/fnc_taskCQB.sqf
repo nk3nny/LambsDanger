@@ -30,7 +30,7 @@ private _fnc_find = {
     params ["_pos", "_radius", "_group"];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {count (_x buildingPos -1) > 0};
-    _building = _building select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _group), [0, 0]]) > 0};
+    _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
     if (count _building > 0) exitWith { _building select 0 };
     objNull
 };
@@ -74,7 +74,7 @@ private _fnc_act = {
     };
 
     // clear and check buildings
-    private _buildingPos = _building getVariable ["LAMBS_CQB_cleared_" + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+    private _buildingPos = _building getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     private _leader = leader _group;
     {
@@ -117,7 +117,7 @@ private _fnc_act = {
     } count (units _group);
 
     // update variable
-    _building setVariable ["LAMBS_CQB_cleared_" + str (side _group), _buildingPos];
+    _building setVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), _buildingPos];
 };
 
 // functions end ---
@@ -131,13 +131,13 @@ if (_group isEqualType objNull) then {
     _group = group _group;
 };
 
-
 // orders
 _group setSpeedMode "FULL";
 _group setFormation "FILE";
 _group enableAttack false;
 _group allowFleeing 0;
 {
+    _x setVariable [QEGVAR(danger,dangerDisabled), true];
     _x disableAI "AUTOCOMBAT";
     _x disableAI "SUPPRESSION";
     _x enableIRLasers true;
@@ -147,7 +147,7 @@ _group allowFleeing 0;
 // loop
 while {{alive _x} count units _group > 0} do {
     // performance
-    waitUntil {sleep 1; simulationenabled (leader _group)};
+    waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // find building
     private _building = [_pos, _radius, _group] call _fnc_find;
@@ -166,6 +166,11 @@ while {{alive _x} count units _group > 0} do {
 };
 
 // reset
+{
+    _x setVariable [QEGVAR(danger,dangerDisabled), false];
+} foreach units _group;
+
+// debug
 if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: CQB DONE version 0.28",side _group];};
 
 // end

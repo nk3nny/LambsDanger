@@ -18,8 +18,15 @@
 */
 params ["_unit", "_pos", ["_range", 10]];
 
-// check if stopped
-if (stopped _unit || {!(attackEnabled _unit)}) exitWith {false};
+// check if stopped or busy
+if (
+    stopped _unit
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
+    || {!(attackEnabled _unit)}
+    || {isplayer (leader _unit)}
+    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
+) exitWith {false};
 
 // if too far away
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};

@@ -23,6 +23,15 @@ if (!isNull objectParent _unit) exitWith {false};
 // units of same side do not trigger
 if (side _unit isEqualTo side _target) exitWith {false};
 
+// units moving or otherwise enable are not cowards
+if (
+    stopped _unit
+    || {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "MOVE")}
+    || {isPlayer (leader _unit)}
+    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
+) exitWith {false};
+
 // Units without weapons are always cowards
 if ((weapons _unit) isEqualTo []) exitWith {true};
 
