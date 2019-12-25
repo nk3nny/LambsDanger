@@ -29,7 +29,7 @@ _unit setVariable [QGVAR(currentTask), "Leader CQC"];
 
 // define buildings
 private _buildings = [_unit, _range] call FUNC(findBuildings);
-_buildings = _buildings select {count (_x getVariable ["LAMBS_CQB_cleared_" + str (side _unit), [0, 0]]) > 0};
+_buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) > 0};
 
 // update variable
 {

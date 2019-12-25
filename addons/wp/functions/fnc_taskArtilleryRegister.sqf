@@ -34,9 +34,9 @@ private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" 
 if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global
-private _global = missionNamespace getVariable ["lambs_artillery_" + str (side _group), []];
+private _global = missionNamespace getVariable [QEGVAR(danger,artillery_) + str (side _group), []];
 { _global pushBackUnique _x; true } count _artillery;
-missionNamespace setVariable ["lambs_artillery_" + str (side _group), _global, false];
+missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _group), _global, false];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

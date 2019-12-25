@@ -45,7 +45,7 @@ _destination apply {_x findEmptyPosition [0, 25, typeOf _veh];};
 _destination = _destination select {count _x > 0 && {!(surfaceIsWater _x)}};
 
 // check -- no location -- exit
-if (count _destination < 1) exitWith { _veh modelToWorldVisual [0, -(random 30), 0] };
+if (_destination isEqualTo []) exitWith { _veh modelToWorldVisual [0, -(random 30), 0] };
 _destination = selectRandom _destination;
 
 // refresh ready

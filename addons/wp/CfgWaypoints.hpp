@@ -2,12 +2,19 @@ class CfgWaypoints {
     class LAMBS_DangerAI {
         displayName = "Advanced AI [LAMBS]";
         class EGVAR(danger,Attack) {
-            displayName = "0 TASK ATTACK [Enters buildings]";
+            displayName = "0 TASK ASSAULT";
             displayNameDebug = QEGVAR(danger,Attack);
-            file = QPATHTOF(functions\fnc_taskAttack.sqf);
+            file = QPATHTOF(scripts\fnc_wpAssault.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
-            tooltip = "Units assault position and check buildings around waypoint out to WP completion radius (default 25m)";
+            tooltip = "Unit rushes to target position with no regard for safety";
         };
+        class EGVAR(danger,Retreat) {
+            displayName = "0 TASK FORCED RETREAT";
+            displayNameDebug = QEGVAR(danger,Retreat);
+            file = QPATHTOF(scripts\fnc_wpRetreat.sqf);
+            icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
+            tooltip = "Unit rushes to target position with no regard for safety";
+        };        
         class EGVAR(danger,Garrison) {
             displayName = "1 TASK GARRISON";
             displayNameDebug = QEGVAR(danger,Garrison);
@@ -47,7 +54,7 @@ class CfgWaypoints {
             displayName = "6 TASK CQB [Experimental]";
             displayNameDebug = QEGVAR(danger,CQB);
             file = QPATHTOF(scripts\fnc_wpCQB.sqf);
-            icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
+            icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
             tooltip = "Clears buildings around the waypoint out to WP completion radius (Default 50m)";
         };
         class EGVAR(danger,Artillery) {

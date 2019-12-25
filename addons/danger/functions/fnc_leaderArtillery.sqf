@@ -24,11 +24,8 @@ if (_pos isEqualTo []) then {
 // check if mod active
 if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- mod not enabled", side _unit]}};
 
-// sort target
-if (_unit distance _pos < 100) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- target too close", side _unit]}};
-
 // settings
-private _artillery = missionNamespace getVariable ["lambs_artillery_" + str (side _unit), []];
+private _artillery = missionNamespace getVariable [QGVAR(artillery_) + str (side _unit), []];
 _artillery select {
     canFire _x
     && {unitReady _x}
@@ -53,6 +50,7 @@ _unit setVariable [QGVAR(currentTask), "Call Artillery"];
 
 // Gesture
 if (stance _unit != "PRONE") then {
+    doStop _unit;
     [_unit, ["MountOptic"]] call FUNC(gesture);
 };
 

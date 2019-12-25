@@ -1,9 +1,14 @@
 class ZEN_WaypointTypes {
     class EGVAR(danger,Attack) {
-        displayName = "0 TASK ATTACK [Enters buildings]";
+        displayName = "0 TASK ASSAULT";
         type = "SCRIPTED";
-        script = QPATHTOF(functions\fnc_taskAttack.sqf);
+        script = QPATHTOF(scripts\fnc_wpAssault.sqf);
     };
+    class EGVAR(danger,Retreat) {
+        displayName = "0 TASK FORCED RETREAT";
+        type = "SCRIPTED";
+        script = QPATHTOF(scripts\fnc_wpRetreat.sqf);
+    };    
     class EGVAR(danger,Garrison) {
         displayName = "1 TASK GARRISON";
         type = "SCRIPTED";
