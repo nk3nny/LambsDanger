@@ -20,15 +20,16 @@ if (_activated && local _logic) then {
     private _error = "";
 
     if (_error == "") then {
-        ["test",
+        ["Set Radio Module",
             [
-                ["test 1", "STRING"],
-                ["test 2", "STRING"],
-                ["test 3", "STRING"],
-                ["test 4", "NUMBER"],
-                ["test 5", "NUMBER"],
-                ["test 6", "NUMBER"]
-            ], {}, {}, {}
+                ["Unit Has Radio", "BOOLEAN"]
+            ], {
+                
+            }, {
+
+            }, {
+
+            }
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
