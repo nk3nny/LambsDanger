@@ -43,7 +43,7 @@ _header ctrlCommit 0;
 private _fnc_CreateLabel = {
     params ["_text", ["_tooltip", ""]];
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
-    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT)];
+    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
     _label ctrlSetText _text;
     _label ctrlSetTooltip _tooltip;
@@ -57,7 +57,7 @@ private _fnc_AddTextField = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
-    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT)];
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _textField ctrlSetTooltip _tooltip;
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
@@ -70,7 +70,7 @@ private _fnc_AddBoolean = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _checkbox = _display ctrlCreate ["RscCheckBox", -1, _globalGroup];
-    _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT - CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)];
+    _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT - CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_HEIGHT / CONST_ELEMENTDIVIDER), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
     _checkbox ctrlCommit 0;
@@ -92,7 +92,7 @@ private _fnc_AddDropDown = {
         };
     } forEach _values;
 
-    _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT)];
+    _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _dropDownField ctrlSetTooltip _tooltip;
     _dropDownField lbSetCurSel _default;
     _dropDownField ctrlCommit 0;
@@ -105,7 +105,7 @@ private _fnc_AddSlider = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _slider = _display ctrlCreate ["ctrlXSliderH", -1, _globalGroup];
-    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT)];
+    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _slider ctrlSetTooltip _tooltip;
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
