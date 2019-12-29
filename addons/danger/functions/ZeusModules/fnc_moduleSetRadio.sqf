@@ -24,12 +24,11 @@ if (_activated && local _logic) then {
             [
                 ["Unit Has Radio", "BOOLEAN"]
             ], {
-                
-            }, {
-
-            }, {
-
-            }
+                params ["_data", "_args"];
+                _args params ["_unit"];
+                _data params ["_hasRadio"];
+                _unit setVariable [QGVAR(dangerRadio), _hasRadio, true];
+            }, {}, {}, _unit
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;

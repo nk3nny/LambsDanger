@@ -12,7 +12,7 @@
 #define CONST_WIDTH 90
 #define CONST_HEIGHT 5
 #define CONST_SPACE_HEIGHT 0.5
-#define CONST_ELEMENTDIVIDER 1
+#define CONST_ELEMENTDIVIDER 2
 
 #define COLOR_A profileNamespace getVariable ["gui_bcg_rgb_a", 0.8]
 #define COLOR_R profileNamespace getVariable ["gui_bcg_rgb_r", 0.13]

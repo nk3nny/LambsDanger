@@ -1,17 +1,40 @@
 #include "script_component.hpp"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
+/*
+ * Author: joko // Jonas
+ * Parses Data from UI Elements from Show Dialog
+ *
+ * Arguments:
+ * 0: Header Text <String>
+ * 1: Data <Array<DataTypes>>
+ * 2: On Complete <Code>
+ * 3: On Abort <Code>
+ * 4: On Unload <Code>
+ * 5: Passthought Parameters <Any>
+ *
+ * Return Value:
+ * <Array> with Parsed Data
+ *
+ * Example:
+ * ["Banana", [["How Many Bannanas?", "SLIDER", "Bannanna, Bannanna? BANANNAS!!!", [0,10], [1, 2]]], { diag_log _this }, {}, {} ] call Lambs_main_fnc_showDialog;
+ *
+ * Public: No
+*/
 params ["_name", "_data", "_OnComplete", "_OnAbort", "_OnUnload", "_params"];
 
 private _display = (findDisplay 46) createDisplay "RscDisplayEmpty";
 
-_display setVariable [QGVAR(OnAbort), _OnAbort];
-_display setVariable [QGVAR(OnUnload), _OnUnload];
-_display setVariable [QGVAR(Params), _params];
 _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
     if (_dikCode == DIK_ESCAPE) then {
         (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On Close Handler
+        _display closeDisplay 1;
+        _handled = true;
+    };
+    if (_dikCode == DIK_NUMPADENTER || _dikCode == DIK_RETURN) then {
+        private _data = _display call FUNC(parseData);
+        [_data, (_display getVariable [QGVAR(Params), []])] call (_display getVariable [QGVAR(OnComplete), {}]);
         _display closeDisplay 1;
         _handled = true;
     };
@@ -23,14 +46,14 @@ _display displayAddEventHandler ["Unload",  {
     (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnClose), {}]); // Call On Close Handler
 }];
 
-private _heigth = ((count _data) + 1) * (PY(CONST_HEIGHT + CONST_SPACE_HEIGHT));
+private _height = ((count _data) + 1) * (PY(CONST_HEIGHT + CONST_SPACE_HEIGHT));
 
 private _basePositionX = 0.5 - (PX(CONST_WIDTH) / 2);
-private _basePositionY = 0.5 - (_heigth / 2);
+private _basePositionY = 0.5 - (_height / 2);
 
 private _globalGroup = _display ctrlCreate ["RscText", -1];
 _globalGroup ctrlSetBackgroundColor BACKGROUND_RGB(0.8);
-_globalGroup ctrlSetPosition [_basePositionX, 0.5 - (_heigth / 2), PX(CONST_WIDTH), _heigth];
+_globalGroup ctrlSetPosition [_basePositionX, 0.5 - (_height / 2), PX(CONST_WIDTH), _height];
 _globalGroup ctrlCommit 0;
 
 private _header = _display ctrlCreate ["RscText", -1, _globalGroup];
@@ -43,7 +66,7 @@ _header ctrlCommit 0;
 private _fnc_CreateLabel = {
     params ["_text", ["_tooltip", ""]];
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
-    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
     _label ctrlSetText _text;
     _label ctrlSetTooltip _tooltip;
@@ -57,7 +80,7 @@ private _fnc_AddTextField = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
-    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _textField ctrlSetTooltip _tooltip;
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
@@ -70,7 +93,7 @@ private _fnc_AddBoolean = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _checkbox = _display ctrlCreate ["RscCheckBox", -1, _globalGroup];
-    _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT - CONST_SPACE_HEIGHT), _basePositionY, PX(CONST_HEIGHT / CONST_ELEMENTDIVIDER), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT + CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_HEIGHT / CONST_ELEMENTDIVIDER), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
     _checkbox ctrlCommit 0;
@@ -92,7 +115,7 @@ private _fnc_AddDropDown = {
         };
     } forEach _values;
 
-    _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2) , PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _dropDownField ctrlSetTooltip _tooltip;
     _dropDownField lbSetCurSel _default;
     _dropDownField ctrlCommit 0;
@@ -105,7 +128,7 @@ private _fnc_AddSlider = {
     [_text, _tooltip] call _fnc_CreateLabel;
 
     private _slider = _display ctrlCreate ["ctrlXSliderH", -1, _globalGroup];
-    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY, PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _slider ctrlSetTooltip _tooltip;
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
@@ -148,9 +171,6 @@ _cancelButton ctrlAddEventHandler ["ButtonClick", {
     (_ctrl getVariable [QGVAR(Params), []]) call (_ctrl getVariable [QGVAR(OnAbort), {}]);
     (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
 }];
-_cancelButton setVariable [QGVAR(OnAbort), _OnAbort];
-_cancelButton setVariable [QGVAR(Display), _display];
-_cancelButton setVariable [QGVAR(Params), _params];
 _cancelButton ctrlCommit 0;
 
 private _okButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
@@ -159,41 +179,24 @@ _okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2), _basePositionY,
 
 _okButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];
-    private _data = [];
-    {
-        _x params ["_ctrl", "_type"];
-        switch (_type) do {
-            case ("BOOLEAN");
-            case ("BOOL"): {
-                _data pushback (cbChecked _ctrl);
-            };
-            case ("NUMBER"): {
-                _data pushback (parseNumber (ctrlText _ctrl));
-            };
-            case ("INT");
-            case ("INTEGER"): {
-                _data pushback (round (parseNumber (ctrlText _ctrl)));
-            };
-            case ("LIST");
-            case ("LISTBOX");
-            case ("DROPDOWN"): {
-                _data pushBack (lbCurSel _ctrl)
-            };
-            case ("SLIDER"): {
-                _data pushBack (sliderPosition _ctrl);
-            };
-            default {
-                _data pushback (ctrlText (_ctrl));
-            };
-        };
-    } forEach (_ctrl getVariable [QGVAR(ControlData), []]);
+    private _data = _ctrl call FUNC(parseData);
     [_data, (_ctrl getVariable [QGVAR(Params), []])] call (_ctrl getVariable [QGVAR(OnComplete), {}]);
     (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
-
 }];
+
 _okButton setVariable [QGVAR(OnComplete), _OnComplete];
 _okButton setVariable [QGVAR(ControlData), _controls];
 _okButton setVariable [QGVAR(Display), _display];
 _okButton setVariable [QGVAR(Params), _params];
+
+_cancelButton setVariable [QGVAR(OnAbort), _OnAbort];
+_cancelButton setVariable [QGVAR(Display), _display];
+_cancelButton setVariable [QGVAR(Params), _params];
+
+_display setVariable [QGVAR(OnComplete), _OnComplete];
+_display setVariable [QGVAR(ControlData), _controls];
+_display setVariable [QGVAR(OnAbort), _OnAbort];
+_display setVariable [QGVAR(OnUnload), _OnUnload];
+_display setVariable [QGVAR(Params), _params];
 
 _okButton ctrlCommit 0;

@@ -19,7 +19,7 @@ if (_activated && local _logic) then {
     if (isNull _group) then { _error = "Error: No Group Selected"; };
 
     if (_error == "") then {
-        // TODO UI
+        
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
     };
