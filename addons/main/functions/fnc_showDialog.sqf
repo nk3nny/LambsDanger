@@ -22,8 +22,23 @@
 */
 params ["_name", "_data", "_OnComplete", "_OnAbort", "_OnUnload", "_params"];
 
-private _display = (findDisplay 46) createDisplay "RscDisplayEmpty";
 
+private _displayGame = findDisplay 46;
+private _displayEGSpectator = findDisplay 60492;
+private _displayCurator = findDisplay 312;
+
+private _display = displayNull;
+
+if !(isNull _displayEGSpectator) then {
+    _display = _displayEGSpectator createDisplay "RscDisplayEmpty";
+} else {
+    if !(isNull _displayCurator) then {
+        _display = _displayCurator createDisplay "RscDisplayEmpty";
+    } else {
+        _display = _displayGame createDisplay "RscDisplayEmpty";
+    };
+};
+if (isNull _display) exitWith {}; // if we hit this something went wrong!
 _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
