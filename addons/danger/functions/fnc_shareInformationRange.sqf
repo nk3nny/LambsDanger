@@ -37,7 +37,7 @@ private _index = _units findIf {
         _x getVariable [QGVAR(dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2d _unit < 70})}
         || {(toLower backpack _x) find "b_radiobag_01_" isEqualTo 0}
-        || {isNumber (configFile >> "CfgVehicles" >> (backpack _x) >> "tf_range")}
+        || {(getNumber (configFile >> "CfgVehicles" >> (backpack _x) >> "tf_hasLRradio")) isEqualTo 1}
 };
 _radio = _index != -1;
 if (_radio) then {
