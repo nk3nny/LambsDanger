@@ -114,6 +114,7 @@ private _curCat = "Share information";
     true
 ] call CBA_fnc_addSetting;
 
+#ifdef ISDEV
 // debug
 _curCat = "Debug";
 // FSM level debug messages
@@ -184,3 +185,10 @@ _curCat = "Debug";
         //GVAR(debug_Drawing) = true; // Force on Debug Renderer
     }
 ] call CBA_fnc_addSetting;
+#else
+GVAR(debug_FSM) = false;
+GVAR(debug_functions) = false;
+GVAR(debug_FSM_civ) = false;
+GVAR(debug_Drawing) = false;
+GVAR(RenderExpectedDestination) = false;
+#endif
