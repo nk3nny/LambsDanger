@@ -97,6 +97,9 @@ private _fnc_AddTextField = {
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
     _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _textField ctrlSetTooltip _tooltip;
+    if !(_default isEqualType "") then {
+        _default = str _default;
+    };
     _textField ctrlSetText _default;
     _textField ctrlCommit 0;
     _textField;
@@ -138,7 +141,11 @@ private _fnc_AddDropDown = {
 };
 
 private _fnc_AddSlider = {
-    params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], ["_default", 0]];
+    params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
+    // if no Default is Given we use the middle of the Range input
+    if (isNil "_default") then {
+        _default = linearConversion [0, 1, 0.5, _range select 0, _range select 1, true];
+    };
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 

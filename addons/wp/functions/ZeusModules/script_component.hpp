@@ -1,1 +1,1 @@
-#include "\z\lambs\addons\danger\script_component.hpp"
+#include "\z\lambs\addons\wp\script_component.hpp"

@@ -9,3 +9,5 @@ PREP(taskGarrison);
 PREP(taskHunt);
 PREP(taskPatrol);
 PREP(taskRush);
+
+SUBPREP(ZeusModules,moduleTaskRush);

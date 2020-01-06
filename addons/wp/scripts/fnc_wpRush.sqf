@@ -14,7 +14,7 @@
 
 // init
 params ["_group", "_pos", ["_radius",0]];
-
+hintSilent "Execute Rush Waypoint";
 // get radius
 _radius = waypointCompletionRadius [_group, currentwaypoint _group];
 if (_radius isEqualTo 0) then { _radius = 1000; };

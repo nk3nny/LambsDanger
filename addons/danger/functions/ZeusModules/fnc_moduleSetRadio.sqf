@@ -1,7 +1,6 @@
 #include "script_component.hpp"
-diag_log _this;
 
-_this params ["_logic", "", "_activated"];
+params ["_logic", "", "_activated"];
 
 if (_activated && local _logic) then {
 
@@ -25,13 +24,14 @@ if (_activated && local _logic) then {
                 ["Unit Has Radio", "BOOLEAN", "If a Unit has a Radio it has a Boosted Communication Range", _unit getVariable [QGVAR(dangerRadio), false]]
             ], {
                 params ["_data", "_args"];
-                _args params ["_unit"];
+                _args params ["_unit", "_logic"];
                 _data params ["_hasRadio"];
                 _unit setVariable [QGVAR(dangerRadio), _hasRadio, true];
-            }, {}, {}, _unit
+                deleteVehicle _logic;
+            }, {}, {}, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+        deleteVehicle _logic;
     };
-    deleteVehicle _logic;
 };

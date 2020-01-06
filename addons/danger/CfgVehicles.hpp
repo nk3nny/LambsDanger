@@ -14,11 +14,10 @@ class CfgVehicles {
         fsmDanger = QUOTE(PATHTOF2_SYS(PREFIX,COMPONENT,scripts\lambs_dangerCivilian.fsm));
     };
 
-    class Logic;
-    class Module_F: Logic {};
-    class Lambs_Danger_SetRadio : Module_F {
+    class Module_F;
+    class GVAR(SetRadio) : Module_F {
         author = "LAMBS Dev Team";
-        _generalMacro = "Lambs_Danger_SetRadio";
+        _generalMacro = QGVAR(SetRadio);
         scope = 1;
         scopeCurator = 2;
         displayName = "Set Radio";
@@ -26,6 +25,6 @@ class CfgVehicles {
         function = QFUNC(moduleSetRadio);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-        isGlobal = 1;
+        isGlobal = 0;
     };
 };
