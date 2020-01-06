@@ -8,9 +8,7 @@ params ["_unit"];
 
 // Standing or recent explosions ignored
 if (
-    !GVAR(ExplosionEventHandlerEnabled)
-    || !(local _unit)
-    || isPlayer _unit
+    isPlayer _unit
     || {!isNull objectParent _unit}
     || {(stance _unit) isEqualTo "PRONE"}
     || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}
@@ -19,7 +17,7 @@ if (
 // settings
 private _pos = _unit getPos [4, random 360];
 private _dir = 360 - (_unit getRelDir _pos);
-_unit setVariable [QGVAR(explosionReactionTime), time + GVAR(ExplosionReactionTime)];
+_unit setVariable [QGVAR(explosionReactionTime), time + 9];
 
 // standing to Right prone
 if (_dir > 330 && { RND(0.2) }) exitWith {
