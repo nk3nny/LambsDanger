@@ -98,7 +98,7 @@ private _curCat = "Share information";
 [
     QGVAR(radio_GUER),
     "SLIDER",
-    ["Base East", "Base range independent and civilian sides share information"],
+    ["Base Independent", "Base range independent and civilian sides share information"],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
     1
