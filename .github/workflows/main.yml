@@ -33,9 +33,7 @@ jobs:
         with:
           command: 'build --release'
       - run: |
-          cp -r 'releases/2.0.0/@lambs' '@LambsDanger'
-          zip -r @LambsDanger.zip @LambsDanger/
       - uses: actions/upload-artifact@master
         with:
           name: '@LambsDanger'
-          path: '@LambsDanger'
+          path: 'releases/@LambsDanger.zip'
