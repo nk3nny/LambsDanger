@@ -36,4 +36,4 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: '@LambsDanger'
-          path: 'release'
+          path: 'releases/@LambsDanger.zip'
