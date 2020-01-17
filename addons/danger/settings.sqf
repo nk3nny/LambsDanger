@@ -6,7 +6,7 @@ private _curCat = "Settings";
     ["Disable Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
     [COMPONENT_NAME, _curCat],
     false,
-    nil         // players may configure their own preferences
+    0         // players may configure their own preferences
 ] call CBA_fnc_addSetting;
 
 // Toggle advanced danger.fsm features on player group
@@ -16,7 +16,7 @@ private _curCat = "Settings";
     ["Disable Suppression from player group", "Toggle autonomous suppression for units in player group"],
     [COMPONENT_NAME, _curCat],
     false,
-    nil
+    0
 ] call CBA_fnc_addSetting;
 
 // Toggle reaction state danger.fsm features on player group
@@ -26,7 +26,7 @@ private _curCat = "Settings";
     ["Disable Reaction state on player group", "Toggle Reaction phase on units in player group"],
     [COMPONENT_NAME, _curCat],
     false,
-    nil
+    0
 ] call CBA_fnc_addSetting;
 
 private _curCat = "General";
@@ -37,7 +37,7 @@ private _curCat = "General";
     ["CQB Range", "Range at which units consider themselves in assault range"],
     [COMPONENT_NAME, _curCat],
     [25, 150, 50, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Minimum range for suppression
@@ -47,7 +47,7 @@ private _curCat = "General";
     ["Minimum Distance for Suppression Fire", "Within this distance AI will not perform suppression fire"],
     [COMPONENT_NAME, _curCat],
     [1, 500, 25, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Chance of panic expressed as percentage
@@ -57,7 +57,7 @@ private _curCat = "General";
     ["Panic Chance", "Chance to panic in percentage"],
     [COMPONENT_NAME, _curCat],
     [1, 100, 10, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 private _curCat = "Share information";
@@ -68,7 +68,7 @@ private _curCat = "Share information";
     ["Shout", "Range AI units share information without radios"],
     [COMPONENT_NAME, _curCat],
     [20, 150, 50, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Base range of WEST side
@@ -78,7 +78,7 @@ private _curCat = "Share information";
     ["Base West", "Base range side WEST share information"],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Base range of EAST side
@@ -88,17 +88,17 @@ private _curCat = "Share information";
     ["Base East", "Base range side EAST share information"],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Base range of INDEPENDENT side
 [
     QGVAR(radio_GUER),
     "SLIDER",
-    ["Base East", "Base range independent and civilian sides share information"],
+    ["Base Independent", "Base range independent and civilian sides share information"],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Base range of RadioBackpack
@@ -108,7 +108,7 @@ private _curCat = "Share information";
     ["Backpack radios", "Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)"],
     [COMPONENT_NAME, _curCat],
     [500, 6000, 2000, 0],
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 _curCat = "CQB Formations";
@@ -139,10 +139,10 @@ DFUNC(UpdateCQBFormations) = {
         [_x, _x + " Formation is Classified as CQB"], // TODO: Better Description? @nKenny
         [COMPONENT_NAME, _curCat],
         _x in GVAR(CQB_formations),
-        true, _code
+        1, _code
     ] call CBA_fnc_addSetting;
 } forEach GVAR(allPossibleFormations);
-#ifdef ISDEV
+
 // debug
 _curCat = "Debug";
 // FSM level debug messages
@@ -152,7 +152,7 @@ _curCat = "Debug";
     ["Debug", "FSM debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // Function level debug messages
@@ -162,7 +162,7 @@ _curCat = "Debug";
     ["Debug Functions", "Function debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 // FSM level debug messages for civilian fsm
@@ -172,7 +172,7 @@ _curCat = "Debug";
     ["Debug Civ", "FSM debug messages for civilian fsm"],
     [COMPONENT_NAME, _curCat],
     false,
-    true
+    1
 ] call CBA_fnc_addSetting;
 
 
@@ -183,7 +183,7 @@ _curCat = "Debug";
     ["Debug Draw", "Draws 3d Text over Units with AI Informations"],
     [COMPONENT_NAME, _curCat],
     false,
-    true,
+    1,
     {
         {
             ctrlDelete _x;
@@ -203,14 +203,5 @@ _curCat = "Debug";
     ["Debug Draw Expected Destination", "Draws Expected Destinations of AI Units"],
     [COMPONENT_NAME, _curCat],
     false,
-    true, {
-        //GVAR(debug_Drawing) = true; // Force on Debug Renderer
-    }
+    1
 ] call CBA_fnc_addSetting;
-#else
-GVAR(debug_FSM) = false;
-GVAR(debug_functions) = false;
-GVAR(debug_FSM_civ) = false;
-GVAR(debug_Drawing) = false;
-GVAR(RenderExpectedDestination) = false;
-#endif

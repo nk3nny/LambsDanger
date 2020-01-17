@@ -16,5 +16,6 @@
 */
 fleeing _this
 || {(_this getVariable ["ACE_isUnconscious", false])}
+|| {((lifeState _this) in ["DEAD", "INCAPACITATED"])}
 || {_this getVariable [QGVAR(disableAI), false]}
 || {isplayer leader _this && {_this getVariable [QGVAR(disableAIPlayerGroup), false]}}
