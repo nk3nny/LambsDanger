@@ -58,7 +58,7 @@ _unit setUnitPos "DOWN";
 [
     {
         if (alive _this) then {
-        _this setUnitPos "AUTO"
+            _this setUnitPos "AUTO"
         };
     }, _unit, 5 + random 3
 ] call CBA_fnc_waitAndExecute;
