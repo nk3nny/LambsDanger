@@ -1,0 +1,9 @@
+name = "lambs_danger"
+prefix = "lambs_danger"
+author = "LAMBS Dev Team"
+template = "yes"
+mainprefix = "z"
+include = ["./include"]
+files = ["mod.cpp"]
+folder_optionals = true
+sig_version = 3
