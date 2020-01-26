@@ -19,10 +19,13 @@
 */
 params ["_unit", "_target", ["_units", []],["_cycle",4]];
 
+if (isPlayer _unit) exitWith {false};
 // find units
 if (_units isEqualTo []) then {
     _units = units _unit;
 };
+
+_units = _units select {!isPlayer _x};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];

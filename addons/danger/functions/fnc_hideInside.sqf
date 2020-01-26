@@ -19,17 +19,18 @@
 */
 params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
 
-if (_buildings isEqualTo []) then {
-    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
-};
-
 // stopped -- exit
 if (
     stopped _unit
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
+    || {isPlayer _unit}
 ) exitWith {false};
+
+if (_buildings isEqualTo []) then {
+    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+};
 
 // already inside -- exit
 if (RND(0.05) && {_unit call FUNC(indoor)}) exitWith {

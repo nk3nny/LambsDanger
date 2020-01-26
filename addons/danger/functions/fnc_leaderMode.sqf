@@ -17,7 +17,7 @@
  * Public: No
 */
 params ["_unit", ["_setting", 0], ["_target", objNull]];
-
+if (isPlayer _unit)  exitWith {false};
 // get variable
 private _dangerMode = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
 

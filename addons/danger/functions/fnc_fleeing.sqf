@@ -21,6 +21,7 @@ if (
     _unit getVariable [QGVAR(disableAI), false]
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
+    || {isPlayer _unit}
 ) exitWith {false};
 
 // variable

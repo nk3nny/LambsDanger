@@ -18,6 +18,7 @@
 */
 params ["_unit", ["_setting", 0], ["_delay", 1]];
 
+if (isPlayer _unit) exitWith {false};
 // get variable
 private _dangerMode = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
 

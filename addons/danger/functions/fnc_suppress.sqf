@@ -22,6 +22,7 @@ if (
     getSuppression _unit > 0.5
     || {(primaryWeapon _unit) isEqualTo ""}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
+    || {isPlayer _unit}
 ) exitWith {false}; // possibly add a more intelligent system here -nkenny
 
 _unit setVariable [QGVAR(currentTarget), _pos];

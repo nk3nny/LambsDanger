@@ -17,6 +17,8 @@
 */
 params ["_unit", ["_stance", ""],"_anim"];
 
+if (isPlayer _unit) exitWith {false};
+
 if (_stance isEqualTo "") then {
     _stance = stance _unit;
 };

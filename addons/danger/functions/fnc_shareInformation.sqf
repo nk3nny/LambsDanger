@@ -24,6 +24,7 @@ if (
     _unit distance _target > viewDistance
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
+    || {isPlayer _unit}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -58,7 +59,7 @@ private _knowsAbout = _unit knowsAbout _target;
 
 // debug
 if (GVAR(debug_functions)) then {
-    
+
     // debug message
     systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];
 

@@ -17,18 +17,15 @@
 */
 params ["_unit", "_target"];
 
-// vehicles are never coward
-if (!isNull objectParent _unit) exitWith {false};
-
-// units of same side do not trigger
-if (side _unit isEqualTo side _target) exitWith {false};
-
 // units moving or otherwise enable are not cowards
 if (
-    stopped _unit
+    !isNull objectParent _unit // vehicles are never coward
+    || {side _unit isEqualTo side _target} // units of same side do not trigger
+    || {stopped _unit}
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {isPlayer (leader _unit)}
+    || {isPlayer _unit}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
 ) exitWith {false};
 

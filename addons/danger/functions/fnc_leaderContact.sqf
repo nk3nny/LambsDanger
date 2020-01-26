@@ -17,13 +17,15 @@
 */
 params ["_unit", "_target"];
 
+if (isPlayer _unit) exitWith {false};
+
 // share information
 [_unit, _target] call FUNC(shareInformation);
 
 // gather the stray flock
 {
     _x doFollow _unit;
-} forEach (( units _unit ) select { _x distance _unit > 45 });
+} forEach (( units _unit ) select { _x distance _unit > 45 && {!(isPlayer _x)}});
 
 // change formation
 (group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation),formation _unit]);

@@ -22,6 +22,7 @@ if (
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
+    || {isPlayer _unit}
 ) exitWith {false};
 
 // settings

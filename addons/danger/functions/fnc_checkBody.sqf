@@ -24,7 +24,8 @@ if (
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {!(attackEnabled _unit)}
-    || {isplayer (leader _unit)}
+    || {isPlayer (leader _unit)}
+    || {isPlayer _unit}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 

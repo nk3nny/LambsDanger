@@ -17,6 +17,7 @@
 */
 params ["_unit", ["_range", GVAR(CQB_range)]];
 
+if (isPlayer _unit) exitWith {false};
 // new variable + distance check
 private _inCQC = group _unit getVariable [QGVAR(inCQC), []];
 _inCQC = _inCQC select {_x distance2d _unit < 250};

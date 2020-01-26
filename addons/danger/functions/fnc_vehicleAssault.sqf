@@ -21,7 +21,7 @@ params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
 // settings + check
 private _veh = vehicle _unit;
-if (!canFire _veh) exitWith {false};
+if (!canFire _veh || isPlayer _unit) exitWith {false};
 
 // tweaks target to remain usefully close
 if ((_pos distance2d _unit) < 80) then {_pos = (_unit getHideFrom _target)};

@@ -25,6 +25,7 @@ if (
     || {!(_unit checkAIFeature "MOVE")}
     || {!(attackEnabled _unit)}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
+    || {isPlayer _unit}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];

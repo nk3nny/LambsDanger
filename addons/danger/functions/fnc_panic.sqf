@@ -15,7 +15,7 @@
  * Public: No
 */
 params ["_unit"];
-
+if (isPlayer _unit) exitWith {0};
 // near enemy + ace check
 if (_unit distance (_unit findNearestEnemy _unit) < 35) exitWith {3};
 if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {22};

@@ -17,16 +17,18 @@
 */
 params ["_unit", ["_pos", []]];
 
-// get pos
-if (_pos isEqualTo []) then {
-    _pos = getPos _unit;
-};
+if (isPlayer _unit) exitWith {false};
 
 // settings
 private _mode = toLower ((group _unit) getVariable [QGVAR(dangerAI), "enabled"]);
 
 // check mode
 if (_mode isEqualTo "disabled") exitWith {false};
+
+// get pos
+if (_pos isEqualTo []) then {
+    _pos = getPos _unit;
+};
 
 // enemy
 private _enemy = _unit targets [true, 600, [], 0, _pos];
@@ -74,7 +76,7 @@ private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units _unit select {unitReady _x && {_x distance2d _unit < 70}};
+private _units = units _unit select {unitReady _x && {_x distance2d _unit < 70} && {!isPlayer _x}};
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
 

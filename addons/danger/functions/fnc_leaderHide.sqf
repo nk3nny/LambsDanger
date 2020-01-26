@@ -18,6 +18,7 @@
 */
 params ["_unit", "_target", ["_buildings", []]];
 
+if (isPlayer _unit) exitWith {false};
 if (_buildings isEqualTo []) then {
     _buildings = [_unit getPos [10, _target getDir _unit], 45, true, true] call FUNC(findBuildings);
 };
@@ -30,7 +31,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 
 // units
 private _units = units _unit;
-_units = _units select {isNull ObjectParent _x && {(secondaryWeapon _x) isEqualTo ""}};
+_units = _units select {isNull ObjectParent _x && {(secondaryWeapon _x) isEqualTo ""} && {!isPlayer _unit}};
 
 // units without launchers hide!
 {
