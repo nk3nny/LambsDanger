@@ -190,8 +190,9 @@ _cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 
 
 _cancelButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];
-    (_ctrl getVariable [QGVAR(Params), []]) call (_ctrl getVariable [QGVAR(OnAbort), {}]);
-    (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
+    private _display = ctrlParent _ctrl;
+    (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]);
+    _display closeDisplay 1;
 }];
 _cancelButton ctrlCommit 0;
 
@@ -201,19 +202,12 @@ _okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2), _basePositionY,
 
 _okButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];
-    private _data = _ctrl call FUNC(parseData);
-    [_data, (_ctrl getVariable [QGVAR(Params), []])] call (_ctrl getVariable [QGVAR(OnComplete), {}]);
-    (_ctrl getVariable [QGVAR(Display), displayNull]) closeDisplay 1;
+    private _display = ctrlParent _ctrl;
+
+    private _data = _display call FUNC(parseData);
+    [_data, (_display getVariable [QGVAR(Params), []])] call (_ctrl getVariable [QGVAR(OnComplete), {}]);
+    _display closeDisplay 1;
 }];
-
-_okButton setVariable [QGVAR(OnComplete), _OnComplete];
-_okButton setVariable [QGVAR(ControlData), _controls];
-_okButton setVariable [QGVAR(Display), _display];
-_okButton setVariable [QGVAR(Params), _params];
-
-_cancelButton setVariable [QGVAR(OnAbort), _OnAbort];
-_cancelButton setVariable [QGVAR(Display), _display];
-_cancelButton setVariable [QGVAR(Params), _params];
 
 _display setVariable [QGVAR(OnComplete), _OnComplete];
 _display setVariable [QGVAR(ControlData), _controls];
