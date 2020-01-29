@@ -205,7 +205,7 @@ _okButton ctrlAddEventHandler ["ButtonClick", {
     private _display = ctrlParent _ctrl;
 
     private _data = _display call FUNC(parseData);
-    [_data, (_display getVariable [QGVAR(Params), []])] call (_ctrl getVariable [QGVAR(OnComplete), {}]);
+    [_data, (_display getVariable [QGVAR(Params), []])] call (_display getVariable [QGVAR(OnComplete), {}]);
     _display closeDisplay 1;
 }];
 
