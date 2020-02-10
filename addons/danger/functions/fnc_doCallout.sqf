@@ -21,12 +21,11 @@ private _cacheName = format [QGVAR(%1_%2_%3), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
 if (isNil "_cachedSounds") then {
-    private _protocolConfig = (configFile >> (getText (configFile >> (getText (configfile >> "CfgVoice" >> _speaker >> "protocol")))));
+    private _protocolConfig = (configFile >> (getText (configFile >> (getText (configfile >> "CfgVoice" >> _speaker >> "protocol")))) >> "Words");
 
     if (_behavior != "") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
-
     private _calloutConfigName = switch (toLower(_callout)) do {
         default {
             ""
