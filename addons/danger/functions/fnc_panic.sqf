@@ -66,7 +66,7 @@ _unit doWatch objNull;
 _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];
 
 // chance to randomly fire weapon
-if ((RND(0.7)) && {!(primaryWeapon _unit isEqualTo "")}) then {
+if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
     _unit forceWeaponFire [(weapons _unit) select 0, selectRandom (getArray (configFile >> "CfgWeapons" >> ((weapons _unit) select 0) >> "modes"))];
 };
 

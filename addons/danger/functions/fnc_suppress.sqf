@@ -40,11 +40,6 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 // debug
 if (GVAR(debug_functions)) then {
     systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];
-
-    // markers
-    [_pos, "SUPPRESS"] call FUNC(dotMarker);
-    _sign = createVehicle ["Sign_Arrow_Green_F",_pos, [], 0, "CAN_COLLIDE"];
-    _sign setPos (_pos vectorAdd [0, 0, 0.2 + random 1.2]);
 };
 
 // end
