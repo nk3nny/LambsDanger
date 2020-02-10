@@ -42,11 +42,12 @@ if (getSuppression _unit < 0.6 && {_unit call FUNC(indoor)}) exitWith {
 
     // stance
     _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
+    [_unit, ["Down"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
 
 };
 
 // nearBuildings
-private _buildings = [_unit,7,true,true] call FUNC(findBuildings);
+private _buildings = [_unit, 7, true, true] call FUNC(findBuildings);
 if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!
@@ -70,11 +71,8 @@ if !(isNull _enemy) then {
     };
 
     // stance based on distance
-    if (_unit distance _enemy < 50) then {_unit setUnitPosWeak "MIDDLE"};
-    if (_unit distance _enemy > 180) then {
-        [_unit, ["Down"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
-        _unit setUnitPosWeak "DOWN"
-    };
+    if (_unit distance _enemy < 50) then {_unit setUnitPosWeak "MIDDLE";};
+    if (_unit distance _enemy > 200) then {_unit setUnitPosWeak "DOWN";};
 
     // move away
     _unit doMove _pos;

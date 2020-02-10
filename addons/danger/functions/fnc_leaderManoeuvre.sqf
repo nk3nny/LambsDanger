@@ -17,11 +17,11 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []],["_cycle",4]];
+params ["_unit", "_target", ["_units", []],["_cycle",2]];
 
 // find units
 if (_units isEqualTo []) then {
-    _units = units _unit;
+    _units = (units _unit) select {!isPlayer _x};
 };
 
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -42,14 +42,35 @@ _pos pushBack (_target call CBA_fnc_getPos);
 // adds movement order
 (group _unit) move (_pos select 0);
 
+// debug
+[_unit, format ["units %1 positions %2", count _units, count _pos]] call FUNC(dotMarker);
+systemchat format ["units %1 positions %2", count _units, count _pos];
+
+{
+    _sign = "Sign_Arrow_Yellow_F" createVehicle getpos _x;
+    [_x,"units","colorYellow"] call FUNC(dotMarker);
+} foreach _units;
+
+{
+    _sign = "Sign_Arrow_Blue_F" createVehicle _x;
+    [_x,"positions","colorBlue"] call FUNC(dotMarker);
+} foreach _pos;
+
 // manoeuvre CQB // within close combat - nkenny
 if (_unit distance2D (_pos select 0) < GVAR(CQB_range)) exitWith {
+
+    // mass strenght one spot
+    _pos = selectRandom _pos;
+
     {
         _x forceSpeed 2;
-        _x doMove selectRandom _pos;
+        _x doMove _pos;
 
         // force movement
-        if !(_x call FUNC(indoor)) then {_x playActionNow selectRandom ["FastF", "FastF", "FastLF", "FastRF"];};
+        if !(_x call FUNC(indoor)) then {[_x, ["FastF", "FastF", "FastLF", "FastRF"]] call FUNC(gesture);};
+        _x setVariable [QGVAR(currentTask), "Manoeuvre CQB"];
+
+        systemchat "MANOEUVRE CQC!";
 
     } foreach _units;
 };
@@ -65,18 +86,18 @@ private _fnc_manoeuvre = {
     {
         // Half suppress -- Half manoeuvre
         if (RND(0.6)) then {
-            _x forceSpeed 0;
+            _x forceSpeed 2;
             _x suppressFor 12;
             [_x, selectRandom _pos] call FUNC(suppress);
         } else {
             // manoeuvre
             _x forceSpeed -1;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
-            _x commandMove selectRandom _pos;
+            _x doMove selectRandom _pos;
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
 
             // force movement
-            if !(_x call FUNC(indoor)) then {_x playActionNow "FastF"};
+            if !(_x call FUNC(indoor)) then {[_x, ["FastF"]] call FUNC(gesture);};
         };
     } foreach _units;
 

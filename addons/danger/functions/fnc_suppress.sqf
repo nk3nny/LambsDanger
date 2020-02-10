@@ -21,6 +21,7 @@ params ["_unit", "_pos"];
 if (
     getSuppression _unit > 0.5
     || {(primaryWeapon _unit) isEqualTo ""}
+    || {currentCommand _unit isEqualTo "Suppress"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
 ) exitWith {false}; // possibly add a more intelligent system here -nkenny
 
@@ -36,7 +37,14 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];};
+if (GVAR(debug_functions)) then {
+    systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];
+
+    // markers
+    [_pos, "SUPPRESS"] call FUNC(dotMarker);
+    _sign = "Sign_Arrow_Green_F" createVehicle [0,0,0];
+    _sign setPos (_pos vectorAdd [0, 0, 0.2 + random 1.2]);
+};
 
 // end
 true

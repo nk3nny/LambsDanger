@@ -24,7 +24,7 @@ private _veh = vehicle _unit;
 if (!canFire _veh) exitWith {false};
 
 // tweaks target to remain usefully close
-if ((_pos distance2d _unit) < 80) then {_pos = (_unit getHideFrom _target)};
+if ((_pos distance2d _unit) < 150) then {_pos = (_unit getHideFrom _target)};
 
 //  target on foot
 if ((_unit distance2d _pos) < GVAR(minSuppression_range)) exitWith {false};
@@ -72,8 +72,8 @@ private _fnc_turretDir = {
     _atan < _threshold
 };
 
-// shoot cannon
-private _cannon = (count _buildings > 2) && {RND(0.2)} && {(_veh distance _pos) > 80} && {[_veh, _pos] call _fnc_turretDir};
+// shoot cannon ~ random chance, enough positions, 80m+ and turret pointed right way
+private _cannon = RND(0.2) && {count _buildings > 2} && {(_veh distance _pos) > 80} && {[_veh, _pos] call _fnc_turretDir};
 if (_cannon) then {
     _veh action ["useWeapon", _veh, gunner _veh, random 2];
 };
