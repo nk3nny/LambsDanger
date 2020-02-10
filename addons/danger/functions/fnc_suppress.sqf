@@ -20,6 +20,7 @@ params ["_unit", "_pos"];
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.5
+    || {terrainIntersect [_unit, _pos]}
     || {(primaryWeapon _unit) isEqualTo ""}
     || {currentCommand _unit isEqualTo "Suppress"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
@@ -42,7 +43,7 @@ if (GVAR(debug_functions)) then {
 
     // markers
     [_pos, "SUPPRESS"] call FUNC(dotMarker);
-    _sign = "Sign_Arrow_Green_F" createVehicle [0,0,0];
+    _sign = createVehicle ["Sign_Arrow_Green_F",_pos, [], 0, "CAN_COLLIDE"];
     _sign setPos (_pos vectorAdd [0, 0, 0.2 + random 1.2]);
 };
 
