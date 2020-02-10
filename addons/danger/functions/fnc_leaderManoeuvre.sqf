@@ -22,9 +22,13 @@ params ["_unit", "_target", ["_units", []],["_cycle", 3]];
 // find target
 _target = _target call cba_fnc_getPos;
 
+// stopped or static
+if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
+
 // check CQC ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
-    { _x doFollow (leader _x)} foreach units _unit;
+    //{ _x doFollow (leader _x)} foreach units _unit; 
+    _unit setFormation "FILE";  // <-- testing setting. Works great, but design principle prohibits altering formations. -nkenny
     false
 };
 
@@ -34,7 +38,7 @@ if (_units isEqualTo []) then {
 };
 
 // find overwatch position
-private _overwatch = [getpos _unit, ((_unit distance _target) / 2) min 300, 100, 8, _target] call lambs_danger_fnc_findOverwatch;
+private _overwatch = [getpos _unit, ((_unit distance2d _target) / 2) min 300, 100, 8, _target] call FUNC(findOverwatch);
 
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
@@ -65,7 +69,7 @@ private _fnc_manoeuvre = {
         // Half suppress -- Half manoeuvre
         if (RND(0.2) && {count _pos > 0}) then {
             _x doWatch (_pos select 0);
-            [_x, _pos select 0] call lambs_danger_fnc_suppress;
+            [_x, _pos select 0] call FUNC(suppress);
             _x suppressFor 12;
             _pos deleteAt 0;
         } else {

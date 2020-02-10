@@ -18,7 +18,7 @@ item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.0
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
 item15[] = {"Ready_Infantry",2,250,-300.000000,-75.000000,-200.000000,-25.000000,0.000000,"Ready Infantry"};
 item16[] = {"Tank_Attack",4,218,-925.000000,25.000000,-825.000000,75.000000,4.000000,"Tank" \n "Attack"};
-item17[] = {"Attack____Suppress",2,250,-925.000000,150.000000,-825.000000,200.000000,0.000000,"Attack " \n "+ Suppress" \n ""};
+item17[] = {"Attack____Suppress",2,4346,-925.000000,150.000000,-825.000000,200.000000,0.000000,"Attack " \n "+ Suppress" \n ""};
 item18[] = {"Timeout",4,218,-925.000000,300.000000,-825.000000,350.000000,0.000000,"Timeout"};
 item19[] = {"Reset_vehicle",2,250,-925.000000,500.000000,-825.000000,550.000000,0.000000,"Reset vehicle"};
 item20[] = {"",7,210,71.000000,-54.000000,79.000000,-46.000000,0.000000,""};
@@ -53,7 +53,7 @@ item48[] = {"Timeout",4,218,325.000000,425.000000,425.000000,475.000000,0.000000
 item49[] = {"___Artillery",4,218,675.000000,200.000000,775.000000,250.000000,1.000000,"6" \n "Artillery"};
 item50[] = {"Artillery___Cont",2,250,675.000000,425.000000,775.000000,475.000000,0.000000,"Artillery: " \n "Continue"};
 item51[] = {"___Manoeuvre",4,218,525.000000,200.000000,625.000000,250.000000,1.000000,"3" \n "Manoeuvre"};
-item52[] = {"Manoeuvre___Cont",2,4346,525.000000,325.000000,625.000000,375.000000,0.000000,"Manoeuvre: " \n "Continue"};
+item52[] = {"Manoeuvre___Cont",2,250,525.000000,325.000000,625.000000,375.000000,0.000000,"Manoeuvre: " \n "Continue"};
 item53[] = {"CQC",4,218,150.000000,150.000000,250.000000,200.000000,4.000000,"CQC"};
 item54[] = {"Panic",4,218,-350.000000,175.000000,-250.000000,225.000000,0.000000,"Panic"};
 item55[] = {"Cargo_or__driver",4,218,-725.000000,25.000000,-625.000000,75.000000,0.000000,"Cargo or " \n "driver"};
@@ -242,8 +242,8 @@ link97[] = {76,29};
 link98[] = {78,79};
 link99[] = {79,18};
 link100[] = {79,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,71.681641,808.075195,616.464355,18.144958,1088,884,1};
-window[] = {2,-1,-1,-32000,-32000,891,78,880,78,3,1106};
+globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-1164.260620,-567.984863,379.957642,-104.516518,1088,884,1};
+window[] = {2,-1,-1,-1,-1,865,52,854,52,3,1106};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -471,7 +471,6 @@ class FSM
                          "_static = (vehicle _this) isKindOf ""StaticWeapon""; " \n
                          "_artillery = (vehicle _this) getVariable [""lambs_danger_isArtillery"", getNumber (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""artilleryScanner"") > 0];" \n
                          "" \n
-                         "" \n
                          "// commander" \n
                          "_commander = (effectiveCommander (vehicle _this)) isEqualTo _this; " \n
                          "" \n
@@ -675,14 +674,11 @@ class FSM
                          "	[vehicle _this, _dangerCausedBy] call lambs_danger_fnc_vehicleRotate; " \n
                          "	" \n
                          "	// assault " \n
-                         "	private _buildings = [_dangerPos, 28, false, false] call lambs_danger_fnc_findBuildings;" \n
-                         "	if (count _buildings > 0) then {" \n
-                         "		[" \n
-                         "			{" \n
-                         "				_this call lambs_danger_fnc_vehicleAssault;" \n
-                         "			}, [_this, _dangerPos,_dangerCausedBy,_buildings], ( 3 + random 3 )" \n
-                         "		] call CBA_fnc_waitAndExecute;" \n
-                         "	};" \n
+                         "	[" \n
+                         "		{" \n
+                         "			_this call lambs_danger_fnc_vehicleAssault;" \n
+                         "		}, [_this, _dangerPos,_dangerCausedBy], ( 3 + random 3 )" \n
+                         "	] call CBA_fnc_waitAndExecute;" \n
                          "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links

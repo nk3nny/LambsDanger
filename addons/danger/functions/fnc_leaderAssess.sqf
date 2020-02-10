@@ -66,6 +66,7 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
     _unit doWatch _pos;
 };
 
+
 // update formation direction
 _unit setFormDir (_unit getDir _pos);
 
@@ -74,7 +75,12 @@ private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units _unit select {unitReady _x && { _x distance2d _unit < 70 } && { isnull objectParent _x } && { !isPlayer _x }};
+private _units = units _unit select {unitReady _x && {!(_x isEqualTo _unit)} && { _x distance2d _unit < 70 } && { isnull objectParent _x } && { !isPlayer _x }};
+
+// isolated leader
+if (_units isEqualTo []) then {
+    _unit doFollow selectRandom _units;
+};
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
 

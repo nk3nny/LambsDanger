@@ -45,7 +45,7 @@ private _knowsAbout = _unit knowsAbout _target;
 // share information
 {
     if (!isNull _target) then {
-        _x reveal [_target, _knowsAbout];
+        _x reveal [_target, _knowsAbout min 1];
     };
 
     if (leader _x distance _unit < (250 min _range)) then {
