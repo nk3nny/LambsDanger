@@ -66,4 +66,4 @@ playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 1, pit
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
     [_unit, false] remoteExecCall ["setRandomLip", 0];
-}, [], 1] CBA_fnc_waitAndExecute;
+}, [], 1] call CBA_fnc_waitAndExecute;
