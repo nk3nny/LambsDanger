@@ -24,11 +24,11 @@ private _cacheName = format [QGVAR(%1_%2_%3), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
 if (isNil "_cachedSounds") then {
-    private _protocolConfig = (configFile >> (getText (configFile >> (getText (configfile >> "CfgVoice" >> _speaker >> "protocol")))) >> "Words");
-
+    private _protocolConfig = configFile >> (getText (configFile >> "CfgVoice" >> _speaker >> "protocol")) >> "Words";
     if (_behavior != "") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
+
     private _calloutConfigName = switch (toLower(_callout)) do {
         case ("contact"): {
             selectRandom ["ContactE_1", "ContactE_2", "ContactE_3"];
@@ -54,16 +54,23 @@ if (isNil "_cachedSounds") then {
 
     _cachedSounds = getArray (_protocolConfig >> _calloutConfigName);
 
+    {
+        private _sound = _x;
+        if (_sound select [0, 1] != "\") then {
+            _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
+        };
+        _cachedSounds set [_forEachIndex, _sound];
+    } forEach _cachedSounds;
+
     GVAR(CalloutCacheNamespace) setVariable [_cacheName, _cachedSounds];
 };
 
 if (_cachedSounds isEqualTo []) exitWith {};
 
 private _sound = selectRandom _cachedSounds;
-if ( _sound == "") exitWith {};
-
+if (_sound == "") exitWith {};
 playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 1, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
-    [_unit, false] remoteExecCall ["setRandomLip", 0];
-}, [], 1] call CBA_fnc_waitAndExecute;
+    _this remoteExecCall ["setRandomLip", 0];
+}, [_unit, false], 1] call CBA_fnc_waitAndExecute;
