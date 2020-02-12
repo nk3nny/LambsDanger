@@ -4,18 +4,21 @@
  *
  *
  * Arguments:
- * 0:
+ * 0: Unit that does the Callout <OBJECT>
+ * 1: Current Unit Behavior <STRING>
+ * 2: Call out <STRING>
+ * 3: Distance the callout is heard <NUMBER> (default: 10)
  *
  * Return Value:
- *
+ * Nothing
  *
  * Example:
- *
+ * [bob, "CombatEngage", "ManDownE", 10] call lambs_danger_fnc_doCallout;
  *
  * Public: No
 */
-
-params ["_unit", "_behavior", "_callout", "_distance"];
+scopeName QGVAR(doCallout_main);
+params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 10]];
 private _speaker = speaker _unit;
 private _cacheName = format [QGVAR(%1_%2_%3), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
@@ -27,6 +30,15 @@ if (isNil "_cachedSounds") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
     private _calloutConfigName = switch (toLower(_callout)) do {
+        case ("contact"): {
+            selectRandom ["ContactE_1", "ContactE_2", "ContactE_3"];
+        };
+        case ("grenadeout"): {
+            selectRandom ["ThrowingGrenadeE_1", "ThrowingGrenadeE_2", "ThrowingGrenadeE_3"];
+        };
+        case ("mandown"): {
+            selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
+        };
         default {
             if (isArray (_protocolConfig >> _callout)) then {
                 _callout;
@@ -36,7 +48,9 @@ if (isNil "_cachedSounds") then {
         };
     };
 
-    if (_calloutConfigName == "") exitWith {};
+    if (_calloutConfigName == "") exitWith {
+        breakOut QGVAR(doCallout_main);
+    };
 
     _cachedSounds = getArray (_protocolConfig >> _calloutConfigName);
 
