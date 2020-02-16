@@ -37,7 +37,7 @@ if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit
 };
 
 // indoor just hide
-if (getSuppression _unit < 0.6 && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.8 && {_unit call FUNC(indoor)}) exitWith {
 
     // halt unit
     doStop _unit;
@@ -47,7 +47,7 @@ if (getSuppression _unit < 0.6 && {_unit call FUNC(indoor)}) exitWith {
 
     // stance
     _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
-    [_unit, ["Down"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
+    [_unit, ["Down", "AdjustB"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
 };
 
 // nearBuildings
@@ -60,7 +60,7 @@ if !(_buildings isEqualTo []) exitWith {
 
 // update path
 private _enemy = _unit findNearestEnemy _unit;
-if !(isNull _enemy) then {
+if (_unit distance2d _enemy < 400) then {
 
     // newpos
     private _pos = (_unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70]);

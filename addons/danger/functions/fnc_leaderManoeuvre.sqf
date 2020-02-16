@@ -27,8 +27,14 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 
 // check CQC ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
-    { _x doFollow (leader _x)} foreach units _unit; 
-    //_unit setFormation "FILE";  // <-- testing setting. Works great, but design principle prohibits altering formations. -nkenny
+
+    // set tasks + rally unit
+    _unit setVariable [QGVAR(currentTask), "Leader Rally"];
+    {
+        _x doFollow (leader _x);
+        _x forceSpeed 24;
+        true
+    } count units _unit;
     false
 };
 
@@ -67,19 +73,19 @@ private _fnc_manoeuvre = {
 
     {
         // Half suppress -- Half manoeuvre
-        if (RND(0.2) && {count _pos > 0}) then {
+        if (RND(0.3) && {count _pos > 0}) then {
             _x doWatch (_pos select 0);
             _x suppressFor 12;
-            [_x, _pos select 0] call FUNC(suppress);
+            [_x, AGLtoASL (_pos select 0)] call FUNC(suppress);
             _pos deleteAt 0;
         } else {
             // manoeuvre
-            _x forceSpeed 6;
+            _x forceSpeed 24;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
 
             // force movement
-            if !(_x call FUNC(indoor)) then {[_x, ["FastF","FastF","FastLF","FastRF"]] call FUNC(gesture);};
+            [_x, ["FastF", "FastF", "FastLF", "FastRF"]] call FUNC(gesture);
         };
     } foreach _units;
 

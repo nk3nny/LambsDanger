@@ -24,6 +24,7 @@ if (
     _unit distance _target > viewDistance
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
+    || {GVAR(radio_disabled)}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -56,6 +57,9 @@ private _knowsAbout = _unit knowsAbout _target;
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 
+// play animation
+if (RND(0.2)) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
+
 // debug
 if (GVAR(debug_functions)) then {
     
@@ -63,10 +67,11 @@ if (GVAR(debug_functions)) then {
     systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];
 
     // debug marker
-    _m = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
-    //[{deleteMarker _this}, _m, 10] call cba_fnc_waitAndExecute;
-
-    };
+    _m = [_unit, "", _unit call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
+    _mt = [_target, "", _target call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
+    _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
+    [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call cba_fnc_waitAndExecute;
+};
 
 // end
 true

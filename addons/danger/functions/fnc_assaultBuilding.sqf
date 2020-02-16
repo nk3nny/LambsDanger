@@ -67,6 +67,9 @@ _unit doWatch objNull;
 _unit lookAt (_buildingPos select 0);
 _unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
 
+// speed
+_unit forceSpeed 2;
+
 // Close range cleanups
 if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
 

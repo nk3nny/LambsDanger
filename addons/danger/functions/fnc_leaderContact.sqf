@@ -29,7 +29,7 @@ params ["_unit", "_target"];
 (group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation),formation _unit]);
 
 // call event system
-[QGVAR(onContact), [_unit, group _unit, units _unit]] call FUNC(eventCallback);
+[QGVAR(onContact), [_unit, group _unit, _target]] call FUNC(eventCallback);
 
 // end
 true

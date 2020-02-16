@@ -81,6 +81,7 @@ item76[] = {"Player_formation",4,218,175.000000,350.000000,275.000000,400.000000
 item77[] = {"EXIT_VARIABLES_Unconcious",-1,250,1125.000000,-425.000000,1350.000000,-350.000000,0.000000,"EXIT VARIABLES" \n "Unconcious" \n "Fleeing" \n "Danger_disabled"};
 item78[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
 item79[] = {"Artillery__none",2,250,-1125.000000,150.000000,-1025.000000,200.000000,0.000000,"Artillery:" \n "none"};
+item80[] = {"",7,210,-504.000000,121.000000,-496.000000,129.000000,0.000000,""};
 version=1;
 class LayoutItems
 {
@@ -152,10 +153,10 @@ link7[] = {7,11};
 link8[] = {8,3};
 link9[] = {9,3};
 link10[] = {10,11};
-link11[] = {11,4};
-link12[] = {11,9};
-link13[] = {11,12};
-link14[] = {11,13};
+link11[] = {11,9};
+link12[] = {11,12};
+link13[] = {11,13};
+link14[] = {11,80};
 link15[] = {12,14};
 link16[] = {13,15};
 link17[] = {14,16};
@@ -242,8 +243,9 @@ link97[] = {76,29};
 link98[] = {78,79};
 link99[] = {79,18};
 link100[] = {79,61};
-globals[] = {0.000000,0,0,0,0,640,480,2,402,6316128,1,-324.385254,534.833130,817.042542,118.927612,1088,884,1};
-window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1106};
+link101[] = {80,4};
+globals[] = {0.000000,0,0,0,0,640,480,2,403,6316128,1,113.693604,1317.628662,1079.940918,160.875183,1158,884,1};
+window[] = {2,-1,-1,-32000,-32000,865,52,854,52,3,1176};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -264,8 +266,7 @@ class FSM
                          "}; " \n
                          "" \n
                          "// reset" \n
-                         "_this lookAt objNull;" \n
-                         ""/*%FSM</STATEINIT""">*/;
+                         "//_this lookAt objNull;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -318,9 +319,14 @@ class FSM
                         itemno = 6;
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 Danger.fsm RESET (%2)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType];" \n
                          "	" \n
-                         "// reset " \n
+                         "// reset" \n
                          "//_this lookAt objNull;" \n
-                         "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
+                         "//_this forceSpeed -1;" \n
+                         "" \n
+                         "// more advanced reset" \n
+                         "if (_this distance2d _dangerPos > lambs_danger_CQB_range) then {" \n
+                         "	_this forceSpeed -1;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -372,12 +378,12 @@ class FSM
                          "" \n
                          "// Retrieve the highest priority event from the _queue" \n
                          "// private _priors = [3,4,5,1,4,1,1,2,2,1];" \n
-                         "private _priors = [3,1,5,4,3,1,1,2,3,1];" \n
+                         "private _priors = [3, 1, 5, 4, 3, 1, 1, 2, 3, 1];" \n
                          "" \n
                          "/*" \n
                          "	Changes " \n
                          "		EnemyNear increased -- sets greater focus on reactions " \n
-                         "		Fire decreased from 4 to 3 -- no special interaction " \n
+                         "		Fire decreased from 4 to 1 -- no special interaction " \n
                          "*/" \n
                          "" \n
                          "private _priorCur = [-1, _priors select _dangerCause] select (_dangerCause > 0);" \n
@@ -388,7 +394,6 @@ class FSM
                          "		_dangerPos = _x select 1;" \n
                          "		_dangerUntil = _x select 2;" \n
                          "		_dangerCausedBy = _x select 3;" \n
-                         "		_explosive = (_x select 0) isEqualTo 4 && {_this distance _dangerPos < 8};" \n
                          "	};" \n
                          "	true " \n
                          "} count _queue;" \n
@@ -776,7 +781,8 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"// reset panic here " \n
                          "" \n
                          "// stance" \n
-                         "_this setUnitPos ""AUTO"";"/*%FSM</STATEINIT""">*/;
+                         "_this setUnitPos ""AUTO"";" \n
+                         "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -801,7 +807,7 @@ class FSM
                         itemno = 25;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// Can fire -- delay for a bit  " \n
-                         "if (random 1 > 0.3 && { (_dangerCause in [8,9])}) then {" \n
+                         "if (random 1 > 0.3 && { (_dangerCause in [8, 9]) } ) then {" \n
                          "" \n
                          "	// movement" \n
                          "	_this forceSpeed 0;" \n
@@ -809,7 +815,7 @@ class FSM
                          "" \n
                          "	// suppress " \n
                          "	if (_this distance _dangerCausedBy > lambs_danger_minSuppression_range) then {" \n
-                         "		[_this, _dangerPos] call lambs_danger_fnc_suppress;" \n
+                         "		[_this, (_this targetKnowledge _dangerCausedBy select 6)] call lambs_danger_fnc_suppress;" \n
                          "	}; " \n
                          "" \n
                          "	// increased delay" \n
@@ -821,13 +827,13 @@ class FSM
                          "if (_assault && {_this knowsAbout _dangerCausedBy > 2}) then {" \n
                          "" \n
                          "	// movement" \n
-                         "	_this forceSpeed 2;" \n
+                         "	_this forceSpeed 1;" \n
                          "" \n
                          "	// Check buildings near enemy" \n
                          "	[_this, _dangerCausedBy, 20] call lambs_danger_fnc_assault;" \n
                          "" \n
                          "	// small delay!" \n
-                         "	_timeout = time + 1 + random 4; " \n
+                         "	_timeout = time + 1 + random 5; " \n
                          "" \n
                          "}; " \n
                          "" \n
@@ -947,7 +953,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Panic_";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(getSuppression _this) >.95"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(getSuppression _this) >.97"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1008,7 +1014,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Panic_";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(getSuppression _this) >.95"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(getSuppression _this) >.97"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1036,7 +1042,8 @@ class FSM
                          "//_this setUnitPos ""AUTO"";" \n
                          "" \n
                          "// join" \n
-                         "_this doFollow (leader group _this); " \n
+                         "_this doFollow (leader _this);" \n
+                         "_this forceSpeed -1;" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1173,7 +1180,7 @@ class FSM
                         itemno = 43;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
-                         "_timeout = time  + 2 + random 4; " \n
+                         "_timeout = time  + 4 + random 4; " \n
                          "" \n
                          "// movement" \n
                          "_this forceSpeed 0;" \n
@@ -1553,7 +1560,7 @@ class FSM
                          "private _assault = _this distance _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
                          "" \n
                          "// coward" \n
-                         "private _coward = (!_CQCmode) && {[_this,_dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
+                         "private _coward = (!_CQCmode) && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1638,7 +1645,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
                          "_timeout = time + 20;" \n
-                         "private _timeoutCQC = time + 2 + random 4; " \n
+                         "private _timeoutCQC = time + 3 + random 4; " \n
                          "" \n
                          "// leaders update buildings " \n
                          "if (isFormationLeader _this || {(group _this getVariable [""lambs_danger_inCQC"",[]])  isEqualTo []}) then {" \n

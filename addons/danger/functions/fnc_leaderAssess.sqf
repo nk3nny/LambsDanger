@@ -22,11 +22,19 @@ if (_pos isEqualTo []) then {
     _pos = getPos _unit;
 };
 
-// settings
-private _mode = toLower ((group _unit) getVariable [QGVAR(dangerAI), "enabled"]);
+// settings -- CHANGE IN SETTING. WILL BE DECREPITATED BY VERSION 2.1 -- line 25 to 30 changes variable to the proper one.
+private _mode = toLower ((group _unit) getVariable [QGVAR(dangerAI), ""]);
+if (_mode isEqualTo "disabled") then {
+    (group _unit) setVariable [QGVAR(disableGroupAI), true];
+    (group _unit) setVariable [QGVAR(dangerAI), nil];
+};
+// ------------------------------------------------------------------
 
-// check mode
-if (_mode isEqualTo "disabled") exitWith {false};
+// check if group AI disabled
+if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
+
+// AI profile stuff below 
+// AI profiles not yet implemented -- nkenny 15/02/2020
 
 // enemy
 private _enemy = _unit targets [true, 600, [], 0, _pos];
@@ -34,18 +42,22 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 // update minimum delay
 [_unit, 99, 66] call FUNC(leaderModeUpdate);
 
+// leader assess EH
+[QGVAR(OnAssess), [_unit, group _unit]] call FUNC(eventCallback);
+
+
 // leadership assessment
 if !(_enemy isEqualTo []) then {
 
     // Enemy is in buildings or at lower position
     private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
-    if (_targets != -1) then {
+    if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
         [_unit, 3, getposATL (_enemy select _targets)] call FUNC(leaderMode);
     };
 
     // Enemy is Tank/Air?
     _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 400 }}};
-    if (_targets != -1) then {
+    if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
     };
 

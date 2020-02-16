@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: Unit suppressing <OBJECT>
- * 1: Target position <ARRAY>
+ * 1: Target position <ARRAY> (ASL position)
  *
  * Return Value:
  * success
@@ -20,7 +20,7 @@ params ["_unit", "_pos"];
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.5
-    || {terrainIntersect [_unit, _pos]}
+    || {terrainIntersect [_unit, ASLtoAGL _pos]}
     || {(primaryWeapon _unit) isEqualTo ""}
     || {currentCommand _unit isEqualTo "Suppress"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
@@ -30,7 +30,7 @@ _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];
 
 // do it!
-_unit doSuppressiveFire ((AGLToASL _pos) vectorAdd [0, 0, 0.2 + random 1.2]);
+_unit doSuppressiveFire (_pos vectorAdd [0, 0, 0.1 + random 1]);
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {
@@ -40,6 +40,10 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 // debug
 if (GVAR(debug_functions)) then {
     systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];
+
+    _sphere = createVehicle ["Sign_Sphere100cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    _sphere setpos ASLtoAGL (_pos vectorAdd [0, 0, 0.1 + random 1]);
+    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
 };
 
 // end
