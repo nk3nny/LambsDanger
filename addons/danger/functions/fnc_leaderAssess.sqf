@@ -45,7 +45,6 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 // leader assess EH
 [QGVAR(OnAssess), [_unit, group _unit]] call FUNC(eventCallback);
 
-
 // leadership assessment
 if !(_enemy isEqualTo []) then {
 

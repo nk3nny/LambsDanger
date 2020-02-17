@@ -37,6 +37,9 @@ _unit setUnitPos _stance;
 // leaders tell their subordinates!
 if (_leader) then {
 
+    // leader slowdown!
+    _unit forceSpeed selectRandom [2, 3, 0];
+
     // get units
     private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
 

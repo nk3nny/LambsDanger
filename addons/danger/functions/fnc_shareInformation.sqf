@@ -64,11 +64,11 @@ if (RND(0.2)) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
 if (GVAR(debug_functions)) then {
     
     // debug message
-    systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, _unit knowsAbout _target, count _groups, round _range];
+    systemchat format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, (_unit knowsAbout _target) min 1, count _groups, round _range];
 
     // debug marker
     _m = [_unit, "", _unit call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
-    _mt = [_target, "", _target call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
+    _mt = [_target, "target", _target call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
     _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call cba_fnc_waitAndExecute;
 };

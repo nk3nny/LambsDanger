@@ -23,6 +23,7 @@ params ["_unit", "_target"];
 // gather the stray flock
 {
     _x doFollow _unit;
+    _x setVariable [QGVAR(forceMOVE), true];
 } forEach (( units _unit ) select { _x distance _unit > 45 });
 
 // change formation

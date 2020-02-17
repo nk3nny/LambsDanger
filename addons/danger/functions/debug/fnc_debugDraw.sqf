@@ -205,7 +205,7 @@ private _fnc_DrawRect = {
         if (GVAR(RenderExpectedDestination)) then {
             (expectedDestination _x) params ["_pos", "_planingMode", "_forceReplan"];
             drawLine3D [_headPos, _pos, [0, 0, 1, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Mode: %1 ForceReplan: %2", _planingMode, _forceReplan]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
     };
     false;
