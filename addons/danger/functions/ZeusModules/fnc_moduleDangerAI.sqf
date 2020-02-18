@@ -21,7 +21,7 @@ if (_activated && local _logic) then {
     };
 
     if (_error == "") then {
-        private _mode = _group getVariable [QGVAR(dangerAI), 0];
+        private _mode = _group getVariable [QGVAR(dangerAI), "enabled"];
         private _index = DANGER_MODE_ARR find _mode;
         if (_index == -1) then {
             _index = 0;
