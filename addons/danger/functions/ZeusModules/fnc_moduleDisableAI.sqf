@@ -17,6 +17,9 @@ if (_activated && local _logic) then {
     if (isNull _unit) then {
         _error = "No Unit Selected";
     };
+    if (isPlayer _unit) then {
+        _error = "Players are not Valid Selections";
+    };
     if (_error == "") then {
         ["Disable LAMBS AI",
             [
