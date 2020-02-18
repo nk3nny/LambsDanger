@@ -41,7 +41,7 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 if (GVAR(debug_functions)) then {
     systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];
 
-    _sphere = createVehicle ["Sign_Sphere100cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    private _sphere = createVehicleLocal ["Sign_Sphere100cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
     _sphere setpos ASLtoAGL (_pos vectorAdd [0, 0, 0.1 + random 1]);
     [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
 };
