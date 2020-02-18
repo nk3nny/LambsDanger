@@ -69,7 +69,7 @@ item64[] = {"Pre_attack",2,250,125.000000,75.000000,225.000000,125.000000,0.0000
 item65[] = {"Always",4,218,50.000000,150.000000,150.000000,200.000000,0.000000,"Always"};
 item66[] = {"Coward",4,218,150.000000,150.000000,250.000000,200.000000,1.000000,"Coward"};
 item67[] = {"Coward",2,250,150.000000,225.000000,250.000000,275.000000,0.000000,"Coward"};
-item68[] = {"Clear_buildings",2,250,250.000000,225.000000,350.000000,275.000000,0.000000,"Clear buildings"};
+item68[] = {"Clear_buildings",2,4346,250.000000,225.000000,350.000000,275.000000,0.000000,"Clear buildings"};
 item69[] = {"Cycle_",4,218,325.000000,325.000000,425.000000,375.000000,1.000000,"Cycle!"};
 item70[] = {"",7,210,-491.500000,-54.000000,-483.500000,-46.000000,0.000000,""};
 item71[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000,"Static"};
@@ -253,8 +253,8 @@ link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,84};
 link106[] = {84,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-631.908203,588.047546,705.584045,-225.711731,1158,884,1};
-window[] = {2,-1,-1,-32000,-32000,995,182,984,182,3,1176};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-263.773926,685.452759,640.279907,-84.345062,1158,884,1};
+window[] = {2,-1,-1,-1,-1,943,130,932,130,3,1176};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1579,7 +1579,7 @@ class FSM
                          "private _assault = _this distance _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
                          "" \n
                          "// coward" \n
-                         "private _coward = (!_CQCmode) && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
+                         "private _coward = (!_CQCmode) && {getSuppression _this > 0.7} && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
