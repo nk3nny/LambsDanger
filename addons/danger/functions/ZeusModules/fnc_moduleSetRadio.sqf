@@ -21,9 +21,9 @@ if (_activated && local _logic) then {
         _error = "Players are not Valid Selections";
     };
     if (_error == "") then {
-        ["Set Radio Module",
+        ["Configure Long-range Radio",
             [
-                ["Add Radio to unit", "BOOLEAN", "Unit with a radio toggled have boosted communications range when sharing information", _unit getVariable [QGVAR(dangerRadio), false]]
+                ["Toggle boosted communication range on unit", "BOOLEAN", "Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.", _unit getVariable [QGVAR(dangerRadio), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];

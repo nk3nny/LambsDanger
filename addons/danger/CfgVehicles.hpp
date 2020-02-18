@@ -20,7 +20,7 @@ class CfgVehicles {
         _generalMacro = QGVAR(SetRadio);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Give unit long range Radio";
+        displayName = "Configure Long-range Radio";
         category = "Lambs_Danger_Cat";
         function = QFUNC(moduleSetRadio);
         functionPriority = 1;

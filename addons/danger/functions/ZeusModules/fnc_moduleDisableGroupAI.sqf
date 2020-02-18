@@ -20,9 +20,9 @@ if (_activated && local _logic) then {
     };
 
     if (_error == "") then {
-        ["LAMBS Danger AI Mode",
+        ["Configure Group AI",
             [
-                ["Disable LAMBS group AI", "BOOLEAN", "Disables LAMBS group AI", _group getVariable [QGVAR(disableGroupAI), false], ""]
+                ["Disable LAMBS group AI", "BOOLEAN", "Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks", _group getVariable [QGVAR(disableGroupAI), false], ""]
             ], {
                 params ["_data", "_args"];
                 _args params ["_group", "_logic"];

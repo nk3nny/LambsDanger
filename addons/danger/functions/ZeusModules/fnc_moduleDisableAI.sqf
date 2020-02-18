@@ -21,7 +21,7 @@ if (_activated && local _logic) then {
         _error = "Players are not Valid Selections";
     };
     if (_error == "") then {
-        ["Disable LAMBS AI",
+        ["Disable Unit AI",
             [
                 ["Disable LAMBS unit AI", "BOOLEAN", "Toggle advanced danger.fsm features on this unit", _unit getVariable [QGVAR(disableAI), false]]
             ], {
