@@ -21,7 +21,7 @@ if (_activated && local _logic) then {
     };
 
     if (_error == "") then {
-        private _mode = _unit getVariable [QGVAR(dangerAI), 0];
+        private _mode = _group getVariable [QGVAR(dangerAI), 0];
         private _index = DANGER_MODE_ARR find _mode;
         if (_index == -1) then {
             _index = 0;
@@ -32,11 +32,11 @@ if (_activated && local _logic) then {
                 ["Lambs AI Mode", "DROPDOWN", "Disables Lambs AI", DANGER_MODE_ARR,  _index]
             ], {
                 params ["_data", "_args"];
-                _args params ["_unit", "_logic"];
+                _args params ["_group", "_logic"];
                 _data params ["_mode"];
-                _unit setVariable [QGVAR(dangerAI), DANGER_MODE_ARR select _mode, true];
+                _group setVariable [QGVAR(dangerAI), DANGER_MODE_ARR select _mode, true];
                 deleteVehicle _logic;
-            }, {}, {}, [_unit, _logic]
+            }, {}, {}, [_group, _logic]
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
