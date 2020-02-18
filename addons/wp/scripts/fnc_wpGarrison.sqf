@@ -11,7 +11,6 @@
  * none
  *
 */
-hintSilent "Execute Rush Waypoint";
 
 // init
 params ["_group", "_pos", ["_radius", 0]];
