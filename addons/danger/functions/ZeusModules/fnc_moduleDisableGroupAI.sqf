@@ -30,14 +30,11 @@ if (_activated && local _logic) then {
                 _group setVariable [QGVAR(disableGroupAI), _disableGroupAI, true];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
-
             }, [_group, _logic]
         ] call EFUNC(main,showDialog);
     } else {
