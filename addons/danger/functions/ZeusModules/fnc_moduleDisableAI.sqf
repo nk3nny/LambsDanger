@@ -18,9 +18,9 @@ if (_activated && local _logic) then {
         _error = "No Unit Selected";
     };
     if (_error == "") then {
-        ["Disable Lambs AI",
+        ["Disable LAMBS AI",
             [
-                ["Lambs AI Disabled", "BOOLEAN", "Disables Lambs AI", _unit getVariable [QGVAR(disableAI), false]]
+                ["Disable LAMBS unit AI", "BOOLEAN", "Toggle advanced danger.fsm features on this unit", _unit getVariable [QGVAR(disableAI), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];

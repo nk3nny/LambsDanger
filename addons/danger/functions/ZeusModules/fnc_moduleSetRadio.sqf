@@ -21,7 +21,7 @@ if (_activated && local _logic) then {
     if (_error == "") then {
         ["Set Radio Module",
             [
-                ["Unit Has Radio", "BOOLEAN", "If a Unit has a Radio it has a Boosted Communication Range", _unit getVariable [QGVAR(dangerRadio), false]]
+                ["Add Radio to unit", "BOOLEAN", "Unit with a radio toggled have boosted communications range when sharing information", _unit getVariable [QGVAR(dangerRadio), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
