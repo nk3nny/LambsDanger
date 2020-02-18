@@ -51,7 +51,7 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
         // debug
         if (GVAR(debug_functions)) then {
             systemchat format ["%1 assaulting position (%2m)", side _unit, round (_unit distance _target)];
-            private _sphere = createVehicleLocal ["Sign_Sphere25cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
+            private _sphere = "Sign_Sphere25cm_F" createVehicleLocal [0,0,0];
             _sphere setpos (_unit getHideFrom _target);
             [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
         };
@@ -68,7 +68,7 @@ if (GVAR(debug_functions)) then {
 
     private _sphereList = [];
     {
-        private _sphere = createVehicleLocal ["Sign_Sphere10cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
+        private _sphere = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
         _sphere setPos _x;
         _sphereList pushBack _sphere;
     } foreach _buildings;
