@@ -62,7 +62,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
-(group _unit) move ([_target, _overwatch] select (_overwatch isEqualto []);
+(group _unit) move ([_target, _overwatch] select (_overwatch isEqualto []));
 
 // manoeuvre function
 private _fnc_manoeuvre = {
