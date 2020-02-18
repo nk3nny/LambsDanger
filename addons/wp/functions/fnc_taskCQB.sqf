@@ -137,7 +137,7 @@ _group setFormation "FILE";
 _group enableAttack false;
 _group allowFleeing 0;
 {
-    _x setVariable [QEGVAR(danger,dangerDisabled), true];
+    _x setVariable [QEGVAR(danger,disableAI), true];
     _x disableAI "AUTOCOMBAT";
     _x disableAI "SUPPRESSION";
     _x enableIRLasers true;
@@ -167,7 +167,7 @@ while {{alive _x} count units _group > 0} do {
 
 // reset
 {
-    _x setVariable [QEGVAR(danger,dangerDisabled), false];
+    _x setVariable [QEGVAR(danger,disableAI), false];
 } foreach units _group;
 
 // debug

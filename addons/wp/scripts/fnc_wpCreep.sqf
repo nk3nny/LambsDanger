@@ -22,7 +22,7 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 // get other settings
 
 // group
-_group setVariable [QEGVAR(danger,dangerAI), "disabled"];
+_group setVariable [QEGVAR(danger,disableGroupAI), true];
 
 // execute script
 [_group, _radius] spawn FUNC(taskCreep);

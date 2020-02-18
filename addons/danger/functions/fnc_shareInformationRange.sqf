@@ -32,7 +32,7 @@ _range = _range min viewDistance;
 // Sort long range radios
 private _target = _unit;
 
-private _units = (units _unit select {alive _x && {_x distance2d _unit < 150}});
+private _units = (units _unit select {alive _x && {_x distance2d _unit < 150} && {!isPlayer _x}});
 private _index = _units findIf {
         _x getVariable [QGVAR(dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2d _unit < 70})}

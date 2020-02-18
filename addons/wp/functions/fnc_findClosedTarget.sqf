@@ -16,7 +16,7 @@
  * Public: Yes
 */
 
-params ["_group", "_radius"];
+params ["_group", ["_radius", 500]];
 private _newdist = _radius;
 private _players = (switchableUnits + playableUnits - entities "HeadlessClient_F");
 _players = _players select {side _x != side _group && {side _x != civilian}};

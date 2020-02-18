@@ -1,5 +1,6 @@
 PREP(assault);
 PREP(assaultBuilding);
+PREP(assaultSpeed);
 PREP(checkBody);
 PREP(coward);
 PREP(findBuildings);

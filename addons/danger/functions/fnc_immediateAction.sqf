@@ -28,10 +28,14 @@ if (_stance isEqualTo "PRONE") exitWith {
 };
 
 // Not standing -- No weapon --  ACE3 captive exit
-if !(_stance isEqualTo "STAND") exitWith {false};
-if (primaryWeapon _unit isEqualTo "" || {!(primaryWeapon _unit isEqualTo currentWeapon _unit)} || {!canMove _unit}) exitWith {false};
-if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {false};
-
+if (
+    !(_stance isEqualTo "STAND")
+    || {primaryWeapon _unit isEqualTo ""}
+    || {!(primaryWeapon _unit isEqualTo currentWeapon _unit)}
+    || {!canMove _unit}
+    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
+    || {_unit getVariable ["ace_captives_issurrendering", false]}
+) exitWith {false};
 
 // stopped or path/move disabled
 //if (stopped _unit) exitWith {false};

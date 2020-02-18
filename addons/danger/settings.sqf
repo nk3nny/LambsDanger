@@ -3,7 +3,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroup),
     "CHECKBOX",
-    ["Disable Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
+    ["Disable danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
     [COMPONENT_NAME, _curCat],
     false,
     0         // players may configure their own preferences
@@ -13,7 +13,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupSuppression),
     "CHECKBOX",
-    ["Disable Suppression from player group", "Toggle autonomous suppression for units in player group"],
+    ["Disable suppression from player group", "Toggle autonomous suppression for units in player group"],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -23,7 +23,27 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupReaction),
     "CHECKBOX",
-    ["Disable Reaction state on player group", "Toggle Reaction phase on units in player group"],
+    ["Disable reaction state on player group", "Toggle Reaction phase on units in player group"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles the concealment AI for units not equipped to damage tanks and aircraft
+[
+    QGVAR(disableAIHideFromTanksAndAircraft),
+    "CHECKBOX",
+    ["Disable units hiding", "Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles group manoevure phase initiated by AI squad leader
+[
+    QGVAR(disableAIAutonomousManoeuvres),
+    "CHECKBOX",
+    ["Disable autonomous group manoevures", "Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.<br/>Disabling this setting will make groups dumber, and more responsive"],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -64,6 +84,16 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
 ] call CBA_fnc_addSetting;
 
 private _curCat = "Share information";
+// Toggle communication for all units
+[
+    QGVAR(radio_disabled),
+    "CHECKBOX",
+    ["Disable information sharing", "Toggle information sharing betweem units"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 // Ranges at which groups share information
 [
     QGVAR(radio_shout),

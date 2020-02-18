@@ -29,7 +29,7 @@ _unit setUnitPosWeak "UP";
 
 // emergency break out of CQC loop
 private _enemy = _unit findNearestEnemy _unit;
-if ((_unit distance _enemy) < 12) exitWith {
+if ((_unit distance _enemy) < 7) exitWith {
 
     _unit setVariable [QGVAR(currentTarget), _enemy];
     _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)"];
@@ -38,6 +38,7 @@ if ((_unit distance _enemy) < 12) exitWith {
     _unit doWatch objNull;
     _unit lookAt _enemy;
     _unit doMove getposATL _enemy; // changed from getHideFrom as this tends to pick a spot outside building - nkenny
+    _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
 
     // return
     true
@@ -50,7 +51,7 @@ _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
     _unit setUnitPosWeak "MIDDLE";
-    _unit doFollow leader group _unit;
+    _unit doFollow leader _unit;
 };
 
 _unit setVariable [QGVAR(currentTarget), objNull];
@@ -65,10 +66,13 @@ private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _u
 // remove current target and do move
 _unit doWatch objNull;
 _unit lookAt (_buildingPos select 0);
-_unit doMove ((_buildingPos select 0) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
+_unit doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
+
+// speed
+_unit forceSpeed ([_unit, (_buildingPos select 0)] call FUNC(assaultSpeed));
 
 // Close range cleanups
-if (RND(0.95) || {_unit distance (_buildingPos select 0) < 3.2}) then {
+if (RND(0.95) || {_unit distance (_buildingPos select 0) < 1.6}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;
@@ -91,7 +95,9 @@ if (_buildingPos isEqualTo []) then {
 };
 
 // debug
-if (GVAR(debug_functions) && {leader _unit isEqualTo _unit}) then {systemchat format ["%1 CQC %2x spots @ %3m", side _unit, count (_building buildingPos -1), round (_unit distance _building)];};
+if (GVAR(debug_functions) && {leader _unit isEqualTo _unit}) then {
+    systemchat format ["%1 CQC %2 buildings - near %3x spots @ %4m", side _unit, count _buildings, count _buildingPos, round (_unit distance _building)];
+};
 
 // return
 true
