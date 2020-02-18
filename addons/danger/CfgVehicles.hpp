@@ -35,7 +35,7 @@ class CfgVehicles {
         scopeCurator = 2;
         displayName = "Disable AI";
         category = "Lambs_Danger_Cat";
-        function = QFUNC(moduleSetRadio);
+        function = QFUNC(moduleDisableAI);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
@@ -48,7 +48,7 @@ class CfgVehicles {
         scopeCurator = 2;
         displayName = "Danger AI";
         category = "Lambs_Danger_Cat";
-        function = QFUNC(moduleSetRadio);
+        function = QFUNC(moduleDangerAI);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
