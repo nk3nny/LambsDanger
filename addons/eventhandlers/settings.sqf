@@ -3,7 +3,7 @@ private _curCat = "Explosion";
 [
     QGVAR(ExplosionEventHandlerEnabled),
     "CHECKBOX",
-    ["Enable Explosion Eventhandler", "Toggle Explosion Eventhander for AI Reactions to Explosions"],
+    ["Enable Explosion Eventhandler", "Toggle AI Reactions to nearby explosions"],
     [COMPONENT_NAME, _curCat],
     true,
     true         // players may configure their own preferences
@@ -12,7 +12,7 @@ private _curCat = "Explosion";
 [
     QGVAR(ExplosionReactionTime),
     "SLIDER",
-    ["Explosion Rection Time", "The Time the AI needs to reset before reacting to an Explosion Again"],
+    ["Explosion EH reset Time", "Configures explosions reset time."],
     [COMPONENT_NAME, _curCat],
     [0, 25, 9, 2],
     true         // players may configure their own preferences

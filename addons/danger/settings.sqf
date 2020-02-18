@@ -43,7 +43,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIAutonomousManoeuvres),
     "CHECKBOX",
-    ["Disable autonomous group manoevures", "Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.<br/>Disabling this setting will make groups dumber, and more responsive"],
+    ["Disable autonomous group manoevures", "Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings."],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -79,12 +79,14 @@ private _curCat = "General";
     [1, 100, 10, 0],
     1
 ] call CBA_fnc_addSetting;
+
+// Enable automatic artillery registration
 if (GVAR(Loaded_WP)) then {
     GVAR(autoArtilleryRunning) = false;
     [
         QGVAR(autoAddArtillery),
         "CHECKBOX",
-        ["Auto Artillery", "Automaticly adds Artillery to Side"],
+        ["Enable automatic artillery registration", "Automatically adds artillery already present in the mission to Side"],
         [COMPONENT_NAME, _curCat],
         false,
         true, {
@@ -107,7 +109,8 @@ if (GVAR(Loaded_WP)) then {
         }
     ] call CBA_fnc_addSetting;
 };
-private _curCat = "Share information";
+private _curCat = "Settings Share information";
+
 // Toggle communication for all units
 [
     QGVAR(radio_disabled),
@@ -168,9 +171,9 @@ private _curCat = "Share information";
     1
 ] call CBA_fnc_addSetting;
 
-_curCat = "CQB Formations";
+// Configures CQC formations
+_curCat = "Settings CQB Formations";
 GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "LINE", "FILE", "DIAMOND"];
-
 GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 DFUNC(UpdateCQBFormations) = {
@@ -193,7 +196,7 @@ DFUNC(UpdateCQBFormations) = {
     [
         format [QGVAR(CQB_formations_%1), _x],
         "CHECKBOX",
-        [_x, _x + " Formation is Classified as CQB"], // TODO: Better Description? @nKenny
+        [_x, _x + " Units set to CQB formations will methodically clear buildings when an enemy is encountered"],
         [COMPONENT_NAME, _curCat],
         _x in GVAR(CQB_formations),
         1, _code
@@ -206,7 +209,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_FSM),
     "CHECKBOX",
-    ["Debug", "FSM debug messages"],
+    ["Debug FSM", "Shows FSM debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
     1
@@ -216,7 +219,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_functions),
     "CHECKBOX",
-    ["Debug Functions", "Function debug messages"],
+    ["Debug Functions", "Shows Function debug messages"],
     [COMPONENT_NAME, _curCat],
     false,
     1
@@ -226,7 +229,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_FSM_civ),
     "CHECKBOX",
-    ["Debug Civ", "FSM debug messages for civilian fsm"],
+    ["Debug Civ", "Shows FSM debug messages for civilians"],
     [COMPONENT_NAME, _curCat],
     false,
     1
