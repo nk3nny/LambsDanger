@@ -1,5 +1,5 @@
 #include "script_component.hpp"
-#define DANGER_MODE_ARR ["disabled", "enabled"]
+
 params ["_logic", "", "_activated"];
 
 if (_activated && local _logic) then {
@@ -15,26 +15,19 @@ if (_activated && local _logic) then {
 
     //--- Check if the unit is suitable
     private _error = "";
-
     if (isNull _group) then {
         _error = "No Group Selected";
     };
 
     if (_error == "") then {
-        private _mode = _group getVariable [QGVAR(dangerAI), "enabled"];
-        private _index = DANGER_MODE_ARR find _mode;
-        if (_index == -1) then {
-            _index = 0;
-        };
-
-        ["Lambs Danger AI Mode",
+        ["LAMBS Danger AI Mode",
             [
-                ["Lambs AI Mode", "DROPDOWN", "Disables Lambs AI", DANGER_MODE_ARR,  _index]
+                ["Disable LAMBS group AI", "BOOLEAN", "Disables LAMBS group AI", _group getVariable [QGVAR(disableGroupAI), false], ""]
             ], {
                 params ["_data", "_args"];
                 _args params ["_group", "_logic"];
-                _data params ["_mode"];
-                _group setVariable [QGVAR(dangerAI), DANGER_MODE_ARR select _mode, true];
+                _data params ["_disableGroupAI"];
+                _group setVariable [QGVAR(disableGroupAI), _disableGroupAI, true];
                 deleteVehicle _logic;
             }, {
                 params ["", "_args"];
