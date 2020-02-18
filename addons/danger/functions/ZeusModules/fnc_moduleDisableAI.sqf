@@ -15,18 +15,17 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _unit) then {
-        _error = "No Unit Seleted";
+        _error = "No Unit Selected";
     };
-
     if (_error == "") then {
-        ["Set Radio Module",
+        ["Disable Lambs AI",
             [
-                ["Unit Has Radio", "BOOLEAN", "If a Unit has a Radio it has a Boosted Communication Range", _unit getVariable [QGVAR(dangerRadio), false]]
+                ["Lambs AI Disabled", "BOOLEAN", "Disables Lambs AI", _unit getVariable [QGVAR(disableAI), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
-                _data params ["_hasRadio"];
-                _unit setVariable [QGVAR(dangerRadio), _hasRadio, true];
+                _data params ["_disableAI"];
+                _unit setVariable [QGVAR(disableAI), _disableAI, true];
                 deleteVehicle _logic;
             }, {}, {}, [_unit, _logic]
         ] call EFUNC(main,showDialog);
