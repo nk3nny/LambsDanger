@@ -186,7 +186,7 @@ _basePositionY = _basePositionY + PY(CONST_HEIGHT + (CONST_SPACE_HEIGHT*2));
 private _cancelButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
 _cancelButton ctrlSetText "CANCEL";
 
-_cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / 2)];
+_cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 2)- PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
 _cancelButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];
@@ -198,7 +198,7 @@ _cancelButton ctrlCommit 0;
 
 private _okButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
 _okButton ctrlSetText "OK";
-_okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2), _basePositionY, PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / 2)];
+_okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2) + PX(CONST_SPACE_HEIGHT/2), _basePositionY, PX(CONST_WIDTH / 2) - PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
 _okButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];

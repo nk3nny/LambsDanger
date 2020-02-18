@@ -27,7 +27,16 @@ if (_activated && local _logic) then {
                 _data params ["_disableAI"];
                 _unit setVariable [QGVAR(disableAI), _disableAI, true];
                 deleteVehicle _logic;
-            }, {}, {}, [_unit, _logic]
+            }, {
+                params ["", "_args"];
+                _args params ["", "_logic"];
+                deleteVehicle _logic;
+            }, {
+                params ["", "_args"];
+                _args params ["", "_logic"];
+                deleteVehicle _logic;
+
+            }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;

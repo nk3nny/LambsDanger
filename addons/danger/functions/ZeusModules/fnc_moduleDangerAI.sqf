@@ -36,7 +36,16 @@ if (_activated && local _logic) then {
                 _data params ["_mode"];
                 _group setVariable [QGVAR(dangerAI), DANGER_MODE_ARR select _mode, true];
                 deleteVehicle _logic;
-            }, {}, {}, [_group, _logic]
+            }, {
+                params ["", "_args"];
+                _args params ["", "_logic"];
+                deleteVehicle _logic;
+            }, {
+                params ["", "_args"];
+                _args params ["", "_logic"];
+                deleteVehicle _logic;
+
+            }, [_group, _logic]
         ] call EFUNC(main,showDialog);
     } else {
         [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
