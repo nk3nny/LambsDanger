@@ -11,8 +11,6 @@ class CfgPatches {
     };
 };
 
-
 #include "CfgEventHandlers.hpp"
 #include "CfgWaypoints.hpp"
 #include "CfgWaypointTypes.hpp"
-#include "CfgVehicles.hpp"
