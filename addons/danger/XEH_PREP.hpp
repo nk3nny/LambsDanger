@@ -37,3 +37,7 @@ SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);
 SUBPREP(debug,debugMarkerColor);
 SUBPREP(debug,dotMarker);
+
+SUBPREP(ZeusModules,moduleDangerAI);
+SUBPREP(ZeusModules,moduleDisableAI);
+SUBPREP(ZeusModules,moduleSetRadio);

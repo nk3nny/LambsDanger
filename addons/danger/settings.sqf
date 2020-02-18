@@ -247,12 +247,18 @@ _curCat = "Debug";
     {
         {
             ctrlDelete _x;
-        } count GVAR(drawRectCacheGame);
-        {
-            ctrlDelete _x;
-        } count GVAR(drawRectCacheEGSpectator);
-        GVAR(drawRectCacheEGSpectator) = [];
+        } count GVAR(drawRectCacheGame) + GVAR(drawRectInUseGame)           // this is only called once
+        + GVAR(drawRectCacheEGSpectator) + GVAR(drawRectInUseEGSpectator)   // when the setting is changed
+        + GVAR(drawRectCacheCurator) + GVAR(drawRectInUseCurator);          // we can use the + operator here
+
         GVAR(drawRectCacheGame) = [];
+        GVAR(drawRectInUseGame) = [];
+
+        GVAR(drawRectCacheEGSpectator) = [];
+        GVAR(drawRectInUseEGSpectator) = [];
+
+        GVAR(drawRectCacheCurator) = [];
+        GVAR(drawRectInUseCurator) = [];
     }
 ] call CBA_fnc_addSetting;
 
