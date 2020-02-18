@@ -27,19 +27,8 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 // group
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
 
-// individual units
-{
-    _x setVariable [QEGVAR(danger,disableAI), true];
-    _x disableAI "SUPPRESSION"; // these are here because the script probably works 'best' with some intelligence enabled. That said. Users expect dumb bots. To preserve utility, I disable these here instead of core script.  -nkenny
-    _x disableAI "FSM";
-    _x forceSpeed 24;
-} foreach units _group;
-
 // execute script
 [_group, _radius] spawn FUNC(taskRush);
-
-// low level move order
-_group move _pos;
 
 // end
 true

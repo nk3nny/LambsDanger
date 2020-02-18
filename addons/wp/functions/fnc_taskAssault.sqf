@@ -41,7 +41,7 @@ if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
 
 // individuals
 {
-    _x setVariable [QEGVAR(danger,dangerDisabled),true];
+    _x setVariable [QEGVAR(danger,disableAI),true];
     _x forceSpeed 24;
     _x setUnitPos "UP";
     _x disableAI "FSM";
@@ -69,7 +69,7 @@ private _fnc_reached = {
         "AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon",
         "AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"
     ];
-    _this setVariable [QEGVAR(danger,dangerDisabled),nil];
+    _this setVariable [QEGVAR(danger,disableAI),nil];
     _this setUnitPos "DOWN";
     _this enableAI "FSM";
     _this enableAI "AUTOTARGET";
@@ -120,7 +120,7 @@ private _handle = [
         if (count _units < 1) then {
             _handle call CBA_fnc_removePerFrameHandler;
             _group setVariable [QEGVAR(danger,forcedMovement),-1];
-            _group setVariable [QEGVAR(danger,dangerAI), "enabled"];
+            _group setVariable [QEGVAR(danger,disableGroupAI), false];
             _group setBehaviour "AWARE";
         };
     }, _cycle, [_group, _pos, _threshold, _units, _fnc_reached, _fnc_restore]

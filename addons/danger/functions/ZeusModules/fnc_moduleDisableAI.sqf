@@ -17,10 +17,13 @@ if (_activated && local _logic) then {
     if (isNull _unit) then {
         _error = "No Unit Selected";
     };
+    if (isPlayer _unit) then {
+        _error = "Players are not Valid Selections";
+    };
     if (_error == "") then {
-        ["Disable Lambs AI",
+        ["Disable LAMBS AI",
             [
-                ["Lambs AI Disabled", "BOOLEAN", "Disables Lambs AI", _unit getVariable [QGVAR(disableAI), false]]
+                ["Disable LAMBS unit AI", "BOOLEAN", "Toggle advanced danger.fsm features on this unit", _unit getVariable [QGVAR(disableAI), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
@@ -28,14 +31,11 @@ if (_activated && local _logic) then {
                 _unit setVariable [QGVAR(disableAI), _disableAI, true];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
-
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {

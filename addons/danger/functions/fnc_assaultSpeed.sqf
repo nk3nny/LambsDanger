@@ -23,7 +23,7 @@ private _distance = _unit distance _target;
 
 // speed
 if (behaviour _unit isEqualTo "STEALTH") exitWith {1};
-if (speedMode _unit isEqualTo "FULL") exitWith {24};
+if (speedMode _unit isEqualTo "FULL") exitWith {[24, 3] select (_distance < (8 + random 4))};
 if (_distance > GVAR(CQB_range)) exitWith {-1};
 if (_distance > 10) exitWith {3};
 if (_distance > 4) exitWith {2};

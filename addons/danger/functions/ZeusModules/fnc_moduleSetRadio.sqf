@@ -17,11 +17,13 @@ if (_activated && local _logic) then {
     if (isNull _unit) then {
         _error = "No Unit Seleted";
     };
-
+    if (isPlayer _unit) then {
+        _error = "Players are not Valid Selections";
+    };
     if (_error == "") then {
         ["Set Radio Module",
             [
-                ["Unit Has Radio", "BOOLEAN", "If a Unit has a Radio it has a Boosted Communication Range", _unit getVariable [QGVAR(dangerRadio), false]]
+                ["Add Radio to unit", "BOOLEAN", "Unit with a radio toggled have boosted communications range when sharing information", _unit getVariable [QGVAR(dangerRadio), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
@@ -29,14 +31,11 @@ if (_activated && local _logic) then {
                 _unit setVariable [QGVAR(dangerRadio), _hasRadio, true];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
             }, {
-                params ["", "_args"];
-                _args params ["", "_logic"];
+                params ["_logic"];
                 deleteVehicle _logic;
-
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
