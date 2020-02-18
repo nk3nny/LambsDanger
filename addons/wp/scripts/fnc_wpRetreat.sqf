@@ -19,7 +19,7 @@ params ["_group", "_pos"];
 [leader _group, 99, 170] call EFUNC(danger,leaderModeUpdate);
 
 // group
-_group setVariable [QEGVAR(danger,dangerAI), "disabled"];
+_group setVariable [QEGVAR(danger,disableGroupAI), true];
 _group setSpeedMode "FULL";
 
 // individual units

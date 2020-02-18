@@ -25,11 +25,11 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 [leader _group, 99, 999999] call EFUNC(danger,leaderModeUpdate);
 
 // group
-_group setVariable [QEGVAR(danger,dangerAI), "disabled"];
+_group setVariable [QEGVAR(danger,disableGroupAI), true];
 
 // individual units
 {
-    _x setVariable [QEGVAR(danger,dangerDisabled), true];
+    _x setVariable [QEGVAR(danger,disableAI), true];
     _x disableAI "SUPPRESSION"; // these are here because the script probably works 'best' with some intelligence enabled. That said. Users expect dumb bots. To preserve utility, I disable these here instead of core script.  -nkenny
     _x disableAI "FSM";
     _x forceSpeed 24;

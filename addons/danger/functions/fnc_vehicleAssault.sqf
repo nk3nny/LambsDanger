@@ -20,19 +20,23 @@
 params ["_unit", "_pos", ["_target", objNull], ["_buildings", []]];
 
 // settings + check
-private _veh = vehicle _unit;
-if (!canFire _veh) exitWith {false};
+private _vehicle = vehicle _unit;
+if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
-if ((_pos distance2d _unit) < 80) then {_pos = (_unit getHideFrom _target)};
+private _predictedPos = (_unit getHideFrom _target);
+if ((_unit distance2d _pos) < 150) then {_pos = _predictedPos};
 
-//  target on foot
-if ((_unit distance2d _pos) < GVAR(minSuppression_range)) exitWith {false};
-if !(_target isKindOf "Man") exitWith {false};
+//  target not on foot or too close
+if (
+    !(_target isKindOf "Man")
+    || {(_unit distance2d _predictedPos) < GVAR(minSuppression_range)}
+) exitWith {false};
 
 // define buildings
 if (_buildings isEqualTo []) then {
     _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
+    //_buildings = _buildings select {!(terrainIntersect [getpos _unit, getpos _x])};
 };
 
 // variables
@@ -41,41 +45,37 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = [_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy;
-    _buildings = if (RND(0.4)) then { _buildings select 0 } else { selectRandom _buildings };
+    _buildings = if (RND(0.4)) then { ([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0 } else { selectRandom _buildings };
     _buildings = _buildings buildingPos -1;
 };
 
 // add predicted location -- just to ensure shots fired!
-_buildings pushBack _pos;
+_buildings pushBack _predictedPos;
 
 // pos
 _pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2];
 
-// minor manoeuvres -- moved to FSM
-//[_veh, _unit getHideFrom _target] spawn FUNC(vehicleRotate);
-
 // look at position
-_veh doWatch _pos;
+_vehicle doWatch _pos;
 
 // suppression
-_veh doSuppressiveFire _pos;
+_vehicle doSuppressiveFire _pos;
 
 // cannon direction ~ threshold 30 degrees
 private _fnc_turretDir = {
-    params ["_veh", "_pos", ["_threshold", 30]];
-    private _array = _veh weaponDirection (currentWeapon _veh);
+    params ["_vehicle", "_pos", ["_threshold", 30]];
+    private _array = _vehicle weaponDirection (currentWeapon _vehicle);
     private _atan = ((_array select 0) atan2 (_array select 1));
     _atan = [ _atan, _atan + 360 ] select ( _atan < 0 );
-    _atan = ( ( _veh getDir _pos ) -_atan );
+    _atan = ( ( _vehicle getDir _pos ) -_atan );
     _atan = [ _atan, _atan * -1 ] select ( _atan < 0 );
     _atan < _threshold
 };
 
-// shoot cannon
-private _cannon = (count _buildings > 2) && {RND(0.2)} && {(_veh distance _pos) > 80} && {[_veh, _pos] call _fnc_turretDir};
+// shoot cannon ~ random chance, enough positions, 80m+ and turret pointed right way
+private _cannon = RND(0.2) && {count _buildings > 2} && {(_vehicle distance _pos) > 80} && {[_vehicle, _pos] call _fnc_turretDir};
 if (_cannon) then {
-    _veh action ["useWeapon", _veh, gunner _veh, random 2];
+    _vehicle action ["useWeapon", _vehicle, gunner _vehicle, random 2];
 };
 
 // debug

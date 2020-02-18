@@ -3,7 +3,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroup),
     "CHECKBOX",
-    ["Disable Danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
+    ["Disable danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
     [COMPONENT_NAME, _curCat],
     false,
     0         // players may configure their own preferences
@@ -13,7 +13,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupSuppression),
     "CHECKBOX",
-    ["Disable Suppression from player group", "Toggle autonomous suppression for units in player group"],
+    ["Disable suppression from player group", "Toggle autonomous suppression for units in player group"],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -23,7 +23,27 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupReaction),
     "CHECKBOX",
-    ["Disable Reaction state on player group", "Toggle Reaction phase on units in player group"],
+    ["Disable reaction state on player group", "Toggle Reaction phase on units in player group"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles the concealment AI for units not equipped to damage tanks and aircraft
+[
+    QGVAR(disableAIHideFromTanksAndAircraft),
+    "CHECKBOX",
+    ["Disable units hiding", "Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles group manoevure phase initiated by AI squad leader
+[
+    QGVAR(disableAIAutonomousManoeuvres),
+    "CHECKBOX",
+    ["Disable autonomous group manoevures", "Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.<br/>Disabling this setting will make groups dumber, and more responsive"],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -39,9 +59,6 @@ private _curCat = "General";
     [25, 150, 50, 0],
     1
 ] call CBA_fnc_addSetting;
-
-// you cannot do arrays in cba settings, only select one entry from an array
-GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 // Minimum range for suppression
 [
@@ -62,8 +79,45 @@ GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
     [1, 100, 10, 0],
     1
 ] call CBA_fnc_addSetting;
+if (GVAR(Loaded_WP)) then {
+    GVAR(autoArtilleryRunning) = false;
+    [
+        QGVAR(autoAddArtillery),
+        "CHECKBOX",
+        ["Auto Artillery", "Automaticly adds Artillery to Side"],
+        [COMPONENT_NAME, _curCat],
+        false,
+        true, {
+            params ["_value"];
+            if (!_value) exitWith {};
+            DFUNC(ArtilleryScan) = {
+                if (!GVAR(autoAddArtillery)) exitWith {};
+                {
+                    if (getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0) then {
+                        _x call EFUNC(WP,taskArtilleryRegister);
+                    };
+                } foreach vehicles;
+                GVAR(autoArtilleryRunning) = true;
+                [{call FUNC(ArtilleryScan);}, [], 120] call CBA_fnc_waitAndExecute;
+            };
 
+            if (_value && !GVAR(autoArtilleryRunning)) then {
+                call FUNC(ArtilleryScan);
+            };
+        }
+    ] call CBA_fnc_addSetting;
+};
 private _curCat = "Share information";
+// Toggle communication for all units
+[
+    QGVAR(radio_disabled),
+    "CHECKBOX",
+    ["Disable information sharing", "Toggle information sharing betweem units"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 // Ranges at which groups share information
 [
     QGVAR(radio_shout),
@@ -114,7 +168,38 @@ private _curCat = "Share information";
     1
 ] call CBA_fnc_addSetting;
 
-#ifdef ISDEV
+_curCat = "CQB Formations";
+GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "LINE", "FILE", "DIAMOND"];
+
+GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
+
+DFUNC(UpdateCQBFormations) = {
+    params ["_args", "_formation"];
+    _args params ["_value"];
+    if (_value) then {
+        GVAR(CQB_formations) pushBackUnique _formation;
+    } else {
+        private _index = GVAR(CQB_formations) find _formation;
+        if (_index != -1) then {
+            GVAR(CQB_formations) deleteAt _index;
+        };
+    };
+};
+
+{
+    private _code = compile format ["
+        [_this, %1] call %2;
+    ", str _x, QFUNC(UpdateCQBFormations)];
+    [
+        format [QGVAR(CQB_formations_%1), _x],
+        "CHECKBOX",
+        [_x, _x + " Formation is Classified as CQB"], // TODO: Better Description? @nKenny
+        [COMPONENT_NAME, _curCat],
+        _x in GVAR(CQB_formations),
+        1, _code
+    ] call CBA_fnc_addSetting;
+} forEach GVAR(allPossibleFormations);
+
 // debug
 _curCat = "Debug";
 // FSM level debug messages
@@ -183,10 +268,3 @@ _curCat = "Debug";
     false,
     1
 ] call CBA_fnc_addSetting;
-#else
-GVAR(debug_FSM) = false;
-GVAR(debug_functions) = false;
-GVAR(debug_FSM_civ) = false;
-GVAR(debug_Drawing) = false;
-GVAR(RenderExpectedDestination) = false;
-#endif

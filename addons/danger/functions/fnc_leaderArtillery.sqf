@@ -49,10 +49,8 @@ private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit setVariable [QGVAR(currentTask), "Call Artillery"];
 
 // Gesture
-if (stance _unit != "PRONE") then {
-    doStop _unit;
-    [_unit, ["MountOptic"]] call FUNC(gesture);
-};
+doStop _unit;
+[_unit, ["HandSignalRadio"]] call FUNC(gesture);
 
 // perform it
 [_gun, _pos, _unit] spawn EFUNC(WP,taskArtillery);

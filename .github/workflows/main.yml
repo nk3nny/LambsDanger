@@ -32,7 +32,6 @@ jobs:
         uses: arma-actions/hemtt@master
         with:
           command: 'build --release'
-      - run: |
       - uses: actions/upload-artifact@master
         with:
           name: '@LambsDanger'

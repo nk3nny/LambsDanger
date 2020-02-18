@@ -8,7 +8,9 @@ params ["_unit"];
 
 // Standing or recent explosions ignored
 if (
-    isPlayer _unit
+    !GVAR(ExplosionEventHandlerEnabled)
+    || !(local _unit)
+    || isPlayer _unit
     || {!isNull objectParent _unit}
     || {(stance _unit) isEqualTo "PRONE"}
     || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}
@@ -17,7 +19,7 @@ if (
 // settings
 private _pos = _unit getPos [4, random 360];
 private _dir = 360 - (_unit getRelDir _pos);
-_unit setVariable [QGVAR(explosionReactionTime), time + 9];
+_unit setVariable [QGVAR(explosionReactionTime), time + GVAR(ExplosionReactionTime)];
 
 // standing to Right prone
 if (_dir > 330 && { RND(0.2) }) exitWith {
@@ -27,7 +29,7 @@ if (_dir > 330 && { RND(0.2) }) exitWith {
             if (alive _this) then {
                 _this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"
             };
-        }, _unit, 4 + random 3
+        }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
     ] call CBA_fnc_waitAndExecute;
 };
 
@@ -39,7 +41,7 @@ if (_dir < 30 && { RND(0.2) }) exitWith {
             if (alive _this) then {
                 _this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"
             };
-        }, _unit, 4 + random 3
+        }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
     ] call CBA_fnc_waitAndExecute;
 };
 
@@ -60,7 +62,7 @@ _unit setUnitPos "DOWN";
         if (alive _this) then {
             _this setUnitPos "AUTO"
         };
-    }, _unit, 5 + random 3
+    }, _unit, (GVAR(ExplosionReactionTime) - 3) + random 3
 ] call CBA_fnc_waitAndExecute;
 
 // end
