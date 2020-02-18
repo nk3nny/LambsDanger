@@ -51,9 +51,9 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
         // debug
         if (GVAR(debug_functions)) then {
             systemchat format ["%1 assaulting position (%2m)", side _unit, round (_unit distance _target)];
-                _sphere = createVehicle ["Sign_Sphere25cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
-                _sphere setpos (_unit getHideFrom _target);
-                [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
+            private _sphere = "Sign_Sphere25cm_F" createVehicleLocal [0,0,0];
+            _sphere setpos (_unit getHideFrom _target);
+            [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
         };
     };
 };
@@ -66,10 +66,10 @@ _unit doMove ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.5 - random 
 if (GVAR(debug_functions)) then {
     systemchat format ["%1 assaulting buildings (%2m)", side _unit, round (_unit distance _target)];
 
-    _sphereList = [];
+    private _sphereList = [];
     {
-        private _sphere = createVehicle ["Sign_Sphere10cm_F",[0,0,0],[],0,"CAN_COLLIDE"];
-        _sphere setpos _x;
+        private _sphere = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
+        _sphere setPos _x;
         _sphereList pushBack _sphere;
     } foreach _buildings;
     [{{deleteVehicle _x;true} count _this}, _sphereList, 10] call cba_fnc_waitAndExecute;

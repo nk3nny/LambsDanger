@@ -1018,7 +1018,7 @@ class FSM
                          "	[_dangerPos,format [""INVESTIGATE -- %1"",_dangerCause call lambs_danger_fnc_debugDangerType],""colorOrange"",""hd_dot""] call lambs_danger_fnc_dotMarker; " \n
                          " " \n
                          "	// arrows " \n
-                         "	_help = createVehicle [""Sign_Arrow_Large_Yellow_F"",[0,0,0],[],0,""CAN_COLLIDE""];" \n
+                         "	_help = ""Sign_Arrow_Large_Yellow_F"" createVehicleLocal [0,0,0]" \n
                          "	_help setPos _dangerPos; " \n
                          "" \n
                          "}; " \n
