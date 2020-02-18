@@ -2,7 +2,7 @@
 class CfgPatches {
     class ADDON {
         name = COMPONENT_NAME;
-        units[] = {QGVAR(TaskRush_Waypoint), QGVAR(Waypoint_Target)};
+        units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"lambs_danger"};
