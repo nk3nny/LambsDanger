@@ -60,9 +60,6 @@ private _curCat = "General";
     1
 ] call CBA_fnc_addSetting;
 
-// you cannot do arrays in cba settings, only select one entry from an array
-GVAR(CQB_formations)= ["FILE", "DIAMOND"];     // Special CQB Formations )
-
 // Minimum range for suppression
 [
     QGVAR(minSuppression_range),
@@ -143,6 +140,38 @@ private _curCat = "Share information";
     [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
+
+_curCat = "CQB Formations";
+GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "LINE", "FILE", "DIAMOND"];
+
+GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
+
+DFUNC(UpdateCQBFormations) = {
+    params ["_args", "_formation"];
+    _args params ["_value"];
+    if (_value) then {
+        GVAR(CQB_formations) pushBackUnique _formation;
+    } else {
+        private _index = GVAR(CQB_formations) find _formation;
+        if (_index != -1) then {
+            GVAR(CQB_formations) deleteAt _index;
+        };
+    };
+};
+
+{
+    private _code = compile format ["
+        [_this, %1] call %2;
+    ", str _x, QFUNC(UpdateCQBFormations)];
+    [
+        format [QGVAR(CQB_formations_%1), _x],
+        "CHECKBOX",
+        [_x, _x + " Formation is Classified as CQB"], // TODO: Better Description? @nKenny
+        [COMPONENT_NAME, _curCat],
+        _x in GVAR(CQB_formations),
+        1, _code
+    ] call CBA_fnc_addSetting;
+} forEach GVAR(allPossibleFormations);
 
 // debug
 _curCat = "Debug";
