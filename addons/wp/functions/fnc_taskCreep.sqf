@@ -99,7 +99,7 @@ while {{alive _x} count units _group > 0} do {
     waitUntil {sleep 1; simulationenabled leader _group};
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then {

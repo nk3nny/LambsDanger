@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482, dedmen
- * Find Closed Target to Group
+ * Find Closest Target to Group
  *
  * Arguments:
  * 0: Group to check <GROUP>
@@ -11,9 +11,9 @@
  * boolean
  *
  * Example:
- * [group bob, 500] call lambs_wp_fnc_findClosedTarget;
+ * [group bob, 500] call lambs_wp_fnc_findClosestTarget;
  *
- * Public: Yes
+ * Public: No
 */
 
 params ["_group", ["_radius", 500]];
