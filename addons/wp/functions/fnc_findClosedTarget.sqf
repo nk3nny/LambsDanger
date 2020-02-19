@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
- * Author: jokoho482
+ * Author: jokoho482, dedmen
  * Find Closed Target to Group
  *
  * Arguments:
@@ -17,13 +17,14 @@
 */
 
 params ["_group", ["_radius", 500]];
-private _newdist = _radius;
+
+private _groupLeader = leader _group;
+private _sideExclusion = [side _group, civilian];
+
 private _players = (switchableUnits + playableUnits - entities "HeadlessClient_F");
-_players = _players select {side _x != side _group && {side _x != civilian}};
-private _target = objNull;
-{
-    private _dist = (leader _group) distance2d _x;
-    if (_dist < _newdist && {(getPosATL _x) select 2 < 200}) then { _target = _x; _newdist = _dist; };
-    true
-} count _players;
-_target
+_players = _players select {!(side _x in _sideExclusion) && {(getPosATL _x) select 2 < 200}};
+
+private _playerDistances = _players apply {[_groupLeader distance2d _x, _x]};
+_playerDistances sort true;
+
+(_playerDistances param [0, [0, objNull]]) param [1, objNull]
