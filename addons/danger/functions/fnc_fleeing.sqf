@@ -31,8 +31,13 @@ _unit setVariable [QGVAR(currentTask), "Fleeing"];
 if (RND(0.85)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
+// enemy near -- abandon vehicles
+if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 12}) exitWith {
+    [_unit] orderGetIn false;
+};
+
 // indoor just hide
-if (getSuppression _unit < 0.6 && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.8 && {_unit call FUNC(indoor)}) exitWith {
 
     // halt unit
     doStop _unit;
@@ -42,11 +47,11 @@ if (getSuppression _unit < 0.6 && {_unit call FUNC(indoor)}) exitWith {
 
     // stance
     _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
-
+    [_unit, ["Down", "AdjustB"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
 };
 
 // nearBuildings
-private _buildings = [_unit,7,true,true] call FUNC(findBuildings);
+private _buildings = [_unit, 7, true, true] call FUNC(findBuildings);
 if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!
@@ -55,7 +60,7 @@ if !(_buildings isEqualTo []) exitWith {
 
 // update path
 private _enemy = _unit findNearestEnemy _unit;
-if !(isNull _enemy) then {
+if (_unit distance2d _enemy < 400) then {
 
     // newpos
     private _pos = (_unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70]);
@@ -70,11 +75,8 @@ if !(isNull _enemy) then {
     };
 
     // stance based on distance
-    if (_unit distance _enemy < 50) then {_unit setUnitPosWeak "MIDDLE"};
-    if (_unit distance _enemy > 180) then {
-        [_unit, ["Down"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
-        _unit setUnitPosWeak "DOWN"
-    };
+    if (_unit distance _enemy < 50) then {_unit setUnitPosWeak "MIDDLE";};
+    if (_unit distance _enemy > 200) then {_unit setUnitPosWeak "DOWN";};
 
     // move away
     _unit doMove _pos;

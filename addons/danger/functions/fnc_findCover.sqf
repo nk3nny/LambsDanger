@@ -91,7 +91,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
 if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
     systemchat format ["Found %1 cover positions", count _ret];
     {
-        createVehicle ["Sign_Arrow_Large_F", (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8], [], 0, "CAN_COLLIDE"];
+        "Sign_Arrow_Large_F" createVehicleLocal ((_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8]);
         private _add = if ((_x select 1) isEqualTo "UP") then {
             2
         } else {
@@ -101,7 +101,7 @@ if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
                 0.2
             };
         };
-        createVehicle ["Sign_Arrow_Large_Blue_F", (_x select 0) vectorAdd [0, 0, _add], [], 0, "CAN_COLLIDE"];
+        "Sign_Arrow_Large_Blue_F" createVehicleLocal ((_x select 0) vectorAdd [0, 0, _add]);
     } forEach _ret;
 };
 

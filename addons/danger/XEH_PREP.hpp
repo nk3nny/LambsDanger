@@ -1,5 +1,6 @@
 PREP(assault);
 PREP(assaultBuilding);
+PREP(assaultSpeed);
 PREP(checkBody);
 PREP(coward);
 PREP(doCallout);
@@ -37,3 +38,7 @@ SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);
 SUBPREP(debug,debugMarkerColor);
 SUBPREP(debug,dotMarker);
+
+SUBPREP(ZeusModules,moduleDisableGroupAI);
+SUBPREP(ZeusModules,moduleDisableAI);
+SUBPREP(ZeusModules,moduleSetRadio);

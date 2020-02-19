@@ -30,6 +30,7 @@ if (
     || {!(_unit checkAIFeature "MOVE")}
     || {isPlayer (leader _unit)}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
+    || {GVAR(disableAIHideFromTanksAndAircraft)}
 ) exitWith {false};
 
 // Units without weapons are always cowards
