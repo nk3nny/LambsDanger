@@ -65,11 +65,11 @@ item60[] = {"Unload",2,250,-825.000000,400.000000,-725.000000,450.000000,0.00000
 item61[] = {"Got_hit__Danger",4,218,-1050.000000,300.000000,-950.000000,350.000000,2.000000,"Got hit!" \n "Danger close!"};
 item62[] = {"Jink_",2,250,-1050.000000,400.000000,-950.000000,450.000000,0.000000,"Jink!"};
 item63[] = {"Timeout__Destina",4,218,-1050.000000,500.000000,-950.000000,550.000000,0.000000,"Timeout " \n "Destination"};
-item64[] = {"Pre_attack",2,250,125.000000,75.000000,225.000000,125.000000,0.000000,"Pre-attack"};
+item64[] = {"Pre_attack",2,4346,125.000000,75.000000,225.000000,125.000000,0.000000,"Pre-attack"};
 item65[] = {"Always",4,218,50.000000,150.000000,150.000000,200.000000,0.000000,"Always"};
 item66[] = {"Coward",4,218,150.000000,150.000000,250.000000,200.000000,1.000000,"Coward"};
 item67[] = {"Coward",2,250,150.000000,225.000000,250.000000,275.000000,0.000000,"Coward"};
-item68[] = {"Clear_buildings",2,4346,250.000000,225.000000,350.000000,275.000000,0.000000,"Clear buildings"};
+item68[] = {"Clear_buildings",2,250,250.000000,225.000000,350.000000,275.000000,0.000000,"Clear buildings"};
 item69[] = {"Cycle_",4,218,325.000000,325.000000,425.000000,375.000000,1.000000,"Cycle!"};
 item70[] = {"",7,210,-491.500000,-54.000000,-483.500000,-46.000000,0.000000,""};
 item71[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000,"Static"};
@@ -253,8 +253,8 @@ link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,84};
 link106[] = {84,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-263.773926,685.452759,640.279907,-84.345062,1158,884,1};
-window[] = {2,-1,-1,-1,-1,943,130,932,130,3,1176};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-258.855316,690.372314,515.682800,-208.941772,1158,884,1};
+window[] = {2,-1,-1,-1,-1,1047,234,1036,234,3,1176};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1018,7 +1018,7 @@ class FSM
                          "	[_dangerPos,format [""INVESTIGATE -- %1"",_dangerCause call lambs_danger_fnc_debugDangerType],""colorOrange"",""hd_dot""] call lambs_danger_fnc_dotMarker; " \n
                          " " \n
                          "	// arrows " \n
-                         "	_help = ""Sign_Arrow_Large_Yellow_F"" createVehicleLocal [0,0,0]" \n
+                         "	_help = ""Sign_Arrow_Large_Yellow_F"" createVehicleLocal [0,0,0];" \n
                          "	_help setPos _dangerPos; " \n
                          "" \n
                          "}; " \n
@@ -1572,8 +1572,8 @@ class FSM
                          "// time out " \n
                          "_timeout = time + 5 + random 4;" \n
                          "" \n
-                         "// look at " \n
-                         "_this lookAt _dangerCausedBy; " \n
+                         "// look at <-- this reveals target. Attempt to disable to check" \n
+                         "//_this lookAt _dangerCausedBy; " \n
                          "" \n
                          "// assault " \n
                          "private _assault = _this distance _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
