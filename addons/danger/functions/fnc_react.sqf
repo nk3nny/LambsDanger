@@ -41,7 +41,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
     "contact"
 };
 
-[formationLeader _unit, "Combat", _callout, 1000] call FUNC(doCallout);
+[formationLeader _unit, "Combat", _callout, 100] call FUNC(doCallout);
 
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);
