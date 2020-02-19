@@ -19,6 +19,17 @@
 */
 scopeName QGVAR(doCallout_main);
 params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 100]];
+
+if ((_this getVariable ["ACE_isUnconscious",false]) || {((lifeState _this) in ["DEAD", "INCAPACITATED"])}) exitWith {};
+
+private _time = _unit getVariable [QGVAR(calloutTime), 0];
+
+if (_time >= time) exitWith {
+    if (GVAR(debug_functions)) then {
+        diag_log format ["LAMBS: Callout called to Early %1", name _unit];
+        systemChat format ["LAMBS: Callout called to Early %1", name _unit];
+    };
+};
 private _speaker = speaker _unit;
 private _cacheName = format [QGVAR(%1_%2_%3), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
@@ -77,3 +88,9 @@ playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pit
 [{
     _this remoteExecCall ["setRandomLip", 0];
 }, [_unit, false], 1] call CBA_fnc_waitAndExecute;
+if (GVAR(debug_functions)) then {
+    diag_log format ["LAMBS: Callout: %1 called %2", name _unit, _sound];
+    systemChat format ["LAMBS: Callout: %1 called %2", name _unit, _sound];
+};
+
+_unit setVariable [QGVAR(calloutTime), time + 5, true];
