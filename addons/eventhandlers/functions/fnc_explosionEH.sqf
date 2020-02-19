@@ -21,6 +21,10 @@ private _pos = _unit getPos [4, random 360];
 private _dir = 360 - (_unit getRelDir _pos);
 _unit setVariable [QGVAR(explosionReactionTime), time + GVAR(ExplosionReactionTime)];
 
+if (RND(0.5)) then {
+    [formationLeader _unit, "Combat", "ScreamingE", 100] call EFUNC(danger,doCallout);
+};
+
 // standing to Right prone
 if (_dir > 330 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";

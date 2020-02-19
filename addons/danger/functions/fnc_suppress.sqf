@@ -29,6 +29,9 @@ if (
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Suppress"];
 
+// Call it out
+[_unit, "Combat", "SuppressingE", 100] call FUNC(doCallout);
+
 // do it!
 _unit doSuppressiveFire (_pos vectorAdd [0, 0, 0.1 + random 1]);
 
