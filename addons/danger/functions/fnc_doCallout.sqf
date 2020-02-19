@@ -20,7 +20,7 @@
 scopeName QGVAR(doCallout_main);
 params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 100]];
 
-if ((_this getVariable ["ACE_isUnconscious",false]) || {((lifeState _this) in ["DEAD", "INCAPACITATED"])}) exitWith {};
+if ((_unit getVariable ["ACE_isUnconscious", false]) || {((lifeState _unit) in ["DEAD", "INCAPACITATED"])}) exitWith {};
 
 private _time = _unit getVariable [QGVAR(calloutTime), 0];
 
