@@ -17,6 +17,9 @@
  *
  * Public: No
 */
+
+if !(GVAR(allowCallout)) exitWith {};
+
 scopeName QGVAR(doCallout_main);
 params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 100]];
 
