@@ -80,6 +80,16 @@ private _curCat = "General";
     1
 ] call CBA_fnc_addSetting;
 
+// Toggles AI Unit Gestures
+[
+    QGVAR(allowGestures),
+    "CHECKBOX",
+    ["Allow Gestures", "Allow Unit Gestures"],
+    [COMPONENT_NAME, _curCat],
+    true,
+    0
+] call CBA_fnc_addSetting;
+
 // Enable automatic artillery registration
 if (GVAR(Loaded_WP)) then {
     GVAR(autoArtilleryRunning) = false;

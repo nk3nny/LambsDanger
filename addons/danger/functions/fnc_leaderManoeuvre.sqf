@@ -87,7 +87,7 @@ private _fnc_manoeuvre = {
             _x setVariable [QGVAR(forceMOVE), true];
 
             // force movement
-            [_x, ["FastF", "FastF", "FastLF", "FastRF"]] call FUNC(gesture);
+            [_x, ["FastF", "FastF", "FastLF", "FastRF"]] call FUNC(gesture); // TODO: does this need to be forced?
         };
     } foreach _units;
 

@@ -50,7 +50,7 @@ if (RND(0.5)) exitWith {
     // action
     _unit doWatch objNull;
     _unit setUnitPos "DOWN";
-    [_unit, ["FastB", "FastLB", "FastRB"]] call FUNC(gesture);
+    [_unit, ["FastB", "FastLB", "FastRB"]] call FUNC(gesture); // TODO: does this need to be forced?
 
     // return
     6 + random 6;

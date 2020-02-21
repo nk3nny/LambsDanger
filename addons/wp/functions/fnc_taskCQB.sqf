@@ -59,7 +59,7 @@ private _fnc_act = {
 
         // posture
         doStop (units _group);
-        (leader _group) playAction selectRandom ["gestureAttack", "gestureGo", "gestureGoB"];
+        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(danger,gesture);
 
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
