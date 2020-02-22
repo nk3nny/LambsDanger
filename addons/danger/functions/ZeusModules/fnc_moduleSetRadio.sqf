@@ -31,10 +31,10 @@ if (_activated && local _logic) then {
                 _unit setVariable [QGVAR(dangerRadio), _hasRadio, true];
                 deleteVehicle _logic;
             }, {
-                params ["_logic"];
+                params ["", "_logic"];
                 deleteVehicle _logic;
             }, {
-                params ["_logic"];
+                params ["", "_logic"];
                 deleteVehicle _logic;
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
