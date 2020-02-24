@@ -49,6 +49,16 @@ private _curCat = "Settings";
     0
 ] call CBA_fnc_addSetting;
 
+// Toggles AI Unit Gestures
+[
+    QGVAR(disableAIGestures),
+    "CHECKBOX",
+    ["Disable unit gestures", "Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 private _curCat = "General";
 // Range at which units consider themselves in CQB
 [

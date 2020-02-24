@@ -23,7 +23,7 @@ if (_stance isEqualTo "") then {
 
 // prone -- exit quickly
 if (_stance isEqualTo "PRONE") exitWith {
-    [_unit, ["EvasiveLeft", "EvasiveRight"]] call FUNC(gesture);
+    [_unit, ["EvasiveLeft", "EvasiveRight"], true] call FUNC(gesture);
     true
 };
 

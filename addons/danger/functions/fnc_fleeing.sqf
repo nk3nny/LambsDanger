@@ -28,7 +28,7 @@ _unit setVariable [QGVAR(currentTask), "Fleeing"];
 // this could have an event attached to it too - nkenny
 
 // play gesture
-if (RND(0.85)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
+//if (RND(0.85)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // enemy near -- abandon vehicles
@@ -46,8 +46,8 @@ if (getSuppression _unit < 0.8 && {_unit call FUNC(indoor)}) exitWith {
     _unit setBehaviour "STEALTH";
 
     // stance
-    _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
-    [_unit, ["Down", "AdjustB"]] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
+    //_unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"]; <-- Seems to have little effect
+    [_unit, ["AdjustB"], true] call FUNC(gesture);
 };
 
 // nearBuildings
