@@ -192,7 +192,7 @@ private _fnc_DrawRect = {
             private _queue = (_dangeModeData select 0) apply { _x call _fnc_dangerModeTypes };
             _textData append [
                 "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",
-                "Danger Mode Timeout: ", round ( (_dangeModeData select 3) - time ), "s <br/>"
+               format [ "Danger Mode Timeout: %1s <br/>", round ( (_dangeModeData select 3) - time )]
             ];
         };
         _textData append [
