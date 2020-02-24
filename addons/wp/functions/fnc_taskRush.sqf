@@ -74,7 +74,7 @@ while {(units _group) findIf {alive _x} != -1 } do {
     waitUntil { sleep 1; simulationEnabled leader _group; };
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then  {
