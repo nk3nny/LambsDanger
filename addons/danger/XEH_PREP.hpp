@@ -36,6 +36,7 @@ SUBPREP(debug,zoneMarker);
 SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);
 SUBPREP(debug,debugMarkerColor);
+SUBPREP(debug,debugObjectColor);
 SUBPREP(debug,dotMarker);
 
 SUBPREP(ZeusModules,moduleDisableGroupAI);

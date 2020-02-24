@@ -79,7 +79,14 @@ if (_cannon) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings, _cannon];};
+if (GVAR(debug_functions)) then {
+    systemchat format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings, _cannon];
+
+    private _sphere = createSimpleObject ["Sign_Sphere100cm_F", (_pos vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2]), true];
+    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
+
+};
 
 // end
 true
