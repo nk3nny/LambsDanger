@@ -184,15 +184,15 @@ private _fnc_DrawRect = {
         };
 
         _textData append [
-            "Vanilla Behaviour: ", behaviour _unit, "<br/>",
-            "Behaviour: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
+            "Behaviour: ", behaviour _unit, "<br/>",
+            "Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
             private _dangeModeData = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
             private _queue = (_dangeModeData select 0) apply { _x call _fnc_dangerModeTypes };
             _textData append [
                 "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",
-                "Danger Mode Timeout: ", round ((_dangeModeData select 3) *100)/100, "<br/>"
+                "Danger Mode Timeout: ", round ( (_dangeModeData select 3) - time ), "s <br/>"
             ];
         };
         _textData append [
@@ -205,14 +205,15 @@ private _fnc_DrawRect = {
 
         _textData append _targetKnowledge;
 
-        private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
-        private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
+        //private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
+        //private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
         private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",
-            "SpotDistance: ", _spotDistance, "<br/>",
-            "SpotTime: ", _spotTime, "<br/>",
+            "Morale: ", morale _unit, "<br/>",
+            //"SpotDistance: ", _spotDistance, "<br/>",
+            //"SpotTime: ", _spotTime, "<br/>",
             "Enemy QueueSize: ", _targetCount, "<br/>"
         ];
         [_headPos, _textData] call _fnc_DrawRect;

@@ -10,7 +10,7 @@
  * String value with marker colour
  *
  * Example:
- * [0] call lambs_danger_fnc_debugMarkerColor;
+ * [_bob] call lambs_danger_fnc_debugMarkerColor;
  *
  * Public: No
 */

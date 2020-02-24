@@ -41,8 +41,8 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 if (GVAR(debug_functions)) then {
     systemchat format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)];
 
-    private _sphere = "Sign_Sphere100cm_F" createVehicleLocal [0,0,0];
-    _sphere setpos ASLtoAGL (_pos vectorAdd [0, 0, 0.1 + random 1]);
+    private _sphere = createSimpleObject ["Sign_Sphere100cm_F", (_pos vectorAdd [0, 0, 0.1 + random 1]), true];
+    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
 };
 
