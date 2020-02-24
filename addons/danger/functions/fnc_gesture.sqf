@@ -18,7 +18,8 @@
 */
 params ["_unit", ["_gesture", ["gestureFreeze"]], ["_force", false]];
 
-if !(GVAR(allowGestures) || _force) exitWith {false};
+// check global settings
+if (GVAR(disableAIGestures) && {!_force}) exitWith {false};
 
 // not for players
 if (isPlayer _unit) exitWith {false};
