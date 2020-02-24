@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-params ["_unit",["_distance",55]];
+params ["_unit", ["_distance", 55]];
 
 // check disabled
 if (
@@ -32,12 +32,12 @@ _unit setVariable [QGVAR(currentTask), "Fleeing"];
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // enemy near -- abandon vehicles
-if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 12}) exitWith {
+if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 5}) exitWith {
     [_unit] orderGetIn false;
 };
 
 // indoor just hide
-if (getSuppression _unit < 0.8 && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.8 && {isNull objectParent _unit} && {_unit call FUNC(indoor)}) exitWith {
 
     // halt unit
     doStop _unit;

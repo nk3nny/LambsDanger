@@ -23,7 +23,6 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 [QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
 
 // settings
-
 _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Panic"];
 
@@ -35,6 +34,7 @@ if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;
+    _unit switchMove "AmovPercMstpSnonWnonDnon"; // set civilian animation - nkenny
     _unit playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared", "AmovPercMstpSnonWnonDnon_Scared2"];
 
     // chance action

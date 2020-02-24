@@ -34,7 +34,7 @@ _unit doSuppressiveFire (_pos vectorAdd [0, 0, 0.1 + random 1]);
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {
-    _unit suppressFor (3 + random 7);
+    _unit suppressFor (7 + random 20);
 };
 
 // debug

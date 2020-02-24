@@ -65,7 +65,7 @@ if !(_body isEqualTo []) exitWith {
                 _unit doFollow leader group _unit;
             };
         },
-        [_unit, time + 20, _body]
+        [_unit, time + 8, _body]
     ] call CBA_fnc_waitUntilAndExecute;
 
     // update variable
