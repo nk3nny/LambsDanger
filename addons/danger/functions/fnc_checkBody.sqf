@@ -24,7 +24,6 @@ if (
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {!(attackEnabled _unit)}
-    || {isplayer (leader _unit)}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
@@ -38,45 +37,56 @@ if (RND(0.5) && { _unit call FUNC(indoor) }) exitWith {false};
 private _body = allDeadMen select { (_x distance _pos) < _range };
 _body = _body select {!(_x getVariable [QGVAR(isChecked), false])};
 
+// no body found
+if (_body isEqualTo []) exitWith {false};
+
 // ready
 doStop _unit;
 
-// Not checked? Move in close
-if !(_body isEqualTo []) exitWith {
-    // one body
-    _body = selectRandom _body;
+// found body
+_body = selectRandom _body;
 
-    _unit setVariable [QGVAR(currentTarget), _body];
-    _unit setVariable [QGVAR(currentTask), "Check Body"];
+_unit setVariable [QGVAR(currentTarget), _body];
+_unit setVariable [QGVAR(currentTask), "Check Body"];
 
-    // do it
-    private _bodyPos = getPosATL _body;
-    _unit doMove _bodyPos;
-    [
-        {
-            params ["_unit", "_time", "_body"];
-            ((_unit distance _body) < 0.7) || {_time < time} || {!alive _unit}
-        },
-        {
-            params ["_unit", "", "_body"];
-            if (alive _unit && {_unit distance _pos < 0.8}) then {
-                [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
-                _unit action ["rearm", _body];
-                _unit doFollow leader group _unit;
-            };
-        },
-        [_unit, time + 8, _body]
-    ] call CBA_fnc_waitUntilAndExecute;
+// do it
+private _bodyPos = getPosATL _body;
+_unit doMove _bodyPos;
+[
+    {
+        // condition
+        params ["_unit", "_body"];
+        (_unit distance _body < 0.7) || {!alive _unit}
+    },
+    {
+        // on near body
+        params ["_unit", "_body"];
+        if (alive _unit) then {
+            [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
+            _unit action ["rearm", _body];
+            _unit doFollow leader _unit;
+        };
+    }, 
+    [_unit, _body], 8,
+    {
+        // on timeout
+        params ["_unit"];
+        if (alive _unit) then {_unit doFollow leader _unit};
+    }
+] call CBA_fnc_waitUntilAndExecute;
 
-    // update variable
-    _body setVariable [QGVAR(isChecked), true, true];
+// update variable
+_body setVariable [QGVAR(isChecked), true, true];
 
-    // debug
-    if (GVAR(debug_functions)) then {systemchat format ["%1 checking body (%2 %3m)", side _unit, name _unit, round (_unit distance _body)];};
+// debug
+if (GVAR(debug_functions)) then {
+    systemchat format ["%1 checking body (%2 %3m)", side _unit, name _unit, round (_unit distance _body)];
 
-    // end
-    true
+    // debug arrow
+    private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];
+    _help setObjectTexture [0, [_unit] call lambs_danger_fnc_debugObjectColor];
+    [{deleteVehicle _this}, _help, 8] call cba_fnc_waitAndExecute;
 };
 
 // end
-false
+true

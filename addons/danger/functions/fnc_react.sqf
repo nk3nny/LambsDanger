@@ -22,10 +22,10 @@ params ["_unit", "_pos", ["_leader",false]];
 if (isplayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set range
-private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 55, true];
+private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, true];
 
 // drop down!
-private _stance = (if (_unit distance2d (nearestBuilding _unit) < ( 20 + random 20 ) || {_unit call FUNC(indoor)}) then {"MIDDLE"} else {selectRandom ["DOWN","DOWN","MIDDLE"]});
+private _stance = ["MIDDLE", selectRandom ["DOWN", "DOWN", "MIDDLE"]] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
 // Share information!
@@ -37,17 +37,18 @@ _unit setUnitPos _stance;
 // leaders tell their subordinates!
 if (_leader) then {
 
-    // leader slowdown!
-    _unit forceSpeed selectRandom [2, 3, 0];
-
     // get units
     private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
 
     // leaders get their subordinates to hide!
-    private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+    private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
     {
         [_x, _pos, _range, _buildings] call FUNC(hideInside);
     } foreach _units;
+
+    // leader slowdown!
+    _unit forceSpeed selectRandom [2, 3, 0];
+
 } else {
     [_unit, _pos, _range] call FUNC(hideInside);
 };

@@ -28,7 +28,7 @@ _unit setVariable [QGVAR(currentTask), "Fleeing"];
 // this could have an event attached to it too - nkenny
 
 // play gesture
-//if (RND(0.85)) then {[_unit, ["GestureCeaseFire"]] call FUNC(gesture);};
+if (RND(0.85)) then {[_unit, ["gestureHi", "gestureHiB", "gestureHiC"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // enemy near -- abandon vehicles
@@ -51,7 +51,7 @@ if (getSuppression _unit < 0.8 && {isNull objectParent _unit} && {_unit call FUN
 };
 
 // nearBuildings
-private _buildings = [_unit, 7, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, 12, true, true] call FUNC(findBuildings);
 if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!
@@ -69,7 +69,7 @@ if (_unit distance2d _enemy < 400) then {
     if (surfaceIsWater _pos) then {_pos = getposASL _unit};
 
     // concealment + pick bushes and rocks if possible
-    private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 9, false, true];
+    private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, false, true];
     if !(_objs isEqualTo []) then {
         _pos = getPos (selectRandom _objs);
     };

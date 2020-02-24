@@ -28,6 +28,10 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 // check CQC ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
+    // leader ~ rally animation here
+    [_unit, ["gestureFollow"]] call FUNC(gesture);
+    [_unit, _unit] call FUNC(assault);  // nb, self targets to find building, any building. -nk
+
     // set tasks + rally unit
     _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     {

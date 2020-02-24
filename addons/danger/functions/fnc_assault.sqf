@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Assault"];
 
 // settings
-_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+_unit setUnitPosWeak selectRandom ["UP", "UP", "UP", "MIDDLE"];
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
@@ -71,7 +71,7 @@ if (GVAR(debug_functions)) then {
         _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
         _sphereList pushBack _sphere;
     } foreach _buildings;
-    [{{deleteVehicle _x;true} count _this}, _sphereList, 10] call cba_fnc_waitAndExecute;
+    [{{deleteVehicle _x;true} count _this}, _sphereList, 15] call cba_fnc_waitAndExecute;
 };
 
 // end

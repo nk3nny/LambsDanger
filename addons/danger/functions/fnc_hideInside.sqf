@@ -19,9 +19,6 @@
 */
 params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
 
-if (_buildings isEqualTo []) then {
-    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
-};
 
 // stopped -- exit
 if (
@@ -33,9 +30,14 @@ if (
 
 // already inside -- exit
 if (RND(0.05) && {_unit call FUNC(indoor)}) exitWith {
-    if (stance _unit isEqualTo "STAND") then { _unit setUnitPosWeak "MIDDLE"; };
-    _unit doWatch _danger;
+    if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
+    //_unit doWatch _danger;
     false
+};
+
+// define buildings
+if (_buildings isEqualTo []) then {
+    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
 };
 
 // variables
@@ -58,7 +60,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     // Get General Target Position
     private _targetPos = (_unit getPos [35 + random _range, (_danger getDir _unit) + 45 - random 90]);
     // Find Surrounding Bushes and Rocks
-    private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true];
+    private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true];
     if !(_objs isEqualTo []) then {
         // if a Rock or Bush is found set it as target Pos
         _targetPos = getPos (selectRandom _objs);
