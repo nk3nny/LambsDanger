@@ -46,7 +46,7 @@ while {{alive _x} count units _group > 0} do {
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // settings
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";

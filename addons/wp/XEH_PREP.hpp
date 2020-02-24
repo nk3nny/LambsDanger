@@ -1,4 +1,4 @@
-PREP(findClosedTarget);
+PREP(findClosestTarget);
 PREP(taskArtillery);
 PREP(taskArtilleryRegister);
 PREP(taskAssault);
