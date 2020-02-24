@@ -46,8 +46,8 @@ if (getSuppression _unit < 0.8 && {_unit call FUNC(indoor)}) exitWith {
     _unit setBehaviour "STEALTH";
 
     // stance
-    _unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"];
-    [_unit, ["Down", "AdjustB"], true] call FUNC(gesture);   // extra force to get AI to drop down - nkenny
+    //_unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"]; <-- Seems to have little effect
+    [_unit, ["AdjustB"], true] call FUNC(gesture);
 };
 
 // nearBuildings
