@@ -93,7 +93,7 @@ _group enableAttack false;
 } count units _group;
 
 // creep loop
-while {{alive _x} count units _group > 0} do {
+while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // performance
     waitUntil {sleep 1; simulationenabled leader _group};

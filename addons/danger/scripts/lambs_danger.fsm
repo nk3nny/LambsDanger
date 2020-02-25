@@ -328,7 +328,7 @@ class FSM
                          "//systemchat format [""%1 half reset %2 - %3"",side _this, name _this, count _queue];" \n
                          "	" \n
                          "// more advanced reset" \n
-                         "if !(alive _dangerCausedBy && {_this distance2d _dangerCausedBy < (lambs_danger_CQB_range* 0.66)}) then {" \n
+                         "if !(_dangerCausedBy call lambs_danger_fnc_isAlive && {_this distance2d _dangerCausedBy < (lambs_danger_CQB_range* 0.66)}) then {" \n
                          "	_this forceSpeed -1;" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -646,7 +646,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Pre_attack";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"alive _dangerCausedBy"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_dangerCausedBy call lambs_danger_fnc_isAlive;"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -859,7 +859,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Killed___Continu";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!alive _dangerCausedBy && {!_assault}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(_dangerCausedBy call lambs_danger_fnc_isAlive) && {!_assault}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

@@ -26,7 +26,7 @@ if (_dir > 330 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";
     [
         {
-            if (alive _this) then {
+            if (_this call EFUNC(danger,isAlive)) then {
                 _this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
@@ -38,7 +38,7 @@ if (_dir < 30 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright";
     [
         {
-            if (alive _this) then {
+            if (_this call EFUNC(danger,isAlive)) then {
                 _this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
@@ -59,7 +59,7 @@ _unit setUnitPos "DOWN";
 // get back
 [
     {
-        if (alive _this) then {
+        if (_this call EFUNC(danger,isAlive)) then {
             _this setUnitPos "AUTO"
         };
     }, _unit, (GVAR(ExplosionReactionTime) - 3) + random 3

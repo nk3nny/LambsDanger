@@ -73,7 +73,7 @@ private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_pos", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select {alive _x && {!isPlayer _x}};
+    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
     _cycle = _cycle - 1;
 
     {

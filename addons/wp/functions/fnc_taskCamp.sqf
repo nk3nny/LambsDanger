@@ -94,7 +94,7 @@ if (count _units > 4) then {
 } count _units;
 
 // TRIGGER!
-waitUntil { (behaviour (leader _group)) isEqualTo "COMBAT" || {!alive (leader _group) }};
+waitUntil { (behaviour (leader _group)) isEqualTo "COMBAT" || {!((leader _group) call EFUNC(danger,isAlive))}};
 _group setCombatMode "RED";
 {
     //_x switchmove "";

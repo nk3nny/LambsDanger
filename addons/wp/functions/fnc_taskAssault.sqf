@@ -107,9 +107,9 @@ private _handle = [
             };
 
             // dead and units near destination get cleaned up!
-            if (!alive _x || {_x distance _pos < (_threshold + random 4)}) then {
+            if (!(_x call EFUNC(danger,isAlive)) || {_x distance _pos < (_threshold + random 4)}) then {
                 _units deleteAt _forEachIndex;
-                if (alive _x) then {
+                if (_x call EFUNC(danger,isAlive)) then {
                     _x call _fnc_reached;
                     [_fnc_restore, [_x,_handle], 7 + random 6] call CBA_fnc_waitAndExecute;
                 };

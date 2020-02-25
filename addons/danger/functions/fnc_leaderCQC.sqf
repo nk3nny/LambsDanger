@@ -23,7 +23,7 @@ _inCQC = _inCQC select {_x distance2d _unit < 250};
 
 // buildings present? ignore
 if (count _inCQC > 0) exitWith {};
-if (!alive _target) then {_target = _unit findNearestEnemy _unit;};
+if (!(_target call FUNC(isAlive))) then {_target = _unit findNearestEnemy _unit;};
 
 // update
 _unit setVariable [QGVAR(currentTarget), objNull];

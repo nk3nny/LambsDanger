@@ -14,6 +14,7 @@ PREP(gesture);
 PREP(hideInside);
 PREP(immediateAction);
 PREP(indoor);
+PREP(isAlive);
 PREP(leaderArtillery);
 PREP(leaderAssess);
 PREP(leaderContact);

@@ -56,22 +56,22 @@ _unit doMove _bodyPos;
     {
         // condition
         params ["_unit", "_body"];
-        (_unit distance _body < 0.7) || {!alive _unit}
+        (_unit distance _body < 0.7) || {!(_unit call FUNC(isAlive))}
     },
     {
         // on near body
         params ["_unit", "_body"];
-        if (alive _unit) then {
+        if (_unit call FUNC(isAlive)) then {
             [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
             _unit action ["rearm", _body];
             _unit doFollow leader _unit;
         };
-    }, 
+    },
     [_unit, _body], 8,
     {
         // on timeout
         params ["_unit"];
-        if (alive _unit) then {_unit doFollow leader _unit};
+        if (_unit call FUNC(isAlive)) then {_unit doFollow leader _unit};
     }
 ] call CBA_fnc_waitUntilAndExecute;
 

@@ -68,7 +68,7 @@ _group enableAttack false;
 { _x disableAI "AUTOCOMBAT"; doStop _x; true } count (units _group);
 
 // Hunting loop
-while {(units _group) findIf {alive _x} != -1 } do {
+while {(units _group) findIf {_x call EFUNC(danger,isAlive)} != -1 } do {
 
     // performance
     waitUntil { sleep 1; simulationEnabled leader _group; };
