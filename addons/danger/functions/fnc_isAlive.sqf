@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
- * Author: nkenny
+ * Author: jokoho482
  * Checks if a Unit is Alive and Awake
  *
  * Arguments:

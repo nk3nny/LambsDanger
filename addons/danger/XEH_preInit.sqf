@@ -11,14 +11,14 @@ GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 GVAR(fsmPriorities) =  [
     3,      // DCEnemyDetected
     1,      // DCFire
-    5,      // DCHit
-    4,      // DCEnemyNear
+    6,      // DCHit
+    5,      // DCEnemyNear
     3,      // DCExplosion
     1,      // DCDeadBodyGroup
     1,      // DCDeadBody
     2,      // DCScream
     4,      // DCCanFire
-    4       // DCBulletClose
+    3       // DCBulletClose
 ];
 
 ADDON = true;

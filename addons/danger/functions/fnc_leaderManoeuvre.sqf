@@ -54,7 +54,7 @@ private _overwatch = [getpos _unit, ((_unit distance2d _target) / 2) min 300, 10
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
 [_pos, true] call cba_fnc_shuffle;
-_pos pushBack (_target call CBA_fnc_getPos);
+_pos pushBack _target;
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -66,7 +66,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
-(group _unit) move ([_target, _overwatch] select (_overwatch isEqualto []));
+(group _unit) move ([_overwatch, _target] select (_overwatch isEqualto []));
 
 // manoeuvre function
 private _fnc_manoeuvre = {
@@ -85,12 +85,13 @@ private _fnc_manoeuvre = {
             _pos deleteAt 0;
         } else {
             // manoeuvre
-            _x forceSpeed selectRandom [24, 3, 3];
+            _x forceSpeed 4;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
             _x setVariable [QGVAR(forceMOVE), true];
 
             // force movement
+            _x doFollow (leader _x);
             [_x, ["FastF", "FastF", "FastLF", "FastRF"], true] call FUNC(gesture);
         };
     } foreach _units;

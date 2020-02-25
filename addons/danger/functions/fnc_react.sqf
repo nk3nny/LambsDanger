@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_leader",false]];
+params ["_unit", "_pos"];
 
 // disable Reaction phase for player group
 if (isplayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
@@ -34,30 +34,20 @@ _unit setUnitPos _stance;
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);
 
-// leadermode update
-[_unit, 1, _pos] call FUNC(leaderMode);
-
-if (!_leader) exitWith {
-
-    // unit hides
-    [_unit, _pos, _range] call FUNC(hideInside);
-
-    // end
-    true
-
-};
-
-// leader slowdown!
-_unit forceSpeed selectRandom [2, 3, 0];
-
 // get units
-private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 100} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
+private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 120} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
 
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
 {
-    [_x, _pos, _range, _buildings] call FUNC(hideInside);
+    [_x, _pos, _range + 15, _buildings] call FUNC(hideInside);
 } foreach _units;
+
+// caller slowdown!
+(formationLeader _unit) forceSpeed 1;
+
+// leadermode update
+[_unit, 1, _pos] call FUNC(leaderMode);
 
 // end
 true
