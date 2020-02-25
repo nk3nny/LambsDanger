@@ -33,7 +33,7 @@ if (_mode isEqualTo "disabled") then {
 // check if group AI disabled
 if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
-// AI profile stuff below 
+// AI profile stuff below
 // AI profiles not yet implemented -- nkenny 15/02/2020
 
 // enemy
@@ -43,7 +43,7 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 [_unit, 99, 66] call FUNC(leaderModeUpdate);
 
 // leader assess EH
-[QGVAR(OnAssess), [_unit, group _unit]] call FUNC(eventCallback);
+[QGVAR(OnAssess), [_unit, group _unit, _enemy]] call FUNC(eventCallback);
 
 // leadership assessment
 if !(_enemy isEqualTo []) then {

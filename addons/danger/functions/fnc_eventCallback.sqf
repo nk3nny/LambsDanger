@@ -11,7 +11,7 @@
  * none
  *
  * Example:
- * [] call lambs_danger_fnc_eventCallback; <-- fill me in @joko
+ * ["MyAwesomeEventname", "MyAwsomeEventParameter110011"] call lambs_danger_fnc_eventCallback;
  *
  * Public: No
 */
