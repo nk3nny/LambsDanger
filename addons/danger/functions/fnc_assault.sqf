@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Assault"];
 
 // settings
-_unit setUnitPosWeak selectRandom ["UP", "UP", "UP", "MIDDLE"];
+_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location

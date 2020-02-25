@@ -44,7 +44,9 @@ private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
 } foreach _units;
 
 // caller slowdown!
-(formationLeader _unit) forceSpeed 1;
+if (count _units > 1) then {
+    (leader _unit) forceSpeed 1;
+};
 
 // leadermode update
 [_unit, 1, _pos] call FUNC(leaderMode);
