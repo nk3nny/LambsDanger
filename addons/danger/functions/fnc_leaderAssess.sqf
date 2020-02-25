@@ -33,7 +33,7 @@ if (_mode isEqualTo "disabled") then {
 // check if group AI disabled
 if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
-// AI profile stuff below 
+// AI profile stuff below
 // AI profiles not yet implemented -- nkenny 15/02/2020
 
 // enemy
@@ -85,11 +85,11 @@ private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units _unit select {unitReady _x && { _x distance2d _unit < 100 } && { isnull objectParent _x } && { !isPlayer _x }};
+private _units = units _unit select { _x call FUNC(isAlive) && {unitReady _x} && { _x distance2d _unit < 100 } && { isNull objectParent _x } && { !isPlayer _x }};
 
 // isolated leader
 if (count _units < 2) then {
-    _unit doFollow selectRandom units _unit;
+    _unit doFollow selectRandom _units;
 };
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW

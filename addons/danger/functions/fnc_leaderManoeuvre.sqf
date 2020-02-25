@@ -39,13 +39,13 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
         _x forceSpeed selectRandom [24, 3];
         _x setVariable [QGVAR(forceMOVE), true];
         true
-    } count (( units _unit ) select { _x distance _unit > 45 });
+    } count (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 45} });
     false
 };
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {!isPlayer _x};
+    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x}};
 };
 
 // find overwatch position

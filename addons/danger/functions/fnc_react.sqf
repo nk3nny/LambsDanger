@@ -51,7 +51,7 @@ if (!_leader) exitWith {
 _unit forceSpeed selectRandom [2, 3, 0];
 
 // get units
-private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
+private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 100} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
 
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
