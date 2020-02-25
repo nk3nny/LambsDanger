@@ -34,27 +34,30 @@ _unit setUnitPos _stance;
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);
 
-// leaders tell their subordinates!
-if (_leader) then {
+// leadermode update
+[_unit, 1, _pos] call FUNC(leaderMode);
 
-    // get units
-    private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
+if (!_leader) exitWith {
 
-    // leaders get their subordinates to hide!
-    private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
-    {
-        [_x, _pos, _range, _buildings] call FUNC(hideInside);
-    } foreach _units;
-
-    // leader slowdown!
-    _unit forceSpeed selectRandom [2, 3, 0];
-
-} else {
+    // unit hides
     [_unit, _pos, _range] call FUNC(hideInside);
+
+    // end
+    true
+
 };
 
-// declare contact!
-[_unit, 1, _pos] call FUNC(leaderMode);
+// leader slowdown!
+_unit forceSpeed selectRandom [2, 3, 0];
+
+// get units
+private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
+
+// leaders get their subordinates to hide!
+private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+{
+    [_x, _pos, _range, _buildings] call FUNC(hideInside);
+} foreach _units;
 
 // end
 true

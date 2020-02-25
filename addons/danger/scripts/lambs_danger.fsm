@@ -251,7 +251,7 @@ link102[] = {80,81};
 link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-896.358704,1448.498657,1011.983521,-990.773682,1035,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-1587.939819,1626.430054,1513.662354,-1231.750732,1035,884,1};
 window[] = {2,-1,-1,-32000,-32000,891,78,880,78,3,1053};
 *//*%FSM</HEAD>*/
 class FSM
@@ -820,11 +820,15 @@ class FSM
                          "" \n
                          "	// suppress " \n
                          "	if (_this distance _dangerCausedBy > lambs_danger_minSuppression_range) then {" \n
-                         "		[_this, (_this targetKnowledge _dangerCausedBy select 6)] call lambs_danger_fnc_suppress;" \n
+                         "		//[_this, (_this targetKnowledge _dangerCausedBy select 6)] call lambs_danger_fnc_suppress;" \n
+                         "		[_this, AGLtoASL _dangerPos] call lambs_danger_fnc_suppress;" \n
+                         "" \n
+                         "		// reset assault" \n
+                         "		_assault = false;" \n
                          "	}; " \n
                          "" \n
-                         "	// increased delay" \n
-                         "	_timeout = _timeout + 4 +  random 6;" \n
+                         "	// increase delay" \n
+                         "	timeout = _timeout + 4 +  random 6;" \n
                          "" \n
                          "};" \n
                          "" \n
@@ -987,9 +991,6 @@ class FSM
                          "" \n
                          "// look at it " \n
                          "_this lookAt _dangerPos; " \n
-                         "" \n
-                         "// allow movement!" \n
-                         "_this setVariable [""lambs_danger_forceMove"", true];" \n
                          "" \n
                          "// leaders gesture " \n
                          "[formationLeader _this, [""gesturePoint""]] call lambs_danger_fnc_gesture; " \n
@@ -1793,7 +1794,7 @@ class FSM
                         itemno = 81;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
-                         "_timeout = time + 5 + random 6; " \n
+                         "_timeout = time + 6 + random 6; " \n
                          "" \n
                          "// destination" \n
                          "private _destination = (expectedDestination _this) select 0;" \n

@@ -30,7 +30,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
     // leader ~ rally animation here
     [_unit, ["gestureFollow"]] call FUNC(gesture);
-    [_unit, _unit] call FUNC(assault);  // nb, self targets to find building, any building. -nk
+    _unit doMove _target;
 
     // set tasks + rally unit
     _unit setVariable [QGVAR(currentTask), "Leader Rally"];
@@ -81,7 +81,7 @@ private _fnc_manoeuvre = {
         if (RND(0.4) && {count _pos > 0}) then {
             _x doWatch (_pos select 0);
             _x suppressFor 12;
-            [_x, AGLtoASL (_pos select 0)] call FUNC(suppress);
+            [_x, AGLtoASL (_pos select 0), true] call FUNC(suppress);
             _pos deleteAt 0;
         } else {
             // manoeuvre

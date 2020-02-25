@@ -49,24 +49,31 @@ _unit forceSpeed (selectRandom [-1, 24, 24]);
 
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
+    
     _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
+    
+    // execute move
     doStop _unit;
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
     _unit setUnitPosWeak "MIDDLE";
     if (GVAR(debug_functions)) then {systemchat format ["%1 hide in building", side _unit];};
 
 } else {
-    _unit setUnitPosWeak "DOWN";
-    // Get General Target Position
-    private _targetPos = (_unit getPos [35 + random _range, (_danger getDir _unit) + 45 - random 90]);
-    // Find Surrounding Bushes and Rocks
-    private _objs = nearestTerrainObjects [_targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true];
-    if !(_objs isEqualTo []) then {
-        // if a Rock or Bush is found set it as target Pos
-        _targetPos = getPos (selectRandom _objs);
-    };
 
-    if (surfaceIsWater _targetPos) exitWith { _unit suppressFor 5; };
+    // hide
+    _unit setUnitPosWeak "DOWN";
+
+    // targetPos
+    private _targetPos = _unit getPos [45 + random _range, (_danger getDir _unit) + 45 - random 90];
+
+    // Find Surrounding Bushes and Rocks
+    private _objs = nearestTerrainObjects [ _targetPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
+    if !(_objs isEqualTo []) then {_targetPos = getPos (selectRandom _objs);};
+
+    // water means hold
+    if (surfaceIsWater _targetPos) then { _targetPos = getposASL _unit;};
+
+    // execute move
     _unit doMove _targetPos;
     if (GVAR(debug_functions)) then {systemchat format ["%1 hide in bush", side _unit];};
 };
