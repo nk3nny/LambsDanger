@@ -32,12 +32,13 @@ if (RND(0.85)) then {[_unit, ["gestureHi", "gestureHiB", "gestureHiC"]] call FUN
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // enemy near -- abandon vehicles
-if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 5}) exitWith {
+if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
     [_unit] orderGetIn false;
+    _unit setSuppression ((getSuppression _unit) + 0.5);  // prevents instant laser aim - nkenny
 };
 
 // indoor just hide
-if (getSuppression _unit < 0.8 && {isNull objectParent _unit} && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.2 && {isNull objectParent _unit} && {_unit call FUNC(indoor)}) exitWith {
 
     // halt unit
     doStop _unit;

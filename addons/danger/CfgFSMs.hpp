@@ -22,7 +22,7 @@ class CfgFSMs {
             class Search_path__Covering {
                 class Init {
                     function = "searchPath";
-                    parameters[] = {30,6};   // 30,6 works, also 26,8 -- tested 36,12 for longer bounds -- 26, 8 v2.0 -- back to 30,6 Lets go crazy! -- nkenny
+                    parameters[] = {28,8};   // 30,6 works, also 26,8 -- tested 36,12 for longer bounds -- 26, 8 v2.0 -- back to 30,6 Lets go crazy! -- nkenny
                     thresholds[] = {};
                 };
             };
