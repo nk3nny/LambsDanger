@@ -65,7 +65,10 @@ if (_group isEqualType objNull) then { _group = group _group; };
 //_group setSpeedMode "FULL";
 //_group setFormation "DIAMOND";
 _group enableAttack false;
-{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count (units _group);
+{ 
+    _x disableAI "AUTOCOMBAT"; 
+    //doStop _x; true 
+} count (units _group);
 
 // Hunting loop
 while {(units _group) findIf {_x call EFUNC(danger,isAlive)} != -1 } do {

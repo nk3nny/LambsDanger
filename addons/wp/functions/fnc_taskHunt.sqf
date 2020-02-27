@@ -61,7 +61,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
         _group enableIRLasers true;
 
         // DEBUG
-        if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskHunt: %2 targets %3 at %4 Meters", side _group, groupID _group, name _target, floor (leader _group distance _target)]};
+        if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)]};
 
         // FLARE HERE
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };

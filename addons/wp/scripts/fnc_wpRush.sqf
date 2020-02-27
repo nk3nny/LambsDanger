@@ -24,11 +24,15 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 // prepare troops ~ pre-set for raid!
 [leader _group, 99, 999999] call EFUNC(danger,leaderModeUpdate);
 
+// low level move order
+_group move _pos;
+
 // group
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
 
 // execute script
-[_group, _radius] spawn FUNC(taskRush);
+[_group, _radius] call FUNC(taskRush);
+
 
 // end
 true

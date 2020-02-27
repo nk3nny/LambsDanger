@@ -80,12 +80,10 @@ _group enableAttack false;
 
 // failsafe!
 {
-    doStop _x;
+    //doStop _x;
     _x addEventhandler ["FiredNear", {
         params ["_unit"];
-        doStop _x;
         _unit setCombatMode "RED";
-        _unit suppressFor 4;
         (group _unit) enableAttack true;
         _unit removeEventHandler ["FiredNear", _thisEventHandler];
     }];

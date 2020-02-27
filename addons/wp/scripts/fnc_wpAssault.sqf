@@ -20,13 +20,11 @@ params ["_group", "_pos"];
 
 // group
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
-_group setSpeedMode "FULL";
 
 // individual units
 {
     _x enableAI "MOVE";
     _x enableAI "PATH";
-    _x forceSpeed 24;
 } foreach units _group;
 
 // execute script

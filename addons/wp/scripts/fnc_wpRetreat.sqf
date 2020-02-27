@@ -26,7 +26,6 @@ _group setSpeedMode "FULL";
 {
     _x enableAI "MOVE";
     _x enableAI "PATH";
-    _x forceSpeed 24;
 } foreach units _group;
 
 // execute script

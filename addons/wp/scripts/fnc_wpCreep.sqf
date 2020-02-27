@@ -21,14 +21,14 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 
 // get other settings
 
+// low level move order
+_group move _pos;
+
 // group
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
 
 // execute script
-[_group, _radius] spawn FUNC(taskCreep);
-
-// low level move order
-_group move _pos;
+[_group, _radius] call FUNC(taskCreep);
 
 // end
 true
