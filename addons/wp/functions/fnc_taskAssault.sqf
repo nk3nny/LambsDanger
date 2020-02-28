@@ -64,11 +64,6 @@ _pos = _pos call CBA_fnc_getPos;
 private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
 //[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];  <-- Offending line  - nkenny
 
-// debug
-[waypointPosition [_group, _wp_index], "_wp origin", "colorBLUE"] call lambs_danger_fnc_dotMarker;
-[_pos, "_pos", "colorRED"] call lambs_danger_fnc_dotMarker;
-[player, str canSuspend, "colorYellow"] call lambs_danger_fnc_dotMarker;
-
 // sort group
 private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
 
@@ -91,8 +86,6 @@ waitUntil {
 
     // get waypoint position
     private _wp = waypointPosition [_group, _wp_index];
-
-    [_wp, "_wp", "colorEAST"] call lambs_danger_fnc_dotMarker;
 
     // end if WP is odd
     if (_wp isEqualTo [0,0,0]) exitWith {true};
