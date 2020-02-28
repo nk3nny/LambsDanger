@@ -251,8 +251,8 @@ link102[] = {80,81};
 link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-2517.957764,2155.935303,1583.892578,-1740.098633,1243,884,1};
-window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1261};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-1275.255737,1258.221680,1585.172363,-774.779297,949,884,1};
+window[] = {2,-1,-1,-1,-1,839,26,828,26,3,967};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1564,11 +1564,13 @@ class FSM
                          "// time out " \n
                          "_timeout = time + 5 + random 4;" \n
                          "" \n
-                         "// look at <-- this reveals target. Attempt to disable to check" \n
-                         "_this lookAt (eyePos _dangerCausedBy); " \n
+                         "// look at_this " \n
+                         "if (_this knowsAbout _dangerCausedBy > 1) then {" \n
+                         "	_this lookAt (eyePos _dangerCausedBy); " \n
+                         "};" \n
                          "" \n
                          "// assault " \n
-                         "private _assault = _this distance2d _dangerCausedBy < (lambs_danger_CQB_range);" \n
+                         "private _assault = _this distance2d _dangerCausedBy < lambs_danger_CQB_range;" \n
                          "" \n
                          "// coward" \n
                          "private _coward = (!_CQCmode) && {getSuppression _this > 0.7} && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;
