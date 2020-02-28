@@ -80,7 +80,7 @@ if (_cannon) then {
 
 // debug
 if (GVAR(debug_functions)) then {
-    format ["%1 Vehicle assault building (buildingPos: %2 cannon: %3)", side _unit, count _buildings, _cannon] call FUNC(debugLog);
+    format ["%1 Vehicle assault building (%2 vs buildingPos: %3x)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call FUNC(debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", (_pos vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2]), true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];

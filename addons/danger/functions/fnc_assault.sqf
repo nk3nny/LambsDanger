@@ -50,7 +50,7 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
 
         // debug
         if (GVAR(debug_functions)) then {
-            format ["%1 assaulting position (%2m)", side _unit, round (_unit distance _target)] call FUNC(debugLog);
+            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
             private _sphere = createSimpleObject ["Sign_Sphere25cm_F", AGLtoASL (_unit getHideFrom _target), true];
             _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
             [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
@@ -63,7 +63,7 @@ _unit doMove ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.5 - random 
 
 // debug
 if (GVAR(debug_functions)) then {
-    format ["%1 assaulting buildings (%2m)", side _unit, round (_unit distance _target)] call FUNC(debugLog);
+    format ["%1 assaulting buildings (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
 
     private _sphereList = [];
     {

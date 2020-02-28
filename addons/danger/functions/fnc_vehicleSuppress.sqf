@@ -35,7 +35,14 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Suppress"];
 _vehicle doSuppressiveFire ((AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3]);
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 suppression (%2 @ %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _pos)] call FUNC(debugLog);};
+if (GVAR(debug_functions)) then {
+
+    format ["%1 suppression (%2 @ %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _pos)] call FUNC(debugLog);
+
+    private _sphere = createSimpleObject ["Sign_Sphere100cm_F", AGLtoASL _pos, true];
+    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
+};
 
 // end
 true
