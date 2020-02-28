@@ -33,14 +33,13 @@ private _enemy = _unit findNearestEnemy _pos;
 // Share information!
 [_unit, _enemy, GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
 
+// Callout
 _enemy = vehicle _enemy;
-
 private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "nameSound")) then {
     getText (configFile >> "CfgVehicles" >> typeOf _enemy >> "nameSound")
 } else {
     "contact"
 };
-
 [formationLeader _unit, "Combat", _callout, 100] call FUNC(doCallout);
 
 // leaders gestures

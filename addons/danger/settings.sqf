@@ -59,6 +59,16 @@ private _curCat = "Settings";
     0
 ] call CBA_fnc_addSetting;
 
+// Toggles AI Unit Callouts
+[
+    QGVAR(disableAICallouts),
+    "CHECKBOX",
+    ["Disable unit callouts", "Toggles extra unit callouts based on situations"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 private _curCat = "General";
 // Range at which units consider themselves in CQB
 [
@@ -90,15 +100,6 @@ private _curCat = "General";
     1
 ] call CBA_fnc_addSetting;
 
-// Toggles AI Unit Callouts
-[
-    QGVAR(allowCallout),
-    "CHECKBOX",
-    ["Allow Callouts", "Allow Unit Callouts"],
-    [COMPONENT_NAME, _curCat],
-    true,
-    0
-] call CBA_fnc_addSetting;
 
 // Enable automatic artillery registration
 if (GVAR(Loaded_WP)) then {

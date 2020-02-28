@@ -29,6 +29,13 @@ _unit setVariable [QGVAR(currentTask), "Panic"];
 // debug
 if (GVAR(debug_functions)) then {format ["%1 - %2 in panic", side _unit, name _unit] call FUNC(debugLog);};
 
+// callout
+if (RND(0.5)) then {
+    [_unit, "Stealth", selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"], 25] call FUNC(doCallout);
+};
+
+
+
 // indoor -- gesture
 if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
 
