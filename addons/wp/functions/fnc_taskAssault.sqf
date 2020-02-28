@@ -50,7 +50,7 @@ private _fnc_softReset = {
 params ["_group", "_pos", ["_retreat", false ], ["_threshold", 10], [ "_cycle", 2] ];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 _group = _group call CBA_fnc_getGroup;
 _group enableAttack false;
 _group allowFleeing 0;
@@ -60,7 +60,7 @@ _pos = _pos call CBA_fnc_getPos;
 
 // sort wp
 private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
-[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];
+//[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];  <-- Offending line  - nkenny
 
 // debug
 [waypointPosition [_group, _wp_index], "_wp origin", "colorBLUE"] call lambs_danger_fnc_dotMarker;
@@ -84,7 +84,6 @@ if (_retreat) then {
 
 // execute move
 waitUntil {
-//while {!(_units isEqualTo [])} do {
 
     // get waypoint position
     private _wp = waypointPosition [_group, _wp_index];
@@ -92,7 +91,7 @@ waitUntil {
     [_wp, "_wp", "colorEAST"] call lambs_danger_fnc_dotMarker;
 
     // end if WP is odd
-    if (_wp isEqualTo [0,0,0]) exitWith {};
+    if (_wp isEqualTo [0,0,0]) exitWith {true};
 
     // sort units
     {
@@ -112,15 +111,12 @@ waitUntil {
     _units = _units select { _x distance2d _wp > _threshold };
 
     // debug
-    //if (EGVAR(danger,debug_functions)) then {
-    if (false) then {
-        systemchat format ["%1 %2: %3 units moving %4m %5s -- %6",
+    if (EGVAR(danger,debug_functions)) then {
+        systemchat format ["%1 %2: %3 units moving %4M",
             side _group,
             ["taskAssault", "taskRetreat"] select _retreat,
             count _units,
-            round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2d _wp ),
-            round time,
-            _units
+            round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2d _wp )
         ];
     };
 
@@ -129,8 +125,6 @@ waitUntil {
     _units isEqualTo []
 
 };
-
-systemChat format ["SCRIPT RUNNING %1 - %2", time, _units];
 
 // end
 true

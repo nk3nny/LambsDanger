@@ -67,7 +67,7 @@ private _fnc_creepOrders = {
 params ["_group", ["_radius", 500], ["_cycle", 15]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders

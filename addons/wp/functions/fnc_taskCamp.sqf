@@ -16,7 +16,7 @@ populate one turret and one building if nearby.
 params ["_group", ["_range", 62]];
 
 // sort grp ---
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then {_group = group _group};
 private _units = units _group;
 

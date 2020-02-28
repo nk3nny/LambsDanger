@@ -20,7 +20,7 @@ params ["_group"];
 private _artillery = [];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = (group _group); };
 
 // find all vehicles
