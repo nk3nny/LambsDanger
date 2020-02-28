@@ -30,7 +30,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 
 // units
 private _units = units _unit;
-_units = _units select {isNull ObjectParent _x && {(secondaryWeapon _x) isEqualTo ""}};
+_units = _units select {_x call FUNC(isAlive) && {isNull objectParent _x} && {(secondaryWeapon _x) isEqualTo ""}};
 
 // units without launchers hide!
 {

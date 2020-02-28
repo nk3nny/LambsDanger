@@ -76,7 +76,7 @@ private _curCat = "General";
     "SLIDER",
     ["Minimum Distance for Suppression Fire", "Within this distance AI will not perform suppression fire"],
     [COMPONENT_NAME, _curCat],
-    [1, 500, 25, 0],
+    [1, 500, 20, 0],
     1
 ] call CBA_fnc_addSetting;
 

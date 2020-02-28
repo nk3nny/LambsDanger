@@ -49,6 +49,7 @@ if (RND(0.5)) exitWith {
         "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
     ];
     _unit switchMove _anim;
+    _unit forceSpeed 4;
     true
 };
 
@@ -60,6 +61,15 @@ _anim = selectRandom [
     "AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"
 ];
 _unit switchMove _anim;
+
+// reset unitPos
+[
+    {
+        if (_this call FUNC(isAlive)) then {
+            _this setUnitPos "AUTO"
+        };
+    }, _unit, 3 + random 3
+] call CBA_fnc_waitAndExecute;
 
 // end
 true

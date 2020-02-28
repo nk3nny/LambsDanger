@@ -20,7 +20,7 @@ params ["_group"];
 private _artillery = [];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = (group _group); };
 
 // find all vehicles
@@ -40,7 +40,7 @@ missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _group), _gl
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery];
+    format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery] call EFUNC(danger,debugLog);
 };
 
 // end

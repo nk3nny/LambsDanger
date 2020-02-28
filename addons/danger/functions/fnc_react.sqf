@@ -16,16 +16,16 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_leader",false]];
+params ["_unit", "_pos"];
 
 // disable Reaction phase for player group
 if (isplayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set range
-private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 55, true];
+private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, true];
 
 // drop down!
-private _stance = (if (_unit distance2d (nearestBuilding _unit) < ( 20 + random 20 ) || {_unit call FUNC(indoor)}) then {"MIDDLE"} else {selectRandom ["DOWN","DOWN","MIDDLE"]});
+private _stance = ["MIDDLE", selectRandom ["DOWN", "DOWN", "MIDDLE"]] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
 // Share information!
@@ -34,25 +34,21 @@ _unit setUnitPos _stance;
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);
 
-// leaders tell their subordinates!
-if (_leader) then {
+// get units
+private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 120} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
 
-    // leader slowdown!
-    _unit forceSpeed selectRandom [2, 3, 0];
+// leaders get their subordinates to hide!
+private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+{
+    [_x, _pos, _range + 15, _buildings] call FUNC(hideInside);
+} foreach _units;
 
-    // get units
-    private _units = ((units _unit) select {_x distance2d _unit < 100 && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
-
-    // leaders get their subordinates to hide!
-    private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
-    {
-        [_x, _pos, _range, _buildings] call FUNC(hideInside);
-    } foreach _units;
-} else {
-    [_unit, _pos, _range] call FUNC(hideInside);
+// caller slowdown!
+if (count _units > 1) then {
+    (leader _unit) forceSpeed 1;
 };
 
-// declare contact!
+// leadermode update
 [_unit, 1, _pos] call FUNC(leaderMode);
 
 // end

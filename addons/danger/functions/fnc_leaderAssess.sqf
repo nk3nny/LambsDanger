@@ -85,11 +85,11 @@ private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units _unit select {unitReady _x && { _x distance2d _unit < 100 } && { isnull objectParent _x } && { !isPlayer _x }};
+private _units = units _unit select { _x call FUNC(isAlive) && {unitReady _x} && { _x distance2d _unit < 100 } && { isNull objectParent _x } && { !isPlayer _x }};
 
 // isolated leader
 if (count _units < 2) then {
-    _unit doFollow selectRandom units _unit;
+    _unit doFollow selectRandom _units;
 };
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW

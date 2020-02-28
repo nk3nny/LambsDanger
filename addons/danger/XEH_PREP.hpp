@@ -14,6 +14,7 @@ PREP(gesture);
 PREP(hideInside);
 PREP(immediateAction);
 PREP(indoor);
+PREP(isAlive);
 PREP(leaderArtillery);
 PREP(leaderAssess);
 PREP(leaderContact);
@@ -32,12 +33,13 @@ PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
 
-SUBPREP(debug,zoneMarker);
 SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);
+SUBPREP(debug,debugLog);
 SUBPREP(debug,debugMarkerColor);
 SUBPREP(debug,debugObjectColor);
 SUBPREP(debug,dotMarker);
+SUBPREP(debug,zoneMarker);
 
 SUBPREP(ZeusModules,moduleDisableGroupAI);
 SUBPREP(ZeusModules,moduleDisableAI);
