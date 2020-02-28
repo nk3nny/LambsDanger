@@ -30,7 +30,6 @@ private _fnc_unAssault = {
         (group _unit) forgetTarget (_unit findNearestEnemy _unit);
         _unit doWatch ObjNull;
     };
-    //_unit enableAI "COVER";
 };
 
 // functions ~ soft reset
@@ -49,7 +48,7 @@ private _fnc_softReset = {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 10], [ "_cycle", 2] ];
+params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 2] ];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -68,8 +67,10 @@ private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
 private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
 
 // sort units
-if (_retreat) then {
-    {
+{
+    _x disableAI "COVER";
+    _x disableAI "SUPPRESSION";
+    if (_retreat) then {
         _x disableAI "TARGET";
         _x disableAI "AUTOTARGET";
         _x switchMove "ApanPercMrunSnonWnonDf";
@@ -78,8 +79,8 @@ if (_retreat) then {
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
         ];
-    } foreach _units;
-};
+    };
+} foreach _units; 
 
 // execute move
 waitUntil {

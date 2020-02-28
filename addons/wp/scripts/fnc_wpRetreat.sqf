@@ -33,7 +33,7 @@ _group setSpeedMode "FULL";
 _group move _pos;
 
 // execute script
-[_group, _pos, true] call FUNC(taskAssault);
+[_group, _pos, true, 25] call FUNC(taskAssault);
 
 // end
 true

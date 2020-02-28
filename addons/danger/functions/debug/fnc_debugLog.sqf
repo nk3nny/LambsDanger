@@ -17,4 +17,4 @@
 
 params ["_str"];
 systemChat _str;
-diag_log format ["[LAMBS Danger FSM ] : %1",_str];
+diag_log ("[LAMBS Danger FSM] : " + _str);
