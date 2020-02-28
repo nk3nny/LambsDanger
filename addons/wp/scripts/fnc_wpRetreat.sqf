@@ -15,6 +15,7 @@
 // init
 params ["_group", "_pos"];
 
+
 // prepare troops ~ pre-set for raid!
 [leader _group, 99, 170] call EFUNC(danger,leaderModeUpdate);
 
@@ -27,6 +28,9 @@ _group setSpeedMode "FULL";
     _x enableAI "MOVE";
     _x enableAI "PATH";
 } foreach units _group;
+
+// low level move order
+_group move _pos;
 
 // execute script
 [_group, _pos, true] call FUNC(taskAssault);

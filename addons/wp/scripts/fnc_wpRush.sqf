@@ -33,6 +33,5 @@ _group setVariable [QEGVAR(danger,disableGroupAI), true];
 // execute script
 [_group, _radius] call FUNC(taskRush);
 
-
 // end
 true

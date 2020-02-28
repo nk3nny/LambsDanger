@@ -28,10 +28,13 @@ _group setVariable [QEGVAR(danger,disableGroupAI), true];
 } foreach units _group;
 
 // low level move order
-//_group move _pos;
+_group move _pos;
 
 // execute script
 [_group, _pos, false] call FUNC(taskAssault);
+
+systemchat format ["task Assault %1", time];
+
 
 // end
 true
