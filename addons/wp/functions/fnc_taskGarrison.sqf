@@ -24,7 +24,7 @@
 params ["_group", ["_pos",[]], ["_radius", 50]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // sort pos
@@ -140,7 +140,7 @@ _wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group];
+    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(danger,debugLog);
 };
 
 

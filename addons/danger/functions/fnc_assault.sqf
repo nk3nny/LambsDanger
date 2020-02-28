@@ -31,7 +31,7 @@ _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Assault"];
 
 // settings
-_unit setUnitPosWeak "UP";
+_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
@@ -44,15 +44,15 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
 
     // Outdoors or indoors with 20% chance to move out
     if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
+
         // execute move
         _unit doMove (_unit getHideFrom _target);
-        //_unit moveTo (_unit getHideFrom _target); //-- testing moveTo for lower level order
 
         // debug
         if (GVAR(debug_functions)) then {
-            systemchat format ["%1 assaulting position (%2m)", side _unit, round (_unit distance _target)];
-            private _sphere = "Sign_Sphere25cm_F" createVehicleLocal [0,0,0];
-            _sphere setpos (_unit getHideFrom _target);
+            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
+            private _sphere = createSimpleObject ["Sign_Sphere25cm_F", AGLtoASL (_unit getHideFrom _target), true];
+            _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
             [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
         };
     };
@@ -60,19 +60,18 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
 
 // execute move
 _unit doMove ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
-//_unit forceSpeed 1; // notice doubling down on this setting. also in FSM. could possibly be removed. -nkenny
 
 // debug
 if (GVAR(debug_functions)) then {
-    systemchat format ["%1 assaulting buildings (%2m)", side _unit, round (_unit distance _target)];
+    format ["%1 assaulting buildings (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
 
     private _sphereList = [];
     {
-        private _sphere = "Sign_Sphere10cm_F" createVehicleLocal [0,0,0];
-        _sphere setPos _x;
+        private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _x, true];
+        _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
         _sphereList pushBack _sphere;
     } foreach _buildings;
-    [{{deleteVehicle _x;true} count _this}, _sphereList, 10] call cba_fnc_waitAndExecute;
+    [{{deleteVehicle _x;true} count _this}, _sphereList, 15] call cba_fnc_waitAndExecute;
 };
 
 // end

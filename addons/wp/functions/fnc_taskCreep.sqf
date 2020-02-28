@@ -67,7 +67,7 @@ private _fnc_creepOrders = {
 params ["_group", ["_radius", 500], ["_cycle", 15]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
@@ -80,12 +80,10 @@ _group enableAttack false;
 
 // failsafe!
 {
-    doStop _x;
+    //doStop _x;
     _x addEventhandler ["FiredNear", {
         params ["_unit"];
-        doStop _x;
         _unit setCombatMode "RED";
-        _unit suppressFor 4;
         (group _unit) enableAttack true;
         _unit removeEventHandler ["FiredNear", _thisEventHandler];
     }];
@@ -93,18 +91,18 @@ _group enableAttack false;
 } count units _group;
 
 // creep loop
-while {{alive _x} count units _group > 0} do {
+while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // performance
     waitUntil {sleep 1; simulationenabled leader _group};
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then {
         [_group, _target] call _fnc_creepOrders;
-        if (EGVAR(danger,debug_functions)) exitWith {systemchat format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getpos leader _group, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _group)];};
+        if (EGVAR(danger,debug_functions)) exitWith {format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getpos leader _group, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(danger,debugLog);};
         _cycle = 30;
     } else {
         _cycle = 120;

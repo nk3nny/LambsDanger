@@ -5,3 +5,5 @@ keys/*
 releases/*
 *.pbo
 *.bisign
+
+build.bat

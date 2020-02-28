@@ -28,6 +28,10 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 // check CQC ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
+    // leader ~ rally animation here
+    [_unit, ["gestureFollow"]] call FUNC(gesture);
+    _unit doMove _target;
+
     // set tasks + rally unit
     _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     {
@@ -35,13 +39,13 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
         _x forceSpeed selectRandom [24, 3];
         _x setVariable [QGVAR(forceMOVE), true];
         true
-    } count (( units _unit ) select { _x distance _unit > 45 });
+    } count (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 45} });
     false
 };
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {!isPlayer _x};
+    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x}};
 };
 
 // find overwatch position
@@ -50,7 +54,7 @@ private _overwatch = [getpos _unit, ((_unit distance2d _target) / 2) min 300, 10
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
 [_pos, true] call cba_fnc_shuffle;
-_pos pushBack (_target call CBA_fnc_getPos);
+_pos pushBack _target;
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -62,14 +66,14 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
-(group _unit) move ([_target, _overwatch] select (_overwatch isEqualto []));
+(group _unit) move ([_overwatch, _target] select (_overwatch isEqualto []));
 
 // manoeuvre function
 private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_pos", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select {alive _x && {!isPlayer _x}};
+    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
     _cycle = _cycle - 1;
 
     {
@@ -77,17 +81,18 @@ private _fnc_manoeuvre = {
         if (RND(0.4) && {count _pos > 0}) then {
             _x doWatch (_pos select 0);
             _x suppressFor 12;
-            [_x, AGLtoASL (_pos select 0)] call FUNC(suppress);
+            [_x, AGLtoASL (_pos select 0), true] call FUNC(suppress);
             _pos deleteAt 0;
         } else {
             // manoeuvre
-            _x forceSpeed selectRandom [24, 3, 3];
+            _x forceSpeed 4;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
             _x setVariable [QGVAR(currentTask), "Manoeuvre"];
             _x setVariable [QGVAR(forceMOVE), true];
 
             // force movement
-            [_x, ["FastF", "FastF", "FastLF", "FastRF"]] call FUNC(gesture);
+            _x doFollow (leader _x);
+            [_x, ["FastF", "FastF", "FastLF", "FastRF"], true] call FUNC(gesture);
         };
     } foreach _units;
 

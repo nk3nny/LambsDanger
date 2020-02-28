@@ -36,12 +36,15 @@
 params ["_group", ["_pos",[]], ["_radius", 200]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // sort pos
 if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call cba_fnc_getPos;
+
+// remove all waypoints
+[_group] call CBA_fnc_clearWaypoints;
 
 // orders
 _group setBehaviour "SAFE";
@@ -54,7 +57,7 @@ _group enableGunLights "forceOn";
 if (isNil "_pos") then { _pos = getPos (leader _group); };
 
 // Waypoints - Move
-for "_i" from 1 to 4 do  {
+for "_i" from 1 to 4 do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
     if (surfaceIsWater _pos2) then { _pos2 = _pos };
     private _wp = _group addWaypoint [_pos2, 10];
@@ -70,7 +73,7 @@ _wpX setWaypointType "CYCLE";
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group];
+    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(danger,debugLog);
 };
 
 // end

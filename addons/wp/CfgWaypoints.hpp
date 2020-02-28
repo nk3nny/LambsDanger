@@ -27,7 +27,7 @@ class CfgWaypoints {
             displayNameDebug = QEGVAR(danger,Patrol);
             file = QPATHTOF(scripts\fnc_wpPatrol.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
-            tooltip = "Randomised patrol within WP completion radius (Default 200m)";
+            tooltip = "Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group";
         };
         class EGVAR(danger,Rush) {
             displayName = "3 TASK RUSH";

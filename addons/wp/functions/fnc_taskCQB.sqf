@@ -48,18 +48,22 @@ private _fnc_enemy = {
 // compile actions
 private _fnc_act = {
     params ["_enemy", "_group", "_building"];
+
+    // units
+    private _units = units _group select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
+
     // deal with close enemy
     if (!isNull _enemy) exitWith {
 
         // debug
         if (EGVAR(danger,debug_functions)) then {
-            systemchat format ["%1 taskCQB: RUSH ENEMY!",side _group];
-            createVehicle ["Sign_Arrow_Large_F", getposATL _enemy, [], 0, "CAN_COLLIDE"];
+            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(danger,debugLog);
+            private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
         };
 
         // posture
-        doStop (units _group);
-        (leader _group) playAction selectRandom ["gestureAttack", "gestureGo", "gestureGoB"];
+        doStop _units;
+        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(danger,gesture);
 
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
@@ -67,38 +71,48 @@ private _fnc_act = {
 
         // act
         {
+            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
             _x doMove selectRandom _buildingPos;
-            _x doWatch _enemy;
+            _x lookAt _enemy;
             true
-        } count units _group;
+        } count _units;
     };
 
     // clear and check buildings
     private _buildingPos = _building getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
-    private _leader = leader _group;
     {
+        
+        // this is the pos to clear!
+        private _buildingPosSelected = _buildingPos select 0;
+
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
+            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
+            _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                createVehicle ["Sign_Arrow_Large_Blue_F", _buildingPos select 0, [], 0, "CAN_COLLIDE"];
+                private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLtoASL _buildingPosSelected, true];
+                _arrow setObjectTexture [0, [_x] call EFUNC(danger,debugObjectColor)];
             };
 
+            // task
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms"];
+
             // clean list
-            if (_x distance (_buildingPos select 0) < 30 || { RND(0.5) && {(_leader isEqualTo _x)}}) then {
+            if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
-                if (lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0, 0, 10]] && {_x distance (_buildingPos select 0) > 45} && {RND(0.6)}) then {
+                if (RND(0.6) && {_x call EFUNC(danger,indoor)} && {_x distance _buildingPosSelected > 45}) then {
                     _x setVehiclePosition [getPos _x, [], 3.5];
                 };
 
                 // distance to building is too far?
-                //if (_x distance (_buildingPos select 0) > 100) then {
+                //if (_x distance _buildingPosSelected > 100) then {
                 //  _x doMove (_building getPos [-10, (_x getDir _b)]);
                 //};
             };
@@ -108,13 +122,13 @@ private _fnc_act = {
             _x setUnitPos "MIDDLE";
 
             // Unit is ready and outside -- try suppressive fire
-            if (unitReady _x && {!(lineIntersects [eyePos _x, (eyePos _x) vectorAdd [0, 0, 10]])}) then {
+            if (unitReady _x && {!(_x call EFUNC(danger,indoor))}) then {
                 _x doSuppressiveFire _building;
-                _x doFollow (leader _group);
+                _x doFollow leader _x;
             };
         };
         true
-    } count (units _group);
+    } count _units;
 
     // update variable
     _building setVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), _buildingPos];
@@ -123,13 +137,16 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params ["_group", "_pos",["_radius",50],["_cycle",21]];
+params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21] ];
 
 // sort grp
 if (!local _group) exitWith {};
 if (_group isEqualType objNull) then {
     _group = group _group;
 };
+
+// more dynamic pos
+private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
 
 // orders
 _group setSpeedMode "FULL";
@@ -145,9 +162,12 @@ _group allowFleeing 0;
 } count units _group;
 
 // loop
-while {{alive _x} count units _group > 0} do {
+while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     // performance
     waitUntil {sleep 1; simulationEnabled (leader _group)};
+
+    // get wp position
+    private _pos = waypointPosition [_group, _wp_index];
 
     // find building
     private _building = [_pos, _radius, _group] call _fnc_find;
@@ -162,16 +182,16 @@ while {{alive _x} count units _group > 0} do {
     // wait
     sleep _cycle;
     if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy];}; // instead of boolean for enemies, would be better with a count -nkenny
-
 };
 
 // reset
 {
-    _x setVariable [QEGVAR(danger,disableAI), false];
+    _x setVariable [QEGVAR(danger,disableAI), nil];
+    _x setUnitpos "AUTO";
 } foreach units _group;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: CQB DONE version 0.28",side _group];};
+if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.29",side _group] call EFUNC(danger,debugLog);};
 
 // end
 true

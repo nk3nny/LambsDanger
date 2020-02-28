@@ -23,7 +23,7 @@
 params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accuracy", 75]];
 
 // Gun and caller must be alive
-if (!canFire _gun || {!alive _caller}) exitWith {false};
+if (!canFire _gun || {!(_caller call EFUNC(danger,isAlive))}) exitWith {false};
 
 // settings
 private _direction = _gun getDir _pos;
@@ -49,7 +49,7 @@ private _checkRounds = (25 + random 35);
 sleep _mainStrike;
 
 // initate attack (gun and caller must be alive)
-if (canFire _gun && {alive _caller}) then {
+if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
     // debug marker list
     private _mlist = [];
@@ -82,7 +82,7 @@ if (canFire _gun && {alive _caller}) then {
     };
 
     // step for main barrage
-    if !(canFire _gun && {alive _caller}) exitWith {false};
+    if !(canFire _gun && {_caller call EFUNC(danger,isAlive)}) exitWith {false};
 
     // Main Barrage
     for "_i" from 1 to _rounds do {
@@ -106,7 +106,7 @@ if (canFire _gun && {alive _caller}) then {
 
     // debug
     if (EGVAR(danger,debug_functions)) then {
-        systemchat format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)];
+        format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)] call EFUNC(danger,debugLog);
     };
 
     // clean markers!

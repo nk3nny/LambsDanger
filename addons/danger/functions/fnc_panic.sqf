@@ -23,18 +23,18 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 [QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
 
 // settings
-
 _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Panic"];
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 - %2 in panic", side _unit, name _unit];};
+if (GVAR(debug_functions)) then {format ["%1 - %2 in panic", side _unit, name _unit] call FUNC(debugLog);};
 
 // indoor -- gesture
 if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;
+    _unit switchMove "AmovPercMstpSnonWnonDnon"; // set civilian animation - nkenny
     _unit playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared", "AmovPercMstpSnonWnonDnon_Scared2"];
 
     // chance action
@@ -50,7 +50,7 @@ if (RND(0.5)) exitWith {
     // action
     _unit doWatch objNull;
     _unit setUnitPos "DOWN";
-    [_unit, ["FastB", "FastLB", "FastRB"]] call FUNC(gesture);
+    [_unit, ["FastB", "FastLB", "FastRB"], true] call FUNC(gesture);
 
     // return
     6 + random 6;

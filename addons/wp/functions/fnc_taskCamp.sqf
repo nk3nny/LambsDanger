@@ -16,7 +16,7 @@ populate one turret and one building if nearby.
 params ["_group", ["_range", 62]];
 
 // sort grp ---
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then {_group = group _group};
 private _units = units _group;
 
@@ -94,7 +94,7 @@ if (count _units > 4) then {
 } count _units;
 
 // TRIGGER!
-waitUntil { (behaviour (leader _group)) isEqualTo "COMBAT" || {!alive (leader _group) }};
+waitUntil { (behaviour (leader _group)) isEqualTo "COMBAT" || {!((leader _group) call EFUNC(danger,isAlive))}};
 _group setCombatMode "RED";
 {
     //_x switchmove "";

@@ -31,15 +31,12 @@ private _selectedPositions = [];
 
 private _fnc_selectResult = {
     //Found position(s)
-    _result = _selectedPositions select 0;
-    private _maximum = (_refObj worldToModel _result) select 2;
-    {
-        private _height = (_refObj worldToModel _x) select 2;
-        if (_height > _maximum) then {
-            _result = _x;
-            _maximum = _height;
-        };
-    } forEach _selectedPositions;
+
+    private _heightSorted = _selectedPositions apply {[(_refObj worldToModel _x) select 2, _x]};
+    _heightSorted sort false;
+    
+    _result = (_heightSorted param [0]) param [1, [0,0,0]];
+
     _result breakOut QGVAR(findOverwatch);
 };
 

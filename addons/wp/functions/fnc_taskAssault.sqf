@@ -19,118 +19,110 @@
  * Public: Yes
 */
 
-// init
-params ["_group","_pos",["_retreat",false],["_threshold",12],["_cycle",2]];
+// functions ~ keep units moving!
+private _fnc_unAssault = {
+    params ["_unit"];
+    if (currentCommand _unit isEqualTO "ATTACK") then {
+        [_unit] joinSilent grpNull;
+        [_unit] joinSilent _group;
+    };
+    if (_retreat) then {
+        (group _unit) forgetTarget (_unit findNearestEnemy _unit);
+        _unit doWatch ObjNull;
+    };
+};
+
+// functions ~ soft reset
+private _fnc_softReset = {
+    params ["_unit"];
+    _unit forceSpeed -1;
+    _unit setUnitPosWeak "AUTO";
+    _unit enableAI "COVER";
+    _unit enableAI "SUPPRESSION";
+    //_unit enableAI "CHECKVISIBLE";
+    if (_retreat) then {
+        _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+        _unit enableAI "TARGET";
+        _unit enableAI "AUTOTARGET";
+    };
+};
+
+// init --
+params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 2] ];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 _group = _group call CBA_fnc_getGroup;
-_group setFormation "DIAMOND";
-_group setBehaviourStrong "CARELESS";
+_group enableAttack false;
+_group allowFleeing 0;
 
 // sort pos
 _pos = _pos call CBA_fnc_getPos;
 
+// sort wp
+private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
+//[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];  <-- Offending line  - nkenny
+
 // sort group
-private _units = units _group;
+private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
 
-// override
-if ((_group getVariable [QEGVAR(danger,forcedMovement),-1]) != -1) then {
-    (_group getVariable QEGVAR(danger,forcedMovement)) call CBA_fnc_removePerFrameHandler;
-};
-
-// individuals
+// sort units
 {
-    _x setVariable [QEGVAR(danger,disableAI),true];
-    _x forceSpeed 24;
-    _x setUnitPos "UP";
-    _x disableAI "FSM";
-    _x disableAI "AUTOTARGET";
-    _x disableAI "TARGET";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
-    _x disableAI "CHECKVISIBLE";
-    _x doMove _pos;
-    _x doWatch _pos;
-    if (RND(0.5) && {_retreat}) then {
+    if (_retreat) then {
+        _x disableAI "TARGET";
+        _x disableAI "AUTOTARGET";
+        _x switchMove "ApanPercMrunSnonWnonDf";
         _x playMoveNow selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
         ];
     };
-} foreach _units;
+} foreach _units; 
 
-// Function ~ reached spot!
-private _fnc_reached = {
-    _this playMoveNow selectRandom [
-        "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon",
-        "AmovPercMevaSrasWrflDf_AmovPknlMstpSrasWrflDnon",
-        "AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon",
-        "AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"
-    ];
-    _this setVariable [QEGVAR(danger,disableAI),nil];
-    _this setUnitPos "DOWN";
-    _this enableAI "FSM";
-    _this enableAI "AUTOTARGET";
-    _this enableAI "TARGET";
-    _this enableAI "COVER";
-    _this enableAI "SUPPRESSION";
-    _this enableAI "CHECKVISIBLE";
-    //_this doMove getposASL _this;
-};
+// execute move
+waitUntil {
 
-// Function ~ restore
-private _fnc_restore = {
-    params ["_unit","_handle"];
-    if (_handle != (_group getVariable [QEGVAR(danger,forcedMovement),-1])) exitWith {};
-    _unit forceSpeed -1;
-    _unit setUnitPos "AUTO";
-    _unit doFollow leader _unit;
-};
+    // get waypoint position
+    private _wp = waypointPosition [_group, _wp_index];
 
-// execute assault
-private _handle = [
+    // end if WP is odd
+    if (_wp isEqualTo [0,0,0]) exitWith {true};
+
+    // sort units
     {
-        params ["_arg","_handle"];
-        _arg params ["_group","_pos","_threshold","_units","_fnc_reached","_fnc_restore"];
+        _x call _fnc_unAssault;
+        _x setUnitPosWeak "UP";
+        _x doMove _wp;
+        _x setDestination [_wp, "DoNotPlanFormation", false];
+        _x forceSpeed ([ [_x, _wp] call EFUNC(danger,assaultSpeed), 24] select _retreat);
+        _x setVariable [QEGVAR(danger,forceMove), true];
+    } foreach _units;
 
-        // Update units
-        {
-            // move
-            _x doMove _pos;
+    // soft reset
+    _units = _units select {_x call EFUNC(danger,isAlive)};
+    {_x call _fnc_softReset;} foreach (_units select {_x distance2d _wp < _threshold});
 
-            // clear targets ~ forget all targets. Harsh, but effective. - nkenny
-            if (currentCommand _x isEqualTO "ATTACK") then {
-                [_x] joinSilent grpNull;
-                [_x] joinSilent _group;
-            };
+    // get unit focus
+    _units = _units select { _x distance2d _wp > _threshold };
 
-            // dead and units near destination get cleaned up!
-            if (!alive _x || {_x distance _pos < (_threshold + random 4)}) then {
-                _units deleteAt _forEachIndex;
-                if (alive _x) then {
-                    _x call _fnc_reached;
-                    [_fnc_restore, [_x,_handle], 7 + random 6] call CBA_fnc_waitAndExecute;
-                };
-            };
-        } foreach _units;
+    // debug
+    if (EGVAR(danger,debug_functions)) then {
+        format ["%1 %2: %3 units moving %4M",
+            side _group,
+            ["taskAssault", "taskRetreat"] select _retreat,
+            count _units,
+            round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2d _wp )
+        ] call EFUNC(danger,debugLog);
+    };
 
-        // end or override
-        if (count _units < 1) then {
-            _handle call CBA_fnc_removePerFrameHandler;
-            _group setVariable [QEGVAR(danger,forcedMovement),-1];
-            _group setVariable [QEGVAR(danger,disableGroupAI), false];
-            _group setBehaviour "AWARE";
-        };
-    }, _cycle, [_group, _pos, _threshold, _units, _fnc_reached, _fnc_restore]
-] call CBA_fnc_addPerFrameHandler;
+    // delay and end
+    sleep _cycle;
+    _units isEqualTo []
 
-// handle
-_group setVariable [QEGVAR(danger,forcedMovement),_handle];
-
-// debug
-if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 %2: Unit moving %3m",side _group, ["taskAssault", "taskRetreat"] select _retreat, round (leader _group distance _pos)];};
+};
 
 // end
 true

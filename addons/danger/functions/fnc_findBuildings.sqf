@@ -26,7 +26,7 @@ _houses = _houses select {!((_x buildingPos -1) isEqualTo [])};
 // find house positions
 if (!_useHousePos) exitWith {_houses}; // return if not use House Pos
 private _housePos = [];
-{_housePos append (_x buildingPos -1); true} count _houses;
+{_housePos append (_x buildingPos -1)} forEach _houses;
 
 // sort indoor positions
 if (_onlyIndoor) then {
@@ -36,4 +36,4 @@ if (_onlyIndoor) then {
     };
 };
 // return
-_housePos;
+_housePos

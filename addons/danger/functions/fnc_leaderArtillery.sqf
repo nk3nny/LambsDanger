@@ -22,7 +22,7 @@ if (_pos isEqualTo []) then {
 };
 
 // check if mod active
-if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- mod not enabled", side _unit]}};
+if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call FUNC(debugLog);}};
 
 // settings
 private _artillery = missionNamespace getVariable [QGVAR(artillery_) + str (side _unit), []];
@@ -33,7 +33,7 @@ _artillery select {
 };
 
 // exit on no ready artillery
-if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {systemchat format ["%1 Artillery failed -- no available artillery", side _unit]}};
+if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery", side _unit] call FUNC(debugLog);}};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];

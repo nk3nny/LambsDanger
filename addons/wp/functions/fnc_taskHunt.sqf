@@ -22,7 +22,7 @@
 params ["_group", ["_radius", 500], ["_cycle", 60 + random 30]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // 2. SET GROUP BEHAVIOR
@@ -40,13 +40,13 @@ private _fnc_flare = {
 };
 
 // 3. DO THE HUNT SCRIPT! ---------------------------------------------------
-while {{alive _x} count units _group > 0} do {
+while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // performance
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // settings
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";
@@ -61,7 +61,7 @@ while {{alive _x} count units _group > 0} do {
         _group enableIRLasers true;
 
         // DEBUG
-        if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskHunt: %2 targets %3 at %4 Meters", side _group, groupID _group, name _target, floor (leader _group distance _target)]};
+        if (EGVAR(danger,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(danger,debugLog);};
 
         // FLARE HERE
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };

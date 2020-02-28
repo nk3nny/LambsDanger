@@ -21,11 +21,11 @@ if (_radius isEqualTo 0) then { _radius = 1000; };
 
 // get other settings
 
-// execute script
-[_group, _radius] spawn FUNC(taskHunt);
-
 // low level move order
 _group move _pos;
+
+// execute script
+[_group, _radius] call FUNC(taskHunt);
 
 // end
 true

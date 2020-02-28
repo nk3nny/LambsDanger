@@ -58,28 +58,31 @@ private _fnc_rushOrders = {
 params ["_group", ["_radius", 500], ["_cycle", 15]];
 
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
 //_group setSpeedMode "FULL";
 //_group setFormation "DIAMOND";
 _group enableAttack false;
-{ _x disableAI "AUTOCOMBAT"; doStop _x; true } count (units _group);
+{
+    _x disableAI "AUTOCOMBAT";
+    //doStop _x; true
+} count (units _group);
 
 // Hunting loop
-while {(units _group) findIf {alive _x} != -1 } do {
+while {(units _group) findIf {_x call EFUNC(danger,isAlive)} != -1 } do {
 
     // performance
     waitUntil { sleep 1; simulationEnabled leader _group; };
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosedTarget);
+    private _target = [_group, _radius] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then  {
         [_group, _target] call _fnc_rushOrders;
-        if (EGVAR(danger,debug_functions)) then { systemchat format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2d _target)]; };
+        if (EGVAR(danger,debug_functions)) then { format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2d _target)] call EFUNC(danger,debugLog); };
         _cycle = (12 + random 8);
     } else {
         _cycle = 60;
