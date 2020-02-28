@@ -251,8 +251,8 @@ link102[] = {80,81};
 link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-1104.031250,1770.030029,1263.260986,-1208.208130,1028,884,1};
-window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1046};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-2517.957764,2155.935303,1583.892578,-1740.098633,1243,884,1};
+window[] = {2,-1,-1,-1,-1,839,26,828,26,3,1261};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -466,7 +466,7 @@ class FSM
                         name = "Ready_Vehicle";
                         itemno = 14;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 @ %3m - %4"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, round (_this distance _dangerPos), _dangerCausedBy]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 Vehicle Danger! - %2 (%3 @ %3m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// settings " \n
                          "_tank = (vehicle _this) isKindOf ""Tank"" || {(vehicle _this) isKindOf ""Wheeled_APC_F""}; " \n
@@ -552,7 +552,7 @@ class FSM
                         name = "Ready_Infantry";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Danger! - %2 @ %3m - %4"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, round (_this distance _dangerPos), _dangerCausedBy]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 Danger! %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// immediate action" \n
                          "if (random 1 > 0.2  && {_dangerCause isEqualTo 2}) then {" \n
@@ -1813,7 +1813,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	format [""%1 - FORCE MOVE!! - %2 for %3s"",side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - FORCE MOVE! - %2 for %3s"",side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
