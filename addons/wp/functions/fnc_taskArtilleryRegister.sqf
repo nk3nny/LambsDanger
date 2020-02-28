@@ -40,7 +40,7 @@ missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _group), _gl
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery];
+    format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery] call EFUNC(danger,debugLog);
 };
 
 // end

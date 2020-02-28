@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "H:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Player_or__not_l",4,218,1100.000000,-525.000000,1225.000000,-450.000000,12.000000,"Player or " \n "not local"};
@@ -82,7 +82,7 @@ item77[] = {"EXIT_VARIABLES_Unconcious",-1,250,1200.000000,-425.000000,1425.0000
 item78[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
 item79[] = {"Artillery__none",2,250,-1125.000000,150.000000,-1025.000000,200.000000,0.000000,"Artillery:" \n "none"};
 item80[] = {"Move_",4,218,-450.000000,0.000000,-350.000000,50.000000,6.000000,"Move!"};
-item81[] = {"Force_move",2,250,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Force move"};
+item81[] = {"Force_move",2,4346,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Force move"};
 item82[] = {"Timeout",4,218,-450.000000,175.000000,-350.000000,225.000000,0.000000,"Timeout"};
 item83[] = {"Reset_move___Con",2,250,-450.000000,275.000000,-350.000000,325.000000,0.000000,"Reset move: " \n "Continue"};
 version=1;
@@ -252,7 +252,7 @@ link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
 globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-380.674500,572.976929,942.983154,-39.566795,858,884,1};
-window[] = {2,-1,-1,-32000,-32000,891,78,880,78,3,876};
+window[] = {2,-1,-1,-1,-1,969,156,958,156,3,876};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -265,7 +265,7 @@ class FSM
                         name = "End";
                         itemno = 3;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "//systemchat format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this]; " \n
+                         "//format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "// reset variable" \n
                          "_this setVariable [""lambs_danger_currentTarget"",nil];" \n
@@ -292,7 +292,7 @@ class FSM
                         name = "Reacting_on_danger";
                         itemno = 5;
                         init = /*%FSM<STATEINIT""">*/"// DEBUG" \n
-                         "//if (lambs_danger_debug_FSM) then {systemchat format [""Danger.fsm - Init - %1 at %2s"",side _this,round time];};" \n
+                         "//if (lambs_danger_debug_FSM) then { format [""Danger.fsm - Init - %1 at %2s"",side _this,round time] call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -330,8 +330,8 @@ class FSM
                 {
                         name = "Check_queue__and";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 Danger.fsm RESET (%2)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType];" \n
-                         "//systemchat format [""%1 half reset %2 - %3"",side _this, name _this, count _queue];" \n
+                        init = /*%FSM<STATEINIT""">*/"//format [""%1 Danger.fsm RESET (%2)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType] call lambs_danger_fnc_debugLog;" \n
+                         "//format [""%1 half reset %2 - %3"",side _this, name _this, count _queue] call lambs_danger_fnc_debugLog;" \n
                          "	" \n
                          "// more advanced reset" \n
                          "if !(alive _dangerCausedBy && {_this distance2d _dangerCausedBy < (lambs_danger_CQB_range* 0.66)}) then {" \n
@@ -466,7 +466,7 @@ class FSM
                         name = "Ready_Vehicle";
                         itemno = 14;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {systemchat format [""%1 - Vehicle Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType]};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 - Vehicle Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType] call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// settings " \n
                          "_tank = (vehicle _this) isKindOf ""Tank"" || {(vehicle _this) isKindOf ""Wheeled_APC_F""}; " \n
@@ -552,7 +552,7 @@ class FSM
                         name = "Ready_Infantry";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {systemchat format [""%1 - Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType]};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 - Danger! - %2"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType] call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// immediate action" \n
                          "if (random 1 > 0.2  && {_dangerCause isEqualTo 2}) then {" \n
@@ -762,7 +762,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	systemchat format [""%1 - PANIC! - %2 for %3s"",side _this,name _this,round (_timeout - time)];" \n
+                         "	format [""%1 - PANIC! - %2 for %3s"",side _this,name _this,round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// markers " \n
                          "	[_this,format [""PANIC -- %1"",name _this],""ColorKhaki"",""hd_Destroy""] call lambs_danger_fnc_dotMarker; " \n
@@ -853,7 +853,7 @@ class FSM
                          "}; " \n
                          "" \n
                          "// debug " \n
-                         "//if (lambs_danger_debug_FSM) then {systemchat format [""%1 - ATTACK! - %2 for %3s"",side _this,name _dangerCausedBy,round (_timeout - time)]};" \n
+                         "//if (lambs_danger_debug_FSM) then {format [""%1 - ATTACK! - %2 for %3s"",side _this,name _dangerCausedBy,round (_timeout - time)]  call lambs_danger_fnc_debugLog;};" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -950,7 +950,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// msg" \n
-                         "	systemchat format [""%1 - REACT! - %2 for %3s"",side _this,name _this,round (_timeout - time)];" \n
+                         "	format [""%1 - REACT! - %2 for %3s"",side _this,name _this,round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
                          "	_m = [_dangerPos,format [""REACT -- %1"",_dangerCause call lambs_danger_fnc_debugDangerType],""colorOrange"",""hd_warning""] call lambs_danger_fnc_dotMarker;" \n
@@ -1008,7 +1008,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
-                         "	systemchat format [""%1 - INVESTIGATING! - %2 for %3s"", side _this, name _this, round (_timeout - time)];" \n
+                         "	format [""%1 - INVESTIGATING! - %2 for %3s"", side _this, name _this, round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
                          "	[_dangerPos,format [""INVESTIGATE -- %1"", _dangerCause call lambs_danger_fnc_debugDangerType], ""colorOrange"", ""hd_dot""] call lambs_danger_fnc_dotMarker; " \n
@@ -1203,7 +1203,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
-                         "	systemchat format [""%1 - LEADER ASSESS! - %2 for %3s"", side _this, name _this, round (_timeout - time)];" \n
+                         "	format [""%1 - LEADER ASSESS! - %2 for %3s"", side _this, name _this, round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
                          "	[_this,format [""LEADER ASSESS -- %1"", _dangerCause call lambs_danger_fnc_debugDangerType], ""colorOrange"", ""hd_unknown""] call lambs_danger_fnc_dotMarker; " \n
@@ -1253,7 +1253,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	systemchat format [""%1 - LEADER ACTION! - Contact"",side _this];" \n
+                         "	format [""%1 - LEADER ACTION! - Contact"",side _this] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
                          "	[_this,format [""%1 - LEADER ACTION -- Contact!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_warning""] call lambs_danger_fnc_dotMarker; " \n
@@ -1297,7 +1297,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	systemchat format [""%1 - LEADER ACTION! - Hide"",side _this];" \n
+                         "	format [""%1 - LEADER ACTION! - Hide"",side _this] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
                          "	[_this,format [""%1 - LEADER ACTION -- Hide!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_join""] call lambs_danger_fnc_dotMarker; " \n
@@ -1350,7 +1350,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	systemchat format [""%1 - LEADER ACTION! - Call artillery"",side _this];" \n
+                         "	format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
                          "	[_this,format [""%1 - LEADER ACTION -- Call artillery!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_warning""] call lambs_danger_fnc_dotMarker; " \n
@@ -1396,7 +1396,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	systemchat format [""%1 - LEADER ACTION! - Manoeuvre"",side _this];" \n
+                         "	format [""%1 - LEADER ACTION! - Manoeuvre"",side _this] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
                          "	_m = [_this,format [""%1 - LEADER ACTION -- Manoeuvre!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_arrow""] call lambs_danger_fnc_dotMarker; " \n
@@ -1449,7 +1449,7 @@ class FSM
                 {
                         name = "Investigate__Unload";
                         itemno = 58;
-                        init = /*%FSM<STATEINIT""">*/"//systemchat ""VEHICLE INVESTIGATE"";" \n
+                        init = /*%FSM<STATEINIT""">*/"//""VEHICLE INVESTIGATE"" call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "// timeout " \n
                          "_timeout =4 + random 3; " \n
@@ -1527,7 +1527,7 @@ class FSM
                         name = "Jink_";
                         itemno = 62;
                         init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "//systemchat ""VEHICLE JINK"";" \n
+                         "//""VEHICLE JINK"" call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "// timeout " \n
                          "_timeout = _timeout + 4; " \n
@@ -1630,7 +1630,7 @@ class FSM
                          "//[_this,_dangerCausedBy,lambs_danger_CQB_range + random 100,true] call lambs_danger_fnc_shareInformation;" \n
                          "" \n
                          "// debug " \n
-                         "//systemchat format [""%1 - Coward! - %2s"",side _this,round (_timeout - time)];"/*%FSM</STATEINIT""">*/;
+                         "//format [""%1 - Coward! - %2s"",side _this,round (_timeout - time)] call lambs_danger_fnc_debugLog;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1673,7 +1673,7 @@ class FSM
                          "[_this] call lambs_danger_fnc_assaultBuilding;" \n
                          "" \n
                          "// debug " \n
-                         "//systemchat format [""%1 - CQC! - %2 for %3s"",side _this,count _buildings,round (_timeout - time)];" \n
+                         "//format [""%1 - CQC! - %2 for %3s"",side _this,count _buildings,round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1813,7 +1813,7 @@ class FSM
                          "if (lambs_danger_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	systemchat format [""%1 - FORCE MOVE!! - %2 for %3s"",side _this,name _this,round (_timeout - time)];" \n
+                         "	format [""%1 - FORCE MOVE!! - %2 for %3s"",side _this,name _this,round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

@@ -27,7 +27,7 @@ _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Panic"];
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 - %2 in panic", side _unit, name _unit];};
+if (GVAR(debug_functions)) then {format ["%1 - %2 in panic", side _unit, name _unit] call FUNC(debugLog);};
 
 // indoor -- gesture
 if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {

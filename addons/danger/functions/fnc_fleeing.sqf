@@ -85,7 +85,7 @@ if (_unit distance2d _enemy < 550) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))];};
+if (GVAR(debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call FUNC(debugLog);};
 
 // end
 true

@@ -73,7 +73,7 @@ _wpX setWaypointType "CYCLE";
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    systemchat format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group];
+    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(danger,debugLog);
 };
 
 // end

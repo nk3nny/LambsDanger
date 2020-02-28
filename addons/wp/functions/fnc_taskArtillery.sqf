@@ -106,7 +106,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
     // debug
     if (EGVAR(danger,debug_functions)) then {
-        systemchat format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)];
+        format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)] call EFUNC(danger,debugLog);
     };
 
     // clean markers!

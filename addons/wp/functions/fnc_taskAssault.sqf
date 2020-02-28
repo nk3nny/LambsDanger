@@ -116,12 +116,12 @@ waitUntil {
 
     // debug
     if (EGVAR(danger,debug_functions)) then {
-        systemchat format ["%1 %2: %3 units moving %4M",
+        format ["%1 %2: %3 units moving %4M",
             side _group,
             ["taskAssault", "taskRetreat"] select _retreat,
             count _units,
             round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2d _wp )
-        ];
+        ] call EFUNC(danger,debugLog);
     };
 
     // delay and end

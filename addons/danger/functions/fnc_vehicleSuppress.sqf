@@ -35,7 +35,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Suppress"];
 _vehicle doSuppressiveFire ((AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3]);
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 suppression (%2 @ %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _pos)];};
+if (GVAR(debug_functions)) then {format ["%1 suppression (%2 @ %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _pos)] call FUNC(debugLog);};
 
 // end
 true

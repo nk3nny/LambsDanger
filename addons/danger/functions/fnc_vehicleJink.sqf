@@ -55,7 +55,7 @@ _destination = selectRandom _destination;
 _veh doMove _destination;
 
 // debug
-if (GVAR(debug_functions)) then {systemchat format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName"), round (_unit distance _destination)];};
+if (GVAR(debug_functions)) then {format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName"), round (_unit distance _destination)] call FUNC(debugLog);};
 
 // end
 _destination

@@ -96,7 +96,7 @@ if (_buildingPos isEqualTo []) then {
 
 // debug
 if (GVAR(debug_functions) && {leader _unit isEqualTo _unit}) then {
-    systemchat format ["%1 CQC %2 buildings - near %3x spots @ %4m", side _unit, count _buildings, count _buildingPos, round (_unit distance _building)];
+    format ["%1 CQC %2 buildings - near %3x spots @ %4m", side _unit, count _buildings, count _buildingPos, round (_unit distance _building)] call FUNC(debugLog);
 };
 
 // return

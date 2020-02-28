@@ -80,7 +80,7 @@ _body setVariable [QGVAR(isChecked), true, true];
 
 // debug
 if (GVAR(debug_functions)) then {
-    systemchat format ["%1 checking body (%2 %3m)", side _unit, name _unit, round (_unit distance _body)];
+    format ["%1 checking body (%2 %3m)", side _unit, name _unit, round (_unit distance _body)] call FUNC(debugLog);
 
     // debug arrow
     private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];

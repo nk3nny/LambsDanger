@@ -102,7 +102,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     // act
     if (!isNull _target) then {
         [_group, _target] call _fnc_creepOrders;
-        if (EGVAR(danger,debug_functions)) exitWith {systemchat format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getpos leader _group, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _group)];};
+        if (EGVAR(danger,debug_functions)) exitWith {format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getpos leader _group, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(danger,debugLog);};
         _cycle = 30;
     } else {
         _cycle = 120;
