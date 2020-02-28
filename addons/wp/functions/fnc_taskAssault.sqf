@@ -43,6 +43,8 @@ private _fnc_softReset = {
     //_unit enableAI "CHECKVISIBLE";
     if (_retreat) then {
         _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+        _unit enableAI "TARGET";
+        _unit enableAI "AUTOTARGET";
     };
 };
 
@@ -73,6 +75,8 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 // sort units
 if (_retreat) then {
     {
+        _x disableAI "TARGET";
+        _x disableAI "AUTOTARGET";
         _x switchMove "ApanPercMrunSnonWnonDf";
         _x playMoveNow selectRandom [
             "ApanPknlMsprSnonWnonDf",
