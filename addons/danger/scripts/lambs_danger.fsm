@@ -33,7 +33,7 @@ item28[] = {"Killed___Continu",2,250,0.000000,425.000000,100.000000,475.000000,0
 item29[] = {"Timeout__Continu",2,250,150.000000,425.000000,250.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
 item30[] = {"____FUNCTIONS__lambs",-1,250,-1550.000000,-775.000000,-1300.000000,-225.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_debugObjectColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-250.000000,0.000000,-150.000000,50.000000,4.000000,"React"};
-item32[] = {"Reaction__to_contact",2,4346,-250.000000,75.000000,-150.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
+item32[] = {"Reaction__to_contact",2,250,-250.000000,75.000000,-150.000000,125.000000,0.000000,"Reaction " \n "to contact" \n ""};
 item33[] = {"Investigate",4,218,-125.000000,0.000000,-25.000000,50.000000,2.000000,"Investigate"};
 item34[] = {"Investigate",2,250,-125.000000,75.000000,-25.000000,125.000000,0.000000,"Investigate"};
 item35[] = {"Timeout",4,218,-125.000000,175.000000,-25.000000,225.000000,0.000000,"Timeout"};
@@ -251,8 +251,8 @@ link102[] = {80,81};
 link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-535.233826,133.035309,491.205170,-79.567627,1035,884,1};
-window[] = {2,-1,-1,-32000,-32000,1047,234,1036,234,3,1053};
+globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-173.004471,365.307007,729.020264,174.396301,858,884,1};
+window[] = {2,-1,-1,-1,-1,891,78,880,78,3,876};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -267,13 +267,19 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
                          "//systemchat format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this]; " \n
                          "" \n
+                         "// reset variable" \n
+                         "_this setVariable [""lambs_danger_currentTarget"",nil];" \n
+                         "_this setVariable [""lambs_danger_currentTask"",nil];" \n
+                         "" \n
+                         "// reset" \n
+                         "_this lookAt objNull;" \n
+                         "" \n
                          "// fleeing" \n
                          "if (fleeing _this) then {" \n
                          "	[_this] call lambs_danger_fnc_fleeing;" \n
                          "}; " \n
                          "" \n
-                         "// reset" \n
-                         "_this lookAt objNull;"/*%FSM</STATEINIT""">*/;
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -934,7 +940,7 @@ class FSM
                          "" \n
                          "// look at explosions" \n
                          "if (_dangerCause isEqualTo 4) then {" \n
-                         "	_this lookAt _dangerPos; " \n
+                         "	_this lookAt AGLtoASL _dangerPos; " \n
                          "}; " \n
                          "" \n
                          "// react " \n
@@ -1524,7 +1530,7 @@ class FSM
                          "//systemchat ""VEHICLE JINK"";" \n
                          "" \n
                          "// timeout " \n
-                         "_timeout = _timeout + random 4; " \n
+                         "_timeout = _timeout + 4; " \n
                          "" \n
                          "// execute jink " \n
                          "_destination = [_this] call lambs_danger_fnc_vehicleJink; " \n
@@ -1559,10 +1565,10 @@ class FSM
                          "_timeout = time + 5 + random 4;" \n
                          "" \n
                          "// look at <-- this reveals target. Attempt to disable to check" \n
-                         "//_this lookAt _dangerCausedBy; " \n
+                         "_this lookAt (eyePos _dangerCausedBy); " \n
                          "" \n
                          "// assault " \n
-                         "private _assault = _this distance _dangerCausedBy < (lambs_danger_CQB_range + random 30);" \n
+                         "private _assault = _this distance2d _dangerCausedBy < (lambs_danger_CQB_range);" \n
                          "" \n
                          "// coward" \n
                          "private _coward = (!_CQCmode) && {getSuppression _this > 0.7} && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</STATEINIT""">*/;

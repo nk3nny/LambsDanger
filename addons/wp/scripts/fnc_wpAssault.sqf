@@ -27,6 +27,9 @@ _group setVariable [QEGVAR(danger,disableGroupAI), true];
     _x enableAI "PATH";
 } foreach units _group;
 
+// low level move order
+//_group move _pos;
+
 // execute script
 [_group, _pos, false] call FUNC(taskAssault);
 

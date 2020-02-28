@@ -84,7 +84,7 @@ if (GVAR(debug_functions)) then {
 
     // debug arrow
     private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];
-    _help setObjectTexture [0, [_unit] call lambs_danger_fnc_debugObjectColor];
+    _help setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _help, 8] call cba_fnc_waitAndExecute;
 };
 

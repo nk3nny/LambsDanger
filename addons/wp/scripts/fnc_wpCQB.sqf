@@ -22,7 +22,7 @@ if (_radius isEqualTo 0) then { _radius = 50; };
 // get other settings
 
 // execute script
-[_group, _pos, _radius] spawn FUNC(taskCQB);
+[_group, _pos, _radius] call FUNC(taskCQB);
 
 // low level move order
 _group move _pos;

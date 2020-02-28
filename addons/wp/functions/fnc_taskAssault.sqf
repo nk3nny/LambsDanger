@@ -59,10 +59,14 @@ _group allowFleeing 0;
 _pos = _pos call CBA_fnc_getPos;
 
 // sort wp
-[_group, 0] setWaypointPosition [AGLtoASL _pos, -1];
+private _wp_index = currentWaypoint _group;
+[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];
+
+// debug
+[_pos, "new WP"] call lambs_danger_fnc_dotMarker;
 
 // sort group
-private _units = units _group select {!isPlayer _x && {isNull objectParent _x}};
+private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
 
 // sort units
 if (_retreat) then {
@@ -77,38 +81,41 @@ if (_retreat) then {
 };
 
 // execute move
-waitUntil {
+//waitUntil {
+while {!(_units isEqualTo [])} do {
 
     // get waypoint position
-    private _wp = waypointPosition [_group, 0];
+    private _wp = waypointPosition [_group, _wp_index];
     {
         _x call _fnc_unAssault;
         _x setUnitPosWeak "UP";
         _x doMove _wp;
-        _x setDestination [_wp, "DoNotPlanFormation", false];
+        //_x setDestination [_wp, "DoNotPlanFormation", false];
         _x forceSpeed ([ [_x, _wp] call EFUNC(danger,assaultSpeed), 24] select _retreat);
-        _x setVariable [QEVAR(danger,forceMove), true];
+        _x setVariable [QEGVAR(danger,forceMove), true];
     } foreach _units;
 
     // soft reset
-    {_x call _fnc_softReset;} foreach (_units select {_x distance _wp < _threshold && {_x call EFUNC(danger,isAlive)}});
+    _units = _units select {_x call EFUNC(danger,isAlive)};
+    {_x call _fnc_softReset;} foreach (_units select {_x distance _wp < _threshold});
 
     // get unit focus
-    _units = _units select {_x distance _wp > _threshold && {_x call EFUNC(danger,isAlive)}};
+    _units = _units select {_x distance _wp > _threshold};
 
     // debug
-        if (EGVAR(danger,debug_functions)) then {
-            systemchat format ["%1 %2: %3 units moving %4m",
-                side _group, 
-                ["taskAssault", "taskRetreat"] select _retreat,
-                count _units,
-                round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance _pos )
-            ];
-        };
+    if (EGVAR(danger,debug_functions)) then {
+        systemchat format ["%1 %2: %3 units moving %4m %5s",
+            side _group, 
+            ["taskAssault", "taskRetreat"] select _retreat,
+            count _units,
+            round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance _pos ),
+            round time
+        ];
+    };
 
     // delay and end
-    sleep _cycle;
-    _units isEqualTo []
+    sleep 2;
+    //_units isEqualTo []
 
 };
 

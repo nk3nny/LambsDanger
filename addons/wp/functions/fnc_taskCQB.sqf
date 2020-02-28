@@ -54,7 +54,8 @@ private _fnc_act = {
         // debug
         if (EGVAR(danger,debug_functions)) then {
             systemchat format ["%1 taskCQB: RUSH ENEMY!",side _group];
-            createVehicle ["Sign_Arrow_Large_F", getposATL _enemy, [], 0, "CAN_COLLIDE"];
+            private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
+            _arrow setPos getposATL _enemy;
         };
 
         // posture
@@ -81,12 +82,19 @@ private _fnc_act = {
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
+            _x forceSpeed ([_x,(_buildingPos select 0)] call EFUNC(danger,assaultSpeed));
             _x doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                createVehicle ["Sign_Arrow_Large_Blue_F", _buildingPos select 0, [], 0, "CAN_COLLIDE"];
+                private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLtoASL (_buildingPos select 0), true];
+                _arrow setObjectTexture [0, [_x] call FUNC(debugObjectColor)];
+                _arrow setPos (_buildingPos select 0);
             };
+
+            // task
+            _x setVariable [EQGVAR(danger,currentTarget), _enemy];
+            _x setVariable [EQGVAR(danger,currentTask), "taskCQB - Clearing rooms"];
 
             // clean list
             if (_x distance (_buildingPos select 0) < 30 || { RND(0.5) && {(_leader isEqualTo _x)}}) then {
@@ -123,7 +131,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params ["_group", "_pos",["_radius",50],["_cycle",21]];
+params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21] ];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -132,7 +140,7 @@ if (_group isEqualType objNull) then {
 };
 
 // orders
-_group setSpeedMode "FULL";
+//_group setSpeedMode "FULL";
 _group setFormation "FILE";
 _group enableAttack false;
 _group allowFleeing 0;
@@ -167,11 +175,11 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
 // reset
 {
-    _x setVariable [QEGVAR(danger,disableAI), false];
+    _x setVariable [QEGVAR(danger,disableAI), nil];
 } foreach units _group;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: CQB DONE version 0.28",side _group];};
+if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: CQB DONE version 0.29",side _group];};
 
 // end
 true
