@@ -23,9 +23,6 @@
 // by nkenny
 
 /*
-
-
-
     Arguments:
         1. group or leader unit
         2. position

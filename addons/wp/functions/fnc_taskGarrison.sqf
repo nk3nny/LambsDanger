@@ -50,7 +50,6 @@ _group enableAttack false;
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;
 _units = _units select {isNull objectParent _x};
-if (count _units > count _houses) then {_units resize (count _houses);};
 
 // Large groups man guns and patrol!
 if (count _units > 4) then {
@@ -70,23 +69,27 @@ if (count _units > 4) then {
     };
 };
 
+if (count _units > count _houses) then {_units resize (count _houses);};
+
 // spread out
 {
     // prepare
     doStop _x;
-
+    private _house = _houses deleteAt 0;
     // move and delay stopping + stance
-    _x doMove (_houses select 0);
+    _x doMove _house;
     [
         {
-            unitReady _this && {canMove _this}
+            params ["_unit", "_target"];
+            unitReady _unit && { canMove _unit } && { (_unit distance _target) <= 0.5 }
         },
         {
-            if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
-            _this disableAI "PATH";
-            _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+            params ["_unit", "_target"];
+            if (surfaceIsWater (getPos _unit)) exitWith { _unit doFollow (leader _unit); };    // surface is water? rejoin formation
+            _unit disableAI "PATH";
+            _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
         },
-        _x
+        [_x, _house]
     ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
@@ -120,9 +123,6 @@ if (count _units > 4) then {
             }];
         };
     };
-
-    // refresh
-    _houses deleteAt 0;
 
     // end
     true
