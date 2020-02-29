@@ -42,7 +42,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 _artillery = [_artillery, [], { _target distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 _artillery = _artillery select {
     private _ammo = getArtilleryAmmo [_x] select 0;
-    _pos inRangeOfArtillery [[_gun], _ammo];
+    _pos inRangeOfArtillery [[_x], _ammo];
 };
 
 if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in rage of Target", side _unit] call FUNC(debugLog);}};
