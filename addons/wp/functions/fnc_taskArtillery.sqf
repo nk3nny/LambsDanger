@@ -63,17 +63,24 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
             // Randomize target location
             private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
-            // Fire round
-            _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
+            private _ammo = getArtilleryAmmo [_gun] select 0;
 
-            // debug
-            if (EGVAR(danger,debug_functions)) then {
-                private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
-                _mlist pushBack _m;
+            if (_target inRangeOfArtillery [[_gun], _ammo]) then {
+                // Fire round
+                _gun commandArtilleryFire [_target, _ammo, 1];
+
+                // debug
+                if (EGVAR(danger,debug_functions)) then {
+                    private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
+                    _mlist pushBack _m;
+                };
+                // waituntil
+                waitUntil {unitReady _gun};
+            } else {
+                if (EGVAR(danger,debug_functions)) then {
+                    (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+                };
             };
-
-            // waituntil
-            waitUntil {unitReady _gun};
         };
 
         // delay
@@ -91,17 +98,26 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
         private _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
         _offset = _offset + _accuracy / 3;
 
-        // Fire round
-        _gun commandArtilleryFire [_target, getArtilleryAmmo [_gun] select 0, 1];
+        private _ammo = getArtilleryAmmo [_gun] select 0;
 
-        // debug
-        if (EGVAR(danger,debug_functions)) then {
-            private _m = [_target, format ["%1 (Round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
-            _mlist pushBack _m;
+        if (_target inRangeOfArtillery [[_gun], _ammo]) then {
+
+            // Fire round
+            _gun commandArtilleryFire [_target, _ammo, 1];
+
+            // debug
+            if (EGVAR(danger,debug_functions)) then {
+                private _m = [_target, format ["%1 (Round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+                _mlist pushBack _m;
+            };
+
+            // waituntil
+            waitUntil {unitReady _gun};
+        } else {
+            if (EGVAR(danger,debug_functions)) then {
+                (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+            };
         };
-
-        // waituntil
-        waitUntil {unitReady _gun};
     };
 
     // debug
