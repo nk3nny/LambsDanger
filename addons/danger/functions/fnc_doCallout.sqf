@@ -98,4 +98,4 @@ if (GVAR(debug_functions)) then {
 };
 
 // set time until next callout
-//_unit setVariable [QGVAR(calloutTime), time + 5, true];
+_unit setVariable [QGVAR(calloutTime), time + 5, true];

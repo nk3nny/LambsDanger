@@ -30,6 +30,7 @@ if (_stance isEqualTo "PRONE") exitWith {
 // Not standing -- No weapon --  ACE3 captive exit
 if (
     !(_stance isEqualTo "STAND")
+    || {GVAR(disableAIGestures)}
     || {primaryWeapon _unit isEqualTo ""}
     || {!(primaryWeapon _unit isEqualTo currentWeapon _unit)}
     || {!canMove _unit}
