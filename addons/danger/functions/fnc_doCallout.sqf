@@ -23,7 +23,7 @@ if (GVAR(disableAICallouts)) exitWith {};
 scopeName QGVAR(doCallout_main);
 params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 100]];
 
-if (isplayer _unit || {!(_unit call FUNC(isAlive))}) exitWith {systemchat "NOT ALIVE NOOB!";};
+if (isPlayer _unit || {!(_unit call FUNC(isAlive))}) exitWith {};
 
 // check timing
 private _time = _unit getVariable [QGVAR(calloutTime), 0];
