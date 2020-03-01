@@ -47,7 +47,7 @@ if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 
 // Call it out ~ low chance. This is a common event. -nkenny
 if (RND(0.2) && {count units _unit > 1}) then {
-    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE","SuppressingE", "Suppressing"], 100] call FUNC(doCallout);
+    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 100] call FUNC(doCallout);
 };
 
 // do it!

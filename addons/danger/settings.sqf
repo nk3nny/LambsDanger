@@ -29,16 +29,6 @@ private _curCat = "Settings";
     0
 ] call CBA_fnc_addSetting;
 
-// Toggles the concealment AI for units not equipped to damage tanks and aircraft
-[
-    QGVAR(disableAIHideFromTanksAndAircraft),
-    "CHECKBOX",
-    ["Disable units hiding", "Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive"],
-    [COMPONENT_NAME, _curCat],
-    false,
-    0
-] call CBA_fnc_addSetting;
-
 // Toggles group manoevure phase initiated by AI squad leader
 [
     QGVAR(disableAIAutonomousManoeuvres),
@@ -49,11 +39,32 @@ private _curCat = "Settings";
     0
 ] call CBA_fnc_addSetting;
 
+
+// Toggles the concealment AI for units not equipped to damage tanks and aircraft
+[
+    QGVAR(disableAIHideFromTanksAndAircraft),
+    "CHECKBOX",
+    ["Disable units hiding", "Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 // Toggles AI Unit Gestures
 [
     QGVAR(disableAIGestures),
     "CHECKBOX",
-    ["Disable unit gestures", "Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures"],
+    ["Disable unit hand gestures", "Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures"],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles AI Immediate (re)Actions
+[
+    QGVAR(disableAIImediateAction),
+    "CHECKBOX",
+    ["Disable unit immediate actions", "Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI"],
     [COMPONENT_NAME, _curCat],
     false,
     0

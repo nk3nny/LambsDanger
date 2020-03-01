@@ -91,7 +91,7 @@ _group enableAttack false;
 } count units _group;
 
 // creep loop
-while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
+waitUntil {
 
     // performance
     waitUntil {sleep 1; simulationenabled leader _group};
@@ -109,8 +109,9 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
         _group setCombatMode "GREEN"
     };
 
-    // delay
+    // delay and end
     sleep _cycle;
+    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
 };
 
 // end
