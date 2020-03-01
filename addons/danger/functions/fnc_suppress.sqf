@@ -45,6 +45,11 @@ _pos = _pos vectorAdd [0, 0, 0.2 + random 1];
 // final range check
 if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 
+// Call it out ~ low chance. This is a common event. -nkenny
+if (RND(0.2) && {count units _unit > 1}) then {
+    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 100] call FUNC(doCallout);
+};
+
 // do it!
 _unit forceSpeed 0;
 _unit doSuppressiveFire _pos;

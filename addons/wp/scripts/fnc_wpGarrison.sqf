@@ -24,8 +24,5 @@ if (_radius isEqualTo 0) then { _radius = 50; };
 // execute script
 [_group, _pos, _radius] spawn FUNC(taskGarrison);
 
-// low level move order
-_group move _pos;
-
 // end
 true

@@ -64,7 +64,7 @@ if (RND(0.2)) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
 if (GVAR(debug_functions)) then {
 
     // debug message
-    format ["%1 share information (knows %2 to %3 groups at %4m range)", side _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call FUNC(debugLog);
+    format ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call FUNC(debugLog);
 
     // debug marker
     private _m = [_unit, "", _unit call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);

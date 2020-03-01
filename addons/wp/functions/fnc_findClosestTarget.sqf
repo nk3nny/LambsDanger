@@ -19,10 +19,11 @@
 params ["_group", ["_radius", 500]];
 
 private _groupLeader = leader _group;
-private _sideExclusion = [side _group, civilian];
+private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];
 
-private _players = (switchableUnits + playableUnits - entities "HeadlessClient_F");
-_players = _players select {!(side _x in _sideExclusion) && {(getPosATL _x) select 2 < 200}};
+private _players = switchableUnits + playableUnits;
+_players = _players select {!(side _x in _sideExclusion) && { _x distance _groupLeader < _radius } && { (getPosATL _x) select 2 < 200 }};
+if (_players isEqualTo []) exitWith {ObjNull};
 
 private _playerDistances = _players apply {[_groupLeader distance2d _x, _x]};
 _playerDistances sort true;

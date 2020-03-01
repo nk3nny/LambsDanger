@@ -30,6 +30,7 @@ if (_stance isEqualTo "PRONE") exitWith {
 // Not standing -- No weapon --  ACE3 captive exit
 if (
     !(_stance isEqualTo "STAND")
+    || {GVAR(disableAIImediateAction)}
     || {primaryWeapon _unit isEqualTo ""}
     || {!(primaryWeapon _unit isEqualTo currentWeapon _unit)}
     || {!canMove _unit}
@@ -39,6 +40,11 @@ if (
 
 // stopped or path/move disabled
 //if (stopped _unit) exitWith {false};
+
+// callout
+if (RND(0.8)) then {
+    [_unit, "Combat", "UnderFireE", 100] call FUNC(doCallout);
+};
 
 // standing to rush
 if (RND(0.5)) exitWith {

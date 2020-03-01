@@ -23,9 +23,6 @@
 // by nkenny
 
 /*
-
-
-
     Arguments:
         1. group or leader unit
         2. position
@@ -40,7 +37,7 @@ if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // sort pos
-if (_pos isEqualTo []) then {_pos = _group;};
+if (_pos isEqualTo []) then { _pos = _group; };
 _pos = _pos call cba_fnc_getPos;
 
 // remove all waypoints
@@ -53,11 +50,10 @@ _group setCombatMode "YELLOW";
 _group setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"];
 _group enableGunLights "forceOn";
 
-// pos
-if (isNil "_pos") then { _pos = getPos (leader _group); };
-
+private _wpX = nil;
+private _fistWPId = 0;
 // Waypoints - Move
-for "_i" from 1 to 4 do {
+for "_i" from 1 to 5 do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
     if (surfaceIsWater _pos2) then { _pos2 = _pos };
     private _wp = _group addWaypoint [_pos2, 10];
@@ -65,11 +61,14 @@ for "_i" from 1 to 4 do {
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
     _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
+    if (_i == 5) then {
+        _wpX = _wp;
+    };
+    if (_i == 1) then {
+        _fistWPId = _wp select 1;
+    };
 };
-
-// CYCLE
-private _wpX = _group addWaypoint [_pos, 10];
-_wpX setWaypointType "CYCLE";
+_wpx setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1]", _fistWPId]];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

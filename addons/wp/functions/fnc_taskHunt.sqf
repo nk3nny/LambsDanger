@@ -40,7 +40,7 @@ private _fnc_flare = {
 };
 
 // 3. DO THE HUNT SCRIPT! ---------------------------------------------------
-while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
+waitUntil {
 
     // performance
     waitUntil { sleep 1; simulationEnabled (leader _group) };
@@ -52,7 +52,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";
     private _onFoot = (isNull objectParent (leader _group));
 
-    // GIVE ORDERS  ~~ Or double wait
+    // give orders
     if (!isNull _target) then {
         _group move (_target getPos [random (linearConversion [50, 1000, (leader _group) distance _target, 25, 300, true]), random 360]);
         _group setFormDir ((leader _group) getDir _target);
@@ -60,16 +60,23 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
         _group enableGunLights "forceOn";
         _group enableIRLasers true;
 
-        // DEBUG
+        // debug
         if (EGVAR(danger,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(danger,debugLog);};
 
-        // FLARE HERE
+        // flare
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };
 
-        // BUILDING SUPPRESSION! <-- BRING IT!
-        if (_combat && {(nearestBuilding _target distance2d _target < 25)}) then { { _x doSuppressiveFire ((getposASL _target) vectorAdd [random 2, random 2, 0.5 + random 3]); true } count units _group;};
+        // suppress nearby buildings
+        if (_combat && {(nearestBuilding _target distance2d _target < 25)}) then {
+            {
+                [_x, getposASL _target] call EFUNC(danger,suppress);
+                true
+            } count units _group;
+        };
     };
 
-    // WAIT FOR IT!
+    // WAIT FOR IT! / end
     sleep _cycle;
+    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+
 };

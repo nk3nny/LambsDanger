@@ -37,8 +37,15 @@ if ((_unit distance _enemy) < 7) exitWith {
     // movement
     _unit doWatch objNull;
     _unit lookAt _enemy;
-    _unit doMove getposATL _enemy; // changed from getHideFrom as this tends to pick a spot outside building - nkenny
+    _unit doMove getposATL _enemy;
     _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
+
+    // debug
+    if (GVAR(debug_functions)) then {
+        format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call FUNC(debugLog);
+        private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
+        [{deleteVehicle _this}, _arrow, 20] call cba_fnc_waitAndExecute;
+    };
 
     // return
     true
@@ -62,17 +69,25 @@ private _building = (_buildings select 0);
 
 // find spots
 private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
+private _buildingPosSelected = _buildingPos select 0;
 
 // remove current target and do move
 _unit doWatch objNull;
-_unit lookAt (_buildingPos select 0);
-_unit doMove ((_buildingPos select 0) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
+_unit lookAt AGLtoASL _buildingPosSelected;
+_unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
+
+// debug
+if (GVAR(debug_functions)) then {
+    private _arrow = createSimpleObject ["Sign_Arrow_Large_F", AGLtoASL _buildingPosSelected, true];
+    _arrow setObjectTexture [0, [_unit] call EFUNC(danger,debugObjectColor)];
+    [{deleteVehicle _this}, _arrow, 20] call cba_fnc_waitAndExecute;
+};
 
 // speed
-_unit forceSpeed ([_unit, (_buildingPos select 0)] call FUNC(assaultSpeed));
+_unit forceSpeed ([_unit, _buildingPosSelected] call FUNC(assaultSpeed));
 
 // Close range cleanups
-if (RND(0.95) || {_unit distance (_buildingPos select 0) < 1.6}) then {
+if (RND(0.95) || {_unit distance _buildingPosSelected < 1.6}) then {
 
     // remove buildingpos
     _buildingPos deleteAt 0;
@@ -96,7 +111,12 @@ if (_buildingPos isEqualTo []) then {
 
 // debug
 if (GVAR(debug_functions) && {leader _unit isEqualTo _unit}) then {
-    format ["%1 CQC %2 attacks %3 buildings - near %4x spots @ %5m", side _unit, name _unit, count _buildings, count _buildingPos, round (_unit distance _building)] call FUNC(debugLog);
+    format ["%1 assaulting building (%2 @ %3m - %4x spots left)",
+        side _unit,
+        name _unit,
+        round (_unit distance _buildingPosSelected),
+        count _buildingPos
+    ] call FUNC(debugLog);
 };
 
 // return

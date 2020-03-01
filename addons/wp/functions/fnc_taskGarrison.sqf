@@ -31,6 +31,9 @@ if (_group isEqualType objNull) then { _group = group _group; };
 if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call cba_fnc_getPos;
 
+// remove all waypoints
+//[_group] call CBA_fnc_clearWaypoints;
+
 // settings
 private _patrol = false;    // disabled for now
 private _statics = 0.8;
@@ -45,12 +48,12 @@ private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // orders
+_group setBehaviour "SAFE";
 _group enableAttack false;
 
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;
 _units = _units select {isNull objectParent _x};
-if (count _units > count _houses) then {_units resize (count _houses);};
 
 // Large groups man guns and patrol!
 if (count _units > 4) then {
@@ -70,23 +73,27 @@ if (count _units > 4) then {
     };
 };
 
+if (count _units > count _houses) then {_units resize (count _houses);};
+
 // spread out
 {
     // prepare
     doStop _x;
-
+    private _house = _houses deleteAt 0;
     // move and delay stopping + stance
-    _x doMove (_houses select 0);
+    _x doMove _house;
     [
         {
-            unitReady _this && {canMove _this}
+            params ["_unit", ""];
+            unitReady _unit
         },
         {
-            if (surfaceIsWater getpos _this) exitWith { _this doFollow leader _this};    // surface is water? rejoin formation
-            _this disableAI "PATH";
-            _this setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+            params ["_unit", "_target"];
+            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1)) exitWith { _unit doFollow (leader _unit); };
+            _unit disableAI "PATH";
+            _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
         },
-        _x
+        [_x, _house]
     ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
@@ -121,21 +128,16 @@ if (count _units > 4) then {
         };
     };
 
-    // refresh
-    _houses deleteAt 0;
-
     // end
     true
 } count _units;
 
 // end with patrol
-
-// orders
-_group setBehaviour "SAFE";
+// disabled!
 
 // waypoint
 private _wp = _group addWaypoint [_pos, _radius / 5];
-_wp setWaypointType "SENTRY";
+_wp setWaypointType "HOLD";
 _wp setWaypointCompletionRadius _radius;
 
 // debug

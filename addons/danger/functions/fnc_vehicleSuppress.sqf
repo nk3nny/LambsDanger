@@ -28,11 +28,16 @@ if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehic
     false
 };
 
+// raytrace + adjust pos
+_pos = ((AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3]);
+private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 2];
+if (count _vis > 1) then {_pos = (_vis select 0) select 0;};
+
 _unit setVariable [QGVAR(currentTarget), _pos];
 _unit setVariable [QGVAR(currentTask), "Vehicle Suppress"];
 
 // do it
-_vehicle doSuppressiveFire ((AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3]);
+_vehicle doSuppressiveFire _pos;
 
 // debug
 if (GVAR(debug_functions)) then {

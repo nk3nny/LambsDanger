@@ -85,6 +85,8 @@ item80[] = {"Move_",4,218,-450.000000,0.000000,-350.000000,50.000000,6.000000,"M
 item81[] = {"Force_move",2,250,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Force move"};
 item82[] = {"Timeout",4,218,-450.000000,175.000000,-350.000000,225.000000,0.000000,"Timeout"};
 item83[] = {"Reset_move___Con",2,250,-450.000000,275.000000,-350.000000,325.000000,0.000000,"Reset move: " \n "Continue"};
+item84[] = {"Timeout",4,218,-725.000000,300.000000,-625.000000,350.000000,0.000000,"Timeout"};
+item85[] = {"Ready_2",2,250,-725.000000,400.000000,-625.000000,450.000000,0.000000,"Ready"};
 version=1;
 class LayoutItems
 {
@@ -221,7 +223,7 @@ link72[] = {52,48};
 link73[] = {53,68};
 link74[] = {54,22};
 link75[] = {55,56};
-link76[] = {56,4};
+link76[] = {56,84};
 link77[] = {57,58};
 link78[] = {58,18};
 link79[] = {58,59};
@@ -251,8 +253,10 @@ link102[] = {80,81};
 link103[] = {81,82};
 link104[] = {82,83};
 link105[] = {83,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,407,6316128,1,-1275.255737,1258.221680,1585.172363,-774.779297,949,884,1};
-window[] = {2,-1,-1,-1,-1,839,26,828,26,3,967};
+link106[] = {84,85};
+link107[] = {85,4};
+globals[] = {0.000000,0,0,0,0,640,480,2,409,6316128,1,-932.171570,-241.490967,872.743469,229.370911,949,884,1};
+window[] = {2,-1,-1,-1,-1,917,104,906,104,3,967};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -466,7 +470,7 @@ class FSM
                         name = "Ready_Vehicle";
                         itemno = 14;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 Vehicle Danger! - %2 (%3 @ %3m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// settings " \n
                          "_tank = (vehicle _this) isKindOf ""Tank"" || {(vehicle _this) isKindOf ""Wheeled_APC_F""}; " \n
@@ -552,7 +556,7 @@ class FSM
                         name = "Ready_Infantry";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 Danger! %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_danger_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// immediate action" \n
                          "if (random 1 > 0.2  && {_dangerCause isEqualTo 2}) then {" \n
@@ -705,7 +709,7 @@ class FSM
                                         priority = 2.000000;
                                         to="Jink_";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_health < damage (vehicle _this)) || {_dangerCausedBy distance (vehicle _this) < 20}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_health < damage (vehicle _this)) || {_dangerCausedBy distance2d (vehicle _this) < 20}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1426,18 +1430,20 @@ class FSM
                 {
                         name = "Ready_1";
                         itemno = 56;
-                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "// timeout " \n
+                         "_timeout = 7 + random 3; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
-                                /*%FSM<LINK "Rest">*/
-                                class Rest
+                                /*%FSM<LINK "Timeout">*/
+                                class Timeout
                                 {
-                                        itemno = 4;
+                                        itemno = 84;
                                         priority = 0.000000;
-                                        to="Check_queue__and";
+                                        to="Ready_2";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1777,7 +1783,7 @@ class FSM
                                         priority = 2.000000;
                                         to="Jink_";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"(_health < damage (vehicle _this)) || {_dangerCausedBy distance (vehicle _this) < 20}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_health < damage (vehicle _this)) || {_dangerCausedBy distance2d (vehicle _this) < 20}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1843,6 +1849,29 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset variable" \n
                          "_this setVariable [""lambs_danger_forceMove"", nil];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Rest">*/
+                                class Rest
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="Check_queue__and";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ready_2">*/
+                class Ready_2
+                {
+                        name = "Ready_2";
+                        itemno = 85;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {

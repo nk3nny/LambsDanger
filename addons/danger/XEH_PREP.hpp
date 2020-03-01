@@ -3,6 +3,7 @@ PREP(assaultBuilding);
 PREP(assaultSpeed);
 PREP(checkBody);
 PREP(coward);
+PREP(doCallout);
 PREP(findBuildings);
 PREP(findCover);
 PREP(findOverwatch);

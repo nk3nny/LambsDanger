@@ -35,8 +35,10 @@ private _fnc_unAssault = {
 // functions ~ soft reset
 private _fnc_softReset = {
     params ["_unit"];
+    _unit setVariable [QEGVAR(danger,disableAI), nil];
     _unit forceSpeed -1;
     _unit setUnitPosWeak "AUTO";
+    _unit enableAI "FSM";
     _unit enableAI "COVER";
     _unit enableAI "SUPPRESSION";
     //_unit enableAI "CHECKVISIBLE";
@@ -48,12 +50,12 @@ private _fnc_softReset = {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 2] ];
+params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 3] ];
 
 // sort grp
 if (!local _group) exitWith {false};
 _group = _group call CBA_fnc_getGroup;
-_group enableAttack false;
+_group enableAttack (!_retreat);
 _group allowFleeing 0;
 
 // sort pos
@@ -68,6 +70,8 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 
 // sort units
 {
+    _x setVariable [QEGVAR(danger,disableAI), true];
+    _x disableAI "FSM";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
     if (_retreat) then {
@@ -97,7 +101,8 @@ waitUntil {
         _x setUnitPosWeak "UP";
         _x doMove _wp;
         _x setDestination [_wp, "DoNotPlanFormation", false];
-        _x forceSpeed ([ [_x, _wp] call EFUNC(danger,assaultSpeed), 24] select _retreat);
+        //_x forceSpeed ([ [_x, _wp] call EFUNC(danger,assaultSpeed), 24] select _retreat);
+        _x forceSpeed ([ [3, 4] select (_x distance _wp > 100), 24] select _retreat);
         _x setVariable [QEGVAR(danger,forceMove), true];
     } foreach _units;
 

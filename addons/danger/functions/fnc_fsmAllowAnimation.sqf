@@ -14,7 +14,8 @@
  *
  * Public: No
 */
-isNull objectParent _this
-&& {count weapons _this < 1}
+!(GVAR(disableAIGestures))
+&& {isNull objectParent _this}
+&& {weapons _this isEqualTo []}
 && {_this checkAIFeature "PATH"}
 && {_this checkAIFeature "MOVE"}

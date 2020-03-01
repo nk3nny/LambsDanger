@@ -12,14 +12,14 @@
  * success
  *
  * Example:
- * [bob,getpos angryJoe, false] call lambs_danger_fnc_react;
+ * [bob, getpos angryJoe, false] call lambs_danger_fnc_react;
  *
  * Public: No
 */
 params ["_unit", "_pos"];
 
 // disable Reaction phase for player group
-if (isplayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
+if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set range
 private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, true];
@@ -28,8 +28,19 @@ private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, tru
 private _stance = ["MIDDLE", selectRandom ["DOWN", "DOWN", "MIDDLE"]] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
+private _enemy = _unit findNearestEnemy _pos;
+
 // Share information!
-[_unit, (_unit findNearestEnemy _pos), GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
+[_unit, _enemy, GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
+
+// Callout
+_enemy = vehicle _enemy;
+private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "nameSound")) then {
+    getText (configFile >> "CfgVehicles" >> typeOf _enemy >> "nameSound")
+} else {
+    "contact"
+};
+[formationLeader _unit, "Combat", _callout, 100] call FUNC(doCallout);
 
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);

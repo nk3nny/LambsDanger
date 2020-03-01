@@ -23,22 +23,28 @@ if (
     || {!(_unit checkAIFeature "MOVE")}
 ) exitWith {false};
 
+// check for vehicle
+private _onFoot = isNull objectParent _unit;
+
 // variable
-_unit setVariable [QGVAR(currentTask), "Fleeing"];
+_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot];
 // this could have an event attached to it too - nkenny
+
+// Abandon vehicles in need!
+if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
+    [_unit] orderGetIn false;
+    _unit setSuppression ((getSuppression _unit) + 0.5);  // prevents instant laser aim - nkenny
+};
+
+// no further action in vehicle
+if (!_onFoot) exitWith {};
 
 // play gesture
 if (RND(0.85)) then {[_unit, ["gestureHi", "gestureHiB", "gestureHiC"]] call FUNC(gesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
-// enemy near -- abandon vehicles
-if (RND(0.5) && {!isNull objectParent _unit} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
-    [_unit] orderGetIn false;
-    _unit setSuppression ((getSuppression _unit) + 0.5);  // prevents instant laser aim - nkenny
-};
-
 // indoor just hide
-if (getSuppression _unit < 0.2 && {isNull objectParent _unit} && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.2 && {_unit call FUNC(indoor)}) exitWith {
 
     // halt unit
     doStop _unit;
