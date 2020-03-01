@@ -17,8 +17,8 @@ The overall goal is to make buildings part of the AI's available terrain. The AI
 Use CBA settings to configure the mod.
 
 ### TEAM
-- Diwako,
-- Johoko,
+- Diwako
+- Joko,
 - and nkenny
 
 Thanks for playing.
