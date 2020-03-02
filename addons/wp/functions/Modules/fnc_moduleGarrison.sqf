@@ -60,9 +60,9 @@ switch (_mode) do {
         } else {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
-
-            private _range = _area select ((_area select 0) < (_area select 1));
+            
             private _area = _logic getVariable ["objectarea",[]];
+            private _range = _area select ((_area select 0) < (_area select 1));
 
             {
                 [_x, getPos _logic, _range, _area] spawn FUNC(taskGarrison);

@@ -112,7 +112,7 @@ waitUntil {
     // soft reset
     _units = _units select {_x call EFUNC(danger,isAlive)};
 
-    {[_x, _retreat] call _fnc_softReset;} foreach (_units select {_x distance2d _wp < _threshold});
+    {[_x, _retreat] call _fnc_softReset;} foreach (_units select {_x distance2d _wPos < _threshold});
 
     // get unit focus
     _units = _units select { _x distance2d _wPos > _threshold };
