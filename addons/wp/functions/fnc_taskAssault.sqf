@@ -21,7 +21,7 @@
 
 // functions ~ keep units moving!
 private _fnc_unAssault = {
-    params ["_unit"];
+    params ["_unit", "_group", "_retreat"];
     if (currentCommand _unit isEqualTO "ATTACK") then {
         [_unit] joinSilent grpNull;
         [_unit] joinSilent _group;
@@ -34,7 +34,7 @@ private _fnc_unAssault = {
 
 // functions ~ soft reset
 private _fnc_softReset = {
-    params ["_unit"];
+    params ["_unit", "_retreat"];
     _unit setVariable [QEGVAR(danger,disableAI), nil];
     _unit forceSpeed -1;
     _unit setUnitPosWeak "AUTO";
@@ -84,7 +84,7 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
             "ApanPercMsprSnonWnonDf"
         ];
     };
-} foreach _units; 
+} foreach _units;
 
 // execute move
 waitUntil {
@@ -97,7 +97,7 @@ waitUntil {
 
     // sort units
     {
-        _x call _fnc_unAssault;
+        [_x, _group, _retreat] call _fnc_unAssault;
         _x setUnitPosWeak "UP";
         _x doMove _wp;
         _x setDestination [_wp, "DoNotPlanFormation", false];
@@ -108,7 +108,7 @@ waitUntil {
 
     // soft reset
     _units = _units select {_x call EFUNC(danger,isAlive)};
-    {_x call _fnc_softReset;} foreach (_units select {_x distance2d _wp < _threshold});
+    {[_x, _retreat] call _fnc_softReset;} foreach (_units select {_x distance2d _wp < _threshold});
 
     // get unit focus
     _units = _units select { _x distance2d _wp > _threshold };
