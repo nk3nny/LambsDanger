@@ -9,3 +9,14 @@ PREP(taskGarrison);
 PREP(taskHunt);
 PREP(taskPatrol);
 PREP(taskRush);
+
+SUBPREP(Modules,moduleArtillery);
+SUBPREP(Modules,moduleArtilleryRegister);
+SUBPREP(Modules,moduleAssault);
+SUBPREP(Modules,moduleCamp);
+SUBPREP(Modules,moduleCQB);
+SUBPREP(Modules,moduleCreep);
+SUBPREP(Modules,moduleGarrison);
+SUBPREP(Modules,moduleHunt);
+SUBPREP(Modules,modulePatrol);
+SUBPREP(Modules,moduleRush);

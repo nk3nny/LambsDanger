@@ -2,7 +2,19 @@
 class CfgPatches {
     class ADDON {
         name = COMPONENT_NAME;
-        units[] = {};
+        units[] = {
+            QGVAR(Target),
+            QGVAR(TaskArtillery),
+            QGVAR(TaskArtilleryRegister),
+            QGVAR(TaskAssault),
+            QGVAR(TaskCamp),
+            QGVAR(TaskCamp),
+            QGVAR(TaskCQB),
+            QGVAR(TaskCreep),
+            QGVAR(TaskGarrison),
+            QGVAR(TaskPatrol),
+            QGVAR(TaskRush)
+        };
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"lambs_danger"};
@@ -14,3 +26,4 @@ class CfgPatches {
 #include "CfgEventHandlers.hpp"
 #include "CfgWaypoints.hpp"
 #include "CfgWaypointTypes.hpp"
+#include "CfgVehicles.hpp"
