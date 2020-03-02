@@ -21,7 +21,7 @@
 */
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 50], "_area"];
+params ["_group", ["_pos", []], ["_radius", 50], "_area"];
 
 // sort grp
 if (!local _group) exitWith {false};

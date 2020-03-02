@@ -25,7 +25,7 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
 
         } else {
-            private _groups = (synchronizedObjects _logic) apply { group _x };
+            private _groups = synchronizedObjects _logic apply {group _x};
 
             if (_groups isEqualTo []) then {
                 private _area = _logic getVariable ["objectarea", []];
@@ -39,25 +39,6 @@ switch (_mode) do {
             } forEach _groups;
             deleteVehicle _logic;
         };
-    };
-    // When some attributes were changed (including position and rotation)
-    case "attributesChanged3DEN": {
-        params [["_logic", objNull, [objNull]]];    };
-    // When added to the world (e.g., after undoing and redoing creation)
-    case "registeredToWorld3DEN": {
-        params [["_logic", objNull, [objNull]]];
-    };
-    // When removed from the world (i.e., by deletion or undoing creation)
-    case "unregisteredFromWorld3DEN": {
-        params [["_logic", objNull, [objNull]]];
-    };
-    // When connection to object changes (i.e., new one is added or existing one removed)
-    case "connectionChanged3DEN": {
-        params [["_logic", objNull, [objNull]]];
-    };
-    // When object is being dragged
-    case "dragged3DEN": {
-        params [["_logic", objNull, [objNull]]];
     };
 };
 true
