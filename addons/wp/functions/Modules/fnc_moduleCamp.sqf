@@ -40,9 +40,9 @@ switch (_mode) do {
                         ["Radius", "NUMBER", "TODO", 200]
                     ], {
                         params ["_data", "_args"];
-                        _args params ["_unit", "_logic"];
+                        _args params ["_group", "_logic"];
                         _data params ["_range"];
-                        [_unit, _range] spawn FUNC(taskCamp);
+                        [_group, _range] spawn FUNC(taskCamp);
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -50,7 +50,7 @@ switch (_mode) do {
                     }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
-                    }, [_unit, _logic]
+                    }, [_group, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
                 [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;

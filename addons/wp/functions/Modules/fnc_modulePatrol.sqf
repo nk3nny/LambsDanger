@@ -31,7 +31,52 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
+            if (isNull _group) then {
+                private _groups = allGroups;
+                ["Task Patrol",
+                    [
+                        ["Groups", "DROPDOWN", "TODO", _groups apply {str _x}, 0],
+                        ["Range", "NUMBER", "TODO", 200],
+                        ["Waypoints", "NUMBER", "TODO", 3]
+                    ], {
+                        params ["_data", "_args"];
+                        _args params ["_groups", "_logic"];
+                        _data params ["_groupIndex", "_range", "_waypointCount"];
+                        [_groups select _groupIndex, getPos _logic, _range, _waypointCount] call FUNC(taskPatrol);
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, [_groups, _logic]
+                ] call EFUNC(main,showDialog);
+            } else {
+                _logic setVehicleVarName "Logic";
+                private _targets = [_logic];
+                _targets append (allMissionObjects QGVAR(Target));
 
+                ["Task Patrol",
+                    [
+                        ["Targets", "DROPDOWN", "TODO", _targets apply { vehicleVarName _x}, 0],
+                        ["Distance Threshold", "NUMBER", "TODO", 200],
+                        ["Waypoints", "NUMBER", "TODO", 3]
+                    ], {
+                        params ["_data", "_args"];
+                        _args params ["_targets", "_logic", "_group"];
+                        _data params ["_targetIndex", "_range", "_waypointCount"];
+                        [_group, _targets select _targetIndex, _range, _waypointCount] call FUNC(taskPatrol);
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, [_targets, _logic, _group]
+                ] call EFUNC(main,showDialog);
+            };
         } else {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;

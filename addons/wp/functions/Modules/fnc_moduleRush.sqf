@@ -31,7 +31,33 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
+            if (isNull _group) then {
+                _error = "No Unit Seleted";
+            };
 
+            if (_error == "") then {
+                ["Task Rush",
+                    [
+                        ["Radius", "NUMBER", "TODO", 200],
+                        ["CycleTime", "NUMBER", "TODO", 4]
+                    ], {
+                        params ["_data", "_args"];
+                        _args params ["_group", "_logic"];
+                        _data params ["_range", "_cycle"];
+                        [_group, _range, _cycle] spawn FUNC(taskRush);
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, [_group, _logic]
+                ] call EFUNC(main,showDialog);
+            } else {
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                deleteVehicle _logic;
+            };
         } else {
             if (is3DEN) exitWith {};
             _input params [["_logic", objNull, [objNull]], ["_isActivated", true, [true]], ["_isCuratorPlaced", false, [true]]];

@@ -27,17 +27,17 @@ switch (_mode) do {
             private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]];
             if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _group = group (_mouseOver select 1); };
             if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { _group = _mouseOver select 1; };
-
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
                 _error = "No Unit Seleted";
             };
+
             if (_error == "") then {
-                ["Task Camp",
+                ["Task Creep",
                     [
                         ["Radius", "NUMBER", "TODO", 200],
-                        ["Cycle Time", "NUMBER", "TODO", 4]
+                        ["CycleTime", "NUMBER", "TODO", 4]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
