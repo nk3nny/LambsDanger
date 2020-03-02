@@ -20,3 +20,4 @@ SUBPREP(Modules,moduleGarrison);
 SUBPREP(Modules,moduleHunt);
 SUBPREP(Modules,modulePatrol);
 SUBPREP(Modules,moduleRush);
+SUBPREP(Modules,moduleTarget);

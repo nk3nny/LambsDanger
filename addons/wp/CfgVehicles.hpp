@@ -12,7 +12,7 @@ class CfgVehicles {
         scopeCurator = 2;
         displayName = "Target for Lambs Danger Zeus Modules";
         category = "Lambs_Danger_WP_Cat";
-        function = "";
+        function = QGVAR(moduleTarget);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;

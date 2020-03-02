@@ -21,8 +21,41 @@ switch (_mode) do {
     case "init": {
         if (is3DEN) exitWith {};
         _input params [["_logic", objNull, [objNull]], ["_isActivated", true, [true]], ["_isCuratorPlaced", false, [true]]];
-        if !(_isActivated) exitWith {};
+        if !(_isActivated && local _logic) exitWith {};
         if (_isCuratorPlaced) then {
+            //--- Get unit under cursor
+            private _group = grpNull;
+            private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]];
+            if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _group = group (_mouseOver select 1); };
+            if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { _group = _mouseOver select 1; };
+
+            //--- Check if the unit is suitable
+            private _error = "";
+            if (isNull _unit) then {
+                _error = "No Unit Seleted";
+            };
+            if (_error == "") then {
+                ["Task Camp",
+                    [
+                        ["Range", "NUMBER", "TODO", 15]
+                    ], {
+                        params ["_data", "_args"];
+                        _args params ["_unit", "_logic"];
+                        _data params ["_range"];
+                        [_x, _range, _area] spawn FUNC(taskCamp);
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, [_unit, _logic]
+                ] call EFUNC(main,showDialog);
+            } else {
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                deleteVehicle _logic;
+            };
 
         } else {
             private _groups = synchronizedObjects _logic (apply {group _x});
