@@ -1,3 +1,4 @@
+private _curCat = "Settings"
 // Enable automatic artillery registration
 DFUNC(ArtilleryScan) = {
     if (!GVAR(autoAddArtillery)) exitWith {
