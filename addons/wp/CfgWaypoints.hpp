@@ -14,7 +14,7 @@ class CfgWaypoints {
             file = QPATHTOF(scripts\fnc_wpRetreat.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
             tooltip = "Unit rushes to target position with no regard for safety";
-        };        
+        };
         class EGVAR(danger,Garrison) {
             displayName = "1 TASK GARRISON";
             displayNameDebug = QEGVAR(danger,Garrison);

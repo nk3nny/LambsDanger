@@ -28,7 +28,14 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
 
         } else {
+            private _units = synchronizedObjects _logic;
 
+            private _retreat = _logic getVariable ["IsRetreat", false];
+            private _threshold = _logic getVariable ["DistanceThreshold", 15];
+            private _cycle = _logic getVariable ["CycleTime", 3];
+            {
+                [_x, getPos _logic, _retreat, _threshold, _cycle] call FUNC(taskAssault);
+            } forEach _units;
         };
     };
     // When some attributes were changed (including position and rotation)

@@ -28,7 +28,18 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
 
         } else {
+            private _groups = (synchronizedObjects _logic) apply {group _x};
 
+            if (_groups isEqualTo []) then {
+                private _area = _logic getVariable ["objectarea", []];
+                _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+
+                _groups = allGroups select { (leader _x) inArea [(getPos _logic), _a, _b, _angle, _isRectangle] };
+            };
+            _groups = _groups arrayIntersect _groups;
+            {
+                [_x] call FUNC(taskArtilleryRegister);
+            } forEach _groups;
         };
     };
     // When some attributes were changed (including position and rotation)

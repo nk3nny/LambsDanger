@@ -27,12 +27,17 @@
 
 // find buildings
 private _fnc_find = {
-    params ["_pos", "_radius", "_group"];
+    params ["_pos", "_radius", "_group", "_area"];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
-    if (count _building > 0) exitWith { _building select 0 };
-    objNull
+    if !(isNil "_area") then {
+        _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+        _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
+    };
+
+    if (_building isEqualTo []) exitWith { objNull };
+    _building select 0;
 };
 
 // check for enemies
@@ -82,7 +87,7 @@ private _fnc_act = {
     private _buildingPos = _building getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
-        
+
         // this is the pos to clear!
         private _buildingPosSelected = _buildingPos select 0;
 
@@ -137,7 +142,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21] ];
+params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], "_area"];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -170,7 +175,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     private _pos = waypointPosition [_group, _wp_index];
 
     // find building
-    private _building = [_pos, _radius, _group] call _fnc_find;
+    private _building = [_pos, _radius, _group, _area] call _fnc_find;
 
     // find enemy
     private _enemy = [_building, _group] call _fnc_enemy;

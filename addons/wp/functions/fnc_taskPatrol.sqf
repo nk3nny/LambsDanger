@@ -30,7 +30,9 @@
 */
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 200]];
+params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], "_area"];
+
+diag_log _this;
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -53,15 +55,22 @@ _group enableGunLights "forceOn";
 private _wpX = nil;
 private _fistWPId = 0;
 // Waypoints - Move
-for "_i" from 1 to 5 do {
+for "_i" from 1 to _waypointCount do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
+    if !(isNil "_area") then {
+        _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
+        _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+        while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+            _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
+        };
+    };
     if (surfaceIsWater _pos2) then { _pos2 = _pos };
     private _wp = _group addWaypoint [_pos2, 10];
     _wp setWaypointType "MOVE";
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
     _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
-    if (_i == 5) then {
+    if (_i == _waypointCount) then {
         _wpX = _wp;
     };
     if (_i == 1) then {

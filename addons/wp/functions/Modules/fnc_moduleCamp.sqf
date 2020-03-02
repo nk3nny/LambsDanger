@@ -28,7 +28,16 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
 
         } else {
+            private _units = synchronizedObjects _logic;
+            _units = (_units apply {group _x});
+            _units = _units arrayIntersect _units;
 
+            private _area = _logic getVariable ["objectarea",[]];
+            private _range = _area select ((_area select 0) < (_area select 1));
+
+            {
+                [_x, _range, _area] call FUNC(taskCamp);
+            } forEach _units;
         };
     };
     // When some attributes were changed (including position and rotation)

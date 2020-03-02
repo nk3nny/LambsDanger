@@ -13,7 +13,7 @@ populate one turret and one building if nearby.
 */
 
 // init
-params ["_group", ["_range", 62]];
+params ["_group", ["_range", 62], "_area"];
 
 // sort grp ---
 if (!local _group) exitWith {false};
@@ -38,6 +38,11 @@ _buildings = _buildings select {count (_x buildingpos -1) > 0};
 // find guns ---
 private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _gun = _gun select {(_x emptyPositions "Gunner") > 0};
+if !(isNil "_area") then {
+    _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+    _gun = _gun select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+};
 
 // STAGE 1 - PATROL --------------------------
 
@@ -54,39 +59,47 @@ if (count _units > 4) then {
     _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];
 
     // orders
-    [_group2, _range * 2] call FUNC(taskPatrol);
+    if (isNil "_area") then {
+        [_group2, _range * 2] call FUNC(taskPatrol);
+    } else {
+        private _area2 = +_area;
+        _area2 set [0, (_area2 select 0) * 2];
+        _area2 set [0, (_area2 select 1) * 2];
+        [_group2, _range * 2, 4, _area2] call FUNC(taskPatrol);
+    };
 
     // update
     _units = units _group;
 };
 
 // STAGE 2 - GUNS & BUILDINGS ---------------
+reverse _units;
 {
     // gun
     if (count _gun > 0) then {
-        _x moveInGunner (_gun select 0);
-        _gun deleteAt 0;
-        _units deleteAt _foreachIndex;
+        _x moveInGunner (_gun deleteAt 0);
+        _units set [_foreachIndex, objNull];
     };
 
     if (!(_buildings isEqualTo []) && { RND(0.3) }) then {
         doStop _x;
         _x setUnitPos "UP";
-        _x setPos selectRandom ((_buildings select 0) buildingPos -1);
-        _buildings deleteAt 0;
-        _units deleteAt _foreachIndex;
+        _x setPos selectRandom ((_buildings deleteAt 0) buildingPos -1);
+        _units set [_foreachIndex, objNull];
     };
 
     if (count _units < count units _group/2) exitWith {};
 
 } forEach _units;
 
+_units = _units - [objNull];
+
 // STAGE 3 - STAND ABOUT ----------------
 {
     private _dir = random 360;
     private _range = 1.3 + random 3.3;
-    _x setDir _dir;
-    _x setPos [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
+    private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
+    _x move _pos2;
     _x disableAI "ANIM";
     _x playActionNow selectRandom ["SitDown", "SitDown", "SitDown", "Relax", "stand"];
     _x addEventHandler ["Hit", {(_this select 0) enableAI "ANIM";}];

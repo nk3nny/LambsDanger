@@ -64,7 +64,7 @@ private _fnc_creepOrders = {
 // functions end ---
 
 // init
-params ["_group", ["_radius", 500], ["_cycle", 15]];
+params ["_group", ["_radius", 500], ["_cycle", 15], "_area"];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -97,7 +97,7 @@ waitUntil {
     waitUntil {sleep 1; simulationenabled leader _group};
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then {

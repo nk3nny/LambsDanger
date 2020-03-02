@@ -84,7 +84,7 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
             "ApanPercMsprSnonWnonDf"
         ];
     };
-} foreach _units; 
+} foreach _units;
 
 // execute move
 waitUntil {

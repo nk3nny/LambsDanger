@@ -28,7 +28,15 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
 
         } else {
-
+            private _area = _logic getVariable ["objectarea",[]];
+            private _radius = _area select ((_area select 0) < (_area select 1));
+            private _cycle = _logic getVariable ["CycleTime", 4];
+            private _units = synchronizedObjects _logic;
+            _units = (_units apply {group _x});
+            _units = _units arrayIntersect _units;
+            {
+                [_x, getPos _logic, _radius, _cycle, _area] call FUNC(taskCQB);
+            } forEach _units;
         };
     };
     // When some attributes were changed (including position and rotation)

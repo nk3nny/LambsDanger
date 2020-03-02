@@ -16,13 +16,21 @@
  * Public: No
 */
 
-params ["_group", ["_radius", 500]];
+params ["_group", ["_radius", 500], "_area"];
 
 private _groupLeader = leader _group;
 private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];
 
 private _players = switchableUnits + playableUnits;
-_players = _players select {!(side _x in _sideExclusion) && { _x distance _groupLeader < _radius } && { (getPosATL _x) select 2 < 200 }};
+_players = _players select {
+    !(side _x in _sideExclusion)
+    && { _x distance _groupLeader < _radius }
+    && { (getPosATL _x) select 2 < 200 }
+};
+if !(isNil "_area") then {
+    _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+    _players = _players select { (getPos _x) inArea [getPos _groupLeader, _a, _b, _angle, _isRectangle] };
+};
 if (_players isEqualTo []) exitWith {ObjNull};
 
 private _playerDistances = _players apply {[_groupLeader distance2d _x, _x]};
