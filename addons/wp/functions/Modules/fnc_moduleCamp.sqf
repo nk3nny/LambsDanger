@@ -31,18 +31,18 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
-            if (isNull _unit) then {
+            if (isNull _group) then {
                 _error = "No Unit Seleted";
             };
             if (_error == "") then {
                 ["Task Camp",
                     [
-                        ["Range", "NUMBER", "TODO", 15]
+                        ["Radius", "NUMBER", "TODO", 200]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_unit", "_logic"];
                         _data params ["_range"];
-                        [_x, _range, _area] spawn FUNC(taskCamp);
+                        [_unit, _range] spawn FUNC(taskCamp);
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];

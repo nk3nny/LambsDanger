@@ -32,7 +32,7 @@ private _fnc_find = {
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
     if !(isNil "_area") then {
-        _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+        _area params ["_a", "_b", "_angle", "_isRectangle"];
         _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
     };
 

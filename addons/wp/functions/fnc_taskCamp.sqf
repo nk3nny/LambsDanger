@@ -39,7 +39,7 @@ _buildings = _buildings select {count (_x buildingpos -1) > 0};
 private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _gun = _gun select {(_x emptyPositions "Gunner") > 0};
 if !(isNil "_area") then {
-    _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+    _area params ["_a", "_b", "_angle", "_isRectangle"];
     _gun = _gun select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
     _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
 };

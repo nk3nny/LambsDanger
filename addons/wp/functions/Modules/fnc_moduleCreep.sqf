@@ -30,7 +30,32 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
-
+            if (isNull _group) then {
+                _error = "No Unit Seleted";
+            };
+            if (_error == "") then {
+                ["Task Camp",
+                    [
+                        ["Radius", "NUMBER", "TODO", 200],
+                        ["Cycle Time", "NUMBER", "TODO", 4]
+                    ], {
+                        params ["_data", "_args"];
+                        _args params ["_group", "_logic"];
+                        _data params ["_range", "_cycle"];
+                        [_group, _range, _cycle] spawn FUNC(taskCreep);
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, {
+                        params ["", "_logic"];
+                        deleteVehicle _logic;
+                    }, [_group, _logic]
+                ] call EFUNC(main,showDialog);
+            } else {
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                deleteVehicle _logic;
+            };
         } else {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;

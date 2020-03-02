@@ -31,6 +31,9 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
+            if (isNull _group) then {
+                _error = "No Unit Seleted";
+            };
 
         } else {
             private _groups = synchronizedObjects _logic apply {group _x};

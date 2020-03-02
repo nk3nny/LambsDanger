@@ -28,7 +28,7 @@ _players = _players select {
     && { (getPosATL _x) select 2 < 200 }
 };
 if !(isNil "_area") then {
-    _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+    _area params ["_a", "_b", "_angle", "_isRectangle"];
     _players = _players select { (getPos _x) inArea [getPos _groupLeader, _a, _b, _angle, _isRectangle] };
 };
 if (_players isEqualTo []) exitWith {ObjNull};

@@ -31,11 +31,11 @@ switch (_mode) do {
 
             //--- Check if the unit is suitable
             private _error = "";
-            if (isNull _unit) then {
+            if (isNull _group) then {
                 _error = "No Unit Seleted";
             };
             if (_error == "") then {
-                [_unit] call FUNC(taskArtilleryRegister);
+                [_group] call FUNC(taskArtilleryRegister);
             } else {
                 [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
@@ -45,7 +45,7 @@ switch (_mode) do {
 
             if (_groups isEqualTo []) then {
                 private _area = _logic getVariable ["objectarea", []];
-                _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+                _area params ["_a", "_b", "_angle", "_isRectangle"];
 
                 _groups = allGroups select { (leader _x) inArea [(getPos _logic), _a, _b, _angle, _isRectangle] };
             };
