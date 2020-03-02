@@ -30,7 +30,7 @@
 */
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], "_area"];
+params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]]];
 
 diag_log _this;
 
@@ -57,7 +57,7 @@ private _fistWPId = 0;
 // Waypoints - Move
 for "_i" from 1 to _waypointCount do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
-    if !(isNil "_area") then {
+    if !(_area isEqualTo []) then {
         _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
         _area params ["_a", "_b", "_angle", "_isRectangle"];
         while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {

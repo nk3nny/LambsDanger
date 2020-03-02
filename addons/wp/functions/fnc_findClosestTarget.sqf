@@ -16,7 +16,7 @@
  * Public: No
 */
 
-params ["_group", ["_radius", 500], "_area"];
+params ["_group", ["_radius", 500], ["_area", [], [[]]]];
 
 private _groupLeader = leader _group;
 private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];
@@ -27,7 +27,7 @@ _players = _players select {
     && { _x distance _groupLeader < _radius }
     && { (getPosATL _x) select 2 < 200 }
 };
-if !(isNil "_area") then {
+if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
     _players = _players select { (getPos _x) inArea [getPos _groupLeader, _a, _b, _angle, _isRectangle] };
 };

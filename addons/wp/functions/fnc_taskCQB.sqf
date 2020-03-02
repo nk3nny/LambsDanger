@@ -27,11 +27,11 @@
 
 // find buildings
 private _fnc_find = {
-    params ["_pos", "_radius", "_group", "_area"];
+    params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
-    if !(isNil "_area") then {
+    if !(_area isEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle"];
         _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
     };
@@ -144,7 +144,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], "_area", "_useWaypoint"];
+params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_area", [], [[]]], ["_useWaypoint", false]];
 
 
 // sort grp
@@ -183,7 +183,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // find building
 
-    private _building = if (isNil "_area") then {
+    private _building = if (_area isEqualTo []) then {
         [_wPos, _radius, _group] call _fnc_find;
     } else {
         [_wPos, _radius, _group, _area] call _fnc_find;

@@ -13,7 +13,7 @@ populate one turret and one building if nearby.
 */
 
 // init
-params ["_group", ["_range", 62], "_area"];
+params ["_group", ["_range", 62], ["_area", [], [[]]]];
 
 // sort grp ---
 if (!local _group) exitWith {false};
@@ -38,7 +38,7 @@ _buildings = _buildings select {count (_x buildingpos -1) > 0};
 // find guns ---
 private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _gun = _gun select {(_x emptyPositions "Gunner") > 0};
-if !(isNil "_area") then {
+if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
     _gun = _gun select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
     _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
@@ -59,7 +59,7 @@ if (count _units > 4) then {
     _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];
 
     // orders
-    if (isNil "_area") then {
+    if (_area isEqualTo []) then {
         [_group2, _range * 2] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;

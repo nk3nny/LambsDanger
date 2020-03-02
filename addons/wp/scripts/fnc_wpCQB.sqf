@@ -22,7 +22,7 @@ if (_radius isEqualTo 0) then { _radius = 50; };
 // get other settings
 
 // execute script
-[_group, _pos, _radius] call FUNC(taskCQB);
+[_group, _pos, _radius, 21, [], true] call FUNC(taskCQB);
 
 // low level move order
 _group move _pos;

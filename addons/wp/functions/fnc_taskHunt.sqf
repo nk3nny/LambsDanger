@@ -19,7 +19,7 @@
 */
 
 // 1. FIND TRACKER
-params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], "_area"];
+params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -46,7 +46,7 @@ waitUntil {
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    private _target = if (isNil "_area") then {
+    private _target = if (_area isEqualTo []) then {
         [_group, _radius] call FUNC(findClosestTarget);
     } else {
         [_group, _radius, _area] call FUNC(findClosestTarget);

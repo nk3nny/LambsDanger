@@ -50,7 +50,7 @@ private _fnc_softReset = {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 3], ["_useWaypoint", true]];
+params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 3], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
