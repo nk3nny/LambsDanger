@@ -29,8 +29,6 @@ switch (_mode) do {
             if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _group = group (_mouseOver select 1); };
             if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { _group = _mouseOver select 1; };
 
-            //--- Check if the unit is suitable
-            private _error = "";
             if (isNull _group) then {
                 private _groups = allGroups;
                 ["Task Patrol",

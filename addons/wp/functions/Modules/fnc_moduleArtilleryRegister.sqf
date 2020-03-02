@@ -40,7 +40,7 @@ switch (_mode) do {
                     [objNull, "Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
                 } else {
                     [objNull, "No Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
-                }
+                };
 
                 deleteVehicle _logic;
             } else {
