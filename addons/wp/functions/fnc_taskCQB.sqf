@@ -55,7 +55,7 @@ private _fnc_act = {
     params ["_enemy", "_group", "_building"];
 
     // units
-    private _units = units _group select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
+    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
 
     // deal with close enemy
     if (!isNull _enemy) exitWith {
@@ -63,7 +63,7 @@ private _fnc_act = {
         // debug
         if (EGVAR(danger,debug_functions)) then {
             format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(danger,debugLog);
-            private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
+            createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
         };
 
         // posture
@@ -73,6 +73,8 @@ private _fnc_act = {
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
         _buildingPos pushBack (getPosATL _enemy);
+
+        private _buildingPosSelected = _buildingPos select 0;
 
         // act
         {
@@ -143,6 +145,7 @@ private _fnc_act = {
 
 // init
 params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], "_area", "_useWaypoint"];
+
 
 // sort grp
 if (!local _group) exitWith {};
