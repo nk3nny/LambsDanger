@@ -50,7 +50,7 @@ private _fnc_act = {
     params ["_enemy", "_group", "_building"];
 
     // units
-    private _units = units _group select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
+    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
 
     // deal with close enemy
     if (!isNull _enemy) exitWith {
@@ -58,7 +58,7 @@ private _fnc_act = {
         // debug
         if (EGVAR(danger,debug_functions)) then {
             format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(danger,debugLog);
-            private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
+            createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
         };
 
         // posture
@@ -68,6 +68,8 @@ private _fnc_act = {
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
         _buildingPos pushBack (getPosATL _enemy);
+
+        private _buildingPosSelected = _buildingPos select 0;
 
         // act
         {
@@ -82,7 +84,7 @@ private _fnc_act = {
     private _buildingPos = _building getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
-        
+
         // this is the pos to clear!
         private _buildingPosSelected = _buildingPos select 0;
 
@@ -137,7 +139,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21] ];
+params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_useWaypoints", true]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -167,10 +169,12 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _pos = waypointPosition [_group, _wp_index];
-
+    private _wPos = waypointPosition [_group, _wp_index];
+    if !(_useWaypoints) then {
+        _wPos = _pos;
+    };
     // find building
-    private _building = [_pos, _radius, _group] call _fnc_find;
+    private _building = [_wPos, _radius, _group] call _fnc_find;
 
     // find enemy
     private _enemy = [_building, _group] call _fnc_enemy;
