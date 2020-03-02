@@ -139,7 +139,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_useWaypoints", true]];
+params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21]];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -170,9 +170,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // get wp position
     private _wPos = waypointPosition [_group, _wp_index];
-    if !(_useWaypoints) then {
-        _wPos = _pos;
-    };
+
     // find building
     private _building = [_wPos, _radius, _group] call _fnc_find;
 
