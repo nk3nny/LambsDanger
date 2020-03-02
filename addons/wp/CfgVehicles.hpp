@@ -22,9 +22,9 @@ class CfgVehicles {
     class GVAR(TaskArtillery) : Module_F {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtillery);
-        scope = 2;
+        scope = 0;
         is3DEN = 1;
-        scopeCurator = 2;
+        scopeCurator = 0;
         displayName = "Task Artillery";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtillery);

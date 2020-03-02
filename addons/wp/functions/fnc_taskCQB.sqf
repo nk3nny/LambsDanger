@@ -142,7 +142,7 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], "_area"];
+params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], "_area", "_useWaypoint"];
 
 // sort grp
 if (!local _group) exitWith {};
@@ -172,10 +172,14 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _pos = waypointPosition [_group, _wp_index];
+    private _wPos = waypointPosition [_group, _wp_index];
+
+    if !(_useWaypoint) then {
+        _wPos = _pos;
+    };
 
     // find building
-    private _building = [_pos, _radius, _group, _area] call _fnc_find;
+    private _building = [_wPos, _radius, _group, _area] call _fnc_find;
 
     // find enemy
     private _enemy = [_building, _group] call _fnc_enemy;

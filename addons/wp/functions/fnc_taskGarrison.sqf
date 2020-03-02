@@ -21,7 +21,7 @@
 */
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 50]];
+params ["_group", ["_pos",[]], ["_radius", 50], "_area"];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -41,6 +41,10 @@ private _statics = 0.8;
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
+if !(isNil "_area") then {
+    _area params ["_a", "_b", "_angle", "_isRectangle", "_c"];
+    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle] };
+};
 [_houses, true] call CBA_fnc_Shuffle;
 
 // find guns

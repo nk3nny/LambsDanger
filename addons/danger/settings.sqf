@@ -111,36 +111,6 @@ private _curCat = "General";
     1
 ] call CBA_fnc_addSetting;
 
-
-// Enable automatic artillery registration
-if (GVAR(Loaded_WP)) then {
-    GVAR(autoArtilleryRunning) = false;
-    [
-        QGVAR(autoAddArtillery),
-        "CHECKBOX",
-        ["Enable automatic artillery registration", "Automatically adds artillery already present in the mission to Side"],
-        [COMPONENT_NAME, _curCat],
-        false,
-        true, {
-            params ["_value"];
-            if (!_value) exitWith {};
-            DFUNC(ArtilleryScan) = {
-                if (!GVAR(autoAddArtillery)) exitWith {};
-                {
-                    if (getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0) then {
-                        _x call EFUNC(WP,taskArtilleryRegister);
-                    };
-                } foreach vehicles;
-                GVAR(autoArtilleryRunning) = true;
-                [{call FUNC(ArtilleryScan);}, [], 120] call CBA_fnc_waitAndExecute;
-            };
-
-            if (_value && !GVAR(autoArtilleryRunning)) then {
-                call FUNC(ArtilleryScan);
-            };
-        }
-    ] call CBA_fnc_addSetting;
-};
 private _curCat = "Settings Share information";
 
 // Toggle communication for all units

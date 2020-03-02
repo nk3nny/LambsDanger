@@ -16,6 +16,7 @@
 */
 
 if !(GVAR(debug_Drawing)) exitWith {};
+if (is3DEN) exitWith {};
 GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
 private _displayGame = findDisplay 46;
 private _displayEGSpectator = findDisplay 60492;
