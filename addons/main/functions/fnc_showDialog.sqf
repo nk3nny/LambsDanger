@@ -23,34 +23,24 @@
 params ["_name", "_data", "_OnComplete", "_OnAbort", "_OnUnload", "_params"];
 
 
-private _displayGame = findDisplay 46;
-private _displayEGSpectator = findDisplay 60492;
-private _displayCurator = findDisplay 312;
-
-private _display = displayNull;
-
-if !(isNull _displayEGSpectator) then {
-    _display = _displayEGSpectator createDisplay "RscDisplayEmpty";
-} else {
-    if !(isNull _displayCurator) then {
-        _display = _displayCurator createDisplay "RscDisplayEmpty";
-    } else {
-        _display = _displayGame createDisplay "RscDisplayEmpty";
-    };
+if (!createDialog QGVAR(display)) exitWith {
+    false
 };
+private _display = uiNamespace getVariable QGVAR(display);
+
 if (isNull _display) exitWith {}; // if we hit this something went wrong!
 _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
     if (_dikCode == DIK_ESCAPE) then {
         (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On Close Handler
-        _display closeDisplay 1;
+        closeDialog 2;
         _handled = true;
     };
     if (_dikCode == DIK_NUMPADENTER || _dikCode == DIK_RETURN) then {
         private _data = _display call FUNC(parseData);
         [_data, (_display getVariable [QGVAR(Params), []])] call (_display getVariable [QGVAR(OnComplete), {}]);
-        _display closeDisplay 1;
+        closeDialog 1;
         _handled = true;
     };
     _handled;
@@ -192,7 +182,7 @@ _cancelButton ctrlAddEventHandler ["ButtonClick", {
     params ["_ctrl"];
     private _display = ctrlParent _ctrl;
     (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]);
-    _display closeDisplay 1;
+    closeDialog 2;
 }];
 _cancelButton ctrlCommit 0;
 
@@ -206,7 +196,7 @@ _okButton ctrlAddEventHandler ["ButtonClick", {
 
     private _data = _display call FUNC(parseData);
     [_data, (_display getVariable [QGVAR(Params), []])] call (_display getVariable [QGVAR(OnComplete), {}]);
-    _display closeDisplay 1;
+    closeDialog 1;
 }];
 
 _display setVariable [QGVAR(OnComplete), _OnComplete];

@@ -1,3 +1,19 @@
+#include "script_component.hpp"
+/*
+ * Author: jokoho482
+ * TODO
+ *
+ * Arguments:
+ * TODO
+ *
+ * Return Value:
+ * TODO
+ *
+ * Example:
+ * TODO
+ *
+ * Public: No
+*/
 params ["_logic", "", "_activated"];
 
 if(local _logic && _activated) then {

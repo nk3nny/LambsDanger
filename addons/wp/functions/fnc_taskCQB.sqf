@@ -179,7 +179,13 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     };
 
     // find building
-    private _building = [_wPos, _radius, _group, _area] call _fnc_find;
+
+    private _building = if (isNil "_area") then {
+        [_wPos, _radius, _group] call _fnc_find;
+    } else {
+        [_wPos, _radius, _group, _area] call _fnc_find;
+    };
+
 
     // find enemy
     private _enemy = [_building, _group] call _fnc_enemy;

@@ -12,3 +12,10 @@ class CfgPatches {
 };
 #include "CfgFactionClasses.hpp"
 #include "CfgEventHandlers.hpp"
+
+class GVAR(Display) {
+    idd = -1;
+    movingEnable = 1;
+    enableSimulation = 1;
+    onLoad = QUOTE(with uiNamespace do {GVAR(display) = _this select 0});
+};
