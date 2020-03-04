@@ -101,7 +101,7 @@ waitUntil {
     waitUntil {sleep 1; simulationenabled leader _group};
 
     // find
-    [_group, _radius, _area] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then {

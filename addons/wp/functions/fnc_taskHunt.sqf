@@ -48,7 +48,7 @@ waitUntil {
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    [_group, _radius, _area] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area] call FUNC(findClosestTarget);
 
     // settings
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";
