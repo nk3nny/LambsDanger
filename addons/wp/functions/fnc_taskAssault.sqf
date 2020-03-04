@@ -18,7 +18,9 @@
  *
  * Public: Yes
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskAssault);
+};
 // functions ~ keep units moving!
 private _fnc_unAssault = {
     params ["_unit", "_group", "_retreat"];

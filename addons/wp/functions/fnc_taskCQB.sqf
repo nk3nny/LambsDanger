@@ -23,6 +23,10 @@
  * Public: No
 */
 
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskCQB);
+};
+
 // functions ---
 
 // find buildings

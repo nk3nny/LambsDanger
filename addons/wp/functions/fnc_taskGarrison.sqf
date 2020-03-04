@@ -19,7 +19,9 @@
  *
  * Public: No
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskGarrison);
+};
 // init
 params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]]];
 

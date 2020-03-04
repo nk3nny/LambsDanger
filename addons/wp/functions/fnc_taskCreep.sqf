@@ -20,6 +20,10 @@
  * Public: No
 */
 
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskCreep);
+};
+
 // functions ---
 
 private _fnc_creepOrders = {

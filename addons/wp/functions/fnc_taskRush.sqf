@@ -15,7 +15,9 @@
  *
  * Public: No
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskRush);
+};
 // functions ---
 
 private _fnc_rushOrders = {

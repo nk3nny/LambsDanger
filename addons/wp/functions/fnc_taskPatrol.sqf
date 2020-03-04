@@ -17,7 +17,9 @@
  *
  * Public: No
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskPatrol);
+};
 // Patrol script
 // version 1.1
 // by nkenny

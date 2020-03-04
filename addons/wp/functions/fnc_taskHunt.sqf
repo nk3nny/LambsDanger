@@ -17,7 +17,9 @@
  *
  * Public: No
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskHunt);
+};
 // 1. FIND TRACKER
 params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]]];
 

@@ -11,7 +11,9 @@ Nice little halfcircle of troops
 populate one turret and one building if nearby.
 
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskCamp);
+};
 // init
 params ["_group", ["_range", 62], ["_area", [], [[]]]];
 

@@ -19,6 +19,10 @@
  * Public: No
 */
 
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskArtillery);
+};
+
 // init
 params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accuracy", 75]];
 
