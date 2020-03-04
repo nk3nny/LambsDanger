@@ -199,6 +199,12 @@ class CfgVehicles {
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         isGlobal = 0;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {100, 100, -1};
+            isRectangle = 0;
+        };
     };
 
     class GVAR(TaskHunt) : Module_F {
@@ -213,6 +219,12 @@ class CfgVehicles {
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {100, 100, -1};
+            isRectangle = 0;
+        };
         class Attributes: AttributesBase {
             class CycleTime {
                 displayName = "Cycle Time";
@@ -275,6 +287,12 @@ class CfgVehicles {
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {100, 100, -1};
+            isRectangle = 0;
+        };
         class Attributes: AttributesBase {
             class CycleTime {
                 displayName = "Cycle Time";
