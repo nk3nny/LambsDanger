@@ -10,9 +10,9 @@ class CfgVehicles {
         _generalMacro = QGVAR(Target);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Target for Lambs Danger Zeus Modules";
+        displayName = "Lambs Target"; // TODO
         category = "Lambs_Danger_WP_Cat";
-        function = QGVAR(moduleTarget);
+        function = QFUNC(moduleTarget);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
@@ -67,8 +67,8 @@ class CfgVehicles {
         isGlobal = 0;
         class Attributes: AttributesBase {
             class IsRetreat {
-                displayName = "Is Retreat";
-                tooltip = "Is Retreating";
+                displayName = "Is Retreat"; // TODO
+                tooltip = "Is Retreating"; // TODO
                 property = "IsRetreat";
                 control = "Checkbox";
                 expression = "_this setVariable ['%s',_value];";
@@ -79,8 +79,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class DistanceThreshold {
-                displayName = "Distance Threshold";
-                tooltip = "The Distance the Task Terminates";
+                displayName = "Distance Threshold"; // TODO
+                tooltip = "The Distance the Task Terminates"; // TODO
                 property = "DistanceThreshold";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -91,8 +91,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class CycleTime {
-                displayName = "Cycle Time";
-                tooltip = "The Cycle Time";
+                displayName = "Cycle Time"; // TODO
+                tooltip = "The Cycle Time"; // TODO
                 property = "CycleTime";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -139,8 +139,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class CycleTime {
-                displayName = "Cycle Time";
-                tooltip = "The Cycle Time";
+                displayName = "Cycle Time"; // TODO
+                tooltip = "The Cycle Time"; // TODO
                 property = "CycleTime";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -173,8 +173,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class CycleTime {
-                displayName = "Cycle Time";
-                tooltip = "The Cycle Time";
+                displayName = "Cycle Time"; // TODO
+                tooltip = "The Cycle Time"; // TODO
                 property = "CycleTime";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -227,8 +227,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class CycleTime {
-                displayName = "Cycle Time";
-                tooltip = "The Cycle Time";
+                displayName = "Cycle Time"; // TODO
+                tooltip = "The Cycle Time"; // TODO
                 property = "CycleTime";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -261,8 +261,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class WaypointCount {
-                displayName = "Waypoint Count";
-                tooltip = "The Amount of Waypoits the Module Creates";
+                displayName = "Waypoint Count"; // TODO
+                tooltip = "The Amount of Waypoits the Module Creates"; // TODO
                 property = "WaypointCount";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";
@@ -295,8 +295,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class CycleTime {
-                displayName = "Cycle Time";
-                tooltip = "The Cycle Time";
+                displayName = "Cycle Time"; // TODO
+                tooltip = "The Cycle Time"; // TODO
                 property = "CycleTime";
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value];";

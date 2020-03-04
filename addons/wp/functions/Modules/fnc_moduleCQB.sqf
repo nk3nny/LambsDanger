@@ -51,7 +51,8 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                private _targets = allMissionObjects QGVAR(Target);
+                GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
+                private _targets = GVAR(ModuleTargets);
                 ["Task CQB",
                     [
                         ["Targets", "DROPDOWN", "TODO", _targets apply { vehicleVarName _x}, 0],

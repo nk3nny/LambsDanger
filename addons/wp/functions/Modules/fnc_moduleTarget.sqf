@@ -26,4 +26,6 @@ if(local _logic && _activated) then {
     };
     _logic setVehicleVarName format ["Lambs Target %1", GVAR(TargetIndex)];
     GVAR(TargetIndex) = GVAR(TargetIndex) + 1;
+    GVAR(ModuleTargets) pushBack _logic;
+    GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
 };

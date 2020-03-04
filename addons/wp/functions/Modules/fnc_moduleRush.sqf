@@ -62,20 +62,17 @@ switch (_mode) do {
             if (is3DEN) exitWith {};
             _input params [["_logic", objNull, [objNull]], ["_isActivated", true, [true]], ["_isCuratorPlaced", false, [true]]];
             if !(_isActivated) exitWith {};
-            if (_isCuratorPlaced) then {
+            private _groups = synchronizedObjects _logic apply {group _x};
+            _groups = _groups arrayIntersect _groups;
 
-            } else {
-                private _groups = synchronizedObjects _logic apply {group _x};
-                _groups = _groups arrayIntersect _groups;
+            private _area = _logic getVariable ["objectarea",[]];
+            private _range = _area select ((_area select 0) < (_area select 1));
+            private _cycle = _logic getVariable ["CycleTime", 4];
 
-                private _area = _logic getVariable ["objectarea",[]];
-                private _range = _area select ((_area select 0) < (_area select 1));
-                private _cycle = _logic getVariable ["CycleTime", 4];
-
-                {
-                    [_x, _range, _cycle, _area] spawn FUNC(taskRush);
-                } forEach _groups;
-            };
+            {
+                [_x, _range, _cycle, _area] spawn FUNC(taskRush);
+            } forEach _groups;
+            deleteVehicle _logic;
         };
     };
 };

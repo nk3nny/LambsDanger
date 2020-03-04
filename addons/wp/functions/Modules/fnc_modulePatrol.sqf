@@ -53,7 +53,8 @@ switch (_mode) do {
             } else {
                 _logic setVehicleVarName "Logic";
                 private _targets = [_logic];
-                _targets append (allMissionObjects QGVAR(Target));
+                GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
+                _targets append GVAR(ModuleTargets);
 
                 ["Task Patrol",
                     [
