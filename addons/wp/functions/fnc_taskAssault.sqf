@@ -92,9 +92,9 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 waitUntil {
 
     // get waypoint position
-    private _wPos = waypointPosition [_group, _wp_index];
-    if !(_useWaypoint) then {
-        _wPos = _pos;
+    private _wPos = _pos
+    if (_useWaypoint) then {
+        _wPos = waypointPosition [_group, _wp_index];;
     };
 
     // end if WP is odd
