@@ -76,7 +76,7 @@ switch (_mode) do {
                 ] call EFUNC(main,showDialog);
             };
         } else {
-            private _groups = synchronizedObjects _logic apply {group _x};
+            private _groups = (synchronizedObjects _logic) apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
             private _retreat = _logic getVariable ["IsRetreat", false];

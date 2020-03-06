@@ -180,7 +180,6 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // get wp position
     private _wPos = _pos;
-
     if (_useWaypoint) then {
         _wPos = waypointPosition [_group, _wp_index];
     };
