@@ -21,6 +21,7 @@
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskAssault);
 };
+
 // functions ~ keep units moving!
 private _fnc_unAssault = {
     params ["_unit", "_group", "_retreat"];
@@ -60,11 +61,11 @@ _group = _group call CBA_fnc_getGroup;
 _group enableAttack (!_retreat);
 _group allowFleeing 0;
 
-// sort pos
-_pos = _pos call CBA_fnc_getPos;
-
 // sort wp
-private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
+if (_useWaypoint) then {
+    _pos = [_group ,(currentWaypoint _group) min ((count waypoints _group) - 1)];
+};
+
 //[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];  <-- Offending line  - nkenny
 
 // sort group
@@ -92,10 +93,7 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 waitUntil {
 
     // get waypoint position
-    private _wPos = _pos;
-    if (_useWaypoint) then {
-        _wPos = waypointPosition [_group, _wp_index];;
-    };
+    private _wPos = _pos call CBA_fnc_getPos;
 
     // end if WP is odd
     if (_wPos isEqualTo [0,0,0]) exitWith {true};

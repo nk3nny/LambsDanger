@@ -78,6 +78,18 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "BOOL";
             };
+            class DeleteOnStartUp {
+                displayName = "Delete On Start Up"; // TODO
+                tooltip = "Delete On Start Up"; // TODO
+                property = "DeleteOnStartUp";
+                control = "Checkbox";
+                expression = "_this setVariable ['%s',_value];";
+                defaultValue = "false";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
             class DistanceThreshold {
                 displayName = "Distance Threshold"; // TODO
                 tooltip = "The Distance the Task Terminates"; // TODO
@@ -149,6 +161,18 @@ class CfgVehicles {
                 validate = "none";
                 condition = "0";
                 typeName = "NUMBER";
+            };
+            class DeleteOnStartUp {
+                displayName = "Delete On Start Up"; // TODO
+                tooltip = "Delete On Start Up"; // TODO
+                property = "DeleteOnStartUp";
+                control = "Checkbox";
+                expression = "_this setVariable ['%s',_value];";
+                defaultValue = "false";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
             };
         };
     };

@@ -36,13 +36,16 @@ switch (_mode) do {
                         ["Groups", "DROPDOWN", "TODO", _groups apply {str _x}, 0],
                         ["Is Retreating", "BOOLEAN", "TODO", false],
                         ["Distance Threshold", "NUMBER", "TODO", 15],
-                        ["Cycle Time", "NUMBER", "TODO", 3]
+                        ["Cycle Time", "NUMBER", "TODO", 3],
+                        ["Delete After Start", "BOOLEAN", "TODO", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_retreat", "_threshold", "_cycle"];
-                        [_groups select _groupIndex, getPos _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
-                        deleteVehicle _logic;
+                        _data params ["_groupIndex", "_retreat", "_threshold", "_cycle", "_deleteAfterStartup"];
+                        [_groups select _groupIndex, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        if (_deleteAfterStartup) then {
+                            deleteVehicle _logic;
+                        };
                     }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
@@ -64,7 +67,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_retreat", "_threshold", "_cycle"];
-                        [_group, getPos (_targets select _targetIndex), _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        [_group, (_targets select _targetIndex), _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -80,12 +83,15 @@ switch (_mode) do {
             _groups = _groups arrayIntersect _groups;
 
             private _retreat = _logic getVariable ["IsRetreat", false];
+            private _deleteAfterStartup = _logic getVariable ["DeleteOnStartUp", false];
             private _threshold = _logic getVariable ["DistanceThreshold", 15];
             private _cycle = _logic getVariable ["CycleTime", 3];
             {
-                [_x, getPos _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                [_x, _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
             } forEach _groups;
-            deleteVehicle _logic;
+            if (_deleteAfterStartup) then {
+                deleteVehicle _logic;
+            };
         };
     };
 };

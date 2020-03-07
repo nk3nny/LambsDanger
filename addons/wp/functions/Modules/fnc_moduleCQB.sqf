@@ -35,13 +35,16 @@ switch (_mode) do {
                     [
                         ["Groups", "DROPDOWN", "TODO", _groups apply {str _x}, 0],
                         ["Radius", "NUMBER", "TODO", 200],
-                        ["Cycle Time", "NUMBER", "TODO", 4]
+                        ["Cycle Time", "NUMBER", "TODO", 4],
+                        ["Delete After Start", "BOOLEAN", "TODO", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_radius", "_cycle"];
-                        [_groups select _groupIndex, getPos _logic, _radius, _cycle, nil, false] spawn FUNC(taskCQB);
-                        deleteVehicle _logic;
+                        _data params ["_groupIndex", "_radius", "_cycle", "_deleteAfterStartup"];
+                        [_groups select _groupIndex, [_logic, getPos _logic] select _deleteAfterStartup, _radius, _cycle, nil, false] spawn FUNC(taskCQB);
+                        if (_deleteAfterStartup) then {
+                            deleteVehicle _logic;
+                        };
                     }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
@@ -62,7 +65,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_radius", "_cycle"];
-                        [_group, getPos (_targets select _targetIndex), _radius, _cycle, nil, false] spawn FUNC(taskCQB);
+                        [_group, (_targets select _targetIndex), _radius, _cycle, nil, false] spawn FUNC(taskCQB);
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -80,11 +83,14 @@ switch (_mode) do {
             private _area = _logic getVariable ["objectarea",[]];
             private _radius = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable ["CycleTime", 4];
+            private _deleteAfterStartup = _logic getVariable ["DeleteOnStartUp", false];
 
             {
-                [_x, getPos _logic, _radius, _cycle, _area, false] spawn FUNC(taskCQB);
+                [_x, _logic, _radius, _cycle, _area, false] spawn FUNC(taskCQB);
             } forEach _groups;
-            deleteVehicle _logic;
+            if (_deleteAfterStartup) then {
+                deleteVehicle _logic;
+            };
         };
     };
 };
