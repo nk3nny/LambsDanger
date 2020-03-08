@@ -1,7 +1,21 @@
 class CfgVehicles {
     class Logic;
-    class Module_F: Logic {
-        class AttributesBase;
+    class Module_F: Logic
+    {
+        class AttributesBase
+        {
+            class Default;
+            class Edit;
+            class Combo;
+            class Checkbox;
+            class CheckboxNumber;
+            class ModuleDescription;
+            class Units;
+        };
+        class ModuleDescription
+        {
+            class AnyBrain;
+        };
     };
 
     // Zeus Modules
@@ -14,8 +28,12 @@ class CfgVehicles {
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleTarget);
         functionPriority = 1;
-        icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        icon = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
+        portrait = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
         isGlobal = 0;
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     // Editor Modules
@@ -30,7 +48,11 @@ class CfgVehicles {
         function = QFUNC(moduleArtillery);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         isGlobal = 0;
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskArtilleryRegister) : Module_F {
@@ -44,12 +66,16 @@ class CfgVehicles {
         function = QFUNC(moduleArtilleryRegister);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
             size3[] = {100, 100, -1};
             isRectangle = 0;
+        };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
         };
     };
 
@@ -63,7 +89,8 @@ class CfgVehicles {
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleAssault);
         functionPriority = 1;
-        icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
+        icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
+        portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         isGlobal = 0;
         class Attributes: AttributesBase {
             class IsRetreat {
@@ -115,6 +142,9 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
         };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskCamp) : Module_F {
@@ -128,7 +158,11 @@ class CfgVehicles {
         function = QFUNC(moduleCamp);
         functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskCQB) : Module_F {
@@ -142,6 +176,7 @@ class CfgVehicles {
         function = QFUNC(moduleCQB);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
@@ -175,6 +210,9 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
         };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskCreep) : Module_F {
@@ -188,6 +226,7 @@ class CfgVehicles {
         function = QFUNC(moduleCreep);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
@@ -208,6 +247,9 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+        };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
         };
     };
 
@@ -222,12 +264,16 @@ class CfgVehicles {
         function = QFUNC(moduleGarrison);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
             size3[] = {100, 100, -1};
             isRectangle = 0;
+        };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
         };
     };
 
@@ -242,6 +288,7 @@ class CfgVehicles {
         function = QFUNC(moduleHunt);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
@@ -263,6 +310,9 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
         };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskPatrol) : Module_F {
@@ -276,6 +326,7 @@ class CfgVehicles {
         function = QFUNC(modulePatrol);
         functionPriority = 1;
         icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
+        portrait = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
@@ -297,6 +348,9 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
         };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
+        };
     };
 
     class GVAR(TaskRush) : Module_F {
@@ -310,6 +364,7 @@ class CfgVehicles {
         function = QFUNC(moduleRush);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
         canSetArea = 1;
         canSetAreaShape = 1;
@@ -330,6 +385,9 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+        };
+        class ModuleDescription: ModuleDescription {
+            description = "TODO";
         };
     };
 };
