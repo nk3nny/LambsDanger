@@ -21,7 +21,6 @@
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskAssault);
 };
-
 // functions ~ keep units moving!
 private _fnc_unAssault = {
     params ["_unit", "_group", "_retreat"];
@@ -63,7 +62,7 @@ _group allowFleeing 0;
 
 // sort wp
 if (_useWaypoint) then {
-    _pos = [_group ,(currentWaypoint _group) min ((count waypoints _group) - 1)];
+    _pos = [_group, (currentWaypoint _group) min ((count waypoints _group) - 1)];
 };
 
 //[_group, _wp_index] setWaypointPosition [AGLtoASL _pos, -1];  <-- Offending line  - nkenny
