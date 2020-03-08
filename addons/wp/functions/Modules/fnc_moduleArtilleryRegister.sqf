@@ -66,7 +66,6 @@ switch (_mode) do {
     // When connection to object changes (i.e., new one is added or existing one removed)
     case "connectionChanged3DEN": {
         private _logic = _input param [0,objNull,[objNull]];
-        diag_log format ["Logic %1; Input %2; Variables %3", _logic, _input, allVariables _logic apply {[_x, _logic getVariable _x]}];
     };
 
 };

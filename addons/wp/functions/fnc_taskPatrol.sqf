@@ -34,8 +34,6 @@ if !(canSuspend) exitWith {
 // init
 params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]]];
 
-diag_log _this;
-
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };

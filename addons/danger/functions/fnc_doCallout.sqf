@@ -94,7 +94,6 @@ playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pit
 }, [_unit, false], 1] call CBA_fnc_waitAndExecute;
 if (GVAR(debug_functions)) then {
     format ["%1 callout (%2 called %3!)", side _unit, name _unit, _callout] call FUNC(debugLog);
-    diag_log ("[LAMBS Danger FSM] : callout file :" + _sound);
 };
 
 // set time until next callout

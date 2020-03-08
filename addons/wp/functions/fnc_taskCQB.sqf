@@ -197,7 +197,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // wait
     sleep _cycle;
-    if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy];}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 };
 
 // reset
