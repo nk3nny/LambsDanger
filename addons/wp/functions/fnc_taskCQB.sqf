@@ -180,10 +180,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _wPos = _pos call FUNC(main,getPos);
-    if (_useWaypoint) then {
-        _wPos = waypointPosition [_group, _wp_index];
-    };
+    private _wPos = _pos call EFUNC(main,getPos);
 
     // find building
     private _building = [_wPos, _radius, _group, _area] call _fnc_find;

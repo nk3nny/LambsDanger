@@ -32,7 +32,7 @@ if !(canSuspend) exitWith {
 */
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]]];
+params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]], ["_moveWaypoints", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -52,8 +52,28 @@ _group setCombatMode "YELLOW";
 _group setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"];
 _group enableGunLights "forceOn";
 
-private _wpX = nil;
 private _fistWPId = 0;
+private _fnc_waypointStatement = "
+    private _radius = %1;
+    private _pos = %2;
+    private _area = %3;
+    private _group = group this;
+    {
+        if ((currentWaypoint _group) != (_x select 1)) then {
+            private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];
+            if !(_area isEqualTo []) then {
+                _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
+                _area params ['_a', '_b', '_angle', '_isRectangle'];
+                while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+                    _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
+                };
+            };
+            if (surfaceIsWater _pos2) then { _pos2 = _pos };
+            _x setWPPos _pos2;
+        };
+    } forEach waypoints (group this);
+";
+private _wp = nil;
 // Waypoints - Move
 for "_i" from 1 to _waypointCount do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
@@ -65,19 +85,21 @@ for "_i" from 1 to _waypointCount do {
         };
     };
     if (surfaceIsWater _pos2) then { _pos2 = _pos };
-    private _wp = _group addWaypoint [_pos2, 10];
+    _wp = _group addWaypoint [_pos2, 10];
     _wp setWaypointType "MOVE";
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
     _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
-    if (_i == _waypointCount) then {
-        _wpX = _wp;
-    };
     if (_i == 1) then {
         _fistWPId = _wp select 1;
     };
 };
-_wpx setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1]", _fistWPId]];
+if (_moveWaypoints) then {
+    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId] + format [_fnc_waypointStatement, _radius, _pos, _area]];
+} else {
+    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId]];
+};
+
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

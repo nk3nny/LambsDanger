@@ -344,6 +344,18 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+            class MoveWaypoints {
+                displayName = "Move Waypoints After Completion"; // TODO
+                tooltip = "Move Waypoints After Completion"; // TODO
+                property = "moveWaypoints";
+                control = "Checkbox";
+                expression = "_this setVariable ['%s',_value];";
+                defaultValue = "false";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
         };
         class ModuleDescription: ModuleDescription {
             description = "TODO";

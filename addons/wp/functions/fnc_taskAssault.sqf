@@ -93,7 +93,7 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 waitUntil {
 
     // get waypoint position
-    private _wPos = _pos call FUNC(main,getPos);
+    private _wPos = _pos call EFUNC(main,getPos);
 
     // end if WP is odd
     if (_wPos isEqualTo [0,0,0]) exitWith {true};
