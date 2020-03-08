@@ -5,9 +5,7 @@ params ["_logic", "", "_activated"];
 if (_activated && local _logic) then {
 
     //--- Get unit under cursor
-    private _unit = objNull;
-    private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]];
-    if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _unit = _mouseOver select 1; };
+    GET_CURATOR_UNIT_UNDER_CURSOR(_unit);
 
     //--- Check if the unit is suitable
     private _error = "";
