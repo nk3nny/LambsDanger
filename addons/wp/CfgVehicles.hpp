@@ -29,6 +29,9 @@ class CfgVehicles {
         portrait = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
         isGlobal = 0;
         class ModuleDescription: ModuleDescription {
+            duplicate = 0;
+            position = 1;
+            direction = 0;
             description = "TODO";
         };
     };
@@ -48,6 +51,9 @@ class CfgVehicles {
         portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         isGlobal = 0;
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 0;
             description = "TODO";
         };
     };
@@ -72,6 +78,9 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -90,25 +99,19 @@ class CfgVehicles {
         portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         isGlobal = 0;
         class Attributes: AttributesBase {
-            class IsRetreat {
+            class IsRetreat: Checkbox {
                 displayName = "Is Retreat"; // TODO
                 tooltip = "Is Retreating"; // TODO
                 property = "IsRetreat";
-                control = "Checkbox";
-                expression = "_this setVariable ['%s',_value];";
-                defaultValue = "false";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
             };
-            class DeleteOnStartUp {
+            class DeleteOnStartUp: Checkbox {
                 displayName = "Delete On Start Up"; // TODO
                 tooltip = "Delete On Start Up"; // TODO
                 property = "DeleteOnStartUp";
-                control = "Checkbox";
-                expression = "_this setVariable ['%s',_value];";
-                defaultValue = "false";
                 unique = 0;
                 validate = "none";
                 condition = "0";
@@ -138,8 +141,12 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 0;
             description = "TODO";
         };
     };
@@ -157,7 +164,14 @@ class CfgVehicles {
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
+        class Attributes: AttributesBase {
+            class ModuleDescription: ModuleDescription {};
+        };
+
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -194,20 +208,21 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
-            class DeleteOnStartUp {
+            class DeleteOnStartUp: Checkbox {
                 displayName = "Delete On Start Up"; // TODO
                 tooltip = "Delete On Start Up"; // TODO
                 property = "DeleteOnStartUp";
-                control = "Checkbox";
-                expression = "_this setVariable ['%s',_value];";
-                defaultValue = "false";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -244,8 +259,12 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -269,7 +288,13 @@ class CfgVehicles {
             size3[] = {100, 100, -1};
             isRectangle = 0;
         };
+        class Attributes: AttributesBase {
+            class ModuleDescription: ModuleDescription {};
+        };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -306,8 +331,12 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -344,20 +373,21 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
-            class MoveWaypoints {
+            class MoveWaypoints: Checkbox {
                 displayName = "Move Waypoints After Completion"; // TODO
                 tooltip = "Move Waypoints After Completion"; // TODO
                 property = "moveWaypoints";
-                control = "Checkbox";
-                expression = "_this setVariable ['%s',_value];";
-                defaultValue = "false";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
@@ -394,8 +424,12 @@ class CfgVehicles {
                 condition = "0";
                 typeName = "NUMBER";
             };
+            class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
             description = "TODO";
         };
     };
