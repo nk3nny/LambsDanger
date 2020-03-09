@@ -7,7 +7,7 @@ class CfgPatches {
             QGVAR(TaskArtillery),
             QGVAR(TaskArtilleryRegister),
             QGVAR(TaskAssault),
-            QGVAR(TaskCamp),
+            QGVAR(TaskHunt),
             QGVAR(TaskCamp),
             QGVAR(TaskCQB),
             QGVAR(TaskCreep),
