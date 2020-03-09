@@ -31,7 +31,7 @@ switch (_mode) do {
                 ["Task CQB",
                     [
                         ["Groups", "DROPDOWN", "TODO", _groups apply {str _x}, 0],
-                        ["Radius", "NUMBER", "TODO", 200],
+                        ["Radius", "NUMBER", "TODO", 50],
                         ["Cycle Time", "NUMBER", "TODO", 4],
                         ["Delete After Start", "BOOLEAN", "TODO", false]
                     ], {

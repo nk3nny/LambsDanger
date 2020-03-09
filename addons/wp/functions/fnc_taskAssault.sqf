@@ -102,9 +102,9 @@ waitUntil {
         [_x, _group, _retreat] call _fnc_unAssault;
         _x setUnitPosWeak "UP";
         _x doMove _wPos;
-        _x setDestination [_wPos, "DoNotPlanFormation", false];
+        _x setDestination [_wPos, "LEADER PLANNED", false];
         //_x forceSpeed ([ [_x, _wPos] call EFUNC(danger,assaultSpeed), 24] select _retreat);
-        _x forceSpeed ([ [3, 4] select (_x distance _wPos > 100), 24] select _retreat);
+        _x forceSpeed ([ [3, 4] select (_x distance _wPos > 100), 24] select (_retreat || {speedMode _x isEQUALto "FULL"}));
         _x setVariable [QEGVAR(danger,forceMove), true];
     } foreach _units;
 

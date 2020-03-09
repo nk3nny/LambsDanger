@@ -35,13 +35,17 @@ private _fnc_find = {
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
+
     if !(_area isEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle"];
         _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
     };
 
     if (_building isEqualTo []) exitWith { objNull };
-    _building select 0;
+
+    _building = _building apply {[_pos distance2D _x, _x]}; // sort nearest -nkenny
+    _building sort true;
+    (_building select 0) select 1
 };
 
 // check for enemies

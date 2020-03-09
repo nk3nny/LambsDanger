@@ -33,7 +33,7 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Creep",
                     [
-                        ["Radius", "NUMBER", "TODO", 200],
+                        ["Radius", "NUMBER", "TODO", 1000],
                         ["CycleTime", "NUMBER", "TODO", 4]
                     ], {
                         params ["_data", "_args"];
