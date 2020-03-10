@@ -40,9 +40,9 @@ class CfgVehicles {
     class GVAR(TaskArtillery) : Module_F {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtillery);
-        scope = 0;
+        scope = 2;
         is3DEN = 1;
-        scopeCurator = 0;
+        scopeCurator = 2;
         displayName = "Task Artillery";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtillery);
@@ -192,7 +192,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {50, 50, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
@@ -243,7 +243,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {1000, 1000, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
@@ -285,7 +285,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {50, 50, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
@@ -315,7 +315,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {1000, 1000, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
@@ -357,7 +357,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {200, 200, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
@@ -408,7 +408,7 @@ class CfgVehicles {
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
-            size3[] = {100, 100, -1};
+            size3[] = {1000, 1000, -1};
             isRectangle = 0;
         };
         class Attributes: AttributesBase {

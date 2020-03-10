@@ -28,9 +28,12 @@ switch (_mode) do {
 
             if (isNull _group) then {
                 private _groups = allGroups;
+                _groups = _groups select { ((units _x) findIf { alive _x }) != -1; };
+                _groups = [_groups, [], {_logic distance (leader _x) }, "ASCEND"] call BIS_fnc_sortBy;
+
                 ["Task CQB",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply {str _x}, 0],
+                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, (leader _x) distance _logic] }, 0],
                         ["Radius", "NUMBER", "TODO", 50],
                         ["Cycle Time", "NUMBER", "TODO", 4],
                         ["Delete After Start", "BOOLEAN", "TODO", false]
@@ -53,10 +56,12 @@ switch (_mode) do {
             } else {
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 private _targets = GVAR(ModuleTargets);
+                _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
+
                 ["Task CQB",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply { vehicleVarName _x}, 0],
-                        ["Radius", "NUMBER", "TODO", 200],
+                        ["Targets", "DROPDOWN", "TODO", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
+                        ["Radius", "NUMBER", "TODO", 50],
                         ["Cycle Time", "NUMBER", "TODO", 4]
                     ], {
                         params ["_data", "_args"];
