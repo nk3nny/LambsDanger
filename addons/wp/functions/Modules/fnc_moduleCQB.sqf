@@ -84,8 +84,8 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _radius = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable ["CycleTime", 4];
-            private _deleteAfterStartup = _logic getVariable ["DeleteOnStartUp", false];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
+            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), false];
 
             {
                 [_x, _logic, _radius, _cycle, _area, false] spawn FUNC(taskCQB);

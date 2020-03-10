@@ -22,7 +22,7 @@ class CfgPatches {
         VERSION_CONFIG;
     };
 };
-
+#include "Cfg3DEN.hpp"
 #include "CfgEventHandlers.hpp"
 #include "CfgWaypoints.hpp"
 #include "CfgWaypointTypes.hpp"

@@ -24,7 +24,7 @@ if !(canSuspend) exitWith {
 };
 
 // init
-params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accuracy", 75]];
+params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
 
 // Gun and caller must be alive
 if (!canFire _gun || {!(_caller call EFUNC(danger,isAlive))}) exitWith {false};
@@ -58,38 +58,39 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
     // debug marker list
     private _mlist = [];
 
-    // check rounds
-    for "_check" from 1 to (1 + random 2) do {
+    if !(_skipCheckrounds) then {
+        // check rounds
+        for "_check" from 1 to (1 + random 2) do {
 
-        // check rounds barrage
-        for "_i" from 1 to (1 + random 1) do {
+            // check rounds barrage
+            for "_i" from 1 to (1 + random 1) do {
 
-            // Randomize target location
-            private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
+                // Randomize target location
+                private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
-            private _ammo = getArtilleryAmmo [_gun] select 0;
+                private _ammo = getArtilleryAmmo [_gun] select 0;
 
-            if (_target inRangeOfArtillery [[_gun], _ammo]) then {
-                // Fire round
-                _gun commandArtilleryFire [_target, _ammo, 1];
+                if (_target inRangeOfArtillery [[_gun], _ammo]) then {
+                    // Fire round
+                    _gun commandArtilleryFire [_target, _ammo, 1];
 
-                // debug
-                if (EGVAR(danger,debug_functions)) then {
-                    private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
-                    _mlist pushBack _m;
-                };
-                // waituntil
-                waitUntil {unitReady _gun};
-            } else {
-                if (EGVAR(danger,debug_functions)) then {
-                    (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+                    // debug
+                    if (EGVAR(danger,debug_functions)) then {
+                        private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
+                        _mlist pushBack _m;
+                    };
+                    // waituntil
+                    waitUntil {unitReady _gun};
+                } else {
+                    if (EGVAR(danger,debug_functions)) then {
+                        (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+                    };
                 };
             };
+
+            // delay
+            sleep _checkRounds;
         };
-
-        // delay
-        sleep _checkRounds;
-
     };
 
     // step for main barrage

@@ -83,10 +83,10 @@ switch (_mode) do {
             private _groups = (synchronizedObjects _logic) apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _retreat = _logic getVariable ["IsRetreat", false];
-            private _deleteAfterStartup = _logic getVariable ["DeleteOnStartUp", false];
-            private _threshold = _logic getVariable ["DistanceThreshold", 15];
-            private _cycle = _logic getVariable ["CycleTime", 3];
+            private _retreat = _logic getVariable [QGVAR(IsRetreat), false];
+            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), false];
+            private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
                 [_x, _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
             } forEach _groups;

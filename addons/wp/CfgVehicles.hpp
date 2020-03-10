@@ -14,9 +14,21 @@ class CfgVehicles {
             class AnyBrain;
         };
     };
+    class GVAR(BaseModule): Module_F {
+        _generalMacro = QGVAR(BaseModule);
+        scope = 0;
+        scopeCurator = 0;
+        class AttributesBase: AttributesBase {
+            class EditShort {
+                control = "EditShort";
+                expression = "_this setVariable ['%s', _value, true];";
+                defaultValue = "15";
+            };
+        };
+    };
 
     // Zeus Modules
-    class GVAR(Target) : Module_F {
+    class GVAR(Target) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(Target);
         scope = 1;
@@ -36,8 +48,8 @@ class CfgVehicles {
         };
     };
 
-    // Editor Modules
-    class GVAR(TaskArtillery) : Module_F {
+    // Zeus and Editor Modules
+    class GVAR(TaskArtillery) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtillery);
         scope = 2;
@@ -47,18 +59,62 @@ class CfgVehicles {
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtillery);
         functionPriority = 1;
-        icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
-        portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
+        portrait = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
         isGlobal = 0;
+        class Attributes: AttributesBase {
+            class GVAR(Side) {
+                displayName = "Side"; // TODO
+                tooltip = "Side"; // TODO
+                property = QGVAR(Side);
+                defaultValue = "0";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "NUMBER";
+                control = QGVAR(Side);
+                expression = "_this setVariable ['%s', _value, true];";
+            };
+            class GVAR(MainSalvo): EditShort {
+                displayName = "Main Salvo"; // TODO
+                tooltip = "Main Salvo"; // TODO
+                property = QGVAR(MainSalvo);
+                defaultValue = "6";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "NUMBER";
+            };
+            class GVAR(Spread): EditShort {
+                displayName = "Spread"; // TODO
+                tooltip = "Spread"; // TODO
+                property = QGVAR(Spread);
+                defaultValue = "75";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "NUMBER";
+            };
+            class GVAR(SkipCheckRounds): Checkbox {
+                displayName = "Skip Check Rounds"; // TODO
+                tooltip = "Skip Check Rounds"; // TODO
+                property = QGVAR(SkipCheckRounds);
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
+            class ModuleDescription: ModuleDescription {};
+        };
         class ModuleDescription: ModuleDescription {
-            duplicate = 1;
+            duplicate = 0;
             position = 1;
             direction = 0;
             description = "TODO";
         };
     };
 
-    class GVAR(TaskArtilleryRegister) : Module_F {
+    class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtilleryRegister);
         scope = 2;
@@ -85,7 +141,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskAssault) : Module_F {
+    class GVAR(TaskAssault) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskAssault);
         scope = 2;
@@ -99,42 +155,38 @@ class CfgVehicles {
         portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         isGlobal = 0;
         class Attributes: AttributesBase {
-            class IsRetreat: Checkbox {
+            class GVAR(IsRetreat): Checkbox {
                 displayName = "Is Retreat"; // TODO
                 tooltip = "Is Retreating"; // TODO
-                property = "IsRetreat";
+                property = QGVAR(IsRetreat);
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
             };
-            class DeleteOnStartUp: Checkbox {
+            class GVAR(DeleteOnStartUp): Checkbox {
                 displayName = "Delete On Start Up"; // TODO
                 tooltip = "Delete On Start Up"; // TODO
-                property = "DeleteOnStartUp";
+                property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
             };
-            class DistanceThreshold {
+            class GVAR(DistanceThreshold): EditShort {
                 displayName = "Distance Threshold"; // TODO
                 tooltip = "The Distance the Task Terminates"; // TODO
-                property = "DistanceThreshold";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(DistanceThreshold);
                 defaultValue = "15";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "NUMBER";
             };
-            class CycleTime {
+            class GVAR(CycleTime): EditShort {
                 displayName = "Cycle Time"; // TODO
                 tooltip = "The Cycle Time"; // TODO
-                property = "CycleTime";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(CycleTime);
                 defaultValue = "3";
                 unique = 0;
                 validate = "none";
@@ -151,7 +203,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskCamp) : Module_F {
+    class GVAR(TaskCamp) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCamp);
         scope = 0;
@@ -176,7 +228,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskCQB) : Module_F {
+    class GVAR(TaskCQB) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCQB);
         scope = 2;
@@ -196,22 +248,20 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class CycleTime {
+            class GVAR(CycleTime): EditShort {
                 displayName = "Cycle Time"; // TODO
                 tooltip = "The Cycle Time"; // TODO
-                property = "CycleTime";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(CycleTime);
                 defaultValue = "21";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "NUMBER";
             };
-            class DeleteOnStartUp: Checkbox {
+            class GVAR(DeleteOnStartUp): Checkbox {
                 displayName = "Delete On Start Up"; // TODO
                 tooltip = "Delete On Start Up"; // TODO
-                property = "DeleteOnStartUp";
+                property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
                 condition = "0";
@@ -227,7 +277,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskCreep) : Module_F {
+    class GVAR(TaskCreep) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCreep);
         scope = 2;
@@ -247,12 +297,10 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class CycleTime {
+            class GVAR(CycleTime): EditShort {
                 displayName = "Cycle Time"; // TODO
                 tooltip = "The Cycle Time"; // TODO
-                property = "CycleTime";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(CycleTime);
                 defaultValue = "21";
                 unique = 0;
                 validate = "none";
@@ -269,7 +317,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskGarrison) : Module_F {
+    class GVAR(TaskGarrison) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskGarrison);
         scope = 2;
@@ -299,7 +347,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskHunt) : Module_F {
+    class GVAR(TaskHunt) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskHunt);
         scope = 2;
@@ -319,12 +367,10 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class CycleTime {
+            class GVAR(CycleTime): EditShort {
                 displayName = "Cycle Time"; // TODO
                 tooltip = "The Cycle Time"; // TODO
-                property = "CycleTime";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(CycleTime);
                 defaultValue = "21";
                 unique = 0;
                 validate = "none";
@@ -341,7 +387,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskPatrol) : Module_F {
+    class GVAR(TaskPatrol) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskPatrol);
         scope = 2;
@@ -361,22 +407,20 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class WaypointCount {
+            class GVAR(WaypointCount): EditShort {
                 displayName = "Waypoint Count"; // TODO
                 tooltip = "The Amount of Waypoits the Module Creates"; // TODO
-                property = "WaypointCount";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(WaypointCount);
                 defaultValue = "4";
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "NUMBER";
             };
-            class MoveWaypoints: Checkbox {
+            class GVAR(MoveWaypoints): Checkbox {
                 displayName = "Move Waypoints After Completion"; // TODO
                 tooltip = "Move Waypoints After Completion"; // TODO
-                property = "moveWaypoints";
+                property = QGVAR(moveWaypoints);
                 unique = 0;
                 validate = "none";
                 condition = "0";
@@ -392,7 +436,7 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskRush) : Module_F {
+    class GVAR(TaskRush) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskRush);
         scope = 2;
@@ -412,12 +456,10 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class CycleTime {
+            class GVAR(CycleTime): EditShort {
                 displayName = "Cycle Time"; // TODO
                 tooltip = "The Cycle Time"; // TODO
-                property = "CycleTime";
-                control = "EditShort";
-                expression = "_this setVariable ['%s', _value];";
+                property = QGVAR(CycleTime);
                 defaultValue = "21";
                 unique = 0;
                 validate = "none";

@@ -26,7 +26,7 @@ if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Art
 
 // settings
 private _artillery = missionNamespace getVariable [QGVAR(artillery_) + str (side _unit), []];
-_artillery select {
+_artillery = _artillery select {
     canFire _x
     && {unitReady _x}
     && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
@@ -40,10 +40,6 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 
 // pick closest artillery
 _artillery = [_artillery, [], { _target distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-_artillery = _artillery select {
-    private _ammo = getArtilleryAmmo [_x] select 0;
-    _pos inRangeOfArtillery [[_x], _ammo];
-};
 
 if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in rage of Target", side _unit] call FUNC(debugLog);}};
 

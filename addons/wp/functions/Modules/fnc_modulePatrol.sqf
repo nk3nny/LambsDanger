@@ -85,10 +85,10 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _moveWaypoint = _logic getVariable ["moveWaypoints", false];
-
+            private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), false];
+            private _waypointCount =_logic getVariable [QGVAR(WaypointCount), 4];
             {
-                [_x, getPos _logic, _range, _logic getVariable ["WaypointCount", 4], _area, _moveWaypoint] call FUNC(taskPatrol);
+                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] call FUNC(taskPatrol);
             } forEach _groups;
             deleteVehicle _logic;
         };
