@@ -12,6 +12,7 @@ class CfgVehicles {
         };
         class ModuleDescription {
             class AnyBrain;
+            class EmptyDetector;
         };
     };
     class GVAR(BaseModule): Module_F {
@@ -23,6 +24,16 @@ class CfgVehicles {
                 control = "EditShort";
                 expression = "_this setVariable ['%s', _value, true];";
                 defaultValue = "15";
+            };
+        };
+        class ModuleDescription: ModuleDescription {
+            duplicate = 0;
+            position = 1;
+            direction = 0;
+            description = "TODO";
+            sync[] = {"AnyBrain", "Condition"};
+            class Condition: EmptyDetector {
+                optional = 1;
             };
         };
     };
@@ -62,6 +73,7 @@ class CfgVehicles {
         icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
         portrait = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(Side) {
                 displayName = "Side"; // TODO
@@ -127,6 +139,7 @@ class CfgVehicles {
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -154,6 +167,7 @@ class CfgVehicles {
         icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(IsRetreat): Checkbox {
                 displayName = "Is Retreat"; // TODO
@@ -216,6 +230,7 @@ class CfgVehicles {
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class ModuleDescription: ModuleDescription {};
         };
@@ -241,6 +256,7 @@ class CfgVehicles {
         icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -290,6 +306,7 @@ class CfgVehicles {
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -330,6 +347,7 @@ class CfgVehicles {
         icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -360,6 +378,7 @@ class CfgVehicles {
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -400,6 +419,7 @@ class CfgVehicles {
         icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
         portrait = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -449,6 +469,7 @@ class CfgVehicles {
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         isGlobal = 0;
+        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
