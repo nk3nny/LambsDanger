@@ -25,7 +25,7 @@ if (_pos isEqualTo []) then {
 if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call FUNC(debugLog);}};
 
 // settings
-private _artillery = missionNamespace getVariable [QGVAR(artillery_) + str (side _unit), []];
+private _artillery = [EGVAR(main,SideArtilleryHash), side _unit] call CBA_fnc_hashGet;
 _artillery = _artillery select {
     canFire _x
     && {unitReady _x}

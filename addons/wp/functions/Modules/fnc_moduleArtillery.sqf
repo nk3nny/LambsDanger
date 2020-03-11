@@ -27,7 +27,7 @@ switch (_mode) do {
             params ["_side", "_salvo", "_spread", "_skipCheckround", "_logic"];
             [{
                 params ["_side", "", "", "", "_pos"];
-                private _artillery = missionNamespace getVariable [QEGVAR(danger,artillery_) + str _side, []];
+                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
                 _artillery = _artillery select {
                     canFire _x
                     && {unitReady _x}
@@ -36,7 +36,7 @@ switch (_mode) do {
                 !(_artillery isEqualTo [])
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
-                private _artillery = missionNamespace getVariable [QEGVAR(danger,artillery_) + str _side, []];
+                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
                 _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 _artillery = _artillery select {
                     canFire _x
