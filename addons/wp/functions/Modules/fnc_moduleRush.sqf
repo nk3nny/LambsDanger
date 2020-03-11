@@ -56,9 +56,6 @@ switch (_mode) do {
                 deleteVehicle _logic;
             };
         } else {
-            if (is3DEN) exitWith {};
-            _input params [["_logic", objNull, [objNull]], ["_isActivated", true, [true]], ["_isCuratorPlaced", false, [true]]];
-            if !(_isActivated) exitWith {};
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
