@@ -81,6 +81,9 @@ private _fnc_CreateLabel = {
 
 private _fnc_AddTextField = {
     params ["_text", "", ["_tooltip", ""], ["_default", ""]];
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -91,12 +94,17 @@ private _fnc_AddTextField = {
         _default = str _default;
     };
     _textField ctrlSetText _default;
+    _textField setVariable [QGVAR(CacheName), _cacheName];
     _textField ctrlCommit 0;
     _textField;
 };
 
 private _fnc_AddBoolean = {
     params ["_text", "", ["_tooltip", ""], ["_default", false, [false]]];
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -104,12 +112,17 @@ private _fnc_AddBoolean = {
     _checkbox ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_HEIGHT + CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_HEIGHT / CONST_ELEMENTDIVIDER), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _checkbox ctrlSetTooltip _tooltip;
     _checkbox cbSetChecked _default;
+    _checkbox setVariable [QGVAR(CacheName), _cacheName];
     _checkbox ctrlCommit 0;
     _checkbox;
 };
 
 private _fnc_AddDropDown = {
     params ["_text", "", ["_tooltip", ""], ["_values", [], []], ["_default", 0, [0]]];
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -126,12 +139,17 @@ private _fnc_AddDropDown = {
     _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2) , PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _dropDownField ctrlSetTooltip _tooltip;
     _dropDownField lbSetCurSel _default;
+    _dropDownField setVariable [QGVAR(CacheName), _cacheName];
     _dropDownField ctrlCommit 0;
     _dropDownField;
 };
 
 private _fnc_AddSlider = {
     params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+
     // if no Default is Given we use the middle of the Range input
     if (isNil "_default") then {
         _default = linearConversion [0, 1, 0.5, _range select 0, _range select 1, true];
@@ -145,6 +163,7 @@ private _fnc_AddSlider = {
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
     _slider sliderSetPosition _default;
+    _slider setVariable [QGVAR(CacheName), _cacheName];
     _slider ctrlCommit 0;
     _slider;
 };
