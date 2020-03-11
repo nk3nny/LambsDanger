@@ -76,7 +76,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
                     // debug
                     if (EGVAR(danger,debug_functions)) then {
-                        private _m = [_target, format ["%1 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
+                        private _m = [_target, format ["%1 %3 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
                         _mlist pushBack _m;
                     };
                     // waituntil
@@ -112,7 +112,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                private _m = [_target, format ["%1 (Round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+                private _m = [_target, format ["%1 %3 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
                 _mlist pushBack _m;
             };
 
