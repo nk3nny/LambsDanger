@@ -17,7 +17,7 @@
 params ["_logic", "", "_activated"];
 
 if(local _logic && _activated) then {
-    GET_CURATOR_UNIT_UNDER_CURSOR(_unit);
+    private _unit = GET_CURATOR_UNIT_UNDER_CURSOR;
     if !(isNull _unit) then {
         _logic attachTo [_unit, [0,0,0]];
     };

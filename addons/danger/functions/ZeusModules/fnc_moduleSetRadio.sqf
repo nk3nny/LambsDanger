@@ -5,7 +5,7 @@ params ["_logic", "", "_activated"];
 if (_activated && local _logic) then {
 
     //--- Get unit under cursor
-    GET_CURATOR_UNIT_UNDER_CURSOR(_unit);
+    private _unit = GET_CURATOR_UNIT_UNDER_CURSOR;
 
     //--- Check if the unit is suitable
     private _error = "";

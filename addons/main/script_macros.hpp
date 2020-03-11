@@ -2,15 +2,21 @@
 #define DFUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define RND(var) random 1 > var
 
-#define GET_CURATOR_GRP_UNDER_CURSOR(VAR) private VAR = grpNull; \
-private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]]; \
-if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { VAR = group (_mouseOver select 1); };\
-if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { VAR = _mouseOver select 1; }
+#define GET_CURATOR_GRP_UNDER_CURSOR call { \
+    private _group = grpNull; \
+    private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]]; \
+    if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _group = group (_mouseOver select 1); };\
+    if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { _group = _mouseOver select 1; }; \
+    _group; \
+}
 
-#define GET_CURATOR_UNIT_UNDER_CURSOR(VAR) private VAR = objNull; \
-private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]]; \
-if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { VAR = _mouseOver select 1; };\
-if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { VAR = leader (_mouseOver select 1); }
+#define GET_CURATOR_UNIT_UNDER_CURSOR call { \
+    private _unit = objNull; \
+    private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]]; \
+    if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _unit = _mouseOver select 1; };\
+    if ((_mouseOver select 0) isEqualTo (typeName grpNull)) then { _unit = leader (_mouseOver select 1); }; \
+    _unit \
+}
 
 // #define DISABLE_COMPILE_CACHE
 

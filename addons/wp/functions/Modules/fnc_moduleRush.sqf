@@ -24,7 +24,7 @@ switch (_mode) do {
         if !(_isActivated && local _logic) exitWith {};
         if (_isCuratorPlaced) then {
             //--- Get unit under cursor
-            GET_CURATOR_GRP_UNDER_CURSOR(_group);
+            private _group = GET_CURATOR_GRP_UNDER_CURSOR;
 
             //--- Check if the unit is suitable
             private _error = "";

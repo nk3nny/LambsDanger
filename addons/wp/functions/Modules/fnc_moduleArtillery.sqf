@@ -37,7 +37,7 @@ switch (_mode) do {
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
                 private _artillery = missionNamespace getVariable [QEGVAR(danger,artillery_) + str _side, []];
-                _artillery = [_artillery, [], { _target distance _x }, "ASCEND"] call BIS_fnc_sortBy;
+                _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 _artillery = _artillery select {
                     canFire _x
                     && {unitReady _x}

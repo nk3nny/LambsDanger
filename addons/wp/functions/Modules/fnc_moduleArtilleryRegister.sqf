@@ -24,7 +24,8 @@ switch (_mode) do {
         if !(_isActivated && local _logic) exitWith {};
         if (_isCuratorPlaced) then {
             //--- Get unit under cursor
-            GET_CURATOR_GRP_UNDER_CURSOR(_group);
+
+            private _group = GET_CURATOR_GRP_UNDER_CURSOR;
 
             //--- Check if the unit is suitable
             private _error = "";
@@ -60,10 +61,5 @@ switch (_mode) do {
             deleteVehicle _logic;
         };
     };
-    // When connection to object changes (i.e., new one is added or existing one removed)
-    case "connectionChanged3DEN": {
-        private _logic = _input param [0,objNull,[objNull]];
-    };
-
 };
 true
