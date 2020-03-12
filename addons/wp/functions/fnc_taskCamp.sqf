@@ -9,18 +9,18 @@
  * Arguments:
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Central position camp should be made, <ARRAY>
- * 2: Range of patrols and turrets found, default is 62 meters <NUMBER>
+ * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
  *
  * Return Value:
  * none
  *
  * Example:
- * [bob, 500] call lambs_wp_fnc_taskCamp;
+ * [bob, getpos bob, 50] call lambs_wp_fnc_taskCamp;
  *
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 62], ["_area", [], [[]]]];
+params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]]];
 
 if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 
@@ -177,6 +177,7 @@ private _dir = random 360;
         {
             params ["_unit", "_target", "_center", "_anim"];
             if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
+            doStop _unit;
             [_unit, _anim] remoteExec ["switchMove", 0];
             _unit disableAI "ANIM";
             _unit disableAI "PATH";
@@ -209,9 +210,9 @@ _wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
     "
 ];
 
-// followup orders
-private _wp2 = _group addWaypoint [_pos, _range];
-_wp2 setWaypointType selectRandom ["HOLD", "GUARD"];
+// followup orders - just stay put or move into buildings!
+private _wp2 = _group addWaypoint [[_pos, selectRandom _buildings] select (count _buildings > 4), _range / 4];
+_wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

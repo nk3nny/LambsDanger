@@ -36,7 +36,7 @@ switch (_mode) do {
                 ["Task Camp",
                     [
                         ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "TODO", 200]
+                        ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -61,7 +61,7 @@ switch (_mode) do {
                 ["Task Camp",
                     [
                         ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "TODO", 200]
+                        ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
