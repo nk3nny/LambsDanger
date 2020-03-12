@@ -60,7 +60,7 @@ switch (_mode) do {
 
                 ["Task CQB",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
+                        ["Targets", "DROPDOWN", "TODO", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Max distance houses will be searched", 50],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21]
                     ], {
