@@ -35,7 +35,7 @@ _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // find units
 private _groups = allGroups select {
-    && {(side _x) getFriend (side _unit) > 0.55}
+    && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
     && {leader _x distance2d _unit < _range}
     && {behaviour leader _x != "CARELESS"}
     && {_x != group _unit}
