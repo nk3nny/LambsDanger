@@ -17,9 +17,8 @@
  *
  * Public: No
 */
-if !(canSuspend) exitWith {
-    _this spawn FUNC(taskPatrol);
-};
+
+if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 
 // init
 params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]], ["_moveWaypoints", false]];

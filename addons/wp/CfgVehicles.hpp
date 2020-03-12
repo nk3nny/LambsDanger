@@ -507,9 +507,9 @@ class CfgVehicles {
     class GVAR(TaskCamp) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCamp);
-        scope = 0;
+        scope = 2;
         is3DEN = 1;
-        scopeCurator = 0;
+        scopeCurator = 2;
         displayName = "Task Camp";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleCamp);

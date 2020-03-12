@@ -19,6 +19,7 @@
 params ["_group"];
 private _artillery = [];
 
+if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = (group _group); };

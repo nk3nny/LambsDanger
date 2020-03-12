@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Sets the team in camp like behaviour. 
+ * Sets the team in camp like behaviour.
  *  Larger groups will set out patrols
  *  Turrets may be manned
  *  Some buildings may be garrisoned
@@ -21,6 +21,8 @@
 */
 // init
 params ["_group", ["_pos",[]], ["_range", 62], ["_area", [], [[]]]];
+
+if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -145,7 +147,7 @@ private _armedAnims = [
     "amovpknlmstpslowwrfldnon",
     "aidlpknlmstpslowwrfldnon_g01",
     "aidlpknlmstpslowwrfldnon_g02",
-    "aidlpknlmstpslowwrfldnon_g03", 
+    "aidlpknlmstpslowwrfldnon_g03",
     "Acts_InjuredLyingRifle01",
     "Acts_InjuredLyingRifle02",
     "Acts_InjuredLyingRifle02_180"
@@ -170,7 +172,7 @@ private _dir = random 360;
     [
         {
             params ["_unit", "", "", ""];
-            unitReady _unit 
+            unitReady _unit
         },
         {
             params ["_unit", "_target", "_center", "_anim"];
