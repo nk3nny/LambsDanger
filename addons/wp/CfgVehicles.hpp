@@ -214,7 +214,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 0;
-            description = "TODO";
+            description = "Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter final destination.";
         };
     };
 
@@ -264,7 +264,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to \nThe module can be moved to dynamically shift the searched area.\n\nAdvice: In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.";
         };
     };
 
@@ -295,7 +295,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.";
         };
     };
 
@@ -345,7 +345,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Patrol makes the unit patrol within the area set by 3DEN attributes.";
         };
     };
 
@@ -387,7 +387,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.\n\nNB: All search-modules make the AI will move towards enemy players with perfect knowledge of location.";
         };
     };
 
@@ -428,7 +428,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiralling closer to the target. The unit will enable flashlights if available.\n\nNB: All search-modules make the AI will move towards enemy players with perfect knowledge of location.";
         };
     };
 
@@ -469,7 +469,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Rush makes the unit attempt run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.\n\nNB: All search-modules make the AI will move towards enemy players with perfect knowledge of location. Disable unit FSM for a truly terrifying enemy.";
         };
     };
 
@@ -496,7 +496,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Task Camp makes the unit appear to gather around a single point, typically a camp site. Some units will peel off to man static weapons, garrison buildings and patrol the area.";
         };
     };
 
