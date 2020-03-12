@@ -151,11 +151,13 @@ private _armedAnims = [
     "Acts_InjuredLyingRifle02_180"
 ];
 
+// direction
+private _dir = random 360;
 {
-    private _dir = random 360;
+    _dir = _dir + random (360 / count _units);
     private _range = 1.3 + random 3.3;
     private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
-    
+
     // execute move
     _x doMove _pos2;
     _x setDestination [_pos2, "LEADER DIRECT", false];
@@ -190,8 +192,8 @@ private _armedAnims = [
         },
         [_x, _pos2, _pos, selectRandom _anims]
     ] call CBA_fnc_waitUntilAndExecute;
-    true
-} count _units;
+
+} forEach _units;
 
 // waypoint and end state
 private _wp = _group addWaypoint [_pos, 0];
