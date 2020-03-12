@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Search pattern. Makes the unit rush and assault hostile players with range
  *
  * Arguments:
  * TODO

@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Forces unit to assault or flee towards target location
  *
  * Arguments:
  * TODO
@@ -60,7 +60,7 @@ switch (_mode) do {
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 ["Task Assault",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
                         ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
                         ["Script interval", "NUMBER", "The cycle time of the script.", 3]
@@ -68,8 +68,11 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_retreat", "_threshold", "_cycle"];
-                        [_group, (_targets select _targetIndex), _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
-                        deleteVehicle _logic;
+                        private _target = _targets select _targetIndex;
+                        [_group, _target, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        if !(_target isEqualTo _logic) then {
+                            deleteVehicle _logic;
+                        };
                     }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;

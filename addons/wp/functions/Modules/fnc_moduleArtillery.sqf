@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Creates an artillery target for a given side
  *
  * Arguments:
  * TODO
@@ -61,6 +61,7 @@ switch (_mode) do {
                         _args params ["_logic", "_fnc_callArtillery"];
                         _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
                         [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
+                        [objNull, format ["Artillery target created for %1", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
                         deleteVehicle _logic;
                     }, {
                         params ["_logic"];

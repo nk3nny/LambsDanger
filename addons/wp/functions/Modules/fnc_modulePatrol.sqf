@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Makes the unit randomly patrol a given area
  *
  * Arguments:
  * TODO
@@ -52,7 +52,7 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName "Logic";
+                _logic setVehicleVarName "Self";
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);
@@ -60,7 +60,7 @@ switch (_mode) do {
 
                 ["Task Patrol",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list.\nIf Dynamic patrol pattern is enabled, the target can be moved to update patrol route", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Range", "NUMBER", "Max distance between waypoints", 200],
                         ["Waypoints", "NUMBER", "Number of waypoints created", 3],
                         ["Dynamic patrol pattern", "BOOLEAN", "Unit will generate a new patrol pattern once one patrol cycle is complete", false]

@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Makes the unit take up defense building positions around target center
  *
  * Arguments:
  * TODO
@@ -50,7 +50,7 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName "Logic";
+                _logic setVehicleVarName "Self";
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);
@@ -58,7 +58,7 @@ switch (_mode) do {
 
                 ["Task Garrison",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Distance buildings are occupied", 50]
                     ], {
                         params ["_data", "_args"];

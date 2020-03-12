@@ -132,5 +132,12 @@ waitUntil {
 
 };
 
+// check reset
+{
+    _x doMove getposASL _x;
+    [_x, false] call _fnc_softReset;    // nb: retreat value set to false to prevent animation from replaying. -nkenny
+    true
+} count units _group;
+
 // end
 true

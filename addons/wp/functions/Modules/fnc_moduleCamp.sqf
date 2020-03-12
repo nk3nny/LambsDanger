@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Makes the unit appear to camp or wait around target location
  *
  * Arguments:
  * TODO

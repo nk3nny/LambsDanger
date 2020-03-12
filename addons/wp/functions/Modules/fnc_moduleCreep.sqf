@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: jokoho482
- * TODO
+ * Search pattern. Makes the unit ambush or creep closer to hostile players
  *
  * Arguments:
  * TODO
