@@ -36,12 +36,17 @@ switch (_mode) do {
                 ["Task Rush",
                     [
                         ["Radius", "NUMBER", "Distance rushing group will search for enemies\nThis module will only target enemy players.", 1000],
-                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4]
+                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4],
+                        ["Use Group As Center", "BOOLEAN", "TODO"]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
-                        _data params ["_range", "_cycle"];
-                        [_group, _range, _cycle] spawn FUNC(taskRush);
+                        _data params ["_range", "_cycle", "_movingCenter"];
+                        if (_movingCenter) then {
+                            [_group, _range, _cycle] spawn FUNC(taskRush);
+                        } else {
+                            [_group, _range, _cycle, [], getPos _logic] spawn FUNC(taskRush);
+                        };
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -62,9 +67,14 @@ switch (_mode) do {
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
+            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
 
             {
-                [_x, _range, _cycle, _area] spawn FUNC(taskRush);
+                if (_movingCenter) then {
+                    [_x, _range, _cycle, _area] spawn FUNC(taskRush);
+                } else {
+                    [_x, _range, _cycle, _area, getPos _logic] spawn FUNC(taskRush);
+                };
             } forEach _groups;
             deleteVehicle _logic;
         };

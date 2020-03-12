@@ -374,6 +374,15 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
+            class GVAR(MovingCenter): Checkbox {
+                displayName = "Moving Center";
+                tooltip = "TODO";
+                property = QGVAR(MovingCenter);
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
                 tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds";
@@ -415,6 +424,15 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
+            class GVAR(MovingCenter): Checkbox {
+                displayName = "Moving Center";
+                tooltip = "TODO";
+                property = QGVAR(MovingCenter);
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
                 tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds";
@@ -456,6 +474,15 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
+            class GVAR(MovingCenter): Checkbox {
+                displayName = "Moving Center";
+                tooltip = "TODO";
+                property = QGVAR(MovingCenter);
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "BOOL";
+            };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
                 tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds";

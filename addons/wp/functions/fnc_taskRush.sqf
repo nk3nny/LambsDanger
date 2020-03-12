@@ -57,7 +57,7 @@ private _fnc_rushOrders = {
 // functions end ---
 
 // init
-params ["_group", ["_radius", 500], ["_cycle", 15], ["_area", [], [[]]]];
+params ["_group", ["_radius", 500], ["_cycle", 15], ["_area", [], [[]]], ["_pos", [], [[]]]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -79,7 +79,7 @@ waitUntil {
     waitUntil { sleep 1; simulationEnabled leader _group; };
 
     // find
-    private _target = [_group, _radius, _area] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area, _pos] call FUNC(findClosestTarget);
 
     // act
     if (!isNull _target) then  {

@@ -16,20 +16,23 @@
  * Public: No
 */
 
-params ["_group", ["_radius", 500], ["_area", [], [[]]]];
+params ["_group", ["_radius", 500], ["_area", [], [[]]], ["_pos", [], [[]]]];
 
 private _groupLeader = leader _group;
 private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];
-
+if (_pos isEqualTo []) then {
+    _pos = _groupLeader;
+};
+_pos = _pos call CBA_fnc_getPos;
 private _players = switchableUnits + playableUnits;
 _players = _players select {
     !(side _x in _sideExclusion)
-    && { _x distance _groupLeader < _radius }
+    && { _x distance _pos < _radius }
     && { (getPosATL _x) select 2 < 200 }
 };
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _players = _players select { (getPos _x) inArea [getPos _groupLeader, _a, _b, _angle, _isRectangle] };
+    _players = _players select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
 };
 if (_players isEqualTo []) exitWith {ObjNull};
 
