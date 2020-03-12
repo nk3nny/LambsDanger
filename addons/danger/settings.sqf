@@ -169,7 +169,7 @@ private _curCat = "Settings Share information";
     "SLIDER",
     ["Shout", "Range AI units share information without radios"],
     [COMPONENT_NAME, _curCat],
-    [20, 150, 50, 0],
+    [20, 200, 100, 0],
     1
 ] call CBA_fnc_addSetting;
 
