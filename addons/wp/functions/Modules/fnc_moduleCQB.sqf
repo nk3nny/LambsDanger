@@ -69,9 +69,11 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_radius", "_cycle"];
-                        [_group, (_targets select _targetIndex), _radius, _cycle, nil, false] spawn FUNC(taskCQB);
-                        deleteVehicle _logic;
-                    }, {
+                        private _target = _targets select _targetIndex;
+                        [_group, _target, _radius, _cycle, nil, false] spawn FUNC(taskCQB);
+                        if !(_logic isEqualTo _target) then {
+                            deleteVehicle _logic;
+                        };                    }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {

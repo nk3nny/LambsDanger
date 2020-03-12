@@ -64,7 +64,8 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range"];
-                        [_group, _targets select _targetIndex, _range] spawn FUNC(taskGarrison);
+                        private _target = _targets select _targetIndex;
+                        [_group, getPos _target, _range] spawn FUNC(taskGarrison);
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];

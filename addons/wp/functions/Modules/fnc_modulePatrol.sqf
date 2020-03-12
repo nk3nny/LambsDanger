@@ -68,9 +68,11 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
-                        [_group, _targets select _targetIndex, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
-                        deleteVehicle _logic;
-                    }, {
+                        private _target = _targets select _targetIndex;
+                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
+                        if !(_logic isEqualTo _target) then {
+                            deleteVehicle _logic;
+                        };                    }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
