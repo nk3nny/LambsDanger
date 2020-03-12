@@ -34,9 +34,9 @@ switch (_mode) do {
                 ["Task CQB",
                     [
                         ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, (leader _x) distance _logic] }, 0],
-                        ["Radius", "NUMBER", "TODO", 50],
-                        ["Cycle Time", "NUMBER", "TODO", 4],
-                        ["Delete After Start", "BOOLEAN", "TODO", false]
+                        ["Radius", "NUMBER", "Max distance houses will be searched", 50],
+                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21],
+                        ["Dynamic center", "BOOLEAN", "Enable this to make it possible to move the center/module of the building search pattern", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -61,8 +61,8 @@ switch (_mode) do {
                 ["Task CQB",
                     [
                         ["Targets", "DROPDOWN", "TODO", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
-                        ["Radius", "NUMBER", "TODO", 50],
-                        ["Cycle Time", "NUMBER", "TODO", 4]
+                        ["Radius", "NUMBER", "Max distance houses will be searched", 50],
+                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

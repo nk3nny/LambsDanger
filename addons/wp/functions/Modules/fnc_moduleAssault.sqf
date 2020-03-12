@@ -33,10 +33,10 @@ switch (_mode) do {
 
                 ["Task Assault",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, _x distance _logic] }, 0],
-                        ["Is Retreating", "BOOLEAN", "TODO", false],
-                        ["Distance Threshold", "NUMBER", "TODO", 15],
-                        ["Cycle Time", "NUMBER", "TODO", 3],
+                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
+                        ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
+                        ["Script interval", "NUMBER", "The cycle time of the script.", 3],
                         ["Delete After Start", "BOOLEAN", "TODO", false]
                     ], {
                         params ["_data", "_args"];
@@ -61,9 +61,9 @@ switch (_mode) do {
                 ["Task Assault",
                     [
                         ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
-                        ["Is Retreating", "BOOLEAN", "TODO", false],
-                        ["Distance Threshold", "NUMBER", "TODO", 15],
-                        ["Cycle Time", "NUMBER", "TODO", 3]
+                        ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
+                        ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
+                        ["Script interval", "NUMBER", "The cycle time of the script.", 3]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

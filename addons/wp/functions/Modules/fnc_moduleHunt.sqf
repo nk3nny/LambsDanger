@@ -35,8 +35,8 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Hunt",
                     [
-                        ["Radius", "NUMBER", "TODO", 1000],
-                        ["CycleTime", "NUMBER", "TODO", 4]
+                        ["Radius", "NUMBER", "Distance hunting group will search for enemies", 1000],
+                        ["Script intervals", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds", 70]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

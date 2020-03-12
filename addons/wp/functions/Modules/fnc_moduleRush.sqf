@@ -35,8 +35,8 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Rush",
                     [
-                        ["Radius", "NUMBER", "TODO", 1000],
-                        ["CycleTime", "NUMBER", "TODO", 4]
+                        ["Radius", "NUMBER", "Distance rushing group will search for enemies", 1000],
+                        ["Script intervals", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

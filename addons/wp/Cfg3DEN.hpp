@@ -35,8 +35,8 @@ class Cfg3DEN {
                     class EGVAR(WP,Editor_IsArtillery) {
                         property = QEGVAR(WP,Editor_IsArtillery);
                         control = "Checkbox";
-                        displayName = "Is Artillery"; // TODO
-                        tooltip = "This will Self Register as Artillery"; // TODO
+                        displayName = "Register as LAMBS artillery";
+                        tooltip = "Unit will be automatically registered as available artillery for dynamic strikes";
                         expression = "if (_value) then {_this spawn {waitUntil {!isNil 'lambs_danger_Loaded_WP'};if (lambs_danger_Loaded_WP) then {[gunner _this] call lambs_wp_fnc_taskArtilleryRegister;};};};";
                         typeName = "BOOL";
                         condition = "objectVehicle";

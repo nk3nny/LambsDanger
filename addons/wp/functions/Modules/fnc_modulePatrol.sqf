@@ -33,10 +33,10 @@ switch (_mode) do {
 
                 ["Task Patrol",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, (leader _x) distance _logic] }, 0],
-                        ["Range", "NUMBER", "TODO", 200],
-                        ["Waypoints", "NUMBER", "TODO", 3],
-                        ["Move Waypoint After Completion", "BOOLEAN", "TODO", false]
+                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Range", "NUMBER", "Max distance between waypoints", 200],
+                        ["Waypoints", "NUMBER", "Number of waypoints created", 3],
+                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will create new patrol pattern once one cycle is complete", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -61,9 +61,9 @@ switch (_mode) do {
                 ["Task Patrol",
                     [
                         ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
-                        ["Distance Threshold", "NUMBER", "TODO", 200],
-                        ["Waypoints", "NUMBER", "TODO", 3],
-                        ["Move Waypoint After Completion", "BOOLEAN", "TODO", false]
+                        ["Range", "NUMBER", "Max distance between waypoints", 200],
+                        ["Waypoints", "NUMBER", "Number of waypoints created", 3],
+                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will create new patrol pattern once one cycle is complete", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

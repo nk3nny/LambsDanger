@@ -95,7 +95,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
         },
         {
             params ["_unit", "_target"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1)) exitWith { _unit doFollow (leader _unit); };
+            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
             _unit disableAI "PATH";
             _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
         },
