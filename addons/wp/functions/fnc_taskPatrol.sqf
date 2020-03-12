@@ -20,16 +20,6 @@
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskPatrol);
 };
-// Patrol script
-// version 1.1
-// by nkenny
-
-/*
-    Arguments:
-        1. group or leader unit
-        2. position
-        3. Radius
-*/
 
 // init
 params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]], ["_moveWaypoints", false]];
@@ -99,7 +89,6 @@ if (_moveWaypoints) then {
 } else {
     _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId]];
 };
-
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
