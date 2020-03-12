@@ -147,6 +147,9 @@ class CfgVehicles {
             size3[] = {100, 100, -1};
             isRectangle = 0;
         };
+        class Attributes: AttributesBase {
+            class ModuleDescription: ModuleDescription {};
+        };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
             position = 1;
