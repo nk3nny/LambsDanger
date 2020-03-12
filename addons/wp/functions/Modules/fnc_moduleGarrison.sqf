@@ -33,7 +33,7 @@ switch (_mode) do {
                 _groups = [_groups, [], {_logic distance (leader _x) }, "ASCEND"] call BIS_fnc_sortBy;
                 ["Task Garrison",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Distance buildings are occupied", 50]
                     ], {
                         params ["_data", "_args"];

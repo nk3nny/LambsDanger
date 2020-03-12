@@ -34,7 +34,7 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Creep",
                     [
-                        ["Radius", "NUMBER", "Distance creeping group will search for enemies", 1000],
+                        ["Radius", "NUMBER", "Distance creeping group will search for enemies\nThis module will only target enemy players.", 1000],
                         ["Script Interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds", 15]
                     ], {
                         params ["_data", "_args"];

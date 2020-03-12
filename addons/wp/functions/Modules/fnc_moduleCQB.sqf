@@ -33,7 +33,7 @@ switch (_mode) do {
 
                 ["Task CQB",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Max distance houses will be searched", 50],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21],
                         ["Dynamic center", "BOOLEAN", "Enable this to make it possible to move the center/module of the building search pattern", false]
