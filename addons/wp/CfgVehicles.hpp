@@ -76,8 +76,8 @@ class CfgVehicles {
         isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(Side) {
-                displayName = "Side"; // TODO
-                tooltip = "Side"; // TODO
+                displayName = "Side";
+                tooltip = "Which side is calling for artillery";
                 property = QGVAR(Side);
                 defaultValue = "0";
                 unique = 0;
@@ -88,8 +88,8 @@ class CfgVehicles {
                 expression = "_this setVariable ['%s', _value, true];";
             };
             class GVAR(MainSalvo): EditShort {
-                displayName = "Main Salvo"; // TODO
-                tooltip = "Main Salvo"; // TODO
+                displayName = "Main Salvo";
+                tooltip = "Number of rounds in main salvo";
                 property = QGVAR(MainSalvo);
                 defaultValue = "6";
                 unique = 0;
@@ -98,8 +98,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(Spread): EditShort {
-                displayName = "Spread"; // TODO
-                tooltip = "Spread"; // TODO
+                displayName = "Spread";
+                tooltip = "Default dispersion of main salvo";
                 property = QGVAR(Spread);
                 defaultValue = "75";
                 unique = 0;
@@ -108,8 +108,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(SkipCheckRounds): Checkbox {
-                displayName = "Skip Check Rounds"; // TODO
-                tooltip = "Skip Check Rounds"; // TODO
+                displayName = "Skip adjusting rounds";
+                tooltip = "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target.";
                 property = QGVAR(SkipCheckRounds);
                 unique = 0;
                 validate = "none";
@@ -170,8 +170,8 @@ class CfgVehicles {
         isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(IsRetreat): Checkbox {
-                displayName = "Is Retreat"; // TODO
-                tooltip = "Is Retreating"; // TODO
+                displayName = "Is Retreat";
+                tooltip = "Enable this to make the unit retreat and ignore enemies";
                 property = QGVAR(IsRetreat);
                 unique = 0;
                 validate = "none";
@@ -179,8 +179,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class GVAR(DeleteOnStartUp): Checkbox {
-                displayName = "Delete On Start Up"; // TODO
-                tooltip = "Delete On Start Up"; // TODO
+                displayName = "Remove module on Start Up";
+                tooltip = "Deletes module on start up\nIf unchecked it is possible to move module to change destination dynamically.";
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -188,8 +188,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class GVAR(DistanceThreshold): EditShort {
-                displayName = "Distance Threshold"; // TODO
-                tooltip = "The Distance the Task Terminates"; // TODO
+                displayName = "Completion Threshold";
+                tooltip = "Units within this many meters will revert to regular behaviour"; // TODO
                 property = QGVAR(DistanceThreshold);
                 defaultValue = "15";
                 unique = 0;
@@ -198,8 +198,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(CycleTime): EditShort {
-                displayName = "Cycle Time"; // TODO
-                tooltip = "The Cycle Time"; // TODO
+                displayName = "Script interval";
+                tooltip = "The cycle time of the script";
                 property = QGVAR(CycleTime);
                 defaultValue = "3";
                 unique = 0;
@@ -265,8 +265,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(CycleTime): EditShort {
-                displayName = "Cycle Time"; // TODO
-                tooltip = "The Cycle Time"; // TODO
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds";
                 property = QGVAR(CycleTime);
                 defaultValue = "21";
                 unique = 0;
@@ -275,8 +275,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(DeleteOnStartUp): Checkbox {
-                displayName = "Delete On Start Up"; // TODO
-                tooltip = "Delete On Start Up"; // TODO
+                displayName = "Remove Dynamic center";
+                tooltip = "With the dynamic center present it is possible to move the central point of the building search pattern";
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -315,10 +315,10 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(CycleTime): EditShort {
-                displayName = "Cycle Time"; // TODO
-                tooltip = "The Cycle Time"; // TODO
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds";
                 property = QGVAR(CycleTime);
-                defaultValue = "21";
+                defaultValue = "15";
                 unique = 0;
                 validate = "none";
                 condition = "0";
@@ -387,10 +387,10 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(CycleTime): EditShort {
-                displayName = "Cycle Time"; // TODO
-                tooltip = "The Cycle Time"; // TODO
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds";
                 property = QGVAR(CycleTime);
-                defaultValue = "21";
+                defaultValue = "70";
                 unique = 0;
                 validate = "none";
                 condition = "0";
@@ -428,8 +428,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(WaypointCount): EditShort {
-                displayName = "Waypoint Count"; // TODO
-                tooltip = "The Amount of Waypoits the Module Creates"; // TODO
+                displayName = "Waypoints";
+                tooltip = "Number of waypoints created";
                 property = QGVAR(WaypointCount);
                 defaultValue = "4";
                 unique = 0;
@@ -438,8 +438,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(MoveWaypoints): Checkbox {
-                displayName = "Move Waypoints After Completion"; // TODO
-                tooltip = "Move Waypoints After Completion"; // TODO
+                displayName = "Dynamic patrol pattern";
+                tooltip = "Unit will generate a new patrol pattern once one cycle is complete";
                 property = QGVAR(moveWaypoints);
                 unique = 0;
                 validate = "none";
@@ -478,10 +478,10 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(CycleTime): EditShort {
-                displayName = "Cycle Time"; // TODO
-                tooltip = "The Cycle Time"; // TODO
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds";
                 property = QGVAR(CycleTime);
-                defaultValue = "21";
+                defaultValue = "4";
                 unique = 0;
                 validate = "none";
                 condition = "0";

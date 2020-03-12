@@ -37,7 +37,7 @@ switch (_mode) do {
                         ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
                         ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
                         ["Script interval", "NUMBER", "The cycle time of the script.", 3],
-                        ["Delete After Start", "BOOLEAN", "TODO", false]
+                        ["Remove module after start", "BOOLEAN", "check this to remove module after script initiates\n If module is present it can be moved to dynamically alter destination.", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];

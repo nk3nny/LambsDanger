@@ -35,7 +35,7 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Garrison",
                     [
-                        ["Radius", "NUMBER", "Max distance buildings are occupied", 50]
+                        ["Radius", "NUMBER", "Distance buildings are occupied", 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

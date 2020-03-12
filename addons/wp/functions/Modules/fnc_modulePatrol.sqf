@@ -63,7 +63,7 @@ switch (_mode) do {
                         ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Range", "NUMBER", "Max distance between waypoints", 200],
                         ["Waypoints", "NUMBER", "Number of waypoints created", 3],
-                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will create new patrol pattern once one cycle is complete", false]
+                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will generate a new patrol pattern once one cycle is complete", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
