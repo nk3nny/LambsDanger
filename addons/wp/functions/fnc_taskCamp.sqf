@@ -43,7 +43,7 @@ _group setCombatMode "YELLOW";
 
 
 // find buildings
-private _buildings = [_pos, _range, true, false] call EFUNC(danger,findBuildings);
+private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuildings);
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns
@@ -93,9 +93,10 @@ reverse _units;
         _units set [_foreachIndex, objNull];
     };
 
-    if (!(_buildings isEqualTo []) && { RND(0.3) }) then {
-        doStop _x;
+    if (!(_buildings isEqualTo []) && { RND(0.85) }) then {
         _x setUnitPos "UP";
+        private _buildingPos = _buildings deleteAt 0;
+        _x doMove _buildingPos;
         [
             {
                 params ["_unit", ""];
@@ -107,7 +108,7 @@ reverse _units;
                 doStop _unit;
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             },
-            [_x, _buildings deleteAt 0]
+            [_x, _buildingPos]
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
@@ -211,7 +212,7 @@ _wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
 ];
 
 // followup orders - just stay put or move into buildings!
-private _wp2 = _group addWaypoint [[_pos, selectRandom _buildings] select (count _buildings > 4), _range / 4];
+private _wp2 = _group addWaypoint [[_pos, getpos selectRandom _buildings] select (count _buildings > 4), _range / 4];
 _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
