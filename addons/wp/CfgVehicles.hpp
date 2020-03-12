@@ -123,7 +123,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = "TODO";
+            description = "This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance.";
         };
     };
 
@@ -151,7 +151,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "TODO";
+            description = "Register unit to that sides artillery pool.";
         };
     };
 
@@ -171,7 +171,7 @@ class CfgVehicles {
         isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(IsRetreat): Checkbox {
-                displayName = "Is Retreat";
+                displayName = "Unit is fleeing";
                 tooltip = "Enable this to make the unit retreat and ignore enemies";
                 property = QGVAR(IsRetreat);
                 unique = 0;
@@ -190,7 +190,7 @@ class CfgVehicles {
             };
             class GVAR(DistanceThreshold): EditShort {
                 displayName = "Completion Threshold";
-                tooltip = "Units within this many meters will revert to regular behaviour"; // TODO
+                tooltip = "Units within this many meters will revert to regular behaviour";
                 property = QGVAR(DistanceThreshold);
                 defaultValue = "15";
                 unique = 0;

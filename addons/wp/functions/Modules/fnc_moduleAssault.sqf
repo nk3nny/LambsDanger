@@ -33,8 +33,8 @@ switch (_mode) do {
 
                 ["Task Assault",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
+                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Unit is fleeing", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
                         ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
                         ["Script interval", "NUMBER", "The cycle time of the script.", 3],
                         ["Remove module after start", "BOOLEAN", "check this to remove module after script initiates\n If module is present it can be moved to dynamically alter destination.", false]

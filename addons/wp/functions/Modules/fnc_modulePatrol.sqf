@@ -33,7 +33,7 @@ switch (_mode) do {
 
                 ["Task Patrol",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Range", "NUMBER", "Max distance between waypoints", 200],
                         ["Waypoints", "NUMBER", "Number of waypoints created", 3],
                         ["Dynamic patrol pattern", "BOOLEAN", "Unit will create new patrol pattern once one cycle is complete", false]
