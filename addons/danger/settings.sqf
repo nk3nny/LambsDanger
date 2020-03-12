@@ -70,6 +70,16 @@ private _curCat = "Settings";
     0
 ] call CBA_fnc_addSetting;
 
+// Toggles AI Enhanced fleeing
+[
+    QGVAR(disableAIFleeing),
+    "CHECKBOX",
+    ["Disable enhanced unit fleeing", "Toggles enhanced fleeing function for units."],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
 // Toggles AI Unit Callouts
 [
     QGVAR(disableAICallouts),

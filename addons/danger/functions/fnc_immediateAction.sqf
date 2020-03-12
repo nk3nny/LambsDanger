@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_stance", ""],"_anim"];
+params ["_unit", ["_stance", ""], "_anim"];
 
 if (_stance isEqualTo "") then {
     _stance = stance _unit;

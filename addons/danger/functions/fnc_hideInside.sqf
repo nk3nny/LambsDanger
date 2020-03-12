@@ -67,7 +67,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     //[_unit, ["DOWN"], true] call FUNC(gesture);
 
     // find cover
-    private _cover = nearestTerrainObjects [ _unit, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 13, false, true ];
+    private _cover = nearestTerrainObjects [ _unit getpos [30, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
 
     // targetPos
     private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [45 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);

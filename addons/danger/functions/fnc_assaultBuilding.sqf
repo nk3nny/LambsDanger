@@ -72,7 +72,6 @@ private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _u
 private _buildingPosSelected = _buildingPos select 0;
 
 // remove current target and do move
-_unit doWatch objNull;
 _unit lookAt AGLtoASL _buildingPosSelected;
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 

@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "H:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"DEFINE_ENUM_BEG",-1,250,-1200.000000,-360.000000,-860.000000,-180.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
@@ -6,7 +6,7 @@ item1[] = {"Init",0,250,-825.000000,-350.000000,-700.000000,-300.000000,0.000000
 item2[] = {"End",1,250,-100.000000,1200.000000,0.000000,1260.000000,0.000000,"End"};
 item3[] = {"Causes__7",4,218,-840.000000,-60.000000,-700.000000,0.000000,1.000000,"Causes:" \n "7"};
 item4[] = {"Rest",4,218,-100.000000,-160.000000,0.000000,-100.000000,0.000000,"Rest"};
-item5[] = {"Causes__1__2__4",4,218,-620.000000,-60.000000,-500.000000,0.000000,1.000000,"Causes:" \n "1, 2, 4"};
+item5[] = {"Causes__1__2__4",4,218,-620.000000,-60.000000,-500.000000,0.000000,1.000000,"Causes:" \n "1, 2, 4, 9"};
 item6[] = {"Not_careless",4,218,-820.000000,-260.000000,-720.000000,-200.000000,0.000000,"Not careless"};
 item7[] = {"Clean_up",2,250,-679.741028,1077.190918,-579.741028,1137.190918,0.000000,"Clean-up"};
 item8[] = {"Always",8,218,-318.201965,1112.264404,-218.201965,1172.264404,0.000000,"Always"};
@@ -50,7 +50,7 @@ item45[] = {"Higher_priority",4,218,-1340.000000,1100.000000,-1240.000000,1160.0
 item46[] = {"Time_up",4,218,-1160.000000,1340.000000,-1060.000000,1400.000000,0.000000,"Time up"};
 item47[] = {"Clean_up_1",2,250,-1520.000000,1100.000000,-1420.000000,1160.000000,0.000000,"Clean-up"};
 item48[] = {"Always",8,218,-1520.000000,-160.000000,-1420.000000,-100.000000,0.000000,"Always"};
-item49[] = {"Clean_up_2",2,4346,-760.000000,1340.000000,-660.000000,1400.000000,0.000000,"Clean-up"};
+item49[] = {"Clean_up_2",2,250,-760.000000,1340.000000,-660.000000,1400.000000,0.000000,"Clean-up"};
 item50[] = {"Always",8,218,-320.000000,1200.000000,-220.000000,1260.000000,0.000000,"Always"};
 item51[] = {"Inspect__dead_bo",-1,250,-1320.000000,440.000000,-1160.000000,560.000000,0.000000,"Inspect " \n "dead body"};
 item52[] = {"Hide_down",-1,250,-840.000000,440.000000,-680.000000,560.000000,0.000000,"Hide/down"};
@@ -201,8 +201,8 @@ link75[] = {65,13};
 link76[] = {66,67};
 link77[] = {67,2};
 link78[] = {68,66};
-globals[] = {0.000000,0,0,0,0,640,480,1,215,6316128,1,-1881.183716,-254.580322,1546.840576,79.577698,980,884,1};
-window[] = {2,-1,-1,-1,-1,922,104,725,104,3,998};
+globals[] = {0.000000,0,0,0,0,640,480,1,215,6316128,1,-873.450073,30.529480,343.027618,-472.398926,980,884,1};
+window[] = {2,-1,-1,-1,-1,1026,208,829,208,3,998};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -240,7 +240,7 @@ class FSM
                          "" \n
                          "" \n
                          "// Function to retrieve the highest priority event from the _queue" \n
-                         "private _priors = [0, 3, 4, 0, 2, 1, 1, 5, 4, 1];" \n
+                         "private _priors = [0, 3, 4, 0, 2, 1, 1, 5, 0, 4];" \n
                          "private _oldDangerCause = -1;" \n
                          "" \n
                          "// vanilla function ~ finds most dangerous threat " \n
@@ -352,7 +352,7 @@ class FSM
                          "" \n
                          "// animation" \n
                          "if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
-                         "	_this playMoveNow selectRandom ['ApanPknlMsprSnonWnonDf','ApanPercMsprSnonWnonDf','ApanPpneMsprSnonWnonDf','ApanPpneMrunSnonWnonDf'];" \n
+                         "	_this playMoveNow selectRandom [""ApanPknlMsprSnonWnonDf"", ""ApanPercMsprSnonWnonDf"", ""ApanPpneMsprSnonWnonDf"", ""ApanPpneMrunSnonWnonDf""];" \n
                          "}; " \n
                          "" \n
                          "// end " \n
@@ -491,7 +491,6 @@ class FSM
                          "" \n
                          "// settings " \n
                          "private _orderedOut = false;" \n
-                         "private _lastAction = _this getVariable [""lambs_danger_lastAction"",0]; " \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -514,7 +513,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Hide_vs__run";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_dangerCause in [1,2,4]"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_dangerCause in [1,2,4,9]"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1040,7 +1039,7 @@ class FSM
                          "if (random 1 > 0.6) then {" \n
                          "	_this stop true;" \n
                          "	if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
-                         "		_this playMoveNow selectRandom ['ApanPpneMsprSnonWnonDf','ApanPpneMrunSnonWnonDf',""ApanPpneMstpSnonWnonDnon_G01"",""ApanPpneMstpSnonWnonDnon_G02"",""ApanPpneMstpSnonWnonDnon_G03""];" \n
+                         "		_this playMoveNow selectRandom [""ApanPpneMsprSnonWnonDf"", ""ApanPpneMrunSnonWnonDf"", ""ApanPpneMstpSnonWnonDnon_G01"", ""ApanPpneMstpSnonWnonDnon_G02"",""ApanPpneMstpSnonWnonDnon_G03""];" \n
                          "	}; " \n
                          "}; " \n
                          "" \n
