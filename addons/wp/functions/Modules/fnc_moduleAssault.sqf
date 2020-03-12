@@ -60,7 +60,7 @@ switch (_mode) do {
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 ["Task Assault",
                     [
-                        ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, _x distance _logic] }, 0],
+                        ["Targets", "DROPDOWN", "TODO", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
                         ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
                         ["Script interval", "NUMBER", "The cycle time of the script.", 3]

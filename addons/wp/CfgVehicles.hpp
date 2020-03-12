@@ -15,6 +15,7 @@ class CfgVehicles {
             class EmptyDetector;
         };
     };
+
     class GVAR(BaseModule): Module_F {
         _generalMacro = QGVAR(BaseModule);
         scope = 0;
@@ -217,32 +218,6 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskCamp) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
-        _generalMacro = QGVAR(TaskCamp);
-        scope = 0;
-        is3DEN = 1;
-        scopeCurator = 0;
-        displayName = "Task Camp";
-        category = "Lambs_Danger_WP_Cat";
-        function = QFUNC(moduleCamp);
-        functionPriority = 1;
-        icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-        portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
-        class Attributes: AttributesBase {
-            class ModuleDescription: ModuleDescription {};
-        };
-
-        class ModuleDescription: ModuleDescription {
-            duplicate = 1;
-            position = 1;
-            direction = 1;
-            description = "TODO";
-        };
-    };
-
     class GVAR(TaskCQB) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCQB);
@@ -293,47 +268,6 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(TaskCreep) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
-        _generalMacro = QGVAR(TaskCreep);
-        scope = 2;
-        is3DEN = 1;
-        scopeCurator = 2;
-        displayName = "Task Creep";
-        category = "Lambs_Danger_WP_Cat";
-        function = QFUNC(moduleCreep);
-        functionPriority = 1;
-        icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
-        canSetArea = 1;
-        canSetAreaShape = 1;
-        class AttributeValues {
-            size3[] = {1000, 1000, -1};
-            isRectangle = 0;
-        };
-        class Attributes: AttributesBase {
-            class GVAR(CycleTime): EditShort {
-                displayName = "Script interval";
-                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds";
-                property = QGVAR(CycleTime);
-                defaultValue = "15";
-                unique = 0;
-                validate = "none";
-                condition = "0";
-                typeName = "NUMBER";
-            };
-            class ModuleDescription: ModuleDescription {};
-        };
-        class ModuleDescription: ModuleDescription {
-            duplicate = 1;
-            position = 1;
-            direction = 1;
-            description = "TODO";
-        };
-    };
-
     class GVAR(TaskGarrison) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskGarrison);
@@ -355,47 +289,6 @@ class CfgVehicles {
             isRectangle = 0;
         };
         class Attributes: AttributesBase {
-            class ModuleDescription: ModuleDescription {};
-        };
-        class ModuleDescription: ModuleDescription {
-            duplicate = 1;
-            position = 1;
-            direction = 1;
-            description = "TODO";
-        };
-    };
-
-    class GVAR(TaskHunt) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
-        _generalMacro = QGVAR(TaskHunt);
-        scope = 2;
-        is3DEN = 1;
-        scopeCurator = 2;
-        displayName = "Task Hunt";
-        category = "Lambs_Danger_WP_Cat";
-        function = QFUNC(moduleHunt);
-        functionPriority = 1;
-        icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
-        canSetArea = 1;
-        canSetAreaShape = 1;
-        class AttributeValues {
-            size3[] = {1000, 1000, -1};
-            isRectangle = 0;
-        };
-        class Attributes: AttributesBase {
-            class GVAR(CycleTime): EditShort {
-                displayName = "Script interval";
-                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds";
-                property = QGVAR(CycleTime);
-                defaultValue = "70";
-                unique = 0;
-                validate = "none";
-                condition = "0";
-                typeName = "NUMBER";
-            };
             class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
@@ -456,6 +349,89 @@ class CfgVehicles {
         };
     };
 
+    // Search Modules
+    class GVAR(TaskCreep) : GVAR(BaseModule) {
+        author = "LAMBS Dev Team";
+        _generalMacro = QGVAR(TaskCreep);
+        scope = 2;
+        is3DEN = 1;
+        scopeCurator = 2;
+        displayName = "Task Creep";
+        category = "Lambs_Danger_WP_Search_Cat";
+        function = QFUNC(moduleCreep);
+        functionPriority = 1;
+        icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        isGlobal = 0;
+        isTriggerActivated = 1;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {1000, 1000, -1};
+            isRectangle = 0;
+        };
+        class Attributes: AttributesBase {
+            class GVAR(CycleTime): EditShort {
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds";
+                property = QGVAR(CycleTime);
+                defaultValue = "15";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "NUMBER";
+            };
+            class ModuleDescription: ModuleDescription {};
+        };
+        class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
+            description = "TODO";
+        };
+    };
+
+    class GVAR(TaskHunt) : GVAR(BaseModule) {
+        author = "LAMBS Dev Team";
+        _generalMacro = QGVAR(TaskHunt);
+        scope = 2;
+        is3DEN = 1;
+        scopeCurator = 2;
+        displayName = "Task Hunt";
+        category = "Lambs_Danger_WP_Search_Cat";
+        function = QFUNC(moduleHunt);
+        functionPriority = 1;
+        icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+        isGlobal = 0;
+        isTriggerActivated = 1;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {1000, 1000, -1};
+            isRectangle = 0;
+        };
+        class Attributes: AttributesBase {
+            class GVAR(CycleTime): EditShort {
+                displayName = "Script interval";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds";
+                property = QGVAR(CycleTime);
+                defaultValue = "70";
+                unique = 0;
+                validate = "none";
+                condition = "0";
+                typeName = "NUMBER";
+            };
+            class ModuleDescription: ModuleDescription {};
+        };
+        class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
+            description = "TODO";
+        };
+    };
+
     class GVAR(TaskRush) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskRush);
@@ -463,7 +439,7 @@ class CfgVehicles {
         is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Rush";
-        category = "Lambs_Danger_WP_Cat";
+        category = "Lambs_Danger_WP_Search_Cat";
         function = QFUNC(moduleRush);
         functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -496,4 +472,32 @@ class CfgVehicles {
             description = "TODO";
         };
     };
+
+    // Disabled
+    class GVAR(TaskCamp) : GVAR(BaseModule) {
+        author = "LAMBS Dev Team";
+        _generalMacro = QGVAR(TaskCamp);
+        scope = 0;
+        is3DEN = 1;
+        scopeCurator = 0;
+        displayName = "Task Camp";
+        category = "Lambs_Danger_WP_Cat";
+        function = QFUNC(moduleCamp);
+        functionPriority = 1;
+        icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        isGlobal = 0;
+        isTriggerActivated = 1;
+        class Attributes: AttributesBase {
+            class ModuleDescription: ModuleDescription {};
+        };
+
+        class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
+            description = "TODO";
+        };
+    };
+
 };

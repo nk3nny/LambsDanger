@@ -33,7 +33,7 @@ switch (_mode) do {
 
                 ["Task CQB",
                     [
-                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, (leader _x) distance _logic] }, 0],
+                        ["Groups", "DROPDOWN", "TODO", _groups apply { format ["%1 (%2 m)", groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Max distance houses will be searched", 50],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21],
                         ["Dynamic center", "BOOLEAN", "Enable this to make it possible to move the center/module of the building search pattern", false]
@@ -54,8 +54,10 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
+                _logic setVehicleVarName "Logic";
+                private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
-                private _targets = GVAR(ModuleTargets);
+                _targets append GVAR(ModuleTargets);
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 
                 ["Task CQB",
