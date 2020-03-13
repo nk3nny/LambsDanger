@@ -1340,7 +1340,7 @@ class FSM
                          "_target = (_dangerMode select 1) select 6;" \n
                          "" \n
                          "// call artillery if available " \n
-                         "if !((missionNameSpace getVariable [""lambs_danger_artillery_"" + str (side _this),[]]) isEqualTo []) then {" \n
+                         "if !([lambs_main_SideArtilleryHash, side _unit] call CBA_fnc_hashGet) then {" \n
                          "" \n
                          "	// do artillery " \n
                          "	[_this, _target] call lambs_danger_fnc_leaderArtillery; " \n

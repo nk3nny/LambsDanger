@@ -10,7 +10,7 @@ class Cfg3DEN {
                         control = "Checkbox";
                         displayName = "AI Disabled";
                         tooltip = "Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency";
-                        expression = "if (_value) then {_this setVariable ['%s', _value, true]}";
+                        expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
                         typeName = "BOOL";
                         condition = "objectBrain";
                         defaultValue = "(false)";
@@ -20,7 +20,7 @@ class Cfg3DEN {
                         control = "Checkbox";
                         displayName = "Has Radio";
                         tooltip = "Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency";
-                        expression = "if (_value) then {_this setVariable ['%s', _value, true]}";
+                        expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
                         typeName = "BOOL";
                         condition = "objectBrain";
                         defaultValue = "(false)";

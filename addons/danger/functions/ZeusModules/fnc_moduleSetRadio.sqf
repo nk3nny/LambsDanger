@@ -4,13 +4,8 @@ params ["_logic", "", "_activated"];
 
 if (_activated && local _logic) then {
 
-    //--- Terminate when remote control is already in progress
-    if !(isNull (missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", objNull])) exitWith {};
-
     //--- Get unit under cursor
-    private _unit = objNull;
-    private _mouseOver = missionNamespace getVariable ["BIS_fnc_curatorObjectPlaced_mouseOver", [""]];
-    if ((_mouseOver select 0) isEqualTo (typeName objNull)) then { _unit = _mouseOver select 1; };
+    private _unit = GET_CURATOR_UNIT_UNDER_CURSOR;
 
     //--- Check if the unit is suitable
     private _error = "";

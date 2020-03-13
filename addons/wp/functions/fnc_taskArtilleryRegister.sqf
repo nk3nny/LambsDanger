@@ -19,6 +19,7 @@
 params ["_group"];
 private _artillery = [];
 
+if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = (group _group); };
@@ -34,9 +35,10 @@ private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" 
 if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global
-private _global = missionNamespace getVariable [QEGVAR(danger,artillery_) + str (side _group), []];
-{ _global pushBackUnique _x; true } count _artillery;
-missionNamespace setVariable [QEGVAR(danger,artillery_) + str (side _group), _global, false];
+private _guns = [EGVAR(main,SideArtilleryHash), side _group] call CBA_fnc_hashGet;
+_guns append _artillery;
+_guns = _guns arrayIntersect _guns;
+EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _group, _guns] call CBA_fnc_hashSet;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

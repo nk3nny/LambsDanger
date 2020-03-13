@@ -6,4 +6,7 @@ class CfgFactionClasses {
     class Lambs_Danger_WP_Cat: NO_CATEGORY {
         displayName = "LAMBS Danger Waypoints";
     };
+    class Lambs_Danger_WP_Search_Cat: NO_CATEGORY {
+        displayName = "LAMBS Danger Search Modules";
+    };
 };
