@@ -93,9 +93,9 @@ reverse _units;
         _units set [_foreachIndex, objNull];
     };
 
-    if (!(_buildings isEqualTo []) && { RND(0.85) }) then {
+    if (!(_buildings isEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
-        private _buildingPos = _buildings deleteAt 0;
+        private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
         _x doMove _buildingPos;
         [
             {
@@ -158,7 +158,7 @@ private _armedAnims = [
 private _dir = random 360;
 {
     _dir = _dir + random (360 / count _units);
-    private _range = 1.3 + random 3.3;
+    private _range = 1.35 + random 3.3;
     private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
 
     // execute move
@@ -217,7 +217,7 @@ _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
 if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskCamp: %2 established camp (buildings spots %3)", side _group, groupID _group, count _buildings] call EFUNC(danger,debugLog);
+    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(danger,debugLog);
 };
 
 // end

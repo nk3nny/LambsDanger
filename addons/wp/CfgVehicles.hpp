@@ -503,7 +503,7 @@ class CfgVehicles {
         };
     };
 
-    // Disabled
+    // Disabled -- Not really disabled yet @Joko
     class GVAR(TaskCamp) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCamp);
