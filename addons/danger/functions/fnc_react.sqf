@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_enemy", ObjNull]];
+params ["_unit", "_pos", ["_enemy", objNull]];
 
 // disable Reaction phase for player group
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
