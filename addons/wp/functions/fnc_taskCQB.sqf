@@ -23,16 +23,29 @@
  * Public: No
 */
 
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskCQB);
+};
+
 // functions ---
 
 // find buildings
 private _fnc_find = {
-    params ["_pos", "_radius", "_group"];
+    params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {count (_x buildingPos -1) > 0};
     _building = _building select {count (_x getVariable [QEGVAR(danger,CQB_cleared_) + str (side _group), [0, 0]]) > 0};
-    if (count _building > 0) exitWith { _building select 0 };
-    objNull
+
+    if !(_area isEqualTo []) then {
+        _area params ["_a", "_b", "_angle", "_isRectangle"];
+        _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
+    };
+
+    if (_building isEqualTo []) exitWith { objNull };
+
+    _building = _building apply {[_pos distance2D _x, _x]}; // sort nearest -nkenny
+    _building sort true;
+    (_building select 0) select 1
 };
 
 // check for enemies
@@ -139,7 +152,8 @@ private _fnc_act = {
 // functions end ---
 
 // init
-params [ "_group", "_pos", ["_radius", 50], ["_cycle", 21]];
+params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_area", [], [[]]], ["_useWaypoint", false]];
+
 
 // sort grp
 if (!local _group) exitWith {};
@@ -148,8 +162,9 @@ if (_group isEqualType objNull) then {
 };
 
 // more dynamic pos
-private _wp_index = (currentWaypoint _group) min ((count waypoints _group) - 1);
-
+if (_useWaypoint) then {
+    _pos = [_group ,(currentWaypoint _group) min ((count waypoints _group) - 1)];
+};
 // orders
 _group setSpeedMode "FULL";
 _group setFormation "FILE";
@@ -169,10 +184,10 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _wPos = waypointPosition [_group, _wp_index];
+    private _wPos = _pos call EFUNC(main,getPos);
 
     // find building
-    private _building = [_wPos, _radius, _group] call _fnc_find;
+    private _building = [_wPos, _radius, _group, _area] call _fnc_find;
 
     // find enemy
     private _enemy = [_building, _group] call _fnc_enemy;
@@ -183,7 +198,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
 
     // wait
     sleep _cycle;
-    if (EGVAR(danger,debug_functions)) then {systemchat format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy];}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 };
 
 // reset

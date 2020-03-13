@@ -18,30 +18,34 @@ params ["_element"];
 private _data = [];
 {
     _x params ["_ctrl", "_type"];
+    private _d = nil;
     switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {
-            _data pushback (cbChecked _ctrl);
+            _d = cbChecked _ctrl;
         };
         case ("NUMBER"): {
-            _data pushback (parseNumber (ctrlText _ctrl));
+            _d = parseNumber (ctrlText _ctrl);
         };
         case ("INT");
         case ("INTEGER"): {
-            _data pushback (round (parseNumber (ctrlText _ctrl)));
+            _d = round (parseNumber (ctrlText _ctrl));
         };
         case ("LIST");
         case ("LISTBOX");
         case ("DROPDOWN"): {
-            _data pushBack (lbCurSel _ctrl)
+            _d = lbCurSel _ctrl;
         };
         case ("SLIDER"): {
-            _data pushBack (sliderPosition _ctrl);
+            _d = sliderPosition _ctrl;
         };
         default {
-            _data pushback (ctrlText (_ctrl));
+            _d = ctrlText _ctrl;
         };
     };
+    private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];
+    GVAR(ChooseDialogSettingsCache) setVariable [_cacheName, _d];
+    _data pushback _d;
 } forEach (_element getVariable [QGVAR(ControlData), []]);
 
 _data;

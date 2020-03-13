@@ -31,7 +31,7 @@ _group setVariable [QEGVAR(danger,disableGroupAI), true];
 _group move _pos;
 
 // execute script
-[_group, _pos, false] call FUNC(taskAssault);
+[_group, _pos, false, 15, 3, true] call FUNC(taskAssault);
 
 // end
 true

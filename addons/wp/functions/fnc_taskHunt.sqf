@@ -17,9 +17,11 @@
  *
  * Public: No
 */
-
+if !(canSuspend) exitWith {
+    _this spawn FUNC(taskHunt);
+};
 // 1. FIND TRACKER
-params ["_group", ["_radius", 500], ["_cycle", 60 + random 30]];
+params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]], ["_pos", [], [[]]]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -46,7 +48,7 @@ waitUntil {
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    private _target = [_group, _radius] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area, _pos] call FUNC(findClosestTarget);
 
     // settings
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";

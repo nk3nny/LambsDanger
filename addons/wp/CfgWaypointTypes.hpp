@@ -41,7 +41,7 @@ class ZEN_WaypointTypes {
         script = QPATHTOF(scripts\fnc_wpCQB.sqf);
     };
     class EGVAR(danger,Artillery) {
-        displayName = "9 REGISTER ARTILLERY";
+        displayName = "REGISTER ARTILLERY";
         type = "SCRIPTED";
         script = QPATHTOF(functions\fnc_taskArtilleryRegister.sqf);
     };

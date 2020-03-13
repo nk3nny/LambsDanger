@@ -5,16 +5,16 @@ class CfgWaypoints {
             displayName = "0 TASK ASSAULT";
             displayNameDebug = QEGVAR(danger,Attack);
             file = QPATHTOF(scripts\fnc_wpAssault.sqf);
-            icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
+            icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
             tooltip = "Unit rushes to target position with no regard for safety";
         };
         class EGVAR(danger,Retreat) {
             displayName = "0 TASK FORCED RETREAT";
             displayNameDebug = QEGVAR(danger,Retreat);
             file = QPATHTOF(scripts\fnc_wpRetreat.sqf);
-            icon = "\a3\3DEN\Data\CfgWaypoints\SeekAndDestroy_ca.paa";
+            icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
             tooltip = "Unit rushes to target position with no regard for safety";
-        };        
+        };
         class EGVAR(danger,Garrison) {
             displayName = "1 TASK GARRISON";
             displayNameDebug = QEGVAR(danger,Garrison);
