@@ -29,7 +29,8 @@ if ((_unit distance2d _pos) < 150) then {_pos = _predictedPos};
 
 //  target not on foot or too close
 if (
-    !(_target isKindOf "Man")
+    isNull _target
+    || {!(_target isKindOf "Man")}
     || {(_unit distance2d _predictedPos) < GVAR(minSuppression_range)}
 ) exitWith {false};
 
@@ -39,7 +40,7 @@ if (_buildings isEqualTo []) then {
     //_buildings = _buildings select {!(terrainIntersect [getpos _unit, getpos _x])};
 };
 
-// variables
+// set task
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
 
@@ -53,7 +54,8 @@ if !(_buildings isEqualTo []) then {
 _buildings pushBack _predictedPos;
 
 // pos
-_pos = (AGLToASL (selectRandom _buildings)) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2];
+private _distance = ((_unit distance _pos) min 650) - 5;
+_pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position
 _vehicle doWatch _pos;
@@ -82,7 +84,7 @@ if (_cannon) then {
 if (GVAR(debug_functions)) then {
     format ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call FUNC(debugLog);
 
-    private _sphere = createSimpleObject ["Sign_Sphere100cm_F", (_pos vectorAdd [0.5 - random 1, 0.5 - random 1, 0.2 + random 1.2]), true];
+    private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
 
