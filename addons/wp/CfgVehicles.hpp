@@ -221,6 +221,38 @@ class CfgVehicles {
         };
     };
 
+    class GVAR(TaskCamp) : GVAR(BaseModule) {
+        author = "LAMBS Dev Team";
+        _generalMacro = QGVAR(TaskCamp);
+        scope = 2;
+        is3DEN = 1;
+        scopeCurator = 2;
+        displayName = "Task Camp";
+        category = "Lambs_Danger_WP_Cat";
+        function = QFUNC(moduleCamp);
+        functionPriority = 1;
+        icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
+        isGlobal = 0;
+        isTriggerActivated = 1;
+        canSetArea = 1;
+        canSetAreaShape = 1;
+        class AttributeValues {
+            size3[] = {50, 50, -1};
+            isRectangle = 0;
+        };
+        class Attributes: AttributesBase {
+            class ModuleDescription: ModuleDescription {};
+        };
+
+        class ModuleDescription: ModuleDescription {
+            duplicate = 1;
+            position = 1;
+            direction = 1;
+            description = "Task Camp makes the unit appear to gather around a single point, typically a camp site. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.";
+        };
+    };
+
     class GVAR(TaskCQB) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCQB);
@@ -500,39 +532,6 @@ class CfgVehicles {
             position = 1;
             direction = 1;
             description = "Task Rush makes the unit attempt run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
-        };
-    };
-
-    // Disabled -- Not really disabled yet @Joko
-    class GVAR(TaskCamp) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
-        _generalMacro = QGVAR(TaskCamp);
-        scope = 2;
-        is3DEN = 1;
-        scopeCurator = 2;
-        displayName = "Task Camp";
-        category = "Lambs_Danger_WP_Cat";
-        function = QFUNC(moduleCamp);
-        functionPriority = 1;
-        icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
-        portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
-        canSetArea = 1;
-        canSetAreaShape = 1;
-        class AttributeValues {
-            size3[] = {50, 50, -1};
-            isRectangle = 0;
-        };        
-        class Attributes: AttributesBase {
-            class ModuleDescription: ModuleDescription {};
-        };
-
-        class ModuleDescription: ModuleDescription {
-            duplicate = 1;
-            position = 1;
-            direction = 1;
-            description = "Task Camp makes the unit appear to gather around a single point, typically a camp site. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.";
         };
     };
 
