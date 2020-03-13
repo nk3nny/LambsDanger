@@ -22,7 +22,7 @@
 // init
 params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]]];
 
-if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
+if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
 // sort grp
 if (!local _group) exitWith {false};

@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
+if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
 params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]]];
