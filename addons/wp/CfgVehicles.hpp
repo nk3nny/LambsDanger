@@ -408,12 +408,13 @@ class CfgVehicles {
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
                 displayName = "Use Group As Center";
-                tooltip = "The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
+                tooltip = "The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
+                defaultValue = "(true)";
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
@@ -458,12 +459,13 @@ class CfgVehicles {
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
                 displayName = "Use Group As Center";
-                tooltip = "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
+                tooltip = "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
+                defaultValue = "(true)";
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
@@ -508,12 +510,13 @@ class CfgVehicles {
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
                 displayName = "Use Group As Center";
-                tooltip = "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
+                tooltip = "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
                 condition = "0";
                 typeName = "BOOL";
+                defaultValue = "(true)";
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
