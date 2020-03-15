@@ -31,7 +31,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = "TODO";
+            description = "";
             sync[] = {"AnyBrain", "Condition"};
             class Condition: EmptyDetector {
                 optional = 1;
@@ -90,7 +90,7 @@ class CfgVehicles {
             };
             class GVAR(MainSalvo): EditShort {
                 displayName = "Main Salvo";
-                tooltip = "Number of rounds in main salvo";
+                tooltip = "Number of rounds in the main salvo";
                 property = QGVAR(MainSalvo);
                 defaultValue = "6";
                 unique = 0;
@@ -100,7 +100,7 @@ class CfgVehicles {
             };
             class GVAR(Spread): EditShort {
                 displayName = "Spread";
-                tooltip = "Default dispersion of main salvo";
+                tooltip = "Default dispersion of the main salvo";
                 property = QGVAR(Spread);
                 defaultValue = "75";
                 unique = 0;
@@ -183,8 +183,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class GVAR(DeleteOnStartUp): Checkbox {
-                displayName = "Remove module on Start Up";
-                tooltip = "Deletes module on start up\nIf unchecked it is possible to move module to change destination dynamically.";
+                displayName = "Remove module on Start-Up";
+                tooltip = "Deletes module on startup\nIf unchecked it is possible to move the module to change destination dynamically.";
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -193,7 +193,7 @@ class CfgVehicles {
             };
             class GVAR(DistanceThreshold): EditShort {
                 displayName = "Completion Threshold";
-                tooltip = "Units within this many meters will revert to regular behaviour";
+                tooltip = "Units within this many meters will revert to regular behavior";
                 property = QGVAR(DistanceThreshold);
                 defaultValue = "15";
                 unique = 0;
@@ -217,7 +217,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 0;
-            description = "Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter final destination.";
+            description = "Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.";
         };
     };
 
@@ -249,7 +249,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Task Camp makes the unit appear to gather around a single point, typically a camp site. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.";
+            description = "Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.";
         };
     };
 
@@ -286,7 +286,7 @@ class CfgVehicles {
             };
             class GVAR(DeleteOnStartUp): Checkbox {
                 displayName = "Remove Dynamic center";
-                tooltip = "With the dynamic center present it is possible to move the central point of the building search pattern";
+                tooltip = "With the dynamic center present, it is possible to move the center point of the building search pattern";
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -299,7 +299,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configured searched area. The module can be moved to dynamically shift the searched area.<br/><br/>In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.";
+            description = "Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.<br/><br/>In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.";
         };
     };
 
@@ -367,7 +367,7 @@ class CfgVehicles {
             };
             class GVAR(MoveWaypoints): Checkbox {
                 displayName = "Dynamic patrol pattern";
-                tooltip = "Unit will generate a new patrol pattern once one patrol cycle is complete";
+                tooltip = "The unit will generate a new patrol pattern once one patrol cycle is complete";
                 property = QGVAR(moveWaypoints);
                 unique = 0;
                 validate = "none";
@@ -407,8 +407,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center";
-                tooltip = "TODO";
+                displayName = "Moving Center"; // TODO: @nKenny
+                tooltip = "TODO"; // TODO: @nKenny
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -457,8 +457,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center";
-                tooltip = "TODO";
+                displayName = "Moving Center"; // TODO: @nKenny
+                tooltip = "TODO"; // TODO: @nKenny
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -481,7 +481,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiralling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.";
+            description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.";
         };
     };
 
@@ -507,8 +507,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center";
-                tooltip = "TODO";
+                displayName = "Moving Center"; // TODO: @nKenny
+                tooltip = "TODO"; // TODO: @nKenny
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -531,7 +531,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Task Rush makes the unit attempt run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
+            description = "Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
         };
     };
 
