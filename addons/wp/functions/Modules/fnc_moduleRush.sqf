@@ -35,9 +35,9 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Rush",
                     [
-                        ["Radius", "NUMBER", "Distance rushing group will search for enemies\nThis module will only target enemy players.", 1000],
+                        ["Radius", "NUMBER", "Distance rushing group will search for enemies.\nThis module only targets enemy players", 1000],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4],
-                        ["Use Group As Center", "BOOLEAN", "TODO"]
+                        ["Use Group As Center", "BOOLEAN", "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead", true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

@@ -35,9 +35,9 @@ switch (_mode) do {
             if (_error == "") then {
                 ["Task Hunt",
                     [
-                        ["Radius", "NUMBER", "Distance hunting group will search for enemies\nThis module will only target enemy players.", 1000],
-                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds", 70],
-                        ["Use Group As Center", "BOOLEAN", "TODO"]
+                        ["Radius", "NUMBER", "Distance hunting group will search for enemies.\nThis module only targets enemy players", 1000],
+                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds", 70],
+                        ["Use Group As Center", "BOOLEAN", "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead", true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

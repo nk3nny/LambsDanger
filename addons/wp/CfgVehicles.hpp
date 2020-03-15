@@ -110,7 +110,7 @@ class CfgVehicles {
             };
             class GVAR(SkipCheckRounds): Checkbox {
                 displayName = "Skip adjusting rounds";
-                tooltip = "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target.";
+                tooltip = "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target";
                 property = QGVAR(SkipCheckRounds);
                 unique = 0;
                 validate = "none";
@@ -123,7 +123,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = "This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance.";
+            description = "This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance";
         };
     };
 
@@ -184,7 +184,7 @@ class CfgVehicles {
             };
             class GVAR(DeleteOnStartUp): Checkbox {
                 displayName = "Remove module on Start-Up";
-                tooltip = "Deletes module on startup\nIf unchecked it is possible to move the module to change destination dynamically.";
+                tooltip = "Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically";
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -407,8 +407,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center"; // TODO: @nKenny
-                tooltip = "TODO"; // TODO: @nKenny
+                displayName = "Use Group As Center";
+                tooltip = "The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -417,7 +417,7 @@ class CfgVehicles {
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
-                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds";
                 property = QGVAR(CycleTime);
                 defaultValue = "15";
                 unique = 0;
@@ -431,7 +431,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players.";
+            description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players";
         };
     };
 
@@ -457,8 +457,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center"; // TODO: @nKenny
-                tooltip = "TODO"; // TODO: @nKenny
+                displayName = "Use Group As Center";
+                tooltip = "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -467,7 +467,7 @@ class CfgVehicles {
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
-                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate\nDefault 70 seconds";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds";
                 property = QGVAR(CycleTime);
                 defaultValue = "70";
                 unique = 0;
@@ -507,8 +507,8 @@ class CfgVehicles {
         };
         class Attributes: AttributesBase {
             class GVAR(MovingCenter): Checkbox {
-                displayName = "Moving Center"; // TODO: @nKenny
-                tooltip = "TODO"; // TODO: @nKenny
+                displayName = "Use Group As Center";
+                tooltip = "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. The module can be moved to create a dynamic search pattern";
                 property = QGVAR(MovingCenter);
                 unique = 0;
                 validate = "none";
@@ -517,7 +517,7 @@ class CfgVehicles {
             };
             class GVAR(CycleTime): EditShort {
                 displayName = "Script interval";
-                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds";
+                tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds";
                 property = QGVAR(CycleTime);
                 defaultValue = "4";
                 unique = 0;
