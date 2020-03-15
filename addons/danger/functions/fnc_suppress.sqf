@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos",["_override", false]];
+params ["_unit", "_pos", ["_override", false]];
 
 // variable
 _unit setVariable [QGVAR(currentTarget), _pos];
@@ -40,14 +40,15 @@ if (!_override) then {
 };
 
 // mod pos
-_pos = _pos vectorAdd [0, 0, 0.2 + random 1];
+private _distance = ((_unit distance _pos) min 350) - 4;
+_pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance);
 
 // final range check
-if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
+if (_distance < GVAR(minSuppression_range)) exitWith {false};
 
 // Call it out ~ low chance. This is a common event. -nkenny
 if (RND(0.2) && {count units _unit > 1}) then {
-    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 100] call FUNC(doCallout);
+    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 75] call FUNC(doCallout);
 };
 
 // do it!

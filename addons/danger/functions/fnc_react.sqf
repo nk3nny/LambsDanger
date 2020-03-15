@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos"];
+params ["_unit", "_pos", ["_enemy", objNull]];
 
 // disable Reaction phase for player group
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
@@ -28,10 +28,11 @@ private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, tru
 private _stance = ["MIDDLE", selectRandom ["DOWN", "DOWN", "MIDDLE"]] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
-private _enemy = _unit findNearestEnemy _pos;
+// sort enemy
+if (isNull _enemy) then {_enemy = _unit findNearestEnemy _pos;};
 
 // Share information!
-[_unit, _enemy, GVAR(radio_shout) + random 100, true] call FUNC(shareInformation);
+[_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
 
 // Callout
 _enemy = vehicle _enemy;
@@ -40,7 +41,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
 } else {
     "contact"
 };
-[formationLeader _unit, "Combat", _callout, 100] call FUNC(doCallout);
+[ [formationLeader _unit, _unit] select (RND(0.5)), "Combat", _callout, 100] call FUNC(doCallout);
 
 // leaders gestures
 [formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);

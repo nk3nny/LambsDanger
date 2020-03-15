@@ -27,7 +27,6 @@ switch (_mode) do {
             private _group = GET_CURATOR_GRP_UNDER_CURSOR;
 
             //--- Check if the unit is suitable
-            private _error = "";
             if (isNull _group) then {
                 private _groups = allGroups;
                 _groups = _groups select { ((units _x) findIf { alive _x }) != -1; };

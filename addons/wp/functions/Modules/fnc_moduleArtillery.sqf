@@ -55,7 +55,7 @@ switch (_mode) do {
                         ["Side", "DROPDOWN", "Which side is calling for artillery", SIDES apply { str _x }],
                         ["Main Salvo", "NUMBER", "Number of rounds in main salvo", 6],
                         ["Spread", "NUMBER", "Default dispersion of main salvo", 75],
-                        ["Skip adjusting rounds", "BOOLEAN", "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target.", false]
+                        ["Skip adjusting rounds", "BOOLEAN", "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_logic", "_fnc_callArtillery"];

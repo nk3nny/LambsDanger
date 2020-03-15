@@ -35,9 +35,8 @@ _unit setVariable [QGVAR(currentTask), "Share Information"];
 
 // find units
 private _groups = allGroups select {
-    local _x
-    && {side _x isEqualTo side _unit}
-    && {leader _x distance2d _unit < _range}
+    leader _x distance2d _unit < _range
+    && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
     && {behaviour leader _x != "CARELESS"}
     && {_x != group _unit}
 };
@@ -46,10 +45,10 @@ private _knowsAbout = _unit knowsAbout _target;
 // share information
 {
     if (!isNull _target) then {
-        _x reveal [_target, _knowsAbout min 1];
+        [_x ,[_target, _knowsAbout min 1]] remoteExec ["reveal", _x];
     };
 
-    if (leader _x distance _unit < (250 min _range)) then {
+    if (leader _x distance _unit < (200 min _range)) then {
         _x setBehaviour "COMBAT";
         _x setFormDir ((leader _x) getDir _unit);
     };
@@ -58,7 +57,7 @@ private _knowsAbout = _unit knowsAbout _target;
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 
 // play animation
-if (RND(0.2)) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
+if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
 
 // debug
 if (GVAR(debug_functions)) then {

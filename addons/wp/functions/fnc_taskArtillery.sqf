@@ -41,12 +41,15 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
 };
 
 // remove from list
-private _artillery = [EGVAR(main,SideArtilleryHash), side _gun] call CBA_fnc_hashGet;
-_artillery = _artillery - [_gun];
-EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
+{
+    private _artillery = [EGVAR(main,SideArtilleryHash), side _gun] call CBA_fnc_hashGet;
+    _artillery = _artillery - [_gun];
+    EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
+} call CBA_fnc_directCall;
+
 
 // delay
-private _mainStrike = linearConversion [100, 2000, (_gun distance _pos), 30, 90, true];
+private _mainStrike = linearConversion [100, 2000, (_gun distance2d _pos), 30, 90, true];
 private _checkRounds = (25 + random 35);
 
 // delay
@@ -69,6 +72,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
                 private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
                 private _ammo = getArtilleryAmmo [_gun] select 0;
+                if (_ammo isEqualTo []) exitWith {};
 
                 if (_target inRangeOfArtillery [[_gun], _ammo]) then {
                     // Fire round
@@ -104,6 +108,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
         _offset = _offset + _accuracy / 3;
 
         private _ammo = getArtilleryAmmo [_gun] select 0;
+        if (_ammo isEqualTo []) exitWith {};
 
         if (_target inRangeOfArtillery [[_gun], _ammo]) then {
 
@@ -131,7 +136,13 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
     };
 
     // clean markers!
-    if (count _mlist > 0) then {_mlist spawn {sleep 60;{deleteMarker _x;true} count _this};};
+    if (count _mlist > 0) then {
+        [
+            {
+                {deleteMarker _x; true} count _this
+            }, _mList, 60
+        ] call cba_fnc_waitAndExecute;
+    };
 };
 
 // delay
@@ -144,9 +155,10 @@ if (!canFire _gun) exitWith {false};
 _gun doMove getposASL _gun;
 
 // register gun
-private _artillery = [EGVAR(main,SideArtilleryHash), side _gun] call CBA_fnc_hashGet;
-_artillery pushBackUnique _gun;
-EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
-
+{
+    private _artillery = [EGVAR(main,SideArtilleryHash), side _gun] call CBA_fnc_hashGet;
+    _artillery pushBackUnique _gun;
+    EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
+} call CBA_fnc_directCall;
 // end
 true
