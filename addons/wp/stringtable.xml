@@ -43,5 +43,41 @@
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
+            <English>Task Artillery Register</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ModuleDescription">
+            <English>Register units to that sides artillery pool.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
+            <English>Task Assault/Retreat</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
+            <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
+            <English>Unit is fleeing</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
+            <English>Enable this to make the unit retreat and ignore enemies</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_DisplayName">
+            <English>Remove module on Start-Up</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
+            <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
+            <English>Completion Threshold</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip">
+            <English>Units within this many meters will revert to regular behavior</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName">
+            <English>Script interval</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip">
+            <English>The cycle time of the script</English>
+        </Key>
     </Package>
 </Project>

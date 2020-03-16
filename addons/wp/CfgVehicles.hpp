@@ -77,8 +77,8 @@ class CfgVehicles {
         isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(Side) {
-                displayName = "Side";
-                tooltip = "Which side is calling for artillery";
+                displayName = CSTRING(Module_TaskArtillery_Side_DisplayName);
+                tooltip = CSTRING(Module_TaskArtillery_Side_Tooltip);
                 property = QGVAR(Side);
                 defaultValue = "0";
                 unique = 0;
@@ -89,8 +89,8 @@ class CfgVehicles {
                 expression = "_this setVariable ['%s', _value, true];";
             };
             class GVAR(MainSalvo): EditShort {
-                displayName = "Main Salvo";
-                tooltip = "Number of rounds in the main salvo";
+                displayName = CSTRING(Module_TaskArtillery_MainSalvo_DisplayName);
+                tooltip = CSTRING(Module_TaskArtillery_MainSalvo_Tooltip);
                 property = QGVAR(MainSalvo);
                 defaultValue = "6";
                 unique = 0;
@@ -99,8 +99,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(Spread): EditShort {
-                displayName = "Spread";
-                tooltip = "Default dispersion of the main salvo";
+                displayName = CSTRING(Module_TaskArtillery_Spread_DisplayName);
+                tooltip = CSTRINGModule_TaskArtillery_Spread_Tooltip
                 property = QGVAR(Spread);
                 defaultValue = "75";
                 unique = 0;
@@ -109,8 +109,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(SkipCheckRounds): Checkbox {
-                displayName = "Skip adjusting rounds";
-                tooltip = "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target";
+                displayName = CSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName);
+                tooltip = CSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip);
                 property = QGVAR(SkipCheckRounds);
                 unique = 0;
                 validate = "none";
@@ -123,7 +123,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = CSTRING(Module_TaskArtillery_ModuleDescription);;
+            description = CSTRING(Module_TaskArtillery_ModuleDescription);
         };
     };
 
@@ -133,7 +133,7 @@ class CfgVehicles {
         scope = 2;
         is3DEN = 1;
         scopeCurator = 2;
-        displayName = "Task Artillery Register";
+        displayName = CSTRING(Module_TaskArtilleryRegister_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtilleryRegister);
         functionPriority = 1;
@@ -154,7 +154,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 1;
-            description = "Register units to that sides artillery pool.";
+            description = CSTRING(Module_TaskArtilleryRegister_ModuleDescription);
         };
     };
 
@@ -164,7 +164,7 @@ class CfgVehicles {
         scope = 2;
         is3DEN = 1;
         scopeCurator = 2;
-        displayName = "Task Assault/Retreat";
+        displayName = CSTRING(Module_TaskAssault_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleAssault);
         functionPriority = 1;
@@ -174,8 +174,8 @@ class CfgVehicles {
         isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(IsRetreat): Checkbox {
-                displayName = "Unit is fleeing";
-                tooltip = "Enable this to make the unit retreat and ignore enemies";
+                displayName = CSTRING(Module_TaskAssault_Retreating_DisplayName);
+                tooltip = CSTRING(Module_TaskAssault_Retreating_Tooltip);
                 property = QGVAR(IsRetreat);
                 unique = 0;
                 validate = "none";
@@ -183,8 +183,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class GVAR(DeleteOnStartUp): Checkbox {
-                displayName = "Remove module on Start-Up";
-                tooltip = "Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically";
+                displayName = CSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName);
+                tooltip = CSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip);
                 property = QGVAR(DeleteOnStartUp);
                 unique = 0;
                 validate = "none";
@@ -192,8 +192,8 @@ class CfgVehicles {
                 typeName = "BOOL";
             };
             class GVAR(DistanceThreshold): EditShort {
-                displayName = "Completion Threshold";
-                tooltip = "Units within this many meters will revert to regular behavior";
+                displayName = CSTRING(Module_TaskAssault_DistanceThreshold_DisplayName);
+                tooltip = CSTRING(Module_TaskAssault_DistanceThreshold_Tooltip);
                 property = QGVAR(DistanceThreshold);
                 defaultValue = "15";
                 unique = 0;
@@ -202,8 +202,8 @@ class CfgVehicles {
                 typeName = "NUMBER";
             };
             class GVAR(CycleTime): EditShort {
-                displayName = "Script interval";
-                tooltip = "The cycle time of the script";
+                displayName = CSTRING(Module_TaskAssault_CycleTime_DisplayName);
+                tooltip = CSTRING(Module_TaskAssault_CycleTime_Tooltip);
                 property = QGVAR(CycleTime);
                 defaultValue = "3";
                 unique = 0;
@@ -217,7 +217,7 @@ class CfgVehicles {
             duplicate = 1;
             position = 1;
             direction = 0;
-            description = "Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.";
+            description = CSTRING(Module_TaskAssault_ModuleDescription);
         };
     };
 
