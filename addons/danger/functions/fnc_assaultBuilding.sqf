@@ -69,8 +69,12 @@ private _building = (_buildings select 0);
 
 // find spots
 private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
+
 private _buildingPosSelected = _buildingPos select 0;
 
+if (isNil "_buildingPosSelected") then {
+    _buildingPosSelected = _building modelToWorld [0,0,0];
+};
 // remove current target and do move
 _unit lookAt AGLtoASL _buildingPosSelected;
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);

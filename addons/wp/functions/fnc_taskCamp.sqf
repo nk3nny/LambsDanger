@@ -27,7 +27,7 @@ if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then {_group = group _group};
-private _units = units _group select {!isPlayer _x && {isNull objectParent _x}};
+private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
 
 // sort pos
 if (_pos isEqualTo []) then { _pos = _group; };
@@ -62,7 +62,9 @@ if (count _units > 4) then {
     if (count _units > 6)  then { [selectRandom units _group] join _group2; };
 
     // performance
-    [_group2, dynamicSimulationEnabled _group] remoteExecCall ["enableDynamicSimulation", 2];
+    if (dynamicSimulationEnabled _group) then {
+        [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
+    };
     _group2 deleteGroupWhenEmpty true;
 
     // id
@@ -86,8 +88,8 @@ if (count _units > 4) then {
 reverse _units;
 {
     // gun
-    if (count _gun > 0) then {
-        _x assignAsGunner (_gun deleteAt 0);
+    if !(_gun isEqualTo []) then {
+        _x assignAsGunner (_gun select 0);
         [_x] orderGetIn true;
         _x moveInGunner (_gun deleteAt 0);
         _units set [_foreachIndex, objNull];

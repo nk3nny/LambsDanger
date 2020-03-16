@@ -39,7 +39,7 @@ private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
 if (isNil "_cachedSounds") then {
     private _protocolConfig = configFile >> (getText (configFile >> "CfgVoice" >> _speaker >> "protocol")) >> "Words";
-    if (_behavior != "") then {
+    if (_behavior != "" && {isClass (_protocolConfig >> _behavior)}) then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
 

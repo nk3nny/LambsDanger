@@ -71,7 +71,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
                 // Randomize target location
                 private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
-                private _ammo = getArtilleryAmmo [_gun] select 0;
+                private _ammo = getArtilleryAmmo [_gun] params [0, []];
                 if (_ammo isEqualTo []) exitWith {};
 
                 if (_target inRangeOfArtillery [[_gun], _ammo]) then {
@@ -107,7 +107,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
         private _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
         _offset = _offset + _accuracy / 3;
 
-        private _ammo = getArtilleryAmmo [_gun] select 0;
+        private _ammo = getArtilleryAmmo [_gun] param [0, []];
         if (_ammo isEqualTo []) exitWith {};
 
         if (_target inRangeOfArtillery [[_gun], _ammo]) then {
@@ -152,7 +152,7 @@ sleep _checkRounds;
 if (!canFire _gun) exitWith {false};
 
 // Ready up again
-_gun doMove getposASL _gun;
+_gun doMove getPosASL _gun;
 
 // register gun
 {

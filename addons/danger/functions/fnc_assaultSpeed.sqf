@@ -16,14 +16,14 @@
  * Public: No
 */
 
-params ["_unit", ["_target",ObjNull]];
+params ["_unit", ["_target", objNull]];
 
 // distance
 private _distance = _unit distance2d _target;
 
 // speed
-if (behaviour _unit isEqualTo "STEALTH") exitWith {1};
-if (speedMode _unit isEqualTo "FULL") exitWith {[24, 3] select (_distance < (8 + random 4))};
+if ((behaviour _unit) isEqualTo "STEALTH") exitWith {1};
+if ((speedMode _unit) isEqualTo "FULL") exitWith {[24, 3] select (_distance < (8 + random 4))};
 if (_distance > (GVAR(CQB_range) + 20)) exitWith {-1};
 if (_distance > 15) exitWith {3};
 if (_distance > 4) exitWith {2};

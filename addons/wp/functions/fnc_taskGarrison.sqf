@@ -102,8 +102,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
     ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
-    private _type = selectRandom [1, 2, 3];
-    switch (_type) do {
+    switch (ceil (random 3)) do {
         case 1: {
             _x addEventHandler ["Fired", {
                 params ["_unit"];
