@@ -172,32 +172,36 @@ private _dir = random 360;
     if !(primaryWeapon _x isEqualTo "") then {_anims append _armedAnims};
 
     // wait for it
-    [
-        {
-            params ["_unit", "", "", ""];
-            unitReady _unit
-        },
-        {
-            params ["_unit", "_target", "_center", "_anim"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-            doStop _unit;
-            [_unit, _anim] remoteExec ["switchMove", 0];
-            _unit disableAI "ANIM";
-            _unit disableAI "PATH";
-            _unit setDir (_unit getDir _center);
-            _unit addEventHandler ["Hit", {
-                params ["_unit"];
-                {
-                    _x enableAI "ANIM";
-                    _x enableAI "PATH";
-                } foreach units _unit;
-                _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
-                _unit removeEventHandler ["Hit", _thisEventHandler]
-                }
-            ];
-        },
-        [_x, _pos2, _pos, selectRandom _anims]
-    ] call CBA_fnc_waitUntilAndExecute;
+    [{
+        params ["_unit"];
+        unitReady _unit
+    }, {
+        params ["_unit", "_target", "_center", "_anim"];
+        if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        doStop _unit;
+        [_unit, _anim] remoteExec ["switchMove", 0];
+        _unit disableAI "ANIM";
+        _unit disableAI "PATH";
+        _unit setDir (_unit getDir _center);
+        _unit addEventHandler ["Hit", {
+            params ["_unit"];
+            {
+                _x enableAI "ANIM";
+                _x enableAI "PATH";
+            } foreach units _unit;
+            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            _unit removeEventHandler ["Hit", _thisEventHandler];
+        }];
+        _unit addEventHandler ["FiredNear", {
+            params ["_unit"];
+            {
+                _x enableAI "ANIM";
+                _x enableAI "PATH";
+            } foreach units _unit;
+            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            _unit removeEventHandler ["FiredNear", _thisEventHandler];
+        }];
+    }, [_x, _pos2, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
 
 } forEach _units;
 
