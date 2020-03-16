@@ -38,7 +38,7 @@ _pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance);
 
 // trace
-private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 2];
+private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // recheck

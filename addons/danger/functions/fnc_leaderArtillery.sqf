@@ -33,7 +33,7 @@ _artillery = _artillery select {
 };
 
 // exit on no ready artillery
-if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in rage of Target", side _unit] call FUNC(debugLog);}};
+if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];

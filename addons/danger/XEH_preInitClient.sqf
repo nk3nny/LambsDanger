@@ -43,7 +43,7 @@ private _fnc_suppress_AI = {
         if (isNull _target) then { _target = cursorObject };  // added to get a target more commonly. - nkenny
         private _firePos = [0, 0, 0];
         if (isNull _target) then {
-            private _intersections = lineIntersectsSurfaces [positionCameraToWorld [0, 0, 0], positionCameraToWorld [0, 0, 10000], player, objNull, true, -1];
+            private _intersections = lineIntersectsSurfaces [positionCameraToWorld [0, 0, 0], positionCameraToWorld [0, 0, 10000], player, objNull, true, 1];
             if !(_intersections isEqualTo []) then {
                 _firePos = (_intersections select 0) select 0;
                 _target = _x findNearestEnemy _firePos;
