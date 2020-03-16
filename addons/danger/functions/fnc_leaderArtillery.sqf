@@ -29,7 +29,7 @@ private _artillery = [EGVAR(main,SideArtilleryHash), side _unit] call CBA_fnc_ha
 _artillery = _artillery select {
     canFire _x
     && {unitReady _x}
-    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
+    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
 };
 
 // exit on no ready artillery
