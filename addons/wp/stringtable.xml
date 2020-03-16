@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="Lambs_Danger">
+    <Package name="Waypoints">
+        <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_DisplayName">
+            <English>Register as LAMBS artillery</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_ToolTip">
+            <English>Vehicle will be automatically registered as available artillery for dynamic strikes</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_Target_DisplayName">
+            <English>Dynamic Target</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_Target_ModuleDescription">
+            <English>The LAMBS dynamic target creates a point of reference for scripts. The module can be dynamically moved and can be attached to units.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_DisplayName">
+            <English>Task Artillery</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ModuleDescription">
+            <English>This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
+            <English>Side</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip">
+            <English>Which side is calling for artillery</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName">
+            <English>Main Salvo</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
+            <English>Number of rounds in the main salvo</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
+            <English>Spread</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
+            <English>Default dispersion of the main salvo</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName">
+            <English>Skip adjusting rounds</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
+            <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
+        </Key>
+    </Package>
+</Project>

@@ -45,7 +45,7 @@ class CfgVehicles {
         _generalMacro = QGVAR(Target);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Dynamic Target";
+        displayName = CSTRING(Module_Target_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleTarget);
         functionPriority = 1;
@@ -56,7 +56,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = "The LAMBS dynamic target creates a point of reference for scripts. The module can be dynamically moved and can be attached to units.";
+            description = CSTRING(Module_Target_ModuleDescription);
         };
     };
 
@@ -67,7 +67,7 @@ class CfgVehicles {
         scope = 2;
         is3DEN = 1;
         scopeCurator = 2;
-        displayName = "Task Artillery";
+        displayName = CSTRING(Module_TaskArtillery_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtillery);
         functionPriority = 1;
@@ -123,7 +123,7 @@ class CfgVehicles {
             duplicate = 0;
             position = 1;
             direction = 0;
-            description = "This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance";
+            description = CSTRING(Module_TaskArtillery_ModuleDescription);;
         };
     };
 
