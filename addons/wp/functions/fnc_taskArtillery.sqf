@@ -79,7 +79,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
                 // Randomize target location
                 private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
-                private _ammo = (getArtilleryAmmo [_gun]) params [0, ""];
+                private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
                 if (_ammo isEqualTo "") exitWith {};
 
                 if (_target inRangeOfArtillery [[_gun], _ammo]) then {
