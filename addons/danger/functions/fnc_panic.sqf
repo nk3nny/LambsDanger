@@ -72,7 +72,7 @@ _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];
 
 // chance to randomly fire weapon
 if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
-    _unit forceWeaponFire [(weapons _unit) select 0, selectRandom (getArray (configFile >> "CfgWeapons" >> ((weapons _unit) select 0) >> "modes"))];
+    _unit forceWeaponFire [primaryWeapon _unit, selectRandom (getArray (configFile >> "CfgWeapons" >> (primaryWeapon _unit) >> "modes"))];
 };
 
 // chance to randomly wave

@@ -34,10 +34,10 @@ private _buildings = [_unit, _range] call FUNC(findBuildings);
 
 // sort buildings near targets
 private _distance = _unit distance2d _target;
-_buildings = _buildings select {_x distance2d _target < (_distance + 8)};
-
-// sort predefined buildings
-_buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) > 0};
+_buildings = _buildings select {
+    _x distance2d _target < (_distance + 8)
+    && !((_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) isEqualTo [])
+};
 
 // update variable
 {
