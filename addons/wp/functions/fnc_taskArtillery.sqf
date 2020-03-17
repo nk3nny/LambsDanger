@@ -53,8 +53,8 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
     EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
 } call CBA_fnc_directCall;
 
-private _ammo = (getArtilleryAmmo [_gun]) params [0, ""];
-private _time = (getArtilleryETA [_target, _ammo]);
+private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
+private _time = getArtilleryETA [_center, _ammo];
 
 // delay
 private _mainStrike = linearConversion [100, 2000, (_gun distance2d _pos), 30, 90, true];
