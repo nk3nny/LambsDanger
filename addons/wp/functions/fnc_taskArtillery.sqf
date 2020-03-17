@@ -54,7 +54,7 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
 } call CBA_fnc_directCall;
 
 private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
-private _time = getArtilleryETA [_center, _ammo];
+private _time = _gun getArtilleryETA [_center, _ammo];
 
 // delay
 private _mainStrike = linearConversion [100, 2000, (_gun distance2d _pos), 30, 90, true];
