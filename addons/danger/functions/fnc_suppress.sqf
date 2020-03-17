@@ -35,8 +35,8 @@ if (
 if (!_override) then {
 
     _pos = AGLtoASL (_unit getHideFrom (_unit findNearestEnemy _unit));
-    private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 2];
-    if (count _vis > 1) then {_pos = (_vis select 0) select 0;};
+    private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
+    if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 };
 
 // mod pos

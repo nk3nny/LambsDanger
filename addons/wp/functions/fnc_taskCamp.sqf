@@ -27,7 +27,7 @@ if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then {_group = group _group};
-private _units = units _group select {!isPlayer _x && {isNull objectParent _x}};
+private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
 
 // sort pos
 if (_pos isEqualTo []) then { _pos = _group; };
@@ -62,7 +62,9 @@ if (count _units > 4) then {
     if (count _units > 6)  then { [selectRandom units _group] join _group2; };
 
     // performance
-    [_group2, dynamicSimulationEnabled _group] remoteExecCall ["enableDynamicSimulation", 2];
+    if (dynamicSimulationEnabled _group) then {
+        [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
+    };
     _group2 deleteGroupWhenEmpty true;
 
     // id
@@ -86,8 +88,8 @@ if (count _units > 4) then {
 reverse _units;
 {
     // gun
-    if (count _gun > 0) then {
-        _x assignAsGunner (_gun deleteAt 0);
+    if !(_gun isEqualTo []) then {
+        _x assignAsGunner (_gun select 0);
         [_x] orderGetIn true;
         _x moveInGunner (_gun deleteAt 0);
         _units set [_foreachIndex, objNull];
@@ -170,32 +172,36 @@ private _dir = random 360;
     if !(primaryWeapon _x isEqualTo "") then {_anims append _armedAnims};
 
     // wait for it
-    [
-        {
-            params ["_unit", "", "", ""];
-            unitReady _unit
-        },
-        {
-            params ["_unit", "_target", "_center", "_anim"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-            doStop _unit;
-            [_unit, _anim] remoteExec ["switchMove", 0];
-            _unit disableAI "ANIM";
-            _unit disableAI "PATH";
-            _unit setDir (_unit getDir _center);
-            _unit addEventHandler ["Hit", {
-                params ["_unit"];
-                {
-                    _x enableAI "ANIM";
-                    _x enableAI "PATH";
-                } foreach units _unit;
-                _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
-                _unit removeEventHandler ["Hit", _thisEventHandler]
-                }
-            ];
-        },
-        [_x, _pos2, _pos, selectRandom _anims]
-    ] call CBA_fnc_waitUntilAndExecute;
+    [{
+        params ["_unit"];
+        unitReady _unit
+    }, {
+        params ["_unit", "_target", "_center", "_anim"];
+        if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        doStop _unit;
+        [_unit, _anim] remoteExec ["switchMove", 0];
+        _unit disableAI "ANIM";
+        _unit disableAI "PATH";
+        _unit setDir (_unit getDir _center);
+        _unit addEventHandler ["Hit", {
+            params ["_unit"];
+            {
+                _x enableAI "ANIM";
+                _x enableAI "PATH";
+            } foreach units _unit;
+            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            _unit removeEventHandler ["Hit", _thisEventHandler];
+        }];
+        _unit addEventHandler ["FiredNear", {
+            params ["_unit"];
+            {
+                _x enableAI "ANIM";
+                _x enableAI "PATH";
+            } foreach units _unit;
+            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            _unit removeEventHandler ["FiredNear", _thisEventHandler];
+        }];
+    }, [_x, _pos2, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
 
 } forEach _units;
 

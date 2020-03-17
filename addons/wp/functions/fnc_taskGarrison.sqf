@@ -102,8 +102,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
     ] call CBA_fnc_waitUntilAndExecute;
 
     // add handlers
-    private _type = selectRandom [1, 2, 3];
-    switch (_type) do {
+    switch (ceil (random 3)) do {
         case 1: {
             _x addEventHandler ["Fired", {
                 params ["_unit"];
@@ -115,9 +114,9 @@ if (count _units > count _houses) then {_units resize (count _houses);};
         case 2: {
             _x addEventHandler ["FiredNear", {
                 params ["_unit", "_shooter", "_distance"];
-                if (side _unit != side _shooter && {_distance < 10 + random 10}) then {
+                if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
                     _unit enableAI "PATH";
-                    _unit doMove getposATL _shooter;
+                    _unit doMove (getPosATL _shooter);
                     _unit setCombatMode "RED";
                     _unit removeEventHandler ["FiredNear", _thisEventHandler];
                 };

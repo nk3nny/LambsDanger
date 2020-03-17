@@ -24,7 +24,13 @@ if !(canSuspend) exitWith {
 };
 
 // init
-params ["_gun", "_pos", "_caller", ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
+params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
+
+if (_pos isEqualTo [] || isNull _gun) exitWith {};
+
+if (isNull _caller) then {
+    _caller = _gun;
+};
 
 // Gun and caller must be alive
 if (!canFire _gun || {!(_caller call EFUNC(danger,isAlive))}) exitWith {false};
@@ -47,10 +53,12 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
     EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
 } call CBA_fnc_directCall;
 
+private _ammo = (getArtilleryAmmo [_gun]) params [0, ""];
+private _time = (getArtilleryETA [_target, _ammo]);
 
 // delay
 private _mainStrike = linearConversion [100, 2000, (_gun distance2d _pos), 30, 90, true];
-private _checkRounds = (25 + random 35);
+private _checkRounds = (_time + random 35);
 
 // delay
 sleep _mainStrike;
@@ -71,8 +79,8 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
                 // Randomize target location
                 private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 50 - random 100];
 
-                private _ammo = getArtilleryAmmo [_gun] select 0;
-                if (_ammo isEqualTo []) exitWith {};
+                private _ammo = (getArtilleryAmmo [_gun]) params [0, ""];
+                if (_ammo isEqualTo "") exitWith {};
 
                 if (_target inRangeOfArtillery [[_gun], _ammo]) then {
                     // Fire round
@@ -107,8 +115,8 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
         private _target = _center getPos [_offset + random _accuracy, _direction + 50 - random 100];
         _offset = _offset + _accuracy / 3;
 
-        private _ammo = getArtilleryAmmo [_gun] select 0;
-        if (_ammo isEqualTo []) exitWith {};
+        private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
+        if (_ammo isEqualTo "") exitWith {};
 
         if (_target inRangeOfArtillery [[_gun], _ammo]) then {
 
@@ -152,7 +160,7 @@ sleep _checkRounds;
 if (!canFire _gun) exitWith {false};
 
 // Ready up again
-_gun doMove getposASL _gun;
+_gun doMove getPosASL _gun;
 
 // register gun
 {
