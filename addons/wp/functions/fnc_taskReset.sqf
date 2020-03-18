@@ -37,6 +37,9 @@ _group deleteGroupWhenEmpty true;
 
 // reset
 {
+    // check move
+    _x doMove getposASL _x;
+
     // AI states
     _x enableAI "MOVE";
     _x enableAI "PATH";
@@ -69,18 +72,9 @@ _group deleteGroupWhenEmpty true;
 // reset lambs variable
 _groupNew setVariable [QEGVAR(danger,disableGroupAI), nil];
 
-// reset move
+// reset move and behaviour
 _groupNew move getPosASL leader _groupNew;
+_groupNew setBehaviour "AWARE";
 
 // end
 true
-
-// TODO @ joko
-/*
-
-    1. Module does not need a dialogue
-    2. Unit should be called 'Unit taskReset'  <-- this puts it at the bottom of alphabetic list
-    3. Unit returns 'Unit orders reset' as Zeus notification if successful
-    4. done 
-
-*/

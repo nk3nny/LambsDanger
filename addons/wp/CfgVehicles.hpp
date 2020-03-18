@@ -60,6 +60,26 @@ class CfgVehicles {
         };
     };
 
+    class GVAR(TaskReset) : GVAR(BaseModule) {
+        author = "LAMBS Dev Team";
+        _generalMacro = QGVAR(TaskReset);
+        scope = 1;
+        scopeCurator = 2;
+        displayName = "Task Reset";
+        category = "Lambs_Danger_WP_Cat";
+        function = QFUNC(moduleReset);
+        functionPriority = 1;
+        icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        isGlobal = 0;
+        class ModuleDescription: ModuleDescription {
+            duplicate = 0;
+            position = 1;
+            direction = 0;
+            description = "This module resets all custom LAMBS scripts running on the unit";
+        };
+    };
+
     // Zeus and Editor Modules
     class GVAR(TaskArtillery) : GVAR(BaseModule) {
         author = "LAMBS Dev Team";

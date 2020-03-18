@@ -20,5 +20,6 @@ SUBPREP(Modules,moduleCreep);
 SUBPREP(Modules,moduleGarrison);
 SUBPREP(Modules,moduleHunt);
 SUBPREP(Modules,modulePatrol);
+SUBPREP(Modules,moduleReset);
 SUBPREP(Modules,moduleRush);
 SUBPREP(Modules,moduleTarget);
