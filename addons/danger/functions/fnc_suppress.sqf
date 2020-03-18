@@ -25,7 +25,7 @@ _unit setVariable [QGVAR(currentTask), "Deliberate Fire"];
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.5
-    || {terrainIntersectASL [eyepos _unit, _pos]}
+    || {terrainIntersectASL [eyePos _unit, _pos]}
     || {(primaryWeapon _unit) isEqualTo ""}
     || {(currentCommand _unit) isEqualTo "Suppress"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
@@ -33,7 +33,9 @@ if (
 
 // override
 if (!_override) then {
-    _pos = AGLtoASL (_unit getHideFrom (_unit findNearestEnemy (ASLtoAGL _pos)));
+    private _enemy = _unit findNearestEnemy (ASLToAGL _pos);
+    if (isNull _enemy) exitWith {};
+    _pos = ATLToASL (_unit getHideFrom _enemy);
     private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
     if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 };
