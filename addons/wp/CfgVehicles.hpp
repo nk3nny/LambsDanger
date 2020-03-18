@@ -64,7 +64,6 @@ class CfgVehicles {
         _generalMacro = QGVAR(TaskReset);
         scope = 2;
         scopeCurator = 2;
-        is3DEN = 0;
         displayName = "Task Reset";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleReset);
