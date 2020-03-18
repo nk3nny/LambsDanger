@@ -24,7 +24,7 @@ if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // units
-private _units = units _group select {!isplayer _x};
+private _units = units _group select {!isPlayer _x};
 
 // make new group + adopt name
 private _groupNew = createGroup (side _group);
@@ -33,12 +33,13 @@ _groupNew setFormation (formation _group);
 
 // remove all current waypoints
 [_group] call CBA_fnc_clearWaypoints;
+
 _group deleteGroupWhenEmpty true;
 
 // reset
 {
     // check move
-    _x doMove getposASL _x;
+    _x doMove (getPosASL _x);
 
     // AI states
     _x enableAI "MOVE";
@@ -56,7 +57,7 @@ _group deleteGroupWhenEmpty true;
 
     // reset animations
     _x enableAI "ANIM";
-    _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select (primaryWeapon _x isEqualTo ""));
+    _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables
     _x setVariable [QEGVAR(danger,currentTask), nil];
@@ -66,14 +67,17 @@ _group deleteGroupWhenEmpty true;
 
     // rejoin group
     [_x] joinSilent _groupNew;
-    _x doFollow leader _x;
+    _x doFollow (leader _x);
 } count _units;
 
 // reset lambs variable
 _groupNew setVariable [QEGVAR(danger,disableGroupAI), nil];
 
+if (dynamicSimulationEnabled _group) then {
+    [_groupNew, true] remoteExecCall ["enableDynamicSimulation", 2];
+};
 // reset move and behaviour
-_groupNew move getPosASL leader _groupNew;
+_groupNew move (getPosASL (leader _groupNew));
 _groupNew setBehaviour "AWARE";
 
 // end

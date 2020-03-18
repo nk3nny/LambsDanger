@@ -98,7 +98,7 @@ _group enableAttack false;
 waitUntil {
 
     // performance
-    waitUntil {sleep 1; simulationenabled leader _group};
+    waitUntil {sleep 1; simulationEnabled leader _group};
 
     // find
     private _target = [_group, _radius, _area, _pos] call FUNC(findClosestTarget);
