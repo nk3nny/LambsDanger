@@ -52,6 +52,9 @@ _unit setVariable [QGVAR(currentTask), "Call Artillery"];
 doStop _unit;
 [_unit, ["HandSignalRadio"]] call FUNC(gesture);
 
+// callout
+[_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);
+
 // perform it
 [_gun, _pos, _unit] spawn EFUNC(WP,taskArtillery);
 

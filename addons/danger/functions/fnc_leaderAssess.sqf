@@ -52,12 +52,24 @@ if !(_enemy isEqualTo []) then {
     private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
         [_unit, 3, getposATL (_enemy select _targets)] call FUNC(leaderMode);
+    
+        // gesture
+        [_unit, ["gesturePoint"]] call FUNC(gesture);
+    
     };
 
     // Enemy is Tank/Air?
     _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
     if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
+
+        // callout
+        private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf (_enemy select _targets) >> "nameSound")) then {
+            getText (configFile >> "CfgVehicles" >> typeOf (_enemy select _targets) >> "nameSound")
+        } else {
+            "KeepFocused"
+        };
+        [_unit, behaviour _unit, _callout, 125] call FUNC(doCallout);
     };
 
     // Artillery
@@ -68,6 +80,11 @@ if !(_enemy isEqualTo []) then {
 
     // communicate <-- possible remove?
     [_unit, selectRandom _enemy] call FUNC(shareInformation);
+
+} else {
+
+    // callout
+    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call FUNC(doCallout);
 
 };
 

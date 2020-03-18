@@ -33,7 +33,6 @@ if (
 
 // override
 if (!_override) then {
-
     _pos = AGLtoASL (_unit getHideFrom (_unit findNearestEnemy _unit));
     private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
     if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
@@ -41,14 +40,14 @@ if (!_override) then {
 
 // mod pos
 private _distance = ((_unit distance _pos) min 350) - 4;
-_pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance);
+_pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
 if (_distance < GVAR(minSuppression_range)) exitWith {false};
 
 // Call it out ~ low chance. This is a common event. -nkenny
 if (RND(0.2) && {count units _unit > 1}) then {
-    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 75] call FUNC(doCallout);
+    [_unit, "Combat", "suppress", 75] call FUNC(doCallout);
 };
 
 // do it!

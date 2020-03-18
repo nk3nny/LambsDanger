@@ -27,6 +27,9 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 // gesture
 [_unit, ["gestureCover"]] call FUNC(gesture);
 
+// callout
+[_unit, behaviour _unit, "TakeCover", 125] call FUNC(doCallout);
+
 // sort units
 private _units = units _unit;
 _units = _units select {_x call FUNC(isAlive) && {isNull objectParent _x}};
