@@ -32,12 +32,15 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
     [_unit, ["gestureFollow"]] call FUNC(gesture);
     _unit doMove _target;
 
+    // leader callout
+    [_unit, "combat", "RallyUp", 125] call FUNC(doCallout);
+
     // set tasks + rally unit
     _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     {
         _x doFollow (leader _x);
         _x forceSpeed selectRandom [24, 3];
-        _x setVariable [QGVAR(forceMOVE), true];
+        _x setVariable [QGVAR(forceMove), true];
         true
     } count (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 45} });
     false
@@ -63,6 +66,9 @@ _unit setVariable [QGVAR(currentTask), "Leader Manoeuvre"];
 // gesture
 [_unit, ["gestureGo"]] call FUNC(gesture);
 [selectRandom _units, ["gestureGoB"]] call FUNC(gesture);
+
+// leader callout
+[_unit, "combat", selectRandom ["OnYourFeet ", "Advance"], 125] call FUNC(doCallout);
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);

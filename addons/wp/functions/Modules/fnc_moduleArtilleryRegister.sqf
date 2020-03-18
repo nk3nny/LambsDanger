@@ -61,5 +61,15 @@ switch (_mode) do {
             deleteVehicle _logic;
         };
     };
+    case "connectionChanged3DEN": {
+        _input params [["_logic", objNull, [objNull]]];
+        private _found = (get3DENConnections _logic) findIf { !((_x select 1) isKindOf "EmptyDetector") } != -1;
+        if (_found) then {
+            _logic set3DENAttribute ["size2", [0, 0]];
+        } else {
+            _logic set3DENAttribute ["size2", [100, 100]];
+            _logic clear3DENAttribute "size2";
+        };
+    };
 };
 true

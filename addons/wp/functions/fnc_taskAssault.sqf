@@ -24,7 +24,7 @@ if !(canSuspend) exitWith {
 // functions ~ keep units moving!
 private _fnc_unAssault = {
     params ["_unit", "_group", "_retreat"];
-    if (currentCommand _unit isEqualTO "ATTACK") then {
+    if ((currentCommand _unit) isEqualTo "ATTACK") then {
         [_unit] joinSilent grpNull;
         [_unit] joinSilent _group;
     };
@@ -91,6 +91,9 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 // execute move
 waitUntil {
 
+    // reset option
+    if ((units _group) isEqualTo []) exitWith {true};
+
     // get waypoint position
     private _wPos = _pos call EFUNC(main,getPos);
 
@@ -137,7 +140,7 @@ waitUntil {
     _x doMove getposASL _x;
     [_x, false] call _fnc_softReset;    // nb: retreat value set to false to prevent animation from replaying. -nkenny
     true
-} count units _group;
+} count (units _group select {!isPlayer _x});
 
 // end
 true

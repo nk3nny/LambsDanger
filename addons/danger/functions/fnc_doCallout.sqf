@@ -53,6 +53,9 @@ if (isNil "_cachedSounds") then {
         case ("mandown"): {
             selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
         };
+        case ("suppress"): {
+            selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"]
+        };
         default {
             if (isArray (_protocolConfig >> _callout)) then {
                 _callout;
@@ -97,4 +100,4 @@ if (GVAR(debug_functions)) then {
 };
 
 // set time until next callout
-_unit setVariable [QGVAR(calloutTime), time + 5, true];
+_unit setVariable [QGVAR(calloutTime), time + 4, true];

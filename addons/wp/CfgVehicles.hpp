@@ -17,9 +17,14 @@ class CfgVehicles {
     };
 
     class GVAR(BaseModule): Module_F {
+        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(BaseModule);
         scope = 0;
         scopeCurator = 0;
+        is3DEN = 1;
+        isGlobal = 0;
+        isTriggerActivated = 1;
+        functionPriority = 1;
         class AttributesBase: AttributesBase {
             class EditShort {
                 control = "EditShort";
@@ -41,40 +46,44 @@ class CfgVehicles {
 
     // Zeus Modules
     class GVAR(Target) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(Target);
+        is3DEN = 0;
         scope = 1;
         scopeCurator = 2;
         displayName = CSTRING(Module_Target_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleTarget);
-        functionPriority = 1;
         icon = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
         portrait = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
-        isGlobal = 0;
         class ModuleDescription: ModuleDescription {
-            duplicate = 0;
-            position = 1;
-            direction = 0;
             description = CSTRING(Module_Target_ModuleDescription);
+        };
+    };
+
+    class GVAR(TaskReset) : GVAR(BaseModule) {
+        _generalMacro = QGVAR(TaskReset);
+        scope = 2;
+        scopeCurator = 2;
+        displayName = "Task Reset";
+        category = "Lambs_Danger_WP_Cat";
+        function = QFUNC(moduleReset);
+        icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+        class ModuleDescription: ModuleDescription {
+            description = "This module resets all custom LAMBS scripts running on the unit";
         };
     };
 
     // Zeus and Editor Modules
     class GVAR(TaskArtillery) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtillery);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = CSTRING(Module_TaskArtillery_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtillery);
-        functionPriority = 1;
         icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
         portrait = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(Side) {
                 displayName = CSTRING(Module_TaskArtillery_Side_DisplayName);
@@ -120,27 +129,19 @@ class CfgVehicles {
             class ModuleDescription: ModuleDescription {};
         };
         class ModuleDescription: ModuleDescription {
-            duplicate = 0;
-            position = 1;
-            direction = 0;
             description = CSTRING(Module_TaskArtillery_ModuleDescription);
         };
     };
 
     class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskArtilleryRegister);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = CSTRING(Module_TaskArtilleryRegister_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleArtilleryRegister);
-        functionPriority = 1;
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -152,7 +153,6 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = CSTRING(Module_TaskArtilleryRegister_ModuleDescription);
         };
@@ -162,16 +162,12 @@ class CfgVehicles {
         author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskAssault);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = CSTRING(Module_TaskAssault_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleAssault);
-        functionPriority = 1;
         icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
         portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         class Attributes: AttributesBase {
             class GVAR(IsRetreat): Checkbox {
                 displayName = CSTRING(Module_TaskAssault_Retreating_DisplayName);
@@ -215,26 +211,19 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
-            direction = 0;
             description = CSTRING(Module_TaskAssault_ModuleDescription);
         };
     };
 
     class GVAR(TaskCamp) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCamp);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Camp";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleCamp);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -254,19 +243,14 @@ class CfgVehicles {
     };
 
     class GVAR(TaskCQB) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCQB);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task CQB";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleCQB);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -297,26 +281,20 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.<br/><br/>In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.";
         };
     };
 
     class GVAR(TaskGarrison) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskGarrison);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Garrison";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleGarrison);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -328,26 +306,20 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.";
         };
     };
 
     class GVAR(TaskPatrol) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskPatrol);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Patrol";
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(modulePatrol);
-        functionPriority = 1;
         icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
         portrait = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -378,7 +350,6 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task Patrol makes the unit patrol within the area set by 3DEN attributes.";
         };
@@ -386,19 +357,14 @@ class CfgVehicles {
 
     // Search Modules
     class GVAR(TaskCreep) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskCreep);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Creep";
         category = "Lambs_Danger_WP_Search_Cat";
         function = QFUNC(moduleCreep);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -430,26 +396,20 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players";
         };
     };
 
     class GVAR(TaskHunt) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskHunt);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Hunt";
         category = "Lambs_Danger_WP_Search_Cat";
         function = QFUNC(moduleHunt);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -481,26 +441,20 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.";
         };
     };
 
     class GVAR(TaskRush) : GVAR(BaseModule) {
-        author = "LAMBS Dev Team";
         _generalMacro = QGVAR(TaskRush);
         scope = 2;
-        is3DEN = 1;
         scopeCurator = 2;
         displayName = "Task Rush";
         category = "Lambs_Danger_WP_Search_Cat";
         function = QFUNC(moduleRush);
-        functionPriority = 1;
         icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
-        isGlobal = 0;
-        isTriggerActivated = 1;
         canSetArea = 1;
         canSetAreaShape = 1;
         class AttributeValues {
@@ -532,10 +486,8 @@ class CfgVehicles {
         };
         class ModuleDescription: ModuleDescription {
             duplicate = 1;
-            position = 1;
             direction = 1;
             description = "Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
         };
     };
-
 };
