@@ -165,7 +165,7 @@ private _dir = random 360;
 
     // execute move
     _x doMove _pos2;
-    _x setDestination [_pos2, "LEADER PLANNED", false];
+    _x setDestination [_pos2, "LEADER DIRECT", false];
 
     // sort anims
     private _anims = _unarmedAnims;

@@ -26,13 +26,14 @@ if (_group isEqualType objNull) then { _group = group _group; };
 // units
 private _units = units _group select {!isplayer _x};
 
-// remove all current waypoints
-[_group] call CBA_fnc_clearWaypoints;
-_group deleteGroupWhenEmpty true;
-
 // make new group + adopt name
 private _groupNew = createGroup (side _group);
 _groupNew setGroupIdGlobal [groupId _group];
+_groupNew setFormation (formation _group);
+
+// remove all current waypoints
+[_group] call CBA_fnc_clearWaypoints;
+_group deleteGroupWhenEmpty true;
 
 // reset
 {
@@ -50,18 +51,13 @@ _groupNew setGroupIdGlobal [groupId _group];
     _x setUnitPos "AUTO";
     _x setUnitPosWeak "AUTO";
 
-    // reset animations if necessary
-    if !(_unit checkAIFeature "ANIM") then {
-        _x enableAI "ANIM";
-        _x switchMove "ApanPercMrunSnonWnonDf";
-        _x playMoveNow selectRandom [
-            "ApanPknlMsprSnonWnonDf",
-            "ApanPknlMsprSnonWnonDf",
-            "ApanPercMsprSnonWnonDf"
-        ];
-    };
+    // reset animations
+    _x enableAI "ANIM";
+    _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select (primaryWeapon _x isEqualTo ""));
 
     // LAMBS variables
+    _x setVariable [QEGVAR(danger,currentTask), nil];
+    _x setVariable [QEGVAR(danger,currentTarget), nil];
     _x setVariable [QEGVAR(danger,disableAI), nil];
     _x setVariable [QEGVAR(danger,forceMove), true];        // one FSM cycle of forced movement to get AI into action! -nkenny
 
@@ -72,6 +68,9 @@ _groupNew setGroupIdGlobal [groupId _group];
 
 // reset lambs variable
 _groupNew setVariable [QEGVAR(danger,disableGroupAI), nil];
+
+// reset move
+_groupNew move getPosASL leader _groupNew;
 
 // end
 true
