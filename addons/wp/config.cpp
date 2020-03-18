@@ -13,7 +13,8 @@ class CfgPatches {
             QGVAR(TaskCreep),
             QGVAR(TaskGarrison),
             QGVAR(TaskPatrol),
-            QGVAR(TaskRush)
+            QGVAR(TaskRush),
+            QGVAR(TaskReset)
         };
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;

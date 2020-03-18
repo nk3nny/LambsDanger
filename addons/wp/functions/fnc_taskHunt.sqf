@@ -82,3 +82,6 @@ waitUntil {
     ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
 
 };
+
+// end
+true

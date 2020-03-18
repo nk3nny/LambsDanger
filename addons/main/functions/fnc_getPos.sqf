@@ -44,7 +44,7 @@ switch (typeName _entity) do {
         taskDestination _entity;
     };
     case ("SCALAR"): {
-        + _entity;
+        + _this;
     };
     default {
         LOG("unkown Type in GetPos with: " + (typeName _this));

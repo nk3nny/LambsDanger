@@ -13,7 +13,7 @@
  * none
  *
  * Example:
- * [bob, 500] call lambs_wp_fnc_taskRush;
+ * [bob, 500] call lambs_wp_fnc_taskPatrol;
  *
  * Public: No
 */

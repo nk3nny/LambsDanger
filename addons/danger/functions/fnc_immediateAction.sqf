@@ -42,8 +42,8 @@ if (
 //if (stopped _unit) exitWith {false};
 
 // callout
-if (RND(0.8)) then {
-    [_unit, "Combat", "UnderFireE", 100] call FUNC(doCallout);
+if (RND(0.6)) then {
+    [_unit, "Combat", "UnderFireE", 125] call FUNC(doCallout);
 };
 
 // standing to rush

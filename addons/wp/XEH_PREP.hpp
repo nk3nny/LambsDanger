@@ -8,6 +8,7 @@ PREP(taskCreep);
 PREP(taskGarrison);
 PREP(taskHunt);
 PREP(taskPatrol);
+PREP(taskReset);
 PREP(taskRush);
 
 SUBPREP(Modules,moduleArtillery);
@@ -19,5 +20,6 @@ SUBPREP(Modules,moduleCreep);
 SUBPREP(Modules,moduleGarrison);
 SUBPREP(Modules,moduleHunt);
 SUBPREP(Modules,modulePatrol);
+SUBPREP(Modules,moduleReset);
 SUBPREP(Modules,moduleRush);
 SUBPREP(Modules,moduleTarget);

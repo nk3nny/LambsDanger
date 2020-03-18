@@ -25,7 +25,7 @@ _unit setVariable [QGVAR(currentTask), "Deliberate Fire"];
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.5
-    || {terrainIntersect [_unit, ASLtoAGL _pos]}
+    || {terrainIntersectASL [eyePos _unit, _pos]}
     || {(primaryWeapon _unit) isEqualTo ""}
     || {(currentCommand _unit) isEqualTo "Suppress"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
@@ -33,22 +33,23 @@ if (
 
 // override
 if (!_override) then {
-
-    _pos = AGLtoASL (_unit getHideFrom (_unit findNearestEnemy _unit));
+    private _enemy = _unit findNearestEnemy (ASLToAGL _pos);
+    if (isNull _enemy) exitWith {};
+    _pos = ATLToASL (_unit getHideFrom _enemy);
     private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
     if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 };
 
 // mod pos
-private _distance = ((_unit distance _pos) min 350) - 4;
-_pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance);
+private _distance = ((_unit distance (ASLToAGL _pos)) min 350) - 4;
+_pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
 if (_distance < GVAR(minSuppression_range)) exitWith {false};
 
-// Call it out ~ low chance. This is a common event. -nkenny
-if (RND(0.2) && {count units _unit > 1}) then {
-    [_unit, "Combat", selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"], 75] call FUNC(doCallout);
+// Callout!
+if (RND(0.4) && {count units _unit > 1}) then {
+    [_unit, "Combat", "suppress", 75] call FUNC(doCallout);
 };
 
 // do it!
