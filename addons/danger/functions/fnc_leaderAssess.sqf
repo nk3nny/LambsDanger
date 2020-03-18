@@ -55,7 +55,7 @@ if !(_enemy isEqualTo []) then {
     };
 
     // Enemy is Tank/Air?
-    _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 400 }}};
+    _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
     if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
     };

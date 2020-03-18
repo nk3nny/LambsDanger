@@ -165,7 +165,7 @@ private _dir = random 360;
 
     // execute move
     _x doMove _pos2;
-    _x setDestination [_pos2, "LEADER DIRECT", false];
+    _x setDestination [_pos2, "LEADER PLANNED", false];
 
     // sort anims
     private _anims = _unarmedAnims;
@@ -179,6 +179,8 @@ private _dir = random 360;
         params ["_unit", "_target", "_center", "_anim"];
         if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
         doStop _unit;
+        //[{_this disableAI "ANIM"}, _unit, 0.5] call CBA_fnc_waitAndExecute;
+        _unit disableAI "ANIM";
         [_unit, _anim] remoteExec ["switchMove", 0];
         _unit disableAI "ANIM";
         _unit disableAI "PATH";

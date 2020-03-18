@@ -8,6 +8,7 @@ PREP(taskCreep);
 PREP(taskGarrison);
 PREP(taskHunt);
 PREP(taskPatrol);
+PREP(taskReset);
 PREP(taskRush);
 
 SUBPREP(Modules,moduleArtillery);

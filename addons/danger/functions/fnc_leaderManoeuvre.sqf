@@ -37,7 +37,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
     {
         _x doFollow (leader _x);
         _x forceSpeed selectRandom [24, 3];
-        _x setVariable [QGVAR(forceMOVE), true];
+        _x setVariable [QGVAR(forceMove), true];
         true
     } count (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 45} });
     false
