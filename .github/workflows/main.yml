@@ -19,17 +19,9 @@ jobs:
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
-    - name: Download SQFLint
-      run: /usr/bin/git clone https://github.com/jokoho48/sqf.git sqfLint
     - name: Lint (sqflint)
-      run: python3 sqfLint/sqflint.py
+      uses: jokoho48/sqflint
       continue-on-error: true # No failure due to many false-positives
-    - name: Echo Log
-      run: printf '%b\n' "$(cat ./sqflint.log)"
-    - uses: actions/upload-artifact@master
-      with:
-        name: './sqflint.log'
-        path: './sqflint.log'
   build:
     runs-on: ubuntu-latest
     steps:
