@@ -22,6 +22,11 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
+    - uses: actions/upload-artifact@master
+      with:
+       name: 'sqfLint Log'
+       path: 'sqf.log'
+
   build:
     runs-on: ubuntu-latest
     steps:
