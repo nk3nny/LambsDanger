@@ -20,8 +20,9 @@ params [["_mode", "", [""]], ["_input", [], [[]]]];
 switch (_mode) do {
     // Default object init
     case "init": {
-        if !(_isActivated && local _logic) exitWith {};
         _input params [["_logic", objNull, [objNull]], ["_isActivated", true, [true]], ["_isCuratorPlaced", false, [true]]];
+        if !(_isActivated && local _logic) exitWith {};
+
         if (_isCuratorPlaced) then {
 
             // grabs unit under cursor
