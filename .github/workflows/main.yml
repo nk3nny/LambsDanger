@@ -24,9 +24,10 @@ jobs:
       with:
         args: -o sqflint.log
       continue-on-error: true # No failure due to many false-positives
-    - name: LS
-      run: ls
-
+    - uses: actions/upload-artifact@master
+      with:
+        name: 'sqflint.log'
+        path: 'sqflint.log'
   build:
     runs-on: ubuntu-latest
     steps:
