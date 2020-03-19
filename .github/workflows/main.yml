@@ -28,6 +28,8 @@ jobs:
       with:
         name: 'sqflint.log'
         path: 'sqflint.log'
+    - name: LS
+      run: ls
 
   build:
     runs-on: ubuntu-latest
