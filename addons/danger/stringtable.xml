@@ -28,5 +28,163 @@
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
         </Key>
+
+        <Key ID="STR_Lambs_Danger_Settings_MainCat">
+            <English>Settings</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
+            <English>General</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_ShareInformationCat">
+            <English>Settings Share information</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBFormationsCat">
+            <English>Settings CQB Formations</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Debug">
+            <English>Debug</English>
+        </Key>
+
+        <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
+            <English>Disable danger.fsm for player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
+            <English>Toggle advanced danger.fsm features on player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup">
+            <English>Disable suppression from player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup_ToolTip">
+            <English>Toggle autonomous suppression for units in player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
+            <English>Disable reaction state on player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
+            <English>Toggle Reaction phase on units in player group</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
+            <English>Disable autonomous group manoevures</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
+            <English>Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
+            <English>Disable units hiding</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
+            <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
+            <English>Disable unit hand gestures</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures_Tooltip">
+            <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
+            <English>Disable unit immediate actions</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions_ToolTip">
+            <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing">
+            <English>Disable enhanced unit fleeing</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing_ToolTip">
+            <English>Toggles enhanced fleeing function for units.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts">
+            <English>Disable unit callouts</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts_ToolTip">
+            <English>Toggles extra unit callouts based on situations</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBRange">
+            <English>CQB Range</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBRange_ToolTip">
+            <English>Range at which units consider themselves in assault range</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance">
+            <English>Minimum Distance for Suppression Fire</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
+            <English>Within this distance AI will not perform suppression fire</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance">
+            <English>Panic Chance</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
+            <English>Chance to panic in percentage</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing">
+            <English>Disable information sharing</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing_Tooltip">
+            <English>Toggle information sharing betweem units</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Shout">
+            <English>Shout</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Shout_ToolTip">
+            <English>Range AI units share information without radios</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseWest">
+            <English>Base West</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseWest_ToolTip">
+            <English>Base range side WEST share information</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseEast">
+            <English>Base East</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseEast_ToolTip">
+            <English>Base range side EAST share information</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent">
+            <English>Base Independent</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent_ToolTip">
+            <English>Base range independent and civilian sides share information</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios">
+            <English>Backpack radios</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
+            <English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
+            <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFSM">
+            <English>Debug FSM</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFSM_ToolTip">
+            <English>Shows FSM debug messages</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions">
+            <English>Debug Functions</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions_ToolTip">
+            <English>Shows Function debug messages</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugCiv">
+            <English>Debug Civ</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugCiv_ToolTip">
+            <English>Shows FSM debug messages for civilians</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDraw">
+            <English>Debug Draw</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDraw_ToolTip">
+            <English>Draws 3d Text over Units with AI Informations</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest">
+            <English>Debug Draw Expected Destination</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest_ToolTip">
+            <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
+        </Key>
     </Package>
 </Project>

@@ -1,9 +1,9 @@
-private _curCat = "Settings";
+private _curCat = LSTRING(Settings_MainCat);
 // Toggle advanced danger.fsm features on player group
 [
     QGVAR(disableAIPlayerGroup),
     "CHECKBOX",
-    ["Disable danger.fsm for player group", "Toggle advanced danger.fsm features on player group"],
+    [LSTRING(Settings_DisableDangerFSM), LSTRING(Settings_DisableDangerFSM_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0         // players may configure their own preferences
@@ -13,7 +13,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupSuppression),
     "CHECKBOX",
-    ["Disable suppression from player group", "Toggle autonomous suppression for units in player group"],
+    [LSTRING(Settings_DisableSuppressionPlayerGroup), LSTRING(Settings_DisableSuppressionPlayerGroup_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -23,7 +23,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIPlayerGroupReaction),
     "CHECKBOX",
-    ["Disable reaction state on player group", "Toggle Reaction phase on units in player group"],
+    [LSTRING(Settings_DisableReactPlayerGroup), LSTRING(Settings_DisableReactPlayerGroup_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -33,7 +33,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIAutonomousManoeuvres),
     "CHECKBOX",
-    ["Disable autonomous group manoevures", "Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings."],
+    [LSTRING(Settings_DisableGroupManoevures), LSTRING(Settings_DisableGroupManoevures_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -44,7 +44,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIHideFromTanksAndAircraft),
     "CHECKBOX",
-    ["Disable units hiding", "Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive"],
+    [LSTRING(Settings_DisableUnitsHiding), LSTRING(Settings_DisableUnitsHiding_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -54,7 +54,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIGestures),
     "CHECKBOX",
-    ["Disable unit hand gestures", "Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures"],
+    [LSTRING(Settings_DisableHandGestures), LSTRING(Settings_DisableHandGestures_Tooltip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -64,7 +64,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIImediateAction),
     "CHECKBOX",
-    ["Disable unit immediate actions", "Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI"],
+    [LSTRING(Settings_DisableImmediateActions), LSTRING(Settings_DisableImmediateActions_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -74,7 +74,7 @@ private _curCat = "Settings";
 [
     QGVAR(disableAIFleeing),
     "CHECKBOX",
-    ["Disable enhanced unit fleeing", "Toggles enhanced fleeing function for units."],
+    [LSTRING(Settings_DisableEnhancedFleeing), LSTRING(Settings_DisableEnhancedFleeing_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -84,18 +84,18 @@ private _curCat = "Settings";
 [
     QGVAR(disableAICallouts),
     "CHECKBOX",
-    ["Disable unit callouts", "Toggles extra unit callouts based on situations"],
+    [LSTRING(Settings_DisableCallouts), LSTRING(Settings_DisableCallouts_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
 ] call CBA_fnc_addSetting;
 
-private _curCat = "General";
+private _curCat = LSTRING(Settings_GeneralCat);
 // Range at which units consider themselves in CQB
 [
     QGVAR(CQB_range),
     "SLIDER",
-    ["CQB Range", "Range at which units consider themselves in assault range"],
+    [LSTRING(Settings_CQBRange), LSTRING(Settings_CQBRange_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [25, 150, 50, 0],
     1
@@ -105,7 +105,7 @@ private _curCat = "General";
 [
     QGVAR(minSuppression_range),
     "SLIDER",
-    ["Minimum Distance for Suppression Fire", "Within this distance AI will not perform suppression fire"],
+    [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [1, 500, 20, 0],
     1
@@ -115,19 +115,19 @@ private _curCat = "General";
 [
     QGVAR(panic_chance),
     "SLIDER",
-    ["Panic Chance", "Chance to panic in percentage"],
+    [LSTRING(Settings_PanicChance), LSTRING(Settings_PanicChance_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [1, 100, 10, 0],
     1
 ] call CBA_fnc_addSetting;
 
-private _curCat = "Settings Share information";
+private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Toggle communication for all units
 [
     QGVAR(radio_disabled),
     "CHECKBOX",
-    ["Disable information sharing", "Toggle information sharing betweem units"],
+    [LSTRING(Settings_DisableInformationSharing), LSTRING(Settings_DisableInformationSharing_Tooltip)],
     [COMPONENT_NAME, _curCat],
     false,
     0
@@ -137,7 +137,7 @@ private _curCat = "Settings Share information";
 [
     QGVAR(radio_shout),
     "SLIDER",
-    ["Shout", "Range AI units share information without radios"],
+    [LSTRING(Settings_Shout), LSTRING(Settings_Shout_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [20, 200, 100, 0],
     1
@@ -147,7 +147,7 @@ private _curCat = "Settings Share information";
 [
     QGVAR(radio_WEST),
     "SLIDER",
-    ["Base West", "Base range side WEST share information"],
+    [LSTRING(Settings_BaseWest), LSTRING(Settings_BaseWest_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
     1
@@ -157,7 +157,7 @@ private _curCat = "Settings Share information";
 [
     QGVAR(radio_EAST),
     "SLIDER",
-    ["Base East", "Base range side EAST share information"],
+    [LSTRING(Settings_BaseEast), LSTRING(Settings_BaseEast_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
     1
@@ -167,7 +167,7 @@ private _curCat = "Settings Share information";
 [
     QGVAR(radio_GUER),
     "SLIDER",
-    ["Base Independent", "Base range independent and civilian sides share information"],
+    [LSTRING(Settings_BaseIndependent), LSTRING(Settings_BaseIndependent_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [200, 3000, 500, 0],
     1
@@ -177,20 +177,20 @@ private _curCat = "Settings Share information";
 [
     QGVAR(radio_backpack),
     "SLIDER",
-    ["Backpack radios", "Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)"],
+    [LSTRING(Settings_BackpackRadios), LSTRING(Settings_BackpackRadios_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
 
 // Configures CQC formations
-_curCat = "Settings CQB Formations";
+_curCat = LSTRING(Settings_CQBFormationsCat);
 GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "LINE", "FILE", "DIAMOND"];
 GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 DFUNC(UpdateCQBFormations) = {
-    params ["_args", "_formation"];
-    _args params ["_value"];
+    params ["_args", "_formation)];
+    _args params ["_value)];
     if (_value) then {
         GVAR(CQB_formations) pushBackUnique _formation;
     } else {
@@ -208,7 +208,7 @@ DFUNC(UpdateCQBFormations) = {
     [
         format [QGVAR(CQB_formations_%1), _x],
         "CHECKBOX",
-        [_x, _x + " Units set to CQB formations will methodically clear buildings when an enemy is encountered"],
+        [_x, format ["%1 %2", _x, localize LSTRING(Settings_CQBFormation)]],
         [COMPONENT_NAME, _curCat],
         _x in GVAR(CQB_formations),
         1, _code
@@ -216,12 +216,12 @@ DFUNC(UpdateCQBFormations) = {
 } forEach GVAR(allPossibleFormations);
 
 // debug
-_curCat = "Debug";
+_curCat = LSTRING(Settings_Debug);
 // FSM level debug messages
 [
     QGVAR(debug_FSM),
     "CHECKBOX",
-    ["Debug FSM", "Shows FSM debug messages"],
+    [LSTRING(Settings_DebugFSM), LSTRING(Settings_DebugFSM_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1
@@ -231,7 +231,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_functions),
     "CHECKBOX",
-    ["Debug Functions", "Shows Function debug messages"],
+    [LSTRING(Settings_DebugFunctions), LSTRING(Settings_DebugFunctions_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1
@@ -241,7 +241,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_FSM_civ),
     "CHECKBOX",
-    ["Debug Civ", "Shows FSM debug messages for civilians"],
+    [LSTRING(Settings_DebugCiv), LSTRING(Settings_DebugCiv_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1
@@ -252,7 +252,7 @@ _curCat = "Debug";
 [
     QGVAR(debug_Drawing),
     "CHECKBOX",
-    ["Debug Draw", "Draws 3d Text over Units with AI Informations"],
+    [LSTRING(Settings_DebugDraw), LSTRING(Settings_DebugDraw_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1,
@@ -278,7 +278,7 @@ _curCat = "Debug";
 [
     QGVAR(RenderExpectedDestination),
     "CHECKBOX",
-    ["Debug Draw Expected Destination", "Draws Expected Destinations of AI Units"],
+    [LSTRING(Settings_DebugDrawExpDest), LSTRING(Settings_DebugDrawExpDest_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1
