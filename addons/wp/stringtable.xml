@@ -13,6 +13,12 @@
         <Key ID="STR_Lambs_WP_Module_Target_ModuleDescription">
             <English>The LAMBS dynamic target creates a point of reference for scripts. The module can be dynamically moved and can be attached to units.</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
+            <English>Task Reset</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
+            <English>This module resets all custom LAMBS scripts running on the unit</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_DisplayName">
             <English>Task Artillery</English>
         </Key>

@@ -64,13 +64,13 @@ class CfgVehicles {
         _generalMacro = QGVAR(TaskReset);
         scope = 2;
         scopeCurator = 2;
-        displayName = "Task Reset";
+        displayName = CSTRING(Module_TaskReset_DisplayName);
         category = "Lambs_Danger_WP_Cat";
         function = QFUNC(moduleReset);
         icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
         class ModuleDescription: ModuleDescription {
-            description = "This module resets all custom LAMBS scripts running on the unit";
+            description = CSTRING(Module_TaskReset_ModuleDescription);
         };
     };
 

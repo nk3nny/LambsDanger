@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="Lambs_Danger">
     <Package name="danger">
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_DisplayName">
+            <English>Disable Unit AI</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingName">
+            <English>Disable LAMBS unit AI</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingToolTip">
+            <English>Toggle advanced danger.fsm features on this unit</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_DisplayName">
+            <English>Configure Long-range Radio</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingName">
+            <English>Toggle boosted communication range on unit</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingToolTip">
+            <English>Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_DisplayName">
+            <English>Configure Group AI</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingName">
+            <English>Disable LAMBS group AI</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
+            <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
+        </Key>
     </Package>
 </Project>

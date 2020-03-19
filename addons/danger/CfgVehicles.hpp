@@ -20,7 +20,7 @@ class CfgVehicles {
         _generalMacro = QGVAR(SetRadio);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Configure Long-range Radio";
+        displayName = CSTRING(Module_SetRadio_DisplayName);
         category = "Lambs_Danger_Cat";
         function = QFUNC(moduleSetRadio);
         functionPriority = 1;
@@ -33,7 +33,7 @@ class CfgVehicles {
         _generalMacro = QGVAR(DisableAI);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Disable Unit AI";
+        displayName = CSTRING(Module_DisableAI_DisplayName);
         category = "Lambs_Danger_Cat";
         function = QFUNC(moduleDisableAI);
         functionPriority = 1;
@@ -46,7 +46,7 @@ class CfgVehicles {
         _generalMacro = QGVAR(DisableGroupAI);
         scope = 1;
         scopeCurator = 2;
-        displayName = "Configure Group AI";
+        displayName = CSTRING(Module_DisableGroupAI_DisplayName);
         category = "Lambs_Danger_Cat";
         function = QFUNC(moduleDisableGroupAI);
         functionPriority = 1;
