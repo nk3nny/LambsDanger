@@ -189,8 +189,8 @@ GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "EC
 GVAR(CQB_formations) = ["FILE", "DIAMOND"];     // Special CQB Formations )
 
 DFUNC(UpdateCQBFormations) = {
-    params ["_args", "_formation)];
-    _args params ["_value)];
+    params ["_args", "_formation"];
+    _args params ["_value"];
     if (_value) then {
         GVAR(CQB_formations) pushBackUnique _formation;
     } else {
