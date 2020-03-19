@@ -21,7 +21,14 @@ jobs:
       uses: actions/checkout@master
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
+      with:
+        args: -o sqflint.log
       continue-on-error: true # No failure due to many false-positives
+    - uses: actions/upload-artifact@master
+      with:
+        name: '@LambsDanger'
+        path: 'releases/@LambsDanger.zip'
+
   build:
     runs-on: ubuntu-latest
     steps:
