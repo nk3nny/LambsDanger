@@ -20,7 +20,7 @@ jobs:
     - name: Checkout the source code
       uses: actions/checkout@master
     - name: Download SQFLint
-      run: /usr/bin/git clone https://github.com/jokoho48/sqf.git
+      run: /usr/bin/git clone https://github.com/jokoho48/sqf.git sqfLint
     - name: Lint (sqflint)
       run: python3 sqfLint/sqflint.py -o ./sqflint.log
       continue-on-error: true # No failure due to many false-positives
