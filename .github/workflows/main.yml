@@ -19,10 +19,10 @@ jobs:
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Download SQFLint
+      run: git clone https://github.com/jokoho48/sqf.git
     - name: Lint (sqflint)
-      uses: jokoho48/sqflint@master
-      with:
-        args: -o ./sqflint.log
+      run: python3 sqfLint/sqflint.py -o ./sqflint.log
       continue-on-error: true # No failure due to many false-positives
     - name: Echo Log
       run: printf '%b\n' "$(cat ./sqflint.log)"
