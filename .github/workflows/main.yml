@@ -26,8 +26,8 @@ jobs:
       continue-on-error: true # No failure due to many false-positives
     - uses: actions/upload-artifact@master
       with:
-        name: '@LambsDanger'
-        path: 'releases/@LambsDanger.zip'
+        name: 'sqflint.log'
+        path: 'sqflint.log'
 
   build:
     runs-on: ubuntu-latest
