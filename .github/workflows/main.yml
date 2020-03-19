@@ -22,14 +22,14 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       with:
-        args: -o sqflint.log
+        args: -o ./sqflint.log
       continue-on-error: true # No failure due to many false-positives
     - name: Echo Log
-      run: printf '%b\n' "$(cat sqflint.log)"
+      run: printf '%b\n' "$(cat ./sqflint.log)"
     - uses: actions/upload-artifact@master
       with:
-        name: 'sqflint.log'
-        path: 'sqflint.log'
+        name: './sqflint.log'
+        path: './sqflint.log'
   build:
     runs-on: ubuntu-latest
     steps:
