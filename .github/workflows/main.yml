@@ -22,7 +22,7 @@ jobs:
     - name: Download SQFLint
       run: /usr/bin/git clone https://github.com/jokoho48/sqf.git sqfLint
     - name: Lint (sqflint)
-      run: python3 sqfLint/sqflint.py -o ./sqflint.log
+      run: python3 sqfLint/sqflint.py
       continue-on-error: true # No failure due to many false-positives
     - name: Echo Log
       run: printf '%b\n' "$(cat ./sqflint.log)"
