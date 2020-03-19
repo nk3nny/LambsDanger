@@ -25,7 +25,7 @@ jobs:
         args: -o sqflint.log
       continue-on-error: true # No failure due to many false-positives
     - name: Echo Log
-      run: printf '%b\n' "$(cat my_file.txt)"
+      run: printf '%b\n' "$(cat sqflint.log)"
     - uses: actions/upload-artifact@master
       with:
         name: 'sqflint.log'
