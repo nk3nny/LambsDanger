@@ -196,6 +196,7 @@ private _dir = random 360;
         }];
         _unit addEventHandler ["FiredNear", {
             params ["_unit"];
+            {
                 [_x, "ANIM"] remoteExec ["enableAI", _x];
                 [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
