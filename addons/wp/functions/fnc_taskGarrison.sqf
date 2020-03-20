@@ -106,7 +106,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
         case 1: {
             _x addEventHandler ["Fired", {
                 params ["_unit"];
-                [_x, "PATH"] remoteExec ["enableAI", _x];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Fired", _thisEventHandler];
             }];
@@ -115,7 +115,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
             _x addEventHandler ["FiredNear", {
                 params ["_unit", "_shooter", "_distance"];
                 if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
-                    [_x, "PATH"] remoteExec ["enableAI", _x];
+                    [_unit, "PATH"] remoteExec ["enableAI", _unit];
                     _unit doMove (getPosATL _shooter);
                     _unit setCombatMode "RED";
                     _unit removeEventHandler ["FiredNear", _thisEventHandler];
@@ -125,7 +125,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
         default {
             _x addEventHandler ["Hit", {
                 params ["_unit"];
-                [_x, "PATH"] remoteExec ["enableAI", _x];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Hit", _thisEventHandler];
             }];
