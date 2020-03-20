@@ -22,6 +22,8 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
+    - name: Validate SQFLinter Logs
+      run: python3 tools/config_style_checker.py
     - uses: actions/upload-artifact@master
       with:
        name: 'sqfLint Log'
