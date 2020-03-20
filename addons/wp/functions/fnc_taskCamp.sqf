@@ -188,19 +188,18 @@ private _dir = random 360;
         _unit addEventHandler ["Hit", {
             params ["_unit"];
             {
-                _x enableAI "ANIM";
-                _x enableAI "PATH";
+                [_x, "ANIM"] remoteExec ["enableAI", _x];
+                [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            [_unit, (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""))] remoteExec ["playMoveNow", _unit];
             _unit removeEventHandler ["Hit", _thisEventHandler];
         }];
         _unit addEventHandler ["FiredNear", {
             params ["_unit"];
-            {
-                _x enableAI "ANIM";
-                _x enableAI "PATH";
+                [_x, "ANIM"] remoteExec ["enableAI", _x];
+                [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            _unit playMoveNow (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+            [_unit, (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""))] remoteExec ["playMoveNow", _unit];
             _unit removeEventHandler ["FiredNear", _thisEventHandler];
         }];
     }, [_x, _pos2, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
