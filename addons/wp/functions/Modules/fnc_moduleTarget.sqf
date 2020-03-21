@@ -15,7 +15,7 @@
  * Public: No
 */
 params ["_logic", "", "_activated"];
-diag_log _this;
+
 if(local _logic && _activated) then {
     private _unit = GET_CURATOR_UNIT_UNDER_CURSOR;
     if !(isNull _unit) then {
