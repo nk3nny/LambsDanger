@@ -22,6 +22,7 @@ class GVAR(ZeusTaskArtillery) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Artillery";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
@@ -40,6 +41,7 @@ class GVAR(ZeusTaskArtilleryRegister) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Artillery Register";
     category = "Lambs_Danger_WP_Cat";
     icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
@@ -58,6 +60,7 @@ class GVAR(ZeusTaskAssault) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Assault/Retreat";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
@@ -76,6 +79,7 @@ class GVAR(ZeusTaskCamp) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Camp";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -94,6 +98,7 @@ class GVAR(ZeusTaskCQB) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task CQB";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
@@ -112,6 +117,7 @@ class GVAR(ZeusTaskGarrison) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Garrison";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -130,6 +136,7 @@ class GVAR(ZeusTaskPatrol) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Patrol";
     category = "Lambs_Danger_WP_Cat";
     icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
@@ -148,6 +155,7 @@ class GVAR(ZeusTaskReset) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Reset";
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
@@ -167,6 +175,7 @@ class GVAR(ZeusTaskCreep) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Creep";
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -185,6 +194,7 @@ class GVAR(ZeusTaskHunt) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Hunt";
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -203,6 +213,7 @@ class GVAR(ZeusTaskRush) : Module_F {
     scope = 1;
     scopeCurator = 2;
     isGlobal = 0;
+    is3DEN = 1;
     displayName = "Task Rush";
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
