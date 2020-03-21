@@ -27,7 +27,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this,true,true)] call FUNC(moduleSetRadio));
+                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleSetRadio));
             };
         };
     };
@@ -43,7 +43,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this,true,true)] call FUNC(moduleDisableAI));
+                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleDisableAI));
             };
         };
     };
@@ -58,7 +58,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this,true,true)] call FUNC(moduleDisableGroupAI));
+                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleDisableGroupAI));
             };
         };
     };
