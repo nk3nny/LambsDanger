@@ -25,10 +25,11 @@ class CfgVehicles {
         displayName = "Configure Long-range Radio";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        function = QFUNC(moduleSetRadio);
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleSetRadio));
+                init = QUOTE(_this call EFUNC(main,initModules));
             };
         };
     };
@@ -42,10 +43,11 @@ class CfgVehicles {
         displayName = "Disable Unit AI";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        function = QFUNC(moduleDisableAI);
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleDisableAI));
+                init = QUOTE(_this call EFUNC(main,initModules));
             };
         };
     };
@@ -58,10 +60,11 @@ class CfgVehicles {
         displayName = "Configure Group AI";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+        function = QFUNC(moduleDisableGroupAI);
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleDisableGroupAI));
+                init = QUOTE(_this call EFUNC(main,initModules));
             };
         };
     };

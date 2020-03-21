@@ -8,10 +8,11 @@ class GVAR(Target) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
     portrait = "\a3\3den\Data\CfgWaypoints\destroy_ca.paa";
+    function = QFUNC(moduleTarget);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_3(_this select 0,true,true)] call FUNC(moduleTarget));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -25,10 +26,11 @@ class GVAR(ZeusTaskArtillery) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
     portrait = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
+    function = QFUNC(moduleArtillery);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleArtillery));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -42,10 +44,11 @@ class GVAR(ZeusTaskArtilleryRegister) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
     portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
+    function = QFUNC(moduleArtilleryRegister);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleArtilleryRegister));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -59,10 +62,11 @@ class GVAR(ZeusTaskAssault) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
     portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
+    function = QFUNC(moduleAssault);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleAssault));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -76,10 +80,11 @@ class GVAR(ZeusTaskCamp) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
+    function = QFUNC(moduleCamp);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCamp));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -93,10 +98,11 @@ class GVAR(ZeusTaskCQB) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    function = QFUNC(moduleCQB);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCQB));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -110,10 +116,11 @@ class GVAR(ZeusTaskGarrison) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
+    function = QFUNC(moduleGarrison);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleGarrison));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -127,10 +134,11 @@ class GVAR(ZeusTaskPatrol) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
     portrait = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
+    function = QFUNC(modulePatrol);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(modulePatrol));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -144,10 +152,11 @@ class GVAR(ZeusTaskReset) : Module_F {
     category = "Lambs_Danger_WP_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    function = QFUNC(moduleReset);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleReset));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -162,10 +171,11 @@ class GVAR(ZeusTaskCreep) : Module_F {
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+    function = QFUNC(moduleCreep);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCreep));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -179,10 +189,11 @@ class GVAR(ZeusTaskHunt) : Module_F {
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+    function = QFUNC(moduleHunt);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleHunt));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
@@ -196,10 +207,11 @@ class GVAR(ZeusTaskRush) : Module_F {
     category = "Lambs_Danger_WP_Search_Cat";
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
+    function = QFUNC(moduleRush);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleRush));
+            init = QUOTE(_this call EFUNC(main,initModules));
         };
     };
 };
