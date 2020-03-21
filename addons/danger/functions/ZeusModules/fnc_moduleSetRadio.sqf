@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_logic", "", "_activated"];
-diag_log _this;
+
 if (_activated && local _logic) then {
 
     //--- Get unit under cursor
