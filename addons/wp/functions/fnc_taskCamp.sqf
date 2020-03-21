@@ -150,10 +150,7 @@ private _armedAnims = [
     "amovpknlmstpslowwrfldnon",
     "aidlpknlmstpslowwrfldnon_g01",
     "aidlpknlmstpslowwrfldnon_g02",
-    "aidlpknlmstpslowwrfldnon_g03",
-    "Acts_InjuredLyingRifle01",
-    "Acts_InjuredLyingRifle02",
-    "Acts_InjuredLyingRifle02_180"
+    "aidlpknlmstpslowwrfldnon_g03"
 ];
 
 // direction
