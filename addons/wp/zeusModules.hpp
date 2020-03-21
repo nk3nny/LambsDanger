@@ -28,7 +28,7 @@ class GVAR(ZeusTaskArtillery) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleArtillery));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleArtillery));
         };
     };
 };
@@ -45,7 +45,7 @@ class GVAR(ZeusTaskArtilleryRegister) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleArtilleryRegister));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleArtilleryRegister));
         };
     };
 };
@@ -62,7 +62,7 @@ class GVAR(ZeusTaskAssault) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleAssault));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleAssault));
         };
     };
 };
@@ -79,7 +79,7 @@ class GVAR(ZeusTaskCamp) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleCamp));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCamp));
         };
     };
 };
@@ -96,7 +96,7 @@ class GVAR(ZeusTaskCQB) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleCQB));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCQB));
         };
     };
 };
@@ -113,7 +113,7 @@ class GVAR(ZeusTaskGarrison) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleGarrison));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleGarrison));
         };
     };
 };
@@ -130,7 +130,7 @@ class GVAR(ZeusTaskPatrol) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(modulePatrol));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(modulePatrol));
         };
     };
 };
@@ -147,7 +147,7 @@ class GVAR(ZeusTaskReset) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleReset));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleReset));
         };
     };
 };
@@ -165,7 +165,7 @@ class GVAR(ZeusTaskCreep) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleCreep));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleCreep));
         };
     };
 };
@@ -182,7 +182,7 @@ class GVAR(ZeusTaskHunt) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleHunt));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleHunt));
         };
     };
 };
@@ -199,7 +199,7 @@ class GVAR(ZeusTaskRush) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE([[ARR_2("init",[ARR_3(_this select 0,true,true)])]] call FUNC(moduleRush));
+            init = QUOTE([ARR_2(QUOTE(QUOTE(init)),[ARR_3(_this select 0,true,true)])] call FUNC(moduleRush));
         };
     };
 };
