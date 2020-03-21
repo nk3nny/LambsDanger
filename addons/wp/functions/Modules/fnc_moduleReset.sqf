@@ -16,7 +16,7 @@
 */
 
 params [["_mode", "", [""]], ["_input", [], [[]]]];
-
+diag_log _this;
 switch (_mode) do {
     // Default object init
     case "init": {

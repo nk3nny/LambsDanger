@@ -15,7 +15,7 @@
  * Public: No
 */
 params [["_mode", "", [""]], ["_input", [], [[]]]];
-
+diag_log _input;
 switch (_mode) do {
     // Default object init
     case "init": {

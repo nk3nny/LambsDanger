@@ -17,6 +17,7 @@
 
 #define SIDES [west, east, independent]
 params [["_mode", "", [""]], ["_input", [], [[]]]];
+diag_log _input;
 switch (_mode) do {
     // Default object init
     case "init": {
