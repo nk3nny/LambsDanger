@@ -4,6 +4,17 @@ class CfgPatches {
         name = COMPONENT_NAME;
         units[] = {
             QGVAR(Target),
+            QGVAR(ZeusTaskArtillery),
+            QGVAR(ZeusTaskArtilleryRegister),
+            QGVAR(ZeusTaskAssault),
+            QGVAR(ZeusTaskHunt),
+            QGVAR(ZeusTaskCamp),
+            QGVAR(ZeusTaskCQB),
+            QGVAR(ZeusTaskCreep),
+            QGVAR(ZeusTaskGarrison),
+            QGVAR(ZeusTaskPatrol),
+            QGVAR(ZeusTaskRush),
+            QGVAR(ZeusTaskReset),
             QGVAR(TaskArtillery),
             QGVAR(TaskArtilleryRegister),
             QGVAR(TaskAssault),
