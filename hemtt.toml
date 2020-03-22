@@ -2,7 +2,7 @@ name = "LAMBS Danger"
 prefix = "lambs"
 author = "LAMBS Dev Team"
 sigversion = 3
-version = "2.3.2" # NB: this is not the real version number. We use git tags.
+version = "2.3.3"
 reuse_private_key = true
 files = [
     "mod.cpp",
