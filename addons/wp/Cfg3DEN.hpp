@@ -23,7 +23,7 @@ class Cfg3DEN {
                     h = 5  * GRID_3DEN_H;
                     rows = 1;
                     columns = 3;
-                    strings[] = { "West", "East", "Independent" };
+                    strings[] = { "$STR_A3_CfgGroups_West0", "$STR_A3_CfgGroups_East0", "$STR_A3_CfgGroups_Indep0" };
                 };
             };
         };

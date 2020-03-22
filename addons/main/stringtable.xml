@@ -10,5 +10,8 @@
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
         </Key>
+        <Key ID="STR_Lambs_Main_Team">
+            <English>LAMBS Danger Dev Team</English>
+        </Key>
     </Package>
 </Project>

@@ -186,5 +186,17 @@
         <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
         </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
+            <English>AI Disabled</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
+            <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
+            <English>Has Radio</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_ToolTip">
+            <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
+        </Key>
     </Package>
 </Project>
