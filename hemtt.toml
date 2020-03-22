@@ -16,9 +16,48 @@ include = ["./include"]
 keyname = "{{prefix}}_danger_{{version}}"
 signame = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
 
+prebuild = [
+    "!version_set"
+]
+postbuild = [
+    "!version_unset"
+]
+
 releasebuild = [
     "@zip @LambsDanger"
 ]
 
 [header_exts]
 version= "{{git \"id 8\"}}"
+
+[scripts.version_set]
+steps_linux = [
+    "echo 'Setting version'",
+    "sed -i -r -s 's/#define MAJOR 0/#define MAJOR {{semver.major}}/g' addons/main/script_version.hpp",
+    "sed -i -r -s 's/#define MINOR 0/#define MINOR {{semver.minor}}/g' addons/main/script_version.hpp",
+    "sed -i -r -s 's/#define PATCHLVL 0/#define PATCHLVL {{semver.patch}}/g' addons/main/script_version.hpp",
+]
+steps_windows = [
+    "echo 'Setting version'",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MAJOR 0', '#define MAJOR {{semver.major}}' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MINOR 0', '#define MINOR {{semver.minor}}' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define PATCHLVL 0', '#define PATCHLVL {{semver.patch}}' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+]
+only_release = true
+show_output = true
+
+[scripts.version_unset]
+steps_linux = [
+    "echo 'Unsetting version'",
+    "sed -i -r -s 's/#define MAJOR {{semver.major}}/#define MAJOR 0/g' addons/main/script_version.hpp",
+    "sed -i -r -s 's/#define MINOR {{semver.minor}}/#define MINOR 0/g' addons/main/script_version.hpp",
+    "sed -i -r -s 's/#define PATCHLVL {{semver.patch}}/#define PATCHLVL 0/g' addons/main/script_version.hpp",
+]
+steps_windows = [
+    "echo 'Unsetting version'",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MAJOR {{semver.major}}', '#define MAJOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MINOR {{semver.minor}}', '#define MINOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+    "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define PATCHLVL {{semver.patch}}', '#define PATCHLVL 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+]
+only_release = true
+show_output = true
