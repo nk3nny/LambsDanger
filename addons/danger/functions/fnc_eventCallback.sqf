@@ -15,7 +15,6 @@
  *
  * Public: No
 */
-params ["_eventName", "_eventParameter"];
 
 [{
      _this call CBA_fnc_localEvent;
