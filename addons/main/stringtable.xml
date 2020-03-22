@@ -12,6 +12,18 @@
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
+            <German>LAMBS Danger Dev Team</German>
+            <Polish>LAMBS Danger Dev Team</Polish>
+            <Portuguese>LAMBS Danger Dev Team</Portuguese>
+            <Russian>LAMBS Danger Dev Team</Russian>
+            <Czech>LAMBS Danger Dev Team</Czech>
+            <Spanish>LAMBS Danger Dev Team</Spanish>
+            <Italian>LAMBS Danger Dev Team</Italian>
+            <French>LAMBS Danger Dev Team</French>
+            <Korean>LAMBS Danger Dev Team</Korean>
+            <Japanese>LAMBS Danger Dev Team</Japanese>
+            <Chinese>LAMBS Danger Dev Team</Chinese>
+            <Chinesesimp>LAMBS Danger Dev Team</Chinesesimp>
         </Key>
     </Package>
 </Project>
