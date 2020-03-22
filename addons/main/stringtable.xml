@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="Lambs_Danger">
     <Package name="Main">
+        <Key ID="STR_Lambs_Main_NoUnitSelected">
+            <English>No Unit Selected</English>
+        </Key>
+        <Key ID="STR_Lambs_Main_PlayerNotValid">
+            <English>Players are not a Valid Selections</English>
+        </Key>
+        <Key ID="STR_Lambs_Main_NoGroupSelected">
+            <English>No Group Selected</English>
+        </Key>
     </Package>
 </Project>

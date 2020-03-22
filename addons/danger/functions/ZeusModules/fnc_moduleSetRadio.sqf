@@ -10,10 +10,10 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _unit) then {
-        _error = "No Unit Seleted";
+        _error = ELSTRING(main,NoUnitSelected);
     };
     if (isPlayer _unit) then {
-        _error = "Players are not Valid Selections";
+        _error = ELSTRING(main,PlayerNotValid);
     };
     if (_error == "") then {
         [LSTRING(Module_SetRadio_DisplayName),
@@ -34,7 +34,7 @@ if (_activated && local _logic) then {
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
-        [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+        [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
         deleteVehicle _logic;
     };
 };

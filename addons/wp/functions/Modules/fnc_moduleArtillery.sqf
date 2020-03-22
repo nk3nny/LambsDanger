@@ -48,34 +48,27 @@ switch (_mode) do {
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
-            //--- Get unit under cursor
-            private _error = "";
-            if (_error == "") then {
-                ["Task Artillery",
-                    [
-                        ["Side", "DROPDOWN", "Which side is calling for artillery", SIDES apply { str _x }],
-                        ["Main Salvo", "NUMBER", "Number of rounds in main salvo", 6],
-                        ["Spread", "NUMBER", "Default dispersion of main salvo", 75],
-                        ["Skip adjusting rounds", "BOOLEAN", "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target", false]
-                    ], {
-                        params ["_data", "_args"];
-                        _args params ["_logic", "_fnc_callArtillery"];
-                        _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
-                        [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
-                        [objNull, format ["Artillery target created for %1", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
-                        deleteVehicle _logic;
-                    }, {
-                        params ["_logic"];
-                        deleteVehicle _logic;
-                    }, {
-                        params ["_logic"];
-                        deleteVehicle _logic;
-                    }, [_logic, _fnc_callArtillery]
-                ] call EFUNC(main,showDialog);
-            } else {
-                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
-                deleteVehicle _logic;
-            };
+            ["Task Artillery",
+                [
+                    ["Side", "DROPDOWN", "Which side is calling for artillery", SIDES apply { str _x }],
+                    ["Main Salvo", "NUMBER", "Number of rounds in main salvo", 6],
+                    ["Spread", "NUMBER", "Default dispersion of main salvo", 75],
+                    ["Skip adjusting rounds", "BOOLEAN", "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target", false]
+                ], {
+                    params ["_data", "_args"];
+                    _args params ["_logic", "_fnc_callArtillery"];
+                    _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
+                    [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
+                    [objNull, format ["Artillery target created for %1", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
+                    deleteVehicle _logic;
+                }, {
+                    params ["_logic"];
+                    deleteVehicle _logic;
+                }, {
+                    params ["_logic"];
+                    deleteVehicle _logic;
+                }, [_logic, _fnc_callArtillery]
+            ] call EFUNC(main,showDialog);
         } else {
             private _sideIndex = _logic getVariable [QGVAR(Side), 0];
             private _salvo = _logic getVariable [QGVAR(MainSalvo), 6];
