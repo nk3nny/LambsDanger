@@ -17,8 +17,6 @@
 */
 params ["_eventName", "_eventParameter"];
 
-[_eventName, _eventParameter] spawn { // TODO: Check if we realy need this.
-    [{
-         _this call CBA_fnc_localEvent;
-    }, _this] call CBA_fnc_directCall;
-};
+[{
+     _this call CBA_fnc_localEvent;
+}, _this] call CBA_fnc_directCall;
