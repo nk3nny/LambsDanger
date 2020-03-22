@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project name="Lambs_Danger">
-    <Package name="danger">
+<Project name="Lambs">
+    <Package name="Danger">
         <Key ID="STR_Lambs_Danger_Module_DisableAI_DisplayName">
             <English>Disable Unit AI</English>
         </Key>
@@ -28,7 +28,6 @@
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
         </Key>
-
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
         </Key>
@@ -44,7 +43,6 @@
         <Key ID="STR_Lambs_Danger_Settings_Debug">
             <English>Debug</English>
         </Key>
-
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
             <English>Disable danger.fsm for player group</English>
         </Key>

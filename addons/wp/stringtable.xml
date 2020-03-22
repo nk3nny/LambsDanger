@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project name="Lambs_Danger">
-    <Package name="Waypoints">
+<Project name="Lambs">
+    <Package name="WP">
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_DisplayName">
             <English>Register as LAMBS artillery</English>
         </Key>
