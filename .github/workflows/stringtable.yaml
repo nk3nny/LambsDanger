@@ -1,0 +1,14 @@
+name: Stringtable
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@master
+    - name: Validate Stringtables
+      run: python3 tools/stringtable_validator.py
