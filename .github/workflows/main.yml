@@ -1,4 +1,4 @@
-name: CI
+name: Arma
 
 on: [push]
 
@@ -43,3 +43,24 @@ jobs:
         with:
           name: '@LambsDanger'
           path: 'releases/@LambsDanger.zip'
+
+  stringtables:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Python packages
+      run: |
+        pip3 install wheel
+        pip3 install setuptools
+        pip3 install pygithub
+        pip3 install pygithub3
+    - name: Checkout the source code
+      uses: actions/checkout@master
+    - name: Validate Stringtables
+      run: python3 tools/stringtable_validator.py
+    - name: Update Translation issue
+      if: github.repository == 'com/nk3nny/LambsDanger' && ! contains(github.event.head_commit.message, '[ci skip]')
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: python3 tools/stringtableDeploy.py
