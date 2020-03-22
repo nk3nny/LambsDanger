@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="Lambs_Danger">
     <Package name="Eventhandlers">
+        <Key ID="STR_Lambs_Eventhandlers_Settings_Cat">
+            <English>Explosion</English>
+        </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_DisplayName">
+            <English>Enable Explosion Eventhandler</English>
+        </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_ToolTip">
+            <English>Toggle AI Reactions to nearby explosions</English>
+        </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
+            <English>Explosion EH reset Time</English>
+        </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_ToolTip">
+            <English>Configures explosions reset time.</English>
+        </Key>
     </Package>
 </Project>
