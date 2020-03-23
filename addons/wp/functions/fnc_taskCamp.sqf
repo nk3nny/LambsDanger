@@ -15,7 +15,7 @@
  * none
  *
  * Example:
- * [bob, getpos bob, 50] call lambs_wp_fnc_taskCamp;
+ * [bob, getPos bob, 50] call lambs_wp_fnc_taskCamp;
  *
  * Public: No
 */
@@ -31,7 +31,7 @@ private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}
 
 // sort pos
 if (_pos isEqualTo []) then { _pos = _group; };
-_pos = _pos call cba_fnc_getPos;
+_pos = _pos call CBA_fnc_getPos;
 
 // remove all waypoints
 //[_group] call CBA_fnc_clearWaypoints;
@@ -217,7 +217,7 @@ _wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
 ];
 
 // followup orders - just stay put or move into buildings!
-private _wp2 = _group addWaypoint [[_pos, getpos selectRandom _buildings] select (count _buildings > 4), _range / 4];
+private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
 _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug

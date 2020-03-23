@@ -11,7 +11,7 @@
  * success
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_leaderAssess;
+ * [bob, getPos angryJoe] call lambs_danger_fnc_leaderAssess;
  *
  * Public: No
 */

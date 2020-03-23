@@ -11,7 +11,7 @@
  * success
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_vehicleSuppress;
+ * [bob, getPos angryJoe] call lambs_danger_fnc_vehicleSuppress;
  *
  * Public: No
 */
@@ -54,7 +54,7 @@ if (GVAR(debug_functions)) then {
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
 };
 
 // end

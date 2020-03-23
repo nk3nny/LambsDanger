@@ -73,7 +73,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [45 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
 
     // water means hold
-    if (surfaceIsWater _targetPos) then { _targetPos = getposASL _unit;};
+    if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
 
     // execute move
     _unit doMove _targetPos;

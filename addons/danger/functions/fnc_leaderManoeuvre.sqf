@@ -20,7 +20,7 @@
 params ["_unit", "_target", ["_units", []], ["_cycle", 3]];
 
 // find target
-_target = _target call cba_fnc_getPos;
+_target = _target call CBA_fnc_getPos;
 
 // stopped or static
 if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
@@ -52,11 +52,11 @@ if (_units isEqualTo []) then {
 };
 
 // find overwatch position
-private _overwatch = [getpos _unit, ((_unit distance2d _target) / 2) min 300, 100, 8, _target] call FUNC(findOverwatch);
+private _overwatch = [getPos _unit, ((_unit distance2d _target) / 2) min 300, 100, 8, _target] call FUNC(findOverwatch);
 
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
-[_pos, true] call cba_fnc_shuffle;
+[_pos, true] call CBA_fnc_shuffle;
 _pos pushBack _target;
 
 // set tasks
@@ -108,7 +108,7 @@ private _fnc_manoeuvre = {
             _fnc_manoeuvre,
             [_cycle, _units, _pos, _fnc_manoeuvre],
             12 + random 6
-        ] call cba_fnc_waitAndExecute;
+        ] call CBA_fnc_waitAndExecute;
     };
 };
 
