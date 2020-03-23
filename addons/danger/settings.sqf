@@ -182,7 +182,15 @@ private _curCat = "Settings Share information";
     [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
-
+// Base range of RadioBackpack
+[
+    QGVAR(maxRevealValue),
+    "SLIDER",
+    ["Maximum Reveal Value", "Max Reveal Value!"], // TODO:
+    [COMPONENT_NAME, _curCat],
+    [0, 4, 1, 2],
+    1
+] call CBA_fnc_addSetting;
 // Configures CQC formations
 _curCat = "Settings CQB Formations";
 GVAR(allPossibleFormations) = ["COLUMN", "STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "LINE", "FILE", "DIAMOND"];

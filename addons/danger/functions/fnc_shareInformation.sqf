@@ -42,13 +42,16 @@ private _groups = allGroups select {
 };
 
 private _knowsAbout = _unit knowsAbout _target;
+
+
 // share information
 {
-    if (!isNull _target) then {
-        [_x ,[_target, _knowsAbout min 1]] remoteExec ["reveal", _x];
+    if !(isNull _target) then {
+        private _max = linearConversion [0, _range, (leader _x) distance _target, GVAR(maxRevealValue), 0, true];
+        [_x, [_target, _knowsAbout min _max]] remoteExec ["reveal", _x];
     };
 
-    if (leader _x distance _unit < (200 min _range)) then {
+    if ((leader _x) distance _unit < (200 min _range)) then {
         _x setBehaviour "COMBAT";
         _x setFormDir ((leader _x) getDir _unit);
     };
