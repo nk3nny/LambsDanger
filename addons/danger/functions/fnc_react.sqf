@@ -12,7 +12,7 @@
  * success
  *
  * Example:
- * [bob, getpos angryJoe, false] call lambs_danger_fnc_react;
+ * [bob, getPos angryJoe, false] call lambs_danger_fnc_react;
  *
  * Public: No
 */

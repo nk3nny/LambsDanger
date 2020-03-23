@@ -29,7 +29,7 @@ if (_group isEqualType objNull) then { _group = group _group; };
 
 // sort pos
 if (_pos isEqualTo []) then { _pos = _group; };
-_pos = _pos call cba_fnc_getPos;
+_pos = _pos call CBA_fnc_getPos;
 
 // remove all waypoints
 [_group] call CBA_fnc_clearWaypoints;

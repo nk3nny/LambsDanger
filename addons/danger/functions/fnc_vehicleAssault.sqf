@@ -13,7 +13,7 @@
  * success
  *
  * Example:
- * [bob, getpos angryJoe, angryJoe] call lambs_danger_fnc_vehicleAssault;
+ * [bob, getPos angryJoe, angryJoe] call lambs_danger_fnc_vehicleAssault;
  *
  * Public: No
 */
@@ -37,7 +37,7 @@ if (
 // define buildings
 if (_buildings isEqualTo []) then {
     _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
-    //_buildings = _buildings select {!(terrainIntersect [getpos _unit, getpos _x])};
+    //_buildings = _buildings select {!(terrainIntersect [getPos _unit, getPos _x])};
 };
 
 // set task
@@ -86,7 +86,7 @@ if (GVAR(debug_functions)) then {
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
 
 };
 

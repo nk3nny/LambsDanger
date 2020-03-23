@@ -18,7 +18,7 @@
 params ["_unit", "_target", ["_pos", []]];
 
 if (_pos isEqualTo []) then {
-    _pos = _target call cba_fnc_getPos;
+    _pos = _target call CBA_fnc_getPos;
 };
 
 // check if mod active

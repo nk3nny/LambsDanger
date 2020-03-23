@@ -12,7 +12,7 @@
  * success
  *
  * Example:
- * [bob, getposASL angryJoe, false] call lambs_danger_fnc_suppress;
+ * [bob, getPosASL angryJoe, false] call lambs_danger_fnc_suppress;
  *
  * Public: No
 */
@@ -70,7 +70,7 @@ if (GVAR(debug_functions)) then {
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    [{deleteVehicle _this}, _sphere, 20] call cba_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
 };
 
 // end

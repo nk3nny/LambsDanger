@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob, getpos angryJoe, 10] call lambs_danger_fnc_checkBody;
+ * [bob, getPos angryJoe, 10] call lambs_danger_fnc_checkBody;
  *
  * Public: No
 */
@@ -85,7 +85,7 @@ if (GVAR(debug_functions)) then {
     // debug arrow
     private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];
     _help setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    [{deleteVehicle _this}, _help, 8] call cba_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _help, 8] call CBA_fnc_waitAndExecute;
 };
 
 // end
