@@ -85,5 +85,29 @@
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip">
             <English>The cycle time of the script</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
+            <English>Task Camp</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
+            <English>Task CQB</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
+            <English>Task Garrison</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
+            <English>Task Patrol</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
+            <English>Task Reset</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
+            <English>Task Creep</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
+            <English>Task Hunt</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
+            <English>Task Rush</English>
+        </Key>
     </Package>
 </Project>

@@ -2,7 +2,7 @@
 class GVAR(TaskArtillery) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskArtillery);
     scope = 2;
-    displayName = "Task Artillery";
+    displayName = CSTRING(Module_TaskArtillery_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleArtillery);
     icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
@@ -59,7 +59,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
 class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskArtilleryRegister);
     scope = 2;
-    displayName = "Task Artillery Register";
+    displayName = CSTRING(Module_TaskArtilleryRegister_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleArtilleryRegister);
     icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
@@ -83,7 +83,7 @@ class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
 class GVAR(TaskAssault) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskAssault);
     scope = 2;
-    displayName = "Task Assault/Retreat";
+    displayName = CSTRING(Module_TaskAssault_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleAssault);
     icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
@@ -138,7 +138,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
 class GVAR(TaskCamp) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCamp);
     scope = 2;
-    displayName = "Task Camp";
+    displayName = CSTRING(Module_TaskCamp_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleCamp);
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -164,7 +164,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
 class GVAR(TaskCQB) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCQB);
     scope = 2;
-    displayName = "Task CQB";
+    displayName = CSTRING(Module_TaskCQB_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleCQB);
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
@@ -207,7 +207,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
 class GVAR(TaskGarrison) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskGarrison);
     scope = 2;
-    displayName = "Task Garrison";
+    displayName = CSTRING(Module_TaskGarrison_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleGarrison);
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -231,7 +231,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
 class GVAR(TaskPatrol) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskPatrol);
     scope = 2;
-    displayName = "Task Patrol";
+    displayName = CSTRING(Module_TaskPatrol_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(modulePatrol);
     icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
@@ -274,7 +274,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
 class GVAR(TaskReset) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskReset);
     scope = 2;
-    displayName = "Task Reset";
+    displayName = CSTRING(Module_TaskReset_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleReset);
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
@@ -288,7 +288,7 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
 class GVAR(TaskCreep) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCreep);
     scope = 2;
-    displayName = "Task Creep";
+    displayName = CSTRING(Module_TaskCreep_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleCreep);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -332,7 +332,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
 class GVAR(TaskHunt) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskHunt);
     scope = 2;
-    displayName = "Task Hunt";
+    displayName = CSTRING(Module_TaskHunt_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleHunt);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -376,7 +376,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
 class GVAR(TaskRush) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskRush);
     scope = 2;
-    displayName = "Task Rush";
+    displayName = CSTRING(Module_TaskRush_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleRush);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
