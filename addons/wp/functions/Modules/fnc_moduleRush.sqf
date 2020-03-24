@@ -33,7 +33,7 @@ switch (_mode) do {
             };
 
             if (_error == "") then {
-                ["Task Rush",
+                [LSTRING(Module_TaskRush_DisplayName),
                     [
                         ["Radius", "NUMBER", "Distance rushing group will search for enemies.\nThis module only targets enemy players", 1000],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4],

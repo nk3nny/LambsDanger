@@ -32,7 +32,7 @@ switch (_mode) do {
                 _groups = _groups select { ((units _x) findIf { alive _x }) != -1; };
                 _groups = [_groups, [], {_logic distance (leader _x) }, "ASCEND"] call BIS_fnc_sortBy;
 
-                ["Task Camp",
+                [LSTRING(Module_TaskCamp_DisplayName),
                     [
                         ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]
@@ -51,13 +51,13 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName "Self";
+                _logic setVehicleVarName localize LSTRING(Self);
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 
-                ["Task Camp",
+                [LSTRING(Module_TaskCamp_DisplayName),
                     [
                         ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]

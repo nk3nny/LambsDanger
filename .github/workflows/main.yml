@@ -45,9 +45,7 @@ jobs:
           path: 'releases/@LambsDanger.zip'
 
   stringtables:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Install Python packages
       run: |
@@ -60,7 +58,7 @@ jobs:
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
-      if: github.repository == 'com/nk3nny/LambsDanger' && ! contains(github.event.head_commit.message, '[ci skip]')
+      if: github.repository == 'nk3nny/LambsDanger' && ! contains(github.event.head_commit.message, '[ci skip]')
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: python3 tools/stringtableDeploy.py

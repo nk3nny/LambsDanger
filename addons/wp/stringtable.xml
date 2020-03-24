@@ -115,5 +115,8 @@
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_ToolTip">
             <English>Automatically adds artillery already present in the mission to Side</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Self">
+            <English>Self</English>
+        </Key>
     </Package>
 </Project>

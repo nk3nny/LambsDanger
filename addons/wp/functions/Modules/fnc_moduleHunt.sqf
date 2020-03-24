@@ -33,7 +33,7 @@ switch (_mode) do {
             };
 
             if (_error == "") then {
-                ["Task Hunt",
+                [LSTRING(Module_TaskHunt_DisplayName),
                     [
                         ["Radius", "NUMBER", "Distance hunting group will search for enemies.\nThis module only targets enemy players", 1000],
                         ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds", 70],

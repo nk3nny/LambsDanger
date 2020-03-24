@@ -48,7 +48,7 @@ switch (_mode) do {
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
-            ["Task Artillery",
+            [LSTRING(Module_TaskArtillery_DisplayName),
                 [
                     ["Side", "DROPDOWN", "Which side is calling for artillery", SIDES apply { str _x }],
                     ["Main Salvo", "NUMBER", "Number of rounds in main salvo", 6],

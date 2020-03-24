@@ -31,7 +31,7 @@ switch (_mode) do {
                 _groups = _groups select { ((units _x) findIf { alive _x }) != -1; };
                 _groups = [_groups, [], {_logic distance (leader _x) }, "ASCEND"] call BIS_fnc_sortBy;
 
-                ["Task Assault",
+                [LSTRING(Module_TaskAssault_DisplayName),
                     [
                         ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         ["Unit is fleeing", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
@@ -58,7 +58,7 @@ switch (_mode) do {
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 private _targets = GVAR(ModuleTargets);
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-                ["Task Assault",
+                [LSTRING(Module_TaskAssault_DisplayName),
                     [
                         ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
