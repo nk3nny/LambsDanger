@@ -97,9 +97,6 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
-            <English>Task Reset</English>
-        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
         </Key>
