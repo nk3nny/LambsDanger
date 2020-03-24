@@ -109,5 +109,11 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
+            <English>Enable automatic artillery registration</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_ToolTip">
+            <English>Automatically adds artillery already present in the mission to Side</English>
+        </Key>
     </Package>
 </Project>
