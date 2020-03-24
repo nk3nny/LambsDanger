@@ -283,3 +283,13 @@ _curCat = "Debug";
     false,
     1
 ] call CBA_fnc_addSetting;
+
+//'Danger close' distance for suppression
+[
+    QGVAR(minimaldistance),
+    "SLIDER",
+    ["Suppression Danger Close", "Minimal distance beyond which friendlies must be to open suppression fire"],
+    [COMPONENT_NAME, _curCat],
+    [0, 200, 20, 0],
+    1
+] call CBA_fnc_addSetting;
