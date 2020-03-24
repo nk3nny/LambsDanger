@@ -325,7 +325,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players";
+        description = CSTRINGModule_TaskCreep_ModuleDescription);
     };
 };
 
@@ -345,8 +345,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = "Use Group As Center";
-            tooltip = "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
+            displayName = CSTRINGModule_TaskHunt_MovingCenter_DisplayName);
+            tooltip = CSTRINGModule_TaskHunt_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -355,8 +355,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds";
+            displayName = CSTRINGModule_TaskHunt_CycleTime_DisplayName);
+            tooltip = CSTRINGModule_TaskHunt_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "70";
             unique = 0;
@@ -369,7 +369,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.";
+        description = CSTRINGModule_TaskHunt_ModuleDescription);
     };
 };
 
@@ -389,8 +389,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = "Use Group As Center";
-            tooltip = "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
+            displayName = CSTRINGModule_TaskRush_MovingCenter_DisplayName);
+            tooltip = CSTRINGModule_TaskRush_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -399,8 +399,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds";
+            displayName = CSTRINGModule_TaskRush_CycleTime_DisplayName);
+            tooltip = CSTRINGModule_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "4";
             unique = 0;
@@ -413,6 +413,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
+        description = CSTRINGModule_TaskRush_ModuleDescription);
     };
 };

@@ -130,6 +130,9 @@
         <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
             <English>This module resets all custom LAMBS scripts running on the unit</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
+            <English>Task Creep</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
             <English>Use Group As Center</English>
         </Key>
@@ -142,14 +145,44 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
-            <English>Task Creep</English>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
+            <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
+            <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
+            <English>Use Group As Center</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
+            <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
+            <English>Script interval</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
+            <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
+            <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
+            <English>Use Group As Center</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
+            <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_DisplayName">
+            <English>Script interval</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
+            <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
