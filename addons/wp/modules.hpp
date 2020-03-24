@@ -325,7 +325,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskCreep_ModuleDescription);
+        description = CSTRING(Module_TaskCreep_ModuleDescription);
     };
 };
 
@@ -345,8 +345,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = CSTRINGModule_TaskHunt_MovingCenter_DisplayName);
-            tooltip = CSTRINGModule_TaskHunt_MovingCenter_ToolTip);
+            displayName = CSTRING(Module_TaskHunt_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -355,8 +355,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = CSTRINGModule_TaskHunt_CycleTime_DisplayName);
-            tooltip = CSTRINGModule_TaskHunt_CycleTime_ToolTip);
+            displayName = CSTRING(Module_TaskHunt_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "70";
             unique = 0;
@@ -369,7 +369,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskHunt_ModuleDescription);
+        description = CSTRING(Module_TaskHunt_ModuleDescription);
     };
 };
 
@@ -389,8 +389,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = CSTRINGModule_TaskRush_MovingCenter_DisplayName);
-            tooltip = CSTRINGModule_TaskRush_MovingCenter_ToolTip);
+            displayName = CSTRING(Module_TaskRush_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskRush_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -399,8 +399,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = CSTRINGModule_TaskRush_CycleTime_DisplayName);
-            tooltip = CSTRINGModule_TaskRush_CycleTime_ToolTip);
+            displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "4";
             unique = 0;
@@ -413,6 +413,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskRush_ModuleDescription);
+        description = CSTRING(Module_TaskRush_ModuleDescription);
     };
 };
