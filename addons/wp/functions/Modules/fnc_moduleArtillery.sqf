@@ -50,16 +50,16 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
-                    ["Side", "DROPDOWN", "Which side is calling for artillery", SIDES apply { str _x }],
-                    ["Main Salvo", "NUMBER", "Number of rounds in main salvo", 6],
-                    ["Spread", "NUMBER", "Default dispersion of main salvo", 75],
-                    ["Skip adjusting rounds", "BOOLEAN", "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target", false]
+                    ["STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName", "DROPDOWN", "STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip", SIDES apply { str _x }],
+                    ["STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip", 6],
+                    ["STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip", 75],
+                    ["STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip", false]
                 ], {
                     params ["_data", "_args"];
                     _args params ["_logic", "_fnc_callArtillery"];
                     _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
                     [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
-                    [objNull, format ["Artillery target created for %1", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, format [localize "STR_Lambs_WP_Module_TaskArtillery_ZeusNotification", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
                     deleteVehicle _logic;
                 }, {
                     params ["_logic"];

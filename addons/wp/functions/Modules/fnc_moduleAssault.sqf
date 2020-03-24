@@ -33,11 +33,11 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskAssault_DisplayName),
                     [
-                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Unit is fleeing", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
-                        ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
-                        ["Script interval", "NUMBER", "The cycle time of the script", 3],
-                        ["Remove module after start", "BOOLEAN", "Check this to remove module after script initiates\n If module is present it can be moved to dynamically alter destination", false]
+                        ["STR_Lambs_WP_Groups_DisplayName", "DROPDOWN", "STR_Lambs_WP_Groups_ToolTip", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip", false],
+                        ["STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip", 15],
+                        ["STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip", 3],
+                        ["STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -60,10 +60,10 @@ switch (_mode) do {
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 [LSTRING(Module_TaskAssault_DisplayName),
                     [
-                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["Is Retreating", "BOOLEAN", "Enable this to make the unit retreat and ignore enemies", false],
-                        ["Completion Threshold", "NUMBER", "Units within this many meters will revert to regular behaviour", 15],
-                        ["Script interval", "NUMBER", "The cycle time of the script", 3]
+                        ["STR_Lambs_WP_Centers_DisplayName", "DROPDOWN", "STR_Lambs_WP_Centers_ToolTip", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip", false],
+                        ["STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip", 15],
+                        ["STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip", 3]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

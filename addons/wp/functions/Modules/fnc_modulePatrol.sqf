@@ -33,10 +33,10 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
-                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Range", "NUMBER", "Max distance between waypoints", 200],
-                        ["Waypoints", "NUMBER", "Number of waypoints created", 3],
-                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will create new patrol pattern once one patrol cycle is complete", false]
+                        ["STR_Lambs_WP_Groups_DisplayName", "DROPDOWN", "STR_Lambs_WP_Groups_ToolTip", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskPatrol_Range_ToolTip", 200],
+                        ["STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskPatrol_Waypoints_ToolTip", 3],
+                        ["STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_ToolTip", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -60,10 +60,10 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
-                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list.\nIf Dynamic patrol pattern is enabled, the target can be moved to update patrol route", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["Range", "NUMBER", "Max distance between waypoints", 200],
-                        ["Waypoints", "NUMBER", "Number of waypoints created", 3],
-                        ["Dynamic patrol pattern", "BOOLEAN", "Unit will generate a new patrol pattern once one patrol cycle is complete", false]
+                        ["STR_Lambs_WP_Centers_DisplayName", "DROPDOWN", "STR_Lambs_WP_Centers_ToolTip", _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskPatrol_Range_ToolTip", 200],
+                        ["STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskPatrol_Waypoints_ToolTip", 3],
+                        ["STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_ToolTip", false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

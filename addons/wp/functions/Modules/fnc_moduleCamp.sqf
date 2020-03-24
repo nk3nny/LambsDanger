@@ -34,8 +34,8 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskCamp_DisplayName),
                     [
-                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance.", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]
+                        ["STR_Lambs_WP_Groups_DisplayName", "DROPDOWN", "STR_Lambs_WP_Groups_ToolTip", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip", 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -59,8 +59,8 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskCamp_DisplayName),
                     [
-                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols", 50]
+                        ["STR_Lambs_WP_Centers_DisplayName", "DROPDOWN", "STR_Lambs_WP_Centers_ToolTip", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        ["STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip", 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];

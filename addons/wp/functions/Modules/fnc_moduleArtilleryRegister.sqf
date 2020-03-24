@@ -35,9 +35,9 @@ switch (_mode) do {
             if (_error == "") then {
                 private _success = [_group] call FUNC(taskArtilleryRegister);
                 if (_success) then {
-                    [objNull, "Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, "STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded"] call BIS_fnc_showCuratorFeedbackMessage;
                 } else {
-                    [objNull, "No Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, "STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded"] call BIS_fnc_showCuratorFeedbackMessage;
                 };
 
                 deleteVehicle _logic;
