@@ -157,7 +157,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         duplicate = 1;
         position = 1;
         direction = 1;
-        description = CSTRINGModule_TaskCamp_ModuleDescription);
+        description = CSTRING(Module_TaskCamp_ModuleDescription);
     };
 };
 
@@ -177,8 +177,8 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(CycleTime): EditShort {
-            displayName = CSTRINGModule_TaskCQB_CycleTime_DisplayName);
-            tooltip = CSTRINGModule_TaskCQB_CycleTime_Tooltip);
+            displayName = CSTRING(Module_TaskCQB_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskCQB_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
             defaultValue = "21";
             unique = 0;
@@ -187,8 +187,8 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(DeleteOnStartUp): Checkbox {
-            displayName = CSTRINGModule_TaskCQB_DeleteOnStartUp_DisplayName);
-            tooltip = CSTRINGModule_TaskCQB_DeleteOnStartUp_Tooltip);
+            displayName = CSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName);
+            tooltip = CSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip);
             property = QGVAR(DeleteOnStartUp);
             unique = 0;
             validate = "none";
@@ -200,7 +200,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskCQB_ModuleDescription);
+        description = CSTRING(Module_TaskCQB_ModuleDescription);
     };
 };
 
@@ -224,7 +224,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskGarrison_ModuleDescription);
+        description = CSTRING(Module_TaskGarrison_ModuleDescription);
     };
 };
 
@@ -244,8 +244,8 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(WaypointCount): EditShort {
-            displayName = CSTRINGModule_TaskPatrol_Waypoints_DisplayName);
-            tooltip = CSTRINGModule_TaskPatrol_Waypoints_Tooltip);
+            displayName = CSTRING(Module_TaskPatrol_Waypoints_DisplayName);
+            tooltip = CSTRING(Module_TaskPatrol_Waypoints_Tooltip);
             property = QGVAR(WaypointCount);
             defaultValue = "4";
             unique = 0;
@@ -254,8 +254,8 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(MoveWaypoints): Checkbox {
-            displayName = CSTRINGModule_TaskPatrol_MoveWaypoints_DisplayName);
-            tooltip = CSTRINGModule_TaskPatrol_MoveWaypoints_Tooltip);
+            displayName = CSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName);
+            tooltip = CSTRING(Module_TaskPatrol_MoveWaypoints_Tooltip);
             property = QGVAR(moveWaypoints);
             unique = 0;
             validate = "none";
@@ -267,7 +267,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = CSTRINGModule_TaskPatrol_ModuleDescription);
+        description = CSTRING(Module_TaskPatrol_ModuleDescription);
     };
 };
 
@@ -280,7 +280,7 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     class ModuleDescription: ModuleDescription {
-        description = CSTRINGModule_TaskReset_ModuleDescription);
+        description = CSTRING(Module_TaskReset_ModuleDescription);
     };
 };
 
@@ -301,8 +301,8 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = CSTRINGModule_TaskCreep_MovingCenter_DisplayName);
-            tooltip = CSTRINGModule_TaskCreep_MovingCenter_Tooltip);
+            displayName = CSTRING(Module_TaskCreep_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskCreep_MovingCenter_Tooltip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -311,8 +311,8 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = CSTRINGModule_TaskCreep_CycleTime_DisplayName);
-            tooltip = CSTRINGModule_TaskCreep_CycleTime_Tooltip);
+            displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
             defaultValue = "15";
             unique = 0;
