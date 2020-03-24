@@ -34,8 +34,8 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskCamp_DisplayName),
                     [
-                        ["STR_Lambs_WP_Groups_DisplayName", "DROPDOWN", "STR_Lambs_WP_Groups_ToolTip", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip", 50]
+                        [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        [LSTRING(Module_TaskCamp_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCamp_Radius_ToolTip), 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -59,8 +59,8 @@ switch (_mode) do {
 
                 [LSTRING(Module_TaskCamp_DisplayName),
                     [
-                        ["STR_Lambs_WP_Centers_DisplayName", "DROPDOWN", "STR_Lambs_WP_Centers_ToolTip", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip", 50]
+                        [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        [LSTRING(Module_TaskCamp_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCamp_Radius_ToolTip), 50]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];

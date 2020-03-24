@@ -50,16 +50,16 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
-                    ["STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName", "DROPDOWN", "STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip", SIDES apply { str _x }],
-                    ["STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip", 6],
-                    ["STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName", "NUMBER", "STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip", 75],
-                    ["STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName", "BOOLEAN", "STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip", false]
+                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "DROPDOWN", LSTRING(Module_TaskArtillery_Side_Tooltip), SIDES apply { str _x }],
+                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), 6],
+                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_Spread_Tooltip), 75],
+                    [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
                 ], {
                     params ["_data", "_args"];
                     _args params ["_logic", "_fnc_callArtillery"];
                     _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
                     [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
-                    [objNull, format [localize "STR_Lambs_WP_Module_TaskArtillery_ZeusNotification", SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, format [localize LSTRING(Module_TaskArtillery_ZeusNotification), SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
                     deleteVehicle _logic;
                 }, {
                     params ["_logic"];
