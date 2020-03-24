@@ -111,6 +111,16 @@ private _curCat = "General";
     1
 ] call CBA_fnc_addSetting;
 
+// 'Danger close' distance for suppression
+[
+    QGVAR(minFriendlySuppressionDistance),
+    "SLIDER",
+    ["Suppression Danger Close Distance", "Minimal distance beyond which friendlies must be to open suppression fire"],
+    [COMPONENT_NAME, _curCat],
+    [0, 200, 15, 0],
+    1
+] call CBA_fnc_addSetting;
+
 // Chance of panic expressed as percentage
 [
     QGVAR(panic_chance),

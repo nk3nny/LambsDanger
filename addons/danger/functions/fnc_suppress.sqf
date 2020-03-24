@@ -47,6 +47,11 @@ _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultipl
 // final range check
 if (_distance < GVAR(minSuppression_range)) exitWith {false};
 
+private _posAGL = (ASLToAGL _pos);
+private _enemy = _unit findNearestEnemy _posAGL;
+private _friendly = _enemy findNearestEnemy _posAGL;
+if (_friendly != _vehicle && { _friendly distance _posAGL < GVAR(minFriendlySuppressionDistance) }) exitWith {false};
+
 // Callout!
 if (RND(0.4) && {count units _unit > 1}) then {
     [_unit, "Combat", "suppress", 75] call FUNC(doCallout);
