@@ -34,9 +34,9 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskCreep_DisplayName),
                     [
-                        ["Radius", "NUMBER", "Distance creeping group will search for enemies.\nThis module only targets enemy players", 1000],
-                        ["Script Interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate\nDefault 15 seconds", 15],
-                        ["Use Group As Center", "BOOLEAN", "The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead", true]
+                        [LSTRING(Module_TaskCreep_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_Radius_ToolTip), 1000],
+                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), 15],
+                        [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

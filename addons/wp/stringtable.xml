@@ -178,6 +178,12 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
+            <English>Radius</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_ToolTip">
+            <English>Distance creeping group will search for enemies.\nThis module only targets enemy players</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players</English>
         </Key>
@@ -199,6 +205,12 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
+            <English>Radius</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
+            <English>Distance hunting group will search for enemies.\nThis module only targets enemy players</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
         </Key>
@@ -216,6 +228,12 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
+            <English>Radius</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
+            <English>Distance rushing group will search for enemies.\nThis module only targets enemy players</English>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
