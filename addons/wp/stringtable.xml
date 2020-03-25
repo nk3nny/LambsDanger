@@ -208,7 +208,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
             <English>Radius</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_ToolTip">
             <English>Distance hunting group will search for enemies.\nThis module only targets enemy players</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">

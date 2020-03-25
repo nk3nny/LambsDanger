@@ -35,7 +35,7 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskHunt_DisplayName),
                     [
-                        [LSTRING(Module_TaskHunt_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskHunt_CycleTime_ToolTip), 1000],
+                        [LSTRING(Module_TaskHunt_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskHunt_Radius_ToolTip), 1000],
                         [LSTRING(Module_TaskHunt_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskHunt_CycleTime_ToolTip), 70],
                         [LSTRING(Module_TaskHunt_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_MovingCenter_ToolTip), true]
                     ], {
