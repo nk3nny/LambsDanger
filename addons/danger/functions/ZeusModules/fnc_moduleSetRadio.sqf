@@ -10,15 +10,15 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _unit) then {
-        _error = "No Unit Seleted";
+        _error = ELSTRING(main,NoUnitSelected);
     };
     if (isPlayer _unit) then {
-        _error = "Players are not Valid Selections";
+        _error = ELSTRING(main,PlayerNotValid);
     };
     if (_error == "") then {
-        ["Configure Long-range Radio",
+        [LSTRING(Module_SetRadio_DisplayName),
             [
-                ["Toggle boosted communication range on unit", "BOOLEAN", "Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.", _unit getVariable [QGVAR(dangerRadio), false]]
+                [LSTRING(Module_SetRadio_SettingName), "BOOLEAN", LSTRING(Module_SetRadio_SettingToolTip), _unit getVariable [QGVAR(dangerRadio), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
@@ -34,7 +34,7 @@ if (_activated && local _logic) then {
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
-        [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+        [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
         deleteVehicle _logic;
     };
 };

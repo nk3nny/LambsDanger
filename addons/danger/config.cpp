@@ -6,7 +6,7 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"lambs_main"};
-        author = "LAMBS Dev Team";
+        author = ECSTRING(main,Team);
         VERSION_CONFIG;
     };
 };

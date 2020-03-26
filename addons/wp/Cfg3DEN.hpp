@@ -23,7 +23,7 @@ class Cfg3DEN {
                     h = 5  * GRID_3DEN_H;
                     rows = 1;
                     columns = 3;
-                    strings[] = { "West", "East", "Independent" };
+                    strings[] = { "$STR_A3_CfgGroups_West0", "$STR_A3_CfgGroups_East0", "$STR_A3_CfgGroups_Indep0" };
                 };
             };
         };
@@ -35,8 +35,8 @@ class Cfg3DEN {
                     class EGVAR(WP,Editor_IsArtillery) {
                         property = QEGVAR(WP,Editor_IsArtillery);
                         control = "Checkbox";
-                        displayName = "Register as LAMBS artillery";
-                        tooltip = "Vehicle will be automatically registered as available artillery for dynamic strikes";
+                        displayName = CSTRING(3DEN_Attributes_RegisterArtillery_DisplayName);
+                        tooltip = CSTRING(3DEN_Attributes_RegisterArtillery_ToolTip);
                         expression = "if (_value) then {_this spawn {waitUntil {!isNil 'lambs_danger_Loaded_WP'};if (lambs_danger_Loaded_WP) then {[gunner _this] call lambs_wp_fnc_taskArtilleryRegister;};};};";
                         typeName = "BOOL";
                         condition = "objectVehicle";

@@ -75,7 +75,7 @@ if (_unit distance2d _enemy < 120) then {
     private _pos = (_unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70]);
 
     // check for water
-    if (surfaceIsWater _pos) then {_pos = getposASL _unit};
+    if (surfaceIsWater _pos) then {_pos = getPosASL _unit};
 
     // concealment + pick bushes and rocks if possible
     private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, false, true];
