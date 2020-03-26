@@ -187,7 +187,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 [
     QGVAR(maxRevealValue),
     "SLIDER",
-    ["Maximum Reveal Value", "Max Reveal Value!"], // TODO
+    [ LSTRING(Settings_maxRevealValue),  LSTRING(Settings_maxRevealValue_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 4, 1, 2],
     1

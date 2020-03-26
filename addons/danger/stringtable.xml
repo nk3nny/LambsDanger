@@ -151,6 +151,12 @@
         <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
             <English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
+            <English>Maximum Reveal Value</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
+            <English>Max Reveal Value!</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
         </Key>
