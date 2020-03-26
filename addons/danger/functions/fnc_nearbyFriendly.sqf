@@ -14,10 +14,10 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", "_distance"];
+params ["_unit", "_pos", ["_distance", GVAR(minFriendlySuppressionDistance)]];
 private _ignoredSides = (side _unit) call BIS_fnc_enemySides;
 _ignoredSides append [sideUnknown, sideEmpty, sideEnemy, sideLogic, sideFriendly, sideAmbientLife];
-(nearestObjects [_pos, ["AllVehicles"], _distance, true]) select {
+(_pos nearEntities ["CAManBase", _distance*1.5]) select {
     // Exit if side
     if ((side _x) in _ignoredSides) then {
         false

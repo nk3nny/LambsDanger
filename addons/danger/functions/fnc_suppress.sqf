@@ -47,7 +47,7 @@ _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultipl
 // final range check
 if (_distance < GVAR(minSuppression_range)) exitWith {false};
 
-private _friendlys = [_unit, _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
 if (_friendlys isEqualTo [] && {!_friendlys isEqualTo [_unit]}) exitWith {false};
 
 // Callout!
