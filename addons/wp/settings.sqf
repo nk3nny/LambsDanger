@@ -1,4 +1,4 @@
-private _curCat = "Settings";
+private _curCat = ELSTRING(Danger,Settings_MainCat);
 // Enable automatic artillery registration
 DFUNC(ArtilleryScan) = {
     if (!GVAR(autoAddArtillery)) exitWith {
@@ -16,7 +16,7 @@ GVAR(autoArtilleryRunning) = false;
 [
     QGVAR(autoAddArtillery),
     "CHECKBOX",
-    ["Enable automatic artillery registration", "Automatically adds artillery already present in the mission to Side"],
+    [LSTRING(Settings_AutoRegisterArtillery_DisplayName), LSTRING(Settings_AutoRegisterArtillery_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     true, {
