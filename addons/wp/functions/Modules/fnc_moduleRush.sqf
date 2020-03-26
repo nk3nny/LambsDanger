@@ -29,15 +29,15 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = "No Unit Seleted";
+                _error = ELSTRING(main,NoUnitSelected);
             };
 
             if (_error == "") then {
-                ["Task Rush",
+                [LSTRING(Module_TaskRush_DisplayName),
                     [
-                        ["Radius", "NUMBER", "Distance rushing group will search for enemies.\nThis module only targets enemy players", 1000],
-                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate\nDefault 4 seconds", 4],
-                        ["Use Group As Center", "BOOLEAN", "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead", true]
+                        [LSTRING(Module_TaskRush_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskRush_Radius_ToolTip), 1000],
+                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskRush_CycleTime_ToolTip), 4],
+                        [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
@@ -57,7 +57,7 @@ switch (_mode) do {
                     }, [_group, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             };
         } else {

@@ -2,15 +2,15 @@
 class GVAR(TaskArtillery) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskArtillery);
     scope = 2;
-    displayName = "Task Artillery";
+    displayName = CSTRING(Module_TaskArtillery_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleArtillery);
     icon = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
     portrait = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\destroy_ca.paa";
     class Attributes: AttributesBase {
         class GVAR(Side) {
-            displayName = "Side";
-            tooltip = "Which side is calling for artillery";
+            displayName = CSTRING(Module_TaskArtillery_Side_DisplayName);
+            tooltip = CSTRING(Module_TaskArtillery_Side_Tooltip);
             property = QGVAR(Side);
             defaultValue = "0";
             unique = 0;
@@ -21,8 +21,8 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             expression = "_this setVariable ['%s', _value, true];";
         };
         class GVAR(MainSalvo): EditShort {
-            displayName = "Main Salvo";
-            tooltip = "Number of rounds in the main salvo";
+            displayName = CSTRING(Module_TaskArtillery_MainSalvo_DisplayName);
+            tooltip = CSTRING(Module_TaskArtillery_MainSalvo_Tooltip);
             property = QGVAR(MainSalvo);
             defaultValue = "6";
             unique = 0;
@@ -31,8 +31,8 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(Spread): EditShort {
-            displayName = "Spread";
-            tooltip = "Default dispersion of the main salvo";
+            displayName = CSTRING(Module_TaskArtillery_Spread_DisplayName);
+            tooltip = CSTRING(Module_TaskArtillery_Spread_Tooltip);
             property = QGVAR(Spread);
             defaultValue = "75";
             unique = 0;
@@ -41,8 +41,8 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(SkipCheckRounds): Checkbox {
-            displayName = "Skip adjusting rounds";
-            tooltip = "Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target";
+            displayName = CSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName);
+            tooltip = CSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip);
             property = QGVAR(SkipCheckRounds);
             unique = 0;
             validate = "none";
@@ -52,14 +52,14 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {
-        description = "This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance";
+        description = CSTRING(Module_TaskArtillery_ModuleDescription);
     };
 };
 
 class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskArtilleryRegister);
     scope = 2;
-    displayName = "Task Artillery Register";
+    displayName = CSTRING(Module_TaskArtilleryRegister_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleArtilleryRegister);
     icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
@@ -76,22 +76,22 @@ class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Register units to that sides artillery pool.";
+        description = CSTRING(Module_TaskArtilleryRegister_ModuleDescription);
     };
 };
 
 class GVAR(TaskAssault) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskAssault);
     scope = 2;
-    displayName = "Task Assault/Retreat";
+    displayName = CSTRING(Module_TaskAssault_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleAssault);
     icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
     portrait = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
     class Attributes: AttributesBase {
         class GVAR(IsRetreat): Checkbox {
-            displayName = "Unit is fleeing";
-            tooltip = "Enable this to make the unit retreat and ignore enemies";
+            displayName = CSTRING(Module_TaskAssault_Retreating_DisplayName);
+            tooltip = CSTRING(Module_TaskAssault_Retreating_Tooltip);
             property = QGVAR(IsRetreat);
             unique = 0;
             validate = "none";
@@ -99,8 +99,8 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             typeName = "BOOL";
         };
         class GVAR(DeleteOnStartUp): Checkbox {
-            displayName = "Remove module on Start-Up";
-            tooltip = "Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically";
+            displayName = CSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName);
+            tooltip = CSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip);
             property = QGVAR(DeleteOnStartUp);
             unique = 0;
             validate = "none";
@@ -108,8 +108,8 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             typeName = "BOOL";
         };
         class GVAR(DistanceThreshold): EditShort {
-            displayName = "Completion Threshold";
-            tooltip = "Units within this many meters will revert to regular behavior";
+            displayName = CSTRING(Module_TaskAssault_DistanceThreshold_DisplayName);
+            tooltip = CSTRING(Module_TaskAssault_DistanceThreshold_Tooltip);
             property = QGVAR(DistanceThreshold);
             defaultValue = "15";
             unique = 0;
@@ -118,8 +118,8 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time of the script";
+            displayName = CSTRING(Module_TaskAssault_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskAssault_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
             defaultValue = "3";
             unique = 0;
@@ -131,14 +131,14 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
     };
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
-        description = "Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.";
+        description = CSTRING(Module_TaskAssault_ModuleDescription);
     };
 };
 
 class GVAR(TaskCamp) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCamp);
     scope = 2;
-    displayName = "Task Camp";
+    displayName = CSTRING(Module_TaskCamp_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleCamp);
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -157,14 +157,14 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         duplicate = 1;
         position = 1;
         direction = 1;
-        description = "Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.";
+        description = CSTRING(Module_TaskCamp_ModuleDescription);
     };
 };
 
 class GVAR(TaskCQB) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCQB);
     scope = 2;
-    displayName = "Task CQB";
+    displayName = CSTRING(Module_TaskCQB_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleCQB);
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
@@ -177,8 +177,8 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds";
+            displayName = CSTRING(Module_TaskCQB_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskCQB_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
             defaultValue = "21";
             unique = 0;
@@ -187,8 +187,8 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(DeleteOnStartUp): Checkbox {
-            displayName = "Remove Dynamic center";
-            tooltip = "With the dynamic center present, it is possible to move the center point of the building search pattern";
+            displayName = CSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName);
+            tooltip = CSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip);
             property = QGVAR(DeleteOnStartUp);
             unique = 0;
             validate = "none";
@@ -200,14 +200,14 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.<br/><br/>In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.";
+        description = CSTRING(Module_TaskCQB_ModuleDescription);
     };
 };
 
 class GVAR(TaskGarrison) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskGarrison);
     scope = 2;
-    displayName = "Task Garrison";
+    displayName = CSTRING(Module_TaskGarrison_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleGarrison);
     icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
@@ -224,14 +224,14 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.";
+        description = CSTRING(Module_TaskGarrison_ModuleDescription);
     };
 };
 
 class GVAR(TaskPatrol) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskPatrol);
     scope = 2;
-    displayName = "Task Patrol";
+    displayName = CSTRING(Module_TaskPatrol_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(modulePatrol);
     icon = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
@@ -244,8 +244,8 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(WaypointCount): EditShort {
-            displayName = "Waypoints";
-            tooltip = "Number of waypoints created";
+            displayName = CSTRING(Module_TaskPatrol_Waypoints_DisplayName);
+            tooltip = CSTRING(Module_TaskPatrol_Waypoints_Tooltip);
             property = QGVAR(WaypointCount);
             defaultValue = "4";
             unique = 0;
@@ -254,8 +254,8 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(MoveWaypoints): Checkbox {
-            displayName = "Dynamic patrol pattern";
-            tooltip = "The unit will generate a new patrol pattern once one patrol cycle is complete";
+            displayName = CSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName);
+            tooltip = CSTRING(Module_TaskPatrol_MoveWaypoints_Tooltip);
             property = QGVAR(moveWaypoints);
             unique = 0;
             validate = "none";
@@ -267,20 +267,23 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Patrol makes the unit patrol within the area set by 3DEN attributes.";
+        description = CSTRING(Module_TaskPatrol_ModuleDescription);
     };
 };
 
 class GVAR(TaskReset) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskReset);
     scope = 2;
-    displayName = "Task Reset";
+    displayName = CSTRING(Module_TaskReset_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleReset);
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    class Attributes: AttributesBase {
+        class ModuleDescription: ModuleDescription {};
+    };
     class ModuleDescription: ModuleDescription {
-        description = "This module resets all custom LAMBS scripts running on the unit";
+        description = CSTRING(Module_TaskReset_ModuleDescription);          // THIS IS NOT SHOWING UP @JOKO
     };
 };
 
@@ -288,7 +291,7 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
 class GVAR(TaskCreep) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCreep);
     scope = 2;
-    displayName = "Task Creep";
+    displayName = CSTRING(Module_TaskCreep_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleCreep);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -301,8 +304,8 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = "Use Group As Center";
-            tooltip = "The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
+            displayName = CSTRING(Module_TaskCreep_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskCreep_MovingCenter_Tooltip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -311,8 +314,8 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds";
+            displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
             defaultValue = "15";
             unique = 0;
@@ -325,14 +328,14 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players";
+        description = CSTRING(Module_TaskCreep_ModuleDescription);
     };
 };
 
 class GVAR(TaskHunt) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskHunt);
     scope = 2;
-    displayName = "Task Hunt";
+    displayName = CSTRING(Module_TaskHunt_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleHunt);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -345,8 +348,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = "Use Group As Center";
-            tooltip = "The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
+            displayName = CSTRING(Module_TaskHunt_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -355,8 +358,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds";
+            displayName = CSTRING(Module_TaskHunt_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "70";
             unique = 0;
@@ -369,14 +372,14 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.";
+        description = CSTRING(Module_TaskHunt_ModuleDescription);
     };
 };
 
 class GVAR(TaskRush) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskRush);
     scope = 2;
-    displayName = "Task Rush";
+    displayName = CSTRING(Module_TaskRush_DisplayName);
     category = "Lambs_Danger_WP_Search_Cat";
     function = QFUNC(moduleRush);
     icon = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
@@ -389,8 +392,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     };
     class Attributes: AttributesBase {
         class GVAR(MovingCenter): Checkbox {
-            displayName = "Use Group As Center";
-            tooltip = "The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group";
+            displayName = CSTRING(Module_TaskRush_MovingCenter_DisplayName);
+            tooltip = CSTRING(Module_TaskRush_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
@@ -399,8 +402,8 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             defaultValue = "(true)";
         };
         class GVAR(CycleTime): EditShort {
-            displayName = "Script interval";
-            tooltip = "The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds";
+            displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
+            tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
             defaultValue = "4";
             unique = 0;
@@ -413,6 +416,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         direction = 1;
-        description = "Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.";
+        description = CSTRING(Module_TaskRush_ModuleDescription);
     };
 };
