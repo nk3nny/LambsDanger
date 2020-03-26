@@ -115,7 +115,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
 [
     QGVAR(minFriendlySuppressionDistance),
     "SLIDER",
-    ["Suppression Danger Close Distance", "Minimal distance beyond which friendlies must be to open suppression fire"],
+    [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 200, 15, 0],
     1

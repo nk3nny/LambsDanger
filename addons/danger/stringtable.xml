@@ -109,6 +109,12 @@
         <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
             <English>Within this distance AI will not perform suppression fire</English>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance">
+            <English>Suppression Danger Close Distance</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance_ToolTip">
+            <English>Minimal distance beyond which friendlies must be to open suppression fire</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>
         </Key>
