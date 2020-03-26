@@ -10,13 +10,13 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _group) then {
-        _error = "No Group Selected";
+        _error = ELSTRING(main,NoGroupSelected);
     };
 
     if (_error == "") then {
-        ["Configure Group AI",
+        [LSTRING(Module_DisableGroupAI_DisplayName),
             [
-                ["Disable LAMBS group AI", "BOOLEAN", "Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks", _group getVariable [QGVAR(disableGroupAI), false], ""]
+                [LSTRING(Module_DisableGroupAI_SettingName), "BOOLEAN", LSTRING(Module_DisableGroupAI_SettingToolTip), _group getVariable [QGVAR(disableGroupAI), false], ""]
             ], {
                 params ["_data", "_args"];
                 _args params ["_group", "_logic"];
@@ -32,7 +32,7 @@ if (_activated && local _logic) then {
             }, [_group, _logic]
         ] call EFUNC(main,showDialog);
     } else {
-        [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+        [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
         deleteVehicle _logic;
     };
 };

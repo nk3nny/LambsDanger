@@ -71,7 +71,7 @@ waitUntil {
         // suppress nearby buildings
         if (_combat && {(nearestBuilding _target distance2d _target < 25)}) then {
             {
-                [_x, getposASL _target] call EFUNC(danger,suppress);
+                [_x, getPosASL _target] call EFUNC(danger,suppress);
                 true
             } count units _group;
         };

@@ -31,7 +31,7 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = "No Unit Seleted";
+                _error = ELSTRING(main,NoUnitSelected);
             };
 
             // resets unit
@@ -42,7 +42,7 @@ switch (_mode) do {
 
             // display error
             } else {
-                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
             };
 
             // clean up

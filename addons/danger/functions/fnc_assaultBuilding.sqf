@@ -37,14 +37,14 @@ if ((_unit distance _enemy) < 7) exitWith {
     // movement
     _unit doWatch objNull;
     _unit lookAt _enemy;
-    _unit doMove getposATL _enemy;
+    _unit doMove getPosATL _enemy;
     _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
 
     // debug
     if (GVAR(debug_functions)) then {
         format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call FUNC(debugLog);
-        private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getposASL _enemy, true];
-        [{deleteVehicle _this}, _arrow, 20] call cba_fnc_waitAndExecute;
+        private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
+        [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
     };
 
     // return
@@ -83,7 +83,7 @@ _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]
 if (GVAR(debug_functions)) then {
     private _arrow = createSimpleObject ["Sign_Arrow_Large_F", AGLtoASL _buildingPosSelected, true];
     _arrow setObjectTexture [0, [_unit] call EFUNC(danger,debugObjectColor)];
-    [{deleteVehicle _this}, _arrow, 20] call cba_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
 };
 
 // speed

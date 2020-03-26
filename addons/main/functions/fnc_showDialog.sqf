@@ -61,6 +61,10 @@ _globalGroup ctrlSetBackgroundColor BACKGROUND_RGB(0.8);
 _globalGroup ctrlSetPosition [_basePositionX, 0.5 - (_height / 2), PX(CONST_WIDTH), _height];
 _globalGroup ctrlCommit 0;
 
+if (isLocalized _name) then {
+    _name = localize _name;
+};
+
 private _header = _display ctrlCreate ["RscText", -1, _globalGroup];
 _header ctrlSetText _name;
 _header ctrlSetFontHeight PY(CONST_HEIGHT);
@@ -70,6 +74,12 @@ _header ctrlCommit 0;
 
 private _fnc_CreateLabel = {
     params ["_text", ["_tooltip", ""]];
+    if (isLocalized _text) then {
+        _text = localize _text;
+    };
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
     _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
@@ -81,7 +91,9 @@ private _fnc_CreateLabel = {
 
 private _fnc_AddTextField = {
     params ["_text", "", ["_tooltip", ""], ["_default", ""]];
-
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
@@ -101,7 +113,9 @@ private _fnc_AddTextField = {
 
 private _fnc_AddBoolean = {
     params ["_text", "", ["_tooltip", ""], ["_default", false, [false]]];
-
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
@@ -119,7 +133,9 @@ private _fnc_AddBoolean = {
 
 private _fnc_AddDropDown = {
     params ["_text", "", ["_tooltip", ""], ["_values", [], []], ["_default", 0, [0]]];
-
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
@@ -132,7 +148,7 @@ private _fnc_AddDropDown = {
         if (_x isEqualType "") then {
             _dropDownField lbAdd _x;
         } else {
-            _dropDownField lbAdd ("Not A String " + (str _x));
+            _dropDownField lbAdd (str _x);
         };
     } forEach _values;
 
@@ -146,7 +162,9 @@ private _fnc_AddDropDown = {
 
 private _fnc_AddSlider = {
     params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
-
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
@@ -193,7 +211,7 @@ private _controls = [];
 _basePositionY = _basePositionY + PY(CONST_HEIGHT + (CONST_SPACE_HEIGHT*2));
 
 private _cancelButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
-_cancelButton ctrlSetText "CANCEL";
+_cancelButton ctrlSetText (localize "STR_DISP_CANCEL");
 
 _cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 2)- PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
@@ -206,7 +224,7 @@ _cancelButton ctrlAddEventHandler ["ButtonClick", {
 _cancelButton ctrlCommit 0;
 
 private _okButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
-_okButton ctrlSetText "OK";
+_okButton ctrlSetText (localize "STR_DISP_OK");
 _okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2) + PX(CONST_SPACE_HEIGHT/2), _basePositionY, PX(CONST_WIDTH / 2) - PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
 _okButton ctrlAddEventHandler ["ButtonClick", {

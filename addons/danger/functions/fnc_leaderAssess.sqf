@@ -11,7 +11,7 @@
  * success
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_leaderAssess;
+ * [bob, getPos angryJoe] call lambs_danger_fnc_leaderAssess;
  *
  * Public: No
 */
@@ -49,9 +49,9 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 if !(_enemy isEqualTo []) then {
 
     // Enemy is in buildings or at lower position
-    private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getposASL _x select 2 ) < ( (getposASL _unit select 2) - 23) }}};
+    private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }}};
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
-        [_unit, 3, getposATL (_enemy select _targets)] call FUNC(leaderMode);
+        [_unit, 3, getPosATL (_enemy select _targets)] call FUNC(leaderMode);
     
         // gesture
         [_unit, ["gesturePoint"]] call FUNC(gesture);
