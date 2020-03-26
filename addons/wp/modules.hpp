@@ -279,8 +279,11 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
     function = QFUNC(moduleReset);
     icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    class Attributes: AttributesBase {
+        class ModuleDescription: ModuleDescription {};
+    };
     class ModuleDescription: ModuleDescription {
-        description = CSTRING(Module_TaskReset_ModuleDescription);
+        description = CSTRING(Module_TaskReset_ModuleDescription);          // THIS IS NOT SHOWING UP @JOKO
     };
 };
 

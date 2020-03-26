@@ -89,7 +89,7 @@
             <English>Task Camp</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ModuleDescription">
-            <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.<br/>Set area in 3DEN.</English>
+            <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.&lt;br/&gt;Set area in 3DEN.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
@@ -119,7 +119,7 @@
             <English>Max distance houses will be searched</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_ModuleDescription">
-            <English>Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.<br/><br/>In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.</English>
+            <English>Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.&lt;br/&gt;&lt;br/&gt;In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
             <English>Task Garrison</English>
@@ -185,13 +185,13 @@
             <English>Distance creeping group will search for enemies.\nThis module only targets enemy players</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
-            <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.<br/><br/>Search modules only target hostile players</English>
+            <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;Search modules only target hostile players</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
-            <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.<br/><br/>Search modules only target hostile players.</English>
+            <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;Search modules only target hostile players.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use Group As Center</English>
@@ -215,7 +215,7 @@
             <English>Task Rush</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
-            <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.<br/><br/>Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
+            <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.&lt;br/&gt;&lt;br/&gt;Search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use Group As Center</English>
