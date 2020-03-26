@@ -30,19 +30,19 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = "No Unit Seleted";
+                _error = ELSTRING(main,NoUnitSelected);
             };
             if (_error == "") then {
                 private _success = [_group] call FUNC(taskArtilleryRegister);
                 if (_success) then {
-                    [objNull, "Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, LSTRING(Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded)] call BIS_fnc_showCuratorFeedbackMessage;
                 } else {
-                    [objNull, "No Units have been added to Artillery Pool"] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, LSTRING(Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded)] call BIS_fnc_showCuratorFeedbackMessage;
                 };
 
                 deleteVehicle _logic;
             } else {
-                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             };
         } else {

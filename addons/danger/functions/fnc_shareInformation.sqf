@@ -69,7 +69,7 @@ if (GVAR(debug_functions)) then {
     private _m = [_unit, "", _unit call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
     private _mt = [_target, "target", _target call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
     private _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
-    [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call cba_fnc_waitAndExecute;
+    [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call CBA_fnc_waitAndExecute;
 };
 
 // end

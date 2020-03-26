@@ -21,8 +21,8 @@ class CfgVehicles {
         _generalMacro = QGVAR(SetRadio);
         scope = 1;
         scopeCurator = 2;
+        displayName = CSTRING(Module_SetRadio_DisplayName);
         isGlobal = 0;
-        displayName = "Configure Long-range Radio";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         function = QFUNC(moduleSetRadio);
@@ -39,8 +39,8 @@ class CfgVehicles {
         _generalMacro = QGVAR(DisableAI);
         scope = 1;
         scopeCurator = 2;
+        displayName = CSTRING(Module_DisableAI_DisplayName);
         isGlobal = 0;
-        displayName = "Disable Unit AI";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         function = QFUNC(moduleDisableAI);
@@ -56,8 +56,8 @@ class CfgVehicles {
         _generalMacro = QGVAR(DisableGroupAI);
         scope = 1;
         scopeCurator = 2;
+        displayName = CSTRING(Module_DisableGroupAI_DisplayName);
         isGlobal = 0;
-        displayName = "Configure Group AI";
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
         function = QFUNC(moduleDisableGroupAI);

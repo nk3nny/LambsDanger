@@ -14,7 +14,7 @@
  * boolean
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_wp_fnc_taskAssault;
+ * [bob, getPos angryJoe] call lambs_wp_fnc_taskAssault;
  *
  * Public: Yes
 */
@@ -137,7 +137,7 @@ waitUntil {
 
 // check reset
 {
-    _x doMove getposASL _x;
+    _x doMove getPosASL _x;
     [_x, false] call _fnc_softReset;    // nb: retreat value set to false to prevent animation from replaying. -nkenny
     true
 } count (units _group select {!isPlayer _x});

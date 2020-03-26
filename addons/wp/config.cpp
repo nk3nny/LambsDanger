@@ -30,7 +30,7 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"lambs_danger"};
-        author = "LAMBS Dev Team";
+        author = ECSTRING(main,Team);
         VERSION_CONFIG;
     };
 };
@@ -39,3 +39,16 @@ class CfgPatches {
 #include "CfgWaypoints.hpp"
 #include "CfgWaypointTypes.hpp"
 #include "CfgVehicles.hpp"
+
+class CfgSettings {
+    class CBA {
+        class Versioning {
+            class ADDON {
+                class dependencies {
+                    //ACE will hard exit if this is missing
+                    CBA[] = {"cba_main", {3,14,0}, "(true)"};
+                };
+            };
+        };
+    };
+};

@@ -11,7 +11,7 @@
  * buildings found
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_leaderCQC;
+ * [bob, getPos angryJoe] call lambs_danger_fnc_leaderCQC;
  *
  * Public: No
 */

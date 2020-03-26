@@ -31,12 +31,12 @@ switch (_mode) do {
                 _groups = _groups select { ((units _x) findIf { alive _x }) != -1; };
                 _groups = [_groups, [], {_logic distance (leader _x) }, "ASCEND"] call BIS_fnc_sortBy;
 
-                ["Task CQB",
+                [LSTRING(Module_TaskCQB_DisplayName),
                     [
-                        ["Groups", "DROPDOWN", "Select which unit script applies to.\nList is sorted by distance", _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "Max distance houses will be searched", 50],
-                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21],
-                        ["Dynamic center", "BOOLEAN", "Enable this to make it possible to move the center/module of the building search pattern", false]
+                        [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCQB_Radius_ToolTip), 50],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), 21],
+                        [LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName), "BOOLEAN", LSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip), false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -54,17 +54,17 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName "Self";
+                _logic setVehicleVarName localize LSTRING(Self);
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 
-                ["Task CQB",
+                [LSTRING(Module_TaskCQB_DisplayName),
                     [
-                        ["Center", "DROPDOWN", "Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list", _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        ["Radius", "NUMBER", "Max distance houses will be searched", 50],
-                        ["Script interval", "NUMBER", "The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds", 21]
+                        [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCQB_Radius_ToolTip), 50],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), 21]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];

@@ -14,7 +14,7 @@
  * none
  *
  * Example:
- * [cannonbob, getpos angryJoe, bob] spawn lambs_wp_fnc_taskArtillery;
+ * [cannonbob, getPos angryJoe, bob] spawn lambs_wp_fnc_taskArtillery;
  *
  * Public: No
 */
@@ -149,7 +149,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
             {
                 {deleteMarker _x; true} count _this
             }, _mList, 60
-        ] call cba_fnc_waitAndExecute;
+        ] call CBA_fnc_waitAndExecute;
     };
 };
 

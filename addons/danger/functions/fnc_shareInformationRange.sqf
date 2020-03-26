@@ -45,7 +45,7 @@ if (_radio) then {
     _range = _range + GVAR(radio_Backpack);
 };
 // tweak by height above sea-level
-_range = _range + (linearConversion [-200, 600, (getposASL _unit) select 2, -400, 1000, true]);
+_range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400, 1000, true]);
 
 // return unit and range
 [_target, _range, _radio]

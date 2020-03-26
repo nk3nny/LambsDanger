@@ -53,7 +53,7 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
             format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
             private _sphere = createSimpleObject ["Sign_Sphere25cm_F", AGLtoASL (_unit getHideFrom _target), true];
             _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-            [{deleteVehicle _this}, _sphere, 10] call cba_fnc_waitAndExecute;
+            [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
         };
     };
 };
@@ -71,7 +71,7 @@ if (GVAR(debug_functions)) then {
         _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
         _sphereList pushBack _sphere;
     } foreach _buildings;
-    [{{deleteVehicle _x;true} count _this}, _sphereList, 15] call cba_fnc_waitAndExecute;
+    [{{deleteVehicle _x;true} count _this}, _sphereList, 15] call CBA_fnc_waitAndExecute;
 };
 
 // end

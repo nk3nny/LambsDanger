@@ -10,15 +10,15 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _unit) then {
-        _error = "No Unit Selected";
+        _error = ELSTRING(main,NoUnitSelected);
     };
     if (isPlayer _unit) then {
-        _error = "Players are not Valid Selections";
+        _error = ELSTRING(main,PlayerNotValid);
     };
     if (_error == "") then {
-        ["Disable Unit AI",
+        [LSTRING(Module_DisableAI_DisplayName),
             [
-                ["Disable LAMBS unit AI", "BOOLEAN", "Toggle advanced danger.fsm features on this unit", _unit getVariable [QGVAR(disableAI), false]]
+                [LSTRING(Module_DisableAI_SettingName), "BOOLEAN", LSTRING(Module_DisableAI_SettingToolTip), _unit getVariable [QGVAR(disableAI), false]]
             ], {
                 params ["_data", "_args"];
                 _args params ["_unit", "_logic"];
@@ -34,7 +34,7 @@ if (_activated && local _logic) then {
             }, [_unit, _logic]
         ] call EFUNC(main,showDialog);
     } else {
-        [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
+        [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
         deleteVehicle _logic;
     };
 };

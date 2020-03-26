@@ -8,8 +8,8 @@ class Cfg3DEN {
                     class GVAR(disableAI) {
                         property = QGVAR(disableAI);
                         control = "Checkbox";
-                        displayName = "AI Disabled";
-                        tooltip = "Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency";
+                        displayName = CSTRING(3DEN_Attributes_DisableAI_DisplayName);
+                        tooltip = CSTRING(3DEN_Attributes_DisableAI_ToolTip);
                         expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
                         typeName = "BOOL";
                         condition = "objectBrain";
@@ -18,8 +18,8 @@ class Cfg3DEN {
                     class GVAR(dangerRadio) {
                         property = QGVAR(dangerRadio);
                         control = "Checkbox";
-                        displayName = "Has Radio";
-                        tooltip = "Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency";
+                        displayName = CSTRING(3DEN_Attributes_HasRadio_DisplayName);
+                        tooltip = CSTRING(3DEN_Attributes_HasRadio_ToolTip);
                         expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
                         typeName = "BOOL";
                         condition = "objectBrain";
