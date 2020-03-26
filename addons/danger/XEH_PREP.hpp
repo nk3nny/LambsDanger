@@ -24,6 +24,7 @@ PREP(leaderHide);
 PREP(leaderManoeuvre);
 PREP(leaderMode);
 PREP(leaderModeUpdate);
+PREP(nearbyFriendly);
 PREP(panic);
 PREP(react);
 PREP(shareInformation);
