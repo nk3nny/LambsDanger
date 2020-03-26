@@ -148,7 +148,7 @@ private _fnc_AddDropDown = {
         if (_x isEqualType "") then {
             _dropDownField lbAdd _x;
         } else {
-            _dropDownField lbAdd ("Not A String " + (str _x));
+            _dropDownField lbAdd (str _x);
         };
     } forEach _values;
 
@@ -211,7 +211,7 @@ private _controls = [];
 _basePositionY = _basePositionY + PY(CONST_HEIGHT + (CONST_SPACE_HEIGHT*2));
 
 private _cancelButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
-_cancelButton ctrlSetText "CANCEL";
+_cancelButton ctrlSetText (localize "STR_DISP_CANCEL");
 
 _cancelButton ctrlSetPosition [_basePositionX, _basePositionY, PX(CONST_WIDTH / 2)- PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
@@ -224,7 +224,7 @@ _cancelButton ctrlAddEventHandler ["ButtonClick", {
 _cancelButton ctrlCommit 0;
 
 private _okButton = _display ctrlCreate ["RscButton", -1, _globalGroup];
-_okButton ctrlSetText "OK";
+_okButton ctrlSetText (localize "STR_DISP_OK");
 _okButton ctrlSetPosition [_basePositionX + PX(CONST_WIDTH / 2) + PX(CONST_SPACE_HEIGHT/2), _basePositionY, PX(CONST_WIDTH / 2) - PX(CONST_SPACE_HEIGHT/2), PY(CONST_HEIGHT / 2)];
 
 _okButton ctrlAddEventHandler ["ButtonClick", {
