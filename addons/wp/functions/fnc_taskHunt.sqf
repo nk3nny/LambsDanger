@@ -48,7 +48,7 @@ waitUntil {
     waitUntil { sleep 1; simulationEnabled (leader _group) };
 
     // find
-    private _target = [_group, _radius, _area, _pos] call FUNC(findClosestTarget);
+    private _target = [_group, _radius, _area, _pos, _onlyPlayers] call FUNC(findClosestTarget);
 
     // settings
     private _combat = (behaviour (leader _group)) isEqualTo "COMBAT";
