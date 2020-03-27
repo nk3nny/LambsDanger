@@ -21,7 +21,7 @@ if !(canSuspend) exitWith {
     _this spawn FUNC(taskHunt);
 };
 // 1. FIND TRACKER
-params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]], ["_pos", [], [[]]]];
+params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
 
 // sort grp
 if (!local _group) exitWith {false};

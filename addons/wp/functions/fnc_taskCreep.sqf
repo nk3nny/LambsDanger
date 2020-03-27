@@ -68,7 +68,7 @@ private _fnc_creepOrders = {
 // functions end ---
 
 // init
-params ["_group", ["_radius", 500], ["_cycle", 15], ["_area", [], [[]]], ["_pos", [], [[]]]];
+params ["_group", ["_radius", 500], ["_cycle", 15], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
 
 // sort grp
 if (!local _group) exitWith {false};
