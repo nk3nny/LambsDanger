@@ -175,7 +175,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_DisplayName">
             <English>Players Only</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_ToolTip">
             <English>The creeping group will only Use Players as targets.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_DisplayName">
@@ -205,8 +205,8 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
             <English>Players Only</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
-            <English>The creeping group will only Use Players as targets.</English>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_ToolTip">
+            <English>The hunting group will only Use Players as targets.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
             <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
@@ -235,8 +235,8 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_DisplayName">
             <English>Players Only</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
-            <English>The creeping group will only Use Players as targets.</English>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_ToolTip">
+            <English>The rushing group will only Use Players as targets.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
             <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
