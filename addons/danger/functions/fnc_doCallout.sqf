@@ -34,7 +34,7 @@ if (_time >= time) exitWith {
 };
 
 private _speaker = speaker _unit;
-private _cacheName = format [QGVAR(%1_%2_%3), _speaker, _behavior, _callout];
+private _cacheName = format ["%1_%2_%3_%3", QGVAR(callouts), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
 if (isNil "_cachedSounds") then {

@@ -7,3 +7,7 @@ releases/*
 *.bisign
 
 build.bat
+
+lint.bat
+
+sqf/*

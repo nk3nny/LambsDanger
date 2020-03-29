@@ -33,10 +33,8 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
     private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
     private _vehicles = nearestObjects  [_unit, ["building", "Car"], _range];
 
-
-
     private _allObjs = [];
-    if(_sortMode isEqualTo "ASCEND" || {_sortMode isEqualTo "DESCEND"}) then {
+    if(_sortMode in ["ASCEND", "DESCEND"]) then {
         _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, _sortMode] call BIS_fnc_sortBy;
     } else {
        _allObjs = (_terrainObjects + _vehicles) call BIS_fnc_arrayShuffle;
