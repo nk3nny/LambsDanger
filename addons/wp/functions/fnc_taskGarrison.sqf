@@ -22,7 +22,7 @@
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false]];
+params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -83,7 +83,38 @@ if (count _units > 4) then {
 };
 
 if (count _units > count _houses) then {_units resize (count _houses);};
-
+private _fnc_addEventHandler = {
+    // add handlers
+    switch (_this) do {
+        case 0: {
+            _x addEventHandler ["Hit", {
+                params ["_unit"];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
+                _unit setCombatMode "RED";
+                _unit removeEventHandler ["Hit", _thisEventHandler];
+            }];
+        };
+        case 1: {
+            _x addEventHandler ["Fired", {
+                params ["_unit"];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
+                _unit setCombatMode "RED";
+                _unit removeEventHandler ["Fired", _thisEventHandler];
+            }];
+        };
+        case 2: {
+            _x addEventHandler ["FiredNear", {
+                params ["_unit", "_shooter", "_distance"];
+                if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
+                    [_unit, "PATH"] remoteExec ["enableAI", _unit];
+                    _unit doMove (getPosATL _shooter);
+                    _unit setCombatMode "RED";
+                    _unit removeEventHandler ["FiredNear", _thisEventHandler];
+                };
+            }];
+        };
+    };
+};
 // spread out
 {
     // prepare
@@ -107,48 +138,26 @@ if (count _units > count _houses) then {_units resize (count _houses);};
             {
                 params ["_unit", ""];
                 unitReady _unit
-            },
-            {
+            }, {
                 params ["_unit", "_target"];
                 if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
                 _unit disableAI "PATH";
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-            },
-            [_x, _house]
+            }, [_x, _house]
         ] call CBA_fnc_waitUntilAndExecute;
     };
 
-    // add handlers
-    switch (ceil (random 3)) do {
-        case 1: {
-            _x addEventHandler ["Fired", {
-                params ["_unit"];
-                [_unit, "PATH"] remoteExec ["enableAI", _unit];
-                _unit setCombatMode "RED";
-                _unit removeEventHandler ["Fired", _thisEventHandler];
-            }];
-        };
-        case 2: {
-            _x addEventHandler ["FiredNear", {
-                params ["_unit", "_shooter", "_distance"];
-                if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
-                    [_unit, "PATH"] remoteExec ["enableAI", _unit];
-                    _unit doMove (getPosATL _shooter);
-                    _unit setCombatMode "RED";
-                    _unit removeEventHandler ["FiredNear", _thisEventHandler];
-                };
-            }];
-        };
-        default {
-            _x addEventHandler ["Hit", {
-                params ["_unit"];
-                [_unit, "PATH"] remoteExec ["enableAI", _unit];
-                _unit setCombatMode "RED";
-                _unit removeEventHandler ["Hit", _thisEventHandler];
-            }];
-        };
+    if (_exitCondition == -2) then {
+        _exitCondition = floor (random 3);
     };
 
+    if (_exitCondition == -1) then {
+        for "_i" from 0 to 2 do {
+            _i call _fnc_addEventHandler;
+        };
+    } else {
+        _exitCondition call _fnc_addEventHandler;
+    };
     // end
     true
 } count _units;

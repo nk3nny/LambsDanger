@@ -219,6 +219,18 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
+        class GVAR(ExitConditions) {
+            displayName = CSTRING(Module_TaskGarrison_ExitCondition_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_ExitCondition_Tooltip);
+            property = QGVAR(ExitConditions);
+            defaultValue = "0";
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "NUMBER";
+            control = QGVAR(ExitConditions);
+            expression = "_this setVariable ['%s', _value, true];";
+        };
         class GVAR(SortByHeight): Checkbox {
             displayName = CSTRING(Module_TaskGarrison_SortByHeight_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_SortByHeight_Tooltip);
