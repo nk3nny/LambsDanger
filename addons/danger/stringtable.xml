@@ -104,16 +104,16 @@
             <English>Range at which units consider themselves in assault range</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance">
-            <English>Minimum Distance for Suppression Fire</English>
+            <English>Minimum distance for Suppression Fire</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
             <English>Within this distance AI will not perform suppression fire</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance">
-            <English>Suppression Danger Close Distance</English>
+            <English>Minimum safe zone for Suppression Fire</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance_ToolTip">
-            <English>Minimal distance beyond which friendlies must be to open suppression fire</English>
+            <English>If there are allies within this distance AI will not perform suppression fire. Set to 0 to disable.</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>

@@ -15,6 +15,7 @@
  * Public: No
 */
 params ["_unit", "_pos", ["_distance", GVAR(minFriendlySuppressionDistance)]];
+if (_distance isEqualTo 0) exitWith {[]};
 private _ignoredSides = (side _unit) call BIS_fnc_enemySides;
 _ignoredSides append [sideUnknown, sideEmpty, sideEnemy, sideLogic, sideFriendly, sideAmbientLife];
 (_pos nearEntities ["CAManBase", _distance*1.5]) select {
