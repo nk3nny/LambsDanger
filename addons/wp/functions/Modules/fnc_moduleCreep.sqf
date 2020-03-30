@@ -37,7 +37,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskCreep_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_Radius_ToolTip), 1000],
                         [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), 15],
                         [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true],
-                        [LSTRING(Module_TaskCreep_PlayerOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayerOnly_ToolTip), true]
+                        [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];

@@ -38,7 +38,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskRush_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskRush_Radius_ToolTip), 1000],
                         [LSTRING(Module_TaskRush_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskRush_CycleTime_ToolTip), 4],
                         [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), true],
-                        [LSTRING(Module_TaskRush_PlayerOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayerOnly_ToolTip), true]
+                        [LSTRING(Module_TaskRush_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayersOnly_ToolTip), true]
 
                     ], {
                         params ["_data", "_args"];
