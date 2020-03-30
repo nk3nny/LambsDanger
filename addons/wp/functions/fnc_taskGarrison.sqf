@@ -22,7 +22,7 @@
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", true]];
+params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
