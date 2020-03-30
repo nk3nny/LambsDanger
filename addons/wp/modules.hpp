@@ -219,6 +219,24 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
+        class GVAR(SortByHeight): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_SortByHeight_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_SortByHeight_Tooltip);
+            property = QGVAR(SortByHeight);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
+        class GVAR(Teleport): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
+            property = QGVAR(Teleport);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {

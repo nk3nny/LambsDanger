@@ -125,6 +125,18 @@
             <English>Task Garrison</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
+            <English>Teleport</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
+            <English>Teleport Units Instantly to Position</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
+            <English>Sort building positions by Height</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
+            <English>Sort Building Positions by Height</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
             <English>Radius</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
