@@ -41,11 +41,14 @@ if (!_override) then {
 };
 
 // mod pos
-private _distance = ((_unit distance (ASLToAGL _pos)) min 350) - 4;
+private _distance = ((_unit distance (ASLToAGL _pos)) min 280) - 4;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
-if (_distance < GVAR(minSuppression_range)) exitWith {false};
+if (!_override && {_distance < GVAR(minSuppression_range)}) exitWith {false};
+
+private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+if !(_friendlys isEqualTo []) exitWith {false};
 
 // Callout!
 if (RND(0.4) && {count units _unit > 1}) then {

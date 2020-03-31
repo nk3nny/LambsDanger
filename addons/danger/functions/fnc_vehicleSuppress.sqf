@@ -42,7 +42,10 @@ private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit,
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // recheck
-if (_vehicle distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
+if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
+
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+if (_friendlys isEqualTo [] && {!_friendlys isEqualTo [_vehicle]}) exitWith {false};
 
 // do it
 _vehicle doSuppressiveFire _pos;

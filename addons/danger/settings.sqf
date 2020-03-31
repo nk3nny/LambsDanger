@@ -111,6 +111,16 @@ private _curCat = LSTRING(Settings_GeneralCat);
     1
 ] call CBA_fnc_addSetting;
 
+// 'Danger close' distance for suppression
+[
+    QGVAR(minFriendlySuppressionDistance),
+    "SLIDER",
+    [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 50, 3, 0],
+    1
+] call CBA_fnc_addSetting;
+
 // Chance of panic expressed as percentage
 [
     QGVAR(panic_chance),
