@@ -47,7 +47,7 @@ private _knowsAbout = _unit knowsAbout _target;
 // share information
 {
     if !(isNull _target) then {
-        [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", _x];
+        [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
     };
 
     if ((leader _x) distance _unit < (200 min _range)) then {
