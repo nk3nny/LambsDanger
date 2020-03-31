@@ -16,7 +16,7 @@
  * Public: No
 */
 
-params ["_group", ["_radius", 500], ["_area", [], [[]]], ["_pos", [], [[]]]];
+params ["_group", ["_radius", 500], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
 
 private _groupLeader = leader _group;
 private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];
@@ -24,19 +24,20 @@ if (_pos isEqualTo []) then {
     _pos = _groupLeader;
 };
 _pos = _pos call CBA_fnc_getPos;
-private _players = switchableUnits + playableUnits;
-_players = _players select {
+private _units = [allUnits ,switchableUnits + playableUnits] select _onlyPlayers;
+
+_units = _units select {
     !(side _x in _sideExclusion)
     && { _x distance _pos < _radius }
     && { (getPosATL _x) select 2 < 200 }
 };
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _players = _players select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
+    _units = _units select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
 };
-if (_players isEqualTo []) exitWith {ObjNull};
+if (_units isEqualTo []) exitWith {ObjNull};
 
-private _playerDistances = _players apply {[_groupLeader distance2d _x, _x]};
-_playerDistances sort true;
+private _unitDistances = _units apply {[_groupLeader distance2d _x, _x]};
+_unitDistances sort true;
 
-(_playerDistances param [0, [0, objNull]]) param [1, objNull]
+(_unitDistances param [0, [0, objNull]]) param [1, objNull]
