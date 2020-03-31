@@ -89,8 +89,9 @@ reverse _units;
 {
     // gun
     if !(_gun isEqualTo []) then {
-        if (_teleport) then {_x moveInGunner (_gun select 0);};
-        _x assignAsGunner (_gun deleteAt 0);
+        private _g = (_gun deleteAt 0);
+        if (_teleport) then { _x moveInGunner _g; };
+        _x assignAsGunner _g;
         [_x] orderGetIn true;
         _units set [_foreachIndex, objNull];
     };
@@ -98,11 +99,11 @@ reverse _units;
     if (!(_buildings isEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
-        if (_teleport) then {_x setPos _buildingPos;};
+        if (_teleport) then { _x setPos _buildingPos; };
         _x doMove _buildingPos;
         [
             {
-                params ["_unit", ""];
+                params ["_unit"];
                 unitReady _unit
             },
             {
@@ -115,7 +116,7 @@ reverse _units;
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
-    if (count _units < count units _group/2) exitWith {};
+    if ((count _units) < (count (units _group))/2) exitWith {};
 
 } forEach _units;
 
