@@ -111,6 +111,16 @@ private _curCat = LSTRING(Settings_GeneralCat);
     1
 ] call CBA_fnc_addSetting;
 
+// 'Danger close' distance for suppression
+[
+    QGVAR(minFriendlySuppressionDistance),
+    "SLIDER",
+    [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 50, 3, 0],
+    1
+] call CBA_fnc_addSetting;
+
 // Chance of panic expressed as percentage
 [
     QGVAR(panic_chance),
@@ -131,6 +141,16 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     [COMPONENT_NAME, _curCat],
     false,
     0
+] call CBA_fnc_addSetting;
+
+// Maximum Reveal Value -- Accuracy of shared information
+[
+    QGVAR(maxRevealValue),
+    "SLIDER",
+    [ LSTRING(Settings_maxRevealValue),  LSTRING(Settings_maxRevealValue_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 4, 1, 2],
+    1
 ] call CBA_fnc_addSetting;
 
 // Ranges at which groups share information
@@ -182,6 +202,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
+
 
 // Configures CQC formations
 _curCat = LSTRING(Settings_CQBFormationsCat);

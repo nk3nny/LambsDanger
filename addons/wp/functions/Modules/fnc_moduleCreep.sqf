@@ -36,15 +36,16 @@ switch (_mode) do {
                     [
                         [LSTRING(Module_TaskCreep_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_Radius_ToolTip), 1000],
                         [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), 15],
-                        [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true]
+                        [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true],
+                        [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), true]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
-                        _data params ["_range", "_cycle", "_movingCenter"];
+                        _data params ["_range", "_cycle", "_movingCenter", "_playerOnly"];
                         if (_movingCenter) then {
-                            [_group, _range, _cycle] spawn FUNC(taskCreep);
+                            [_group, _range, _cycle, nil, nil, _playerOnly] spawn FUNC(taskCreep);
                         } else {
-                            [_group, _range, _cycle, [], getPos _logic] spawn FUNC(taskCreep);
+                            [_group, _range, _cycle, nil, getPos _logic, _playerOnly] spawn FUNC(taskCreep);
                         };
                         deleteVehicle _logic;
                     }, {
@@ -67,12 +68,12 @@ switch (_mode) do {
             private _range = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
-
+            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
             {
                 if (_movingCenter) then {
-                    [_x, _range, _cycle, _area] spawn FUNC(taskCreep);
+                    [_x, _range, _cycle, _area, nil, _playerOnly] spawn FUNC(taskCreep);
                 } else {
-                    [_x, _range, _cycle, _area, getPos _logic] spawn FUNC(taskCreep);
+                    [_x, _range, _cycle, _area, getPos _logic, _playerOnly] spawn FUNC(taskCreep);
                 };
             } forEach _groups;
             deleteVehicle _logic;

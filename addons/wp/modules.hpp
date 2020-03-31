@@ -343,6 +343,16 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             typeName = "BOOL";
             defaultValue = "(true)";
         };
+        class GVAR(PlayersOnly): Checkbox {
+            displayName = CSTRING(Module_TaskCreep_PlayersOnly_DisplayName);
+            tooltip = CSTRING(Module_TaskCreep_PlayersOnly_ToolTip);
+            property = QGVAR(PlayersOnly);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = "(true)";
+        };
         class GVAR(CycleTime): EditShort {
             displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
@@ -387,6 +397,16 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             typeName = "BOOL";
             defaultValue = "(true)";
         };
+        class GVAR(PlayersOnly): Checkbox {
+            displayName = CSTRING(Module_TaskHunt_PlayersOnly_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_PlayersOnly_ToolTip);
+            property = QGVAR(PlayersOnly);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = "(true)";
+        };
         class GVAR(CycleTime): EditShort {
             displayName = CSTRING(Module_TaskHunt_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskHunt_CycleTime_ToolTip);
@@ -425,6 +445,16 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_MovingCenter_DisplayName);
             tooltip = CSTRING(Module_TaskRush_MovingCenter_ToolTip);
             property = QGVAR(MovingCenter);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = "(true)";
+        };
+        class GVAR(PlayersOnly): Checkbox {
+            displayName = CSTRING(Module_TaskRush_PlayersOnly_DisplayName);
+            tooltip = CSTRING(Module_TaskRush_PlayersOnly_ToolTip);
+            property = QGVAR(PlayersOnly);
             unique = 0;
             validate = "none";
             condition = "0";
