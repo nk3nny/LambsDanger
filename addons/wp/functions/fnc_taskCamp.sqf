@@ -20,7 +20,7 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]]];
+params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false]];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -89,15 +89,16 @@ reverse _units;
 {
     // gun
     if !(_gun isEqualTo []) then {
-        _x assignAsGunner (_gun select 0);
+        if (_teleport) then {_x moveInGunner (_gun select 0);};
+        _x assignAsGunner (_gun deleteAt 0);
         [_x] orderGetIn true;
-        _x moveInGunner (_gun deleteAt 0);
         _units set [_foreachIndex, objNull];
     };
 
     if (!(_buildings isEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
+        if (_teleport) then {_x setPos _buildingPos;};
         _x doMove _buildingPos;
         [
             {
@@ -156,11 +157,18 @@ private _armedAnims = [
 // direction
 private _dir = random 360;
 {
-    _dir = _dir + random (360 / count _units);
+    _dir = _dir + (360 / count _units) - random (180 / count _units);
     private _range = 1.35 + random 3.3;
     private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
 
+    // teleport
+    if (_teleport) then {
+        _x setPos _pos2;
+        _x setDir (_unit getDir _center);
+    };
+
     // execute move
+    doStop _x;
     _x doMove _pos2;
     _x setDestination [_pos2, "LEADER DIRECT", false];
 
@@ -175,10 +183,8 @@ private _dir = random 360;
     }, {
         params ["_unit", "_target", "_center", "_anim"];
         if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-        doStop _unit;
-        //[{_this disableAI "ANIM"}, _unit, 0.5] call CBA_fnc_waitAndExecute;
-        _unit disableAI "ANIM";
-        [_unit, _anim] remoteExec ["switchMove", 0];
+        _unit switchMove _anim;
+        [_unit, _anim] remoteExec ["switchMove", 0];    // double up to ensure animation activates!
         _unit disableAI "ANIM";
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);
@@ -207,7 +213,7 @@ private _dir = random 360;
 // waypoint and end state
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
-_wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
+_wp setWaypointStatements ["true || (behaviour this) isEqualTo 'COMBAT'", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
