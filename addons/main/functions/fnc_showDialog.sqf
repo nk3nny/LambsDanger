@@ -147,12 +147,12 @@ private _fnc_AddDropDown = {
     {
         private _str = if (_x isEqualType "") then {
             if (isLocalized _x) then {
-                _str = localize _x;
+                localize _x;
             } else {
                 _x;
             };
         } else {
-            _str = str _x;
+            str _x;
         };
         _dropDownField lbAdd _str;
 
