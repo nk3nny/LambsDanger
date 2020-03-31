@@ -183,8 +183,7 @@ private _dir = random 360;
     }, {
         params ["_unit", "_target", "_center", "_anim"];
         if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-        _unit switchMove _anim;
-        [_unit, _anim] remoteExec ["switchMove", 0];    // double up to ensure animation activates!
+        [_unit, _anim] remoteExec ["switchMove", 0];
         _unit disableAI "ANIM";
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);
