@@ -124,11 +124,29 @@
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
             <English>Task Garrison</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_DisplayName">
+            <English>Teleport units</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_ToolTip">
+            <English>Teleport units instantly to position</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_DisplayName">
+            <English>Sort building positions by height</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_ToolTip">
+            <English>Sort building positions by height. Units will prefer positions on higher in buildings</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
             <English>Radius</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
             <English>Distance buildings are occupied</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_DisplayName">
+            <English>Exit Trigger</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
+            <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
             <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
@@ -273,6 +291,21 @@
         </Key>
         <Key ID="STR_Lambs_WP_Centers_ToolTip">
             <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Random">
+            <English>Random</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_All">
+            <English>All</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_FiredNear">
+            <English>Fired Near</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Fired">
+            <English>Fired</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Hit">
+            <English>Hit</English>
         </Key>
     </Package>
 </Project>

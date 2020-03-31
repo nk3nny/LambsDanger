@@ -22,7 +22,7 @@
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]]];
+params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -47,6 +47,10 @@ if !(_area isEqualTo []) then {
     _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle] };
 };
 [_houses, true] call CBA_fnc_Shuffle;
+
+if (_sortBasedOnHeight) then {
+    _houses = [_houses, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
+};
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
@@ -79,30 +83,17 @@ if (count _units > 4) then {
 };
 
 if (count _units > count _houses) then {_units resize (count _houses);};
-
-// spread out
-{
-    // prepare
-    doStop _x;
-    private _house = _houses deleteAt 0;
-    // move and delay stopping + stance
-    _x doMove _house;
-    [
-        {
-            params ["_unit", ""];
-            unitReady _unit
-        },
-        {
-            params ["_unit", "_target"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
-            _unit disableAI "PATH";
-            _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
-        },
-        [_x, _house]
-    ] call CBA_fnc_waitUntilAndExecute;
-
+private _fnc_addEventHandler = {
     // add handlers
-    switch (ceil (random 3)) do {
+    switch (_this) do {
+        case 0: {
+            _x addEventHandler ["Hit", {
+                params ["_unit"];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
+                _unit setCombatMode "RED";
+                _unit removeEventHandler ["Hit", _thisEventHandler];
+            }];
+        };
         case 1: {
             _x addEventHandler ["Fired", {
                 params ["_unit"];
@@ -122,16 +113,51 @@ if (count _units > count _houses) then {_units resize (count _houses);};
                 };
             }];
         };
-        default {
-            _x addEventHandler ["Hit", {
-                params ["_unit"];
-                [_unit, "PATH"] remoteExec ["enableAI", _unit];
-                _unit setCombatMode "RED";
-                _unit removeEventHandler ["Hit", _thisEventHandler];
-            }];
+    };
+};
+// spread out
+{
+    // prepare
+    doStop _x;
+    private _house = _houses deleteAt 0;
+    // move and delay stopping + stance
+    if (_teleport) then {
+        if (surfaceIsWater _house) then {
+            _x doFollow (leader _x);
+        } else {
+            _x setPos _house;
+            _x disableAI "PATH";
+            _x setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
         };
+    } else {
+        if (surfaceIsWater _house) exitWith {
+            _x doFollow (leader _x);
+        };
+        _x doMove _house;
+        [
+            {
+                params ["_unit", ""];
+                unitReady _unit
+            }, {
+                params ["_unit", "_target"];
+                if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
+                _unit disableAI "PATH";
+                _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+            }, [_x, _house]
+        ] call CBA_fnc_waitUntilAndExecute;
     };
 
+    if (_exitCondition == -2) then {
+        _exitCondition = floor (random 3);
+    };
+
+    if (_exitCondition == -1) then {
+        for "_i" from 0 to 2 do {
+            _i call _fnc_addEventHandler;
+        };
+    } else {
+        _exitCondition call _fnc_addEventHandler;
+    };
     // end
     true
 } count _units;

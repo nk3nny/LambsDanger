@@ -145,11 +145,17 @@ private _fnc_AddDropDown = {
     private _dropDownField = _display ctrlCreate ["RscCombo", -1, _globalGroup];
 
     {
-        if (_x isEqualType "") then {
-            _dropDownField lbAdd _x;
+        private _str = if (_x isEqualType "") then {
+            if (isLocalized _x) then {
+                _str = localize _x;
+            } else {
+                _x;
+            };
         } else {
-            _dropDownField lbAdd (str _x);
+            _str = str _x;
         };
+        _dropDownField lbAdd _str;
+
     } forEach _values;
 
     _dropDownField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2) , PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
