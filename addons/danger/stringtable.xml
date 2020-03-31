@@ -151,6 +151,12 @@
         <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
             <English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
+            <English>Accuracy of shared information</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
+            <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode. </English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
         </Key>

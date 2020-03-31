@@ -133,6 +133,16 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Maximum Reveal Value -- Accuracy of shared information
+[
+    QGVAR(maxRevealValue),
+    "SLIDER",
+    [ LSTRING(Settings_maxRevealValue),  LSTRING(Settings_maxRevealValue_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 4, 1, 2],
+    1
+] call CBA_fnc_addSetting;
+
 // Ranges at which groups share information
 [
     QGVAR(radio_shout),
@@ -182,6 +192,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
+
 
 // Configures CQC formations
 _curCat = LSTRING(Settings_CQBFormationsCat);
