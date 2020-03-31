@@ -38,7 +38,7 @@ class Cfg3DEN {
                     w = 82 * GRID_3DEN_W;
                     h = 5  * GRID_3DEN_H;
                     rows = 1;
-                    columns = 3;
+                    columns = 5;
                     strings[] = { CSTRING(Random), CSTRING(All), CSTRING(FiredNear), CSTRING(Fired), CSTRING(Hit) };
                 };
             };
