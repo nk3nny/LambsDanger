@@ -164,7 +164,7 @@ private _dir = random 360;
     // teleport
     if (_teleport) then {
         _x setPos _pos2;
-        _x setDir (_unit getDir _center);
+        _x setDir (_x getDir _pos);
     };
 
     // execute move
@@ -213,7 +213,7 @@ private _dir = random 360;
 // waypoint and end state
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
-_wp setWaypointStatements ["true || (behaviour this) isEqualTo 'COMBAT'", "
+_wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
