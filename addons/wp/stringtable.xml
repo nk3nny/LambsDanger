@@ -143,10 +143,10 @@
             <English>Distance buildings are occupied</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_DisplayName">
-            <English>Exit Condition</English>
+            <English>Exit Trigger</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
-            <English>Exit Condition for Units in Buildings</English>
+            <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
             <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
