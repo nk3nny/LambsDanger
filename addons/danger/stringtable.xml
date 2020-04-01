@@ -75,11 +75,11 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
-            <German>'Reaction State' für Spielergruppe ausschalten</German>
+            <German>Reaktionszustand für Spielergruppe ausschalten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
             <English>Toggle Reaction phase on units in player group</English>
-            <German>'Reaction Phase' für Spielergruppe ausschalten</German>
+            <German>Reaktionsphase für Spielergruppe ausschalten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
             <English>Disable autonomous group manoevures</English>
