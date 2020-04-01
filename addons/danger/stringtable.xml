@@ -1,281 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="Lambs">
-	<Package name="Danger">
-		<Key ID="STR_Lambs_Danger_Module_DisableAI_DisplayName">
-			<English>Disable Unit AI</English>
-			<German>KI der Einheit ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_DisableAI_SettingName">
-			<English>Disable LAMBS unit AI</English>
-			<German>LAMBS KI der Einheit ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_DisableAI_SettingToolTip">
-			<English>Toggle advanced danger.fsm features on this unit</English>
-			<German>Erweiterte danger.fsm für diese Einheit umschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_SetRadio_DisplayName">
-			<English>Configure Long-range Radio</English>
-			<German>Langstrecken-Funk einstellen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_SetRadio_SettingName">
-			<English>Toggle boosted communication range on unit</English>
-			<German>Verstärkte Kommunikationsreichweite für diese Einheit umschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_SetRadio_SettingToolTip">
-			<English>Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.</English>
-			<German>Einheiten bei denen diese Option aktiviert ist haben eine erhöhte Kommunikationsreichweite.\n Dieser Effekt kann auch erzeugt werden durch das Ausrüsten der Einheit mit einem standard Radio-Rucksack oder einem TFAR-Mod kompatiblen Radio.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_DisableGroupAI_DisplayName">
-			<English>Configure Group AI</English>
-			<German>Gruppen-KI einstellen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingName">
-			<English>Disable LAMBS group AI</English>
-			<German>LAMBS KI für Gruppe ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
-			<English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
-			<German>Das Ausschalten verhindert das autonome Stürmen und Säubern von Gebäuden sowie das verstecken vor Panzern und Flugobjekten.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_MainCat">
-			<English>Settings</English>
-			<German>Einstellungen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_GeneralCat">
-			<English>General</English>
-			<German>Allgemein</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_ShareInformationCat">
-			<English>Settings Share information</English>
-			<German>Informationen-Teilen Einstellungen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_CQBFormationsCat">
-			<English>Settings CQB Formations</English>
-			<German>CQB-Formationseinstellungen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_Debug">
-			<English>Debug</English>
-			<German>Debug</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
-			<English>Disable danger.fsm for player group</English>
-			<German>Danger.fsm für Spielergruppe deaktivieren</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
-			<English>Toggle advanced danger.fsm features on player group</English>
-			<German>Erweiterte danger.fsm Funktionen für Spielergruppe umschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup">
-			<English>Disable suppression from player group</English>
-			<German>Niederhaltung für Spielergruppe deaktivieren</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup_ToolTip">
-			<English>Toggle autonomous suppression for units in player group</English>
-			<German>Autonome Niederhaltung für Einheiten der Spielergruppe umschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
-			<English>Disable reaction state on player group</English>
-			<German>Reaktionszustand für Spielergruppe ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
-			<English>Toggle Reaction phase on units in player group</English>
-			<German>Reaktionsphase für Spielergruppe ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
-			<English>Disable autonomous group manoevures</English>
-			<German>Autonome Gruppenmanöver ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
-			<English>Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.</English>
-			<German>Gruppenmanöver-Phase die durch den Gruppenführer initiiert wird. Das Ausschalten dieser Option deaktiviert Befehle des Gruppenführers Gebäude zu flankieren oder niederzuhalten.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
-			<English>Disable units hiding</English>
-			<German>Einheiten verstecken deaktivieren</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
-			<English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
-			<German>Schaltet das verdeckte Bewegen von KI für Einheiten die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
-			<English>Disable unit hand gestures</English>
-			<German>Handzeichen deaktivieren</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableHandGestures_Tooltip">
-			<English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
-			<German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
-			<English>Disable unit immediate actions</English>
-			<German>Sofortige KI-Aktionen ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions_ToolTip">
-			<English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
-			<German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing">
-			<English>Disable enhanced unit fleeing</English>
-			<German>Verbessertes Fliehen ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing_ToolTip">
-			<English>Toggles enhanced fleeing function for units.</English>
-			<German>Schaltet das verbesserte Fliehen für Einheiten aus.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableCallouts">
-			<English>Disable unit callouts</English>
-			<German>Rufe ausschalten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableCallouts_ToolTip">
-			<English>Toggles extra unit callouts based on situations</English>
-			<German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_CQBRange">
-			<English>CQB Range</English>
-			<German>CQB Reichweite</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_CQBRange_ToolTip">
-			<English>Range at which units consider themselves in assault range</English>
-			<German>Legt die Angriffsreichweite fest.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance">
-			<English>Minimum distance for Suppression Fire</English>
-			<German>Minimale Distanz für Unterdrückungsfeuer</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
-			<English>Within this distance AI will not perform suppression fire</English>
-			<German>Unter dieser Distanz führt die KI kein Unterdrückungsfeuer aus.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance">
-			<English>Minimum safe zone for Suppression Fire</English>
-			<German>Minimaler Sicherheitsbereich für Unterdrückungsfeuer</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance_ToolTip">
-			<English>If there are allies within this distance AI will not perform suppression fire. Set to 0 to disable.</English>
-			<German>Wenn sich befreundete Einheiten innerhalb des Sicherheitsradius befinden für die KI kein Unterdrückungsfeuer durch. Auf 0 setzen um die Funktion zu deaktivieren.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_PanicChance">
-			<English>Panic Chance</English>
-			<German>Panikwahrscheinlichkeit</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
-			<English>Chance to panic in percentage</English>
-			<German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing">
-			<English>Disable information sharing</English>
-			<German>Teilen von Informationen deaktivieren</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing_Tooltip">
-			<English>Toggle information sharing betweem units</English>
-			<German>Schaltet das Teilen von Informationen zwischen Einheiten aus.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_Shout">
-			<English>Shout</English>
-			<German>Rufen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_Shout_ToolTip">
-			<English>Range AI units share information without radios</English>
-			<German>Die Distanz über die KI Einheiten ohne Radius informationen teilen.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseWest">
-			<English>Base West</English>
-			<German>Basis Westen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseWest_ToolTip">
-			<English>Base range side WEST share information</English>
-			<German>Basisreichweite über die westliche Einheiten Informationen teilen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseEast">
-			<English>Base East</English>
-			<German>Basis Osten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseEast_ToolTip">
-			<English>Base range side EAST share information</English>
-			<German>Basisreichweite über die östliche Einheiten Informationen teilen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseIndependent">
-			<English>Base Independent</English>
-			<German>Basis Unabhängige</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BaseIndependent_ToolTip">
-			<English>Base range independent and civilian sides share information</English>
-			<German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BackpackRadios">
-			<English>Backpack radios</English>
-			<German>Rucksackradios</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
-			<English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
-			<German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
-			<English>Accuracy of shared information</English>
-			<German>Genauigkeit der geteilten Informationen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
-			<English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode. </English>
-			<German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_CQBFormation">
-			<English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
-			<German>Einheiten die in CQB-Formationen gesetzt werden, werden bei Feindkontakt methodisch Häuser säubern.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugFSM">
-			<English>Debug FSM</English>
-			<German>Debug FSM</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugFSM_ToolTip">
-			<English>Shows FSM debug messages</English>
-			<German>Zeigt FSM Debug-Meldungen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugFunctions">
-			<English>Debug Functions</English>
-			<German>Debug Funktionen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugFunctions_ToolTip">
-			<English>Shows Function debug messages</English>
-			<German>Zeigt Debug-Meldungen für Funktionen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugCiv">
-			<English>Debug Civ</English>
-			<German>Debug Civ</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugCiv_ToolTip">
-			<English>Shows FSM debug messages for civilians</English>
-			<German>Zeigt FSM Debug-Meldungen für Civilisten</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugDraw">
-			<English>Debug Draw</English>
-			<German>Debug Zeichnen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugDraw_ToolTip">
-			<English>Draws 3d Text over Units with AI Informations</English>
-			<German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest">
-			<English>Debug Draw Expected Destination</English>
-			<German>Debug Erwartete Ankuftsposition zeichnen</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest_ToolTip">
-			<English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
-			<German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
-			<English>AI Disabled</English>
-			<German>KI ausgeschaltet</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
-			<English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
-			<German>Erweitete danger.fsm Funktionen werden für die Einheit deaktiviert.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
-			<English>Has Radio</English>
-			<German>Hat Radio</German>
-		</Key>
-		<Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_ToolTip">
-			<English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
-			<German>Definiert die Einheit als würde sie ein Rucksackradio besitzten.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
-		</Key>
-	</Package>
+    <Package name="Danger">
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_DisplayName">
+            <English>Disable Unit AI</English>
+            <German>KI der Einheit ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingName">
+            <English>Disable LAMBS unit AI</English>
+            <German>LAMBS KI der Einheit ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingToolTip">
+            <English>Toggle advanced danger.fsm features on this unit</English>
+            <German>Erweiterte danger.fsm für diese Einheit umschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_DisplayName">
+            <English>Configure Long-range Radio</English>
+            <German>Langstrecken-Funk einstellen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingName">
+            <English>Toggle boosted communication range on unit</English>
+            <German>Verstärkte Kommunikationsreichweite für diese Einheit umschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingToolTip">
+            <English>Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.</English>
+            <German>Einheiten bei denen diese Option aktiviert ist haben eine erhöhte Kommunikationsreichweite.\n Dieser Effekt kann auch erzeugt werden durch das Ausrüsten der Einheit mit einem standard Radio-Rucksack oder einem TFAR-Mod kompatiblen Radio.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_DisplayName">
+            <English>Configure Group AI</English>
+            <German>Gruppen-KI einstellen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingName">
+            <English>Disable LAMBS group AI</English>
+            <German>LAMBS KI für Gruppe ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
+            <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
+            <German>Das Ausschalten verhindert das autonome Stürmen und Säubern von Gebäuden sowie das verstecken vor Panzern und Flugobjekten.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MainCat">
+            <English>Settings</English>
+            <German>Einstellungen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
+            <English>General</English>
+            <German>Allgemein</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_ShareInformationCat">
+            <English>Settings Share information</English>
+            <German>Informationen-Teilen Einstellungen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBFormationsCat">
+            <English>Settings CQB Formations</English>
+            <German>CQB-Formationseinstellungen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Debug">
+            <English>Debug</English>
+            <German>Debug</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
+            <English>Disable danger.fsm for player group</English>
+            <German>Danger.fsm für Spielergruppe deaktivieren</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
+            <English>Toggle advanced danger.fsm features on player group</English>
+            <German>Erweiterte danger.fsm Funktionen für Spielergruppe umschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup">
+            <English>Disable suppression from player group</English>
+            <German>Niederhaltung für Spielergruppe deaktivieren</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup_ToolTip">
+            <English>Toggle autonomous suppression for units in player group</English>
+            <German>Autonome Niederhaltung für Einheiten der Spielergruppe umschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
+            <English>Disable reaction state on player group</English>
+            <German>Reaktionszustand für Spielergruppe ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
+            <English>Toggle Reaction phase on units in player group</English>
+            <German>Reaktionsphase für Spielergruppe ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
+            <English>Disable autonomous group manoevures</English>
+            <German>Autonome Gruppenmanöver ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
+            <English>Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.</English>
+            <German>Gruppenmanöver-Phase die durch den Gruppenführer initiiert wird. Das Ausschalten dieser Option deaktiviert Befehle des Gruppenführers Gebäude zu flankieren oder niederzuhalten.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
+            <English>Disable units hiding</English>
+            <German>Einheiten verstecken deaktivieren</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
+            <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
+            <German>Schaltet das verdeckte Bewegen von KI für Einheiten die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
+            <English>Disable unit hand gestures</English>
+            <German>Handzeichen deaktivieren</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures_Tooltip">
+            <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
+            <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
+            <English>Disable unit immediate actions</English>
+            <German>Sofortige KI-Aktionen ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions_ToolTip">
+            <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
+            <German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing">
+            <English>Disable enhanced unit fleeing</English>
+            <German>Verbessertes Fliehen ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing_ToolTip">
+            <English>Toggles enhanced fleeing function for units.</English>
+            <German>Schaltet das verbesserte Fliehen für Einheiten aus.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts">
+            <English>Disable unit callouts</English>
+            <German>Rufe ausschalten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts_ToolTip">
+            <English>Toggles extra unit callouts based on situations</English>
+            <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBRange">
+            <English>CQB Range</English>
+            <German>CQB Reichweite</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBRange_ToolTip">
+            <English>Range at which units consider themselves in assault range</English>
+            <German>Legt die Angriffsreichweite fest.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance">
+            <English>Minimum distance for Suppression Fire</English>
+            <German>Minimale Distanz für Unterdrückungsfeuer</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
+            <English>Within this distance AI will not perform suppression fire</English>
+            <German>Unter dieser Distanz führt die KI kein Unterdrückungsfeuer aus.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance">
+            <English>Minimum safe zone for Suppression Fire</English>
+            <German>Minimaler Sicherheitsbereich für Unterdrückungsfeuer</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance_ToolTip">
+            <English>If there are allies within this distance AI will not perform suppression fire. Set to 0 to disable.</English>
+            <German>Wenn sich befreundete Einheiten innerhalb des Sicherheitsradius befinden für die KI kein Unterdrückungsfeuer durch. Auf 0 setzen um die Funktion zu deaktivieren.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance">
+            <English>Panic Chance</English>
+            <German>Panikwahrscheinlichkeit</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
+            <English>Chance to panic in percentage</English>
+            <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing">
+            <English>Disable information sharing</English>
+            <German>Teilen von Informationen deaktivieren</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing_Tooltip">
+            <English>Toggle information sharing betweem units</English>
+            <German>Schaltet das Teilen von Informationen zwischen Einheiten aus.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Shout">
+            <English>Shout</English>
+            <German>Rufen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_Shout_ToolTip">
+            <English>Range AI units share information without radios</English>
+            <German>Die Distanz über die KI Einheiten ohne Radius informationen teilen.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseWest">
+            <English>Base West</English>
+            <German>Basis Westen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseWest_ToolTip">
+            <English>Base range side WEST share information</English>
+            <German>Basisreichweite über die westliche Einheiten Informationen teilen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseEast">
+            <English>Base East</English>
+            <German>Basis Osten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseEast_ToolTip">
+            <English>Base range side EAST share information</English>
+            <German>Basisreichweite über die östliche Einheiten Informationen teilen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent">
+            <English>Base Independent</English>
+            <German>Basis Unabhängige</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent_ToolTip">
+            <English>Base range independent and civilian sides share information</English>
+            <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios">
+            <English>Backpack radios</English>
+            <German>Rucksackradios</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
+            <English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
+            <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
+            <English>Accuracy of shared information</English>
+            <German>Genauigkeit der geteilten Informationen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
+            <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode. </English>
+            <German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
+            <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
+            <German>Einheiten die in CQB-Formationen gesetzt werden, werden bei Feindkontakt methodisch Häuser säubern.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFSM">
+            <English>Debug FSM</English>
+            <German>Debug FSM</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFSM_ToolTip">
+            <English>Shows FSM debug messages</English>
+            <German>Zeigt FSM Debug-Meldungen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions">
+            <English>Debug Functions</English>
+            <German>Debug Funktionen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions_ToolTip">
+            <English>Shows Function debug messages</English>
+            <German>Zeigt Debug-Meldungen für Funktionen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugCiv">
+            <English>Debug Civ</English>
+            <German>Debug Civ</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugCiv_ToolTip">
+            <English>Shows FSM debug messages for civilians</English>
+            <German>Zeigt FSM Debug-Meldungen für Civilisten</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDraw">
+            <English>Debug Draw</English>
+            <German>Debug Zeichnen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDraw_ToolTip">
+            <English>Draws 3d Text over Units with AI Informations</English>
+            <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest">
+            <English>Debug Draw Expected Destination</English>
+            <German>Debug Erwartete Ankuftsposition zeichnen</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest_ToolTip">
+            <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
+            <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
+            <English>AI Disabled</English>
+            <German>KI ausgeschaltet</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
+            <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
+            <German>Erweitete danger.fsm Funktionen werden für die Einheit deaktiviert.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
+            <English>Has Radio</English>
+            <German>Hat Radio</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_ToolTip">
+            <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
+            <German>Definiert die Einheit als würde sie ein Rucksackradio besitzten.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
+        </Key>
+    </Package>
 </Project>
