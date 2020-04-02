@@ -1,7 +1,7 @@
 name = "LAMBS Danger"
 prefix = "lambs"
 author = "LAMBS Dev Team"
-sigversion = 3
+sig_version = 3
 version = "2.3.3"
 reuse_private_key = true
 files = [
@@ -13,8 +13,8 @@ files = [
 ]
 include = ["./include"]
 
-keyname = "{{prefix}}_danger_{{version}}"
-signame = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
+key_name = "{{prefix}}_danger_{{version}}"
+authority = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
 
 prebuild = [
     "!version_set"
