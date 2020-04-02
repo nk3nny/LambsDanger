@@ -57,18 +57,18 @@ switch (_priority) do {
     };
     case 1: {
         if (_unit == vehicle _unit) then {
-            [_unit, _animation] remoteExec ["playMove", _unit];
+            [_unit, _animation] remoteExec ["playMoveNow", _unit];
         } else {
             // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have local effects when executed on remote machines inside vehicles.
-            [_unit, _animation] remoteExec ["playMove", 0];
+            [_unit, _animation] remoteExec ["playMoveNow", 0];
         };
     };
     case 2: {
         if (_unit == vehicle _unit) then {
-            [_unit, _animation] remoteExec ["playMove", _unit];
+            [_unit, _animation] remoteExec ["playMoveNow", _unit];
         } else {
             // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have local effects when executed on remote machines inside vehicles.
-            [_unit, _animation] remoteExec ["playMove", 0];
+            [_unit, _animation] remoteExec ["playMoveNow", 0];
         };
 
         // if animation doesn't respond, do switchMove
