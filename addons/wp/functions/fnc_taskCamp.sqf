@@ -187,8 +187,7 @@ private _dir = random 360;
                 [_x, "ANIM"] remoteExec ["enableAI", _x];
                 [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            private _anim = ["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo "");
-            [_unit, _anim, 2] call EFUNC(main,doAnimation);
+            [_unit, "", 2] call EFUNC(main,doAnimation);
 
             _unit removeEventHandler ["Hit", _thisEventHandler];
         }];
@@ -198,8 +197,7 @@ private _dir = random 360;
                 [_x, "ANIM"] remoteExec ["enableAI", _x];
                 [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            private _anim = ["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo "");
-            [_unit, _anim, 2] call EFUNC(main,doAnimation);
+            [_unit, "", 2] call EFUNC(main,doAnimation);
 
             _unit removeEventHandler ["FiredNear", _thisEventHandler];
         }];
