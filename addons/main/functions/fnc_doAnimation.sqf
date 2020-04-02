@@ -15,7 +15,6 @@
  * Public: No
 */
 params ["_unit", "_animation", ["_priority", 0]];
-TRACE_3("params",_unit,_animation,_priority);
 
 // switchMove "" no longer works in dev 1.37
 if (_animation == "") then {
@@ -50,26 +49,26 @@ if (_animation == "") then {
 switch (_priority) do {
     case 0: {
         if (_unit == vehicle _unit) then {
-            [_unit _animation] remoteExec ["playMove", _unit];
+            [_unit, _animation] remoteExec ["playMove", _unit];
         } else {
             // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have local effects when executed on remote machines inside vehicles.
-            [_unit _animation] remoteExec ["playMove", 0];
+            [_unit, _animation] remoteExec ["playMove", 0];
         };
     };
     case 1: {
         if (_unit == vehicle _unit) then {
-            [_unit _animation] remoteExec ["playMove", _unit];
+            [_unit, _animation] remoteExec ["playMove", _unit];
         } else {
             // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have local effects when executed on remote machines inside vehicles.
-            [_unit _animation] remoteExec ["playMove", 0];
+            [_unit, _animation] remoteExec ["playMove", 0];
         };
     };
     case 2: {
         if (_unit == vehicle _unit) then {
-            [_unit _animation] remoteExec ["playMove", _unit];
+            [_unit, _animation] remoteExec ["playMove", _unit];
         } else {
             // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have local effects when executed on remote machines inside vehicles.
-            [_unit _animation] remoteExec ["playMove", 0];
+            [_unit, _animation] remoteExec ["playMove", 0];
         };
 
         // if animation doesn't respond, do switchMove
@@ -77,10 +76,9 @@ switch (_priority) do {
             params ["_unit", "_animation"]
             if (animationState _unit != _animation) then {
                 // Execute on all machines. SwitchMove has local effects.
-                [_unit _animation] remoteExec ["switchMove", 0];
+                [_unit, _animation] remoteExec ["switchMove", 0];
             };
-        }, [_unit _animation], 0.1] call CBA_fnc_waitAndExecute;
+        }, [_unit, _animation], 0.1] call CBA_fnc_waitAndExecute;
 
     };
-    default {};
 };
