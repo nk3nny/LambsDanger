@@ -50,7 +50,7 @@ if (isNull (objectParent _unit)) then {
     [_unit, _animation] remoteExec [_case, 0];
 };
 
-if (_priority >= 2 && {animationState _unit != _anim}) then {
+if (_priority >= 2) then {
     [{
         params ["_unit", "_animation"];
         if (animationState _unit != _animation) then {
