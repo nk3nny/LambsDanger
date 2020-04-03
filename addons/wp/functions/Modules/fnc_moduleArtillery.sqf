@@ -28,23 +28,10 @@ switch (_mode) do {
             params ["_side", "_salvo", "_spread", "_skipCheckround", "_logic"];
             [{
                 params ["_side", "", "", "", "_pos"];
-                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
-                _artillery = _artillery select {
-                    canFire _x
-                    && {unitReady _x}
-                    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
-                };
-                !(_artillery isEqualTo [])
+                [_side, _pos] call FUNC(sideHasArtillery);
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
-                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
-                _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-                _artillery = _artillery select {
-                    canFire _x
-                    && {unitReady _x}
-                    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
-                };
-                [_artillery select 0, _pos, leader (_artillery select 0), _salvo, _spread, _skipCheckround] spawn FUNC(taskArtillery);
+                [_side, _pos, objNull, _salvo, _spread, _skipCheckround] spawn FUNC(taskArtillery);
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
