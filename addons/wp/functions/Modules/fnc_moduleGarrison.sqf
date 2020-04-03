@@ -42,7 +42,8 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_sortByHeight", "_teleport", "_exitCondition"];
-                        [_groups select _groupIndex, getPos _logic, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] spawn FUNC(taskGarrison);
+                        private _group = _groups select _groupIndex;
+                        [_group, getPos _logic, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -72,7 +73,10 @@ switch (_mode) do {
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_sortByHeight", "_teleport", "_exitCondition"];
                         private _target = _targets select _targetIndex;
-                        [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] spawn FUNC(taskGarrison);
+                        if !(local _group) then {
+                            _target = getPos _target;
+                        };
+                        [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];

@@ -41,7 +41,8 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint"];
-                        [_groups select _groupIndex, getPos _logic, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
+                        private _group = _groups select _groupIndex;
+                        [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -69,10 +70,14 @@ switch (_mode) do {
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
                         private _target = _targets select _targetIndex;
-                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
+                        if !(local _group) then {
+                            _target = getPos _target;
+                        };
+                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
                         if !(_logic isEqualTo _target) then {
                             deleteVehicle _logic;
-                        };                    }, {
+                        };
+                    }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
