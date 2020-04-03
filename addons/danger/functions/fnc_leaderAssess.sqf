@@ -52,10 +52,10 @@ if !(_enemy isEqualTo []) then {
     private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }}};
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
         [_unit, 3, getPosATL (_enemy select _targets)] call FUNC(leaderMode);
-    
+
         // gesture
         [_unit, ["gesturePoint"]] call FUNC(gesture);
-    
+
     };
 
     // Enemy is Tank/Air?
@@ -74,7 +74,8 @@ if !(_enemy isEqualTo []) then {
 
     // Artillery
     _targets = _enemy select {_x distance _unit > 200};
-    if !(_targets isEqualTo [] || {([EGVAR(main,SideArtilleryHash), side _unit] call CBA_fnc_hashGet) isEqualTo []}) then {
+
+    if !(_targets isEqualTo [] || { GVAR(WP_Loaded) && {[side _unit, true] call EFUNC(WP,sideHasArtillery)} }) then {
         [_unit, 6, (_unit getHideFrom (_targets select 0))] call FUNC(leaderMode);
     };
 

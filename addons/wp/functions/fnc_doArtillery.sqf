@@ -155,4 +155,4 @@ if (!canFire _gun) exitWith {false};
 
 // Ready up again
 _gun doMove getPosASL _gun;
-[QGVAR(RegisterArillery), _gun] call CBA_fnc_serverEvent;
+[QGVAR(RegisterArillery), [_gun]] call CBA_fnc_serverEvent;

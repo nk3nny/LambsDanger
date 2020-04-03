@@ -35,10 +35,7 @@ private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" 
 if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global
-private _guns = [EGVAR(main,SideArtilleryHash), side _group] call CBA_fnc_hashGet;
-_guns append _artillery;
-_guns = _guns arrayIntersect _guns;
-EGVAR(main,SideArtilleryHash) = [EGVAR(main,SideArtilleryHash), side _group, _guns] call CBA_fnc_hashSet;
+[QGVAR(RegisterArillery), _artillery] call CBA_fnc_serverEvent;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

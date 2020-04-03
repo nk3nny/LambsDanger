@@ -10,10 +10,10 @@ if (isServer) then {
 };
 
 [QGVAR(RegisterArillery), {
-    params ["_gun"];
-    private _artillery = [GVAR(SideArtilleryHash), side _gun] call CBA_fnc_hashGet;
-    _artillery pushBackUnique _gun;
-    GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side _gun, _artillery] call CBA_fnc_hashSet;
+    params ["_guns"];
+    private _artillery = [GVAR(SideArtilleryHash), side (_guns select 0)] call CBA_fnc_hashGet;
+    _artillery append _guns;
+    GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_guns select 0), _artillery] call CBA_fnc_hashSet;
     publicVariable QGVAR(SideArtilleryHash);
 }] call CBA_fnc_addEventhandler;
 
