@@ -20,12 +20,12 @@ if (isServer) then {
 [QGVAR(RequestArillery), {
     params ["_side", "_pos", "_caller", "_rounds", "_accuracy", "_skipCheckrounds"];
     private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
-    _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
     _artillery = _artillery select {
         canFire _x
         && {unitReady _x}
         && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
     };
+    _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
     private _gun = _artillery deleteAt 0;
     GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), _side, _artillery] call CBA_fnc_hashSet;
     publicVariable QGVAR(SideArtilleryHash);
