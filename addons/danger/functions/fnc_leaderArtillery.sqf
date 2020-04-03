@@ -27,13 +27,10 @@ if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Art
 // settings
 
 // exit on no ready artillery
-if ([side _unit, _pos] call EFUNC(WP,sideHasArtillery);) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
+if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
-
-// pick closest artillery
-[QGVAR(OnArtilleryCalled), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
 
 // find caller
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
