@@ -36,7 +36,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskCamp_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskCamp_Radius_ToolTip), 50],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
+                        [LSTRING(Module_TaskCamp_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskCamp_Teleport_Tooltip), false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
