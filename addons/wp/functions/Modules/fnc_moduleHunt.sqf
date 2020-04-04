@@ -69,7 +69,7 @@ switch (_mode) do {
             private _playerOnly = _logic getVariable [QGVAR(PlayerOnly), true];
             {
                 private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
-                _args spawn FUNC(taskHunt);
+                _args remoteExec [QFUNC(taskHunt), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

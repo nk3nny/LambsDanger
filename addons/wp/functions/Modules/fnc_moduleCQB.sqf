@@ -42,8 +42,9 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_radius", "_cycle", "_deleteAfterStartup"];
                         private _group = _groups select _groupIndex;
-                        if !(local _group) then {
+                        if !((local _group) || _deleteAfterStartup) then {
                             _deleteAfterStartup = true;
+                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
                         [_group, [_logic, getPos _logic] select _deleteAfterStartup, _radius, _cycle, nil, false] remoteExec [QFUNC(taskCQB), leader _group];
                         if (_deleteAfterStartup) then {
@@ -99,7 +100,11 @@ switch (_mode) do {
             private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), false];
 
             {
-                [_x, _logic, _radius, _cycle, _area, false] spawn FUNC(taskCQB);
+                private _target = _logic;
+                if !(local _x) then {
+                    _target = getPos _target;
+                };
+                [_x, _target, _radius, _cycle, _area, false] remoteExec [QFUNC(taskCQB), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;

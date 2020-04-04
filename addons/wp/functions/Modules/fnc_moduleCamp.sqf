@@ -85,7 +85,7 @@ switch (_mode) do {
             private _range = _area select ((_area select 0) < (_area select 1));
 
             {
-                [_x, getPos _logic, _range, _area] call FUNC(taskCamp);
+                [_x, getPos _logic, _range, _area] remoteExecCall [QFUNC(taskCamp), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

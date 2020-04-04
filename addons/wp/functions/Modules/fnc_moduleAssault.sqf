@@ -43,8 +43,9 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_retreat", "_threshold", "_cycle", "_deleteAfterStartup"];
                         private _group = _groups select _groupIndex;
-                        if !(local _group) then {
+                        if !((local _group) || _deleteAfterStartup) then {
                             _deleteAfterStartup = true;
+                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
                         [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
 
@@ -99,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
             private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
-                [_x, _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                [_x, _logic, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;

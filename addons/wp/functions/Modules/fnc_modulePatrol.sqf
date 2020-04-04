@@ -95,7 +95,7 @@ switch (_mode) do {
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), false];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), 4];
             {
-                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] call FUNC(taskPatrol);
+                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

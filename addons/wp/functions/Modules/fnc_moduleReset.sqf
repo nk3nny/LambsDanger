@@ -49,7 +49,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
             {
-                [_x] call FUNC(taskReset);
+                [_x] remoteExecCall [QFUNC(taskReset), leader _x];
             } forEach _groups;
         };
     };
