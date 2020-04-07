@@ -51,8 +51,7 @@ switch (_mode) do {
                     }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
-                    }, [_groups, _logic]
-                ] call EFUNC(main,showDialog);
+                    }, [_groups, _logic]] call EFUNC(main,showDialog);
             } else {
                 _logic setVehicleVarName localize LSTRING(Self);
                 private _targets = [_logic];
@@ -93,8 +92,8 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), true];
-            private _teleport = _logic getVariable [QGVAR(Teleport), true];
+            private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), false];
+            private _teleport = _logic getVariable [QGVAR(Teleport), false];
             private _exitCondition = _logic getVariable [QGVAR(ExitConditions), -2];
             {
                 [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition] remoteExec [QFUNC(taskGarrison), leader _x];

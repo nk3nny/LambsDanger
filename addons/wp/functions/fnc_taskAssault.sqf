@@ -9,12 +9,13 @@
  * 2: Forced retreat, default false <BOOL>
  * 3: Distance threshold, default 10 <NUMBER>
  * 4: Update cycle, default 2 <NUMBER>
+ * 5: Is Called for Waypoint, default false <BOOL>
  *
  * Return Value:
  * boolean
  *
  * Example:
- * [bob, getPos angryJoe] call lambs_wp_fnc_taskAssault;
+ * [bob, getPos angryJoe] spawn lambs_wp_fnc_taskAssault;
  *
  * Public: Yes
 */
