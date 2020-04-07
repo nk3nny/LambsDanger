@@ -33,7 +33,7 @@ _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
     if (_dikCode == DIK_ESCAPE) then {
-        (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On Close Handler
+        (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On OnAbort Handler
         closeDialog 2;
         _handled = true;
     };
@@ -48,7 +48,7 @@ _display displayAddEventHandler ["KeyDown",  {
 
 _display displayAddEventHandler ["Unload",  {
     params ["_display"];
-    (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnClose), {}]); // Call On Close Handler
+    (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnUnload), {}]); // Call On OnUnload Handler
 }];
 
 private _height = ((count _data) + 1) * (PY(CONST_HEIGHT + CONST_SPACE_HEIGHT));
@@ -81,12 +81,37 @@ private _fnc_CreateLabel = {
         _tooltip = localize _tooltip;
     };
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
-    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _label ctrlSetPosition [_basePositionX + PX(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
     _label ctrlSetText _text;
     _label ctrlSetTooltip _tooltip;
     _label ctrlCommit 0;
     _label;
+};
+
+private _fnc_DescriptionField = {
+    params [["_text", "", ["", text "",[]]]];
+    if (_text isEqualType []) then {
+        {
+            if (_x isEqualType "" && {isLocalized _x}) then {
+                _text set [_forEachIndex, localize _x];
+            };
+        } forEach _text;
+        _text = formatText _text;
+    } else {
+        if (_text isEqualType "" && {isLocalized _text}) then {
+            _text = localize _text;
+        };
+    };
+    if (_text isEqualType "") then {
+        _text = parseText _text;
+    };
+    private _textField = _display ctrlCreate ["RscStructuredText", -1, _globalGroup];
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_SPACE_HEIGHT/2), PX(CONST_WIDTH - CONST_SPACE_HEIGHT * 2), PY(CONST_HEIGHT - (CONST_SPACE_HEIGHT/2))];
+    _textField ctrlSetStructuredText _text;
+    _textField ctrlCommit 0;
+    _textField;
 };
 
 private _fnc_AddTextField = {
@@ -208,8 +233,20 @@ private _controls = [];
         case ("SLIDER"): {
             _controls pushBack [(_x call _fnc_AddSlider), _type];
         };
+        case ("NUMBER");
+        case ("INT");
+        case ("INTEGER");
+        case ("TEXT");
+        case ("EDIT"): {
+            _controls pushback [(_x call _fnc_AddTextField), _type];
+        };
+        case ("DESCRIPTION"): {
+            _x call _fnc_DescriptionField; // This Type does not generate any Data and will not be enterted into the return data
+        };
         default {
             _controls pushback [(_x call _fnc_AddTextField), _type];
+            hint format ["%1 type unknown %2", _type, _x];
+            // TYPE NOT FOUND
         };
     };
 } forEach _data;

@@ -39,8 +39,13 @@ private _data = [];
         case ("SLIDER"): {
             _d = sliderPosition _ctrl;
         };
+        case ("TEXT");
+        case ("EDIT"): {
+            _d = ctrlText _ctrl;
+        };
         default {
             _d = ctrlText _ctrl;
+            hint format ["%1 type unknown %2", _type, _x];
         };
     };
     private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];
