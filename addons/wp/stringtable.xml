@@ -239,7 +239,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
             <English>This module resets all custom LAMBS scripts running on the unit</English>
-            <German>Diese Modul setzt alle benutzerdefinierten LAMBS Skripte zurück die für diese Einheit laufen.</German>
+            <German>Dieses Modul setzt alle benutzerdefinierten LAMBS Skripte zurück die für diese Einheit laufen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
