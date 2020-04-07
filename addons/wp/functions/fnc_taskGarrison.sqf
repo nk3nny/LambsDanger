@@ -10,6 +10,8 @@
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Position to occupy, default group location <ARRAY or OBJECT>
  * 2: Range of tracking, default is 50 meters <NUMBER>
+ * 3: Area the AI Camps in, default [] <ARRAY>
+ * 4: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <BOOL>
  *
  * Return Value:
  * none

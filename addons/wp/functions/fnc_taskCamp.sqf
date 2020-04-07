@@ -10,6 +10,7 @@
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Central position camp should be made, <ARRAY>
  * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
+ * 3: Area the AI Camps in, default [] <ARRAY>
  *
  * Return Value:
  * none
@@ -20,7 +21,7 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]]];
+params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false]];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -89,19 +90,21 @@ reverse _units;
 {
     // gun
     if !(_gun isEqualTo []) then {
-        _x assignAsGunner (_gun select 0);
+        private _g = (_gun deleteAt 0);
+        if (_teleport) then { _x moveInGunner _g; };
+        _x assignAsGunner _g;
         [_x] orderGetIn true;
-        _x moveInGunner (_gun deleteAt 0);
         _units set [_foreachIndex, objNull];
     };
 
     if (!(_buildings isEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
+        if (_teleport) then { _x setPos _buildingPos; };
         _x doMove _buildingPos;
         [
             {
-                params ["_unit", ""];
+                params ["_unit"];
                 unitReady _unit
             },
             {
@@ -114,7 +117,7 @@ reverse _units;
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
-    if (count _units < count units _group/2) exitWith {};
+    if ((count _units) < (count (units _group))/2) exitWith {};
 
 } forEach _units;
 
@@ -156,11 +159,18 @@ private _armedAnims = [
 // direction
 private _dir = random 360;
 {
-    _dir = _dir + random (360 / count _units);
+    _dir = _dir + (360 / count _units) - random (180 / count _units);
     private _range = 1.35 + random 3.3;
     private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
 
+    // teleport
+    if (_teleport) then {
+        _x setPos _pos2;
+        _x setDir (_x getDir _pos);
+    };
+
     // execute move
+    doStop _x;
     _x doMove _pos2;
     _x setDestination [_pos2, "LEADER DIRECT", false];
 
@@ -175,9 +185,8 @@ private _dir = random 360;
     }, {
         params ["_unit", "_target", "_center", "_anim"];
         if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-        doStop _unit;
-        //[{_this disableAI "ANIM"}, _unit, 0.5] call CBA_fnc_waitAndExecute;
         [_unit, _anim, 2] call EFUNC(main,doAnimation);
+
         _unit disableAI "ANIM";
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);

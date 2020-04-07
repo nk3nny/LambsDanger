@@ -9,6 +9,7 @@
  * 2: Caller of strike <OBJECT>
  * 3: Rounds fired, default 3 - 7 <NUMBER>
  * 4: Dispersion accuracy, default 100 <NUMBER>
+ * 5: Skip Check Rounds default false <BOOLEAN>
  *
  * Return Value:
  * none
