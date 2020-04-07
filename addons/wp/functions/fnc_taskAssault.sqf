@@ -15,7 +15,7 @@
  * boolean
  *
  * Example:
- * [bob, getPos angryJoe] call lambs_wp_fnc_taskAssault;
+ * [bob, getPos angryJoe] spawn lambs_wp_fnc_taskAssault;
  *
  * Public: Yes
 */

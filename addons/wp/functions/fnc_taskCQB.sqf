@@ -20,7 +20,7 @@
  * none
  *
  * Example:
- * [bob, getPos angryJoe, 50] call lambs_wp_fnc_taskCQB;
+ * [bob, getPos angryJoe, 50] spawn lambs_wp_fnc_taskCQB;
  *
  * Public: No
 */
