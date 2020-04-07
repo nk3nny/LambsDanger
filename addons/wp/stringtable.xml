@@ -97,6 +97,12 @@
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
+            <English>Teleport units</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_ToolTip">
+            <English>Teleport units instantly to position</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
         </Key>
