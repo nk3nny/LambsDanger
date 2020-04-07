@@ -192,6 +192,7 @@ private _fnc_AddDropDown = {
 };
 
 private _fnc_AddSlider = {
+    #define __SLIDER_EDIT_SIZE__ 16
     params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
@@ -205,16 +206,43 @@ private _fnc_AddSlider = {
     };
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
-
     private _slider = _display ctrlCreate ["ctrlXSliderH", -1, _globalGroup];
-    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT * __SLIDER_EDIT_SIZE__), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _slider ctrlSetTooltip _tooltip;
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
     _slider sliderSetPosition _default;
     _slider setVariable [QGVAR(CacheName), _cacheName];
+
+    private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
+    _textField ctrlSetPosition [_basePositionX + PX((CONST_WIDTH) - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+
+    _slider setVariable [QGVAR(TextField), _textField];
+    _textField setVariable [QGVAR(Slider), _slider];
+    _textField ctrlSetText str _default;
+
+    _slider ctrlAddEventHandler ["SliderPosChanged", {
+        params ["_control", "_newValue"];
+        private _textField = _control getVariable [QGVAR(TextField), controlNull];
+        _textField ctrlSetText str _newValue;
+        _textField ctrlCommit 0;
+    }];
+
+    _textField ctrlAddEventHandler ["KeyUp", {
+        params ["_control"];
+        private _slider = _control getVariable [QGVAR(Slider), controlNull];
+        _slider sliderSetPosition parseNumber (ctrlText _control);
+    }];
+    _textField ctrlAddEventHandler ["KillFocus", {
+        params ["_control"];
+        private _slider = _control getVariable [QGVAR(Slider), controlNull];
+        _slider sliderSetPosition parseNumber (ctrlText _control);
+    }];
+
     _slider ctrlCommit 0;
+    _textField ctrlCommit 0;
     _slider;
+    #undef __SLIDER_EDIT_SIZE__
 };
 
 private _controls = [];
