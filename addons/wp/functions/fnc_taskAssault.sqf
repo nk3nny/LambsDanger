@@ -9,6 +9,7 @@
  * 2: Forced retreat, default false <BOOL>
  * 3: Distance threshold, default 10 <NUMBER>
  * 4: Update cycle, default 2 <NUMBER>
+ * 5: Use Waypoints default false <BOOL>
  *
  * Return Value:
  * boolean

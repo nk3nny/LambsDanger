@@ -7,13 +7,15 @@
  * Arguments:
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Position being searched, default group position <OBJECT or ARRAY>
- * 1: Range of tracking, default is 200 meters <NUMBER>
+ * 2: Range of tracking, default is 200 meters <NUMBER>
+ * 3: Waypoint Count, default 4  <NUMBER>
+ * 4: Area the AI Camps in, default [] <ARRAY>
  *
  * Return Value:
  * none
  *
  * Example:
- * [bob, 500] call lambs_wp_fnc_taskPatrol;
+ * [bob, getPos bob, 500] call lambs_wp_fnc_taskPatrol;
  *
  * Public: No
 */

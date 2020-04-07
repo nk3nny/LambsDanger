@@ -10,6 +10,7 @@
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Central position camp should be made, <ARRAY>
  * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
+ * 3: Area the AI Camps in, default [] <ARRAY>
  *
  * Return Value:
  * none

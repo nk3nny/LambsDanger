@@ -13,6 +13,8 @@
  * 1: Position targeted <ARRAY>
  * 2: Radius of search, default 50 <NUMBER>
  * 3: Delay of cycle, default 21 seconds <NUMBER>
+ * 4: Area the AI Camps in, default [] <ARRAY>
+ * 5: Use Waypoints, default false <BOOL>
  *
  * Return Value:
  * none
