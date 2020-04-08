@@ -48,18 +48,17 @@ switch (_mode) do {
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
-            private _sides = SIDES apply { str _x };
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
-                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "DROPDOWN", LSTRING(Module_TaskArtillery_Side_Tooltip), _sides],
+                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), SIDES],
                     [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), 6],
                     [LSTRING(Module_TaskArtillery_Spread_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_Spread_Tooltip), 75],
                     [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
                 ], {
                     params ["_data", "_args"];
                     _args params ["_logic", "_fnc_callArtillery"];
-                    _data params ["_sideIndex", "_salvo", "_spread", "_skipCheckround"];
-                    [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
+                    _data params ["_side", "_salvo", "_spread", "_skipCheckround"];
+                    [_side, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
                     [objNull, format [localize LSTRING(Module_TaskArtillery_ZeusNotification), SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
                     deleteVehicle _logic;
                 }, {
