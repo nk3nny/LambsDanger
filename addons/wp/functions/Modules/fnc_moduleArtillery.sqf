@@ -59,7 +59,7 @@ switch (_mode) do {
                     _args params ["_logic", "_fnc_callArtillery"];
                     _data params ["_side", "_salvo", "_spread", "_skipCheckround"];
                     [_side, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
-                    [objNull, format [localize LSTRING(Module_TaskArtillery_ZeusNotification), SIDES select _sideIndex]] call BIS_fnc_showCuratorFeedbackMessage;
+                    [objNull, format [localize LSTRING(Module_TaskArtillery_ZeusNotification), [_side] call BIS_fnc_sideName]] call BIS_fnc_showCuratorFeedbackMessage;
                     deleteVehicle _logic;
                 }, {
                     params ["_logic"];

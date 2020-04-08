@@ -248,7 +248,6 @@ private _fnc_AddSlider = {
 private _fnc_AddSideSelector = {
     #define __SIDES__ [west, east, independent, civilian, sideEmpty, sideLogic, sideUnknown]
     #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\submode_logic_logic_ca.paa"]
-    #define __SIDES_LOC__ ["STR_A3_CfgGroups_West0", "STR_A3_CfgGroups_East0", "STR_A3_CfgGroups_Indep0", "STR_DN_Civilian", "STR_A3_CfgDefaultKeysPresets_Empty0", "STR_A3_ObjectType_Logic", "STR_A3_NameSound_Veh_Unknown_P"]
 
     params ["_text", "", "_tooltip", "_sides", ["_default", sideUnknown]];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
@@ -264,11 +263,7 @@ private _fnc_AddSideSelector = {
         _button ctrlSetPosition _position;
         private _index = __SIDES__ find _side;
         if (_tooltip == "") then {
-            if (_index == -1) then {
-                _tooltip = str _side;
-            } else {
-                _tooltip = __SIDES_LOC__ select _index;
-            };
+            _tooltip = [_side] call BIS_fnc_sideName;
         };
         if (isLocalized _tooltip) then {
             _tooltip = localize _tooltip;
