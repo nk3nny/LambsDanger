@@ -43,6 +43,9 @@ private _data = [];
         case ("EDIT"): {
             _d = ctrlText _ctrl;
         };
+        case ("SIDE"): {
+            _d = _ctrl getVariable [QGVAR(Side), sideUnknown];
+        };
         default {
             _d = ctrlText _ctrl;
             hint format ["%1 type unknown %2", _type, _x];

@@ -215,7 +215,7 @@ private _fnc_AddSlider = {
     _slider setVariable [QGVAR(CacheName), _cacheName];
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
-    _textField ctrlSetPosition [_basePositionX + PX((CONST_WIDTH) - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
 
     _slider setVariable [QGVAR(TextField), _textField];
     _textField setVariable [QGVAR(Slider), _slider];
@@ -245,6 +245,74 @@ private _fnc_AddSlider = {
     #undef __SLIDER_EDIT_SIZE__
 };
 
+private _fnc_AddSideSelector = {
+    #define __SIDES__ [west, east, independent, civilian, sideEmpty, sideLogic]
+    #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa"]
+    #define __SIDES_LOC__ ["STR_A3_CfgGroups_West0", "STR_A3_CfgGroups_East0", "STR_A3_CfgGroups_Indep0", str civilian, str sideEmpty, str sideLogic] /*TODO: find stringtable Entrys*/
+
+    params ["_text", "", "_sides", "_tooltip", ["_default", 0]];
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+
+    [_text, _tooltip] call _fnc_CreateLabel;
+
+    private _fnc_CreateButton = {
+        params ["_tooltip", "_side", "_position"];
+        private _button = _display ctrlCreate ["RscActivePictureKeepAspect", -1, _globalGroup];
+        _button ctrlSetPosition _position;
+        private _index = __SIDES__ find _side;
+        if (_tooltip == "") then {
+            if (_index == -1) then {
+                _tooltip = str _side;
+            } else {
+                _tooltip = __SIDES_LOC__ select _index;
+            };
+        };
+        if (isLocalized _tooltip) then {
+            _tooltip = localize _tooltip;
+        };
+        if (_index == -1) then {
+            _index = 5; // if Side is not known use sideLogic Icon
+        };
+        _button ctrlSetText (__SIDES_ICONS__ select _index);
+        _button ctrlSetTooltip _tooltip;
+        _button ctrlAddEventHandler ["MouseButtonUp", {
+            params ["_ctrl"];
+            private _buttons = _ctrl getVariable [QGVAR(Controls), controlNull];
+            (_button select 0) setVariable [QGVAR(SelectedSide), _ctrl getVariable [QGVAR(Side), sideUnknown]];
+            {
+                _x ctrlSetBackgroundColor [0, 0, 0, 0];
+            } forEach _buttons;
+            _ctrl ctrlSetBackgroundColor BACKGROUND_RGBA;
+        }];
+        _button setVariable [QGVAR(Side), _side];
+        _button ctrlCommit 0;
+        _button;
+    };
+
+    private _buttons = [];
+    private _count = count _sides;
+    private _px = PX(((CONST_WIDTH/2)/_count)-(CONST_SPACE_HEIGHT*_count));
+    {
+        _x params ["_side", ["_tooltip", "", [""]]];
+        private _b = [_tooltip, _side, [_basePositionX + PX(CONST_WIDTH/2) + (_px * (_forEachIndex + 1)), _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)]] call _fnc_CreateButton; //TODO: Fix X Position
+        _buttons pushback _b;
+        if (_default == _forEachIndex) then {
+            (_buttons select 0) setVariable [QGVAR(SelectedSide), _side];
+        };
+    } forEach _sides;
+
+    {
+        _x setVariable [QGVAR(Controls), _buttons];
+        _x setVariable [QGVAR(CacheName), _cacheName];
+    } forEach _buttons;
+    #undef __SIDES__
+    #undef __SIDES_ICONS__
+    _buttons select 0;
+};
+
 private _controls = [];
 {
     private _type = toUpper (_x select 1);
@@ -270,6 +338,9 @@ private _controls = [];
         };
         case ("DESCRIPTION"): {
             _x call _fnc_DescriptionField; // This Type does not generate any Data and will not be enterted into the return data
+        };
+        case ("SIDE"): {
+            _controls pushBack [(_x call _fnc_AddSideSelector), _type];
         };
         default {
             _controls pushback [(_x call _fnc_AddTextField), _type];
