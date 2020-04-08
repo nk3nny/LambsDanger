@@ -14,8 +14,6 @@
  *
  * Public: No
 */
-
-#define SIDES [west, east, independent]
 params [["_mode", "", [""]], ["_input", [], [[]]]];
 
 switch (_mode) do {
@@ -50,7 +48,7 @@ switch (_mode) do {
         if (_isCuratorPlaced) then {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
-                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), SIDES],
+                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), [west, east, independent]],
                     [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), 6],
                     [LSTRING(Module_TaskArtillery_Spread_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_Spread_Tooltip), 75],
                     [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
