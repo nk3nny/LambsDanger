@@ -293,7 +293,7 @@ private _fnc_AddSideSelector = {
         _button ctrlCommit 0;
         _button;
     };
-
+    _sides = _sides arrayIntersect _sides;
     private _buttons = [];
     private _count = count _sides;
     private _margin = PX((CONST_WIDTH/2 - _count*(CONST_HEIGHT+CONST_SPACE_HEIGHT) - CONST_SPACE_HEIGHT)/2);
