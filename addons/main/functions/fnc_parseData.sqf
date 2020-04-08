@@ -44,7 +44,7 @@ private _data = [];
             _d = ctrlText _ctrl;
         };
         case ("SIDE"): {
-            _d = _ctrl getVariable [QGVAR(Side), sideUnknown];
+            _d = _ctrl getVariable [QGVAR(SelectedSide), sideUnknown];
         };
         default {
             _d = ctrlText _ctrl;

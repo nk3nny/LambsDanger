@@ -250,11 +250,11 @@ private _fnc_AddSideSelector = {
     #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa"]
     #define __SIDES_LOC__ ["STR_A3_CfgGroups_West0", "STR_A3_CfgGroups_East0", "STR_A3_CfgGroups_Indep0", str civilian, str sideEmpty, str sideLogic] /*TODO: find stringtable Entrys*/
 
-    params ["_text", "", "_sides", "_tooltip", ["_default", 0]];
+    params ["_text", "", "_sides", "_tooltip", ["_default", sideUnknown]];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    private _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -281,26 +281,32 @@ private _fnc_AddSideSelector = {
         _button ctrlAddEventHandler ["MouseButtonUp", {
             params ["_ctrl"];
             private _buttons = _ctrl getVariable [QGVAR(Controls), controlNull];
-            (_button select 0) setVariable [QGVAR(SelectedSide), _ctrl getVariable [QGVAR(Side), sideUnknown]];
+            (_buttons select 0) setVariable [QGVAR(SelectedSide), _ctrl getVariable [QGVAR(Side), sideUnknown]];
             {
-                _x ctrlSetBackgroundColor [0, 0, 0, 0];
+                _x ctrlSetTextColor [1, 1, 1, 0.25];
             } forEach _buttons;
-            _ctrl ctrlSetBackgroundColor BACKGROUND_RGBA;
+            _ctrl ctrlSetTextColor [1, 1, 1, 1];
+            _ctrl ctrlCommit 0;
         }];
         _button setVariable [QGVAR(Side), _side];
+        _button ctrlSetTextColor [1, 1, 1, 0.25];
         _button ctrlCommit 0;
         _button;
     };
 
     private _buttons = [];
     private _count = count _sides;
-    private _px = PX(((CONST_WIDTH/2)/_count)-(CONST_SPACE_HEIGHT*_count));
+    private _margin = PX((CONST_WIDTH/2 - _count*(CONST_HEIGHT+CONST_SPACE_HEIGHT) - CONST_SPACE_HEIGHT)/2);
+    private _xoffset = PX(CONST_HEIGHT+CONST_SPACE_HEIGHT);
+    private _xpos = _basePositionX + PX(CONST_WIDTH/2) + _margin;
     {
         _x params ["_side", ["_tooltip", "", [""]]];
-        private _b = [_tooltip, _side, [_basePositionX + PX(CONST_WIDTH/2) + (_px * (_forEachIndex + 1)), _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)]] call _fnc_CreateButton; //TODO: Fix X Position
+        private _b = [_tooltip, _side, [_xpos, _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)]] call _fnc_CreateButton;
+        _xpos = _xpos + _xoffset;
         _buttons pushback _b;
-        if (_default == _forEachIndex) then {
+        if (_default == _side) then {
             (_buttons select 0) setVariable [QGVAR(SelectedSide), _side];
+            _b ctrlSetTextColor [1, 1, 1, 1];
         };
     } forEach _sides;
 
