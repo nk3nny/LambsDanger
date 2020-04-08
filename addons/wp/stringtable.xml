@@ -243,7 +243,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
-            <German>Task Schleichen</German>
+            <German>Aufgabe Schleichen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -279,24 +279,31 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
+            <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
+            <German>Aufgabe Jagen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
             <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
+            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtemGebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
+            <German>Gruppe als Mittelpunkt benutzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_ToolTip">
             <English>The hunting group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <German>Die jagende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
             <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -304,6 +311,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
             <English>Radius</English>
@@ -311,24 +319,31 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_ToolTip">
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
+            <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
+            <German>Aufgabe Hetzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
             <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
+            <German>Aufgabe Hetzen lässt die Einheit aggressiv auf Feinde in dem durch die Eden Attribute festgelegtem Gebiet losstürmen. Die Einheit wird sich aggressiv bewegen und meistens Deckung und Niederhaltung ignorieren.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler. Schalten Sie die Einheiten-FSM ab, um einen wirklich furchteinflößenden Feind zu erhalten.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use group as center</English>
+            <German>Gruppe als Mittelpunkt verwenden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_ToolTip">
             <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
             <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -336,6 +351,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
             <English>Radius</English>
@@ -343,12 +359,15 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
+            <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
+            <German>Automisches Registrieren von Artillerie aktivieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_ToolTip">
             <English>Automatically adds artillery already present in the mission to Side</English>
+            <German>Fügt Artillerie die in der Mission vorhanden ist automatisch zur Seite hinzu.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Self">
             <English>Self</English>
@@ -360,6 +379,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Groups_ToolTip">
             <English>Select which unit script applies to.\nList is sorted by distance</English>
+            <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Centers_DisplayName">
             <English>Center</English>
@@ -367,10 +387,11 @@
         </Key>
         <Key ID="STR_Lambs_WP_Centers_ToolTip">
             <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
+            <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Random">
             <English>Random</English>
-            <German>Willkürlich</German>
+            <German>Zufällig</German>
         </Key>
         <Key ID="STR_Lambs_WP_All">
             <English>All</English>
