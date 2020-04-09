@@ -45,8 +45,8 @@ class CfgSettings {
         class Versioning {
             class ADDON {
                 class dependencies {
-                    //ACE will hard exit if this is missing
-                    CBA[] = {"cba_main", {3,14,0}, "(true)"};
+                    // Lambs will hard exit if this is missing
+                    CBA[] = {"cba_main", {3,15,0}, "(true)"};
                 };
             };
         };

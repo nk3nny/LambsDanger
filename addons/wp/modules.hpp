@@ -150,6 +150,15 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
+        class GVAR(Teleport): Checkbox {
+            displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);  // Strings and code lifted directly out of taskGarrison -- do we really need extra string entries for this? Might even make it generic -nkenny
+            tooltip = CSTRING(Module_TaskCamp_Teleport_Tooltip);
+            property = QGVAR(Teleport);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
         class ModuleDescription: ModuleDescription {};
     };
 

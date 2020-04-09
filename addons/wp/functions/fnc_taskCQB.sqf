@@ -13,12 +13,14 @@
  * 1: Position targeted <ARRAY>
  * 2: Radius of search, default 50 <NUMBER>
  * 3: Delay of cycle, default 21 seconds <NUMBER>
+ * 4: Area the AI Camps in, default [] <ARRAY>
+ * 5: Is Called for Waypoint, default false <BOOL>
  *
  * Return Value:
  * none
  *
  * Example:
- * [bob, getPos angryJoe, 50] call lambs_wp_fnc_taskCQB;
+ * [bob, getPos angryJoe, 50] spawn lambs_wp_fnc_taskCQB;
  *
  * Public: No
 */
@@ -184,7 +186,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _wPos = _pos call EFUNC(main,getPos);
+    private _wPos = _pos call CBA_fnc_getPos;
 
     // find building
     private _building = [_wPos, _radius, _group, _area] call _fnc_find;

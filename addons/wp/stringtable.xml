@@ -3,309 +3,417 @@
     <Package name="WP">
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_DisplayName">
             <English>Register as LAMBS artillery</English>
+            <German>Als LAMBS Artillerie registrieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_ToolTip">
             <English>Vehicle will be automatically registered as available artillery for dynamic strikes</English>
+            <German>Das Fahrzeug wird automatisch als verfügbare Artillerie für dynamische Angriffe registriert.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Target_DisplayName">
             <English>Dynamic Target</English>
+            <German>Dynamisches Ziel</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_DisplayName">
             <English>Task Artillery</English>
+            <German>Aufgabe Artillerie</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ModuleDescription">
             <English>This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance</English>
+            <German>Diese Position wird durch die erste, verfügbare Artillerie der gegebenen Seite anvisiert. Die Artillerie muss für die Seite registriert und in Reichweite sein.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
             <English>Side</English>
+            <German>Seite</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip">
             <English>Which side is calling for artillery</English>
+            <German>Die Seite die die Artillerie ruft.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName">
             <English>Main Salvo</English>
+            <German>Hauptsalve</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
             <English>Number of rounds in the main salvo</English>
+            <German>Anzahl an Schüssen der Hauptsalve.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
             <English>Spread</English>
+            <German>Streuung</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
             <English>Default dispersion of the main salvo</English>
+            <German>Standard Streuung der Hauptsalve.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName">
             <English>Skip adjusting rounds</English>
+            <German>Anpassen der Schüsse überspringen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
+            <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
+            <German>Artillerie-Ziel erstellt für %1</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
             <English>Task Artillery Register</English>
+            <German>Aufgabe Artillerie-Register</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ModuleDescription">
             <English>Register units to that sides artillery pool.</English>
+            <German>Registriere Einheiten zum Artillerie-Pool dieser Seite hinzugefügt.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded">
             <English>Units have been added to Artillery Pool</English>
+            <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded">
             <English>No Units have been added to Artillery Pool</English>
+            <German>Keine Einheiten wurden zum Artillerie-Pool dieser Seite hinzugefügt.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
             <English>Task Assault/Retreat</English>
+            <German>Aufgabe Angriff/Rückzug</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
+            <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
             <English>Unit is fleeing</English>
+            <German>Einheit flieht</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
             <English>Enable this to make the unit retreat and ignore enemies</English>
+            <German>Aktiviere diese Option um die Einheit zum Rückzug zu zwingen. Feindliche Einheiten werden beim Rückzug ignoriert.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_DisplayName">
             <English>Remove module on Start-Up</English>
+            <German>Entferne das Modul beim Start</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
             <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
+            <German>Entfernt das Modul beim Start.\n Wenn nicht aktiviert ist es möglich das Module zu verschieben um den Zielort dynamisch anzupassen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
+            <German>Abschlussradius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip">
             <English>Units within this many meters will revert to regular behavior</English>
+            <German>Einheiten innerhalb dieses Radius werden zu ihrem regulären Verhalten zurückkehren.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName">
             <English>Script interval</English>
+            <German>Skript-Interval</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip">
             <English>The cycle time of the script</English>
+            <German>Die Zykluszeit des Skripts.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
             <English>Task Camp</English>
+            <German>Aufgabe Lager</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ModuleDescription">
             <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.&lt;br/&gt;Set area in 3DEN.</English>
+            <German>Durch Aufgabe Lager sammeln sich Einheiten um einen Punkt, typischerweise ein Lagerplatz,  herum. Manche Einheiten splittern sich von der Gruppe ab um stationiäe Geschütze zu bemannen, Häuser zu besetzen oder zu patroullieren.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
+            <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
+            <English>Teleport units</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_ToolTip">
+            <English>Teleport units instantly to position</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
+            <German>Aufgabe CQB</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_DisplayName">
             <English>Script interval</English>
+            <German>Skript-Interval</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds</English>
+            <German>Die Zykluszeit des Skripts in Sekunden. Eine höherer Wert sorgt dafür das Gebäude vorsichtiger von Einheiten durchsucht werden.\nStandardwert ist 21 Sekunden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_DisplayName">
             <English>Remove Dynamic center</English>
+            <German>Dynamischen Mittelpunkt entfernen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_Tooltip">
             <English>With the dynamic center present, it is possible to move the center point of the building search pattern</English>
+            <German>Wenn der dynamische Mittelpunkt vorhanden ist, kann der Mittelpunkt für das Gebäudesuchmuster verschoben werden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_ToolTip">
             <English>Max distance houses will be searched</English>
+            <German>Maximale Distanz in der Häuser durchsucht werden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_ModuleDescription">
             <English>Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.&lt;br/&gt;&lt;br/&gt;In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.</English>
+            <German>Die Aufgabe CQB lässt Einheiten Gebäude innerhalb des Gebietes durchsuchen. Die Modulgröße in Eden Editor kann dazu verwendet werden das Suchgebiet zu verändern. Das Modul kann verschoben werden um das Suchgebiet zu verschieben.&lt;br/&gt;&lt;br/&gt;In der Regel funktioniert das Modul am besten mit einem kleinen Einsatzgebiet. Es wird empfohlen mehrere Module und Wegpunkte zusammenzuschalten, Gruppen der selben Seite teilen Informationen über durchsuchte Gebäude.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
             <English>Task Garrison</English>
+            <German>Aufgabe Besetzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_DisplayName">
             <English>Teleport units</English>
+            <German>Einheiten teleportieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_ToolTip">
             <English>Teleport units instantly to position</English>
+            <German>Teleportiert Einheiten sofort zur Position</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_DisplayName">
             <English>Sort building positions by height</English>
+            <German>Gebäudepositionen nach Höhe sortieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_ToolTip">
             <English>Sort building positions by height. Units will prefer positions on higher in buildings</English>
+            <German>Gebäudepositionen nach Höhe sortieren. Einheiten bevorzugen höhergelegene Position in Gebäuden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
             <English>Distance buildings are occupied</English>
+            <German>Distanz in der Gebäude besetzt werden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_DisplayName">
             <English>Exit Trigger</English>
+            <German>Trigger verlassen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
+            <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
             <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
+            <German>Task Besetzen lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, Stellung in Häusern beziehen und Geschütze bemannen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
+            <German>Aufgabe Patrouillieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName">
             <English>Waypoints</English>
+            <German>Wegpunkte</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_ToolTip">
             <English>Number of waypoints created</English>
+            <German>Anzahl an erstellen Wegpunkten</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
             <English>Dynamic patrol pattern</English>
+            <German>Dynamisches Patrouillienmuster</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_ToolTip">
             <English>The unit will generate a new patrol pattern once one patrol cycle is complete</English>
+            <German>Die Einheiten erstellen ein neues Patroullienmuster, sobald das Alte abgeschlossen wurde.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName">
             <English>Range</English>
+            <German>Reichweite</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_ToolTip">
             <English>Max distance between waypoints</English>
+            <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
             <English>Task Patrol makes the unit patrol within the area set by 3DEN attributes.</English>
+            <German>Task Patroullie lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, patrouillieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
             <English>Task Reset</English>
+            <German>Aufgabe Zurücksetzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
             <English>This module resets all custom LAMBS scripts running on the unit</English>
+            <German>Dieses Modul setzt alle benutzerdefinierten LAMBS Skripte zurück die für diese Einheit laufen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
+            <German>Aufgabe Schleichen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
             <English>Use group as center</English>
+            <German>Gruppe als Mittelpunkt benutzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_ToolTip">
             <English>The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <German>Die schleichende Gruppe wird den Gruppenführer als Mittelpunkt für das Suchmuster verwenden. Das Ausschalten sorgt dafür, dass die Einheiten die Modulposition als Mittelpunkt verwenden, dies macht die Gruppe defensiver.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
+            <German>Gruppe visiert nur Spieler an.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_ToolTip">
             <English>The creeping group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <German>Die schleichende Gruppe visiert nur Spieler an. Durch Ausschalten visiert die Gruppe alle feindlichen Einheiten innerhalb der Reichweite an.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_DisplayName">
             <English>Script interval</English>
+            <German>Skript-Interval</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
+            <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_ToolTip">
             <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
+            <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
+            <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
+            <German>Aufgabe Jagen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
             <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
+            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
+            <German>Gruppe als Mittelpunkt benutzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_ToolTip">
             <English>The hunting group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <German>Die jagende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
             <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
             <English>Script interval</English>
+            <German>Skript-Interval</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_ToolTip">
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
+            <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
+            <German>Aufgabe Hetzen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
             <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
+            <German>Aufgabe Hetzen lässt die Einheit aggressiv auf Feinde in dem durch die Eden Attribute festgelegtem Gebiet losstürmen. Die Einheit wird sich aggressiv bewegen und meistens Deckung und Niederhaltung ignorieren.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler. Schalten Sie die Einheiten-FSM ab, um einen wirklich furchteinflößenden Feind zu erhalten.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use group as center</English>
+            <German>Gruppe als Mittelpunkt verwenden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_ToolTip">
             <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
             <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_DisplayName">
             <English>Script interval</English>
+            <German>Skript-Interval</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
             <English>Radius</English>
+            <German>Radius</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
+            <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
+            <German>Automisches Registrieren von Artillerie aktivieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_ToolTip">
             <English>Automatically adds artillery already present in the mission to Side</English>
+            <German>Fügt Artillerie die in der Mission vorhanden ist automatisch zur Seite hinzu.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Self">
             <English>Self</English>
+            <German>Selber</German>
         </Key>
         <Key ID="STR_Lambs_WP_Groups_DisplayName">
             <English>Groups</English>
+            <German>Gruppen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Groups_ToolTip">
             <English>Select which unit script applies to.\nList is sorted by distance</English>
+            <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Centers_DisplayName">
             <English>Center</English>
+            <German>Mittelpunkt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Centers_ToolTip">
             <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
+            <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Random">
             <English>Random</English>
+            <German>Zufällig</German>
         </Key>
         <Key ID="STR_Lambs_WP_All">
             <English>All</English>
+            <German>Alle</German>
         </Key>
         <Key ID="STR_Lambs_WP_FiredNear">
             <English>Fired Near</English>
+            <German>In der Nähe geschossen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Fired">
             <English>Fired</English>
+            <German>Geschossen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Hit">
             <English>Hit</English>
+            <German>Getroffen</German>
         </Key>
     </Package>
 </Project>
