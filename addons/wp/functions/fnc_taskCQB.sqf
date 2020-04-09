@@ -186,7 +186,7 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
     // get wp position
-    private _wPos = _pos call EFUNC(main,getPos);
+    private _wPos = _pos call CBA_fnc_getPos;
 
     // find building
     private _building = [_wPos, _radius, _group, _area] call _fnc_find;

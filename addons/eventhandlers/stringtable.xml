@@ -3,18 +3,23 @@
     <Package name="Eventhandlers">
         <Key ID="STR_Lambs_Eventhandlers_Settings_Cat">
             <English>Explosion</English>
+            <German>Explosion</German>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_DisplayName">
             <English>Enable Explosion Eventhandler</English>
+            <German>Explosionsereignis-Handler aktivieren</German>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_ToolTip">
             <English>Toggle AI Reactions to nearby explosions</English>
+            <German>KI-Reaktionen auf umliegende Explosionen umschalten</German>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
-            <English>Explosion EH reset Time</English>
+            <English>Explosion Eventhandler reset time</English>
+            <German>Explosionsereignis-Handler Reset-Timer</German>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_ToolTip">
             <English>Configures explosions reset time.</English>
+            <German>Legt den Reset-Timer für den Explosionsereignis-Handler fest.</German>
         </Key>
     </Package>
 </Project>

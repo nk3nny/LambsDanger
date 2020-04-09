@@ -3,16 +3,19 @@
     <Package name="Main">
         <Key ID="STR_Lambs_Main_NoUnitSelected">
             <English>No Unit Selected</English>
+            <German>Keine Einheit ausgewählt</German>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
+            <German>Spieler sind keine gültige Auswahl</German>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
+            <German>Keine Gruppe ausgewählt</German>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
-            <German>LAMBS Danger Dev Team</German>
+            <German>LAMBS Danger Entwicklerteam</German>
             <Polish>LAMBS Danger Dev Team</Polish>
             <Portuguese>LAMBS Danger Dev Team</Portuguese>
             <Russian>LAMBS Danger Dev Team</Russian>
