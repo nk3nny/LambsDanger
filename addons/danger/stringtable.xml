@@ -67,11 +67,11 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup">
             <English>Disable suppression from player group</English>
-            <German>Niederhaltung für Spielergruppe deaktivieren</German>
+            <German>Unterdrückungsfeuer für Spielergruppe deaktivieren</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup_ToolTip">
             <English>Toggle autonomous suppression for units in player group</English>
-            <German>Autonome Niederhaltung für Einheiten der Spielergruppe umschalten</German>
+            <German>Autonomes Unterdrückungsfeuer für Einheiten der Spielergruppe umschalten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
