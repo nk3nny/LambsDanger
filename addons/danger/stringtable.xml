@@ -95,7 +95,7 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
             <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
-            <German>Schaltet das verdeckte Bewegen von KI für Einheiten die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
+            <German>Schaltet das verdeckte Bewegen von KI für Einheiten, die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
@@ -239,11 +239,11 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DebugCiv">
             <English>Debug Civ</English>
-            <German>Debug Civ</German>
+            <German>Debug Zivilisten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
-            <German>Zeigt FSM Debug-Meldungen für Civilisten</German>
+            <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DebugDraw">
             <English>Debug Draw</English>

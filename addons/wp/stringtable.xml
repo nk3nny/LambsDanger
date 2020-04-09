@@ -67,7 +67,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded">
             <English>Units have been added to Artillery Pool</English>
-            <German>EinheitenAufgabe Angriff/Rückzug</German>
+            <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded">
             <English>No Units have been added to Artillery Pool</English>
@@ -267,7 +267,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
-            <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheite weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
+            <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
             <English>Radius</English>
@@ -287,7 +287,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
             <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
-            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtemGebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
+            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -351,7 +351,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
-            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
             <English>Radius</English>
