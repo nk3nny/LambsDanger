@@ -34,7 +34,7 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), 200],
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [0.5, 1], 200],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), 3],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
                     ], {
@@ -61,8 +61,8 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), 200],
-                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), 3],
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [0.5, 1], 200],
+                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [1, 1], 3],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
                     ], {
                         params ["_data", "_args"];

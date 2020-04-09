@@ -36,9 +36,7 @@ private _data = [];
         case ("DROPDOWN"): {
             _d = lbCurSel _ctrl;
         };
-        case ("SLIDER"): {
-            _d = sliderPosition _ctrl;
-        };
+        case ("SLIDER");
         case ("TEXT");
         case ("EDIT"): {
             _d = ctrlText _ctrl;

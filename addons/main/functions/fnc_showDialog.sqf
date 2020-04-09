@@ -241,7 +241,7 @@ private _fnc_AddSlider = {
 
     _slider ctrlCommit 0;
     _textField ctrlCommit 0;
-    _slider;
+    _textField;
     #undef __SLIDER_EDIT_SIZE__
 };
 

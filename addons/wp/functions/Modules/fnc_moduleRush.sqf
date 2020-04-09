@@ -35,8 +35,8 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskRush_DisplayName),
                     [
-                        [LSTRING(Module_TaskRush_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskRush_Radius_ToolTip), 1000],
-                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskRush_CycleTime_ToolTip), 4],
+                        [LSTRING(Module_TaskRush_Radius_DisplayName), "NUMBER", LSTRING(Module_TaskRush_Radius_ToolTip), [25,5000], [0.5, 1], 1000],
+                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskRush_CycleTime_ToolTip), [1, 300], [0.5, 1], 4],
                         [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), true],
                         [LSTRING(Module_TaskRush_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayersOnly_ToolTip), true]
 
