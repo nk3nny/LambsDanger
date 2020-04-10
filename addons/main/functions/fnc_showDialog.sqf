@@ -212,19 +212,18 @@ private _fnc_AddSlider = {
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
     _slider sliderSetPosition _default;
-    _slider setVariable [QGVAR(CacheName), _cacheName];
 
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
     _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
 
     _slider setVariable [QGVAR(TextField), _textField];
     _textField setVariable [QGVAR(Slider), _slider];
-    _textField ctrlSetText str _default;
+    _textField ctrlSetText (str _default);
 
     _slider ctrlAddEventHandler ["SliderPosChanged", {
         params ["_control", "_newValue"];
         private _textField = _control getVariable [QGVAR(TextField), controlNull];
-        _textField ctrlSetText str _newValue;
+        _textField ctrlSetText (str _newValue);
         _textField ctrlCommit 0;
     }];
 
@@ -239,6 +238,7 @@ private _fnc_AddSlider = {
         _slider sliderSetPosition parseNumber (ctrlText _control);
     }];
 
+    _textField setVariable [QGVAR(CacheName), _cacheName];
     _slider ctrlCommit 0;
     _textField ctrlCommit 0;
     _textField;
