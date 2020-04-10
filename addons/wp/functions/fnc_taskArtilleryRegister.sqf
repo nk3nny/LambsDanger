@@ -17,12 +17,13 @@
 
 // init
 params ["_group"];
-private _artillery = [];
 
 if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 // sort grp
 if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = (group _group); };
+
+private _artillery = [];
 
 // find all vehicles
 {
@@ -35,7 +36,7 @@ private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" 
 if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global
-[QGVAR(RegisterArillery), _artillery] call CBA_fnc_serverEvent;
+[QGVAR(RegisterArtillery), _artillery] call CBA_fnc_serverEvent;
 
 // debug
 if (EGVAR(danger,debug_functions)) then {

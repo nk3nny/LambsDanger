@@ -9,15 +9,14 @@ if (isServer) then {
     publicVariable QGVAR(SideArtilleryHash);
 };
 
-[QGVAR(RegisterArillery), {
-    params ["_guns"];
-    private _artillery = [GVAR(SideArtilleryHash), side (_guns select 0)] call CBA_fnc_hashGet;
-    _artillery append _guns;
-    GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_guns select 0), _artillery] call CBA_fnc_hashSet;
+[QGVAR(RegisterArtillery), {
+    private _artillery = [GVAR(SideArtilleryHash), side (_this select 0)] call CBA_fnc_hashGet;
+    _artillery append _this;
+    GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_this select 0), _artillery] call CBA_fnc_hashSet;
     publicVariable QGVAR(SideArtilleryHash);
 }] call CBA_fnc_addEventhandler;
 
-[QGVAR(RequestArillery), {
+[QGVAR(RequestArtillery), {
     params ["_side", "_pos", "_caller", "_rounds", "_accuracy", "_skipCheckrounds"];
     private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
     _artillery = _artillery select {
@@ -30,9 +29,9 @@ if (isServer) then {
     GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), _side, _artillery] call CBA_fnc_hashSet;
     publicVariable QGVAR(SideArtilleryHash);
 
-    [QGVAR(FireArillery), [_gun, _pos, _caller, _rounds, _accuracy, _skipCheckrounds]] call CBA_fnc_targetEvent
+    [QGVAR(FireArtillery), [_gun, _pos, _caller, _rounds, _accuracy, _skipCheckrounds]] call CBA_fnc_targetEvent
 }] call CBA_fnc_addEventhandler;
 
-[QGVAR(FireArillery), {
+[QGVAR(FireArtillery), {
     _this spawn FUNC(doArtillery);
 }] call CBA_fnc_addEventhandler;

@@ -21,9 +21,9 @@
 */
 
 if ((_this select 0) isEqualType objNull) then {
-    [QGVAR(FireArillery), _this, (_this select 0)] call CBA_fnc_targetEvent;
+    [QGVAR(FireArtillery), _this, (_this select 0)] call CBA_fnc_targetEvent;
 } else {
-    [QGVAR(RequestArillery), _this] call CBA_fnc_serverEvent;
+    [QGVAR(RequestArtillery), _this] call CBA_fnc_serverEvent;
 };
 
 // end
