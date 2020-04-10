@@ -34,12 +34,7 @@ switch (_mode) do {
             };
             if (_error == "") then {
                 private _success = [_group] call FUNC(taskArtilleryRegister);
-                if (_success) then {
-                    [objNull, LSTRING(Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded)] call BIS_fnc_showCuratorFeedbackMessage;
-                } else {
-                    [objNull, LSTRING(Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded)] call BIS_fnc_showCuratorFeedbackMessage;
-                };
-
+                [objNull, localize [LSTRING(Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded), LSTRING(Module_TaskArtilleryRegister_ZeusNotification_UnitAdded)] select _success] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             } else {
                 [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
