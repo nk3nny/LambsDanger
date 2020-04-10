@@ -185,7 +185,8 @@ private _dir = random 360;
     }, {
         params ["_unit", "_target", "_center", "_anim"];
         if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
-        [_unit, _anim] remoteExec ["switchMove", 0];
+        [_unit, _anim, 2] call EFUNC(main,doAnimation);
+
         _unit disableAI "ANIM";
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);
@@ -195,7 +196,8 @@ private _dir = random 360;
                 [_x, "ANIM"] remoteExec ["enableAI", _x];
                 [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            [_unit, (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""))] remoteExec ["playMoveNow", _unit];
+            [_unit, "", 2] call EFUNC(main,doAnimation);
+
             _unit removeEventHandler ["Hit", _thisEventHandler];
         }];
         _unit addEventHandler ["FiredNear", {
@@ -204,7 +206,8 @@ private _dir = random 360;
                 [_x, "ANIM"] remoteExec ["enableAI", _x];
                 [_x, "PATH"] remoteExec ["enableAI", _x];
             } foreach units _unit;
-            [_unit, (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""))] remoteExec ["playMoveNow", _unit];
+            [_unit, "", 2] call EFUNC(main,doAnimation);
+
             _unit removeEventHandler ["FiredNear", _thisEventHandler];
         }];
     }, [_x, _pos2, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
@@ -218,7 +221,7 @@ _wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
-            _x playMoveNow (['AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon', 'AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon'] select (primaryWeapon _x isEqualTo ''));
+            [_x, '', 2] call lambs_main_fnc_doAnimation;
         } foreach thisList;
     "
 ];

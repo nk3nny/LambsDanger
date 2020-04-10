@@ -33,7 +33,7 @@ _display displayAddEventHandler ["KeyDown",  {
     params ["_display", "_dikCode"];
     private _handled = false;
     if (_dikCode == DIK_ESCAPE) then {
-        (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On Close Handler
+        (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnAbort), {}]); // Call On OnAbort Handler
         closeDialog 2;
         _handled = true;
     };
@@ -48,7 +48,7 @@ _display displayAddEventHandler ["KeyDown",  {
 
 _display displayAddEventHandler ["Unload",  {
     params ["_display"];
-    (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnClose), {}]); // Call On Close Handler
+    (_display getVariable [QGVAR(Params), []]) call (_display getVariable [QGVAR(OnUnload), {}]); // Call On OnUnload Handler
 }];
 
 private _height = ((count _data) + 1) * (PY(CONST_HEIGHT + CONST_SPACE_HEIGHT));
@@ -81,12 +81,37 @@ private _fnc_CreateLabel = {
         _tooltip = localize _tooltip;
     };
     private _label = _display ctrlCreate ["RscText", -1, _globalGroup];
-    _label ctrlSetPosition [_basePositionX + PY(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _label ctrlSetPosition [_basePositionX + PX(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH / 2), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _label ctrlSetFontHeight PY(CONST_HEIGHT/2);
     _label ctrlSetText _text;
     _label ctrlSetTooltip _tooltip;
     _label ctrlCommit 0;
     _label;
+};
+
+private _fnc_DescriptionField = {
+    params [["_text", "", ["", text "",[]]]];
+    if (_text isEqualType []) then {
+        {
+            if (_x isEqualType "" && {isLocalized _x}) then {
+                _text set [_forEachIndex, localize _x];
+            };
+        } forEach _text;
+        _text = formatText _text;
+    } else {
+        if (_text isEqualType "" && {isLocalized _text}) then {
+            _text = localize _text;
+        };
+    };
+    if (_text isEqualType "") then {
+        _text = parseText _text;
+    };
+    private _textField = _display ctrlCreate ["RscStructuredText", -1, _globalGroup];
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_SPACE_HEIGHT), _basePositionY + PY(CONST_SPACE_HEIGHT/2), PX(CONST_WIDTH - CONST_SPACE_HEIGHT * 2), PY(CONST_HEIGHT - (CONST_SPACE_HEIGHT/2))];
+    _textField ctrlSetStructuredText _text;
+    _textField ctrlCommit 0;
+    _textField;
 };
 
 private _fnc_AddTextField = {
@@ -167,6 +192,7 @@ private _fnc_AddDropDown = {
 };
 
 private _fnc_AddSlider = {
+    #define __SLIDER_EDIT_SIZE__ 16
     params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
@@ -180,16 +206,112 @@ private _fnc_AddSlider = {
     };
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
-
     private _slider = _display ctrlCreate ["ctrlXSliderH", -1, _globalGroup];
-    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT * __SLIDER_EDIT_SIZE__), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _slider ctrlSetTooltip _tooltip;
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
     _slider sliderSetPosition _default;
-    _slider setVariable [QGVAR(CacheName), _cacheName];
+
+    private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
+    _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+
+    _slider setVariable [QGVAR(TextField), _textField];
+    _textField setVariable [QGVAR(Slider), _slider];
+    _textField ctrlSetText (str _default);
+
+    _slider ctrlAddEventHandler ["SliderPosChanged", {
+        params ["_control", "_newValue"];
+        private _textField = _control getVariable [QGVAR(TextField), controlNull];
+        _textField ctrlSetText (str _newValue);
+        _textField ctrlCommit 0;
+    }];
+
+    _textField ctrlAddEventHandler ["KeyUp", {
+        params ["_control"];
+        private _slider = _control getVariable [QGVAR(Slider), controlNull];
+        _slider sliderSetPosition parseNumber (ctrlText _control);
+    }];
+    _textField ctrlAddEventHandler ["KillFocus", {
+        params ["_control"];
+        private _slider = _control getVariable [QGVAR(Slider), controlNull];
+        _slider sliderSetPosition parseNumber (ctrlText _control);
+    }];
+
+    _textField setVariable [QGVAR(CacheName), _cacheName];
     _slider ctrlCommit 0;
-    _slider;
+    _textField ctrlCommit 0;
+    _textField;
+    #undef __SLIDER_EDIT_SIZE__
+};
+
+private _fnc_AddSideSelector = {
+    #define __SIDES__ [west, east, independent, civilian, sideEmpty, sideLogic, sideUnknown]
+    #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\submode_logic_logic_ca.paa"]
+
+    params ["_text", "", "_tooltip", "_sides", ["_default", sideUnknown]];
+    _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
+
+    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+
+    [_text, _tooltip] call _fnc_CreateLabel;
+
+    private _fnc_CreateButton = {
+        params ["_tooltip", "_side", "_position"];
+        private _button = _display ctrlCreate ["RscActivePictureKeepAspect", -1, _globalGroup];
+        _button ctrlSetPosition _position;
+        private _index = __SIDES__ find _side;
+        if (_tooltip == "") then {
+            _tooltip = [_side] call BIS_fnc_sideName;
+        };
+        if (isLocalized _tooltip) then {
+            _tooltip = localize _tooltip;
+        };
+        if (_index == -1) then {
+            _index = 5; // if Side is not known use sideLogic Icon
+        };
+        _button ctrlSetText (__SIDES_ICONS__ select _index);
+        _button ctrlSetTooltip _tooltip;
+        _button ctrlAddEventHandler ["MouseButtonUp", {
+            params ["_ctrl"];
+            private _buttons = _ctrl getVariable [QGVAR(Controls), controlNull];
+            (_buttons select 0) setVariable [QGVAR(SelectedSide), _ctrl getVariable [QGVAR(Side), sideUnknown]];
+            {
+                _x ctrlSetTextColor [1, 1, 1, 0.25];
+            } forEach _buttons;
+            _ctrl ctrlSetTextColor [1, 1, 1, 1];
+            _ctrl ctrlCommit 0;
+        }];
+        _button setVariable [QGVAR(Side), _side];
+        _button ctrlSetTextColor [1, 1, 1, 0.25];
+        _button ctrlCommit 0;
+        _button;
+    };
+    _sides = _sides arrayIntersect _sides;
+    private _buttons = [];
+    private _count = count _sides;
+    private _margin = PX((CONST_WIDTH/2 - _count*(CONST_HEIGHT+CONST_SPACE_HEIGHT) - CONST_SPACE_HEIGHT)/2);
+    private _xoffset = PX(CONST_HEIGHT+CONST_SPACE_HEIGHT);
+    private _xpos = _basePositionX + PX(CONST_WIDTH/2) + _margin;
+    {
+        _x params ["_side", ["_tooltip", "", [""]]];
+        private _b = [_tooltip, _side, [_xpos, _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)]] call _fnc_CreateButton;
+        _xpos = _xpos + _xoffset;
+        _buttons pushback _b;
+        if (_default == _side) then {
+            (_buttons select 0) setVariable [QGVAR(SelectedSide), _side];
+            _b ctrlSetTextColor [1, 1, 1, 1];
+        };
+    } forEach _sides;
+
+    {
+        _x setVariable [QGVAR(Controls), _buttons];
+        _x setVariable [QGVAR(CacheName), _cacheName];
+    } forEach _buttons;
+    #undef __SIDES__
+    #undef __SIDES_ICONS__
+    _buttons select 0;
 };
 
 private _controls = [];
@@ -208,8 +330,23 @@ private _controls = [];
         case ("SLIDER"): {
             _controls pushBack [(_x call _fnc_AddSlider), _type];
         };
+        case ("NUMBER");
+        case ("INT");
+        case ("INTEGER");
+        case ("TEXT");
+        case ("EDIT"): {
+            _controls pushback [(_x call _fnc_AddTextField), _type];
+        };
+        case ("DESCRIPTION"): {
+            _x call _fnc_DescriptionField; // This Type does not generate any Data and will not be enterted into the return data
+        };
+        case ("SIDE"): {
+            _controls pushBack [(_x call _fnc_AddSideSelector), _type];
+        };
         default {
             _controls pushback [(_x call _fnc_AddTextField), _type];
+            hint format ["%1 type unknown %2", _type, _x];
+            // TYPE NOT FOUND
         };
     };
 } forEach _data;

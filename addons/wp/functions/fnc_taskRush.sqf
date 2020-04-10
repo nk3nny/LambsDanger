@@ -89,13 +89,12 @@ waitUntil {
     if (!isNull _target) then  {
         [_group, _target] call _fnc_rushOrders;
         if (EGVAR(danger,debug_functions)) then { format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2d _target)] call EFUNC(danger,debugLog); };
-        _cycle = (12 + random 8);
+        sleep _cycle;
     } else {
-        _cycle = 60;
+        sleep (_cycle * 4);
     };
 
-    // delay and end
-    sleep _cycle;
+    // end
     ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
 
 };

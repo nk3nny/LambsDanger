@@ -415,5 +415,8 @@
             <English>Hit</English>
             <German>Getroffen</German>
         </Key>
+        <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
+            <English>'%1' is only Posible if the Group is local</English>
+        </Key>
     </Package>
 </Project>

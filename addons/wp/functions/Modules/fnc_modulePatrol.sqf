@@ -34,14 +34,15 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), 200],
-                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), 3],
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [0.5, 1], 200],
+                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [1, 1], 3],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint"];
-                        [_groups select _groupIndex, getPos _logic, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
+                        private _group = _groups select _groupIndex;
+                        [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -61,18 +62,22 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Range_ToolTip), 200],
-                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "NUMBER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), 3],
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [0.5, 1], 200],
+                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [1, 1], 3],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
                         private _target = _targets select _targetIndex;
-                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] call FUNC(taskPatrol);
+                        if !(local _group) then {
+                            _target = getPos _target;
+                        };
+                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
                         if !(_logic isEqualTo _target) then {
                             deleteVehicle _logic;
-                        };                    }, {
+                        };
+                    }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
@@ -90,7 +95,7 @@ switch (_mode) do {
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), false];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), 4];
             {
-                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] call FUNC(taskPatrol);
+                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

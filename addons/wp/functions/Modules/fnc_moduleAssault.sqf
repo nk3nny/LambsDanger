@@ -35,14 +35,20 @@ switch (_mode) do {
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "NUMBER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), 15],
-                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), 3],
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [1, 2], 15],
+                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [0.5, 1], 3],
                         [LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip), false]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_retreat", "_threshold", "_cycle", "_deleteAfterStartup"];
-                        [_groups select _groupIndex, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        private _group = _groups select _groupIndex;
+                        if !((local _group) || _deleteAfterStartup) then {
+                            _deleteAfterStartup = true;
+                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
+                        };
+                        [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
+
                         if (_deleteAfterStartup) then {
                             deleteVehicle _logic;
                         };
@@ -62,14 +68,17 @@ switch (_mode) do {
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "NUMBER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), 15],
-                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "NUMBER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), 3]
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [1, 2], 15],
+                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [0.5, 1], 3]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_retreat", "_threshold", "_cycle"];
                         private _target = _targets select _targetIndex;
-                        [_group, _target, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        if !(local _group) then {
+                            _target = getPos _target;
+                        };
+                        [_group, _target, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
                         if !(_target isEqualTo _logic) then {
                             deleteVehicle _logic;
                         };
@@ -91,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
             private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
-                [_x, _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                [_x, _logic, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;
