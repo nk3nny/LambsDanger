@@ -41,7 +41,7 @@ switch (_mode) do {
                 deleteVehicle _logic;
             };
         } else {
-            private _groups = synchronizedObjects _logic apply {group _x};
+            private _groups = (synchronizedObjects _logic) apply {group _x};
 
             if (_groups isEqualTo []) then {
                 private _area = _logic getVariable ["objectarea", []];

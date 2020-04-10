@@ -31,7 +31,7 @@ if (isNull _caller) then {
     _caller = _gun;
 };
 
-[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call FUNC(eventCallback);
+[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(danger,eventCallback);
 
 // Gun and caller must be alive
 if (!canFire _gun || {!(_caller call EFUNC(danger,isAlive))}) exitWith {false};
