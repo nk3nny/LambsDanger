@@ -246,9 +246,6 @@ private _fnc_AddSlider = {
 };
 
 private _fnc_AddSideSelector = {
-    #define __SIDES__ [west, east, independent, civilian, sideEmpty, sideLogic, sideUnknown]
-    #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\submode_logic_logic_ca.paa"]
-
     params ["_text", "", "_tooltip", "_sides", "_default"];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
@@ -261,7 +258,7 @@ private _fnc_AddSideSelector = {
         params ["_tooltip", "_side", "_position"];
         private _button = _display ctrlCreate ["RscActivePictureKeepAspect", -1, _globalGroup];
         _button ctrlSetPosition _position;
-        private _index = __SIDES__ find _side;
+        private _index = [west, east, independent, civilian, sideEmpty, sideLogic, sideUnknown] find _side;
         if (_tooltip == "") then {
             _tooltip = [_side] call BIS_fnc_sideName;
         };
@@ -271,7 +268,7 @@ private _fnc_AddSideSelector = {
         if (_index == -1) then {
             _index = 5; // if Side is not known use sideLogic Icon
         };
-        _button ctrlSetText (__SIDES_ICONS__ select _index);
+        _button ctrlSetText (["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\submode_logic_logic_ca.paa"] select _index);
         _button ctrlSetTooltip _tooltip;
         _button ctrlAddEventHandler ["MouseButtonUp", {
             params ["_ctrl"];
@@ -312,8 +309,6 @@ private _fnc_AddSideSelector = {
         _x setVariable [QGVAR(Controls), _buttons];
         _x setVariable [QGVAR(CacheName), _cacheName];
     } forEach _buttons;
-    #undef __SIDES__
-    #undef __SIDES_ICONS__
     _buttons select 0;
 };
 
