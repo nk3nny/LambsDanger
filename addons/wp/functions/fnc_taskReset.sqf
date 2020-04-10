@@ -57,6 +57,7 @@ _group deleteGroupWhenEmpty true;
 
     // reset animations
     _x enableAI "ANIM";
+    [_x, "" , 2] call EFUNC(main,doAnimation);
     _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables

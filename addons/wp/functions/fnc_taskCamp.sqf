@@ -221,7 +221,7 @@ _wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
-            _x playMoveNow (['AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon', 'AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon'] select (primaryWeapon _x isEqualTo ''));
+            [_x, '', 2] call lambs_main_fnc_doAnimation;
         } foreach thisList;
     "
 ];
