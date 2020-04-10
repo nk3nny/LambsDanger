@@ -38,9 +38,7 @@ switch (_mode) do {
             if (_error isEqualTo "") then {
                 if (_group isEqualType objNull) then { _group = group _group; };
                 [objNull, format ["%1 reset", groupId _group]] call BIS_fnc_showCuratorFeedbackMessage;
-                [_group] call FUNC(taskReset);
-
-            // display error
+                [_group] remoteExecCall [QFUNC(taskRest), leader _group];
             } else {
                 [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
             };
@@ -51,7 +49,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
             {
-                [_x] call FUNC(taskReset);
+                [_x] remoteExecCall [QFUNC(taskReset), leader _x];
             } forEach _groups;
         };
     };

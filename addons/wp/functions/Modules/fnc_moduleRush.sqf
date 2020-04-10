@@ -44,11 +44,8 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly"];
-                        if (_movingCenter) then {
-                            [_group, _range, _cycle, nil, nil, _playerOnly] spawn FUNC(taskRush);
-                        } else {
-                            [_group, _range, _cycle, nil, getPos _logic, _playerOnly] spawn FUNC(taskRush);
-                        };
+                        private _args = [[_group, _range, _cycle, nil, getPos _logic, _playerOnly], [_group, _range, _cycle, nil, nil, _playerOnly]] select _movingCenter;
+                        _args remoteExec [QFUNC(taskRush), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -72,11 +69,8 @@ switch (_mode) do {
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
             private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
             {
-                if (_movingCenter) then {
-                    [_x, _range, _cycle, _area, nil, _playerOnly] spawn FUNC(taskRush);
-                } else {
-                    [_x, _range, _cycle, _area, getPos _logic, _playerOnly] spawn FUNC(taskRush);
-                };
+                private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
+                _args remoteExec [QFUNC(taskRush), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

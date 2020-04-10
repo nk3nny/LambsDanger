@@ -41,7 +41,8 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range"];
-                        [_groups select _groupIndex, getPos _logic, _range] call FUNC(taskCamp);
+                        private _group = _groups select _groupIndex;
+                        [_group, getPos _logic, _range] remoteExecCall [QFUNC(taskCamp), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -67,7 +68,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range"];
-                        [_group, getPos (_targets select _targetIndex), _range] call FUNC(taskCamp);
+                        [_group, getPos (_targets select _targetIndex), _range] remoteExecCall [QFUNC(taskCamp), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -87,7 +88,7 @@ switch (_mode) do {
             private _teleport = _logic getVariable [QGVAR(Teleport), false];
 
             {
-                [_x, getPos _logic, _range, _area, _teleport] call FUNC(taskCamp);
+                [_x, getPos _logic, _range, _area, _teleport] remoteExecCall [QFUNC(taskCamp), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };

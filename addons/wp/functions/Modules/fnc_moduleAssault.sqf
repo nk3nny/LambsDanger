@@ -42,7 +42,13 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_retreat", "_threshold", "_cycle", "_deleteAfterStartup"];
-                        [_groups select _groupIndex, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        private _group = _groups select _groupIndex;
+                        if !((local _group) || _deleteAfterStartup) then {
+                            _deleteAfterStartup = true;
+                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
+                        };
+                        [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
+
                         if (_deleteAfterStartup) then {
                             deleteVehicle _logic;
                         };
@@ -69,7 +75,10 @@ switch (_mode) do {
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_retreat", "_threshold", "_cycle"];
                         private _target = _targets select _targetIndex;
-                        [_group, _target, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                        if !(local _group) then {
+                            _target = getPos _target;
+                        };
+                        [_group, _target, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
                         if !(_target isEqualTo _logic) then {
                             deleteVehicle _logic;
                         };
@@ -91,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
             private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
-                [_x, _logic, _retreat, _threshold, _cycle, false] spawn FUNC(taskAssault);
+                [_x, _logic, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;
