@@ -24,6 +24,7 @@ private _data = [];
         case ("BOOL"): {
             _d = cbChecked _ctrl;
         };
+        case ("SLIDER");
         case ("NUMBER"): {
             _d = parseNumber (ctrlText _ctrl);
         };
@@ -36,11 +37,16 @@ private _data = [];
         case ("DROPDOWN"): {
             _d = lbCurSel _ctrl;
         };
-        case ("SLIDER"): {
-            _d = sliderPosition _ctrl;
+        case ("TEXT");
+        case ("EDIT"): {
+            _d = ctrlText _ctrl;
+        };
+        case ("SIDE"): {
+            _d = _ctrl getVariable [QGVAR(SelectedSide), sideUnknown];
         };
         default {
             _d = ctrlText _ctrl;
+            hint format ["%1 type unknown %2", _type, _x];
         };
     };
     private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];
