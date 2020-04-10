@@ -2,19 +2,18 @@
 ADDON = false;
 #include "settings.sqf"
 #include "XEH_PREP.hpp"
-ADDON = true;
 
 if (isServer) then {
     GVAR(SideArtilleryHash) = [[], []] call CBA_fnc_hashCreate;
     publicVariable QGVAR(SideArtilleryHash);
+    [QGVAR(RegisterArtillery), {
+        private _artillery = [GVAR(SideArtilleryHash), side (_this select 0)] call CBA_fnc_hashGet;
+        _artillery append _this;
+        _artillery = _artillery arrayIntersect _artillery;
+        GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_this select 0), _artillery] call CBA_fnc_hashSet;
+        publicVariable QGVAR(SideArtilleryHash);
+    }] call CBA_fnc_addEventhandler;
 };
-
-[QGVAR(RegisterArtillery), {
-    private _artillery = [GVAR(SideArtilleryHash), side (_this select 0)] call CBA_fnc_hashGet;
-    _artillery append _this;
-    GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_this select 0), _artillery] call CBA_fnc_hashSet;
-    publicVariable QGVAR(SideArtilleryHash);
-}] call CBA_fnc_addEventhandler;
 
 [QGVAR(RequestArtillery), {
     params ["_side", "_pos", "_caller", "_rounds", "_accuracy", "_skipCheckrounds"];
@@ -35,3 +34,5 @@ if (isServer) then {
 [QGVAR(FireArtillery), {
     _this spawn FUNC(doArtillery);
 }] call CBA_fnc_addEventhandler;
+
+ADDON = true;

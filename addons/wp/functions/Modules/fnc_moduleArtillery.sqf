@@ -59,7 +59,7 @@ switch (_mode) do {
             private _salvo = _logic getVariable [QGVAR(MainSalvo), 6];
             private _spread = _logic getVariable [QGVAR(Spread), 75];
             private _skipCheckround = _logic getVariable [QGVAR(SkipCheckRounds), false];
-            [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
+            [[west, east, independent] select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
 
             deleteVehicle _logic;
         };

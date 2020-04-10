@@ -249,7 +249,7 @@ private _fnc_AddSideSelector = {
     #define __SIDES__ [west, east, independent, civilian, sideEmpty, sideLogic, sideUnknown]
     #define __SIDES_ICONS__ ["a3\3den\Data\Displays\Display3DEN\PanelRight\side_west_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_east_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_guer_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_civ_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_empty_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\side_custom_ca.paa", "a3\3den\Data\Displays\Display3DEN\PanelRight\submode_logic_logic_ca.paa"]
 
-    params ["_text", "", "_tooltip", "_sides", ["_default", sideUnknown]];
+    params ["_text", "", "_tooltip", "_sides", "_default"];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
     private _cacheName = format ["lambs_%1_%2", _name, _text];
@@ -289,6 +289,9 @@ private _fnc_AddSideSelector = {
         _button;
     };
     _sides = _sides arrayIntersect _sides;
+    if (isNil "_default") then {
+        _default = _sides select 0;
+    };
     private _buttons = [];
     private _count = count _sides;
     private _margin = PX((CONST_WIDTH/2 - _count*(CONST_HEIGHT+CONST_SPACE_HEIGHT) - CONST_SPACE_HEIGHT)/2);
