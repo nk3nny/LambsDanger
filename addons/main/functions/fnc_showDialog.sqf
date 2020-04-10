@@ -207,7 +207,7 @@ private _fnc_AddSlider = {
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
     private _slider = _display ctrlCreate ["ctrlXSliderH", -1, _globalGroup];
-    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - CONST_SPACE_HEIGHT * __SLIDER_EDIT_SIZE__), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
+    _slider ctrlSetPosition [_basePositionX + PX(CONST_WIDTH/2), _basePositionY + PY(CONST_HEIGHT / 2), PX(CONST_WIDTH/2 - (CONST_SPACE_HEIGHT * __SLIDER_EDIT_SIZE__)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
     _slider ctrlSetTooltip _tooltip;
     _slider sliderSetRange _range;
     _slider sliderSetSpeed _speed;
