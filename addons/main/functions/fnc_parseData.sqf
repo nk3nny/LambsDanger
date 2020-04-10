@@ -24,6 +24,7 @@ private _data = [];
         case ("BOOL"): {
             _d = cbChecked _ctrl;
         };
+        case ("SLIDER");
         case ("NUMBER"): {
             _d = parseNumber (ctrlText _ctrl);
         };
@@ -36,7 +37,6 @@ private _data = [];
         case ("DROPDOWN"): {
             _d = lbCurSel _ctrl;
         };
-        case ("SLIDER");
         case ("TEXT");
         case ("EDIT"): {
             _d = ctrlText _ctrl;
