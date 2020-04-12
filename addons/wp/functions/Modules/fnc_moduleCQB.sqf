@@ -34,8 +34,8 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCQB_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [1, 2], 50],
-                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [0.5, 1], 21],
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21],
                         [LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName), "BOOLEAN", LSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip), false]
                     ], {
                         params ["_data", "_args"];
@@ -68,8 +68,8 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCQB_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [1, 2], 50],
-                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [0.5, 1], 21]
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
