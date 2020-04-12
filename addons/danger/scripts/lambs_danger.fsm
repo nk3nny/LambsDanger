@@ -1342,7 +1342,7 @@ class FSM
                          "_target = (_dangerMode select 1) select 6;" \n
                          "" \n
                          "// call artillery if available " \n
-                         "if !(([lambs_main_SideArtilleryHash, side _this] call CBA_fnc_hashGet) isEqualTo []) then {" \n
+                         "if (lambs_danger_Loaded_WP && {[side _this] call lambs_WP_fnc_sideHasArtillery}) then {" \n
                          "" \n
                          "	// do artillery " \n
                          "	[_this, _target] call lambs_danger_fnc_leaderArtillery; " \n
