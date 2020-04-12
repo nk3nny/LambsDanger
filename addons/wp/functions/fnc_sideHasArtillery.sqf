@@ -16,8 +16,6 @@
 */
 params ["_side", "_pos"];
 
-hintSilent str _this;
-
 private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
 if !(isNil "_pos") then {
     _artillery = _artillery select {
