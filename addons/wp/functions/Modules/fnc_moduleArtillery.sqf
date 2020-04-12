@@ -36,8 +36,8 @@ switch (_mode) do {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
                     [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), [west, east, independent]],
-                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [1, 2], 6],
-                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [1, 2], 75],
+                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [2, 1], 6],
+                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [2, 1], 75],
                     [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
                 ], {
                     params ["_data", "_args"];
