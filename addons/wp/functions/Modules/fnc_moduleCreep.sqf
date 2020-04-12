@@ -34,8 +34,8 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskCreep_DisplayName),
                     [
-                        [LSTRING(Module_TaskCreep_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_Radius_ToolTip), [25,5000], [1, 0.5], 1000],
-                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], 15],
+                        [LSTRING(Module_TaskCreep_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_Radius_ToolTip), [25,5000], [1, 0.5], 1000, 1],
+                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], 15, 2],
                         [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true],
                         [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), true]
                     ], {
