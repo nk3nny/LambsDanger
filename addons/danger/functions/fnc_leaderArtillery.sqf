@@ -44,7 +44,7 @@ doStop _unit;
 [_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);
 
 // perform it
-[side _unit, _pos, _unit] spawn EFUNC(WP,taskArtillery);
+[side _unit, _pos, _unit] call EFUNC(WP,taskArtillery);
 
 // end
 true

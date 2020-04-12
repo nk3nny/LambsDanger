@@ -16,12 +16,14 @@
 */
 params ["_side", "_pos"];
 
+hintSilent str _this;
+
 private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
 if !(isNil "_pos") then {
     _artillery = _artillery select {
         canFire _x
         && {unitReady _x}
-        && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
+        && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
     };
 };
 

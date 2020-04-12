@@ -29,7 +29,7 @@ switch (_mode) do {
                 [_side, _pos] call FUNC(sideHasArtillery);
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
-                [_side, _pos, objNull, _salvo, _spread, _skipCheckround] spawn FUNC(taskArtillery);
+                [_side, _pos, objNull, _salvo, _spread, _skipCheckround] call FUNC(taskArtillery);
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
