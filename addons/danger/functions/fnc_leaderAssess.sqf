@@ -75,7 +75,7 @@ if !(_enemy isEqualTo []) then {
     // Artillery
     _targets = _enemy select {_x distance _unit > 200};
 
-    if !(_targets isEqualTo [] || { GVAR(WP_Loaded) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
+    if !(_targets isEqualTo [] || { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
         [_unit, 6, (_unit getHideFrom (_targets select 0))] call FUNC(leaderMode);
     };
 
