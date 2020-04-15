@@ -68,7 +68,7 @@ if (_dir < 80 && { RND(0.1) }) then {
 };
 
 // move back 
-if ((_dir > 320 || _dir < 40) && {_unit distance2d _pos < 20}) then {
+if ((_dir > 320 || _dir < 40) && {speed _unit < 8} && {_unit distance2d _pos < 20}) then {
   
   if (_suppression) then {
         _anim pushBack "FastB";

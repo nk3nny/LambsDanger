@@ -17,4 +17,5 @@
 params ["_unit"];
 private _trace = lineIntersectsSurfaces [eyePos _unit, eyePos _unit vectorAdd [0, 0, 10], _unit, objNull, true, 1, "GEOM", "NONE"];
 if (_trace isEqualTo []) exitWith {false};
-((_trace select 0) select 3) isKindOf "Building"
+_trace findIf {_x select 3 isKindOf "Building"} != -1
+//((_trace select 0) select 3) isKindOf "Building"
