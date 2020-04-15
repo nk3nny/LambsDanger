@@ -35,7 +35,6 @@ if (RND(0.5) && { _unit call FUNC(indoor) }) exitWith {false};
 
 // find body
 private _body = allDeadMen select { (_x distance _pos) < _range };
-_body = _body select {!(_x getVariable [QGVAR(isChecked), false])};
 
 // no body found
 if (_body isEqualTo []) exitWith {false};
@@ -74,9 +73,6 @@ _unit doMove _bodyPos;
         if (_unit call FUNC(isAlive)) then {_unit doFollow leader _unit};
     }
 ] call CBA_fnc_waitUntilAndExecute;
-
-// update variable
-_body setVariable [QGVAR(isChecked), true, true];
 
 // debug
 if (GVAR(debug_functions)) then {

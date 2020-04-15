@@ -15,7 +15,7 @@
  * Public: No
 */
 fleeing _this
-|| {(_this getVariable ["ACE_isUnconscious", false])}
-|| {((lifeState _this) in ["DEAD", "INCAPACITATED"])}
 || {_this getVariable [QGVAR(disableAI), false]}
-|| {isPlayer leader _this && {_this getVariable [QGVAR(disableAIPlayerGroup), false]}}
+|| {!(_this call FUNC(isAlive))}
+|| {isPlayer leader _this && {GVAR(disableAIPlayerGroup)}
+|| {!(_this getVariable ["ace_medical_ai_healQueue", []] isEqualTo [])}

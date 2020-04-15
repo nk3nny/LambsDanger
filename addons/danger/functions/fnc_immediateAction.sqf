@@ -5,77 +5,87 @@
  *
  * Arguments:
  * 0: Unit hit <OBJECT>
- * 1: Current stance of unit, default none <STRING>
+ * 1: Position of dange <ARRAY>
  *
  * Return Value:
- * boolean
+ * stance
  *
  * Example:
  * [bob] call lambs_danger_fnc_immediateAction;
  *
  * Public: No
 */
-params ["_unit", ["_stance", ""], "_anim"];
+params ["_unit", ["_pos", [0, 0, 0]]];
 
-if (_stance isEqualTo "") then {
-    _stance = stance _unit;
-};
+// settings
+private _stance = stance _unit;
+private _dir = 360 - (_unit getRelDir _pos);
 
-// prone -- exit quickly
+// dodge
+_unit setVariable [QGVAR(currentTask), "Dodge!"];
+
+// prone override
 if (_stance isEqualTo "PRONE") exitWith {
-    [_unit, ["EvasiveLeft", "EvasiveRight"], true] call FUNC(gesture);
-    true
+    _unit playActionNow (["EvasiveLeft", "EvasiveRight"] select (_dir > 330));
+    _stance
 };
 
-// Not standing -- No weapon --  ACE3 captive exit
+// ACE3 captive exit
 if (
-    !(_stance isEqualTo "STAND")
-    || {GVAR(disableAIImediateAction)}
-    || {primaryWeapon _unit isEqualTo ""}
-    || {!(primaryWeapon _unit isEqualTo currentWeapon _unit)}
-    || {!canMove _unit}
+    GVAR(disableAIImediateAction)
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
 ) exitWith {false};
-
-// stopped or path/move disabled
-//if (stopped _unit) exitWith {false};
 
 // callout
 if (RND(0.6)) then {
     [_unit, "Combat", "UnderFireE", 125] call FUNC(doCallout);
 };
 
-// standing to rush
-if (RND(0.5)) exitWith {
-    _anim = selectRandom [
-        "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf",
-        "AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDfr",
-        "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf",
-        "AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl"
-    ];
-    _unit switchMove _anim;
-    _unit forceSpeed 4;
-    true
+private _suppression = getSuppression _unit > 0.1;
+private _anim = [];
+
+// move right
+if (_dir > 250 && { random 1 > 0.1 }) then {
+
+    if (_suppression) then {
+        _anim append ["FastL", "FastLB"];
+        _unit setUnitPosWeak "DOWN";
+    } else {
+        _anim append ["TactL", "TactLB", "WalkL"];
+    };
 };
 
-// standing to crouched
-_unit setUnitPos "MIDDLE";
-_anim = selectRandom [
-    "AmovPercMevaSrasWrflDf_AmovPknlMstpSrasWrflDnon",
-    "AmovPercMevaSrasWrflDfl_AmovPknlMstpSrasWrflDnon",
-    "AmovPercMevaSrasWrflDfr_AmovPknlMstpSrasWrflDnon"
-];
-_unit switchMove _anim;
+// move left
+if (_dir < 80 && { random 1 > 0.1 }) then {
 
-// reset unitPos
-[
-    {
-        if (_this call FUNC(isAlive)) then {
-            _this setUnitPos "AUTO"
-        };
-    }, _unit, 3 + random 3
-] call CBA_fnc_waitAndExecute;
+    if (_suppression) then {
+        _anim append ["FastR", "FastRB"];
+        _unit setUnitPosWeak "DOWN";
+    } else {
+        _anim append ["TactR", "TactRB", "WalkR"];
+    };
+};
+
+// move back 
+if ((_dir > 320 || _dir < 40) && {_unit distance2d _pos < 20}) then {
+  
+  if (_suppression) then {
+        _anim pushBack "FastB";
+    } else {
+        _anim append ["TactB", "WalkB"];
+    };
+};
+
+
+// check
+if (_anim isEqualTo []) then {
+    _anim pushBack "FastF";
+    _unit setUnitPosWeak "DOWN";
+};
+
+// otherwise rush left or right
+[_unit, _anim, true] call FUNC(gesture);
 
 // end
-true
+_stance

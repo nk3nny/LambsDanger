@@ -35,8 +35,9 @@ if ((_unit distance _enemy) < 7) exitWith {
     _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)"];
 
     // movement
-    _unit doWatch objNull;
-    _unit lookAt _enemy;
+    //_unit doWatch objNull;
+    _unit doTarget _enemy;
+    _unit doFire _enemy;
     _unit doMove getPosATL _enemy;
     _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
 
@@ -57,8 +58,9 @@ _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str
 
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
-    _unit setUnitPosWeak "MIDDLE";
+
     _unit doFollow leader _unit;
+
 };
 
 _unit setVariable [QGVAR(currentTarget), objNull];
@@ -76,7 +78,7 @@ if (isNil "_buildingPosSelected") then {
     _buildingPosSelected = _building modelToWorld [0,0,0];
 };
 // remove current target and do move
-_unit lookAt AGLtoASL _buildingPosSelected;
+//_unit lookAt AGLtoASL _buildingPosSelected;
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
 // debug

@@ -52,11 +52,11 @@ if (_units isEqualTo []) then {
 };
 
 // find overwatch position
-private _overwatch = [getPos _unit, ((_unit distance2d _target) / 2) min 300, 100, 8, _target] call FUNC(findOverwatch);
+private _overwatch = [getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch);
 
 // sort building locations
 private _pos = ([_target, 12, true, false] call FUNC(findBuildings));
-[_pos, true] call CBA_fnc_shuffle;
+_pos append ((nearestTerrainObjects [ _target, [], 12, false, true ]) apply {getPos _x});
 _pos pushBack _target;
 
 // set tasks
@@ -84,12 +84,12 @@ private _fnc_manoeuvre = {
 
     {
         // Half suppress -- Half manoeuvre
-        if (RND(0.4) && {count _pos > 0}) then {
-            _x doWatch (_pos select 0);
-            _x suppressFor 12;
-            [_x, AGLtoASL (_pos select 0), true] call FUNC(suppress);
-            _pos deleteAt 0;
+        if (RND(0.4)) then {
+
+            [_x, AGLtoASL (selectRandom _pos), true] call FUNC(suppress);
+
         } else {
+
             // manoeuvre
             _x forceSpeed 4;
             _x setUnitPosWeak selectRandom ["UP", "MIDDLE"];
@@ -103,7 +103,7 @@ private _fnc_manoeuvre = {
     } foreach _units;
 
     // recursive cyclic
-    if (_cycle > 0 && {!(_units isEqualTo [])} && {!(_pos isEqualTo [])}) then {
+    if (_cycle > 0 && {!(_units isEqualTo [])}) then {
         [
             _fnc_manoeuvre,
             [_cycle, _units, _pos, _fnc_manoeuvre],

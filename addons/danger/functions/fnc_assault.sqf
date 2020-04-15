@@ -12,11 +12,11 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe, 30] call lambs_danger_fnc_assault;
+ * [bob, angryJoe, 20] call lambs_danger_fnc_assault;
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 30]];
+params ["_unit", ["_target", objNull], ["_range", 20]];
 
 // check if stopped or busy
 if (
@@ -32,20 +32,21 @@ _unit setVariable [QGVAR(currentTask), "Assault"];
 
 // settings
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+_unit forceSpeed ([_unit, _target] call lambs_danger_fnc_assaultSpeed);
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, true] call FUNC(findBuildings);
-_buildings pushBack (getPosATL _target);
 _buildings = _buildings select { _x distance _target < _rangeBuilding };
 
 // exit without buildings? -- Assault or delay!
-if (RND(0.8) || { count _buildings < 2 }) exitWith {
+if (RND(0.8) || { _buildings isEqualTo [] }) exitWith {
 
     // Outdoors or indoors with 20% chance to move out
     if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
 
         // execute move
+        _unit doTarget _target;
         _unit doMove (_unit getHideFrom _target);
 
         // debug
@@ -57,6 +58,9 @@ if (RND(0.8) || { count _buildings < 2 }) exitWith {
         };
     };
 };
+
+// add actual pos
+_buildings pushBack (getPosATL _target);
 
 // execute move
 _unit doMove ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
