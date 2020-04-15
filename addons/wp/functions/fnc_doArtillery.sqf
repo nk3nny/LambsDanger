@@ -24,7 +24,6 @@ if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 // init
 params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
 
-
 if (_pos isEqualTo [] || isNull _gun) exitWith {};
 
 if (isNull _caller) then {
