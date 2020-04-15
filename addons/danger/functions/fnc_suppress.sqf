@@ -41,7 +41,7 @@ if (!_override) then {
 };
 
 // mod pos
-private _distance = ((_unit distance (ASLToAGL _pos)) min 280) - 4;
+private _distance = (_unit distance (ASLToAGL _pos)) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
