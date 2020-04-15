@@ -51,7 +51,7 @@ item46[] = {"___Hide_",4,218,625.000000,200.000000,725.000000,250.000000,1.00000
 item47[] = {"Hide_from_target",2,250,625.000000,300.000000,725.000000,350.000000,0.000000,"Hide from target!" \n "Continue"};
 item48[] = {"Timeout",4,218,525.000000,425.000000,625.000000,475.000000,0.000000,"Timeout"};
 item49[] = {"___Artillery",4,218,875.000000,200.000000,975.000000,250.000000,1.000000,"6" \n "Artillery"};
-item50[] = {"Artillery___Cont",2,4346,875.000000,425.000000,975.000000,475.000000,0.000000,"Artillery: " \n "Continue"};
+item50[] = {"Artillery___Cont",2,250,875.000000,425.000000,975.000000,475.000000,0.000000,"Artillery: " \n "Continue"};
 item51[] = {"___Manoeuvre",4,218,725.000000,200.000000,825.000000,250.000000,1.000000,"3" \n "Manoeuvre"};
 item52[] = {"Manoeuvre___Cont",2,250,725.000000,325.000000,825.000000,375.000000,0.000000,"Manoeuvre: " \n "Continue"};
 item53[] = {"CQC",4,218,350.000000,150.000000,450.000000,200.000000,4.000000,"CQC"};
@@ -264,7 +264,7 @@ link109[] = {86,87};
 link110[] = {87,88};
 link111[] = {88,89};
 link112[] = {89,4};
-globals[] = {0.000000,0,0,0,0,640,480,2,413,6316128,1,406.960083,1416.278076,885.640808,-191.940552,828,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,413,6316128,1,146.887634,1135.788086,667.469727,-388.312927,828,884,1};
 window[] = {2,-1,-1,-32000,-32000,1021,208,1010,208,3,846};
 *//*%FSM</HEAD>*/
 class FSM
@@ -599,7 +599,7 @@ class FSM
                                         priority = 5.000000;
                                         to="Panic_";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"random 100 < lambs_danger_panic_chance && {((getSuppression _this) >.80)}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"random 100 < lambs_danger_panic_chance && {(getSuppression _this) >.95}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -632,7 +632,7 @@ class FSM
                                         priority = 3.000000;
                                         to="Dodge";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/" _dangerCause in [2, 9]"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"random 1 > 0.15 && { _dangerCause in [2, 9]}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -821,7 +821,7 @@ class FSM
                         itemno = 25;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// Can fire -- delay for a bit  " \n
-                         "if (random 1 > 0.25 && { _dangerCause isEqualTo 8 } ) then {" \n
+                         "if (random 1 > 0.25 && { _dangerCause in [8, 9] } ) then {" \n
                          "" \n
                          "	// movement" \n
                          "	_this forceSpeed 1;" \n

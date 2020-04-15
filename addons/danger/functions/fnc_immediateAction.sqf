@@ -46,7 +46,7 @@ private _suppression = getSuppression _unit > 0.1;
 private _anim = [];
 
 // move right
-if (_dir > 250 && { random 1 > 0.1 }) then {
+if (_dir > 250 && { RND(0.1) }) then {
 
     if (_suppression) then {
         _anim append ["FastL", "FastLB"];
@@ -57,7 +57,7 @@ if (_dir > 250 && { random 1 > 0.1 }) then {
 };
 
 // move left
-if (_dir < 80 && { random 1 > 0.1 }) then {
+if (_dir < 80 && { RND(0.1) }) then {
 
     if (_suppression) then {
         _anim append ["FastR", "FastRB"];
