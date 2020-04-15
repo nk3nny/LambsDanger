@@ -35,7 +35,7 @@ if (
     GVAR(disableAIImediateAction)
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
-) exitWith {false};
+) exitWith {_stance};
 
 // callout
 if (RND(0.6)) then {
