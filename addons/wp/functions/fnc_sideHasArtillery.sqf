@@ -1,16 +1,17 @@
 #include "script_component.hpp"
 /*
  * Author: joko // Jonas
- *
+ * Checks if a side has available artillery
  *
  * Arguments:
- *
+ * 0: side of unit to check <SIDE>
+ * 1: Position being attacked <ARRAY>, optional
  *
  * Return Value:
- *
+ * BOOL
  *
  * Example:
- *
+ * [side bob] call lambs_danger_sideHasArtillery
  *
  * Public: No
 */
