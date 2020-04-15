@@ -26,7 +26,7 @@ _unit setVariable [QGVAR(currentTask), "Dodge!"];
 
 // prone override
 if (_stance isEqualTo "PRONE") exitWith {
-    [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call FUNC(gesture);	
+    [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call FUNC(gesture);
     _stance
 };
 
