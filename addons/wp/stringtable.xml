@@ -65,11 +65,11 @@
             <English>Register units to that sides artillery pool.</English>
             <German>Registriere Einheiten zum Artillerie-Pool dieser Seite hinzugefügt.</German>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_UnitAdded">
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_UnitAdded">
             <English>Units have been added to Artillery Pool</English>
             <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotificatio_NoUnitAdded">
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded">
             <English>No Units have been added to Artillery Pool</English>
             <German>Keine Einheiten wurden zum Artillerie-Pool dieser Seite hinzugefügt.</German>
         </Key>

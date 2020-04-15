@@ -25,24 +25,12 @@ if (_pos isEqualTo []) then {
 if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call FUNC(debugLog);}};
 
 // settings
-private _artillery = [EGVAR(main,SideArtilleryHash), side _unit] call CBA_fnc_hashGet;
-_artillery = _artillery select {
-    canFire _x
-    && {unitReady _x}
-    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
-};
 
 // exit on no ready artillery
-if (_artillery isEqualTo []) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
+if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
 
 _unit setVariable [QGVAR(currentTarget), _target];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
-
-// pick closest artillery
-_artillery = [_artillery, [], { _target distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-
-private _gun = _artillery select 0;
-[QGVAR(OnArtilleryCalled), [_unit, group _unit, _gun, _pos]] call FUNC(eventCallback);
 
 // find caller
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
@@ -56,7 +44,7 @@ doStop _unit;
 [_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);
 
 // perform it
-[_gun, _pos, _unit] spawn EFUNC(WP,taskArtillery);
+[side _unit, _pos, _unit] call EFUNC(WP,taskArtillery);
 
 // end
 true

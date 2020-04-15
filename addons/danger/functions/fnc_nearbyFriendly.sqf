@@ -1,16 +1,18 @@
 #include "script_component.hpp"
 /*
  * Author: joko // Jonas
- *
+ * Checks if unit has friendlies nearby
  *
  * Arguments:
- *
+ * 0: side being checked <OBJECT>
+ * 1: Position checked  <ARRAY>
+ * 2: radius being checked within <NUMBER> 
  *
  * Return Value:
- *
+ * BOOLEAN
  *
  * Example:
- *
+ * [bob, getpos angryBob] call lambs_danger_fnc_nearbyFriendly
  *
  * Public: No
 */
