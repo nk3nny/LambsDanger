@@ -34,8 +34,8 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCQB_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50],
-                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21],
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21, 2],
                         [LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName), "BOOLEAN", LSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip), false]
                     ], {
                         params ["_data", "_args"];

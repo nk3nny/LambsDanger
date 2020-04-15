@@ -193,7 +193,7 @@ private _fnc_AddDropDown = {
 
 private _fnc_AddSlider = {
     #define __SLIDER_EDIT_SIZE__ 16
-    params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default"];
+    params ["_text", "", ["_tooltip", ""], ["_range", [0, 1]], ["_speed", [0.01, 0.1]], "_default", ["_round", -1]];
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };
@@ -216,26 +216,56 @@ private _fnc_AddSlider = {
     private _textField = _display ctrlCreate ["RscEdit", -1, _globalGroup];
     _textField ctrlSetPosition [_basePositionX + PX(CONST_WIDTH - CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 1)), _basePositionY + PY((CONST_HEIGHT / 2)), PX(CONST_SPACE_HEIGHT * (__SLIDER_EDIT_SIZE__ - 2)), PY(CONST_HEIGHT / CONST_ELEMENTDIVIDER)];
 
+    private _fnc_RoundValue = {
+        params ["_newValue", "_control"];
+        private _round = _control getVariable [QGVAR(Round), -1];
+        if (_round != -1) then {
+            private _roundTo = 10 ^ _round;
+            _newValue = (round (_newValue * _roundTo))/_roundTo;
+        };
+        _newValue;
+    };
+
     _slider setVariable [QGVAR(TextField), _textField];
     _textField setVariable [QGVAR(Slider), _slider];
+    _textField setVariable [QGVAR(Round), _round];
+    _slider setVariable [QGVAR(Round), _round];
+    _textField setVariable [QFUNC(RoundValue), _fnc_RoundValue];
+    _slider setVariable [QFUNC(RoundValue), _fnc_RoundValue];
     _textField ctrlSetText (str _default);
 
     _slider ctrlAddEventHandler ["SliderPosChanged", {
-        params ["_control", "_newValue"];
-        private _textField = _control getVariable [QGVAR(TextField), controlNull];
+        params ["_slider", "_newValue"];
+        private _textField = _slider getVariable [QGVAR(TextField), controlNull];
+        _newValue = [_newValue, _slider] call (_slider getVariable [QFUNC(RoundValue), {_this select 0}]);
         _textField ctrlSetText (str _newValue);
         _textField ctrlCommit 0;
     }];
 
-    _textField ctrlAddEventHandler ["KeyUp", {
-        params ["_control"];
-        private _slider = _control getVariable [QGVAR(Slider), controlNull];
-        _slider sliderSetPosition parseNumber (ctrlText _control);
+    _slider ctrlAddEventHandler ["KillFocus", {
+        params ["_slider"];
+        private _textField = _slider getVariable [QGVAR(TextField), controlNull];
+        private _newValue = [sliderPosition _slider, _slider] call (_slider getVariable [QFUNC(RoundValue), {_this select 0}]);
+        _slider sliderSetPosition _newValue;
+        _textField ctrlSetText (str _newValue);
+        _slider ctrlCommit 0;
+        _textField ctrlCommit 0;
     }];
+
+    _textField ctrlAddEventHandler ["KeyUp", {
+        params ["_textField"];
+        private _slider = _textField getVariable [QGVAR(Slider), controlNull];
+        private _newValue = [parseNumber (ctrlText _textField), _slider] call (_textField getVariable [QFUNC(RoundValue), {_this select 0}]);
+        _slider sliderSetPosition _newValue;
+        _slider ctrlCommit 0;
+    }];
+
     _textField ctrlAddEventHandler ["KillFocus", {
-        params ["_control"];
-        private _slider = _control getVariable [QGVAR(Slider), controlNull];
-        _slider sliderSetPosition parseNumber (ctrlText _control);
+        params ["_textField"];
+        private _slider = _textField getVariable [QGVAR(Slider), controlNull];
+        private _newValue = [parseNumber (ctrlText _textField), _slider] call (_textField getVariable [QFUNC(RoundValue), {_this select 0}]);
+        _slider sliderSetPosition _newValue;
+        _slider ctrlCommit 0;
     }];
 
     _textField setVariable [QGVAR(CacheName), _cacheName];
@@ -246,7 +276,7 @@ private _fnc_AddSlider = {
 };
 
 private _fnc_AddSideSelector = {
-    params ["_text", "", "_tooltip", "_sides", ["_default", sideUnknown]];
+    params ["_text", "", "_tooltip", "_sides", "_default"];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
     private _cacheName = format ["lambs_%1_%2", _name, _text];
@@ -286,6 +316,9 @@ private _fnc_AddSideSelector = {
         _button;
     };
     _sides = _sides arrayIntersect _sides;
+    if (isNil "_default") then {
+        _default = _sides select 0;
+    };
     private _buttons = [];
     private _count = count _sides;
     private _margin = PX((CONST_WIDTH/2 - _count*(CONST_HEIGHT+CONST_SPACE_HEIGHT) - CONST_SPACE_HEIGHT)/2);

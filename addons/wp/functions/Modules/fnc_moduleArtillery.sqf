@@ -26,31 +26,18 @@ switch (_mode) do {
             params ["_side", "_salvo", "_spread", "_skipCheckround", "_logic"];
             [{
                 params ["_side", "", "", "", "_pos"];
-                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
-                _artillery = _artillery select {
-                    canFire _x
-                    && {unitReady _x}
-                    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
-                };
-                !(_artillery isEqualTo [])
+                [_side, _pos] call FUNC(sideHasArtillery);
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
-                private _artillery = [EGVAR(main,SideArtilleryHash), _side] call CBA_fnc_hashGet;
-                _artillery = [_artillery, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-                _artillery = _artillery select {
-                    canFire _x
-                    && {unitReady _x}
-                    && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
-                };
-                [_artillery select 0, _pos, leader (_artillery select 0), _salvo, _spread, _skipCheckround] spawn FUNC(taskArtillery);
+                [_side, _pos, objNull, _salvo, _spread, _skipCheckround] call FUNC(taskArtillery);
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
                     [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), [west, east, independent]],
-                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), 6],
-                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "NUMBER", LSTRING(Module_TaskArtillery_Spread_Tooltip), 75],
+                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [2, 1], 6, 0],
+                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [2, 1], 75, 2],
                     [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
                 ], {
                     params ["_data", "_args"];
@@ -72,7 +59,7 @@ switch (_mode) do {
             private _salvo = _logic getVariable [QGVAR(MainSalvo), 6];
             private _spread = _logic getVariable [QGVAR(Spread), 75];
             private _skipCheckround = _logic getVariable [QGVAR(SkipCheckRounds), false];
-            [SIDES select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
+            [[west, east, independent] select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
 
             deleteVehicle _logic;
         };

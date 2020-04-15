@@ -18,15 +18,17 @@ params ["_element"];
 private _data = [];
 {
     _x params ["_ctrl", "_type"];
-    private _d = nil;
+    private "_d";
     switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {
             _d = cbChecked _ctrl;
         };
-        case ("SLIDER");
         case ("NUMBER"): {
             _d = parseNumber (ctrlText _ctrl);
+        };
+        case ("SLIDER"): {
+            _d = [parseNumber (ctrlText _ctrl), _ctrl] call (_ctrl getVariable [QFUNC(RoundValue), {_this select 0}]);
         };
         case ("INT");
         case ("INTEGER"): {
