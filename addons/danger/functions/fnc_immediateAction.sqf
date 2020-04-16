@@ -42,6 +42,9 @@ if (RND(0.6)) then {
     [_unit, "Combat", "UnderFireE", 125] call FUNC(doCallout);
 };
 
+// reset speed
+_unit forceSpeed -1;
+
 private _suppression = getSuppression _unit > 0.1;
 private _anim = [];
 
@@ -76,7 +79,6 @@ if ((_dir > 320 || _dir < 40) && {speed _unit < 8} && {_unit distance2d _pos < 2
         _anim append ["TactB", "WalkB"];
     };
 };
-
 
 // check
 if (_anim isEqualTo []) then {

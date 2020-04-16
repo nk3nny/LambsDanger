@@ -39,7 +39,8 @@ if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;
-    _unit switchMove "AmovPercMstpSnonWnonDnon"; // set civilian animation - nkenny
+    _unit switchMove (["AmovPercMstpSnonWnonDnon", "AmovPpneMstpSnonWnonDnon"] select (stance _unit isEqualTo "PRONE"));
+     // set civilian animation - nkenny
     _unit playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared", "AmovPercMstpSnonWnonDnon_Scared2"];
 
     // chance action
