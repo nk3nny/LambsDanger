@@ -99,25 +99,28 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
 _unit setFormDir (_unit getDir _pos);
 
 // man empty statics?
-private _weapons = nearestObjects [_unit, ["StaticWeapon"], 60, true];
+private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];
 _weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
 
 // give orders
-private _units = units _unit select { _x call FUNC(isAlive) && {unitReady _x} && { _x distance2d _unit < 100 } && { isNull objectParent _x } && { !isPlayer _x }};
+private _units = units _unit select { !(_unit isEqualTo _x) && {_x call FUNC(isAlive)} && {unitReady _x} && { _x distance2d _unit < 150 } && { isNull objectParent _x } && { !isPlayer _x } };
 
-// isolated leader
+// isolated leader <-- not sure why this is here?
+/*
 if (count _units < 2) then {
     _unit doFollow selectRandom _units;
-};
+};*/
 
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
 
     // pick a random unit
-    _units = selectRandom _units;
     _weapons = selectRandom _weapons;
+    _units = [_units, [], { _weapons distance _x }, "ASCEND"] call BIS_fnc_sortBy;
+    _units = _units select 0;
 
     // asign no target
     _units doWatch ObjNull;
+    _units setVariable [QGVAR(forceMOVE), true];
 
     // order to man the vehicle
     _units assignAsGunner _weapons;
