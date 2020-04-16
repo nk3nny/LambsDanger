@@ -44,7 +44,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
 [ [formationLeader _unit, _unit] select (RND(0.33)), "Combat", _callout, 100] call FUNC(doCallout);
 
 // leaders gestures
-[formationLeader _unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);
+[formationLeader _unit, ["gestureCover", "gesturePoint", "gestureFreeze"]] call FUNC(gesture);
 
 // get units
 private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 120} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
