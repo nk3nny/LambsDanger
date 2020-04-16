@@ -25,7 +25,7 @@ if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
 private _predictedPos = (_unit getHideFrom _target);
-if ((_unit distance2d _pos) < 150) then {_pos = _predictedPos};
+if ((_unit distance2d _pos) < 50) then {_pos = _predictedPos};
 
 //  target not on foot or too close
 if (
@@ -54,11 +54,20 @@ if !(_buildings isEqualTo []) then {
 _buildings pushBack _predictedPos;
 
 // pos
-private _distance = ((_unit distance _pos) min 650) - 5;
+_pos = AGLToASL (selectRandom _buildings);
+private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
+if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+
+// set max distance
+private _distance = (_unit distance _pos) min 650;
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position
 _vehicle doWatch _pos;
+
+// check for friendlies
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+if !(_friendlys isEqualTo []) exitWith {false};
 
 // suppression
 _vehicle doSuppressiveFire _pos;

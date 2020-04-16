@@ -28,8 +28,8 @@ class Cfg3DEN {
             };
         };
         class GVAR(ExitConditions): Title {
-            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 2) + 2);
-            attributeSave = QUOTE(lbCurSel (_this controlsGroupCtrl 100) - 2);
+            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 4));
+            attributeSave = QUOTE(lbCurSel (_this controlsGroupCtrl 100));
             class Controls: Controls {
                 class Title: Title {};
                 class Value: ctrlToolbox {

@@ -180,7 +180,7 @@
             <German>Teleportiert Einheiten sofort zur Position</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_DisplayName">
-            <English>Sort building positions by height</English>
+            <English>Sort positions by height</English>
             <German>Gebäudepositionen nach Höhe sortieren</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_ToolTip">

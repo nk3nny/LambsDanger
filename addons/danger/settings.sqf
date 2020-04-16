@@ -97,7 +97,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
     "SLIDER",
     [LSTRING(Settings_CQBRange), LSTRING(Settings_CQBRange_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [25, 150, 50, 0],
+    [20, 150, 60, 0],
     1
 ] call CBA_fnc_addSetting;
 
@@ -169,7 +169,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     "SLIDER",
     [LSTRING(Settings_BaseWest), LSTRING(Settings_BaseWest_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 500, 0],
+    [20, 3000, 500, 0],
     1
 ] call CBA_fnc_addSetting;
 
@@ -179,7 +179,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     "SLIDER",
     [LSTRING(Settings_BaseEast), LSTRING(Settings_BaseEast_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 500, 0],
+    [20, 3000, 500, 0],
     1
 ] call CBA_fnc_addSetting;
 
@@ -189,7 +189,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     "SLIDER",
     [LSTRING(Settings_BaseIndependent), LSTRING(Settings_BaseIndependent_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [200, 3000, 500, 0],
+    [20, 3000, 500, 0],
     1
 ] call CBA_fnc_addSetting;
 

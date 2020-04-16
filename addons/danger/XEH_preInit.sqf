@@ -18,7 +18,7 @@ GVAR(fsmPriorities) = [
     1,      // DCDeadBody
     2,      // DCScream
     4,      // DCCanFire
-    3       // DCBulletClose
+    6       // DCBulletClose
 ];
 
 ADDON = true;

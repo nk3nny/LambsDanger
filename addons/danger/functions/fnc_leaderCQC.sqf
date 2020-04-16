@@ -19,7 +19,7 @@ params ["_unit", "_target", ["_range", GVAR(CQB_range)]];
 
 // new variable + distance check
 private _inCQC = group _unit getVariable [QGVAR(inCQC), []];
-_inCQC = _inCQC select {_x distance2d _unit < 250};
+_inCQC = _inCQC select {_x distance2d _unit < _range + 25};
 
 // buildings present? ignore
 if (count _inCQC > 0) exitWith {};
@@ -27,7 +27,7 @@ if (!(_target call FUNC(isAlive))) then {_target = _unit findNearestEnemy _unit;
 
 // update
 _unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Leader CQC"];
+_unit setVariable [QGVAR(currentTask), "Leader CQB"];
 
 // define buildings
 private _buildings = [_unit, _range] call FUNC(findBuildings);

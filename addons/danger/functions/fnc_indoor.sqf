@@ -15,4 +15,6 @@
  * Public: No
 */
 params ["_unit"];
-lineIntersects [eyePos _unit, eyePos _unit vectorAdd [0, 0, 4]]
+private _trace = lineIntersectsSurfaces [eyePos _unit, eyePos _unit vectorAdd [0, 0, 10], _unit, objNull, true, -1, "GEOM", "NONE", true];
+if (_trace isEqualTo []) exitWith {false};
+_trace findIf {_x select 3 isKindOf "Building"} != -1

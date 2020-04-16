@@ -24,7 +24,7 @@ _unit setVariable [QGVAR(currentTask), "Deliberate Fire"];
 
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
-    getSuppression _unit > 0.5
+    getSuppression _unit > 0.75
     || {terrainIntersectASL [eyePos _unit, _pos]}
     || {(primaryWeapon _unit) isEqualTo ""}
     || {(currentCommand _unit) isEqualTo "Suppress"}
@@ -41,7 +41,7 @@ if (!_override) then {
 };
 
 // mod pos
-private _distance = ((_unit distance (ASLToAGL _pos)) min 280) - 4;
+private _distance = (_unit distance (ASLToAGL _pos)) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
