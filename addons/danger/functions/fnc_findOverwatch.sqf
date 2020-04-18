@@ -34,8 +34,8 @@ private _fnc_selectResult = {
 
     private _heightSorted = _selectedPositions apply {[(_refObj worldToModel _x) select 2, _x]};
     _heightSorted sort false;
-    
-    _result = (_heightSorted param [0]) param [1, [0,0,0]];
+
+    _result = (_heightSorted param [0]) param [1, _centerPos];
 
     _result breakOut QGVAR(findOverwatch);
 };
