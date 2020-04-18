@@ -57,7 +57,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally"];
 
     // set mode
     _x forceSpeed 3;
-    _x setVariable [QGVAR(forceMove), true];
+    _x setVariable [QGVAR(forceMove), !_garrison];
 
     // execute move
     if !(_pos isEqualTo []) then {
