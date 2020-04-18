@@ -67,7 +67,7 @@ if !(_enemy isEqualTo []) then {
         if (combatMode _unit isEqualTo "RED") then {_type pushBack 4;};
         if (combatMode _unit in ["YELLOW", "WHITE"]) then {_type pushBack 5;};
 
-        // visibility / distance / no cover / stopped
+        // visibility / distance / no cover
         if !(terrainIntersectASL [eyepos _unit, eyepos _target]) then {_type pushBack 5;};
         if (_unit distance2d _target < 120) then {_type pushBack 4;};
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "CHAPEL", "HIDE"], 4, false, true ]) isEqualTo []) then {_type pushBack 3;};  // could be retreat in the future! - nkenny
@@ -109,6 +109,9 @@ if !(_enemy isEqualTo []) then {
 
 };
 
+// update formation direction
+_unit setFormDir (_unit getDir _pos);
+
 // move
 _unit forceSpeed 0;
 
@@ -118,40 +121,23 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
     _unit doWatch _pos;
 };
 
-// update formation direction
-_unit setFormDir (_unit getDir _pos);
-
-// man empty statics?
-private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
-
-// give orders
-private _units = units _unit select { !(_unit isEqualTo _x) && {_x call FUNC(isAlive)} && {unitReady _x} && { _x distance2d _unit < 150 } && { isNull objectParent _x } && { !isPlayer _x } };
-
-// isolated leader <-- not sure why this is here?
-/*
-if (count _units < 2) then {
-    _unit doFollow selectRandom _units;
-};*/
-
-if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
-
-    // pick a random unit
-    _weapons = selectRandom _weapons;
-    _units = [_units, [], { _weapons distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-    _units = _units select 0;
-
-    // asign no target
-    _units doWatch ObjNull;
-    _units setVariable [QGVAR(forceMOVE), true];
-
-    // order to man the vehicle
-    _units assignAsGunner _weapons;
-    [_units] orderGetIn true;
-    (group _unit) addVehicle _weapons;
+// find units
+private _units = units _unit select {
+    !(_unit isEqualTo _x)
+    && {_x call FUNC(isAlive)}
+    && {unitReady _x}
+    && { _x distance2d _unit < 150 }
+    && { isNull objectParent _x }
+    && { !isPlayer _x }
 };
 
-// set current task -- moved here so it is not interfered by things happening above
+// deploy static weapons ~ also returns available units
+_units = [_units, _pos] call FUNC(leaderStaticDeploy);
+
+// man empty static weapons
+_units = [_units, _unit] call FUNC(leaderStaticFind);
+
+// set current task
 _unit setVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTask), "Leader Assess"];
 

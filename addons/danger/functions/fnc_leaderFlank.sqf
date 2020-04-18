@@ -28,7 +28,7 @@ _target = _target call CBA_fnc_getPos;
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
-    [_unit, _target] call FUNC(leaderAssaultClose);
+    [_unit, _target] call FUNC(leaderGarrison);
 
     false
 };
@@ -46,16 +46,13 @@ _pos pushBack _target;
 private _overwatch = [getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch);
 
 // overwatch Failed ~ pick forest or house locations
-if (_overwatch isEqualto []) then {
+if (_overwatch distance2d _target < 40) then {
 
     _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(1 + forest + trees + houses) * (1 - meadow) * (1 - deadBody)", 100 , 3] apply {_x select 0};
     _overwatch = _overwatch select {!(surfaceIsWater _x)};
     _overwatch = selectRandom _overwatch;
 
 };
-
-// overwatch failed again -- randomise
-if (_overwatch isEqualto []) then {_overWatch = _target getPos [75, random 360]};
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -86,7 +83,7 @@ private _fnc_manoeuvre = {
         // Half suppress -- Half manoeuvre
         if (!(terrainIntersectASL [eyePos _x, _posASL]) && {RND(0.65)}) then {
             
-            _x doWatch _posASL;
+            _x doWatch ASLtoAGL _posASL;
             [_x, _posASL, true] call FUNC(suppress);
 
         } else {

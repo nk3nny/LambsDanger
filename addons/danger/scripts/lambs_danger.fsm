@@ -16,7 +16,7 @@ item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.0000
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
-item15[] = {"Ready_Infantry",2,250,-100.000000,-75.000000,0.000000,-25.000000,0.000000,"Ready Infantry"};
+item15[] = {"Ready_Infantry",2,4346,-100.000000,-75.000000,0.000000,-25.000000,0.000000,"Ready Infantry"};
 item16[] = {"Tank_Attack",4,218,-925.000000,25.000000,-825.000000,75.000000,4.000000,"Tank" \n "Attack"};
 item17[] = {"Attack____Suppre",2,250,-925.000000,150.000000,-825.000000,200.000000,0.000000,"Attack " \n "+ Suppress"};
 item18[] = {"Timeout",4,218,-925.000000,300.000000,-825.000000,350.000000,0.000000,"Timeout"};
@@ -274,7 +274,7 @@ link115[] = {90,91};
 link116[] = {91,48};
 link117[] = {92,93};
 link118[] = {93,48};
-globals[] = {0.000000,0,0,0,0,640,480,2,417,6316128,1,-465.062134,887.345093,916.574829,-527.299866,828,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,417,6316128,1,-425.641998,418.184113,621.054810,-279.841553,828,884,1};
 window[] = {2,-1,-1,-1,-1,943,130,932,130,3,846};
 *//*%FSM</HEAD>*/
 class FSM
@@ -578,7 +578,7 @@ class FSM
                          "" \n
                          "// look at explosions" \n
                          "if (_dangerCause isEqualTo 4) then {" \n
-                         "	_this lookAt AGLtoASL _dangerPos; " \n
+                         "	_this lookAt _dangerPos; " \n
                          "}; "/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1584,8 +1584,8 @@ class FSM
                          "_timeout = time + 5 + random 4;" \n
                          "" \n
                          "// look at_this " \n
-                         "if (_this knowsAbout _dangerCausedBy > 1) then {" \n
-                         "	_this lookAt (eyePos _dangerCausedBy); " \n
+                         "if (_this knowsAbout _dangerCausedBy > 3.5) then {" \n
+                         "	_this lookAt _dangerCausedBy; " \n
                          "};" \n
                          "" \n
                          "// assault " \n

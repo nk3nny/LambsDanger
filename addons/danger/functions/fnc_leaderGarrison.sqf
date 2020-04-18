@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Leader rallies troops and assaults unit into nearby buildings or location
+ * Leader rallies troops and garrisons nearby building from top to bottom with an option to remain firm
  *
  * Arguments:
  * 0: Group leader <OBJECT>
@@ -27,11 +27,17 @@ if !(attackEnabled _unit) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x} && {_x distance _unit < 120}};
+    _units = (units _unit) select {
+        _x call FUNC(isAlive)
+        && {!isPlayer _x}
+        && {!fleeing _x}
+        && {_x distance _unit < 120}
+    };
 };
 
 // sort building locations
 private _pos = [_target, 12, true, false] call FUNC(findBuildings);
+_pos = [_pos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
 _pos pushBack _target;
 
 // leader ~ rally animation here
@@ -49,10 +55,16 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     // check garrison
     if (_garrison) then {doStop _x};
 
-    // execute move
-    _x doMove selectRandom _pos;
+    // set mode
     _x forceSpeed 3;
     _x setVariable [QGVAR(forceMove), true];
+
+    // execute move
+    if !(_pos isEqualTo []) then {
+        _x doMove (_pos deleteAt 0);
+    } else {
+        _x doMove _target;
+    };
 
     true
 

@@ -63,7 +63,7 @@ private _distance = (_unit distance _pos) min 650;
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position
-_vehicle doWatch _pos;
+_vehicle doWatch ASLtoAGL _pos;
 
 // check for friendlies
 private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);

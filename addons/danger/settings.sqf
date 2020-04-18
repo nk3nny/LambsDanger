@@ -50,6 +50,29 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+
+// Toggles units dynamically deploying static weapons
+[
+    QGVAR(disableAIDeployStaticWeapons),
+    "CHECKBOX",
+    [LSTRING(Settings_DisableStaticDeployment), LSTRING(Settings_DisableStaticDeployment_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+
+// Toggles units dynamically find and using static weapons
+[
+    QGVAR(disableAIFindStaticWeapons),
+    "CHECKBOX",
+    [LSTRING(Settings_DisableStaticFinding), LSTRING(Settings_DisableStaticFinding_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+
 // Toggles AI Unit Gestures
 [
     QGVAR(disableAIGestures),

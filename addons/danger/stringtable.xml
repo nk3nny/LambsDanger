@@ -86,7 +86,7 @@
             <German>Autonome Gruppenmanöver ausschalten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
-            <English>Toggles group manoevure phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.</English>
+            <English>Toggles group manoeuvre phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoevure orders to flank and suppress buildings.</English>
             <German>Gruppenmanöver-Phase die durch den Gruppenführer initiiert wird. Das Ausschalten dieser Option deaktiviert Befehle des Gruppenführers Gebäude zu flankieren oder niederzuhalten.</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
@@ -96,6 +96,22 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
             <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
             <German>Schaltet das verdeckte Bewegen von KI für Einheiten, die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment">
+            <English>Disable units deploying static weapons</English>
+            <German>TODO</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment_ToolTip">
+            <English>Toggles AI group ability to dynamically deploy static/backpack weapons</English>
+            <German>TODO</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding">
+            <English>Disable units manning static weapons</English>
+            <German>TODO</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding_ToolTip">
+            <English>Toggles AI group ability ability to dynamically find and man vacant static turrets</English>
+            <German>TODO</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>

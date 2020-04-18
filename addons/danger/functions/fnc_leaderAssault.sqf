@@ -28,7 +28,7 @@ _target = _target call CBA_fnc_getPos;
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
-    [_unit, _target] call FUNC(leaderAssaultClose);
+    [_unit, _target] call FUNC(leaderGarrison);
 
     false
 };

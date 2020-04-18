@@ -28,7 +28,7 @@ if (
 ) exitWith {false};
 
 // look at it 
-_unit lookAt AGLtoASL _pos; 
+_unit lookAt _pos; 
 
 // leaders gesture 
 [formationLeader _unit, ["gesturePoint"]] call FUNC(gesture); 

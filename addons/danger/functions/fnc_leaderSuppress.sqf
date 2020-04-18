@@ -95,7 +95,7 @@ private _fnc_suppress = {
     // vehicles
     {
         private _posAGL = selectRandom _pos;
-        _x doWatch AGLtoASL _posAGL;
+        _x doWatch _posAGL;
         [_x, _posAGL] call FUNC(vehicleSuppress);
 
     } foreach _vehicles;
