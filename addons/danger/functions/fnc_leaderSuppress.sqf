@@ -30,7 +30,7 @@ if (_units isEqualTo []) then {
 };
 
 // find vehicles
-_vehicles = [];
+private _vehicles = [];
 {
     if (!(isNull objectParent _x) && {isTouchingGround vehicle _x} && {canFire vehicle _x}) then {
         _vehicles pushBackUnique vehicle _x;
