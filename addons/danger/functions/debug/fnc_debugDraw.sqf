@@ -61,13 +61,13 @@ private _fnc_dangerModeTypes = {
             "Hide from tank/air craft";
         };
         case (3): {
-            "Manoeuvre";
+            "Flanking";
         };
         case (4): {
-            "?"
+            "Assaulting"
         };
         case (5): {
-            "?"
+            "Suppressing"
         };
         case (6): {
             "Call artillery"

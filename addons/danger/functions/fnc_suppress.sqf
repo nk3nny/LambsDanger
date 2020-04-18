@@ -36,11 +36,13 @@ if (!_override) then {
     private _enemy = _unit findNearestEnemy (ASLToAGL _pos);
     if (isNull _enemy) exitWith {};
     _pos = ATLToASL (_unit getHideFrom _enemy);
-    private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
-    if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 };
 
-// mod pos
+// adjust pos
+private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
+if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+
+// max range pos
 private _distance = (_unit distance (ASLToAGL _pos)) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 

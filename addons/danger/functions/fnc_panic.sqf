@@ -31,7 +31,7 @@ if (GVAR(debug_functions)) then {format ["%1 - %2 in panic", side _unit, name _u
 
 // callout
 if (RND(0.4)) then {
-    [_unit, "Stealth", selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"], 55] call FUNC(doCallout);
+    [_unit, "Stealth", "panic", 55] call FUNC(doCallout);
 };
 
 // indoor -- gesture

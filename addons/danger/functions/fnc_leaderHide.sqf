@@ -63,8 +63,12 @@ if (_buildings isEqualTo []) then {
 
 // groups without launchers hide!
 {
+
+    // ready
+    doStop _x;
+
     // add suppression
-    _x setSuppression ((getSuppression _x) + random 1);
+    _x setSuppression 1;
 
     // hide
     _x setVariable [QGVAR(forceMove), true];

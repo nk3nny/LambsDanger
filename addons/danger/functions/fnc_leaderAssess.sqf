@@ -51,10 +51,30 @@ if !(_enemy isEqualTo []) then {
     // Enemy is in buildings or at lower position
     private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }}};
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
-        [_unit, 3, getPosATL (_enemy select _targets)] call FUNC(leaderMode);
 
-        // gesture
-        [_unit, ["gesturePoint"]] call FUNC(gesture);
+        // select type
+        private _target = _enemy select _targets;
+        private _type = [3, 3];
+
+        /*
+        Types
+            3 Flanking Manoeuvre
+            4 Assault
+            5 Group Suppressive fire
+        */
+
+        // combatmode 
+        if (combatMode _unit isEqualTo "RED") then {_type pushBack 4;};
+        if (combatMode _unit in ["YELLOW", "WHITE"]) then {_type pushBack 5;};
+
+        // visibility / distance / no cover / stopped
+        if !(terrainIntersectASL [eyepos _unit, eyepos _target]) then {_type pushBack 5;};
+        if (_unit distance2d _target < 120) then {_type pushBack 4;};
+        if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "CHAPEL", "HIDE"], 4, false, true ]) isEqualTo []) then {_type pushBack 3;};  // could be retreat in the future! - nkenny
+
+        // enable selection
+        _type = selectRandom _type;
+        [_unit, _type, getPosATL _target] call FUNC(leaderMode);
 
     };
 
@@ -79,7 +99,7 @@ if !(_enemy isEqualTo []) then {
         [_unit, 6, (_unit getHideFrom (_enemy select _targets))] call FUNC(leaderMode);
     };
 
-    // communicate <-- possible remove?
+    // communicate
     [_unit, selectRandom _enemy] call FUNC(shareInformation);
 
 } else {
@@ -88,6 +108,9 @@ if !(_enemy isEqualTo []) then {
     [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call FUNC(doCallout);
 
 };
+
+// move
+_unit forceSpeed 0;
 
 // binoculars if appropriate!
 if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {

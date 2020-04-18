@@ -46,13 +46,12 @@ if (RND(0.8) || { _buildings isEqualTo [] }) exitWith {
     if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
 
         // execute move
-        _unit doTarget _target;
         _unit doMove (_unit getHideFrom _target);
 
         // debug
         if (GVAR(debug_functions)) then {
-            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
-            private _sphere = createSimpleObject ["Sign_Sphere25cm_F", AGLtoASL (_unit getHideFrom _target), true];
+            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call FUNC(debugLog);
+            private _sphere = createSimpleObject ["Sign_Sphere25cm_F", ATLtoASL (_unit getHideFrom _target), true];
             _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
             [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
         };

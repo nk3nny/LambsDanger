@@ -36,9 +36,20 @@ _unit setVariable [QGVAR(currentTask), "Leader Artillery"];
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit setVariable [QGVAR(currentTask), "Call Artillery"];
 
+// movement
+_unit forceSpeed 0;
+_unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
+_unit setVariable [QGVAR(forceMove), true];
+
 // Gesture
 doStop _unit;
 [_unit, ["HandSignalRadio"]] call FUNC(gesture);
+
+// binoculars if appropriate!
+if (!(binocular _unit isEqualTo "")) then {
+    _unit selectWeapon (binocular _unit);
+    _unit doWatch _pos;
+};
 
 // callout
 [_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);

@@ -45,7 +45,7 @@ if (RND(0.85)) then {[_unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(ges
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // indoor just hide
-if (getSuppression _unit < 0.2 && {_unit call FUNC(indoor)}) exitWith {
+if (getSuppression _unit < 0.2 && {lineIntersects [eyepos _unit, (eyepos _unit) vectorAdd [0, 0, 10]]}) exitWith {
 
     // halt unit
     //doStop _unit;

@@ -18,14 +18,18 @@
 */
 params ["_unit", "_pos", ["_enemy", objNull]];
 
+// leadermode update
+[_unit, 1, _pos] call FUNC(leaderMode);
+
 // disable Reaction phase for player group
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set range
 private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, true];
+private _stealth = behaviour _unit isEqualTo "STEALTH";
 
 // drop down!
-private _stance = ["MIDDLE", selectRandom ["DOWN", "DOWN", "MIDDLE"]] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
+private _stance = [selectRandom ["DOWN", "DOWN", "MIDDLE"], "MIDDLE"] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
 // sort enemy
@@ -34,6 +38,9 @@ if (isNull _enemy) then {_enemy = _unit findNearestEnemy _pos;};
 // Share information!
 [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
 
+// leaders gestures
+if (count units _unit > 1) then {[formationLeader _unit, ["gestureFreeze"]] call FUNC(gesture);};
+
 // Callout
 _enemy = vehicle _enemy;
 private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "nameSound")) then {
@@ -41,27 +48,30 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
 } else {
     "contact"
 };
-[ [formationLeader _unit, _unit] select (RND(0.33)), "Combat", _callout, 100] call FUNC(doCallout);
+[ [formationLeader _unit, _unit] select (RND(0.33)), ["Combat", "Stealth"] select _stealth, _callout, 100] call FUNC(doCallout);
 
-// leaders gestures
-[formationLeader _unit, ["gestureCover", "gesturePoint", "gestureFreeze"]] call FUNC(gesture);
+// stealth ~ exits early to retain sneakiness or speed
+if (_stealth || {speedMode _unit isEqualTo "FULL"}) exitWith {
+    true
+};
 
 // get units
-private _units = ((units _unit) select { _x call FUNC(isAlive) && {_x distance2d _unit < 120} && { unitReady _x } && { isNull objectParent _x } && {!isPlayer _x}});
+private _units = (units _unit) select { _x call FUNC(isAlive) && { _x distance2d _unit < 135 } && { currentCommand _x isEqualTo "" } && { isNull objectParent _x } && { !isPlayer _x }};
 
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
 {
+
     [_x, _pos, _range + 15, _buildings] call FUNC(hideInside);
+
 } foreach _units;
 
 // caller slowdown!
 if (count _units > 1) then {
-    (leader _unit) forceSpeed 1;
-};
 
-// leadermode update
-[_unit, 1, _pos] call FUNC(leaderMode);
+    (leader _unit) forceSpeed 1;
+
+};
 
 // end
 true

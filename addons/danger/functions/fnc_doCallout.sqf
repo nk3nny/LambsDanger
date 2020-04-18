@@ -56,6 +56,9 @@ if (isNil "_cachedSounds") then {
         case ("suppress"): {
             selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"]
         };
+        case ("panic"): {
+            selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"]
+        };
         default {
             if (isArray (_protocolConfig >> _callout)) then {
                 _callout;

@@ -25,7 +25,7 @@ private _dir = 360 - (_unit getRelDir _pos);
 _unit setVariable [QGVAR(currentTask), "Dodge!"];
 
 // prone override
-if (_stance isEqualTo "PRONE") exitWith {
+if (_stance isEqualTo "PRONE" && {!(_unit call FUNC(indoor))}) exitWith {
     [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call FUNC(gesture);
     _stance
 };
@@ -33,6 +33,7 @@ if (_stance isEqualTo "PRONE") exitWith {
 // ACE3 captive exit
 if (
     GVAR(disableAIImediateAction)
+    || {!(_unit checkAIFeature "MOVE")} // not stopping with PATH for gameplay reasons -nkenny
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
 ) exitWith {_stance};
@@ -45,7 +46,7 @@ if (RND(0.6)) then {
 // reset speed
 _unit forceSpeed -1;
 
-private _suppression = getSuppression _unit > 0.1;
+private _suppression = getSuppression _unit > 0.55;
 private _anim = [];
 
 // move right
