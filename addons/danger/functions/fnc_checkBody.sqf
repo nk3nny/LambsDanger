@@ -27,11 +27,11 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
-// look at it 
-_unit lookAt _pos; 
+// look at it
+_unit lookAt _pos;
 
-// leaders gesture 
-[formationLeader _unit, ["gesturePoint"]] call FUNC(gesture); 
+// leaders gesture
+[formationLeader _unit, ["gesturePoint"]] call FUNC(gesture);
 
 // if too far away
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
@@ -57,7 +57,7 @@ _unit setVariable [QGVAR(currentTask), "Check Body"];
 // do it
 private _bodyPos = getPosATL _body;
 _unit doMove _bodyPos;
-_unit forceSpeed ([_unit, _bodyPos] call lambs_danger_fnc_assaultSpeed);
+_unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
 [
     {
         // condition

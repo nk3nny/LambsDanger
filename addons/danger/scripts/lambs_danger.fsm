@@ -12,7 +12,7 @@ item7[] = {"Next__cause",4,218,1225.000000,-375.000000,1300.000000,-325.000000,1
 item8[] = {"Always",8,218,1225.000000,775.000000,1300.000000,825.000000,0.000000,"Always"};
 item9[] = {"Exit_Variables",4,218,1300.000000,-450.000000,1400.000000,-400.000000,12.000000,"Exit Variables"};
 item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.000000,"Begin"};
-item11[] = {"Ready",2,4346,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
+item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
@@ -42,7 +42,7 @@ item37[] = {"Leader",4,218,625.000000,-150.000000,725.000000,-75.000000,5.000000
 item38[] = {"Leader___Continu",2,250,400.000000,525.000000,500.000000,575.000000,0.000000,"Leader: " \n "Continue"};
 item39[] = {"Leader_Assess",4,218,75.000000,0.000000,175.000000,50.000000,3.000000,"Leader" \n "Assess"};
 item40[] = {"Evaluate",2,250,625.000000,50.000000,725.000000,100.000000,0.000000,"Evaluate"};
-item41[] = {"Assess___Continu",2,250,75.000000,75.000000,175.000000,125.000000,0.000000,"Assess: " \n "Continue"};
+item41[] = {"Assess___Continu",2,4346,75.000000,75.000000,175.000000,125.000000,0.000000,"Assess: " \n "Continue"};
 item42[] = {"___Contact",4,218,525.000000,200.000000,625.000000,250.000000,0.000000,"1" \n "Contact"};
 item43[] = {"Contact___Contin",2,250,525.000000,275.000000,625.000000,325.000000,0.000000,"Contact: " \n "Continue"};
 item44[] = {"___Hide_",4,218,625.000000,200.000000,725.000000,250.000000,1.000000,"2" \n "Hide!"};
@@ -273,7 +273,7 @@ link114[] = {89,46};
 link115[] = {90,91};
 link116[] = {91,46};
 link117[] = {92,93};
-globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-832.630981,388.397217,781.394714,-614.968567,773,884,1};
+globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-342.314209,419.026123,684.197327,-186.468750,773,884,1};
 window[] = {2,-1,-1,-1,-1,917,104,906,104,3,791};
 *//*%FSM</HEAD>*/
 class FSM
@@ -1038,13 +1038,9 @@ class FSM
                         name = "Reset_Investigate";
                         itemno = 36;
                         init = /*%FSM<STATEINIT""">*/"" \n
-                         "// stance " \n
-                         "//_this setUnitPos ""AUTO"";" \n
-                         "" \n
                          "// join" \n
                          "_this doFollow (leader _this);" \n
-                         "_this forceSpeed -1;" \n
-                         ""/*%FSM</STATEINIT""">*/;
+                         "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1188,10 +1184,10 @@ class FSM
                         itemno = 41;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// time out " \n
-                         "_timeout = time  + 8; " \n
+                         "_timeout = time  + 9; " \n
                          "" \n
                          "// leader assessment " \n
-                         "[_this, _dangerPos] call lambs_danger_fnc_leaderAssess; " \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_leaderAssess;" \n
                          "" \n
                          "// debug " \n
                          "if (lambs_danger_debug_FSM) then {" \n

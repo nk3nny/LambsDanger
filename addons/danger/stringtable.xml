@@ -99,19 +99,15 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment">
             <English>Disable units deploying static weapons</English>
-            <German>TODO</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment_ToolTip">
             <English>Toggles AI group ability to dynamically deploy static/backpack weapons</English>
-            <German>TODO</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding">
             <English>Disable units manning static weapons</English>
-            <German>TODO</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding_ToolTip">
             <English>Toggles AI group ability ability to dynamically find and man vacant static turrets</English>
-            <German>TODO</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>

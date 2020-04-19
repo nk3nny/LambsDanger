@@ -32,7 +32,7 @@ if (_units isEqualTo []) then {
 // find vehicles
 private _vehicles = [];
 {
-    if (!(isNull objectParent _x) && {isTouchingGround vehicle _x} && {canFire vehicle _x}) then {
+    if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
         _vehicles pushBackUnique vehicle _x;
     };
 } foreach units _unit;
@@ -63,8 +63,8 @@ private _fnc_suppress = {
     params ["_cycle", "_units", "_vehicles", "_pos", "_fnc_suppress"];
 
     // update
-    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
-    _vehicles = _vehicles select {canfire _x};
+    _units = _units select {_x call FUNC(isAlive) && { !isPlayer _x }};
+    _vehicles = _vehicles select { canfire _x };
     _cycle = _cycle - 1;
 
     // infantry
