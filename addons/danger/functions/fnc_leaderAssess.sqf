@@ -122,14 +122,7 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
 };
 
 // find units
-private _units = units _unit select {
-    !(_unit isEqualTo _x)
-    && {_x call FUNC(isAlive)}
-    && {unitReady _x}
-    && { _x distance2d _unit < 150 }
-    && { isNull objectParent _x }
-    && { !isPlayer _x }
-};
+private _units = [_unit] call FUNC(findReadyUnits);
 
 // deploy static weapons ~ also returns available units
 _units = [_units, _pos] call FUNC(leaderStaticDeploy);

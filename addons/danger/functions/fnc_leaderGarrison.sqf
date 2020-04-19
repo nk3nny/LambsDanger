@@ -14,7 +14,7 @@
  * success
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_leaderAssault;
+ * [bob, angryJoe] call lambs_danger_fnc_leaderGarrison;
  *
  * Public: No
 */
@@ -28,12 +28,7 @@ if !(attackEnabled _unit) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {
-        _x call FUNC(isAlive)
-        && {!isPlayer _x}
-        && {!fleeing _x}
-        && {_x distance _unit < 120}
-    };
+    _units = [_unit, 125] call FUNC(findReadyUnits);
 };
 
 // sort building locations

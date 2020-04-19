@@ -35,7 +35,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = [_unit, 250] call FUNC(findReadyUnits);
 };
 
 // sort building locations
@@ -78,7 +78,7 @@ private _fnc_assault = {
         _x forceSpeed 3;
         _x setUnitPosWeak "UP";
         _x setVariable [QGVAR(currentTask), "Group Assault"];
-        _x setVariable [QGVAR(forceMOVE), true];
+        _x setVariable [QGVAR(forceMove), true];
 
         // force movement
         [_x, ["TactF", "TactF", "TactLF", "TactRF"], true] call FUNC(gesture);

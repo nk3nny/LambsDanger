@@ -18,8 +18,11 @@
 
 params ["_units", "_unit"];
 
+// never leader
+_units = _units - [_unit];
+
 // prevent deployment of static weapons
-if (GVAR(disableAIFindStaticWeapons)) exitWith {_units};
+if (GVAR(disableAIFindStaticWeapons) || {_units isEqualTo []}) exitWith {_units};
 
 // man empty statics
 private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];

@@ -19,7 +19,7 @@
 params ["_units", "_pos"];
 
 // prevent deployment of static weapons
-if (GVAR(disableAIDeployStaticWeapons)) exitWith {_units};
+if (GVAR(disableAIDeployStaticWeapons) || {_units isEqualTo []}) exitWith {_units};
 
 // find gunner
 private _gunner = _units findIf {unitBackpack _x isKindOf "Weapon_Bag_Base"};
@@ -40,7 +40,7 @@ private _assistant = _units findIf {
 };
 
 // define assistant
-if (_assistant isEqualTo -1) exitWith {_units + _gunner};
+if (_assistant isEqualTo -1) exitWith {_units + [_gunner]};
 _assistant = _units deleteAt _assistant;
 
 // Manoeuvre gunner 
@@ -65,14 +65,17 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
 [formationLeader _gunner, "aware", "AssembleThatWeapon"] call FUNC(doCallout);
 
 // find position ~ kept simple for now!
-private _weaponPos = [ getpos _gunner, 0, 15, 2, 0, 0.19, 0, [], [getpos _gunner, getpos _gunner]] call BIS_fnc_findSafePos;
+private _weaponPos = [ getpos _gunner, 0, 15, 2, 0, 0.19, 0, [], [getpos (leader _gunner), getpos (leader _gunner)]] call BIS_fnc_findSafePos;
+_weaponPos set [2, 0];
 
 // ready units
 {
     doStop _x;
-    _x setUnitPos "MIDDLE";
-    _x setVariable [QGVAR(forceMOVE), true];
+    _x setUnitPosWeak "MIDDLE";
+    _x setVariable [QGVAR(forceMove), true];
+    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon"];
     _x doMove _weaponPos;
+    //_x setDestination [_weaponPos, "LEADER DIRECT", false];
 
 } foreach [_gunner, _assistant];
 
@@ -80,13 +83,13 @@ private _weaponPos = [ getpos _gunner, 0, 15, 2, 0, 0.19, 0, [], [getpos _gunner
 [
     {
         // condition
-        params ["_gunner", "_assistant", "_pos", ""];
-        (_assistant distance2d _gunner < 1.7 && {unitReady _gunner}) || {fleeing _gunner} || {fleeing _assistant} || {unitReady _assistant}
+        params ["_gunner", "_assistant", "_pos", "_weaponPos", ""];
+        (unitReady _gunner || {_gunner distance2d _assistant < 3}) || {fleeing _gunner} || {fleeing _assistant}
     },
     {
         // on near gunner
         params ["_gunner", "_assistant", "_pos", ""];
-        if (fleeing _gunner || {fleeing _assistant}) exitWith {false};
+        if (fleeing _gunner || {fleeing _assistant} || {!(_gunner call FUNC(isAlive))}) exitWith {false};
 
         // assemble weapon
         _gunner action ["PutBag", _assistant];
@@ -101,14 +104,13 @@ private _weaponPos = [ getpos _gunner, 0, 15, 2, 0, 0.19, 0, [], [getpos _gunner
         [_assistant, ["gesturePoint"]] call FUNC(gesture);
 
     },
-    [_gunner, _assistant, _pos, _EH], 8,
+    [_gunner, _assistant, _pos, _weaponPos, _EH], 8,
     {
         // on timeout
-        params ["_gunner", "_assistant", "", "_EH"];
-        
+        params ["_gunner", "_assistant", "", "", "_EH"];
         {
             _x doFollow (leader _x);
-        } foreach ([_gunner, _assistant] select {alive _x});
+        } foreach ([_gunner, _assistant] select { _x call FUNC(isAlive) });
         _gunner removeEventHandler ["WeaponAssembled", _EH];
     }
 ] call CBA_fnc_waitUntilAndExecute;

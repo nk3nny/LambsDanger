@@ -59,10 +59,10 @@ if (_stealth || {speedMode _unit isEqualTo "FULL"}) exitWith {
 private _units = (units _unit) select { _x call FUNC(isAlive) && { _x distance2d _unit < 135 } && { currentCommand _x isEqualTo "" } && { isNull objectParent _x } && { !isPlayer _x }};
 
 // leaders get their subordinates to hide!
-private _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
 {
 
-    [_x, _pos, _range + 15, _buildings] call FUNC(hideInside);
+    [_x, _pos, _range, _buildings] call FUNC(hideInside);
 
 } foreach _units;
 

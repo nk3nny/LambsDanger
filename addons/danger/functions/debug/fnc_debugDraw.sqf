@@ -58,19 +58,25 @@ private _fnc_dangerModeTypes = {
             "Contact";
         };
         case (2): {
-            "Hide from tank/air craft";
+            "Group Hide (air/armor)";
         };
         case (3): {
-            "Flanking";
+            "Group Flank";
         };
         case (4): {
-            "Assaulting"
+            "Group Assault"
         };
         case (5): {
-            "Suppressing"
+            "Group Suppress"
         };
         case (6): {
-            "Call artillery"
+            "Call Artillery"
+        };
+        case (7): {
+            "Call CAS"
+        };
+        case (8): {
+            "Group Garrison"
         };
     };
 };

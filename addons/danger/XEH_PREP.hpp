@@ -7,6 +7,7 @@ PREP(doCallout);
 PREP(findBuildings);
 PREP(findCover);
 PREP(findOverwatch);
+PREP(findReadyUnits);
 PREP(fleeing);
 PREP(fsmAllowAnimation);
 PREP(fsmExitVariables);

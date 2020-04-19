@@ -26,7 +26,7 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = [_unit] call FUNC(findReadyUnits);
 };
 
 // find vehicles
@@ -71,13 +71,14 @@ private _fnc_suppress = {
     {
 
         // ready
-        //_x setVariable [QGVAR(forceMOVE), true];
+        //_x setVariable [QGVAR(forceMove), true];
         _x setVariable [QGVAR(currentTask), "Group Suppress"];
         private _posAGL = selectRandom _pos;
 
         // suppressive fire
         _x forceSpeed 1;
         _x setUnitPosWeak "MIDDLE";
+        _x doWatch _posAGL;
         private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(suppress);
 
         // no LOS

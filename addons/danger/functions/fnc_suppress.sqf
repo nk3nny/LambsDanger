@@ -71,7 +71,7 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 
 // debug
 if (GVAR(debug_functions)) then {
-    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call FUNC(debugLog);
+    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call FUNC(debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];

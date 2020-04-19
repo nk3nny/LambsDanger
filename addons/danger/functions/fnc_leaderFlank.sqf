@@ -35,7 +35,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
 // find units
 if (_units isEqualTo []) then {
-    _units = (units _unit) select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = [_unit, 200] call FUNC(findReadyUnits);
 };
 
 // sort building locations
@@ -88,7 +88,7 @@ private _fnc_manoeuvre = {
             _x forceSpeed 4;
             _x setUnitPosWeak "MIDDLE";
             _x setVariable [QGVAR(currentTask), "Group Flank"];
-            _x setVariable [QGVAR(forceMOVE), getSuppression _x > 0.5];
+            _x setVariable [QGVAR(forceMove), getSuppression _x > 0.5];
 
             // force movement
             _x doMove _overwatch;
