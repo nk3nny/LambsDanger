@@ -1,7 +1,8 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Leader rallies troops and garrisons nearby building from top to bottom with an option to remain firm
+ * Leader rallies troops and garrisons nearby building from top to bottom with an option to remain firm. 
+ * COMMENT: Future versions of this function could leverage the more advanced Waypoint ~ nkenny
  *
  * Arguments:
  * 0: Group leader <OBJECT>

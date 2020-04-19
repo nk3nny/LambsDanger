@@ -43,16 +43,12 @@ private _pos = [_target, 12, true, false] call FUNC(findBuildings);
 _pos pushBack _target;
 
 // find overwatch position
-private _overwatch = [getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch);
-
-// overwatch Failed ~ pick forest or house locations
-if (_overwatch distance2d _target < 40) then {
-
-    _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(1 + forest + trees + houses) * (1 - meadow) * (1 - deadBody)", 100 , 3] apply {_x select 0};
-    _overwatch = _overwatch select {!(surfaceIsWater _x)};
-    _overwatch = selectRandom _overwatch;
-
-};
+private _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2d _unit, _x select 0]};
+_overwatch sort true;
+_overwatch = _overwatch apply {_x select 1};
+_overwatch = _overwatch select {!(surfaceIsWater _x)};
+_overwatch pushBack ([getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch));
+_overwatch = _overwatch select 0;
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -63,7 +59,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Flank"];
 [_units select (count _units - 1), ["gestureGoB"]] call FUNC(gesture);
 
 // leader callout
-[_unit, "combat", selectRandom ["OnYourFeet ", "Advance"], 125] call FUNC(doCallout);
+[_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call FUNC(doCallout);
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
