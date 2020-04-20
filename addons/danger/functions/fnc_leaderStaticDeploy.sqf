@@ -88,13 +88,13 @@ if (_weaponPos isEqualTo []) then {
 [
     {
         // condition
-        params ["_gunner", "_assistant", "", "_weaponPos", ""];
+        params ["_gunner", "_assistant", "", "_weaponPos"];
         (_gunner distance2d _weaponPos < 2 || {_gunner distance2d _assistant < 3}) || {fleeing _gunner} || {fleeing _assistant}
         // use of OR here to facilitiate the sometimes shoddy irreverent A3 pathfinding ~ nkenny
     },
     {
         // on near gunner
-        params ["_gunner", "_assistant", "_pos", "", ""];
+        params ["_gunner", "_assistant", "_pos"];
         if (fleeing _gunner || {fleeing _assistant} || {!(_gunner call FUNC(isAlive))}) exitWith {false};
 
         // assemble weapon

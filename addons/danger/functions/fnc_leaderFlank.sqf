@@ -76,7 +76,7 @@ private _fnc_manoeuvre = {
     {
         private _posASL = AGLtoASL (selectRandom _pos);
 
-        // Half suppress -- Half manoeuvre
+        // suppress
         if (!(terrainIntersectASL [eyePos _x, _posASL]) && {RND(0.65)}) then {
             
             _x doWatch ASLtoAGL _posASL;

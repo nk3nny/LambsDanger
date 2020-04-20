@@ -80,9 +80,6 @@ private _fnc_assault = {
         _x setVariable [QGVAR(currentTask), "Group Assault"];
         _x setVariable [QGVAR(forceMove), true];
 
-        // force movement
-        [_x, ["TactF", "TactF", "TactLF", "TactRF"], true] call FUNC(gesture);
-
     } foreach _units;
 
     // recursive cyclic

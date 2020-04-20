@@ -42,7 +42,7 @@ item37[] = {"Leader",4,218,625.000000,-150.000000,725.000000,-75.000000,5.000000
 item38[] = {"Leader___Continu",2,250,400.000000,525.000000,500.000000,575.000000,0.000000,"Leader: " \n "Continue"};
 item39[] = {"Leader_Assess",4,218,75.000000,0.000000,175.000000,50.000000,3.000000,"Leader" \n "Assess"};
 item40[] = {"Evaluate",2,250,625.000000,50.000000,725.000000,100.000000,0.000000,"Evaluate"};
-item41[] = {"Assess___Continu",2,4346,75.000000,75.000000,175.000000,125.000000,0.000000,"Assess: " \n "Continue"};
+item41[] = {"Assess___Continu",2,250,75.000000,75.000000,175.000000,125.000000,0.000000,"Assess: " \n "Continue"};
 item42[] = {"___Contact",4,218,525.000000,200.000000,625.000000,250.000000,0.000000,"1" \n "Contact"};
 item43[] = {"Contact___Contin",2,250,525.000000,275.000000,625.000000,325.000000,0.000000,"Contact: " \n "Continue"};
 item44[] = {"___Hide_",4,218,625.000000,200.000000,725.000000,250.000000,1.000000,"2" \n "Hide!"};
@@ -80,7 +80,7 @@ item75[] = {"EXIT_VARIABLES_Unconcious",-1,250,1500.000000,-425.000000,1725.0000
 item76[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
 item77[] = {"Artillery__none",2,250,-1125.000000,150.000000,-1025.000000,200.000000,0.000000,"Artillery:" \n "none"};
 item78[] = {"Move_",4,218,-350.000000,0.000000,-250.000000,50.000000,10.000000,"Move!"};
-item79[] = {"Force_move",2,250,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Force move"};
+item79[] = {"Force_move",2,4346,-350.000000,75.000000,-250.000000,125.000000,0.000000,"Force move"};
 item80[] = {"Timeout",4,218,-350.000000,175.000000,-250.000000,225.000000,0.000000,"Timeout"};
 item81[] = {"Reset_Move___Con",2,250,-350.000000,275.000000,-250.000000,325.000000,0.000000,"Reset Move: " \n "Continue"};
 item82[] = {"Timeout",4,218,-725.000000,300.000000,-625.000000,350.000000,0.000000,"Timeout"};
@@ -273,8 +273,8 @@ link114[] = {89,46};
 link115[] = {90,91};
 link116[] = {91,46};
 link117[] = {92,93};
-globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-342.314209,419.026123,684.197327,-186.468750,773,884,1};
-window[] = {2,-1,-1,-1,-1,917,104,906,104,3,791};
+globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-518.342651,-68.778992,512.818787,-1.300585,773,884,1};
+window[] = {2,-1,-1,-1,-1,891,78,880,78,3,791};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1786,8 +1786,13 @@ class FSM
                          "// time out " \n
                          "_timeout = time + 4 + random 6; " \n
                          "" \n
-                         "// readd event to queue" \n
+                         "// re-add event to queue" \n
                          "_queue pushBack [0, _dangerPos, _dangerUntil + 8, _dangerCausedBy ];" \n
+                         "" \n
+                         "// cover" \n
+                         "private _cover = _this checkAIFeature ""COVER"";" \n
+                         "_this disableAI ""COVER"";" \n
+                         "_this setDestination (expectedDestination _this);" \n
                          "" \n
                          "// ACE3 medical ~ delay 10 seconds on bandaging" \n
                          "_this setVariable [""ace_medical_ai_lastFired"", CBA_missionTime - 20];" \n
@@ -1822,6 +1827,9 @@ class FSM
                         name = "Reset_Move___Con";
                         itemno = 81;
                         init = /*%FSM<STATEINIT""">*/"" \n
+                         "// reset cover" \n
+                         "if (_cover) then {_this enableAI ""COVER"";};" \n
+                         "" \n
                          "// reset variable" \n
                          "_this setVariable [""lambs_danger_forceMove"", nil];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
