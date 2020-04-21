@@ -31,7 +31,7 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = ELSTRING(main,NoUnitSelected);
+                _error = LELSTRING(main,NoUnitSelected);
             };
 
             // resets unit
@@ -40,7 +40,7 @@ switch (_mode) do {
                 [objNull, format ["%1 reset", groupId _group]] call BIS_fnc_showCuratorFeedbackMessage;
                 [_group] remoteExecCall [QFUNC(taskRest), leader _group];
             } else {
-                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
             };
 
             // clean up

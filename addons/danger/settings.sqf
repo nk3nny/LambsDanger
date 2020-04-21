@@ -252,7 +252,7 @@ DFUNC(UpdateCQBFormations) = {
     [
         format [QGVAR(CQB_formations_%1), _x],
         "CHECKBOX",
-        [_x, format ["%1 %2", _x, localize LSTRING(Settings_CQBFormation)]],
+        [_x, format ["%1 %2", _x, LLSTRING(Settings_CQBFormation)]],
         [COMPONENT_NAME, _curCat],
         _x in GVAR(CQB_formations),
         1, _code

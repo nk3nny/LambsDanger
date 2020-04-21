@@ -30,14 +30,14 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = ELSTRING(main,NoUnitSelected);
+                _error = LELSTRING(main,NoUnitSelected);
             };
             if (_error == "") then {
                 private _success = [_group] call FUNC(taskArtilleryRegister);
-                [objNull, localize ([LSTRING(Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded), LSTRING(Module_TaskArtilleryRegister_ZeusNotification_UnitAdded)] select _success)] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, ([LLSTRING(Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded), LLSTRING(Module_TaskArtilleryRegister_ZeusNotification_UnitAdded)] select _success)] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             } else {
-                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             };
         } else {

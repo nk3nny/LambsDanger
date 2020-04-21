@@ -44,7 +44,7 @@ switch (_mode) do {
                         private _group = _groups select _groupIndex;
                         if !((local _group) || _deleteAfterStartup) then {
                             _deleteAfterStartup = true;
-                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
+                            [objNull, format [LLSTRING(SettingIsOnlyForLocalGroups), LLSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
                         [_group, [_logic, getPos _logic] select _deleteAfterStartup, _radius, _cycle, nil, false] remoteExec [QFUNC(taskCQB), leader _group];
                         if (_deleteAfterStartup) then {
@@ -59,7 +59,7 @@ switch (_mode) do {
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName localize LSTRING(Self);
+                _logic setVehicleVarName LLSTRING(Self);
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);

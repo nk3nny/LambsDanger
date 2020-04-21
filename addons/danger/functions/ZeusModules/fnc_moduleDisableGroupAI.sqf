@@ -10,7 +10,7 @@ if (_activated && local _logic) then {
     //--- Check if the unit is suitable
     private _error = "";
     if (isNull _group) then {
-        _error = ELSTRING(main,NoGroupSelected);
+        _error = LELSTRING(main,NoGroupSelected);
     };
 
     if (_error == "") then {
@@ -32,7 +32,7 @@ if (_activated && local _logic) then {
             }, [_group, _logic]
         ] call EFUNC(main,showDialog);
     } else {
-        [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
+        [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
         deleteVehicle _logic;
     };
 };

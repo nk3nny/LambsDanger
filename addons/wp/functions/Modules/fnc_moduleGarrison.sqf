@@ -54,7 +54,7 @@ switch (_mode) do {
                         deleteVehicle _logic;
                     }, [_groups, _logic]] call EFUNC(main,showDialog);
             } else {
-                _logic setVehicleVarName localize LSTRING(Self);
+                _logic setVehicleVarName LLSTRING(Self);
                 private _targets = [_logic];
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
                 _targets append GVAR(ModuleTargets);
