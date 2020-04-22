@@ -65,7 +65,7 @@ _unit setVariable [QGVAR(forceMove), true];
 _unit setVariable [QGVAR(currentTask), "Shoot flare"];
 
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
-private _dummy = "Sign_Sphere10cm_F" createvehicle (getpos _unit);
+private _dummy = "Sign_Sphere10cm_F" createvehicle [0, 0, 0];
 _dummy setpos ((_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]);
 _unit reveal _dummy;
 
