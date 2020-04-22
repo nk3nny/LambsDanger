@@ -4,7 +4,7 @@
  * Picks one unit from an array to shoot flare if available
  *
  * Arguments:
- * 0: Units  <ARRAY>
+ * 0: Units  <ARRAY>, <GROUP> or <OJECT>
  *
  * Return Value:
  * available units
@@ -16,6 +16,10 @@
 */
 
 params ["_units"];
+
+// single unit
+if (_units isEqualType objNull) then {_units = [_units]};
+if (_units isEqualType grpNull) then {_units = units _units};
 
 // find grenade launcher
 private _flare = "";
@@ -62,7 +66,7 @@ _unit setVariable [QGVAR(currentTask), "Shoot flare"];
 
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
 private _dummy = "Sign_Sphere10cm_F" createvehicle (getpos _unit);
-_dummy setpos ((_unit getPos [50, getDir formationLeader _unit]) vectorAdd [0, 0, 200]);
+_dummy setpos ((_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]);
 _unit reveal _dummy;
 
 // store - remove
@@ -71,7 +75,6 @@ _unit removeMagazine _flare;
 _unit addWeaponItem [currentWeapon _unit, _flare];
 
 // watch
-//_unit doWatch ((_unit getPos [50, formationDirection _unit]) vectorAdd [0, 0, 125]);
 _unit doTarget _dummy;
 
 // force fire

@@ -72,6 +72,25 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Toggles units self-use of smoke grenades for cover
+[
+    QGVAR(disableAutonomousSmokeGrenades),
+    "CHECKBOX",
+    [LSTRING(Settings_DisableAutonomousSmokeGrenades), LSTRING(Settings_DisableAutonomousSmokeGrenades_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
+
+// Toggles units self-use of flares for illumation
+[
+    QGVAR(disableAutonomousFlares),
+    "CHECKBOX",
+    [LSTRING(Settings_DisableAutonomousFlares), LSTRING(Settings_DisableAutonomousFlares_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
+] call CBA_fnc_addSetting;
 
 // Toggles AI Unit Gestures
 [
@@ -114,6 +133,7 @@ private _curCat = LSTRING(Settings_MainCat);
 ] call CBA_fnc_addSetting;
 
 private _curCat = LSTRING(Settings_GeneralCat);
+
 // Range at which units consider themselves in CQB
 [
     QGVAR(CQB_range),
@@ -140,7 +160,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
     "SLIDER",
     [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [0, 50, 3, 0],
+    [0, 50, 5, 0],
     1
 ] call CBA_fnc_addSetting;
 

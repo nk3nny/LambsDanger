@@ -19,12 +19,16 @@
 
 params ["_units", "_pos", ["_weaponPos", []]];
 
+// sort units
+if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits) };
+if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits) };
+
 // prevent deployment of static weapons
-if (GVAR(disableAIDeployStaticWeapons) || {_units isEqualTo []}) exitWith { _units };
+if (_units isEqualTo []) exitWith { _units };
 
 // find gunner
 private _gunner = _units findIf { unitBackpack _x isKindOf "Weapon_Bag_Base" };
-if (_gunner isEqualTo -1) exitWith {_units};
+if (_gunner isEqualTo -1) exitWith { _units };
 
 // define gunner
 _gunner = _units deleteAt _gunner;
@@ -107,7 +111,13 @@ if (_weaponPos isEqualTo []) then {
         _weapon setVectorUp surfaceNormal position _weapon;
         _weapon doWatch _pos;
 
+        // register
+        private _weaponList = group _gunner getVariable [QGVAR(staticWeaponList), []];
+        _weaponList pushBackUnique _weapon;
+        group _gunner setVariable [QGVAR(staticWeaponList), _weaponList, true];
+
         // assistant
+        doStop _assistant;
         _assistant doWatch _pos;
         [_assistant, ["gesturePoint"]] call FUNC(gesture);
 

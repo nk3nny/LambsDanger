@@ -51,6 +51,13 @@ if !(_launchers isEqualTo []) exitWith {
     // extra aggression from unit
     _unit doFire _target;
 
+    // leaders rally troops in preparation
+    if !( (speedMode _unit) isEqualTo "FULL" ) then {
+
+        [_unit, 8, getpos _unit] call FUNC(leaderMode);
+
+    };
+
     // end
     true
 

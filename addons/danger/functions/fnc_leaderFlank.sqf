@@ -8,6 +8,7 @@
  * 1: Group threat unit <OBJECT> or position <ARRAY>
  * 2: Units in group, default all <ARRAY>
  * 3: How many assault cycles, default four <NUMBER>
+ * 4: Overwatch destination <ARRAY>
  *
  * Return Value:
  * success
@@ -17,7 +18,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 3]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []]];
 
 // stopped or static
 if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
@@ -51,12 +52,16 @@ private _pos = [_target, 12, true, false] call FUNC(findBuildings);
 _pos pushBack _target;
 
 // find overwatch position
-private _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2d _unit, _x select 0]};
-_overwatch sort true;
-_overwatch = _overwatch apply {_x select 1};
-_overwatch = _overwatch select {!(surfaceIsWater _x)};
-_overwatch pushBack ([getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch));
-_overwatch = _overwatch select 0;
+if (_overwatch isEqualTO []) then {
+
+    _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2d _unit, _x select 0]};
+    _overwatch sort true;
+    _overwatch = _overwatch apply {_x select 1};
+    _overwatch = _overwatch select {!(surfaceIsWater _x)};
+    _overwatch pushBack ([getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch));
+    _overwatch = _overwatch select 0;
+
+};
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target];
@@ -78,7 +83,7 @@ private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = _units select { _x call FUNC(isAlive) && { _x distance2D (_pos select 0) > 20 } && { !isPlayer _x } };
     _cycle = _cycle - 1;
 
     {
@@ -117,7 +122,7 @@ private _fnc_manoeuvre = {
         [
             _fnc_manoeuvre,
             [_cycle, _units, _vehicles, _pos, _overwatch, _fnc_manoeuvre],
-            10 + random 6
+            12 + random 9
         ] call CBA_fnc_waitAndExecute;
     };
 };

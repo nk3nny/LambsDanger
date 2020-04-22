@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Unit considers if it is night (necessary to shoot flares essentially)
+ * Unit considers if it is night and therefore necessary to provide light
  *
  * Arguments:
  * 0: Unit  <OBJECT>
@@ -17,10 +17,9 @@
 
 params ["_unit"];
 
-// stealth mode or has nightvision or global variable <-- TODO
+// stealth mode or has nightvision
 if (behaviour _unit isEqualTo "STEALTH" 
     || {!( ( (assignedItems _unit) select 5 ) isEqualTo "" )}
-    || {false}
 ) exitWith {false};
 
 // night check

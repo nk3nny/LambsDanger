@@ -4,7 +4,7 @@
  * Unit finds and throws smoke grenade at location
  *
  * Arguments:
- * 0: Unit  <OBJECT>
+ * 0: Unit  <OBJECT>, <ARRAY> or <GROUP>
  * 1: Position <ARRAY>, optional
  * 2: Type, corresponds to ai usage flags <string> optional
  *
@@ -19,8 +19,9 @@
 
 params ["_unit", ["_pos", []], ["_type", "4 + 2"]];
 
-// no autnomous smoke throwing  <--- TODO nkenny (also do check elsewhere to preserve usefullness of this function)
-if (false) exitWith {false};
+// single unit
+if (_unit isEqualType []) then {_unit = selectRandom _unit};
+if (_unit isEqualType grpNull) then {_unit = leader _unit};
 
 // get magazines
 private _magazines = magazinesAmmo _unit;
@@ -54,7 +55,7 @@ _muzzle = configName (_muzzleList select _muzzle);
 
 // turn towards target 
 if !(_pos isEqualTo []) then {
-    _unit doWatch _pos
+    _unit doWatch _pos;
     _unit setVariable [QGVAR(currentTarget), _pos];
 };
 

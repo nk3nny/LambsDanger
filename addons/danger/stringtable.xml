@@ -107,7 +107,19 @@
             <English>Disable units manning static weapons</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding_ToolTip">
-            <English>Toggles AI group ability ability to dynamically find and man vacant static turrets</English>
+            <English>Toggles AI group ability to dynamically find and man vacant static turrets</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades">
+            <English>Disable autonomous smoke usage</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades_ToolTip">
+            <English>Toggles AI group ability to autonomously use smoke to cover group manoeuvres</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
+            <English>Disable units using flares for illumination </English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares_ToolTip">
+            <English>Toggles AI group ability to autonomously use flares for illumation at nighttime unless NVGs are available or unit is in stealth mode</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>

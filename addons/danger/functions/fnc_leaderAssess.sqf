@@ -132,11 +132,20 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
 // find units
 private _units = [_unit] call FUNC(findReadyUnits);
 
+// deploy flares
+if !((GVAR(disableAutonomousFlares)) || {_unit call FUNC(isNight)}) then {
+    _units = [_units] call FUNC(doFlare);
+};
+
 // deploy static weapons ~ also returns available units
-_units = [_units, _pos] call FUNC(leaderStaticDeploy);
+if !(GVAR(disableAIDeployStaticWeapons)) then {
+    _units = [_units, _pos] call FUNC(leaderStaticDeploy);
+};
 
 // man empty static weapons
-_units = [_units, _unit] call FUNC(leaderStaticFind);
+if !(GVAR(disableAIFindStaticWeapons)) then {
+    _units = [_units, _unit] call FUNC(leaderStaticFind);
+};
 
 // set current task
 _unit setVariable [QGVAR(currentTarget), objNull];

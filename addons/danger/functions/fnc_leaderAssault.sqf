@@ -30,6 +30,9 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
     [_unit, _target] call FUNC(leaderGarrison);
 
+    // leader smoke
+    [_unit, _target] call FUNC(doSmoke);
+
     false
 };
 
@@ -52,6 +55,9 @@ _unit setVariable [QGVAR(currentTask), "Leader Assault"];
 
 // leader callout
 [_unit, "combat", "Advance", 125] call FUNC(doCallout);
+
+// leader smoke
+[_unit, _target] call FUNC(doSmoke);
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -87,7 +93,7 @@ private _fnc_assault = {
         [
             _fnc_assault,
             [_cycle, _units, _pos, _fnc_assault],
-            8
+            10
         ] call CBA_fnc_waitAndExecute;
     };
 };
