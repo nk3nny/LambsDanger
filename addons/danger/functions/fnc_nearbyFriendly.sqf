@@ -9,7 +9,7 @@
  * 2: radius being checked within <NUMBER> 
  *
  * Return Value:
- * BOOLEAN
+ * Array
  *
  * Example:
  * [bob, getpos angryBob] call lambs_danger_fnc_nearbyFriendly
