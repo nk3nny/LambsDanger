@@ -52,19 +52,16 @@ private _unit = _units findIf {
 if (_unit == -1) exitWith {_units};
 _unit = _units select _unit;
 
-// debug
-systemchat format ["%1 grenadier %2 has %3", side _unit, name _unit, _flare];
-
 // force
 doStop _unit;
 _unit setUnitPosWeak "MIDDLE";
-_unit setVariable [QGVAR(ForceMove), true];
+_unit setVariable [QGVAR(forceMove), true];
 
 // variable
 _unit setVariable [QGVAR(currentTask), "Shoot flare"];
 
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
-_dummy = "Sign_Sphere10cm_F" createvehicle (getpos _unit);
+private _dummy = "Sign_Sphere10cm_F" createvehicle (getpos _unit);
 _dummy setpos ((_unit getPos [50, getDir formationLeader _unit]) vectorAdd [0, 0, 200]);
 _unit reveal _dummy;
 
