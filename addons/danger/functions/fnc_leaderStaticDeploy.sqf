@@ -116,9 +116,7 @@ if (_weaponPos isEqualTo []) then {
     {
         // on timeout
         params ["_gunner", "_assistant", "", "", "_EH"];
-        {
-            _x doFollow (leader _x);
-        } foreach ([_gunner, _assistant] select { _x call FUNC(isAlive) });
+        [_gunner, _assistant] doFollow _gunner;
         _gunner removeEventHandler ["WeaponAssembled", _EH];
     }
 ] call CBA_fnc_waitUntilAndExecute;

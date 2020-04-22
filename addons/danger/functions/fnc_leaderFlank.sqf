@@ -38,6 +38,14 @@ if (_units isEqualTo []) then {
     _units = [_unit, 200] call FUNC(findReadyUnits);
 };
 
+// find vehicles
+private _vehicles = [];
+{
+    if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
+        _vehicles pushBackUnique vehicle _x;
+    };
+} foreach (units _unit select { _unit distance _x < 350 && { canfire _x }});
+
 // sort building locations
 private _pos = [_target, 12, true, false] call FUNC(findBuildings);
 _pos pushBack _target;
@@ -67,7 +75,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Flank"];
 
 // manoeuvre function
 private _fnc_manoeuvre = {
-    params ["_cycle", "_units", "_pos", "_overwatch", "_fnc_manoeuvre"];
+    params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", "_fnc_manoeuvre"];
 
     // update
     _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
@@ -96,18 +104,26 @@ private _fnc_manoeuvre = {
         };
     } foreach _units;
 
+    // vehicles
+    {
+        private _posAGL = selectRandom _pos;
+        _x doWatch _posAGL;
+        [_x, _posAGL] call FUNC(vehicleSuppress);
+
+    } foreach _vehicles;
+
     // recursive cyclic
     if (_cycle > 0 && {!(_units isEqualTo [])}) then {
         [
             _fnc_manoeuvre,
-            [_cycle, _units, _pos, _overwatch, _fnc_manoeuvre],
+            [_cycle, _units, _vehicles, _pos, _overwatch, _fnc_manoeuvre],
             10 + random 6
         ] call CBA_fnc_waitAndExecute;
     };
 };
 
 // execute recursive cycle
-[_cycle, _units, _pos, _overwatch, _fnc_manoeuvre] call _fnc_manoeuvre;
+[_cycle, _units, _vehicles, _pos, _overwatch, _fnc_manoeuvre] call _fnc_manoeuvre;
 
 // end
 true

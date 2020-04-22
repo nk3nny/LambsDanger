@@ -48,8 +48,14 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 // leadership assessment
 if !(_enemy isEqualTo []) then {
 
-    // Enemy is in buildings or at lower position
-    private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }}};
+    // Enemy is in buildings or at lower position or near bunker or static weapon
+    private _targets = _enemy findIf {
+        _x isKindOf "Man" && { 
+            _x call FUNC(indoor)
+            || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }
+            || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
+        }
+    };
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
 
         // select type
