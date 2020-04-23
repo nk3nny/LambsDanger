@@ -18,8 +18,8 @@
 params ["_units"];
 
 // single unit
-if (_units isEqualType objNull) then {_units = [_units]};
-if (_units isEqualType grpNull) then {_units = units _units};
+if (_units isEqualType objNull) then {_units = [_units];};
+if (_units isEqualType grpNull) then {_units = units _units;};
 
 // find grenade launcher
 private _flare = "";
@@ -54,7 +54,7 @@ private _unit = _units findIf {
 
 // execute
 if (_unit == -1) exitWith {_units};
-_unit = _units select _unit;
+_unit = _units deleteAt _unit;
 
 // force
 doStop _unit;
@@ -65,7 +65,8 @@ _unit setVariable [QGVAR(forceMove), true];
 _unit setVariable [QGVAR(currentTask), "Shoot flare"];
 
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
-private _dummy = "Sign_Sphere10cm_F" createvehicle [0, 0, 0];
+//private _dummy = "Sign_Sphere10cm_F" createVehicle [0, 0, 0];
+private _dummy = "Module_F" createVehicle [0, 0, 0];
 _dummy setpos ((_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]);
 _unit reveal _dummy;
 
@@ -92,7 +93,7 @@ _unit doTarget _dummy;
         deleteVehicle _dummy;
 
     }, [_unit, _muzzle, _dummy], 2
-] call cba_fnc_waitAndExecute;
+] call CBA_fnc_waitAndExecute;
 
 // end
-_units - [_unit]
+_units

@@ -20,14 +20,12 @@
 params ["_units", ["_guns", []]];
 
 // sort units
-if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits )};
-if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits) };
+if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits); };
+if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits); };
 
 // get weapons list
 if (_guns isEqualTo []) then {
-
     _guns = (group (_units select 0)) getVariable [QGVAR(staticWeaponList), []];
-
 };
 
 // check if weapon is unmanned
@@ -50,18 +48,21 @@ _units sort true;
 private _assistant = (_units select 0) select 1;
 
 // eventhandler ~ inspired by BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
-private _EH = _gunner addEventHandler ["WeaponDisassembled", format [
-    '
+_gunner setVariable [QGVAR(staticWeaponAssistant), _assistant];
+private _EH = _gunner addEventHandler ["WeaponDisassembled", {
         params ["_gunner", "_weaponBag", "_baseBag"];
-        
-        _assistant = "%1" call BIS_fnc_objectFromNetId;
+
+        // get assistant
+        private _assistant = _gunner getVariable [QGVAR(staticWeaponAssistant), selectRandom units _gunner];
+
+        // get bags
         _gunner action ["TakeBag", _weaponBag];
         _assistant action ["TakeBag", _baseBag];
 
+        // remove EH
         _gunner removeEventHandler ["WeaponDisassembled", _thisEventHandler];
-    ',
-    _assistant call BIS_fnc_netId
-]];
+    }
+];
 
 // callout
 [formationLeader _assistant, "aware", "DisassembleThatWeapon"] call FUNC(doCallout);

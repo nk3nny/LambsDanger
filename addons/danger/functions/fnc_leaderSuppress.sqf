@@ -35,7 +35,7 @@ private _vehicles = [];
     if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
         _vehicles pushBackUnique vehicle _x;
     };
-} foreach (units _unit select { _unit distance _x < 350 && { canfire _x }});
+} foreach (units _unit select { _unit distance _x < 350 && { canFire _x }});
 
 // sort building locations
 private _pos = [_target, 20, true, true] call FUNC(findBuildings);
@@ -64,15 +64,12 @@ private _fnc_suppress = {
 
     // update
     _units = _units select {_x call FUNC(isAlive) && { !isPlayer _x }};
-    _vehicles = _vehicles select { canfire _x };
+    _vehicles = _vehicles select { canFire _x };
     _cycle = _cycle - 1;
 
     // infantry
     {
-
         // ready
-        //_x setVariable [QGVAR(forceMove), true];
-        _x setVariable [QGVAR(currentTask), "Group Suppress"];
         private _posAGL = selectRandom _pos;
 
         // suppressive fire
@@ -80,17 +77,15 @@ private _fnc_suppress = {
         _x setUnitPosWeak "MIDDLE";
         _x doWatch _posAGL;
         private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(suppress);
+        _x setVariable [QGVAR(currentTask), "Group Suppress"];
 
         // no LOS
         if !(_suppress) then {
-
             // move forward
             _x forceSpeed 3;
             _x doMove (_x getPos [8 + random 6, _x getdir _posAGL]);
             _x setVariable [QGVAR(currentTask), "Group Suppress (Move)"];
-
         };
-
     } foreach _units;
 
     // vehicles
@@ -98,7 +93,6 @@ private _fnc_suppress = {
         private _posAGL = selectRandom _pos;
         _x doWatch _posAGL;
         [_x, _posAGL] call FUNC(vehicleSuppress);
-
     } foreach _vehicles;
 
     // recursive cyclic
@@ -113,6 +107,11 @@ private _fnc_suppress = {
 
 // execute recursive cycle
 [_cycle, _units, _vehicles, _pos, _fnc_suppress] call _fnc_suppress;
+
+// debug
+if (GVAR(debug_functions)) then {
+    format ["%1 group SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions for %7 cycles)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos, count _vehicles, _cycle] call FUNC(debugLog);
+};
 
 // end
 true

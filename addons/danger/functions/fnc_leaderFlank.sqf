@@ -45,20 +45,20 @@ private _vehicles = [];
     if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
         _vehicles pushBackUnique vehicle _x;
     };
-} foreach (units _unit select { _unit distance _x < 350 && { canfire _x }});
+} foreach (units _unit select { _unit distance _x < 350 && { canFire _x }});
 
 // sort building locations
 private _pos = [_target, 12, true, false] call FUNC(findBuildings);
 _pos pushBack _target;
 
 // find overwatch position
-if (_overwatch isEqualTO []) then {
+if (_overwatch isEqualTo []) then {
 
-    _overwatch = selectBestPlaces [_target, ((_unit distance2d _target) / 2) min 200, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2d _unit, _x select 0]};
+    _overwatch = selectBestPlaces [_target, ((_unit distance2D _target) / 2) min 200, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2d _unit, _x select 0]};
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
     _overwatch = _overwatch select {!(surfaceIsWater _x)};
-    _overwatch pushBack ([getPos _unit, ((_unit distance2d _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch));
+    _overwatch pushBack ([getPos _unit, ((_unit distance2D _target) / 2) min 200, 100, 8, _target] call FUNC(findOverwatch));
     _overwatch = _overwatch select 0;
 
 };
@@ -83,7 +83,8 @@ private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select { _x call FUNC(isAlive) && { _x distance2D (_pos select 0) > 20 } && { !isPlayer _x } };
+    _units = _units select { _x call FUNC(isAlive) && { _x distance2D (_pos select 0) > 10 } && { !isPlayer _x } };
+    _vehicles = _vehicles select { canFire _x };
     _cycle = _cycle - 1;
 
     {
@@ -129,6 +130,16 @@ private _fnc_manoeuvre = {
 
 // execute recursive cycle
 [_cycle, _units, _vehicles, _pos, _overwatch, _fnc_manoeuvre] call _fnc_manoeuvre;
+
+// debug
+if (GVAR(debug_functions)) then {
+    format ["%1 group FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call FUNC(debugLog);
+
+    _overwatch set [2, 0];
+    private _arrow = createSimpleObject ["Sign_Arrow_F", AGLToASL _overwatch, true];
+    _arrow setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    [{deleteVehicle _this}, _arrow, 30] call CBA_fnc_waitAndExecute;
+};
 
 // end
 true

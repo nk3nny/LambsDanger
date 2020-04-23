@@ -20,8 +20,8 @@
 params ["_unit", ["_pos", []], ["_type", "4 + 2"]];
 
 // single unit
-if (_unit isEqualType []) then {_unit = selectRandom _unit};
-if (_unit isEqualType grpNull) then {_unit = leader _unit};
+if (_unit isEqualType []) then {_unit = selectRandom _unit;};
+if (_unit isEqualType grpNull) then {_unit = leader _unit;};
 
 // get magazines
 private _magazines = magazinesAmmo _unit;
@@ -65,9 +65,9 @@ _unit setVariable [QGVAR(currentTask), "Throwing smoke grenade"];
 // execute
 [
     {
-        _this call bis_fnc_fire;
+        _this call BIS_fnc_fire;
     }, [_unit, _muzzle], 1
-] call cba_fnc_waitAndExecute;
+] call CBA_fnc_waitAndExecute;
 
 // end
 true

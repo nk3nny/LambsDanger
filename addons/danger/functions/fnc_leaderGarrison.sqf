@@ -54,6 +54,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     // set mode
     _x forceSpeed 3;
     _x setVariable [QGVAR(forceMove), !_garrison];
+    _x setVariable [QGVAR(currentTask), "Group Garrison"];
 
     // execute move
     if !(_pos isEqualTo []) then {
@@ -61,10 +62,13 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     } else {
         _x doMove _target;
     };
-
     true
-
 } count _units;
+
+// debug
+if (GVAR(debug_functions)) then {
+    format ["%1 group GARRISON (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call FUNC(debugLog);
+};
 
 // end
 true

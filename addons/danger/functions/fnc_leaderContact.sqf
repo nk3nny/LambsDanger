@@ -21,7 +21,7 @@ params ["_unit", "_target"];
 [_unit, _target] call FUNC(shareInformation);
 
 // movement
-_unit forcespeed 0;
+_unit forceSpeed 0;
 _unit setUnitPosWeak "MIDDLE";
 
 // gesture

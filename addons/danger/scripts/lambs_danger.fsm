@@ -2,7 +2,7 @@
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Careless",4,218,1400.000000,-525.000000,1525.000000,-450.000000,12.000000,"Careless"};
-item1[] = {"DEFINE_ENUM_BEG",-1,250,-1275.000000,-775.000000,-925.000000,-600.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "  DCEnemyDetected, // the first enemy detected" \n "  DCFire, // fire visible" \n "  DCHit, // vehicle hit" \n "  DCEnemyNear, // enemy very close to me" \n "  DCExplosion, // explosion detected" \n "  DCDeadBodyGroup, // dead soldier from my group found" \n "  DCDeadBody, // other dead soldier found" \n "  DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
+item1[] = {"DEFINE_ENUM_BEG",-1,250,-1200.000000,-725.000000,-850.000000,-550.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "  DCEnemyDetected, // the first enemy detected" \n "  DCFire, // fire visible" \n "  DCHit, // vehicle hit" \n "  DCEnemyNear, // enemy very close to me" \n "  DCExplosion, // explosion detected" \n "  DCDeadBodyGroup, // dead soldier from my group found" \n "  DCDeadBody, // other dead soldier found" \n "  DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item2[] = {"Attack",4,218,225.000000,0.000000,325.000000,50.000000,1.000000,"Attack"};
 item3[] = {"End",1,250,1400.000000,775.000000,1475.000000,825.000000,0.000000,"End"};
 item4[] = {"Rest",8,218,-550.000000,600.000000,-450.000000,650.000000,0.000000,"Rest"};
@@ -12,7 +12,7 @@ item7[] = {"Next__cause",4,218,1225.000000,-375.000000,1300.000000,-325.000000,1
 item8[] = {"Always",8,218,1225.000000,775.000000,1300.000000,825.000000,0.000000,"Always"};
 item9[] = {"Exit_Variables",4,218,1300.000000,-450.000000,1400.000000,-400.000000,12.000000,"Exit Variables"};
 item10[] = {"Begin",8,218,-575.000000,-575.000000,-425.000000,-475.000000,0.000000,"Begin"};
-item11[] = {"Ready",2,250,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
+item11[] = {"Ready",2,4346,-775.000000,-400.000000,-225.000000,-325.000000,0.000000,"Ready"};
 item12[] = {"Vehicle",4,218,-800.000000,-275.000000,-525.000000,-125.000000,2.000000,"Vehicle"};
 item13[] = {"Infantry",4,218,-450.000000,-275.000000,-200.000000,-125.000000,1.000000,"Infantry"};
 item14[] = {"Ready_Vehicle",2,250,-825.000000,-75.000000,-725.000000,-25.000000,0.000000,"Ready Vehicle"};
@@ -31,7 +31,7 @@ item26[] = {"Timeout",4,218,250.000000,325.000000,350.000000,375.000000,0.000000
 item27[] = {"Killed",4,218,100.000000,325.000000,200.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,100.000000,425.000000,200.000000,475.000000,0.000000,"Killed: " \n "Continue"};
 item29[] = {"Timeout__Continu",2,250,250.000000,425.000000,350.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
-item30[] = {"____FUNCTIONS__lambs",-1,250,-1550.000000,-775.000000,-1300.000000,-225.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderManoeuvre " \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_debugObjectColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
+item30[] = {"____FUNCTIONS__lambs",-1,250,-1475.000000,-725.000000,-1225.000000,-100.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderFlank" \n "lambs_danger_fnc_leaderSuppress" \n "lambs_danger_fnc_leaderAssault" \n "lambs_danger_fnc_leaderGarrison" \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_debugObjectColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-150.000000,0.000000,-50.000000,50.000000,7.000000,"React"};
 item32[] = {"Reaction__to_con",2,250,-150.000000,75.000000,-50.000000,125.000000,0.000000,"Reaction " \n "to contact"};
 item33[] = {"Investigate",4,218,-25.000000,0.000000,75.000000,50.000000,2.000000,"Investigate"};
@@ -74,7 +74,7 @@ item69[] = {"Static",4,218,-1025.000000,25.000000,-925.000000,75.000000,1.000000
 item70[] = {"Suppression",2,250,-1025.000000,150.000000,-925.000000,200.000000,0.000000,"Suppression"};
 item71[] = {"LEADER_EVALUATIONS",-1,250,725.000000,-50.000000,1000.000000,0.000000,0.000000,"LEADER EVALUATIONS AND ACTIONS"};
 item72[] = {"Close_Quarters_C",-1,250,375.000000,75.000000,500.000000,125.000000,0.000000,"Close" \n "Quarters" \n "Combat"};
-item73[] = {"LAMBS_DANGER_FSM",-1,250,-1700.000000,-925.000000,-800.000000,-800.000000,0.000000,"LAMBS DANGER FSM 2.0.0"};
+item73[] = {"LAMBS_DANGER_FSM",-1,250,-1625.000000,-875.000000,-725.000000,-750.000000,0.000000,"LAMBS DANGER FSM 2.4.0"};
 item74[] = {"Player_formation",4,218,375.000000,350.000000,475.000000,400.000000,0.000000,"Player" \n "formationleader"};
 item75[] = {"EXIT_VARIABLES_Unconcious",-1,250,1500.000000,-425.000000,1725.000000,-350.000000,0.000000,"EXIT VARIABLES" \n "Unconcious" \n "Fleeing" \n "lambs_danger_disableAI"};
 item76[] = {"Artillery",4,218,-1125.000000,25.000000,-1025.000000,75.000000,5.000000,"Artillery"};
@@ -86,7 +86,7 @@ item81[] = {"Reset_Move___Con",2,250,-350.000000,275.000000,-250.000000,325.0000
 item82[] = {"Timeout",4,218,-725.000000,300.000000,-625.000000,350.000000,0.000000,"Timeout"};
 item83[] = {"Ready_2",2,250,-725.000000,400.000000,-625.000000,450.000000,0.000000,"Ready"};
 item84[] = {"Immediate_Reacti",4,218,-450.000000,0.000000,-350.000000,50.000000,4.000000,"Immediate" \n "Reaction"};
-item85[] = {"Dodge",2,4346,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Dodge"};
+item85[] = {"Dodge",2,250,-450.000000,75.000000,-350.000000,125.000000,0.000000,"Dodge"};
 item86[] = {"true",8,218,-450.000000,175.000000,-350.000000,225.000000,0.000000,"true"};
 item87[] = {"Reset_Dodge___Co",2,250,-450.000000,275.000000,-350.000000,325.000000,0.000000,"Reset Dodge:" \n " Continue"};
 item88[] = {"___Assault",4,218,825.000000,200.000000,925.000000,250.000000,1.000000,"4" \n "Assault"};
@@ -273,8 +273,8 @@ link114[] = {89,46};
 link115[] = {90,91};
 link116[] = {91,46};
 link117[] = {92,93};
-globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-673.147339,-140.000488,524.553162,-85.151581,773,884,1};
-window[] = {2,-1,-1,-32000,-32000,891,78,880,78,3,791};
+globals[] = {0.000000,0,0,0,0,640,480,2,420,6316128,1,-1021.036804,1113.251709,1031.439697,-755.218323,1056,884,1};
+window[] = {2,-1,-1,-1,-1,969,156,958,156,3,1074};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -286,9 +286,7 @@ class FSM
                 {
                         name = "End";
                         itemno = 3;
-                        init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "//systemchat format [""%1 - DANGER.FSM ENDS FOR %2"",side _this, name _this];" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset variable" \n
                          "_this setVariable [""lambs_danger_currentTarget"",nil];" \n
                          "_this setVariable [""lambs_danger_currentTask"",nil];" \n
@@ -310,10 +308,7 @@ class FSM
                 {
                         name = "Reacting_on_danger";
                         itemno = 5;
-                        init = /*%FSM<STATEINIT""">*/"// DEBUG" \n
-                         "//if (lambs_danger_debug_FSM) then { systemchat format [""Danger.fsm - Init - %1 at %2s"",side _this,round time];};" \n
-                         "" \n
-                         ""/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -347,9 +342,7 @@ class FSM
                 {
                         name = "Check_queue__and";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 Danger.fsm RESET (%2)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType];" \n
-                         "//systemchat format [""%1 half reset %2 - %3"",side _this, name _this, count _queue];" \n
-                         "	" \n
+                        init = /*%FSM<STATEINIT""">*/"	" \n
                          "// more advanced reset" \n
                          "if !(alive _dangerCausedBy && {_this distance2d _dangerCausedBy < (lambs_danger_CQB_range* 0.66)}) then {" \n
                          "	_this forceSpeed -1;" \n
@@ -387,19 +380,7 @@ class FSM
                 {
                         name = "Ready";
                         itemno = 11;
-                        init = /*%FSM<STATEINIT""">*/"/*" \n
-                         "comment ""0  DCEnemyDetected"";" \n
-                         "comment ""1  DCFire"";" \n
-                         "comment ""2  DCHit"";" \n
-                         "comment ""3  DCEnemyNear"";" \n
-                         "comment ""4  DCExplosion"";" \n
-                         "comment ""5  DCDeadBodyGroup"";" \n
-                         "comment ""6  DCDeadBody"";" \n
-                         "comment ""7  DCScream"";" \n
-                         "comment ""8  DCCanFire"";" \n
-                         "comment ""9  DCBulletClose"";" \n
-                         "*/" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// init" \n
                          "private [""_dangerCause""];" \n
                          "private _priorCur = [-1, lambs_danger_fsmPriorities select _dangerCause] select (_dangerCause > 0);" \n
@@ -851,9 +832,6 @@ class FSM
                          "	_timeout = time + 1 + random 4; " \n
                          "" \n
                          "}; " \n
-                         "" \n
-                         "// debug " \n
-                         "//if (lambs_danger_debug_FSM) then {systemchat format [""%1 - ATTACK! - %2 for %3s"",side _this,name _dangerCausedBy,round (_timeout - time)];};" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1439,8 +1417,7 @@ class FSM
                 {
                         name = "Investigate__Unload";
                         itemno = 56;
-                        init = /*%FSM<STATEINIT""">*/"//systemchat ""VEHICLE INVESTIGATE"";" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// timeout " \n
                          "_timeout =4 + random 3; " \n
                          "" \n
@@ -1516,9 +1493,7 @@ class FSM
                 {
                         name = "Jink_";
                         itemno = 60;
-                        init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "//systemchat ""VEHICLE JINK"";" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "// timeout " \n
                          "_timeout = _timeout + 4; " \n
                          "" \n
@@ -1615,12 +1590,7 @@ class FSM
                          "" \n
                          "// update leader-mode" \n
                          "[_this, 2, _dangerCausedby] call lambs_danger_fnc_leaderMode;" \n
-                         "" \n
-                         "// Share information!" \n
-                         "//[_this,_dangerCausedBy,lambs_danger_CQB_range + random 100,true] call lambs_danger_fnc_shareInformation;" \n
-                         "" \n
-                         "// debug " \n
-                         "//systemchat format [""%1 - Coward! - %2s"",side _this,round (_timeout - time)];"/*%FSM</STATEINIT""">*/;
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1655,10 +1625,6 @@ class FSM
                          "" \n
                          "// methodical sweep of buildings " \n
                          "[_this] call lambs_danger_fnc_assaultBuilding;" \n
-                         "" \n
-                         "// debug " \n
-                         "//systemchat format [""%1 - CQC! - %2 for %3s"",side _this,count _buildings,round (_timeout - time)];" \n
-                         "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links

@@ -81,7 +81,7 @@ private _fnc_assault = {
         _x setSuppression 0;
 
         // manoeuvre
-        _x forceSpeed 3;
+        _x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
         _x setUnitPosWeak "UP";
         _x setVariable [QGVAR(currentTask), "Group Assault"];
         _x setVariable [QGVAR(forceMove), true];
@@ -100,6 +100,11 @@ private _fnc_assault = {
 
 // execute recursive cycle
 [_cycle, _units, _pos, _fnc_assault] call _fnc_assault;
+
+// debug
+if (GVAR(debug_functions)) then {
+    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call FUNC(debugLog);
+};
 
 // end
 true

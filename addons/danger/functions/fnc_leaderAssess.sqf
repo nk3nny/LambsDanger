@@ -85,7 +85,7 @@ if !(_enemy isEqualTo []) then {
     };
 
     // Enemy is Tank/Air?
-    _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
+    _targets = _enemy findIf { _x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
     if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
 
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
@@ -100,7 +100,7 @@ if !(_enemy isEqualTo []) then {
     };
 
     // Artillery
-    _targets = _enemy findIf {_x distance _unit > 200};
+    _targets = _enemy findIf { _x distance2D _unit > 200 && { isTouchingGround (vehicle _x) }};
     if  (_targets != -1 && { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
 
         [_unit, 6, (_unit getHideFrom (_enemy select _targets))] call FUNC(leaderMode);

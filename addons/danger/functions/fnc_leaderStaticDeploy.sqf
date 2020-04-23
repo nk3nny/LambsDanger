@@ -20,8 +20,8 @@
 params ["_units", "_pos", ["_weaponPos", []]];
 
 // sort units
-if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits) };
-if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits) };
+if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits); };
+if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits); };
 
 // prevent deployment of static weapons
 if (_units isEqualTo []) exitWith { _units };
@@ -39,9 +39,7 @@ private _compatibleBases = if ( isText _cfgBase) then { [getText _cfgBase] } els
 
 // find assistant
 private _assistant = _units findIf {
-
     backpack _x in _compatibleBases;
-
 };
 
 // define assistant
@@ -71,10 +69,8 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
 
 // find position ~ kept simple for now!
 if (_weaponPos isEqualTo []) then {
-
     _weaponPos = [ getpos _gunner, 0, 15, 2, 0, 0.19, 0, [], [getpos _assistant, getpos _assistant]] call BIS_fnc_findSafePos;
     _weaponPos set [2, 0];
-
 };
 
 // ready units
@@ -85,7 +81,6 @@ if (_weaponPos isEqualTo []) then {
     _x setVariable [QGVAR(forceMove), true];
     _x setVariable [QGVAR(currentTask), "Deploy Static Weapon"];
     _x doMove _weaponPos;
-
 } foreach [_gunner, _assistant];
 
 // do it
@@ -120,7 +115,6 @@ if (_weaponPos isEqualTo []) then {
         doStop _assistant;
         _assistant doWatch _pos;
         [_assistant, ["gesturePoint"]] call FUNC(gesture);
-
     },
     [_gunner, _assistant, _pos, _weaponPos, _EH], 8,
     {
