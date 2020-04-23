@@ -19,7 +19,7 @@ params ["_unit"];
 
 // stealth mode or has nightvision
 if (behaviour _unit isEqualTo "STEALTH" 
-    || {!( ( (assignedItems _unit) select 5 ) isEqualTo "" )}
+    || { !( (hmd _unit) isEqualTo "" )}
 ) exitWith {false};
 
 // night check
