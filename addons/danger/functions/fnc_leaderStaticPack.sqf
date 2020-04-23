@@ -87,7 +87,7 @@ _assistant doMove getposATL (vehicle _gunner);
         // on success
         params ["_gunner", "_assistant", "", "_EH"];
 
-        if (fleeing _gunner || {fleeing _assistant} || {!(_assisstant call FUNC(isAlive))}) exitWith {false};
+        if (fleeing _gunner || {fleeing _assistant} || {!(_assistant call FUNC(isAlive))}) exitWith {false};
 
         // gunner leaves weapon triple threat
         private _weapon = vehicle _gunner;
