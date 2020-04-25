@@ -40,6 +40,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 if (_units isEqualTo []) then {
     _units = [_unit, 250] call FUNC(findReadyUnits);
 };
+if (_units isEqualTo []) exitWith {false}
 
 // sort building locations
 private _pos = [_target, 16, true, false] call FUNC(findBuildings);

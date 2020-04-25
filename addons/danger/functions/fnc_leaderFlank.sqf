@@ -38,6 +38,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 if (_units isEqualTo []) then {
     _units = [_unit, 200] call FUNC(findReadyUnits);
 };
+if (_units isEqualTo []) exitWith {false}
 
 // find vehicles
 private _vehicles = [];

@@ -28,6 +28,7 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 if (_units isEqualTo []) then {
     _units = [_unit] call FUNC(findReadyUnits);
 };
+if (_units isEqualTo []) exitWith {false}
 
 // find vehicles
 private _vehicles = [];

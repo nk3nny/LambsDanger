@@ -30,6 +30,7 @@ if !(attackEnabled _unit) exitWith {false};
 if (_units isEqualTo []) then {
     _units = [_unit, 125] call FUNC(findReadyUnits);
 };
+if (_units isEqualTo []) exitWith {false}
 
 // sort building locations
 private _pos = [_target, 12, true, false] call FUNC(findBuildings);

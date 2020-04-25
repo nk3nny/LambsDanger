@@ -33,6 +33,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 // sort units
 private _units = units _unit;
 _units = _units select {_x call FUNC(isAlive) && {isNull objectParent _x}};
+if (_units isEqualTo []) exitWith {false}
 
 // find launcher ~ if present, exit with preparation for armoured/air contact
 private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
