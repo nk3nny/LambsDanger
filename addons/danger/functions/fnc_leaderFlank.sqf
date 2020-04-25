@@ -38,7 +38,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 if (_units isEqualTo []) then {
     _units = [_unit, 200] call FUNC(findReadyUnits);
 };
-if (_units isEqualTo []) exitWith {false}
+if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
 private _vehicles = [];
@@ -93,7 +93,7 @@ private _fnc_manoeuvre = {
 
         // suppress
         if (!(terrainIntersectASL [eyePos _x, _posASL]) && {RND(0.65)}) then {
-            
+
             _x doWatch ASLtoAGL _posASL;
             [_x, _posASL, true] call FUNC(suppress);
 

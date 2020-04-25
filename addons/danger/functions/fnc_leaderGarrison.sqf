@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Leader rallies troops and garrisons nearby building from top to bottom with an option to remain firm. 
+ * Leader rallies troops and garrisons nearby building from top to bottom with an option to remain firm.
  * COMMENT: Future versions of this function could leverage the more advanced Waypoint ~ nkenny
  *
  * Arguments:
@@ -30,7 +30,7 @@ if !(attackEnabled _unit) exitWith {false};
 if (_units isEqualTo []) then {
     _units = [_unit, 125] call FUNC(findReadyUnits);
 };
-if (_units isEqualTo []) exitWith {false}
+if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
 private _pos = [_target, 12, true, false] call FUNC(findBuildings);
