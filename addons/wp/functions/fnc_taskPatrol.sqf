@@ -10,6 +10,7 @@
  * 2: Range of tracking, default is 200 meters <NUMBER>
  * 3: Waypoint Count, default 4  <NUMBER>
  * 4: Area the AI Camps in, default [] <ARRAY>
+ * 5: Dynamic patrol pattern, default false <BOOL>
  *
  * Return Value:
  * none
