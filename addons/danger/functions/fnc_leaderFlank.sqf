@@ -77,7 +77,10 @@ _unit setVariable [QGVAR(currentTask), "Leader Flank"];
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
-(group _unit) move _overwatch;
+//(group _unit) move _overwatch;  ~ removed move command alters current WP. -nkenny
+
+// leader smoke ~ deploy concealment to enable movement
+if (RND(0.5)) then {[_unit, _overwatch] call FUNC(doSmoke);};
 
 // manoeuvre function
 private _fnc_manoeuvre = {
