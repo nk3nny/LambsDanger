@@ -41,11 +41,12 @@ _units = _units select { isNull objectParent _x && { (backpack _x) isEqualTo ""}
 
 // get nearest assistant ~ should probably write a function for this! - nkenny
 if (_units isEqualTo []) exitWith { _units };
-_units = _units apply { [ _x distance2d _gunner, _x ] };
+_units = _units apply { [ _x distance2D _gunner, _x ] };
 _units sort true;
+_units = _units apply { _x select 1 };
 
 // get assistant
-private _assistant = (_units select 0) select 1;
+private _assistant = _units param [0, objNull];
 
 // eventhandler ~ inspired by BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
 _gunner setVariable [QGVAR(staticWeaponAssistant), _assistant];
