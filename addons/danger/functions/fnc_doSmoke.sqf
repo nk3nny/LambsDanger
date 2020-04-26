@@ -23,6 +23,9 @@ params ["_unit", ["_pos", []], ["_type", "4 + 2"]];
 if (_unit isEqualType []) then {_unit = selectRandom _unit;};
 if (_unit isEqualType grpNull) then {_unit = leader _unit;};
 
+// local
+if !(local _unit) exitWith {false};
+
 // get magazines
 private _magazines = magazinesAmmo _unit;
 _magazines = _magazines select {(_x select 1) isEqualTo 1};
