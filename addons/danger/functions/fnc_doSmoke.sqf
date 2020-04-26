@@ -6,7 +6,7 @@
  * Arguments:
  * 0: Unit  <OBJECT>, <ARRAY> or <GROUP>
  * 1: Position <ARRAY>, optional
- * 2: Type, corresponds to ai usage flags <string> optional
+ * 2: Type, corresponds to ai usage flags <NUMBER>, optional
  *
  * Return Value:
  * boolean
@@ -17,7 +17,7 @@
  * Public: No
 */
 
-params ["_unit", ["_pos", []], ["_type", "4 + 2"]];
+params ["_unit", ["_pos", []], ["_type", 6]];
 
 // single unit
 if (_unit isEqualType []) then {_unit = selectRandom _unit;};
@@ -35,7 +35,7 @@ if (_magazines isEqualTo []) exitWith {false};
 // find smoke shell
 private _smokeshell = _magazines findIf {
     private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
-    private _aiAmmoUsage = getText (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
+    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
     _aiAmmoUsage isEqualTo _type
 };
 

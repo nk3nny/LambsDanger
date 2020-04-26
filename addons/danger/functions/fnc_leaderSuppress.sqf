@@ -36,7 +36,7 @@ private _vehicles = [];
     if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
         _vehicles pushBackUnique vehicle _x;
     };
-} foreach (units _unit select { _unit distance _x < 350 && { canFire _x }});
+} foreach (units _unit select { _unit distance2D _x < 350 && { canFire _x }});
 
 // sort building locations
 private _pos = [_target, 20, true, true] call FUNC(findBuildings);

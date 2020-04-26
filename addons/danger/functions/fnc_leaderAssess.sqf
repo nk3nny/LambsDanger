@@ -75,7 +75,7 @@ if !(_enemy isEqualTo []) then {
 
         // visibility / distance / no cover
         if !(terrainIntersectASL [eyepos _unit, eyepos _target]) then {_type pushBack 5;};
-        if (_unit distance2d _target < 120) then {_type pushBack 4;};
+        if (_unit distance2D _target < 120) then {_type pushBack 4;};
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_type pushBack 3;};  // could be retreat in the future! - nkenny
 
         // enable selection
@@ -85,7 +85,7 @@ if !(_enemy isEqualTo []) then {
     };
 
     // Enemy is Tank/Air?
-    _targets = _enemy findIf { _x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
+    _targets = _enemy findIf { _x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2D _unit < 200 }}};
     if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
 
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
