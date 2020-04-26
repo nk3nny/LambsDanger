@@ -78,6 +78,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Flank"];
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
+_unit doMove _overwatch;        // ~ to ensure some movement! -nkenny
 //(group _unit) move _overwatch;  ~ removed move command alters current WP. -nkenny
 
 // leader smoke ~ deploy concealment to enable movement
