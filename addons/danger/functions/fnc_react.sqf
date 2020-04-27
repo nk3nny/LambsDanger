@@ -25,11 +25,11 @@ params ["_unit", "_pos", ["_enemy", objNull]];
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set range
-private _range = linearConversion [ 0, 150, (_unit distance2d _pos), 12, 35, true];
+private _range = linearConversion [ 0, 150, (_unit distance2D _pos), 12, 35, true];
 private _stealth = behaviour _unit isEqualTo "STEALTH";
 
 // drop down!
-private _stance = [selectRandom ["DOWN", "DOWN", "MIDDLE"], "MIDDLE"] select (_unit distance2d (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
+private _stance = [selectRandom ["DOWN", "DOWN", "MIDDLE"], "MIDDLE"] select (_unit distance2D (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
 _unit setUnitPos _stance;
 
 // sort enemy
@@ -62,16 +62,12 @@ _units = _units select { currentCommand _x isEqualTo "" };
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
 {
-
     [_x, _pos, _range, _buildings] call FUNC(hideInside);
-
 } foreach _units;
 
 // caller slowdown!
 if (count _units > 1) then {
-
     (leader _unit) forceSpeed 1;
-
 };
 
 // end

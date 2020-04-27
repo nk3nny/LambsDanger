@@ -33,7 +33,7 @@ _guns = _guns select {!(crew _x isEqualTo [])};
 if (_guns isEqualTo []) exitWith { _units };
 
 // get gunner
-private _weapon = (_guns deleteAt 0);
+private _weapon = _guns deleteAt 0;
 private _gunner = gunner _weapon;
 
 // check for nearest unit without backpack
@@ -46,7 +46,7 @@ _units sort true;
 _units = _units apply { _x select 1 };
 
 // get assistant
-private _assistant = _units param [0, objNull];
+private _assistant = _units deleteAt 0;
 
 // eventhandler ~ inspired by BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
 _gunner setVariable [QGVAR(staticWeaponAssistant), _assistant];
@@ -82,7 +82,7 @@ _assistant doMove getposATL (vehicle _gunner);
     {
         // condition
         params ["_gunner", "_assistant", "_pos"];
-        (_assistant distance2d _pos < 5 || {unitReady _assistant}) || {fleeing _gunner} || {fleeing _assistant}
+        (_assistant distance2D _pos < 5 || {unitReady _assistant}) || {fleeing _gunner} || {fleeing _assistant}
     },
     {
         // on success
@@ -117,7 +117,7 @@ _assistant doMove getposATL (vehicle _gunner);
         _gunner removeEventHandler ["WeaponDisassembled", _EH];
 
     }
-] call cba_fnc_waitUntilAndExecute;
+] call CBA_fnc_waitUntilAndExecute;
 
 // end
-_units - [_gunner, _assistant]
+_units
