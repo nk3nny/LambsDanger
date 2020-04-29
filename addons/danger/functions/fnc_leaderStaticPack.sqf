@@ -54,7 +54,7 @@ private _EH = _gunner addEventHandler ["WeaponDisassembled", {
         params ["_gunner", "_weaponBag", "_baseBag"];
 
         // get assistant
-        private _assistant = _gunner getVariable [QGVAR(staticWeaponAssistant), selectRandom units _gunner];
+        private _assistant = _gunner getVariable QGVAR(staticWeaponAssistant);
 
         // get bags
         _gunner action ["TakeBag", _weaponBag];
