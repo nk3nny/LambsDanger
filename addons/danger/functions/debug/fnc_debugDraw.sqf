@@ -36,13 +36,6 @@ private _displayCurator = findDisplay 312;
     _x ctrlCommit 0;
 } count GVAR(drawRectCacheCurator);
 
-private _fnc_getPos = {
-    if (_this isEqualType objNull) then {
-        (_this modelToWorldVisual (_this selectionPosition "pilot")) vectorAdd [0, 0, 0.4];
-    } else {
-        _this;
-    };
-};
 private _fnc_getEyePos = {
     if (_this isEqualType objNull) then {
         eyePos _this
@@ -141,14 +134,14 @@ private _fnc_DrawRect = {
 
 {
     private _unit = _x;
-    private _headPos = _unit call _fnc_getPos;
+    private _headPos = _unit call CBA_fnc_getPos;
     if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
     // if (true) then {
         private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
-                private _pos2 = _x call _fnc_getPos;
+                private _pos2 = _x call CBA_fnc_getPos;
                 drawLine3D [_headPos, _pos2, [1, 1, 1, 0.5]];
             } count (units _x);
             _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
@@ -158,8 +151,8 @@ private _fnc_DrawRect = {
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
              private _knowledge = _unit targetKnowledge _currentTarget;
-             if (_knowledge select 2 == time) then {
-                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6];
+             if (_knowledge select 2 == time && local _unit) then {
+                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6, GVAR(debug_functions)];
              };
              private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
              _targetKnowledge append [
@@ -174,7 +167,7 @@ private _fnc_DrawRect = {
             drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
 
-            drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1, 0, 0, 1]];
+            drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
             ["None", name _currentTarget] select (isNull _currentTarget);
         } else {
             _targetKnowledge append [
@@ -183,7 +176,7 @@ private _fnc_DrawRect = {
                "    Position Error: N/A<br/>"
            ];
             if (_currentTarget isEqualType []) then {
-                drawLine3D [_headPos, _currentTarget call _fnc_getPos, [1, 0, 0, 1]];
+                drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
                 format ["POS %1", _currentTarget];
             } else {
                 format ["N/A"];

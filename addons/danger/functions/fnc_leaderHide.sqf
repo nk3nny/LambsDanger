@@ -21,8 +21,8 @@ params ["_unit", "_target", ["_buildings", []]];
 // check if target remains a threat or is invalid
 if (_target isEqualType [] || {isNull _target} || {!alive _target}) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Hide"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Hide", GVAR(debug_functions)];
 
 // gesture
 [_unit, ["gestureCover"]] call FUNC(gesture);

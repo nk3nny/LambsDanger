@@ -44,8 +44,8 @@ _pos pushBack _target;
 [_unit, "combat", "RallyUp", 125] call FUNC(doCallout);
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Rally"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Rally", GVAR(debug_functions)];
 
 // rally unit
 {
@@ -55,7 +55,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally"];
     // set mode
     _x forceSpeed 3;
     _x setVariable [QGVAR(forceMove), !_garrison];
-    _x setVariable [QGVAR(currentTask), "Group Garrison"];
+    _x setVariable [QGVAR(currentTask), "Group Garrison", GVAR(debug_functions)];
 
     // execute move
     if !(_pos isEqualTo []) then {

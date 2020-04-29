@@ -18,10 +18,6 @@
 */
 params ["_unit", "_pos", ["_override", false]];
 
-// variable
-_unit setVariable [QGVAR(currentTarget), _pos];
-_unit setVariable [QGVAR(currentTask), "Deliberate Fire"];
-
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.75
@@ -62,7 +58,8 @@ _unit forceSpeed 0;
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire
-_unit setVariable [QGVAR(currentTask), "Suppressive Fire"];
+_unit setVariable [QGVAR(currentTask), "Suppressive Fire", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {

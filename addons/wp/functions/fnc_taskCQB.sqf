@@ -116,8 +116,8 @@ private _fnc_act = {
             };
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms"];
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(danger,debug_functions)];
 
             // clean list
             if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {

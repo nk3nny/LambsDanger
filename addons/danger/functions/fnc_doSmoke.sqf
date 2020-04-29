@@ -56,14 +56,16 @@ private _muzzle = _muzzleList findIf {
 if (_muzzle == -1) exitWith {false};
 _muzzle = configName (_muzzleList select _muzzle);
 
-// turn towards target 
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+// turn towards target
 if !(_pos isEqualTo []) then {
     _unit doWatch _pos;
-    _unit setVariable [QGVAR(currentTarget), _pos];
+    _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 };
 
+
 // variable
-_unit setVariable [QGVAR(currentTask), "Throwing smoke grenade"];
+_unit setVariable [QGVAR(currentTask), "Throwing smoke grenade", GVAR(debug_functions)];
 
 // execute
 [

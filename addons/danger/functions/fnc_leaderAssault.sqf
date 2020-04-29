@@ -47,8 +47,8 @@ private _pos = [_target, 16, true, false] call FUNC(findBuildings);
 _pos pushBack _target;
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Assault"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assault", GVAR(debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call FUNC(gesture);
@@ -84,7 +84,7 @@ private _fnc_assault = {
         // manoeuvre
         _x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
         _x setUnitPosWeak "UP";
-        _x setVariable [QGVAR(currentTask), "Group Assault"];
+        _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
         _x setVariable [QGVAR(forceMove), true];
 
     } foreach _units;

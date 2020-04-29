@@ -35,22 +35,25 @@ _gunner = _units deleteAt _gunner;
 
 // crudely and unapologetically lifted from BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
 private _cfgBase = configFile >> "CfgVehicles" >> backpack _gunner >> "assembleInfo" >> "base";
-private _compatibleBases = if ( isText _cfgBase) then { [getText _cfgBase] } else { getArray _cfgBase };
+private _compatibleBases = if (isText _cfgBase) then { [getText _cfgBase] } else { getArray _cfgBase };
 
 // find assistant
-private _assistant = _units findIf {
-    backpack _x in _compatibleBases;
+private _assistantIndex = _units findIf {
+    (backpack _x) in _compatibleBases;
 };
 
 // define assistant
-if (_assistant isEqualTo -1) exitWith { _units + [_gunner] };
-_assistant = _units deleteAt _assistant;
+if (_assistantIndex isEqualTo -1) exitWith {
+    _units pushback _gunner;
+    _units
+};
+private _assistant = _units deleteAt _assistantIndex;
 
-// Manoeuvre gunner 
+// Manoeuvre gunner
 private _EH = _gunner addEventHandler ["WeaponAssembled", {
         params ["_unit", "_weapon"];
-        
-        // get in weapon 
+
+        // get in weapon
         _unit assignAsGunner _weapon;
         _unit moveInGunner _weapon;
 
@@ -79,7 +82,9 @@ if (_weaponPos isEqualTo []) then {
     _x setUnitPosWeak "MIDDLE";
     _x forceSpeed 24;
     _x setVariable [QGVAR(forceMove), true];
-    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon"];
+    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", GVAR(debug_functions)];
+    _x setVariable [QGVAR(currentTarget), _weaponPos, GVAR(debug_functions)];
+
     _x doMove _weaponPos;
 } foreach [_gunner, _assistant];
 
@@ -107,9 +112,10 @@ if (_weaponPos isEqualTo []) then {
         _weapon doWatch _pos;
 
         // register
-        private _weaponList = group _gunner getVariable [QGVAR(staticWeaponList), []];
+        private _grp = group _gunner;
+        private _weaponList = _grp getVariable [QGVAR(staticWeaponList), []];
         _weaponList pushBackUnique _weapon;
-        group _gunner setVariable [QGVAR(staticWeaponList), _weaponList, true];
+        _grp setVariable [QGVAR(staticWeaponList), _weaponList, true];
 
         // assistant
         doStop _assistant;

@@ -50,7 +50,7 @@ if !(_enemy isEqualTo []) then {
 
     // Enemy is in buildings or at lower position or near bunker or static weapon
     private _targets = _enemy findIf {
-        _x isKindOf "Man" && { 
+        _x isKindOf "Man" && {
             _x call FUNC(indoor)
             || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }
             || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
@@ -69,7 +69,7 @@ if !(_enemy isEqualTo []) then {
             5 Group Suppressive fire
         */
 
-        // combatmode 
+        // combatmode
         if (combatMode _unit isEqualTo "RED") then {_type pushBack 4;};
         if (combatMode _unit in ["YELLOW", "WHITE"]) then {_type pushBack 5;};
 
@@ -148,8 +148,8 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // set current task
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Leader Assess"];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assess", GVAR(debug_functions)];
 
 // end
 true

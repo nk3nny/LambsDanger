@@ -66,8 +66,8 @@ if (_overwatch isEqualTo []) then {
 };
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Flank"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Flank", GVAR(debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call FUNC(gesture);
@@ -107,7 +107,7 @@ private _fnc_manoeuvre = {
             // manoeuvre
             _x forceSpeed 4;
             _x setUnitPosWeak "MIDDLE";
-            _x setVariable [QGVAR(currentTask), "Group Flank"];
+            _x setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
             _x setVariable [QGVAR(forceMove), getSuppression _x > 0.5];
 
             // force movement

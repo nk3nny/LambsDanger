@@ -41,8 +41,8 @@ if (_buildings isEqualTo []) then {
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), _danger];
-_unit setVariable [QGVAR(currentTask), "Hide"];
+_unit setVariable [QGVAR(currentTarget), _danger, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Hide", GVAR(debug_functions)];
 
 // settings
 _unit forceSpeed 24;
@@ -50,7 +50,7 @@ _unit forceSpeed 24;
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
-    _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
+    _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
     // hide
     doStop _unit;

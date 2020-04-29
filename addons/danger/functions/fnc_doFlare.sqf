@@ -47,7 +47,7 @@ private _unit = _units findIf {
                 private _flareSimulation = getText (configfile >> "CfgAmmo" >> _ammo >> "simulation");
                 _flareSimulation isEqualTo _type
             };
-            
+
             if (_index == -1) exitWith {false};
             _flare = _findFlares select _index;
         };
@@ -65,8 +65,8 @@ _unit setUnitPosWeak "MIDDLE";
 _unit setVariable [QGVAR(forceMove), true];
 
 // variable
-_unit setVariable [QGVAR(currentTask), "Shoot flare"];
-
+_unit setVariable [QGVAR(currentTask), "Shoot flare", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
 private _flarePos = [_pos, (_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]] select (_pos isEqualTo []);
 private _dummy = "Target_F" createVehicle _flarePos;

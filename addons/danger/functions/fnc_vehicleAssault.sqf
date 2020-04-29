@@ -41,8 +41,8 @@ if (_buildings isEqualTo []) then {
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
 
 // find closest building
 if !(_buildings isEqualTo []) then {

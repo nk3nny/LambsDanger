@@ -26,7 +26,9 @@ if !(canSuspend) exitWith {
 private _fnc_unAssault = {
     params ["_unit", "_group", "_retreat"];
     if ((currentCommand _unit) isEqualTo "ATTACK") then {
-        [_unit] joinSilent grpNull;
+        private _grp = createGroup (side (group _unit));
+        _grp deleteGroupWhenEmpty true;
+        [_unit] joinSilent _grp;
         [_unit] joinSilent _group;
     };
     if (_retreat) then {

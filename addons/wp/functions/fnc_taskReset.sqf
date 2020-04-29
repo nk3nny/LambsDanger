@@ -35,6 +35,7 @@ _groupNew setFormation (formation _group);
 [_group] call CBA_fnc_clearWaypoints;
 
 _group deleteGroupWhenEmpty true;
+_groupNew deleteGroupWhenEmpty true;
 
 // reset
 {
@@ -61,8 +62,8 @@ _group deleteGroupWhenEmpty true;
     _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables
-    _x setVariable [QEGVAR(danger,currentTask), nil];
-    _x setVariable [QEGVAR(danger,currentTarget), nil];
+    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(danger,debug_functions)];
+    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(danger,debug_functions)];
     _x setVariable [QEGVAR(danger,disableAI), nil];
     _x setVariable [QEGVAR(danger,forceMove), true];        // one FSM cycle of forced movement to get AI into action! -nkenny
 

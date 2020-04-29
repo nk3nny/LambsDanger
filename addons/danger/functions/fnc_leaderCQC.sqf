@@ -26,8 +26,8 @@ if (count _inCQC > 0) exitWith {};
 if (!(_target call FUNC(isAlive))) then {_target = _unit findNearestEnemy _unit;};
 
 // update
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Leader CQB"];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader CQB", GVAR(debug_functions)];
 
 // define buildings
 private _buildings = [_unit, _range] call FUNC(findBuildings);

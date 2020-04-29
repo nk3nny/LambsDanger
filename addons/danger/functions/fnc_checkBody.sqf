@@ -51,8 +51,8 @@ doStop _unit;
 // found body
 _body = selectRandom _body;
 
-_unit setVariable [QGVAR(currentTarget), _body];
-_unit setVariable [QGVAR(currentTask), "Check Body"];
+_unit setVariable [QGVAR(currentTarget), _body, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Check Body", GVAR(debug_functions)];
 
 // do it
 private _bodyPos = getPosATL _body;

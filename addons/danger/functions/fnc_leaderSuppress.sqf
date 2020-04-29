@@ -47,8 +47,8 @@ _pos pushBack _target;
 private _cycle = selectRandom [3, 3, 4, 5];
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Suppress"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Suppress", GVAR(debug_functions)];
 
 // gesture
 [_unit, ["gesturePoint"]] call FUNC(gesture);
@@ -78,14 +78,14 @@ private _fnc_suppress = {
         _x setUnitPosWeak "MIDDLE";
         _x doWatch _posAGL;
         private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(suppress);
-        _x setVariable [QGVAR(currentTask), "Group Suppress"];
+        _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
 
         // no LOS
         if !(_suppress) then {
             // move forward
             _x forceSpeed 3;
             _x doMove (_x getPos [8 + random 6, _x getdir _posAGL]);
-            _x setVariable [QGVAR(currentTask), "Group Suppress (Move)"];
+            _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
         };
     } foreach _units;
 

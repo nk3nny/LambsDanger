@@ -25,10 +25,12 @@ if (
 ) exitWith {false};
 
 // check for vehicle
-private _onFoot = isNull objectParent _unit;
+private _onFoot = isNull (objectParent _unit);
 
 // variable
-_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot];
+_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+
 // this could have an event attached to it too - nkenny
 
 // Abandon vehicles in need!

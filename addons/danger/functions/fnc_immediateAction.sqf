@@ -22,8 +22,8 @@ private _stance = stance _unit;
 private _dir = 360 - (_unit getRelDir _pos);
 
 // dodge
-_unit setVariable [QGVAR(currentTask), "Dodge!"];
-
+_unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call FUNC(indoor))}) exitWith {
     [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call FUNC(gesture);
@@ -71,9 +71,9 @@ if (_dir < 80 && { RND(0.1) }) then {
     };
 };
 
-// move back 
+// move back
 if ((_dir > 320 || _dir < 40) && {speed _unit < 8} && {_unit distance2d _pos < 20}) then {
-  
+
   if (_suppression) then {
         _anim pushBack "FastB";
     } else {

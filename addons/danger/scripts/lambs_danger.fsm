@@ -288,8 +288,8 @@ class FSM
                         itemno = 3;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset variable" \n
-                         "_this setVariable [""lambs_danger_currentTarget"",nil];" \n
-                         "_this setVariable [""lambs_danger_currentTask"",nil];" \n
+                         "_this setVariable [""lambs_danger_currentTarget"",nil,lambs_danger_debug_functions];" \n
+                         "_this setVariable [""lambs_danger_currentTask"",nil,lambs_danger_debug_functions];" \n
                          "" \n
                          "// fleeing" \n
                          "if (fleeing _this) then {" \n

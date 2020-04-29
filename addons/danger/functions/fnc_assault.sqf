@@ -27,12 +27,12 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Assault"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
 // settings
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-_unit forceSpeed ([_unit, _target] call lambs_danger_fnc_assaultSpeed);
+_unit forceSpeed ([_unit, _target] call FUNC(assaultSpeed));
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
