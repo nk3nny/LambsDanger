@@ -41,8 +41,8 @@ if (_buildings isEqualTo []) then {
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
 
 // find closest building
 if !(_buildings isEqualTo []) then {
@@ -63,7 +63,7 @@ private _distance = (_unit distance _pos) min 650;
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position
-_vehicle doWatch _pos;
+_vehicle doWatch ASLtoAGL _pos;
 
 // check for friendlies
 private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);

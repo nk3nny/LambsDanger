@@ -23,15 +23,15 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 [QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
 
 // settings
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Panic"];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Panic", GVAR(debug_functions)];
 
 // debug
 if (GVAR(debug_functions)) then {format ["%1 - %2 in panic", side _unit, name _unit] call FUNC(debugLog);};
 
 // callout
 if (RND(0.4)) then {
-    [_unit, "Stealth", selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"], 55] call FUNC(doCallout);
+    [_unit, "Stealth", "panic", 55] call FUNC(doCallout);
 };
 
 // indoor -- gesture

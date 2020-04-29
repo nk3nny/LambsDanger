@@ -20,11 +20,18 @@ params ["_unit", "_target"];
 // share information
 [_unit, _target] call FUNC(shareInformation);
 
+// movement
+_unit forceSpeed 0;
+_unit setUnitPosWeak "MIDDLE";
+
+// gesture
+[_unit, ["gesturePoint"]] call FUNC(gesture);
+
 // gather the stray flock
 {
     _x doFollow _unit;
     _x setVariable [QGVAR(forceMOVE), true];
-} forEach (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 45} });
+} forEach (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 95} });
 
 // change formation
 (group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation), formation _unit]);

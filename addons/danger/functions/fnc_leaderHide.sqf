@@ -21,8 +21,8 @@ params ["_unit", "_target", ["_buildings", []]];
 // check if target remains a threat or is invalid
 if (_target isEqualType [] || {isNull _target} || {!alive _target}) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Hide"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Hide", GVAR(debug_functions)];
 
 // gesture
 [_unit, ["gestureCover"]] call FUNC(gesture);
@@ -33,6 +33,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Hide"];
 // sort units
 private _units = units _unit;
 _units = _units select {_x call FUNC(isAlive) && {isNull objectParent _x}};
+if (_units isEqualTo []) exitWith {false};
 
 // find launcher ~ if present, exit with preparation for armoured/air contact
 private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
@@ -46,10 +47,15 @@ if !(_launchers isEqualTo []) exitWith {
         _x selectWeapon (secondaryWeapon _x);
         _x setUnitPosWeak "MIDDLE";
 
-    } foreach _launchers;
+    } forEach _launchers;
 
     // extra aggression from unit
     _unit doFire _target;
+
+    // leaders rally troops in preparation
+    if !( GVAR(disableAIAutonomousManoeuvres) || { (speedMode _unit) isEqualTo "FULL" } ) then {
+        [_unit, 8, getpos _unit] call FUNC(leaderMode);
+    };
 
     // end
     true
@@ -63,14 +69,18 @@ if (_buildings isEqualTo []) then {
 
 // groups without launchers hide!
 {
+
+    // ready
+    doStop _x;
+
     // add suppression
-    _x setSuppression ((getSuppression _x) + random 1);
+    _x setSuppression 1;
 
     // hide
     _x setVariable [QGVAR(forceMove), true];
     [_x, _target, 45, _buildings] call FUNC(hideInside);
 
-} foreach _units;
+} forEach _units;
 
 // end
 true

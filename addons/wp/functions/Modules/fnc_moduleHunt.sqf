@@ -29,7 +29,7 @@ switch (_mode) do {
             //--- Check if the unit is suitable
             private _error = "";
             if (isNull _group) then {
-                _error = ELSTRING(main,NoUnitSelected);
+                _error = LELSTRING(main,NoUnitSelected);
             };
 
             if (_error == "") then {
@@ -55,7 +55,7 @@ switch (_mode) do {
                     }, [_group, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
-                [objNull, localize _error] call BIS_fnc_showCuratorFeedbackMessage;
+                [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
                 deleteVehicle _logic;
             };
         } else {

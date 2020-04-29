@@ -29,8 +29,8 @@ if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehic
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _pos];
-_unit setVariable [QGVAR(currentTask), "Vehicle Suppress"];
+_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Suppress", GVAR(debug_functions)];
 
 // pos
 _pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];

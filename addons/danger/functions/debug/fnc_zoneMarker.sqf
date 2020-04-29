@@ -37,11 +37,11 @@ params ["_pos", ["_size", [100, 100]], ["_color", "colorEAST"], ["_brush", "FDia
 _pos = _pos call CBA_fnc_getPos;
 
 // create
-private _m = createMarker [format["mzone_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
-_m setMarkerShape "ELLIPSE";
-_m setmarkerColor _color;
-_m setMarkerBrush _brush;
-_m setMarkerSize _size;
+private _m = createMarkerLocal [format["mzone_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
+_m setMarkerShapeLocal "ELLIPSE";
+_m setMarkerColorLocal _color;
+_m setMarkerBrushLocal _brush;
+_m setMarkerSizeLocal _size;
 
 // optional Rectangle
 if (_shape) then {_m setMarkerShape "RECTANGLE";};

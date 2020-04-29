@@ -29,16 +29,26 @@ if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Art
 // exit on no ready artillery
 if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Leader Artillery"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Artillery", GVAR(debug_functions)];
 
 // find caller
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
-_unit setVariable [QGVAR(currentTask), "Call Artillery"];
+
+// movement
+_unit forceSpeed 0;
+_unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
+_unit setVariable [QGVAR(forceMove), true];
 
 // Gesture
 doStop _unit;
 [_unit, ["HandSignalRadio"]] call FUNC(gesture);
+
+// binoculars if appropriate!
+if (!(binocular _unit isEqualTo "")) then {
+    _unit selectWeapon (binocular _unit);
+    _unit doWatch _pos;
+};
 
 // callout
 [_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);

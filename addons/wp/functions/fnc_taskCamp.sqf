@@ -58,7 +58,7 @@ if !(_area isEqualTo []) then {
 
 // STAGE 1 - PATROL --------------------------
 if (count _units > 4) then {
-    private _group2 = createGroup (side _group);
+    private _group2 = createGroup [(side _group), true];
     [selectRandom _units] join _group2;
     if (count _units > 6)  then { [selectRandom units _group] join _group2; };
 
@@ -66,7 +66,6 @@ if (count _units > 4) then {
     if (dynamicSimulationEnabled _group) then {
         [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
     };
-    _group2 deleteGroupWhenEmpty true;
 
     // id
     _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];

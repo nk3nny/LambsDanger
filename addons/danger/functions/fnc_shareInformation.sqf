@@ -27,8 +27,8 @@ if (
     || {GVAR(radio_disabled)}
 ) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Share Information"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)];
 
 // range
 ([_unit, _range, _override] call FUNC(shareInformationRange)) params ["_unit", "_range"];

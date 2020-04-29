@@ -34,7 +34,7 @@ if (_time >= time) exitWith {
 };
 
 private _speaker = speaker _unit;
-private _cacheName = format ["%1_%2_%3_%3", QGVAR(callouts), _speaker, _behavior, _callout];
+private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
 if (isNil "_cachedSounds") then {
@@ -55,6 +55,9 @@ if (isNil "_cachedSounds") then {
         };
         case ("suppress"): {
             selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"]
+        };
+        case ("panic"): {
+            selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"]
         };
         default {
             if (isArray (_protocolConfig >> _callout)) then {

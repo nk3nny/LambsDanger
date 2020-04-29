@@ -24,8 +24,8 @@ private _vehicle = vehicle _unit;
 if (!canMove _vehicle || {currentCommand _vehicle isEqualTo "MOVE" || currentCommand _vehicle isEqualTo "ATTACK"}) exitWith {getPosASL _unit};
 
 // variables
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Jink Vehicle"];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Jink Vehicle", GVAR(debug_functions)];
 
 // Find positions
 private _destination = [];

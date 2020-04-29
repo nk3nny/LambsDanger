@@ -27,6 +27,12 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
+// look at it
+_unit lookAt _pos;
+
+// leaders gesture
+[formationLeader _unit, ["gesturePoint"]] call FUNC(gesture);
+
 // if too far away
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
 
@@ -45,12 +51,13 @@ doStop _unit;
 // found body
 _body = selectRandom _body;
 
-_unit setVariable [QGVAR(currentTarget), _body];
-_unit setVariable [QGVAR(currentTask), "Check Body"];
+_unit setVariable [QGVAR(currentTarget), _body, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Check Body", GVAR(debug_functions)];
 
 // do it
 private _bodyPos = getPosATL _body;
 _unit doMove _bodyPos;
+_unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
 [
     {
         // condition

@@ -48,19 +48,46 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 // leadership assessment
 if !(_enemy isEqualTo []) then {
 
-    // Enemy is in buildings or at lower position
-    private _targets = _enemy findIf {_x isKindOf "Man" && { _x call FUNC(indoor) || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }}};
+    // Enemy is in buildings or at lower position or near bunker or static weapon
+    private _targets = _enemy findIf {
+        _x isKindOf "Man" && {
+            _x call FUNC(indoor)
+            || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }
+            || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
+        }
+    };
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) then {
-        [_unit, 3, getPosATL (_enemy select _targets)] call FUNC(leaderMode);
 
-        // gesture
-        [_unit, ["gesturePoint"]] call FUNC(gesture);
+        // select type
+        private _target = _enemy select _targets;
+        private _type = [3, 3];
+
+        /*
+        Types
+            3 Flanking Manoeuvre
+            4 Assault
+            5 Group Suppressive fire
+        */
+
+        // combatmode
+        if (combatMode _unit isEqualTo "RED") then {_type pushBack 4;};
+        if (combatMode _unit in ["YELLOW", "WHITE"]) then {_type pushBack 5;};
+
+        // visibility / distance / no cover
+        if !(terrainIntersectASL [eyepos _unit, eyepos _target]) then {_type pushBack 5;};
+        if (_unit distance2D _target < 120) then {_type pushBack 4;};
+        if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_type pushBack 3;};  // could be retreat in the future! - nkenny
+
+        // enable selection
+        _type = selectRandom _type;
+        [_unit, _type, getPosATL _target] call FUNC(leaderMode);
 
     };
 
     // Enemy is Tank/Air?
-    _targets = _enemy findIf {_x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2d _unit < 200 }}};
+    _targets = _enemy findIf { _x isKindOf "Air" || { _x isKindOf "Tank" && { _x distance2D _unit < 200 }}};
     if (_targets != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)}) then {
+
         [_unit, 2, _enemy select _targets] call FUNC(leaderMode);
 
         // callout
@@ -73,13 +100,14 @@ if !(_enemy isEqualTo []) then {
     };
 
     // Artillery
-    _targets = _enemy findIf {_x distance _unit > 200};
-
+    _targets = _enemy findIf { _x distance2D _unit > 200 && { isTouchingGround (vehicle _x) }};
     if  (_targets != -1 && { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
+
         [_unit, 6, (_unit getHideFrom (_enemy select _targets))] call FUNC(leaderMode);
+
     };
 
-    // communicate <-- possible remove?
+    // communicate
     [_unit, selectRandom _enemy] call FUNC(shareInformation);
 
 } else {
@@ -89,48 +117,39 @@ if !(_enemy isEqualTo []) then {
 
 };
 
+// update formation direction
+_unit setFormDir (_unit getDir _pos);
+
+// move
+_unit forceSpeed 0;
+
 // binoculars if appropriate!
 if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
     _unit selectWeapon (binocular _unit);
     _unit doWatch _pos;
 };
 
-// update formation direction
-_unit setFormDir (_unit getDir _pos);
+// find units
+private _units = [_unit] call FUNC(findReadyUnits);
 
-// man empty statics?
-private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
-
-// give orders
-private _units = units _unit select { !(_unit isEqualTo _x) && {_x call FUNC(isAlive)} && {unitReady _x} && { _x distance2d _unit < 150 } && { isNull objectParent _x } && { !isPlayer _x } };
-
-// isolated leader <-- not sure why this is here?
-/*
-if (count _units < 2) then {
-    _unit doFollow selectRandom _units;
-};*/
-
-if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW
-
-    // pick a random unit
-    _weapons = selectRandom _weapons;
-    _units = [_units, [], { _weapons distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-    _units = _units select 0;
-
-    // asign no target
-    _units doWatch ObjNull;
-    _units setVariable [QGVAR(forceMOVE), true];
-
-    // order to man the vehicle
-    _units assignAsGunner _weapons;
-    [_units] orderGetIn true;
-    (group _unit) addVehicle _weapons;
+// deploy flares
+if !((GVAR(disableAutonomousFlares)) || {_unit call FUNC(isNight)}) then {
+    _units = [_units] call FUNC(doFlare);
 };
 
-// set current task -- moved here so it is not interfered by things happening above
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Leader Assess"];
+// deploy static weapons ~ also returns available units
+if !(GVAR(disableAIDeployStaticWeapons)) then {
+    _units = [_units, _pos] call FUNC(leaderStaticDeploy);
+};
+
+// man empty static weapons
+if !(GVAR(disableAIFindStaticWeapons)) then {
+    _units = [_units, _unit] call FUNC(leaderStaticFind);
+};
+
+// set current task
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assess", GVAR(debug_functions)];
 
 // end
 true

@@ -168,6 +168,7 @@ private _fnc_addEventHandler = {
 // disabled!
 
 // waypoint
+_pos set [2, 0]; // Stop Waypoints from Flying
 private _wp = _group addWaypoint [_pos, _radius / 5];
 _wp setWaypointType "HOLD";
 _wp setWaypointCompletionRadius _radius;

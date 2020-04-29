@@ -31,8 +31,8 @@ _unit setUnitPosWeak "UP";
 private _enemy = _unit findNearestEnemy _unit;
 if ((_unit distance _enemy) < 7) exitWith {
 
-    _unit setVariable [QGVAR(currentTarget), _enemy];
-    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)"];
+    _unit setVariable [QGVAR(currentTarget), _enemy, GVAR(debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)", GVAR(debug_functions)];
 
     // movement
     //_unit doWatch objNull;
@@ -63,8 +63,8 @@ if (_buildings isEqualTo []) exitWith {
 
 };
 
-_unit setVariable [QGVAR(currentTarget), objNull];
-_unit setVariable [QGVAR(currentTask), "Assault Building"];
+_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault Building", GVAR(debug_functions)];
 
 // define building
 private _building = (_buildings select 0);

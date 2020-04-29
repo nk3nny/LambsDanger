@@ -18,10 +18,6 @@
 */
 params ["_unit", "_pos", ["_override", false]];
 
-// variable
-_unit setVariable [QGVAR(currentTarget), _pos];
-_unit setVariable [QGVAR(currentTask), "Deliberate Fire"];
-
 // no primary weapons exit? Player led groups do not auto-suppress
 if (
     getSuppression _unit > 0.75
@@ -36,11 +32,13 @@ if (!_override) then {
     private _enemy = _unit findNearestEnemy (ASLToAGL _pos);
     if (isNull _enemy) exitWith {};
     _pos = ATLToASL (_unit getHideFrom _enemy);
-    private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
-    if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 };
 
-// mod pos
+// adjust pos
+private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
+if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+
+// max range pos
 private _distance = (_unit distance (ASLToAGL _pos)) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
@@ -60,7 +58,8 @@ _unit forceSpeed 0;
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire
-_unit setVariable [QGVAR(currentTask), "Suppressive Fire"];
+_unit setVariable [QGVAR(currentTask), "Suppressive Fire", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {
@@ -69,7 +68,7 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 
 // debug
 if (GVAR(debug_functions)) then {
-    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call FUNC(debugLog);
+    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call FUNC(debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];

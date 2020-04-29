@@ -27,12 +27,12 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target];
-_unit setVariable [QGVAR(currentTask), "Assault"];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
 // settings
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-_unit forceSpeed ([_unit, _target] call lambs_danger_fnc_assaultSpeed);
+_unit forceSpeed ([_unit, _target] call FUNC(assaultSpeed));
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
@@ -46,13 +46,12 @@ if (RND(0.8) || { _buildings isEqualTo [] }) exitWith {
     if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
 
         // execute move
-        _unit doTarget _target;
         _unit doMove (_unit getHideFrom _target);
 
         // debug
         if (GVAR(debug_functions)) then {
-            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call FUNC(debugLog);
-            private _sphere = createSimpleObject ["Sign_Sphere25cm_F", AGLtoASL (_unit getHideFrom _target), true];
+            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call FUNC(debugLog);
+            private _sphere = createSimpleObject ["Sign_Sphere25cm_F", ATLtoASL (_unit getHideFrom _target), true];
             _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
             [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
         };

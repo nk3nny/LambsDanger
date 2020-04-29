@@ -45,7 +45,7 @@ switch (_mode) do {
                         private _group = _groups select _groupIndex;
                         if !((local _group) || _deleteAfterStartup) then {
                             _deleteAfterStartup = true;
-                            [objNull, format [localize LSTRING(SettingIsOnlyForLocalGroups), localize LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
+                            [objNull, format [LLSTRING(SettingIsOnlyForLocalGroups), LLSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
                         [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
 

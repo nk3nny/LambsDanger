@@ -41,8 +41,8 @@ if (_buildings isEqualTo []) then {
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), _danger];
-_unit setVariable [QGVAR(currentTask), "Hide"];
+_unit setVariable [QGVAR(currentTarget), _danger, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Hide", GVAR(debug_functions)];
 
 // settings
 _unit forceSpeed 24;
@@ -50,7 +50,7 @@ _unit forceSpeed 24;
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
-    _unit setVariable [QGVAR(currentTask), "Hide (inside)"];
+    _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
     // hide
     doStop _unit;
@@ -70,7 +70,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     private _cover = nearestTerrainObjects [ _unit getPos [20, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
 
     // targetPos
-    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [45 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
+    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [10 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
 
     // water means hold
     if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
