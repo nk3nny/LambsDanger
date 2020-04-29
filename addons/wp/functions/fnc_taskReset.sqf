@@ -27,7 +27,7 @@ if (_group isEqualType objNull) then { _group = group _group; };
 private _units = units _group select {!isPlayer _x};
 
 // make new group + adopt name
-private _groupNew = createGroup (side _group);
+private _groupNew = createGroup [(side _group), true];
 _groupNew setGroupIdGlobal [groupId _group];
 _groupNew setFormation (formation _group);
 
@@ -35,7 +35,6 @@ _groupNew setFormation (formation _group);
 [_group] call CBA_fnc_clearWaypoints;
 
 _group deleteGroupWhenEmpty true;
-_groupNew deleteGroupWhenEmpty true;
 
 // reset
 {
