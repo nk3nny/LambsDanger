@@ -33,6 +33,8 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 
 // this could have an event attached to it too - nkenny
 
+[QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
+
 // Abandon vehicles in need!
 if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
     [_unit] orderGetIn false;

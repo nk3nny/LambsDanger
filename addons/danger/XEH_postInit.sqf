@@ -41,3 +41,8 @@ addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
     [_this select 0, QGVAR(OnInformationShared), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnInformationShared), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
+
+[QGVAR(OnFleeing), {
+    [_this select 0, QGVAR(OnFleeing), _this] call BIS_fnc_callScriptedEventHandler;
+    [_this select 1, QGVAR(OnFleeing), _this] call BIS_fnc_callScriptedEventHandler;
+}] call CBA_fnc_addEventHandler;
