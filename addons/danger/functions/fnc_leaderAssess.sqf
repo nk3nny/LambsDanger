@@ -134,7 +134,7 @@ private _units = [_unit] call FUNC(findReadyUnits);
 
 // deploy flares
 if (!(GVAR(disableAutonomousFlares)) && {_unit call FUNC(isNight)}) then {
-    _units = [_units] call FUNC(doFlare);
+    _units = [_units] call FUNC(doUGL);
 };
 
 // deploy static weapons ~ also returns available units

@@ -4,7 +4,7 @@ PREP(assaultSpeed);
 PREP(checkBody);
 PREP(coward);
 PREP(doCallout);
-PREP(doFlare);
+PREP(doUGL);
 PREP(doSmoke);
 PREP(findBuildings);
 PREP(findCover);

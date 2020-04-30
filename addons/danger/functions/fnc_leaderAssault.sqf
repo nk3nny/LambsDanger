@@ -61,7 +61,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Assault", GVAR(debug_functions)];
 [_unit, _target] call FUNC(doSmoke);
 
 // grenadier smoke
-[{_this call FUNC(doFlare)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+[{_this call FUNC(doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
