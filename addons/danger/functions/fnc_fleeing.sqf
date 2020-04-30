@@ -73,19 +73,19 @@ if !(_buildings isEqualTo []) exitWith {
 
 // update path
 private _enemy = _unit findNearestEnemy _unit;
-if (_unit distance2d _enemy < 120) then {
+if (_unit distance2D _enemy < 120) then {
 
     // newpos
-    private _pos = (_unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70]);
-
-    // check for water
-    if (surfaceIsWater _pos) then {_pos = getPosASL _unit};
+    private _pos = _unit getPos [(_distance * 0.33) + random (_distance * 0.66), (_enemy getDir _unit) - 35 + random 70];
 
     // concealment + pick bushes and rocks if possible
-    private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, false, true];
+    private _objs = nearestTerrainObjects [_pos, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE", "ROCK", "ROCKS"], 15, false, true];
     if !(_objs isEqualTo []) then {
         _pos = getPos (selectRandom _objs);
     };
+
+    // check for water
+    if (surfaceIsWater _pos) then {_pos = getPosASL _unit};
 
     // move away
     _unit doMove _pos;

@@ -11,7 +11,7 @@
  * units in array
  *
  * Example:
- * [units bob, getPos angryJoe] call lambs_danger_fnc_leaderStaticFind;
+ * [units bob, bob] call lambs_danger_fnc_leaderStaticFind;
  *
  * Public: No
 */

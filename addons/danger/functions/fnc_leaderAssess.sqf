@@ -133,7 +133,7 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
 private _units = [_unit] call FUNC(findReadyUnits);
 
 // deploy flares
-if !((GVAR(disableAutonomousFlares)) || {_unit call FUNC(isNight)}) then {
+if (!(GVAR(disableAutonomousFlares)) && {_unit call FUNC(isNight)}) then {
     _units = [_units] call FUNC(doFlare);
 };
 
