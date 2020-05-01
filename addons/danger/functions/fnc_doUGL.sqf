@@ -65,7 +65,7 @@ _unit setUnitPosWeak "MIDDLE";
 _unit setVariable [QGVAR(forceMove), true];
 
 // variable
-_unit setVariable [QGVAR(currentTask), "Shoot flare", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Shoot UGL", GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
 private _flarePos = [_pos, (_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]] select (_pos isEqualTo []);
