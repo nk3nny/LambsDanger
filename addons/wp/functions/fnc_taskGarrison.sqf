@@ -119,6 +119,9 @@ private _fnc_addEventHandler = {
                 };
             }];
         };
+        case 3: {
+            // DO NOTHING
+        };
     };
 };
 // spread out
