@@ -395,10 +395,6 @@
             <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
             <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
         </Key>
-        <Key ID="STR_Lambs_WP_None">
-            <English>None</English>
-            <German>Keine</German>
-        </Key>
         <Key ID="STR_Lambs_WP_Random">
             <English>Random</English>
             <German>Zufällig</German>

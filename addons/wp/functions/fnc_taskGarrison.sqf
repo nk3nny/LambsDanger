@@ -86,12 +86,8 @@ if (count _units > 4) then {
 
 if (count _units > count _houses) then {_units resize (count _houses);};
 private _fnc_addEventHandler = {
-    params ["_type"];
-    if (_type == -2) then {
-        _type = floor (random 3);
-    };
     // add handlers
-    switch (_type) do {
+    switch (_this) do {
         case 0: {
             _x addEventHandler ["Hit", {
                 params ["_unit"];
@@ -151,6 +147,10 @@ private _fnc_addEventHandler = {
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             }, [_x, _house]
         ] call CBA_fnc_waitUntilAndExecute;
+    };
+
+    if (_exitCondition == -2) then {
+        _exitCondition = floor (random 3);
     };
 
     if (_exitCondition == -1) then {

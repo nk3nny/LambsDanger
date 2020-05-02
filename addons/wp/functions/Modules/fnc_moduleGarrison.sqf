@@ -35,7 +35,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
-                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
+                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit)], 0],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
                         [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
 

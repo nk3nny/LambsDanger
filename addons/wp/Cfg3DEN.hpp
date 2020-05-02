@@ -28,7 +28,7 @@ class Cfg3DEN {
             };
         };
         class GVAR(ExitConditions): Title {
-            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 5));
+            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 4));
             attributeSave = QUOTE(lbCurSel (_this controlsGroupCtrl 100));
             class Controls: Controls {
                 class Title: Title {};
@@ -38,8 +38,8 @@ class Cfg3DEN {
                     w = 82 * GRID_3DEN_W;
                     h = 5  * GRID_3DEN_H;
                     rows = 1;
-                    columns = 6;
-                    strings[] = { CSTRING(Random), CSTRING(All), CSTRING(FiredNear), CSTRING(Fired), CSTRING(Hit), CSTRING(None) };
+                    columns = 5;
+                    strings[] = { CSTRING(Random), CSTRING(All), CSTRING(FiredNear), CSTRING(Fired), CSTRING(Hit) };
                 };
             };
         };
