@@ -35,8 +35,13 @@ _unit setUnitPosWeak "MIDDLE";
 
 // deploy flares
 if (!(GVAR(disableAutonomousFlares)) && {_unit call FUNC(isNight)}) then {
-    private _units = units _unit select {!(lineIntersects [eyepos _x, (eyepos _x) vectorAdd [0, 0, 10]])};
-    [_units] call FUNC(doUGL);
+    [
+        {
+            params ["_unit"];
+            private _units = units _unit select { _x call FUNC(isAlive) && {!(lineIntersects [eyepos _x, (eyepos _x) vectorAdd [0, 0, 10]])}};
+            [_units] call FUNC(doUGL);
+        }, [_unit], 1.5
+    ] call CBA_fnc_waitAndExecute;
 };
 
 // change formation
