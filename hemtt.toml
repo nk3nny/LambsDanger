@@ -28,7 +28,7 @@ releasebuild = [
 ]
 
 [header_exts]
-version= "{{git \"id 8\"}}"
+version = "{{version}}_{{git \"id 8\"}}"
 
 [scripts.version_set]
 steps_linux = [
