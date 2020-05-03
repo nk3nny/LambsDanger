@@ -11,7 +11,7 @@
  * success
  *
  * Example:
- * [bob, getPos angryJoe] call lambs_danger_fnc_leaderAssess;
+ * [bob, angryJoe] call lambs_danger_fnc_leaderContact;
  *
  * Public: No
 */
@@ -32,6 +32,17 @@ _unit setUnitPosWeak "MIDDLE";
     _x doFollow _unit;
     _x setVariable [QGVAR(forceMOVE), true];
 } forEach (( units _unit ) select { _x call FUNC(isAlive) && {_x distance _unit > 95} });
+
+// deploy flares
+if (!(GVAR(disableAutonomousFlares)) && {_unit call FUNC(isNight)}) then {
+    [
+        {
+            params ["_unit"];
+            private _units = units _unit select { _x call FUNC(isAlive) && {!(lineIntersects [eyepos _x, (eyepos _x) vectorAdd [0, 0, 10]])}};
+            [_units] call FUNC(doUGL);
+        }, [_unit], 1.5
+    ] call CBA_fnc_waitAndExecute;
+};
 
 // change formation
 (group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation), formation _unit]);
