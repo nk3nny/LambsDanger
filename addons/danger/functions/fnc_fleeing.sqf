@@ -38,7 +38,7 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // Abandon vehicles in need!
 if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
     [_unit] orderGetIn false;
-    _unit setSuppression 2;  // prevents instant laser aim - nkenny
+    _unit setSuppression 1;  // prevents instant laser aim - nkenny
 };
 
 // no further action in vehicle
@@ -60,7 +60,7 @@ if (getSuppression _unit < 0.2 && {lineIntersects [eyepos _unit, (eyepos _unit) 
 
     // stance
     //_unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"]; <-- Seems to have little effect
-    [_unit, ["AdjustB"], true] call FUNC(gesture);
+    //[_unit, ["AdjustB"], true] call FUNC(gesture);
 };
 
 // nearBuildings
