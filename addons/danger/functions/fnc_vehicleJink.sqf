@@ -34,8 +34,14 @@ _destination pushBack (_vehicle modelToWorldVisual [_range * -1, -(random 10), 0
 //_destination pushBack (_vehicle modelToWorldVisual [0, (20 + random 50) * -1, 0]);  <-- rear movement just confuses AI
 
 // near enemy?
-if (!isNull (_unit findNearestEnemy _unit)) then {
-    _destination pushBack ([getPos (_unit findNearestEnemy _unit), 120 + _range, _range, 8, getPos _vehicle] call FUNC(findOverwatch));
+private _enemy = _unit findNearestEnemy _unit;
+if (!isNull _enemy) then {
+
+    _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call FUNC(findOverwatch));
+
+    // Share information!
+    [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
+
 };
 
 // tweak
