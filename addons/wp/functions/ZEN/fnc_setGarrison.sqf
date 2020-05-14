@@ -1,6 +1,6 @@
 #include "\z\lambs\addons\wp\script_component.hpp"
 
-params ["_groups"];
+params ["_groups", "_objects"];
 
 private _targets = [];
 _targets append _groups;
