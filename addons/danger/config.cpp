@@ -15,3 +15,4 @@ class CfgPatches {
 #include "CfgVehicles.hpp"
 #include "CfgFSMs.hpp"
 #include "Cfg3DEN.hpp"
+#include "ZEN_CfgContext.hpp"

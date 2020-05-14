@@ -37,7 +37,7 @@ class CfgPatches {
 #include "Cfg3DEN.hpp"
 #include "CfgEventHandlers.hpp"
 #include "CfgWaypoints.hpp"
-#include "CfgWaypointTypes.hpp"
+#include "ZEN_CfgWaypointTypes.hpp"
 #include "CfgVehicles.hpp"
 
 class CfgSettings {
