@@ -45,7 +45,7 @@
             icon = "\a3\3DEN\Data\CfgWaypoints\cycle_ca.paa";
         };
     };
-    class DOUBLE(ADDON,Search) {
+    class DOUBLES(ADDON,Search) {
         displayName = "LAMBS Danger Search Waypoints";
         condition = QUOTE(!((_groups isEqualTo []) && (_objects isEqualTo [])));
         priority = 4;
