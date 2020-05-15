@@ -422,5 +422,9 @@
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Context_CreateTarget">
+            <English>Create Dynamic Target</English>
+            <German>Erstelle Dynamisches Ziel</German>
+        </Key>
     </Package>
 </Project>
