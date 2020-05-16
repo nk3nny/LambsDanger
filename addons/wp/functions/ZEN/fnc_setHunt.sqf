@@ -3,15 +3,7 @@
 params ["_groups", "_objects"];
 
 private _targets = [];
-_targets append _groups;
-{
-    if (_x isKindOf "CAManBase") then {
-        _targets pushBackUnique (group _x);
-    } else {
-        _targets append ((crew _x) apply {group _x});
-    };
-} forEach _objects;
-_targets = _targets arrayIntersect _targets;
+GET_GROUPS_CONTEXT(_targets,_groups,_objects);
 
 {
     [_x, 1000, 70] remoteExec [QFUNC(taskHunt), leader _x];

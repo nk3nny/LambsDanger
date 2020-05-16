@@ -1,6 +1,6 @@
  class ZEN_context_menu_actions {
     class ADDON {
-        displayName = "LAMBS Danger Waypoints";
+        displayName = CSTRING(Context_Main_DisplayName);
         priority = 3;
         class CreateTarget {
             displayName = CSTRING(Context_CreateTarget);
@@ -46,7 +46,7 @@
         };
     };
     class DOUBLES(ADDON,Search) {
-        displayName = "LAMBS Danger Search Waypoints";
+        displayName = CSTRING(Context_Search_DisplayName);
         condition = QUOTE(!((_groups isEqualTo []) && (_objects isEqualTo [])));
         priority = 4;
         class TaskCreep {

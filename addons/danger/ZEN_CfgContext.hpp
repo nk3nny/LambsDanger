@@ -1,6 +1,6 @@
 class ZEN_context_menu_actions {
     class ADDON {
-        displayName = COMPONENT_NAME;
+        displayName = CSTRING(Context_Main_displayName);
         condition = QUOTE(!((_groups isEqualTo []) && (_objects isEqualTo [])));
         priority = 5;
         class EnableAI {

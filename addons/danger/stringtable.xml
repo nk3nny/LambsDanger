@@ -325,5 +325,8 @@
             <English>Enable Group AI</English>
             <German>Aktiviere Gruppen KI</German>
         </Key>
+        <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
+            <English>Lamber Danger FSM</English>
+        </Key>
     </Package>
 </Project>
