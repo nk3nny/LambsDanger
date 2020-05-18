@@ -366,7 +366,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = "15";
+            defaultValue = "30";
             unique = 0;
             validate = "none";
             condition = "0";
@@ -474,7 +474,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = "4";
+            defaultValue = "15";
             unique = 0;
             validate = "none";
             condition = "0";

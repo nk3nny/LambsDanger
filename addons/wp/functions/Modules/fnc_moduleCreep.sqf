@@ -35,7 +35,7 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCreep_DisplayName),
                     [
                         [LSTRING(Module_TaskCreep_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_Radius_ToolTip), [25,5000], [1, 0.5], 1000, 1],
-                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], 15, 2],
+                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], 30, 2],
                         [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true],
                         [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), true]
                     ], {
@@ -63,7 +63,7 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), 30];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
             private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
             {
