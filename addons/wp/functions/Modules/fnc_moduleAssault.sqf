@@ -100,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
             private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
-                [_x, _logic, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
+                [_x, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;

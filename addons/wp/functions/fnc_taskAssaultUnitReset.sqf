@@ -15,7 +15,7 @@
  *
  * Public: Yes
 */
-params ["_unit", "_retreat"];
+params ["_unit", ["_retreat", false]];
 
 _unit setVariable [QEGVAR(danger,disableAI), nil];
 _unit setVariable [QEGVAR(danger,forceMove), nil];
@@ -24,11 +24,15 @@ _unit setVariable [QEGVAR(danger,forceMove), nil];
 _unit forceSpeed -1;
 _unit setUnitPos "AUTO";
 _unit doMove getposASL _unit;
+_unit doFollow leader _unit;
 
 // AI
 _unit enableAI "FSM";
 _unit enableAI "COVER";
 _unit enableAI "SUPPRESSION";
+
+// double check retreat
+if (!_retreat && {animationState _unit in ["apanpknlmsprsnonwnondf", "apanpercmsprsnonWnondf"]}) then {_retreat = true};
 
 // retreat
 if (_retreat) then {

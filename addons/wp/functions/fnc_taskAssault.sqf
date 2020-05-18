@@ -44,6 +44,7 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAl
 _group setVariable [QGVAR(taskAssaultDestination), _pos];
 _group setVariable [QGVAR(taskAssaultMembers), _units];
 _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
+_group setSpeedMode "FULL";
 
 // sort units
 {
