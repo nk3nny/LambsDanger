@@ -76,7 +76,7 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
                 if (!(_unit call EFUNC(danger,isAlive)) || {_unit distance2D _destination < _threshold}) exitWith {
 
                     // group
-                    _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
+                    private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
                     _groupMembers = _groupMembers - [_unit];
                     _group setVariable [QGVAR(taskAssaultMembers), _groupMembers];
                     
