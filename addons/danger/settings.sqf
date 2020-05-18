@@ -196,6 +196,16 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     1
 ] call CBA_fnc_addSetting;
 
+// Combat share range
+[
+    QGVAR(combatShareRange),
+    "SLIDER",
+    [ LSTRING(Settings_combatShareRange),  LSTRING(Settings_combatShareRange_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 1000, 200, 0],
+    1
+] call CBA_fnc_addSetting;
+
 // Ranges at which groups share information
 [
     QGVAR(radio_shout),

@@ -32,6 +32,7 @@ if (
     isNull _target
     || {!(_target isKindOf "Man")}
     || {(_unit distance2d _predictedPos) < GVAR(minSuppression_range)}
+    || {terrainIntersectASL [eyePos _vehicle, ATLtoASL _predictedPos]}
 ) exitWith {false};
 
 // define buildings

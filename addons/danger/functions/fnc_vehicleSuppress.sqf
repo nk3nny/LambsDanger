@@ -18,7 +18,10 @@
 params ["_unit", "_pos"];
 
 // too close + high speed
-if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
+if (
+    _unit distance2d _pos < GVAR(minSuppression_range)
+    || {terrainIntersectASL [eyePos _unit, AGLtoASL _pos]}
+) exitWith {false};
 private _vehicle = vehicle _unit;
 if (speed _vehicle > 12) exitWith {false};
 
