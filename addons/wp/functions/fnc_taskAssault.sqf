@@ -66,15 +66,15 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
     };
 
     // adds frame handler
-    if ((_x getVariable [QGVAR(taskAssaultHandle), -1]) isEqualTo -1) then {
-        private _handle = [
+    if (!(_x getVariable [QGVAR(taskAssault), false])) then {
+        [
             {
                 params ["_args", "_handle"];
                 _args params ["_unit", "_group", "_retreat", "_threshold"];
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
                 // exit
-                if (!(_unit call EFUNC(danger,isAlive)) || {_unit distance2D _destination < _threshold}) exitWith {
+                if (!(_unit call EFUNC(danger,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
@@ -83,7 +83,7 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
                     
                     // handle
                     _handle call CBA_fnc_removePerFrameHandler;
-                    _unit setVariable [QGVAR(taskAssaultHandle), nil];
+                    _unit setVariable [QGVAR(taskAssault), nil];
 
                     // unit
                     [_unit, _retreat] call FUNC(taskAssaultUnitReset);
@@ -129,7 +129,7 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
             _cycle,
             [_x, _group, _retreat, _threshold]
         ] call CBA_fnc_addPerFrameHandler;
-        _x setVariable [QGVAR(taskAssaultHandle), _handle];
+        _x setVariable [QGVAR(taskAssault), true];
     };
 
 } foreach _units;

@@ -23,6 +23,7 @@ _unit setVariable [QEGVAR(danger,forceMove), nil];
 // stance
 _unit forceSpeed -1;
 _unit setUnitPos "AUTO";
+_unit doMove getposASL _unit;
 
 // AI
 _unit enableAI "FSM";
