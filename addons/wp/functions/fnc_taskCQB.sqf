@@ -35,7 +35,7 @@ if !(canSuspend) exitWith {
 private _fnc_find = {
     params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
-    _building = _building select {count (_x buildingPos -1) > 0};
+    _building = _building select {!((_x buildingPos -1) isEqualTo [])};
     _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
     if !(_area isEqualTo []) then {
@@ -45,9 +45,9 @@ private _fnc_find = {
 
     if (_building isEqualTo []) exitWith { objNull };
 
-    _building = _building apply {[_pos distance2D _x, _x]}; // sort nearest -nkenny
-    _building sort true;
-    (_building select 0) select 1
+    private _nearestBuildings = _building apply {[(leader _group) distance2D _x, _x]}; // sort nearest -nkenny
+    _nearestBuildings sort true;
+    (_nearestBuildings param [0, [0, objNull]]) param [1, objNull]
 };
 
 // check for enemies
@@ -55,8 +55,7 @@ private _fnc_enemy = {
     params ["_building", "_group"];
     private _pos = [ getPos _building, getPos leader _group] select isNull _building;
     private _enemy = (leader _group) findNearestEnemy _pos;
-    if (isNull _enemy || {_pos distance2d _enemy < 25}) exitWith {_enemy};
-    (leader _group) doSuppressiveFire _enemy;
+    if (isNull _enemy || {_pos distance2d _enemy < 25}) exitWith { _enemy };
     objNull
 };
 
@@ -84,24 +83,27 @@ private _fnc_act = {
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
         _buildingPos pushBack (getPosATL _enemy);
 
-        private _buildingPosSelected = _buildingPos select 0;
+        private _buildingPosSelected = selectRandom _buildingPos;
 
         // act
         {
             _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
-            _x doMove selectRandom _buildingPos;
+            _x doMove _buildingPosSelected;
             _x lookAt _enemy;
+
+            // task
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(danger,debug_functions)];
             true
         } count _units;
     };
 
     // clear and check buildings
     private _buildingPos = _building getVariable [format["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
-    //_buildingPos = _buildinggetVariable ["nk_CQB_cleared", (_buildingbuildingPos -1)];
     {
 
         // this is the pos to clear!
-        private _buildingPosSelected = _buildingPos select 0;
+        private _buildingPosSelected = _buildingPos param [0, []];
 
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
@@ -124,7 +126,7 @@ private _fnc_act = {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
-                if (RND(0.6) && {_x call EFUNC(danger,indoor)} && {_x distance _buildingPosSelected > 45}) then {
+                if (RND(0.6) && {_x call EFUNC(danger,indoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
                     _x setVehiclePosition [getPos _x, [], 3.5];
                 };
 
@@ -140,7 +142,7 @@ private _fnc_act = {
 
             // Unit is ready and outside -- try suppressive fire
             if (unitReady _x && {!(_x call EFUNC(danger,indoor))}) then {
-                _x doSuppressiveFire _building;
+                [_x, getPosASL _building] call EFUNC(danger,suppress);
                 _x doFollow leader _x;
             };
         };
@@ -156,9 +158,8 @@ private _fnc_act = {
 // init
 params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_area", [], [[]]], ["_useWaypoint", false]];
 
-
 // sort grp
-if (!local _group) exitWith {};
+if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then {
     _group = group _group;
 };
@@ -167,6 +168,7 @@ if (_group isEqualType objNull) then {
 if (_useWaypoint) then {
     _pos = [_group ,(currentWaypoint _group) min ((count waypoints _group) - 1)];
 };
+
 // orders
 _group setSpeedMode "FULL";
 _group setFormation "FILE";
@@ -181,7 +183,8 @@ _group allowFleeing 0;
 } count units _group;
 
 // loop
-while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
+waitUntil {
+
     // performance
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
@@ -195,22 +198,29 @@ while {{_x call EFUNC(danger,isAlive)} count units _group > 0} do {
     private _enemy = [_building, _group] call _fnc_enemy;
 
     // act!
-    if (isNull _building && {isNull _enemy}) exitWith {};
+    if (isNull _building && {isNull _enemy}) exitWith {false};
     [_enemy, _group, _building] call _fnc_act;
+
+    // debug
+    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
-    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+
+    // end
+    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+
 };
 
 // reset
 {
     _x setVariable [QEGVAR(danger,disableAI), nil];
     _x setUnitpos "AUTO";
+    _x doFollow (leader _x);
 } foreach units _group;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.29",side _group] call EFUNC(danger,debugLog);};
+if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(danger,debugLog);};
 
 // end
 true
