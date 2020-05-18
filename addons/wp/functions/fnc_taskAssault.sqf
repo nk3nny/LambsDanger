@@ -69,6 +69,7 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
     if ((_x getVariable [QGVAR(taskAssaultHandle), -1]) isEqualTo -1) then {
         private _handle = [
             {
+                params ["_args", "_handle"];
                 _args params ["_unit", "_group", "_retreat", "_threshold"];
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
@@ -121,9 +122,8 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
 
                 // forward
                 if (_anim isEqualTo []) then {_anim = ["FastF"];};
-                
+
                 // execute
-                systemchat format ["%1 degrees: %2  anims: %3", name _unit, _dir, _anim];
                 _unit playActionNow selectRandom _anim;
             },
             _cycle,
