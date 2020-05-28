@@ -18,8 +18,8 @@ Use CBA settings to configure the mod.
 
 ### TEAM
 - Diwako
-- Joko,
-- and nkenny
+- Joko
+- nkenny
 
 Thanks for playing.
 

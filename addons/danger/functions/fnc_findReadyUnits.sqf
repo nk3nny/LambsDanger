@@ -26,7 +26,7 @@ if (_units isEqualTo []) then {
 // sort
 _units = _units select {
     //unitReady _x
-    _x distance2d _unit < _range
+    _x distance2D _unit < _range
     && { isNull objectParent _x }
     && { _x call FUNC(isAlive) }
     && { !(_x getVariable [QGVAR(forceMove), false]) }
