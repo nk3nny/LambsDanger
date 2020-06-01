@@ -72,12 +72,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _range * 2] call FUNC(taskPatrol);
+        [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _range * 2, 4, _area2] call FUNC(taskPatrol);
+        [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
     };
 
     // update
@@ -183,7 +183,7 @@ private _dir = random 360;
         unitReady _unit
     }, {
         params ["_unit", "_target", "_center", "_anim"];
-        if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        if (surfaceIsWater (getPos _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
         [_unit, _anim, 2] call EFUNC(main,doAnimation);
 
         _unit disableAI "ANIM";
@@ -216,7 +216,7 @@ private _dir = random 360;
 // waypoint and end state
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
-_wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
+_wp setWaypointStatements ["true", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
