@@ -24,7 +24,7 @@
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2]];
+params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2], ["_patrol", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -33,13 +33,6 @@ if (_group isEqualType objNull) then { _group = group _group; };
 // sort pos
 if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call CBA_fnc_getPos;
-
-// remove all waypoints
-//[_group] call CBA_fnc_clearWaypoints;
-
-// settings
-private _patrol = false;    // disabled for now
-private _statics = 0.8;
 
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
@@ -66,24 +59,47 @@ _group enableAttack false;
 private _units = units _group;
 _units = _units select {isNull objectParent _x};
 
-// Large groups man guns and patrol!
-if (count _units > 4) then {
+// add sub patrols
+reverse _units;
+if (_patrol) then {
+    private _group2 = createGroup [(side _group), true];
+    [_units deleteAt 0] join _group2;
+    if (count _units > 4)  then { [_units deleteAt 0] join _group2; };
 
-    // consider patrol
-    if (_patrol) then {
-        while {RND(0.8) && {count _units > 5}} do { _units deleteAt 0 };
+    // performance
+    if (dynamicSimulationEnabled _group) then {
+        [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
     };
 
-    // last man mans guns
-    for "_i" from 0 to (count _weapons - 1) do {
-        if (random 1 > _statics) then {
-            private _gunner = (_units deleteAt (count _units - 1));
-            _gunner assignAsGunner (_weapons deleteAt _i);
-            [_gunner] orderGetIn true;
-        };
+    // id
+    _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];
+
+    // orders
+    if (_area isEqualTo []) then {
+        [_group2, _group2, _range * 2] call FUNC(taskPatrol);
+    } else {
+        private _area2 = +_area;
+        _area2 set [0, (_area2 select 0) * 2];
+        _area2 set [0, (_area2 select 1) * 2];
+        [_group2, _group2, _range * 2, 4, _area2] call FUNC(taskPatrol);
     };
 };
 
+// man static weapons
+{
+    // gun
+    if !(_weapons isEqualTo []) then {
+        private _staticWeapon = _weapons deleteAt 0;
+        if (_teleport) then { _x moveInGunner _staticWeapon; };
+        _x assignAsGunner _staticWeapon;
+        [_x] orderGetIn true;
+        _units set [_foreachIndex, objNull];
+    };
+} forEach _units;
+
+_units = _units - [objNull];
+
+// enter buildings
 if (count _units > count _houses) then {_units resize (count _houses);};
 private _fnc_addEventHandler = {
     params ["_type"];

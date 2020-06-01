@@ -21,7 +21,7 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false]];
+params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false], ["_patrol", false]];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -48,19 +48,19 @@ private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuilding
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns
-private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
-_gun = _gun select {(_x emptyPositions "Gunner") > 0};
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
+_weapons = _weapons select {(_x emptyPositions "Gunner") > 0};
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _gun = _gun select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
     _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
 };
 
 // STAGE 1 - PATROL --------------------------
-if (count _units > 4) then {
+if (_patrol) then {
     private _group2 = createGroup [(side _group), true];
     [selectRandom _units] join _group2;
-    if (count _units > 6)  then { [selectRandom units _group] join _group2; };
+    if (count _units > 4)  then { [selectRandom units _group] join _group2; };
 
     // performance
     if (dynamicSimulationEnabled _group) then {
@@ -88,10 +88,10 @@ if (count _units > 4) then {
 reverse _units;
 {
     // gun
-    if !(_gun isEqualTo []) then {
-        private _g = (_gun deleteAt 0);
-        if (_teleport) then { _x moveInGunner _g; };
-        _x assignAsGunner _g;
+    if !(_weapons isEqualTo []) then {
+        private _staticWeapon = (_weapons deleteAt 0);
+        if (_teleport) then { _x moveInGunner _staticWeapon; };
+        _x assignAsGunner _staticWeapon;
         [_x] orderGetIn true;
         _units set [_foreachIndex, objNull];
     };

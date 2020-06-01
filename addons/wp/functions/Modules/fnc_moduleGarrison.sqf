@@ -37,14 +37,15 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
+                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false],
+                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), false]
 
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport"];
+                        _data params ["_groupIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport", "_patrol"];
                         private _group = _groups select _groupIndex;
-                        [_group, getPos _logic, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _group];
+                        [_group, getPos _logic, _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -66,17 +67,18 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
+                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false],
+                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), false]
 
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
-                        _data params ["_targetIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport"];
+                        _data params ["_targetIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport", "_patrol"];
                         private _target = _targets select _targetIndex;
                         if !(local _group) then {
                             _target = getPos _target;
                         };
-                        [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _group];
+                        [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -96,8 +98,9 @@ switch (_mode) do {
             private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), false];
             private _teleport = _logic getVariable [QGVAR(Teleport), false];
             private _exitCondition = _logic getVariable [QGVAR(ExitConditions), 0];
+            private _patrol = _logic getVariable [QGVAR(Patrol), 0];
             {
-                [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _x];
+                [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _x];
             } forEach _groups;
 
             deleteVehicle _logic;
