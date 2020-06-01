@@ -22,7 +22,7 @@ if (_pos isEqualTo []) then {
     _pos = getPos _unit;
 };
 
-// settings -- CHANGE IN SETTING. WILL BE DECREPITATED BY VERSION 2.1 -- line 25 to 30 changes variable to the proper one.
+// settings -- CHANGE IN SETTING. WILL BE DECREPITATED BY VERSION 2.5 -- line 25 to 30 changes variable to the proper one.
 private _mode = toLower ((group _unit) getVariable [QGVAR(dangerAI), ""]);
 if (_mode isEqualTo "disabled") then {
     (group _unit) setVariable [QGVAR(disableGroupAI), true];
