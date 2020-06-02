@@ -8,6 +8,6 @@ Feel free to add yourself to this when creating a pull request.
 
 
 ## CONTRIBUTORS
-Couls
-dedmen
-R3voA3
+- Couls
+- dedmen
+- R3voA3
