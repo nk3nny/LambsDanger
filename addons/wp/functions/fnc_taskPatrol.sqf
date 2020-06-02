@@ -44,6 +44,9 @@ _group setCombatMode "YELLOW";
 _group setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"];
 _group enableGunLights "forceOn";
 
+// dynamic reinforcements
+_group setVariable [QGVAR(enableGroupReinforce), true, true];
+
 private _fistWPId = 0;
 private _fnc_waypointStatement = "
     private _radius = %1;

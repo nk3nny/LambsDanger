@@ -35,7 +35,7 @@ _unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions
 
 // find units
 private _groups = allGroups select {
-    leader _x distance2d _unit < _range
+    leader _x distance2D _unit < _range
     && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
     && {behaviour leader _x != "CARELESS"}
     && {_x != group _unit}
@@ -45,14 +45,22 @@ private _knowsAbout = _unit knowsAbout _target;
 
 // share information
 {
+    // share information
     if !(isNull _target) then {
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
+
+        // reinforce
+        if (_range > 100 && {_x getVariable [QGVAR(enableGroupReinforce), false]}) then {
+            [_x, [getpos _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec ["move", leader _x];
+        };
     };
 
+    // set combat mode
     if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
-        _x setBehaviour "COMBAT";
-        _x setFormDir ((leader _x) getDir _unit);
+        [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
+        [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];
     };
+
 } forEach _groups;
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);

@@ -16,12 +16,14 @@ if (_activated && local _logic) then {
     if (_error == "") then {
         [LSTRING(Module_DisableGroupAI_DisplayName),
             [
-                [LSTRING(Module_DisableGroupAI_SettingName), "BOOLEAN", LSTRING(Module_DisableGroupAI_SettingToolTip), _group getVariable [QGVAR(disableGroupAI), false], ""]
+                [LSTRING(Module_DisableGroupAI_SettingName), "BOOLEAN", LSTRING(Module_DisableGroupAI_SettingToolTip), _group getVariable [QGVAR(disableGroupAI), false], ""],
+                [LSTRING(Module_EnableGroupReinforce_SettingName), "BOOLEAN", LSTRING(Module_EnableGroupReinforce_SettingToolTip), _group getVariable [QGVAR(enableGroupReinforce), false], ""]
             ], {
                 params ["_data", "_args"];
                 _args params ["_group", "_logic"];
-                _data params ["_disableGroupAI"];
+                _data params ["_disableGroupAI", "_enableGroupReinforce"];
                 _group setVariable [QGVAR(disableGroupAI), _disableGroupAI, true];
+                _group setVariable [QGVAR(enableGroupReinforce), _enableGroupReinforce, true];
                 deleteVehicle _logic;
             }, {
                 params ["", "_logic"];

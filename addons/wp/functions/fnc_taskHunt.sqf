@@ -36,6 +36,9 @@ _group setbehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group enableAttack false;
 
+// dynamic reinforcements
+_group setVariable [QGVAR(enableGroupReinforce), true, true];
+
 // FUNCTIONS -------------------------------------------------------------
 
 // FLARE SCRIPT

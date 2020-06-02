@@ -1,4 +1,34 @@
 class Cfg3DEN {
+    class Group {
+        class AttributeCategories {
+            class GVAR(groupAttributes) {
+                collapsed = 1;
+                displayName = "LAMBS Danger.fsm";
+                class Attributes {
+                    class GVAR(disableGroupAI) {
+                        property = QGVAR(disableGroupAI);
+                        control = "Checkbox";
+                        displayName = CSTRING(Module_DisableGroupAI_SettingName);
+                        tooltip = CSTRING(Module_DisableGroupAI_SettingToolTip);
+                        expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
+                        typeName = "BOOL";
+                        //condition = "objectBrain";
+                        defaultValue = "(false)";
+                    };
+                    class GVAR(enableGroupReinforce) {
+                        property = QGVAR(enableGroupReinforce);
+                        control = "Checkbox";
+                        displayName = CSTRING(Module_EnableGroupReinforce_SettingName);
+                        tooltip = CSTRING(Module_EnableGroupReinforce_SettingToolTip);
+                        expression = "if (_value) then { _this setVariable ['%s', _value, true]; }";
+                        typeName = "BOOL";
+                        //condition = "objectBrain";
+                        defaultValue = "(false)";
+                    };
+                };
+            };
+        };
+    };
     class Object {
         class AttributeCategories {
             class GVAR(attributes) {
