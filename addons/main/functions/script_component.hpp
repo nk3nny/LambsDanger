@@ -6,7 +6,7 @@
 // PX(1) is 10 Pixels in a 1920x1080 Resolution on the X Axis
 #define PX(X) ((X)/PYN*safeZoneH/(4/3))
 #undef PY
-// PX(1) is 10 Pixels in a 1920x1080 Resolution on the X Axis
+// PY(1) is 10 Pixels in a 1920x1080 Resolution on the Y Axis
 #define PY(Y) ((Y)/PYN*safeZoneH)
 
 #define CONST_WIDTH 90
