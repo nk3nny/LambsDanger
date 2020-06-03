@@ -1,7 +1,7 @@
-#include "\z\lambs\addons\wp\script_component.hpp"
+#include "script_component.hpp"
 
 private _targets = [];
-GET_GROUPS_CONTEXT(_targets,_groups,_objects);
+GET_GROUPS_CONTEXT(_targets);
 
 {
     [_x] call FUNC(taskArtilleryRegister);

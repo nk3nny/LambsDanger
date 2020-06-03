@@ -1,4 +1,4 @@
-#include "\z\lambs\addons\wp\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_objects", "_pos"];
 
