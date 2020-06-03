@@ -25,3 +25,15 @@ SUBPREP(Modules,modulePatrol);
 SUBPREP(Modules,moduleReset);
 SUBPREP(Modules,moduleRush);
 SUBPREP(Modules,moduleTarget);
+
+
+SUBPREP(ZEN,setArtilleryRegister);
+SUBPREP(ZEN,setCamp);
+SUBPREP(ZEN,setCQB);
+SUBPREP(ZEN,setCreep);
+SUBPREP(ZEN,setGarrison);
+SUBPREP(ZEN,setHunt);
+SUBPREP(ZEN,setPatrol);
+SUBPREP(ZEN,setReset);
+SUBPREP(ZEN,setRush);
+SUBPREP(ZEN,setTarget);
