@@ -158,8 +158,8 @@ class GVAR(ZeusTaskReset) : Module_F {
     is3DEN = 1;
     displayName = CSTRING(Module_TaskReset_DisplayName);
     category = "Lambs_Danger_WP_Cat";
-    icon = "\a3\3DEN\Data\CfgWaypoints\cycle_ca.paa";
-    portrait = "\a3\3DEN\Data\CfgWaypoints\cycle_ca.paa";
+    icon = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
+    portrait = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
     function = QFUNC(moduleReset);
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};

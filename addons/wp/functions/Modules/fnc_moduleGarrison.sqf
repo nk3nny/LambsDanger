@@ -38,7 +38,6 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
                         [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
-
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -67,15 +66,11 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
                         [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false]
-
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport"];
                         private _target = _targets select _targetIndex;
-                        if !(local _group) then {
-                            _target = getPos _target;
-                        };
                         [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {
