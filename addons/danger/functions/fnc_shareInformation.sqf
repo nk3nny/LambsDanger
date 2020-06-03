@@ -50,8 +50,9 @@ private _knowsAbout = _unit knowsAbout _target;
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
 
         // reinforce
-        if (_range > 100 && {_x getVariable [QGVAR(enableGroupReinforce), false]}) then {
+        if ((_x getVariable [QGVAR(enableGroupReinforce), false]) && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time}) then {
             [_x, [getpos _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec ["move", leader _x];
+            _x setVariable [QGVAR(enableGroupReinforceTime), time + 30, true];
         };
     };
 
