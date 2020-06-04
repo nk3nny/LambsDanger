@@ -5,10 +5,12 @@ ADDON = false;
 
 if (isServer) then {
     [QGVAR(RegisterArtillery), {
-        private _artillery = [GVAR(SideArtilleryHash), side (_this select 0)] call CBA_fnc_hashGet;
-        _artillery append _this;
-        _artillery = _artillery arrayIntersect _artillery;
-        GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side (_this select 0), _artillery] call CBA_fnc_hashSet;
+        {
+            private _artillery = [GVAR(SideArtilleryHash), side _x] call CBA_fnc_hashGet;
+            _artillery pushBackUnique _x;
+            GVAR(SideArtilleryHash) = [GVAR(SideArtilleryHash), side _x, _artillery] call CBA_fnc_hashSet;
+        } forEach _this;
+
         publicVariable QGVAR(SideArtilleryHash);
     }] call CBA_fnc_addEventhandler;
 

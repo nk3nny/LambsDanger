@@ -301,5 +301,32 @@
             <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
             <German>Definiert die Einheit als würde sie ein Rucksackradio besitzten.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
         </Key>
+        <Key ID="STR_Lambs_Danger_Context_HasRadio">
+            <English>Has Radio</English>
+            <German>Hat Radio</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_HasNoRadio">
+            <English>Has no Radio</English>
+            <German>Hat kein Radio</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_DisableAI">
+            <English>Disable AI</English>
+            <German>Deaktiviere KI</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_EnableAI">
+            <English>Enable AI</English>
+            <German>Aktiviere KI</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_DisableGroupAI">
+            <English>Disable Group AI</English>
+            <German>Deaktiviere Gruppen KI</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_EnableGroupAI">
+            <English>Enable Group AI</English>
+            <German>Aktiviere Gruppen KI</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_Main_DisplayName">
+            <English>Lamber Danger FSM</English>
+        </Key>
     </Package>
 </Project>

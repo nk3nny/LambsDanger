@@ -39,7 +39,6 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
                         [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), false]
-
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -75,9 +74,6 @@ switch (_mode) do {
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport", "_patrol"];
                         private _target = _targets select _targetIndex;
-                        if !(local _group) then {
-                            _target = getPos _target;
-                        };
                         [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _group];
                         deleteVehicle _logic;
                     }, {

@@ -334,8 +334,8 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
     displayName = CSTRING(Module_TaskReset_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleReset);
-    icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
-    portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    icon = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
+    portrait = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
     class Attributes: AttributesBase {
         class ModuleDescription: ModuleDescription {};
     };

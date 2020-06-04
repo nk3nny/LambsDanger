@@ -16,6 +16,7 @@
 */
 params ["_logic"];
 
+if (_logic getVariable [QGVAR(skipInit), false]) exitWith {};
 if (!local _logic) exitWith {};
 private _type = typeOf _logic;
 private _fnc = getText (configFile >> "CfgVehicles" >> _type >> "function");

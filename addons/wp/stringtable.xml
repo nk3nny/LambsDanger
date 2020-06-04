@@ -430,5 +430,15 @@
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Context_CreateTarget">
+            <English>Create Dynamic Target</English>
+            <German>Erstelle Dynamisches Ziel</German>
+        </Key>
+        <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
+            <English>Lamber Danger Waypoints</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
+            <English>Lamber Danger Search Waypoints</English>
+        </Key>
     </Package>
 </Project>

@@ -43,8 +43,6 @@ class CfgVehicles {
             };
         };
     };
-
     #include "modules.hpp"
     #include "zeusModules.hpp"
-
 };
