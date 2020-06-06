@@ -11,9 +11,9 @@
  * unit
  *
  * Example:
- * [bob] call lambs_wp_fnc_taskAssaultUnitReset;
+ * [bob] call lambs_wp_fnc_doAssaultUnitReset;
  *
- * Public: Yes
+ * Public: No
 */
 params ["_unit", ["_retreat", false]];
 

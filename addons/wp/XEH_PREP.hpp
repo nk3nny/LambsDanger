@@ -1,10 +1,10 @@
 PREP(doArtillery);
+PREP(doAssaultUnitReset);
 PREP(findClosestTarget);
 PREP(sideHasArtillery);
 PREP(taskArtillery);
 PREP(taskArtilleryRegister);
 PREP(taskAssault);
-PREP(taskAssaultUnitReset);
 PREP(taskCamp);
 PREP(taskCQB);
 PREP(taskCreep);

@@ -24,7 +24,7 @@ if !(canSuspend) exitWith {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 15], [ "_cycle", 3], ["_useWaypoint", false]];
+params ["_group", "_pos", ["_retreat", false ], ["_threshold", 12], [ "_cycle", 3], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -87,7 +87,7 @@ _group setSpeedMode "FULL";
                     _unit setVariable [QGVAR(taskAssault), nil];
 
                     // unit
-                    [_unit, _retreat] call FUNC(taskAssaultUnitReset);
+                    [_unit, _retreat] call FUNC(doAssaultUnitReset);
                 };
 
                 // unAttack
