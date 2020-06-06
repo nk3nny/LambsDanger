@@ -1,7 +1,7 @@
 # LAMBS Danger
 Expansion of vanilla Danger.fsm. Added are features which extend the enemy response and reaction to fire.
 
-The overall goal is to make buildings part of the AI's available terrain. The AI will dynamically enter and clear buildings holding enemy soldiers. The nature of the the danger.fsm does not make these features a replacement for dedicated scripts however.
+The goal is to make buildings part of the AI's available terrain. The AI will dynamically enter and clear buildings holding enemy soldiers. The nature of the the danger.fsm does not make these features a replacement for dedicated scripts however.
 
 ### Features
  * AI will move inside buildings
@@ -16,10 +16,8 @@ The overall goal is to make buildings part of the AI's available terrain. The AI
 ### Settings
 Use CBA settings to configure the mod.
 
-### TEAM
-- Diwako
-- Joko
-- nkenny
+### The team
+diwako / joko / nkenny
 
 Thanks for playing.
 
