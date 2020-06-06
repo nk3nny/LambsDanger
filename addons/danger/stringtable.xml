@@ -230,7 +230,7 @@
             <German>Rucksackradios</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
-            <English>Range added to units wearing backpack radios (Vanilla, TFAR, or configured by variable)</English>
+            <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
             <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
@@ -238,8 +238,14 @@
             <German>Genauigkeit der geteilten Informationen</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
-            <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode. </English>
+            <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
             <German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_combatShareRange">
+            <English>Range combat mode is shared</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_combatShareRange_ToolTip">
+            <English>Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>

@@ -27,19 +27,22 @@ if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findRe
 if (_units isEqualTo []) exitWith { _units };
 
 // find gunner
-private _gunner = _units findIf { unitBackpack _x isKindOf "Weapon_Bag_Base" };
-if (_gunner isEqualTo -1) exitWith { _units };
+private _gunnerIndex = _units findIf { (unitBackpack _x) isKindOf "Weapon_Bag_Base" };
+if (_gunnerIndex isEqualTo -1) exitWith { _units };
 
 // define gunner
-_gunner = _units deleteAt _gunner;
+private _gunner = _units deleteAt _gunnerIndex;
 
 // crudely and unapologetically lifted from BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
 private _cfgBase = configFile >> "CfgVehicles" >> backpack _gunner >> "assembleInfo" >> "base";
 private _compatibleBases = if (isText _cfgBase) then { [getText _cfgBase] } else { getArray _cfgBase };
+if (_compatibleBases isEqualTo [""]) then {_compatibleBases = []};
 
 // find assistant
 private _assistantIndex = _units findIf {
-    (backpack _x) in _compatibleBases;
+    private _cfgBaseAssistant = configFile >> "CfgVehicles" >> backpack _x >> "assembleInfo" >> "base";
+    private _compatibleBasesAssistant = if (isText _cfgBaseAssistant) then {[getText _cfgBaseAssistant]} else {getArray _cfgBaseAssistant};
+    (backpack _x) in _compatibleBases || { (backpack _gunner) in _compatibleBasesAssistant}
 };
 
 // define assistant
@@ -84,7 +87,6 @@ if (_weaponPos isEqualTo []) then {
     _x setVariable [QGVAR(forceMove), true];
     _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", GVAR(debug_functions)];
     _x setVariable [QGVAR(currentTarget), _weaponPos, GVAR(debug_functions)];
-
     _x doMove _weaponPos;
 } foreach [_gunner, _assistant];
 
@@ -93,13 +95,18 @@ if (_weaponPos isEqualTo []) then {
     {
         // condition
         params ["_gunner", "_assistant", "", "_weaponPos"];
-        (_gunner distance2d _weaponPos < 2 || {_gunner distance2d _assistant < 3}) || {fleeing _gunner} || {fleeing _assistant}
+        (_gunner distance2D _weaponPos < 2 || {_gunner distance2D _assistant < 3}) || {fleeing _gunner} || {fleeing _assistant}
         // use of OR here to facilitiate the sometimes shoddy irreverent A3 pathfinding ~ nkenny
     },
     {
         // on near gunner
         params ["_gunner", "_assistant", "_pos"];
-        if (fleeing _gunner || {fleeing _assistant} || {!(_gunner call FUNC(isAlive))}) exitWith {false};
+        if (
+            fleeing _gunner
+            || {fleeing _assistant}
+            || {!(_gunner call FUNC(isAlive))}
+            || {!(_assistant call FUNC(isAlive))}
+        ) exitWith {false};
 
         // assemble weapon
         _gunner action ["PutBag", _assistant];

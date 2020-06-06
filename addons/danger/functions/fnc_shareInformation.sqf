@@ -43,14 +43,13 @@ private _groups = allGroups select {
 
 private _knowsAbout = _unit knowsAbout _target;
 
-
 // share information
 {
     if !(isNull _target) then {
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
     };
 
-    if ((leader _x) distance _unit < (200 min _range)) then {
+    if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
         _x setBehaviour "COMBAT";
         _x setFormDir ((leader _x) getDir _unit);
     };

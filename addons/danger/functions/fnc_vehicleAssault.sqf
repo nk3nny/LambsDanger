@@ -25,13 +25,14 @@ if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
 private _predictedPos = (_unit getHideFrom _target);
-if ((_unit distance2d _pos) < 50) then {_pos = _predictedPos};
+if ((_unit distance2D _pos) < 50) then {_pos = _predictedPos};
 
 //  target not on foot or too close
 if (
     isNull _target
     || {!(_target isKindOf "Man")}
-    || {(_unit distance2d _predictedPos) < GVAR(minSuppression_range)}
+    || {(_unit distance2D _predictedPos) < GVAR(minSuppression_range)}
+    || {terrainIntersectASL [eyePos _vehicle, ATLtoASL _predictedPos]}
 ) exitWith {false};
 
 // define buildings
@@ -65,8 +66,11 @@ _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRan
 // look at position
 _vehicle doWatch ASLtoAGL _pos;
 
+// recheck
+if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
+
 // check for friendlies
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call FUNC(nearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // suppression

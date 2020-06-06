@@ -17,10 +17,15 @@
 */
 params ["_unit", "_pos"];
 
-// too close + high speed
-if (_unit distance2d _pos < GVAR(minSuppression_range)) exitWith {false};
 private _vehicle = vehicle _unit;
-if (speed _vehicle > 12) exitWith {false};
+
+// too close + high speed + height over ground
+if (
+    _unit distance2d _pos < GVAR(minSuppression_range)
+    || {terrainIntersectASL [eyePos _unit, AGLtoASL _pos]}
+    || {speed _vehicle > 12}
+    || {(_pos select 2) > 45}
+) exitWith {false};
 
 // artillery (no tactical options)
 if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
