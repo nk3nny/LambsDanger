@@ -2,7 +2,7 @@ name = "LAMBS Danger"
 prefix = "lambs"
 author = "LAMBS Dev Team"
 sig_version = 3
-version = "2.4.2"
+version = "2.4.3"
 reuse_private_key = false
 files = [
     "mod.cpp",
