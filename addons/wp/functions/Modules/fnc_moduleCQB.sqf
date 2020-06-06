@@ -54,8 +54,8 @@ switch (_mode) do {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
-                        params ["", "_logic"];
-                        deleteVehicle _logic;
+                        //params ["", "_logic"];
+                        //deleteVehicle _logic;
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {

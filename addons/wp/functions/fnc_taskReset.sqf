@@ -33,8 +33,11 @@ _groupNew setFormation (formation _group);
 
 // remove all current waypoints
 [_group] call CBA_fnc_clearWaypoints;
-
 _group deleteGroupWhenEmpty true;
+
+// remove LAMBS group variables
+_group setVariable [QGVAR(taskAssaultDestination), nil];
+_group setVariable [QGVAR(taskAssaultMembers), nil];
 
 // reset
 {

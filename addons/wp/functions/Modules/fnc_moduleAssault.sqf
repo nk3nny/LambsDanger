@@ -35,7 +35,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 15, 2],
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 12, 2],
                         [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], 3, 2],
                         [LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip), false]
                     ], {
@@ -56,8 +56,8 @@ switch (_mode) do {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
-                        params ["", "_logic"];
-                        deleteVehicle _logic;
+                        //params ["", "_logic"]; <-- uncommented for now. 'Unload phase' would always delete logic even when _deleteAfterStartUp was set to false. - nkenny
+                        //deleteVehicle _logic;
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
@@ -68,7 +68,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 15, 2],
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 12, 2],
                         [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], 3, 2]
                     ], {
                         params ["_data", "_args"];
@@ -100,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
             private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
             {
-                [_x, _logic, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
+                [_x, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;
