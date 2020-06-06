@@ -21,7 +21,7 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false]];
+params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false], ["_patrol", false]];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -48,19 +48,19 @@ private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuilding
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns
-private _gun = nearestObjects [_pos, ["Landvehicle"], _range, true];
-_gun = _gun select {(_x emptyPositions "Gunner") > 0};
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
+_weapons = _weapons select {(_x emptyPositions "Gunner") > 0};
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _gun = _gun select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
     _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
 };
 
 // STAGE 1 - PATROL --------------------------
-if (count _units > 4) then {
+if (_patrol) then {
     private _group2 = createGroup [(side _group), true];
     [selectRandom _units] join _group2;
-    if (count _units > 6)  then { [selectRandom units _group] join _group2; };
+    if (count _units > 4)  then { [selectRandom units _group] join _group2; };
 
     // performance
     if (dynamicSimulationEnabled _group) then {
@@ -72,12 +72,12 @@ if (count _units > 4) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _range * 2] call FUNC(taskPatrol);
+        [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _range * 2, 4, _area2] call FUNC(taskPatrol);
+        [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
     };
 
     // update
@@ -88,10 +88,10 @@ if (count _units > 4) then {
 reverse _units;
 {
     // gun
-    if !(_gun isEqualTo []) then {
-        private _g = (_gun deleteAt 0);
-        if (_teleport) then { _x moveInGunner _g; };
-        _x assignAsGunner _g;
+    if !(_weapons isEqualTo []) then {
+        private _staticWeapon = (_weapons deleteAt 0);
+        if (_teleport) then { _x moveInGunner _staticWeapon; };
+        _x assignAsGunner _staticWeapon;
         [_x] orderGetIn true;
         _units set [_foreachIndex, objNull];
     };
@@ -183,7 +183,7 @@ private _dir = random 360;
         unitReady _unit
     }, {
         params ["_unit", "_target", "_center", "_anim"];
-        if (surfaceIsWater (getPos _unit) || (_unit distance2d _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        if (surfaceIsWater (getPos _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
         [_unit, _anim, 2] call EFUNC(main,doAnimation);
 
         _unit disableAI "ANIM";
@@ -216,7 +216,7 @@ private _dir = random 360;
 // waypoint and end state
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
-_wp setWaypointStatements ["(behaviour this) isEqualTo 'COMBAT'", "
+_wp setWaypointStatements ["true", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';

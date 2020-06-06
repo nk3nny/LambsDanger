@@ -159,6 +159,15 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             condition = "0";
             typeName = "BOOL";
         };
+        class GVAR(Patrol): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Patrol_Tooltip);
+            property = QGVAR(Patrol);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
         class ModuleDescription: ModuleDescription {};
     };
 
@@ -253,6 +262,15 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
             property = QGVAR(Teleport);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
+        class GVAR(Patrol): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Patrol_Tooltip);
+            property = QGVAR(Patrol);
             unique = 0;
             validate = "none";
             condition = "0";
