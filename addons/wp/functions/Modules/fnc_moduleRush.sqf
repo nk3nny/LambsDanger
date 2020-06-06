@@ -35,8 +35,8 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskRush_DisplayName),
                     [
-                        [LSTRING(Module_TaskRush_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskRush_Radius_ToolTip), [25,5000], [1, 0.5], 1000, 1],
-                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskRush_CycleTime_ToolTip), [1, 300], [1, 0.5], 4, 2],
+                        [LSTRING(Module_TaskRush_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskRush_Radius_ToolTip), [25, 5000], [1, 0.5], 1000, 1],
+                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskRush_CycleTime_ToolTip), [1, 300], [1, 0.5], 15, 2],
                         [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), true],
                         [LSTRING(Module_TaskRush_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayersOnly_ToolTip), true]
 
@@ -65,7 +65,7 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), 15];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
             private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
             {

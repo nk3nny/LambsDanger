@@ -26,23 +26,25 @@ if !(canSuspend) exitWith {
 
 private _fnc_rushOrders = {
     params ["_group", "_target"];
+
+    private _distance = (leader _group) distance2D _target;
     // Helicopters -- supress it!
-    if (((leader _group) distance2d _target < 200) && {vehicle _target isKindOf "Air"}) exitWith {
+    if ((_distance < 200) && {vehicle _target isKindOf "Air"}) exitWith {
         {
-            _x commandSuppressiveFire (getPosASL _target);
+            _x commandSuppressiveFire _target;
             true
         } count (units _group);
     };
 
     // Tank -- hide or ready AT
-    if (((leader _group) distance2d _target < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
+    if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
             if !(secondaryWeapon _x isEqualTo "") then {
-                _x setUnitPos "Middle";
+                _x setUnitPos "MIDDLE";
                 _x selectWeapon (secondaryWeapon _x);
             } else {
                 _x setUnitPos "DOWN";
-                _x commandSuppressiveFire (getPosASL _target);
+                _x commandSuppressiveFire _target;
             };
             true
         } count (units _group);
@@ -52,8 +54,8 @@ private _fnc_rushOrders = {
     // Default -- run for it!
     {
         _x setUnitPos "UP";
-        _x forceSpeed ([_x, _target] call EFUNC(danger,assaultSpeed));
         _x doMove (getPosATL _target);
+        //_x forceSpeed ([_x, _target] call EFUNC(danger,assaultSpeed));
         true
     } count (units _group);
     _group enableGunLights "forceOn";
@@ -68,12 +70,13 @@ if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
-//_group setSpeedMode "FULL";
+_group setSpeedMode "FULL";
 //_group setFormation "DIAMOND";
 _group enableAttack false;
 {
     _x disableAI "AUTOCOMBAT";
-    //doStop _x; true
+    doStop _x;
+    true
 } count (units _group);
 
 // Hunting loop
@@ -88,8 +91,8 @@ waitUntil {
     // act
     if (!isNull _target) then  {
         [_group, _target] call _fnc_rushOrders;
-        if (EGVAR(danger,debug_functions)) then { format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2d _target)] call EFUNC(danger,debugLog); };
-        sleep _cycle;
+        if (EGVAR(danger,debug_functions)) then { format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2D _target)] call EFUNC(danger,debugLog); };
+        sleep (linearConversion [1000, 2000, (leader _group distance2D _target), _cycle, _cycle * 4, true]);
     } else {
         sleep (_cycle * 4);
     };

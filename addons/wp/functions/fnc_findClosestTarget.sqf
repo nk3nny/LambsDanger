@@ -28,7 +28,7 @@ private _units = [allUnits ,switchableUnits + playableUnits] select _onlyPlayers
 
 _units = _units select {
     !(side _x in _sideExclusion)
-    && { _x distance _pos < _radius }
+    && { _x distance2D _pos < _radius }
     && { (getPosATL _x) select 2 < 200 }
 };
 if !(_area isEqualTo []) then {
@@ -37,7 +37,7 @@ if !(_area isEqualTo []) then {
 };
 if (_units isEqualTo []) exitWith {ObjNull};
 
-private _unitDistances = _units apply {[_groupLeader distance2d _x, _x]};
+private _unitDistances = _units apply {[_groupLeader distance2D _x, _x]};
 _unitDistances sort true;
 
 (_unitDistances param [0, [0, objNull]]) param [1, objNull]
