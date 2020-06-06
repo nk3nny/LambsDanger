@@ -213,7 +213,7 @@
             <English>Dynamic patrol</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_ToolTip">
-            <English>The unit will subdivide a small sentry group to patrol the within the two times the radius</English>
+            <English>The unit will create a sub-group to patrol the area. NB: The patrol will leave their original group to form a new one.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
