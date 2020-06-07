@@ -6,6 +6,8 @@ const PREFIX = "Lambs";
 const projectFiles = [];
 const prepedFunctions = ["Lambs_main_fnc_fncName", "Lambs_main_fnc_var1", "Lambs_main_fnc_RoundValue"];
 
+let failedCount = 0;
+
 function getDirFiles(p, module) {
     var files = fs.readdirSync(p);
     for (const file of files) {
@@ -62,11 +64,13 @@ function CheckFunctions() {
                 var fncName = `${PREFIX}_${data.module}_fnc_${m[1]}`;
                 if (!prepedFunctions.includes(fncName)) {
                     console.log(`Use of not Existing Function: ${fncName} in ${data.path}`)
+                    failedCount++;
                 }
             } else if (m[3] && m[4]) {
                 var fncName = `${PREFIX}_${m[3]}_fnc_${m[4]}`;
                 if (!prepedFunctions.includes(fncName)) {
                     console.log(`Use of not Existing Functions: ${fncName} in ${data.path}`)
+                    failedCount++;
                 }
             }
         }
@@ -75,3 +79,4 @@ function CheckFunctions() {
 
 getDirFiles("addons", "");
 CheckFunctions();
+process.exit(failedCount);
