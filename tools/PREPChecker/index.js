@@ -4,7 +4,7 @@ const fs = require('fs');
 const PREFIX = "Lambs";
 
 const projectFiles = [];
-const prepedFunctions = ["Lambs_main_fnc_fncName", "Lambs_main_fnc_var1", "Lambs_main_fnc_RoundValue"];
+const prepedFunctions = ["Lambs_main_fnc_RoundValue"];
 
 let failedCount = 0;
 
@@ -33,7 +33,7 @@ function getDirFiles(p, module) {
 
 function getFunctions(file, module) {
     var data = fs.readFileSync(file);
-    var regex = /PREP\((\w+)\)|SUBPREP\((\w+),(\w+)\);|DFUNC\((\w+)\)/gm;
+    var regex = /PREP\((\w+)\)|SUBPREP\(\w+,(\w+)\);|DFUNC\((\w+)\)/gm;
     let m;
     while ((m = regex.exec(data)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
@@ -42,11 +42,12 @@ function getFunctions(file, module) {
         }
 
         // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            if (match && groupIndex != 0 && groupIndex != 2 && match != "var1" && match != "fncName") {
-                prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`)
+        for (let groupIndex = 0; groupIndex < m.length; groupIndex++) {
+            const match = m[groupIndex];
+            if (match && groupIndex != 0) {
+                prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`);
             }
-        });
+        }
     }
 }
 
@@ -79,4 +80,6 @@ function CheckFunctions() {
 
 getDirFiles("addons", "");
 CheckFunctions();
+fs.writeFileSync("data.json", JSON.stringify(prepedFunctions, null, 2));
 process.exit(failedCount);
+
