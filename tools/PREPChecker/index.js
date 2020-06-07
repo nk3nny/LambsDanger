@@ -80,6 +80,5 @@ function CheckFunctions() {
 
 getDirFiles("addons", "");
 CheckFunctions();
-fs.writeFileSync("data.json", JSON.stringify(prepedFunctions, null, 2));
 process.exit(failedCount);
 
