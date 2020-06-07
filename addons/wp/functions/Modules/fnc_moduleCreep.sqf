@@ -34,10 +34,10 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskCreep_DisplayName),
                     [
-                        [LSTRING(Module_TaskCreep_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_Radius_ToolTip), [25,5000], [1, 0.5], 1000, 1],
-                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], 30, 2],
-                        [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), true],
-                        [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), true]
+                        [LSTRING(Module_TaskCreep_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_Radius_ToolTip), [25,5000], [1, 0.5], TASK_CREEP_SIZE, 1],
+                        [LSTRING(Module_TaskCreep_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCreep_CycleTime_ToolTip), [1, 300], [1, 0.5], TASK_CREEP_CYCLETIME, 2],
+                        [LSTRING(Module_TaskCreep_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_MovingCenter_ToolTip), TASK_CREEP_MOVINGCENTER],
+                        [LSTRING(Module_TaskCreep_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskCreep_PlayersOnly_ToolTip), TASK_CREEP_PLAYERSONLY]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
@@ -61,11 +61,11 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_CREEP_SIZE, TASK_CREEP_SIZE]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 30];
-            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
-            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_CREEP_CYCLETIME];
+            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_CREEP_MOVINGCENTER];
+            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), TASK_CREEP_PLAYERSONLY];
             {
                 private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
                 _args remoteExec [QFUNC(taskCreep), leader _x];

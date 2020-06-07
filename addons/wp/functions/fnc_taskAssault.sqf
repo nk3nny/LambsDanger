@@ -24,7 +24,7 @@ if !(canSuspend) exitWith {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 12], [ "_cycle", 3], ["_useWaypoint", false]];
+params ["_group", "_pos", ["_retreat", TASK_ASSAULT_ISREATREAT ], ["_threshold", TASK_ASSAULT_DISTANCETHREASHOLD], [ "_cycle", TASK_ASSAULT_CYCLETIME], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -81,7 +81,7 @@ _group setSpeedMode "FULL";
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
                     _groupMembers = _groupMembers - [_unit];
                     _group setVariable [QGVAR(taskAssaultMembers), _groupMembers];
-                    
+
                     // handle
                     _handle call CBA_fnc_removePerFrameHandler;
                     _unit setVariable [QGVAR(taskAssault), nil];

@@ -34,9 +34,9 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], 200, 1],
-                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], 3, 0],
-                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
+                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
+                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -62,9 +62,9 @@ switch (_mode) do {
                 [LSTRING(Module_TaskPatrol_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], 200, 1],
-                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], 3, 0],
-                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), false]
+                        [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
+                        [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
+                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
@@ -90,10 +90,10 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_PATROL_SIZE, TASK_PATROL_SIZE]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), false];
-            private _waypointCount =_logic getVariable [QGVAR(WaypointCount), 4];
+            private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), TASK_PATROL_MOVEWAYPOINTS];
+            private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];
             {
                 [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _x];
             } forEach _groups;

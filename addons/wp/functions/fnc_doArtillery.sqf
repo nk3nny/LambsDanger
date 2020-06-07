@@ -22,7 +22,7 @@
 if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 
 // init
-params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
+params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCECKROUNDS]];
 
 if (_pos isEqualTo [] || isNull _gun) exitWith {};
 
@@ -43,7 +43,7 @@ private _offset = 0;
 // higher class artillery fire more rounds? Less accurate?
 if !((vehicle _gun) isKindOf "StaticMortar") then {
     _rounds = _rounds * 2;
-    _accuracy = _accuracy / 2;
+    _accuracy = _accuracy * 0.5;
 };
 
 private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];

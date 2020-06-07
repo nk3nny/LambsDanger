@@ -21,7 +21,7 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false], ["_patrol", false]];
+params ["_group", ["_pos",[]], ["_range", TASK_CAMP_SIZE], ["_area", [], [[]]], ["_teleport", TASK_CAMP_TELEPORT], ["_patrol", TASK_CAMP_PATROL]];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -116,7 +116,7 @@ reverse _units;
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
-    if ((count _units) < (count (units _group))/2) exitWith {};
+    if ((count _units) < (count (units _group))*0.5) exitWith {};
 
 } forEach _units;
 

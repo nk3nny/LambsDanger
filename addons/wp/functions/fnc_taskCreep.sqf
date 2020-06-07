@@ -28,6 +28,9 @@ if !(canSuspend) exitWith {
     _this spawn FUNC(taskCreep);
 };
 
+// init
+params ["_group", ["_radius", TASK_CREEP_SIZE], ["_cycle", 30], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
+
 // functions ---
 
 private _fnc_creepOrders = {
@@ -35,7 +38,7 @@ private _fnc_creepOrders = {
 
     // distance
     private _newDist = (leader _group) distance2d _target;
-    private _in_forest = ((selectBestPlaces [getPos (leader _group), 2, "(forest + trees)/2", 1, 1]) select 0) select 1;
+    private _in_forest = ((selectBestPlaces [getPos (leader _group), 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1;
 
     // danger mode? go for it!
     if (behaviour (leader _group) isEqualTo "COMBAT") exitWith {
@@ -70,9 +73,6 @@ private _fnc_creepOrders = {
 
 
 // functions end ---
-
-// init
-params ["_group", ["_radius", 500], ["_cycle", 30], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -110,7 +110,7 @@ waitUntil {
     // act
     if (!isNull _target) then {
         [_group, _target] call _fnc_creepOrders;
-        if (EGVAR(danger,debug_functions)) exitWith {format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getPos leader _group, 2, "(forest + trees)/2", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(danger,debugLog);};
+        if (EGVAR(danger,debug_functions)) exitWith {format ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getPos leader _group, 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(danger,debugLog);};
         sleep _cycle;
     } else {
         _group setCombatMode "GREEN";

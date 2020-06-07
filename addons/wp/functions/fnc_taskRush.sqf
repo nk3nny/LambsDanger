@@ -22,6 +22,10 @@
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskRush);
 };
+
+// init
+params ["_group", ["_radius", TASK_RUSH_SIZE], ["_cycle", TASK_RUSH_CYCLETIME], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", TASK_RUSH_PLAYERSONLY]];
+
 // functions ---
 
 private _fnc_rushOrders = {
@@ -61,9 +65,6 @@ private _fnc_rushOrders = {
     _group enableGunLights "forceOn";
 };
 // functions end ---
-
-// init
-params ["_group", ["_radius", 500], ["_cycle", 15], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
 
 // sort grp
 if (!local _group) exitWith {false};

@@ -28,6 +28,8 @@
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskCQB);
 };
+// init
+params ["_group", "_pos", ["_radius", TASK_CQB_SIZE], ["_cycle", TASK_CQB_CYCLETIME], ["_area", [], [[]]], ["_useWaypoint", false]];
 
 // functions ---
 
@@ -154,9 +156,6 @@ private _fnc_act = {
 };
 
 // functions end ---
-
-// init
-params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_area", [], [[]]], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
