@@ -50,7 +50,7 @@ private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
 private _time = _gun getArtilleryETA [_center, _ammo];
 
 // delay
-private _mainStrike = linearConversion [100, 2000, (_gun distance2d _pos), 30, 90, true];
+private _mainStrike = linearConversion [100, 2000, (_gun distance2D _pos), 30, 90, true];
 private _checkRounds = (_time + random 35);
 
 // delay
@@ -81,7 +81,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
                     // debug
                     if (EGVAR(danger,debug_functions)) then {
-                        private _m = [_target, format ["%1 %3 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
+                        private _m = [_target, format ["%1 %3 (check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
                         _mlist pushBack _m;
                     };
                     // waituntil
@@ -118,7 +118,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
 
             // debug
             if (EGVAR(danger,debug_functions)) then {
-                private _m = [_target, format ["%1 %3 (Check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+                private _m = [_target, format ["%1 %3 (main salvo %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
                 _mlist pushBack _m;
             };
 

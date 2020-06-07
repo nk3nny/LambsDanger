@@ -38,7 +38,7 @@ switch (_mode) do {
             if (_error isEqualTo "") then {
                 if (_group isEqualType objNull) then { _group = group _group; };
                 [objNull, format ["%1 reset", groupId _group]] call BIS_fnc_showCuratorFeedbackMessage;
-                [_group] remoteExecCall [QFUNC(taskRest), leader _group];
+                [_group] remoteExecCall [QFUNC(taskReset), leader _group];
             } else {
                 [objNull, _error] call BIS_fnc_showCuratorFeedbackMessage;
             };
