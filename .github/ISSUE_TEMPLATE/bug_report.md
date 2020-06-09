@@ -36,8 +36,7 @@ A clear and concise description of what you expected to happen.
 Add any other context about the problem here.
 
 **Log Files:**
-
-Link to (gist or pastebin) to the client and/or server RPT file. An instruction to find your RPT files can be found here.
+- Link to ([gist](https://gist.github.com) or [pastebin](http://pastebin.com)) to the client and/or server RPT file. An instruction to find your RPT files can be found [here](https://community.bistudio.com/wiki/Crash_Files#Arma_3).
 
 **Screenshots:**
 
