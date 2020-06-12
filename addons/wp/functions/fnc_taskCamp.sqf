@@ -217,12 +217,13 @@ private _dir = random 360;
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
 _wp setWaypointStatements ["true", "
+    if (local this) then {
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
             [_x, '', 2] call lambs_main_fnc_doAnimation;
         } foreach thisList;
-    "
+    };"
 ];
 
 // followup orders - just stay put or move into buildings!
