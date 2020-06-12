@@ -64,7 +64,7 @@ if !(_launchers isEqualTo []) exitWith {
 
 // find buildings
 if (_buildings isEqualTo []) then {
-    _buildings = [_unit getPos [10, _target getDir _unit], 45, true, true] call FUNC(findBuildings);
+    _buildings = [_unit getPos [10, _target getDir _unit], 45, true, true] call EFUNC(main,findBuildings);
 };
 
 // groups without launchers hide!

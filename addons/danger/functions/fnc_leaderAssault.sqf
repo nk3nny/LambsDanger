@@ -43,7 +43,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
-private _pos = [_target, 16, true, false] call FUNC(findBuildings);
+private _pos = [_target, 16, true, false] call EFUNC(main,findBuildings);
 _pos pushBack _target;
 
 // set tasks

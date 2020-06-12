@@ -33,7 +33,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
-private _pos = [_target, 12, true, false] call FUNC(findBuildings);
+private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);
 _pos = [_pos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
 _pos pushBack _target;
 

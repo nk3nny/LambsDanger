@@ -66,7 +66,7 @@ private _fnc_suppress_AI = {
 
 // functions ~ easy hide
 private _fnc_hide_AI = {
-    private _buildings = [player getPos [15, getdir player], 38, true, true] call FUNC(findBuildings);
+    private _buildings = [player getPos [15, getdir player], 38, true, true] call EFUNC(main,findBuildings);
     private _units = (units player) select {_x distance player < 55 && {!isPlayer _x}};
     {
         [_x, _x getPos [25, random 360], 10, _buildings] call FUNC(hideInside);

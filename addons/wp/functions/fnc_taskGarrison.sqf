@@ -35,7 +35,7 @@ if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call CBA_fnc_getPos;
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];

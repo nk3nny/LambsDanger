@@ -49,7 +49,7 @@ private _vehicles = [];
 } foreach (units _unit select { _unit distance2D _x < 350 && { canFire _x }});
 
 // sort building locations
-private _pos = [_target, 12, true, false] call FUNC(findBuildings);
+private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);
 _pos pushBack _target;
 
 // find overwatch position

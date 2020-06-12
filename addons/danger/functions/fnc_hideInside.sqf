@@ -37,7 +37,7 @@ if (RND(0.05) && {_unit call FUNC(indoor)}) exitWith {
 
 // define buildings
 if (_buildings isEqualTo []) then {
-    _buildings = [_unit, _range, true, true] call FUNC(findBuildings);
+    _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
 };
 
 // variables

@@ -30,7 +30,7 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader CQB", GVAR(debug_functions)];
 
 // define buildings
-private _buildings = [_unit, _range] call FUNC(findBuildings);
+private _buildings = [_unit, _range] call EFUNC(main,findBuildings);
 
 // sort buildings near targets
 private _distance = _unit distance2d _target;

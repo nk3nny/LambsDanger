@@ -60,7 +60,7 @@ private _units = [_unit] call FUNC(findReadyUnits);
 _units = _units select { currentCommand _x isEqualTo "" };
 
 // leaders get their subordinates to hide!
-private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, _range + 5, true, true] call EFUNC(main,findBuildings);
 {
     [_x, _pos, _range, _buildings] call FUNC(hideInside);
 } foreach _units;

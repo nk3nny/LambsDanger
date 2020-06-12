@@ -44,7 +44,7 @@ _group setCombatMode "YELLOW";
 
 
 // find buildings
-private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuildings);
+private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns

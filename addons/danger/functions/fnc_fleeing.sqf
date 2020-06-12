@@ -64,7 +64,7 @@ if (getSuppression _unit < 0.2 && {lineIntersects [eyepos _unit, (eyepos _unit) 
 };
 
 // nearBuildings
-private _buildings = [_unit, 12, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, 12, true, true] call EFUNC(main,findBuildings);
 if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!

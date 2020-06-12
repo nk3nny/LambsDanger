@@ -37,7 +37,7 @@ if (
 
 // define buildings
 if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
+    _buildings = [_pos, 28, false, false] call EFUNC(main,findBuildings);
     //_buildings = _buildings select {!(terrainIntersect [getPos _unit, getPos _x])};
 };
 

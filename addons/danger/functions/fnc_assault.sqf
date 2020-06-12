@@ -36,7 +36,7 @@ _unit forceSpeed ([_unit, _target] call FUNC(assaultSpeed));
 private _rangeBuilding = linearConversion [ 0, 200, (_unit distance2d _target), 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
-private _buildings = [_target, _range, true, true] call FUNC(findBuildings);
+private _buildings = [_target, _range, true, true] call EFUNC(main,findBuildings);
 _buildings = _buildings select { _x distance _target < _rangeBuilding };
 
 // exit without buildings? -- Assault or delay!
