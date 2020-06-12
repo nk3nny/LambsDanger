@@ -20,7 +20,7 @@ params ["_unit"];
 if (_unit distance (_unit findNearestEnemy _unit) < 35) exitWith {3};
 if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {22};
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
-[QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
+[QGVAR(OnPanic), [_unit, group _unit]] call EFUNC(main,eventCallback);
 
 // settings
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
@@ -31,11 +31,11 @@ if (GVAR(debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _uni
 
 // callout
 if (RND(0.4)) then {
-    [_unit, "Stealth", "panic", 55] call FUNC(doCallout);
+    [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
 };
 
 // indoor -- gesture
-if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
+if (RND(0.8) || {_unit call EFUNC(main,isIndoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;
@@ -56,7 +56,7 @@ if (RND(0.5)) exitWith {
     // action
     _unit doWatch objNull;
     _unit setUnitPos "DOWN";
-    [_unit, ["FastB", "FastLB", "FastRB"], true] call FUNC(gesture);
+    [_unit, ["FastB", "FastLB", "FastRB"], true] call EFUNC(main,doGesture);
 
     // return
     6 + random 6;
@@ -78,7 +78,7 @@ if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
 
 // chance to randomly wave
 if (RND(0.4)) then {
-    [_unit, ["GestureCover"]] call FUNC(gesture);
+    [_unit, ["GestureCover"]] call EFUNC(main,doGesture);
 };
 
 // return

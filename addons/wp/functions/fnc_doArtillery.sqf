@@ -30,10 +30,10 @@ if (isNull _caller) then {
     _caller = _gun;
 };
 
-[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(danger,eventCallback);
+[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(main,eventCallback);
 
 // Gun and caller must be alive
-if (!canFire _gun || {!(_caller call EFUNC(danger,isAlive))}) exitWith {false};
+if (!canFire _gun || {!(_caller call EFUNC(main,isAlive))}) exitWith {false};
 
 // settings
 private _direction = _gun getDir _pos;
@@ -57,7 +57,7 @@ private _checkRounds = (_time + random 35);
 sleep _mainStrike;
 
 // initate attack (gun and caller must be alive)
-if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
+if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 
     // debug marker list
     private _mlist = [];
@@ -99,7 +99,7 @@ if (canFire _gun && {_caller call EFUNC(danger,isAlive)}) then {
     };
 
     // step for main barrage
-    if !(canFire _gun && {_caller call EFUNC(danger,isAlive)}) exitWith {false};
+    if !(canFire _gun && {_caller call EFUNC(main,isAlive)}) exitWith {false};
 
     // Main Barrage
     for "_i" from 1 to _rounds do {

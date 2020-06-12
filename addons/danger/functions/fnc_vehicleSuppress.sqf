@@ -47,7 +47,7 @@ if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 // recheck
 if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
 
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // do it

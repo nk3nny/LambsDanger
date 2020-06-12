@@ -28,7 +28,7 @@ if !(attackEnabled _unit) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 125] call FUNC(findReadyUnits);
+    _units = [_unit, 125] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -38,10 +38,10 @@ _pos = [_pos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top t
 _pos pushBack _target;
 
 // leader ~ rally animation here
-[_unit, ["gestureFollow"]] call FUNC(gesture);
+[_unit, ["gestureFollow"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", "RallyUp", 125] call FUNC(doCallout);
+[_unit, "combat", "RallyUp", 125] call EFUNC(main,doCallout);
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];

@@ -117,7 +117,7 @@ waitUntil {
         sleep (_cycle * 4);
     };
     // end
-    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+    ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)
 };
 
 // end

@@ -55,10 +55,10 @@ private _knowsAbout = _unit knowsAbout _target;
     };
 } forEach _groups;
 
-[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
+[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call EFUNC(main,eventCallback);
 
 // play animation
-if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
+if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call EFUNC(main,doGesture);};
 
 // debug
 if (GVAR(debug_functions)) then {

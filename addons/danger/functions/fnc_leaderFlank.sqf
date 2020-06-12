@@ -36,7 +36,7 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 200] call FUNC(findReadyUnits);
+    _units = [_unit, 200] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -60,7 +60,7 @@ if (_overwatch isEqualTo []) then {
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
     _overwatch = _overwatch select {!(surfaceIsWater _x)};
-    _overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call FUNC(findOverwatch));
+    _overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));
     _overwatch = _overwatch select 0;
 
 };
@@ -70,11 +70,11 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Flank", GVAR(debug_functions)];
 
 // gesture
-[_unit, ["gestureGo"]] call FUNC(gesture);
-[_units select (count _units - 1), ["gestureGoB"]] call FUNC(gesture);
+[_unit, ["gestureGo"]] call EFUNC(main,doGesture);
+[_units select (count _units - 1), ["gestureGoB"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call FUNC(doCallout);
+[_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call EFUNC(main,doCallout);
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -82,14 +82,14 @@ _unit doMove _overwatch;        // ~ to ensure some movement! -nkenny
 //(group _unit) move _overwatch;  ~ removed move command alters current WP. -nkenny
 
 // leader smoke ~ deploy concealment to enable movement
-if (RND(0.5)) then {[_unit, _overwatch] call FUNC(doSmoke);};
+if (RND(0.5)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // manoeuvre function
 private _fnc_manoeuvre = {
     params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", "_fnc_manoeuvre"];
 
     // update
-    _units = _units select { _x call FUNC(isAlive) && { _x distance2D (_pos select 0) > 10 } && { !isPlayer _x } };
+    _units = _units select { _x call EFUNC(main,isAlive) && { _x distance2D (_pos select 0) > 10 } && { !isPlayer _x } };
     _vehicles = _vehicles select { canFire _x };
     _cycle = _cycle - 1;
 

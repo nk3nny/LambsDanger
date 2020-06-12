@@ -66,7 +66,7 @@ private _fnc_act = {
     params ["_enemy", "_group", "_building"];
 
     // units
-    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
+    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(main,isAlive)}};
 
     // deal with close enemy
     if (!isNull _enemy) exitWith {
@@ -79,7 +79,7 @@ private _fnc_act = {
 
         // posture
         doStop _units;
-        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(danger,gesture);
+        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(main,doGesture);
 
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
@@ -128,7 +128,7 @@ private _fnc_act = {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
-                if (RND(0.6) && {_x call EFUNC(danger,indoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
+                if (RND(0.6) && {_x call EFUNC(main,isIndoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
                     _x setVehiclePosition [getPos _x, [], 3.5];
                 };
 
@@ -143,7 +143,7 @@ private _fnc_act = {
             _x setUnitPos "MIDDLE";
 
             // Unit is ready and outside -- try suppressive fire
-            if (unitReady _x && {!(_x call EFUNC(danger,indoor))}) then {
+            if (unitReady _x && {!(_x call EFUNC(main,isIndoor))}) then {
                 [_x, getPosASL _building] call EFUNC(danger,suppress);
                 _x doFollow leader _x;
             };
@@ -207,7 +207,7 @@ waitUntil {
     sleep _cycle;
 
     // end
-    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+    ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)
 
 };
 

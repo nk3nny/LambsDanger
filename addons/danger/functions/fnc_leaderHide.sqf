@@ -25,14 +25,14 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Hide", GVAR(debug_functions)];
 
 // gesture
-[_unit, ["gestureCover"]] call FUNC(gesture);
+[_unit, ["gestureCover"]] call EFUNC(main,doGesture);
 
 // callout
-[_unit, behaviour _unit, "TakeCover", 125] call FUNC(doCallout);
+[_unit, behaviour _unit, "TakeCover", 125] call EFUNC(main,doCallout);
 
 // sort units
 private _units = units _unit;
-_units = _units select {_x call FUNC(isAlive) && {isNull objectParent _x}};
+_units = _units select {_x call EFUNC(main,isAlive) && {isNull objectParent _x}};
 if (_units isEqualTo []) exitWith {false};
 
 // find launcher ~ if present, exit with preparation for armoured/air contact

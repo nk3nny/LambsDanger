@@ -20,8 +20,14 @@
 params ["_units", ["_guns", []]];
 
 // sort units
-if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits); };
-if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits); };
+switch (typeName _units) do {
+    case ("OBJECT"): {
+        _units = [_units] call EFUNC(main,findReadyUnits);
+    };
+    case ("GROUP"): {
+        _units = [leader _units] EFUNC(main,findReadyUnits);
+    };
+};
 
 // get weapons list
 if (_guns isEqualTo []) then {
@@ -66,7 +72,7 @@ private _EH = _gunner addEventHandler ["WeaponDisassembled", {
 ];
 
 // callout
-[formationLeader _assistant, "aware", "DisassembleThatWeapon"] call FUNC(doCallout);
+[formationLeader _assistant, "aware", "DisassembleThatWeapon"] call EFUNC(main,doCallout);
 
 // assistant moves to gunner
 doStop _assistant;
@@ -89,7 +95,7 @@ _assistant doMove getposATL (vehicle _gunner);
         // on success
         params ["_gunner", "_assistant", "", "_EH"];
 
-        if (fleeing _gunner || {fleeing _assistant} || {!(_assistant call FUNC(isAlive))}) exitWith {false};
+        if (fleeing _gunner || {fleeing _assistant} || {!(_assistant call EFUNC(main,isAlive))}) exitWith {false};
 
         // gunner leaves weapon triple threat
         private _weapon = vehicle _gunner;

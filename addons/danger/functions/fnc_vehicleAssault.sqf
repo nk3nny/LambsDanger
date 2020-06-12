@@ -70,7 +70,7 @@ _vehicle doWatch ASLtoAGL _pos;
 if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
 
 // check for friendlies
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call FUNC(nearbyFriendly);
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // suppression

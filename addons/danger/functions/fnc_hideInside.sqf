@@ -29,7 +29,7 @@ if (
 ) exitWith {false};
 
 // already inside -- exit
-if (RND(0.05) && {_unit call FUNC(indoor)}) exitWith {
+if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
     //_unit doWatch _danger;
     false
@@ -64,7 +64,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // hide
     _unit setUnitPosWeak "DOWN";
-    //[_unit, ["DOWN"], true] call FUNC(gesture);
+    //[_unit, ["DOWN"], true] call EFUNC(main,doGesture);
 
     // find cover
     private _cover = nearestTerrainObjects [ _unit getPos [20, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];

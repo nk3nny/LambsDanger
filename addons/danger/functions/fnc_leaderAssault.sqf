@@ -31,14 +31,14 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
     [_unit, _target] call FUNC(leaderGarrison);
 
     // leader smoke
-    [_unit, _target] call FUNC(doSmoke);
+    [_unit, _target] call EFUNC(main,doSmoke);
 
     false
 };
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 250] call FUNC(findReadyUnits);
+    _units = [_unit, 250] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -51,17 +51,17 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Assault", GVAR(debug_functions)];
 
 // gesture
-[_unit, ["gestureGo"]] call FUNC(gesture);
-[_units select (count _units - 1), ["gestureGoB"]] call FUNC(gesture);
+[_unit, ["gestureGo"]] call EFUNC(main,doGesture);
+[_units select (count _units - 1), ["gestureGoB"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", "Advance", 125] call FUNC(doCallout);
+[_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // leader smoke
-[_unit, _target] call FUNC(doSmoke);
+[_unit, _target] call EFUNC(main,doSmoke);
 
 // grenadier smoke
-[{_this call FUNC(doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -71,7 +71,7 @@ private _fnc_assault = {
     params ["_cycle", "_units", "_pos", "_fnc_assault"];
 
     // update
-    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = _units select {_x call EFUNC(main,isAlive) && {!isPlayer _x}};
     _cycle = _cycle - 1;
 
     {

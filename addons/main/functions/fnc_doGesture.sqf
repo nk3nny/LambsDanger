@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob] call lambs_danger_fnc_gesture;
+ * [bob] call lambs_main_fnc_doGesture;
  *
  * Public: No
 */

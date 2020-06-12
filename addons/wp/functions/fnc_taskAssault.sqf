@@ -38,7 +38,7 @@ if (_useWaypoint) then {
 };
 
 // sort group
-private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
+private _units = units _group select {!isPlayer _x && {_x call EFUNC(main,isAlive)} && {isNull objectParent _x}};
 
 // add group variables
 _group setVariable [QGVAR(taskAssaultDestination), _pos];
@@ -75,7 +75,7 @@ _group setSpeedMode "FULL";
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
                 // exit
-                if (!(_unit call EFUNC(danger,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
+                if (!(_unit call EFUNC(main,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];

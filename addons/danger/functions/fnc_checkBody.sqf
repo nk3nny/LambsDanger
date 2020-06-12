@@ -31,13 +31,13 @@ if (
 _unit lookAt _pos;
 
 // leaders gesture
-[formationLeader _unit, ["gesturePoint"]] call FUNC(gesture);
+[formationLeader _unit, ["gesturePoint"]] call EFUNC(main,doGesture);
 
 // if too far away
 if (_unit distance _pos > GVAR(CQB_range)) exitWith {false};
 
 // half chance-- indoors
-if (RND(0.5) && { _unit call FUNC(indoor) }) exitWith {false};
+if (RND(0.5) && { _unit call EFUNC(main,isIndoor) }) exitWith {false};
 
 // find body
 private _body = allDeadMen select { (_x distance _pos) < _range };
@@ -62,13 +62,13 @@ _unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
     {
         // condition
         params ["_unit", "_body"];
-        (_unit distance _body < 0.7) || {!(_unit call FUNC(isAlive))}
+        (_unit distance _body < 0.7) || {!(_unit call EFUNC(main,isAlive))}
     },
     {
         // on near body
         params ["_unit", "_body"];
-        if (_unit call FUNC(isAlive)) then {
-            [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
+        if (_unit call EFUNC(main,isAlive)) then {
+            [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call EFUNC(main,eventCallback);
             _unit action ["rearm", _body];
             _unit doFollow leader _unit;
         };
@@ -77,7 +77,7 @@ _unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
     {
         // on timeout
         params ["_unit"];
-        if (_unit call FUNC(isAlive)) then {_unit doFollow leader _unit};
+        if (_unit call EFUNC(main,isAlive)) then {_unit doFollow leader _unit};
     }
 ] call CBA_fnc_waitUntilAndExecute;
 

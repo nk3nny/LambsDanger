@@ -28,7 +28,7 @@ _units = _units select {
     //unitReady _x
     _x distance2D _unit < _range
     && { isNull objectParent _x }
-    && { _x call FUNC(isAlive) }
+    && { _x call EFUNC(main,isAlive) }
     && { !(_x getVariable [QGVAR(forceMove), false]) }
     && { !isPlayer _x }
     && { !fleeing _x }

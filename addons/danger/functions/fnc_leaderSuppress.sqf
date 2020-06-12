@@ -26,7 +26,7 @@ if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit] call FUNC(findReadyUnits);
+    _units = [_unit] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -51,10 +51,10 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Suppress", GVAR(debug_functions)];
 
 // gesture
-[_unit, ["gesturePoint"]] call FUNC(gesture);
+[_unit, ["gesturePoint"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", "SuppressiveFire", 125] call FUNC(doCallout);
+[_unit, "combat", "SuppressiveFire", 125] call EFUNC(main,doCallout);
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -64,7 +64,7 @@ private _fnc_suppress = {
     params ["_cycle", "_units", "_vehicles", "_pos", "_fnc_suppress"];
 
     // update
-    _units = _units select {_x call FUNC(isAlive) && { !isPlayer _x }};
+    _units = _units select {_x call EFUNC(main,isAlive) && { !isPlayer _x }};
     _vehicles = _vehicles select { canFire _x };
     _cycle = _cycle - 1;
 

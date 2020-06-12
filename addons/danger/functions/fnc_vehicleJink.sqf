@@ -37,7 +37,7 @@ _destination pushBack (_vehicle modelToWorldVisual [_range * -1, -(random 10), 0
 private _enemy = _unit findNearestEnemy _unit;
 if (!isNull _enemy) then {
 
-    _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call FUNC(findOverwatch));
+    _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call EFUNC(main,findOverwatch));
 
     // Share information!
     [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);

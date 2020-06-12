@@ -43,7 +43,7 @@ _buildings = _buildings select { _x distance _target < _rangeBuilding };
 if (RND(0.8) || { _buildings isEqualTo [] }) exitWith {
 
     // Outdoors or indoors with 20% chance to move out
-    if (RND(0.8) || { !(_unit call FUNC(indoor)) }) then {
+    if (RND(0.8) || { !(_unit call EFUNC(main,isIndoor)) }) then {
 
         // execute move
         _unit doMove (_unit getHideFrom _target);
