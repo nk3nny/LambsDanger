@@ -111,7 +111,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskAssault_DistanceThreshold_DisplayName);
             tooltip = CSTRING(Module_TaskAssault_DistanceThreshold_Tooltip);
             property = QGVAR(DistanceThreshold);
-            defaultValue = QUOTE(TASK_ASSAULT_DISTANCETHREASHOLD);
+            defaultValue = QUOTE(TASK_ASSAULT_DISTANCETHRESHOLD);
             unique = 0;
             validate = "none";
             condition = "0";

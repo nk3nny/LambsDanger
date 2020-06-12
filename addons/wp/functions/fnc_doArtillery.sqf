@@ -22,7 +22,7 @@
 if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 
 // init
-params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCECKROUNDS]];
+params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS]];
 
 if (_pos isEqualTo [] || isNull _gun) exitWith {};
 

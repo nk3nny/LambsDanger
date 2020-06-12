@@ -24,7 +24,7 @@ if !(canSuspend) exitWith {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", TASK_ASSAULT_ISREATREAT ], ["_threshold", TASK_ASSAULT_DISTANCETHREASHOLD], [ "_cycle", TASK_ASSAULT_CYCLETIME], ["_useWaypoint", false]];
+params ["_group", "_pos", ["_retreat", TASK_ASSAULT_ISRETREAT ], ["_threshold", TASK_ASSAULT_DISTANCETHRESHOLD], [ "_cycle", TASK_ASSAULT_CYCLETIME], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
