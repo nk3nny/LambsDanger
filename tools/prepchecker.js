@@ -9,7 +9,17 @@ const PREFIX = "Lambs";
 
 const projectFiles = [];
 const prepedFunctions = ["Lambs_main_fnc_RoundValue"];
-const ignoreFiles = ["addons\\main\\functions\\fnc_fncName.sqf", "addons\\main\\functions\\fnc_var1.sqf", "addons\\wp\\functions\\fnc_ArtilleryScan.sqf", "addons\\wp\\functions\\fnc_TaskPatrol_WaypointStatement.sqf", "addons\\wp\\functions\\fnc_ArtilleryScan.sqf"]
+const ignoreFiles = ["addons/main/functions/fnc_fncName.sqf", "addons/main/functions/fnc_var1.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/wp/functions/fnc_TaskPatrol_WaypointStatement.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/danger/functions/fnc_UpdateCQBFormations.sqf"]
+const ignoredFiles = [];
+for (const file of ignoreFiles) {
+    var temp = "";
+    for (const p of file.split("/")) {
+        temp = path.join(temp,p);
+    }
+    ignoredFiles.push(temp);
+}
+
+
 const requiredFunctionFiles = [];
 let failedCount = 0;
 
@@ -52,10 +62,11 @@ function getFunctions(file, module) {
             if (!match) continue;
             if (groupIndex != 0 && groupIndex != 2) {
                 prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`);
-                if (!m[2])
-                    requiredFunctionFiles.push(`addons\\${module}\\functions\\fnc_${match}.sqf`);
+                if (!m[2] && groupIndex != 3)
+                    
+                    requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `fnc_${match}.sqf`));
             } else if (groupIndex != 0 && groupIndex == 2) {
-                requiredFunctionFiles.push(`addons\\${module}\\functions\\${match}\\fnc_${m[groupIndex+1]}.sqf`);
+                requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `${match}`, `fnc_${m[groupIndex+1]}.sqf`));
             }
         }
     }
@@ -97,7 +108,7 @@ getDirFiles("addons", "");
 CheckFunctions();
 
 for (const file of requiredFunctionFiles) {
-    if (ignoreFiles.includes(file)) continue;
+    if (ignoredFiles.includes(file)) continue;
     failedCount++;
     console.log(`File ${file} Missing!`)
 }
