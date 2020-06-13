@@ -13,7 +13,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe, 30] call lambs_danger_fnc_hideInside;
+ * [bob, angryJoe, 30] call lambs_danger_fnc_doHide;
  *
  * Public: No
 */

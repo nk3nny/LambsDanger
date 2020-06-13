@@ -348,7 +348,7 @@ class FSM
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,  _dangerPos, 55 + random 50] call lambs_danger_fnc_hideInside; " \n
+                         "[_this,  _dangerPos, 55 + random 50] call lambs_danger_fnc_doHide; " \n
                          "" \n
                          "// animation" \n
                          "if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
@@ -835,7 +835,7 @@ class FSM
                         itemno = 44;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,  getPos _this,  25] call lambs_danger_fnc_checkBody; " \n
+                         "[_this,  getPos _this,  25] call lambs_danger_fnc_doCheckBody; " \n
                          "" \n
                          "// stance " \n
                          "_this setUnitPosWeak ""Middle"";" \n

@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob, getPos angryJoe, 10] call lambs_danger_fnc_checkBody;
+ * [bob, getPos angryJoe, 10] call lambs_danger_fnc_doCheckBody;
  *
  * Public: No
 */

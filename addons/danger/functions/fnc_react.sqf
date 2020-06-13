@@ -62,7 +62,7 @@ _units = _units select { currentCommand _x isEqualTo "" };
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range + 5, true, true] call EFUNC(main,findBuildings);
 {
-    [_x, _pos, _range, _buildings] call FUNC(hideInside);
+    [_x, _pos, _range, _buildings] call FUNC(doHide);
 } foreach _units;
 
 // caller slowdown!

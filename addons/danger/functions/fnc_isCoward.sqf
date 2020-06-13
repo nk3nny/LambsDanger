@@ -11,7 +11,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_coward;
+ * [bob, angryJoe] call lambs_danger_fnc_isCoward;
  *
  * Public: No
 */

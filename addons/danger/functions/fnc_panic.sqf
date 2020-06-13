@@ -66,7 +66,7 @@ if (RND(0.5)) exitWith {
 
 // action
 _unit doWatch objNull;
-[_unit, _unit getPos [100, getDir _unit], 55] call FUNC(hideInside);
+[_unit, _unit getPos [100, getDir _unit], 55] call FUNC(doHide);
 
 // chance action
 _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];

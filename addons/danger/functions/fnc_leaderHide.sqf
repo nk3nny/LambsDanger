@@ -78,7 +78,7 @@ if (_buildings isEqualTo []) then {
 
     // hide
     _x setVariable [QGVAR(forceMove), true];
-    [_x, _target, 45, _buildings] call FUNC(hideInside);
+    [_x, _target, 45, _buildings] call FUNC(doHide);
 
 } forEach _units;
 

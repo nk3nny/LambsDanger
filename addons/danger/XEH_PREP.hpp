@@ -1,12 +1,12 @@
 PREP(assault);
 PREP(assaultBuilding);
 PREP(assaultSpeed);
-PREP(checkBody);
-PREP(coward);
+PREP(doCheckBody);
+PREP(isCoward);
 PREP(fleeing);
 PREP(fsmAllowAnimation);
 PREP(fsmExitVariables);
-PREP(hideInside);
+PREP(doHide);
 PREP(immediateAction);
 PREP(leaderArtillery);
 PREP(leaderAssault);
