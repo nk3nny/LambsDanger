@@ -148,13 +148,13 @@ waitUntil {
     if (_wPos isEqualTo [0,0,0]) exitWith {true};
 
     // debug
-    if (EGVAR(danger,debug_functions)) then {
+    if (EGVAR(main,debug_functions)) then {
         format ["%1 %2: %3 units moving %4M",
             side _group,
             ["taskAssault", "taskRetreat"] select _retreat,
             count (_group getVariable [QGVAR(taskAssaultMembers), []]),
             round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2D _wPos )
-        ] call EFUNC(danger,debugLog);
+        ] call EFUNC(main,debugLog);
     };
 
     // delay and end
@@ -169,12 +169,12 @@ _group setVariable [QGVAR(taskAssaultMembers), nil];
 _group setBehaviour "AWARE";
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
+if (EGVAR(main,debug_functions)) then {
     format ["%1 %2 %3 Completed",
         side _group,
         ["taskAssault", "taskRetreat"] select _retreat,
         _group
-    ] call EFUNC(danger,debugLog);
+    ] call EFUNC(main,debugLog);
 };
 
 // end

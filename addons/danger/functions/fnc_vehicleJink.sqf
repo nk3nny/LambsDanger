@@ -24,8 +24,8 @@ private _vehicle = vehicle _unit;
 if (!canMove _vehicle || {currentCommand _vehicle isEqualTo "MOVE" || currentCommand _vehicle isEqualTo "ATTACK"}) exitWith {getPosASL _unit};
 
 // variables
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Jink Vehicle", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Jink Vehicle", EGVAR(main,debug_functions)];
 
 // Find positions
 private _destination = [];
@@ -61,7 +61,7 @@ _destination = selectRandom _destination;
 _vehicle doMove _destination;
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _destination)] call FUNC(debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _destination)] call EFUNC(main,debugLog);};
 
 // end
 _destination

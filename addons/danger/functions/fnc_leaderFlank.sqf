@@ -66,8 +66,8 @@ if (_overwatch isEqualTo []) then {
 };
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Flank", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Flank", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
@@ -107,7 +107,7 @@ private _fnc_manoeuvre = {
             // manoeuvre
             _x forceSpeed 4;
             _x setUnitPosWeak "MIDDLE";
-            _x setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
+            _x setVariable [QGVAR(currentTask), "Group Flank", EGVAR(main,debug_functions)];
             _x setVariable [QGVAR(forceMove), getSuppression _x > 0.5];
 
             // force movement
@@ -138,12 +138,12 @@ private _fnc_manoeuvre = {
 [_cycle, _units, _vehicles, _pos, _overwatch, _fnc_manoeuvre] call _fnc_manoeuvre;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 group FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 group FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
 
     _overwatch set [2, 0];
     private _arrow = createSimpleObject ["Sign_Arrow_F", AGLToASL _overwatch, true];
-    _arrow setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    _arrow setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _arrow, 30] call CBA_fnc_waitAndExecute;
 };
 

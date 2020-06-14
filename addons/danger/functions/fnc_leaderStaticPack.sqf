@@ -80,8 +80,8 @@ _assistant doWatch vehicle _gunner;
 _assistant setUnitPosWeak "MIDDLE";
 _assistant forceSpeed 24;
 _assistant setVariable [QGVAR(forceMove), true];
-_assistant setVariable [QGVAR(currentTask), "Pack Static Weapon", GVAR(debug_functions)];
-_assistant setVariable [QGVAR(currentTarget), getPos _gunner, GVAR(debug_functions)];
+_assistant setVariable [QGVAR(currentTask), "Pack Static Weapon", EGVAR(main,debug_functions)];
+_assistant setVariable [QGVAR(currentTarget), getPos _gunner, EGVAR(main,debug_functions)];
 _assistant doMove getposATL (vehicle _gunner);
 
 // do it

@@ -51,8 +51,8 @@ doStop _unit;
 // found body
 _body = selectRandom _body;
 
-_unit setVariable [QGVAR(currentTarget), _body, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Check Body", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _body, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Check Body", EGVAR(main,debug_functions)];
 
 // do it
 private _bodyPos = getPosATL _body;
@@ -82,12 +82,12 @@ _unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
 ] call CBA_fnc_waitUntilAndExecute;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 checking body (%2 @ %3m)", side _unit, name _unit, round (_unit distance _body)] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 checking body (%2 @ %3m)", side _unit, name _unit, round (_unit distance _body)] call EFUNC(main,debugLog);
 
     // debug arrow
     private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];
-    _help setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    _help setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _help, 8] call CBA_fnc_waitAndExecute;
 };
 

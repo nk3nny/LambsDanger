@@ -10,7 +10,7 @@
  * none
  *
  * Example:
- * [] call lambs_danger_fnc_debugLog;
+ * [] call lambs_main_fnc_debugLog;
  *
  * Public: No
 */

@@ -148,8 +148,8 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // set current task
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Assess", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assess", EGVAR(main,debug_functions)];
 
 // end
 true

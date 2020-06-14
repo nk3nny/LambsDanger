@@ -64,8 +64,8 @@ _group setVariable [QGVAR(taskAssaultMembers), nil];
     _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables
-    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(danger,debug_functions)];
-    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(danger,debug_functions)];
+    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(main,debug_functions)];
     _x setVariable [QEGVAR(danger,disableAI), nil];
     _x setVariable [QEGVAR(danger,forceMove), true];        // one FSM cycle of forced movement to get AI into action! -nkenny
 

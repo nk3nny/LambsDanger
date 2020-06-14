@@ -31,8 +31,8 @@ _unit setUnitPosWeak "UP";
 private _enemy = _unit findNearestEnemy _unit;
 if ((_unit distance _enemy) < 7) exitWith {
 
-    _unit setVariable [QGVAR(currentTarget), _enemy, GVAR(debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)", GVAR(debug_functions)];
+    _unit setVariable [QGVAR(currentTarget), _enemy, EGVAR(main,debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)", EGVAR(main,debug_functions)];
 
     // movement
     //_unit doWatch objNull;
@@ -42,8 +42,8 @@ if ((_unit distance _enemy) < 7) exitWith {
     _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
 
     // debug
-    if (GVAR(debug_functions)) then {
-        format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call FUNC(debugLog);
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call EFUNC(main,debugLog);
         private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
     };
@@ -63,8 +63,8 @@ if (_buildings isEqualTo []) exitWith {
 
 };
 
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Assault Building", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault Building", EGVAR(main,debug_functions)];
 
 // define building
 private _building = (_buildings select 0);
@@ -82,9 +82,9 @@ if (isNil "_buildingPosSelected") then {
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
 // debug
-if (GVAR(debug_functions)) then {
+if (EGVAR(main,debug_functions)) then {
     private _arrow = createSimpleObject ["Sign_Arrow_Large_F", AGLtoASL _buildingPosSelected, true];
-    _arrow setObjectTexture [0, [_unit] call EFUNC(danger,debugObjectColor)];
+    _arrow setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
 };
 
@@ -115,13 +115,13 @@ if (_buildingPos isEqualTo []) then {
 };
 
 // debug
-if (GVAR(debug_functions) && {leader _unit isEqualTo _unit}) then {
+if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
     format ["%1 assaulting building (%2 @ %3m - %4x spots left)",
         side _unit,
         name _unit,
         round (_unit distance _buildingPosSelected),
         count _buildingPos
-    ] call FUNC(debugLog);
+    ] call EFUNC(main,debugLog);
 };
 
 // return

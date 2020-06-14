@@ -10,7 +10,7 @@
  * none
  *
  * Example:
- * [] call lambs_danger_fnc_debugDraw;
+ * [] call lambs_main_fnc_debugDraw;
  *
  * Public: No
 */
@@ -185,10 +185,10 @@ private _fnc_DrawRect = {
 
         _textData append [
             "Behaviour: ", behaviour _unit, "<br/>",
-            "Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
+            "Current Task: ", _unit getVariable [QEGVAR(danger,currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
-            private _dangeModeData = (group _unit) getVariable [QGVAR(dangerMode), [[], [], true, time]];
+            private _dangeModeData = (group _unit) getVariable [QEGVAR(danger,dangerMode), [[], [], true, time]];
             private _queue = (_dangeModeData select 0) apply { _x call _fnc_dangerModeTypes };
             _textData append [
                 "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",

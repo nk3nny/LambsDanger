@@ -41,8 +41,8 @@ if (_buildings isEqualTo []) then {
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), _danger, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Hide", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _danger, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Hide", EGVAR(main,debug_functions)];
 
 // settings
 _unit forceSpeed 24;
@@ -50,7 +50,7 @@ _unit forceSpeed 24;
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
-    _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Hide (inside)", EGVAR(main,debug_functions)];
 
     // hide
     doStop _unit;
@@ -58,7 +58,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // execute move
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
-    if (GVAR(debug_functions)) then {format ["%1 hide in building", side _unit] call FUNC(debugLog);};
+    if (EGVAR(main,debug_functions)) then {format ["%1 hide in building", side _unit] call EFUNC(main,debugLog);};
 
 } else {
 
@@ -77,7 +77,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // execute move
     _unit doMove _targetPos;
-    if (GVAR(debug_functions)) then {format ["%1 hide in bush", side _unit] call FUNC(debugLog);};
+    if (EGVAR(main,debug_functions)) then {format ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);};
 };
 
 // end

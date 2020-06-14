@@ -80,15 +80,15 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
                     _gun commandArtilleryFire [_target, _ammo, 1];
 
                     // debug
-                    if (EGVAR(danger,debug_functions)) then {
-                        private _m = [_target, format ["%1 %3 (check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(danger,dotMarker);
+                    if (EGVAR(main,debug_functions)) then {
+                        private _m = [_target, format ["%1 %3 (check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(main,dotMarker);
                         _mlist pushBack _m;
                     };
                     // waituntil
                     waitUntil {unitReady _gun};
                 } else {
-                    if (EGVAR(danger,debug_functions)) then {
-                        (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+                    if (EGVAR(main,debug_functions)) then {
+                        (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(main,debugLog);
                     };
                 };
             };
@@ -117,23 +117,23 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
             _gun commandArtilleryFire [_target, _ammo, 1];
 
             // debug
-            if (EGVAR(danger,debug_functions)) then {
-                private _m = [_target, format ["%1 %3 (main salvo %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(danger,dotMarker);
+            if (EGVAR(main,debug_functions)) then {
+                private _m = [_target, format ["%1 %3 (main salvo %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(main,dotMarker);
                 _mlist pushBack _m;
             };
 
             // waituntil
             waitUntil {unitReady _gun};
         } else {
-            if (EGVAR(danger,debug_functions)) then {
-                (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(danger,debugLog);
+            if (EGVAR(main,debug_functions)) then {
+                (format ["Error Artillery Position is not Reachable with Artillery"]) call EFUNC(main,debugLog);
             };
         };
     };
 
     // debug
-    if (EGVAR(danger,debug_functions)) then {
-        format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)] call EFUNC(danger,debugLog);
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance _pos)] call EFUNC(main,debugLog);
     };
 
     // clean markers!

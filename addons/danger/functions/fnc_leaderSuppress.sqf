@@ -47,8 +47,8 @@ _pos pushBack _target;
 private _cycle = selectRandom [3, 3, 4, 5];
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Suppress", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gesturePoint"]] call EFUNC(main,doGesture);
@@ -78,14 +78,14 @@ private _fnc_suppress = {
         _x setUnitPosWeak "MIDDLE";
         _x doWatch _posAGL;
         private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(suppress);
-        _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
+        _x setVariable [QGVAR(currentTask), "Group Suppress", EGVAR(main,debug_functions)];
 
         // no LOS
         if !(_suppress) then {
             // move forward
             _x forceSpeed 3;
             _x doMove (_x getPos [8 + random 6, _x getdir _posAGL]);
-            _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
+            _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", EGVAR(main,debug_functions)];
         };
     } foreach _units;
 
@@ -110,8 +110,8 @@ private _fnc_suppress = {
 [_cycle, _units, _vehicles, _pos, _fnc_suppress] call _fnc_suppress;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 group SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions for %7 cycles)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos, count _vehicles, _cycle] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 group SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions for %7 cycles)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos, count _vehicles, _cycle] call EFUNC(main,debugLog);
 };
 
 // end

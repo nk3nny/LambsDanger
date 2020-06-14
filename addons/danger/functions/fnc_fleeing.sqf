@@ -28,8 +28,8 @@ if (
 private _onFoot = isNull (objectParent _unit);
 
 // variable
-_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 
 // this could have an event attached to it too - nkenny
 
@@ -93,7 +93,7 @@ if (_unit distance2D _enemy < 120) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call FUNC(debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
 
 // end
 true

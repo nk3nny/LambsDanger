@@ -47,8 +47,8 @@ private _pos = [_target, 16, true, false] call EFUNC(main,findBuildings);
 _pos pushBack _target;
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Assault", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assault", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
@@ -88,7 +88,7 @@ private _fnc_assault = {
         // manoeuvre
         _x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
         _x setUnitPosWeak "UP";
-        _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
+        _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
         _x setVariable [QGVAR(forceMove), true];
 
     } foreach _units;
@@ -107,8 +107,8 @@ private _fnc_assault = {
 [_cycle, _units, _pos, _fnc_assault] call _fnc_assault;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call EFUNC(main,debugLog);
 };
 
 // end

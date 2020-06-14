@@ -1,15 +1,5 @@
 #include "script_component.hpp"
 
-GVAR(drawRectCacheGame) = [];
-GVAR(drawRectInUseGame) = [];
-
-GVAR(drawRectCacheEGSpectator) = [];
-GVAR(drawRectInUseEGSpectator) = [];
-
-GVAR(drawRectCacheCurator) = [];
-GVAR(drawRectInUseCurator) = [];
-addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
-
 [QGVAR(OnCheckBody), {
     [_this select 0, QGVAR(OnCheckBody), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnCheckBody), _this] call BIS_fnc_callScriptedEventHandler;

@@ -102,8 +102,8 @@ if (_moveWaypoints) then {
 };
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

@@ -230,8 +230,8 @@ private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select
 _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

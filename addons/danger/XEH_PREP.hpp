@@ -32,14 +32,6 @@ PREP(vehicleJink);
 PREP(vehicleRotate);
 PREP(vehicleSuppress);
 
-SUBPREP(debug,debugDangerType);
-SUBPREP(debug,debugDraw);
-SUBPREP(debug,debugLog);
-SUBPREP(debug,debugMarkerColor);
-SUBPREP(debug,debugObjectColor);
-SUBPREP(debug,dotMarker);
-SUBPREP(debug,zoneMarker);
-
 SUBPREP(ZeusModules,moduleDisableGroupAI);
 SUBPREP(ZeusModules,moduleDisableAI);
 SUBPREP(ZeusModules,moduleSetRadio);

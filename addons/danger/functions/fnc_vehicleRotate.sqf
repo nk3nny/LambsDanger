@@ -32,8 +32,8 @@ if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {true};
 // CQB tweak <-- disabled! more dynamic vehicles is better!!
 if (_unit distance _target < GVAR(CQB_range)) exitWith {true};
 
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functions)];
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {

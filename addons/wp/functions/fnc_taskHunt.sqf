@@ -67,7 +67,7 @@ waitUntil {
         _group enableIRLasers true;
 
         // debug
-        if (EGVAR(danger,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(danger,debugLog);};
+        if (EGVAR(main,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(main,debugLog);};
 
         // flare
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };

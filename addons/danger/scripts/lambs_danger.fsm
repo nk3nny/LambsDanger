@@ -279,8 +279,8 @@ class FSM
                         itemno = 3;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset variable" \n
-                         "_this setVariable [""lambs_danger_currentTarget"",nil,lambs_danger_debug_functions];" \n
-                         "_this setVariable [""lambs_danger_currentTask"",nil,lambs_danger_debug_functions];" \n
+                         "_this setVariable [""lambs_danger_currentTarget"",nil,lambs_main_debug_functions];" \n
+                         "_this setVariable [""lambs_danger_currentTask"",nil,lambs_main_debug_functions];" \n
                          "" \n
                          "// fleeing" \n
                          "if (fleeing _this) then {" \n
@@ -444,7 +444,7 @@ class FSM
                         name = "Ready_Vehicle";
                         itemno = 14;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_main_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// settings " \n
                          "private _vehicle = vehicle _this;" \n
@@ -516,7 +516,7 @@ class FSM
                         name = "Ready_Infantry";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_main_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
                          "" \n
                          "// identify leader" \n
                          "private _leader = leader _this isEqualTo _this && { count units _this > 1} && { getSuppression _this < 0.5};" \n
@@ -721,7 +721,7 @@ class FSM
                          "_timeout = time + _delay; " \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
                          "	format [""%1 - PANIC! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
@@ -896,7 +896,7 @@ class FSM
                          "[_this, _dangerPos, _dangerCausedBy] call lambs_danger_fnc_react;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg" \n
                          "	format [""%1 - REACT! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
@@ -948,7 +948,7 @@ class FSM
                          "[_this, _dangerPos] call lambs_danger_fnc_doCheckBody; " \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
                          "	format [""%1 - INVESTIGATING! - %2 for %3s"", side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
@@ -1141,7 +1141,7 @@ class FSM
                          "[_this, _dangerPos] call lambs_danger_fnc_leaderAssess;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
                          "	format [""%1 - LEADER ASSESS! - %2 for %3s"", side _this, name _this, round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
@@ -1184,7 +1184,7 @@ class FSM
                          "[_this, _this findNearestEnemy _dangerPos] call lambs_danger_fnc_leaderContact;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Contact"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1225,7 +1225,7 @@ class FSM
                          "[_this, (_dangerMode select 1) select 2] call lambs_danger_fnc_leaderHide;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Hide"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1271,7 +1271,7 @@ class FSM
                          "}; " \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1318,7 +1318,7 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderFlank;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Flank"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1658,7 +1658,7 @@ class FSM
                          "_this setVariable [""ace_medical_ai_lastFired"", CBA_missionTime - 20];" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
                          "	format [""%1 - FORCE MOVE! - %2 for %3s"",side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
@@ -1745,7 +1745,7 @@ class FSM
                          "_this setVariable [""ace_medical_ai_lastFired"", CBA_missionTime - 24];" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
                          "	format [""%1 - IMMEDIATE ACTION! - %2 - %3m"",side _this, name _this, round (_this distance2d _dangerPos)]  call lambs_danger_fnc_debugLog;" \n
@@ -1810,7 +1810,7 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderAssault;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Assault"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1857,7 +1857,7 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderSuppress;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Suppress"",side _this] call lambs_danger_fnc_debugLog;" \n
@@ -1904,7 +1904,7 @@ class FSM
                          "[_this,  _target, true] call lambs_danger_fnc_leaderGarrison;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
                          "	format [""%1 - LEADER ACTION! - Garrison"",side _this] call lambs_danger_fnc_debugLog;" \n

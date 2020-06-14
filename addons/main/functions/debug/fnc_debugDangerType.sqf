@@ -10,7 +10,7 @@
  * String value of type of danger
  *
  * Example:
- * [0] call lambs_danger_fnc_debugDangerType;
+ * [0] call lambs_main_fnc_debugDangerType;
  *
  * Public: No
 */

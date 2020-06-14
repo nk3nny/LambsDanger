@@ -72,8 +72,8 @@ private _fnc_act = {
     if (!isNull _enemy) exitWith {
 
         // debug
-        if (EGVAR(danger,debug_functions)) then {
-            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(danger,debugLog);
+        if (EGVAR(main,debug_functions)) then {
+            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
             createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         };
 
@@ -94,8 +94,8 @@ private _fnc_act = {
             _x lookAt _enemy;
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
             true
         } count _units;
     };
@@ -114,14 +114,14 @@ private _fnc_act = {
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
-            if (EGVAR(danger,debug_functions)) then {
+            if (EGVAR(main,debug_functions)) then {
                 private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLtoASL _buildingPosSelected, true];
-                _arrow setObjectTexture [0, [_x] call EFUNC(danger,debugObjectColor)];
+                _arrow setObjectTexture [0, [_x] call EFUNC(main,debugObjectColor)];
             };
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
 
             // clean list
             if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {
@@ -201,7 +201,7 @@ waitUntil {
     [_enemy, _group, _building] call _fnc_act;
 
     // debug
-    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
@@ -219,7 +219,7 @@ waitUntil {
 } foreach units _group;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(danger,debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
 
 // end
 true

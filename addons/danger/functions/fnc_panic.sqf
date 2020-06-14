@@ -23,11 +23,11 @@ if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariab
 [QGVAR(OnPanic), [_unit, group _unit]] call EFUNC(main,eventCallback);
 
 // settings
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Panic", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Panic", EGVAR(main,debug_functions)];
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call FUNC(debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call EFUNC(main,debugLog);};
 
 // callout
 if (RND(0.4)) then {

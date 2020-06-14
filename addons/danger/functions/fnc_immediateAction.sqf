@@ -22,8 +22,8 @@ private _stance = stance _unit;
 private _dir = 360 - (_unit getRelDir _pos);
 
 // dodge
-_unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Dodge!", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
     [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call EFUNC(main,doGesture);
