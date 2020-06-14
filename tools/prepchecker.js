@@ -8,7 +8,7 @@ const fs = require('fs');
 const PREFIX = "Lambs";
 
 const projectFiles = [];
-const prepedFunctions = ["Lambs_main_fnc_RoundValue"];
+const prepedFunctions = ["lambs_main_fnc_roundvalue"];
 const ignoreFiles = ["addons/main/functions/fnc_fncName.sqf", "addons/main/functions/fnc_var1.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/wp/functions/fnc_TaskPatrol_WaypointStatement.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/danger/functions/fnc_UpdateCQBFormations.sqf"]
 const ignoredFiles = [];
 for (const file of ignoreFiles) {
@@ -61,7 +61,7 @@ function getFunctions(file, module) {
             const match = m[groupIndex];
             if (!match) continue;
             if (groupIndex != 0 && groupIndex != 2) {
-                prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`);
+                prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`.toLowerCase());
                 if (!m[2] && groupIndex != 3)
 
                     requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `fnc_${match}.sqf`));
@@ -87,15 +87,14 @@ function CheckFunctions() {
             if (m.index === regex.lastIndex) {
                 regex.lastIndex++;
             }
+            var fncName;
             if (m[1]) {
-                var fncName = `${PREFIX}_${data.module}_fnc_${m[1]}`;
-                if (!prepedFunctions.includes(fncName)) {
-                    console.log(`Use of not Existing Function: ${fncName} in ${data.path}`)
-                    failedCount++;
-                }
+                fncName = `${PREFIX}_${data.module}_fnc_${m[1]}`;
             } else if (m[2] && m[3]) {
-                var fncName = `${PREFIX}_${m[2]}_fnc_${m[3]}`;
-                if (!prepedFunctions.includes(fncName)) {
+                fncName = `${PREFIX}_${m[2]}_fnc_${m[3]}`;
+            }
+            if (fncName) {
+                if (!prepedFunctions.includes(fncName.toLowerCase())) {
                     console.log(`Use of not Existing Functions: ${fncName} in ${data.path}`)
                     failedCount++;
                 }
