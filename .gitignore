@@ -12,3 +12,5 @@ build.bat
 lint.bat
 
 sqf/*
+
+tools/stringtableChecker/node_modules
