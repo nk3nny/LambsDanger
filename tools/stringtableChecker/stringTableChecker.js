@@ -1,3 +1,6 @@
+/*
+    Author: joko // Jonas
+*/
 const fs = require('fs');
 const path = require('path');
 const xml = require("xml2js");
@@ -44,7 +47,7 @@ function getDirFiles(p, module) {
 
 function CheckStringtables() {
     for (const data of projectFiles) {
-        
+
         const content = fs.readFileSync(data.path);
         const regex = /LSTRING\((\w+)\)|ELSTRING\((\w+),(\w+)\)/gm;
         let m;

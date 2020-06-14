@@ -93,8 +93,8 @@ function CheckFunctions() {
                     console.log(`Use of not Existing Function: ${fncName} in ${data.path}`)
                     failedCount++;
                 }
-            } else if (m[3] && m[4]) {
-                var fncName = `${PREFIX}_${m[3]}_fnc_${m[4]}`;
+            } else if (m[2] && m[3]) {
+                var fncName = `${PREFIX}_${m[2]}_fnc_${m[3]}`;
                 if (!prepedFunctions.includes(fncName)) {
                     console.log(`Use of not Existing Functions: ${fncName} in ${data.path}`)
                     failedCount++;
