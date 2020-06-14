@@ -63,7 +63,7 @@ function getFunctions(file, module) {
             if (groupIndex != 0 && groupIndex != 2) {
                 prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`);
                 if (!m[2] && groupIndex != 3)
-                    
+
                     requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `fnc_${match}.sqf`));
             } else if (groupIndex != 0 && groupIndex == 2) {
                 requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `${match}`, `fnc_${m[groupIndex+1]}.sqf`));
@@ -113,4 +113,3 @@ for (const file of requiredFunctionFiles) {
     console.log(`File ${file} Missing!`)
 }
 process.exit(failedCount);
-

@@ -18,6 +18,9 @@ jobs:
       uses: actions/setup-node@v1.4.2
     - name: Check Functions
       run: node tools/prepchecker.js
+    - name: Run Stringtable use Checker
+      run: cd tools/stringtableChecker && npm i && cd ../../ node tools/stringtableChecker/stringTableChecker.js
+
   lint:
     runs-on: ubuntu-latest
     steps:
