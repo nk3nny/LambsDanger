@@ -60,8 +60,8 @@ function CheckStringtables() {
             var strName;
             if (m[1]) {
                 strName = `STR_${PREFIX}_${data.module}_${m[1]}`
-            } else if (m[3] && m[4]) {
-                strName = `STR_${PREFIX}_${m[3]}_${m[4]}`
+            } else if (m[2] && m[3]) {
+                strName = `STR_${PREFIX}_${m[2]}_${m[3]}`
             }
 
             if (strName && !stringtableEntries.includes(strName.toLowerCase())) {
@@ -75,6 +75,6 @@ function CheckStringtables() {
 getDirFiles("addons", "");
 
 while (running != 0) {}
-fs.writeFileSync("data.json", JSON.stringify(stringtableEntries, null, 2));
+
 CheckStringtables();
 process.exit(failedCount);
