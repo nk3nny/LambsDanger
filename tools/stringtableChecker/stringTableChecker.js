@@ -77,4 +77,9 @@ getDirFiles("addons", "");
 while (running != 0) {}
 
 CheckStringtables();
+
+if (failedCount == 0) {
+    console.log("No Errors in Found");
+}
+
 process.exit(failedCount);

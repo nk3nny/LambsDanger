@@ -17,7 +17,7 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
     - name: Run Stringtable Checker
-      run: cd tools/stringtableChecker && npm i && cd ../../ && node tools/stringtableChecker/stringTableChecker.js
+      run: cd tools/stringtableChecker && npm i &> /dev/null && cd ../../ && node tools/stringtableChecker/stringTableChecker.js
     - name: Check Functions
       run: node tools/prepchecker.js
 

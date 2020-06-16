@@ -110,4 +110,7 @@ for (const file of requiredFunctionFiles) {
     failedCount++;
     console.log(`File ${file} Missing!`)
 }
+if (failedCount == 0) {
+    console.log("No Errors in Found");
+}
 process.exit(failedCount);
