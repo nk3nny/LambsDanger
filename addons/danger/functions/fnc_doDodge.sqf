@@ -11,7 +11,7 @@
  * stance
  *
  * Example:
- * [bob] call lambs_danger_fnc_immediateAction;
+ * [bob] call lambs_danger_fnc_doDodge;
  *
  * Public: No
 */

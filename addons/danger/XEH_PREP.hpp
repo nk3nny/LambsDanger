@@ -7,7 +7,7 @@ PREP(fleeing);
 PREP(fsmAllowAnimation);
 PREP(fsmExitVariables);
 PREP(doHide);
-PREP(immediateAction);
+PREP(doDodge);
 PREP(leaderArtillery);
 PREP(leaderAssault);
 PREP(leaderAssess);
