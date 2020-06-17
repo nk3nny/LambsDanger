@@ -6,7 +6,7 @@
  * Arguments:
  * 0: side being checked <OBJECT>
  * 1: Position checked  <ARRAY>
- * 2: radius being checked within <NUMBER> 
+ * 2: radius being checked within <NUMBER>
  *
  * Return Value:
  * Array
@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_distance", GVAR(minFriendlySuppressionDistance)]];
+params ["_unit", "_pos", ["_distance", 5]];
 if (_distance isEqualTo 0) exitWith {[]};
 private _ignoredSides = (side _unit) call BIS_fnc_enemySides;
 _ignoredSides append [sideUnknown, sideEmpty, sideEnemy, sideLogic, sideFriendly, sideAmbientLife];

@@ -25,7 +25,7 @@ switch (typeName _units) do {
         _units = [_units] call EFUNC(main,findReadyUnits);
     };
     case ("GROUP"): {
-        _units = [leader _units] EFUNC(main,findReadyUnits);
+        _units = [leader _units] call EFUNC(main,findReadyUnits);
     };
 };
 
