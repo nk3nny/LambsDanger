@@ -2,6 +2,7 @@
     Author: joko // Jonas
 */
 const fs = require('fs');
+const EOL = require('os').EOL;
 const path = require('path');
 const xml = require("xml2js");
 const { Console } = require('console');
@@ -14,6 +15,8 @@ var failedCount = 0;
 const stringtableIDs = [];
 const stringtableEntries = [];
 const projectFiles = [];
+
+fs.writeFileSync("duplicated.log", "");
 
 function getDirFiles(p, module) {
     var files = fs.readdirSync(p);
@@ -52,18 +55,25 @@ function getDirFiles(p, module) {
 };
 function ParseString(Keys) {
     for (const entry of Keys) {
-
-        const index = stringtableEntries.indexOf(entry.English[0]);
-        if (index != -1) {
-            console.log(`${entry.$.ID} is a Duplicated string ${stringtableIDs[index]}`);
-            failedCount++;
+        for (const key in entry) {
+            if (key != "$" && entry.hasOwnProperty(key)) {
+                const element = entry[key][0];
+                const index = stringtableEntries.indexOf(element);
+                if (index != -1) {
+                    const log = `${entry.$.ID} is a Duplicated string ${stringtableIDs[index]} : ${key}`;
+                    fs.appendFileSync("duplicated.log", log + EOL);
+                    console.log(log);
+                    failedCount++;
+                }
+                stringtableIDs.push(entry.$.ID);
+                stringtableEntries.push(element);
+            }
         }
-        stringtableIDs.push(entry.$.ID);
-        stringtableEntries.push(entry.English[0]);
+        
     }
     
 }
-getDirFiles("H:\\Git\\ACE3\\addons", "");
+getDirFiles("addons", "");
 
 while (running != 0) {}
 if (failedCount == 0) {
