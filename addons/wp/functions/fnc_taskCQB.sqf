@@ -29,7 +29,14 @@ if !(canSuspend) exitWith {
     _this spawn FUNC(taskCQB);
 };
 // init
-params ["_group", "_pos", ["_radius", TASK_CQB_SIZE], ["_cycle", TASK_CQB_CYCLETIME], ["_area", [], [[]]], ["_useWaypoint", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_radius", TASK_CQB_SIZE, [0]],
+    ["_cycle", TASK_CQB_CYCLETIME, [0]],
+    ["_area", [], [[]]],
+    ["_useWaypoint", false, [false]]
+];
 
 // functions ---
 

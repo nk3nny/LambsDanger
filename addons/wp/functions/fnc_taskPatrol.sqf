@@ -24,7 +24,14 @@
 if (canSuspend) exitWith { [FUNC(taskPatrol), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos",[]], ["_radius", TASK_PATROL_SIZE], ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT], ["_area", [], [[]]], ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos",[], [[]]],
+    ["_radius", TASK_PATROL_SIZE, [0]],
+    ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
+    ["_area", [], [[]]],
+    ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};

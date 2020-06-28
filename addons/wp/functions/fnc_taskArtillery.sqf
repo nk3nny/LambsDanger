@@ -19,7 +19,6 @@
  *
  * Public: No
 */
-
 if ((_this select 0) isEqualType objNull) then {
     [QGVAR(FireArtillery), _this, (_this select 0)] call CBA_fnc_targetEvent;
 } else {

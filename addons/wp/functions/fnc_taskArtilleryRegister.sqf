@@ -16,7 +16,7 @@
 */
 
 // init
-params ["_group"];
+params [["_group", grpNull, [grpNull, objNull]]];
 
 if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 // sort grp

@@ -25,7 +25,14 @@ if !(canSuspend) exitWith {
     _this spawn FUNC(taskHunt);
 };
 // 1. FIND TRACKER
-params ["_group", ["_radius", TASK_HUNT_SIZE], ["_cycle", TASK_HUNT_CYCLETIME], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", TASK_HUNT_PLAYERSONLY]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_radius", TASK_HUNT_SIZE, [0]],
+    ["_cycle", TASK_HUNT_CYCLETIME, [0]],
+    ["_area", [], [[]]],
+    ["_pos", [], [[]]],
+    ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};

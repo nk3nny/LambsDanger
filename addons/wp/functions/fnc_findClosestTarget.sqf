@@ -16,7 +16,13 @@
  * Public: No
 */
 
-params ["_group", ["_radius", 500], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_radius", 500, [0]],
+    ["_area", [], [[]]],
+    ["_pos", [], [[]]],
+    ["_onlyPlayers", true, [false]]
+];
 
 private _groupLeader = leader _group;
 private _sideExclusion = [side _group, civilian, sideUnknown, sideEmpty, sideLogic];

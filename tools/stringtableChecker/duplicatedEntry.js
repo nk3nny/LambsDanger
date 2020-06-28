@@ -52,7 +52,8 @@ function getDirFiles(p, module) {
             });
         }
     }
-};
+}
+
 function ParseString(Keys) {
     for (const entry of Keys) {
         for (const key in entry) {
@@ -69,10 +70,9 @@ function ParseString(Keys) {
                 stringtableEntries.push(element);
             }
         }
-        
     }
-    
 }
+
 getDirFiles("addons", "");
 
 while (running != 0) {}

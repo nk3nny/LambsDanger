@@ -15,10 +15,13 @@
  *
  * Public: No
 */
-params ["_side", "_pos"];
+params [
+    ["_side", sideUnknown, [sideUnknown]],
+    ["_pos", [], [[]]]
+];
 
 private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
-if !(isNil "_pos") then {
+if !(_pos isEqualTo []) then {
     _artillery = _artillery select {
         canFire _x
         && {unitReady _x}

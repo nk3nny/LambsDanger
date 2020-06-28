@@ -29,7 +29,14 @@ if !(canSuspend) exitWith {
 };
 
 // init
-params ["_group", ["_radius", TASK_CREEP_SIZE], ["_cycle", 30], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_radius", TASK_CREEP_SIZE, [0]],
+    ["_cycle", 30, [0]],
+    ["_area", [], [[]]],
+    ["_pos", [], [[]]],
+    ["_onlyPlayers", true, [false]]
+];
 
 // functions ---
 

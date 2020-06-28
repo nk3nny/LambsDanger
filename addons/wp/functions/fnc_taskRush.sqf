@@ -24,7 +24,14 @@ if !(canSuspend) exitWith {
 };
 
 // init
-params ["_group", ["_radius", TASK_RUSH_SIZE], ["_cycle", TASK_RUSH_CYCLETIME], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", TASK_RUSH_PLAYERSONLY]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_radius", TASK_RUSH_SIZE, [0]],
+    ["_cycle", TASK_RUSH_CYCLETIME, [0]],
+    ["_area", [], [[]]],
+    ["_pos", [], [[]]],
+    ["_onlyPlayers", TASK_RUSH_PLAYERSONLY, [false]]
+];
 
 // functions ---
 

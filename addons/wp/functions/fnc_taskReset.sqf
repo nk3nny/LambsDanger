@@ -17,7 +17,7 @@
 
 
 // init
-params ["_group"];
+params [["_group", grpNull, [grpNull, objNull]]];
 
 // sort group
 if (!local _group) exitWith {false};

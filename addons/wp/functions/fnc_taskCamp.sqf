@@ -11,6 +11,8 @@
  * 1: Central position camp should be made, <ARRAY>
  * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
+ * 4: Teleport <BOOL>
+ * 5: Patrol <BOOL>
  *
  * Return Value:
  * none
@@ -21,7 +23,14 @@
  * Public: No
 */
 // init
-params ["_group", ["_pos",[]], ["_range", TASK_CAMP_SIZE], ["_area", [], [[]]], ["_teleport", TASK_CAMP_TELEPORT], ["_patrol", TASK_CAMP_PATROL]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_range", TASK_CAMP_SIZE, [0],
+    ["_area", [], [[]], []],
+    ["_teleport", TASK_CAMP_TELEPORT, [false]],
+    ["_patrol", TASK_CAMP_PATROL, [false]]
+];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
