@@ -17,7 +17,7 @@
  * Example:
  * [bob, 500] spawn lambs_wp_fnc_taskRush;
  *
- * Public: No
+ * Public: Yes
 */
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskRush);

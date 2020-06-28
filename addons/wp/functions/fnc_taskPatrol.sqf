@@ -18,7 +18,7 @@
  * Example:
  * [bob, getPos bob, 500] call lambs_wp_fnc_taskPatrol;
  *
- * Public: No
+ * Public: Yes
 */
 
 if (canSuspend) exitWith { [FUNC(taskPatrol), _this] call CBA_fnc_directCall; };

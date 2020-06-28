@@ -12,7 +12,7 @@
  * Example:
  * [bob] call lambs_wp_fnc_taskReset;
  *
- * Public: No
+ * Public: Yes
 */
 
 

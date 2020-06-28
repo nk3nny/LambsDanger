@@ -19,7 +19,13 @@
  *
  * Public: Yes
 */
-params ["_unit", ["_enemy", objNull, [objNull, []]], ["_range", 15, [0]], ["_sortMode", "ASCEND", [""]], ["_maxResults", 1, [0]]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_enemy", objNull, [objNull, []]],
+    ["_range", 15, [0]],
+    ["_sortMode", "ASCEND", [""]],
+    ["_maxResults", 1, [0]]
+];
 
 _maxResults = floor _maxResults;
 private _ret = [];

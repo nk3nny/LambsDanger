@@ -17,7 +17,11 @@
  * Public: Yes
 */
 
-params ["_unit", ["_range", 200], ["_units", []]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_range", 200, [0]],
+    ["_units", [], [[]]]
+];
 
 if (_units isEqualTo []) then {
     _units = units _unit;

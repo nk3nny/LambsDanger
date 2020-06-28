@@ -19,7 +19,7 @@
  * Example:
  * [bob, 500] spawn lambs_wp_fnc_taskHunt;
  *
- * Public: No
+ * Public: Yes
 */
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskHunt);

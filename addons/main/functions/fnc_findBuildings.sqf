@@ -17,7 +17,12 @@
  *
  * Public: Yes
 */
-params ["_unit", ["_range", 100], ["_useHousePos", false], ["_onlyIndoor", false]];
+params [
+    ["_unit", objNull, [objNull, []]],
+    ["_range", 100, [0]],
+    ["_useHousePos", false, [false]],
+    ["_onlyIndoor", false, [false]]
+];
 
 // houses
 private _houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];

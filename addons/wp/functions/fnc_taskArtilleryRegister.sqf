@@ -12,7 +12,7 @@
  * Example:
  * [group bob] call lambs_wp_fnc_taskArtilleryRegister;
  *
- * Public: No
+ * Public: Yes
 */
 
 // init

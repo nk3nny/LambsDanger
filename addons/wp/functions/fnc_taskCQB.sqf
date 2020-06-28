@@ -22,7 +22,7 @@
  * Example:
  * [bob, getPos angryJoe, 50] spawn lambs_wp_fnc_taskCQB;
  *
- * Public: No
+ * Public: Yes
 */
 
 if !(canSuspend) exitWith {

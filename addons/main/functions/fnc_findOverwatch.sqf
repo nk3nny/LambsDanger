@@ -7,11 +7,11 @@
  * It is possible that this function does not Generate any Posisions and Returns a Empty Array!
  *
  * Arguments:
- * 0: Target Position <Vector3>
- * 1: Maximum distance from Target in meters <Vector3>
- * 2: Minimum distance from Target in meters <Number>
- * 3: Minimum height in relation to Target in meters <Number>
- * 4: Position to start looking from <Number>
+ * 0: Target Position <ARRAY>
+ * 1: Maximum distance from Target in meters <NUMBER>
+ * 2: Minimum distance from Target in meters <NUMBER>
+ * 3: Minimum height in relation to Target in meters <NUMBER>
+ * 4: Position to start looking from <ARRAY>
  *
  * Return Value:
  * Position of a Possible Overwatch Position
@@ -24,7 +24,13 @@
 scriptName QGVAR(findOverwatch);
 scopeName QGVAR(findOverwatch);
 
-params ["_targetPos", "_maxRange", "_minRange", "_minHeight", "_centerPos"];
+params [
+    ["_targetPos", [0, 0, 0], [[]]],
+    ["_maxRange", 50, [0]],
+    ["_minRange", 10, [0]],
+    ["_minHeight", 8, [0]],
+    ["_centerPos", [0,0,0], [[]]]
+];
 private _refObj = nearestObject [_targetPos, "All"];
 private _result = [];
 private _selectedPositions = [];

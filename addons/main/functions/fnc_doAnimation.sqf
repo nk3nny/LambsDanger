@@ -20,9 +20,13 @@
  * Example:
  * [player, "AmovPercMstpSnonWnonDnon_exerciseKata", 1] call lambs_main_fnc_doAnimation
  *
- * Public: No
+ * Public: Yes
 */
-params ["_unit", "_animation", ["_priority", 0]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_animation", "", [""]],
+    ["_priority", 0, [0]]
+];
 
 // switchMove "" no longer works in dev 1.37
 if (_animation == "") then {

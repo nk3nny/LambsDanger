@@ -22,7 +22,7 @@
  * Example:
  * [bob, bob, 50] call lambs_wp_fnc_taskGarrison;
  *
- * Public: No
+ * Public: Yes
 */
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 

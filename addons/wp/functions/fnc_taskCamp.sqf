@@ -20,7 +20,7 @@
  * Example:
  * [bob, getPos bob, 50] call lambs_wp_fnc_taskCamp;
  *
- * Public: No
+ * Public: Yes
 */
 // init
 params [

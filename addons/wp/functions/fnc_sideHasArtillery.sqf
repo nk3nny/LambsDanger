@@ -13,7 +13,7 @@
  * Example:
  * [side bob] call lambs_wp_fnc_sideHasArtillery
  *
- * Public: No
+ * Public: Yes
 */
 params [
     ["_side", sideUnknown, [sideUnknown]],
