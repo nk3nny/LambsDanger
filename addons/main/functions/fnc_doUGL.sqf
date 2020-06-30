@@ -16,7 +16,7 @@
 */
 
 params [
-    ["_unit", objNull, [grpNull, objNull, []]],
+    ["_units", objNull, [grpNull, objNull, []]],
     ["_pos", [0, 0, 0], [[]]],
     ["_type", "shotIlluminating", [""]]
 ];

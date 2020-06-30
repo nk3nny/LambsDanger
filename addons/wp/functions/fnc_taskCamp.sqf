@@ -26,7 +26,7 @@
 params [
     ["_group", grpNull, [grpNull, objNull]],
     ["_pos", [0, 0, 0]],
-    ["_range", TASK_CAMP_SIZE, [0],
+    ["_range", TASK_CAMP_SIZE, [0]],
     ["_area", [], [[]], []],
     ["_teleport", TASK_CAMP_TELEPORT, [false]],
     ["_patrol", TASK_CAMP_PATROL, [false]]
