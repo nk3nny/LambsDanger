@@ -54,8 +54,8 @@ switch (_mode) do {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {
-                        params ["", "_logic"];
-                        deleteVehicle _logic;
+                        //params ["", "_logic"];
+                        //deleteVehicle _logic;
                     }, [_groups, _logic]
                 ] call EFUNC(main,showDialog);
             } else {
@@ -78,10 +78,11 @@ switch (_mode) do {
                         if !(local _group) then {
                             _target = getPos _target;
                         };
-                        [_group, _target, _radius, _cycle, nil, false] spawn FUNC(taskCQB);
+                        [_group, _target, _radius, _cycle, nil, false] remoteExec [QFUNC(taskCQB), leader _group];
                         if !(_logic isEqualTo _target) then {
                             deleteVehicle _logic;
-                        };                    }, {
+                        };
+                    }, {
                         params ["", "_logic"];
                         deleteVehicle _logic;
                     }, {

@@ -64,7 +64,7 @@ switch (_mode) do {
 
             private _area = _logic getVariable ["objectarea",[]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), 70];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
             private _playerOnly = _logic getVariable [QGVAR(PlayerOnly), true];
             {

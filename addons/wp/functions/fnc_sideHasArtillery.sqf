@@ -11,7 +11,7 @@
  * BOOL
  *
  * Example:
- * [side bob] call lambs_danger_sideHasArtillery
+ * [side bob] call lambs_wp_fnc_sideHasArtillery
  *
  * Public: No
 */

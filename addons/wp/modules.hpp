@@ -159,6 +159,15 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             condition = "0";
             typeName = "BOOL";
         };
+        class GVAR(Patrol): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Patrol_Tooltip);
+            property = QGVAR(Patrol);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
         class ModuleDescription: ModuleDescription {};
     };
 
@@ -258,6 +267,15 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             condition = "0";
             typeName = "BOOL";
         };
+        class GVAR(Patrol): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Patrol_Tooltip);
+            property = QGVAR(Patrol);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+        };
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {
@@ -316,8 +334,8 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
     displayName = CSTRING(Module_TaskReset_DisplayName);
     category = "Lambs_Danger_WP_Cat";
     function = QFUNC(moduleReset);
-    icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
-    portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
+    icon = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
+    portrait = "\A3\3DEN\Data\CfgWaypoints\Cycle_ca.paa";
     class Attributes: AttributesBase {
         class ModuleDescription: ModuleDescription {};
     };
@@ -366,7 +384,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = "15";
+            defaultValue = "30";
             unique = 0;
             validate = "none";
             condition = "0";
@@ -474,7 +492,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = "4";
+            defaultValue = "15";
             unique = 0;
             validate = "none";
             condition = "0";

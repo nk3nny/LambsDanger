@@ -21,7 +21,7 @@ private _vehicle = vehicle _unit;
 
 // too close + high speed + height over ground
 if (
-    _unit distance _pos < GVAR(minSuppression_range)
+    _unit distance2d _pos < GVAR(minSuppression_range)
     || {terrainIntersectASL [eyePos _unit, AGLtoASL _pos]}
     || {speed _vehicle > 12}
     || {(_pos select 2) > 45}
