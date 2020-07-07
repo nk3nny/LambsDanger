@@ -12,7 +12,7 @@
  * available units (only infantry)
  *
  * Example:
- * [bob, 200] call lambs_danger_fnc_findReadyUnits;
+ * [bob, 200] call lambs_main_fnc_findReadyUnits;
  *
  * Public: Yes
 */

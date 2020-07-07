@@ -10,7 +10,7 @@
  * available units
  *
  * Example:
- * [units bob] call lambs_danger_fnc_doUGL;
+ * [units bob] call lambs_main_fnc_doUGL;
  *
  * Public: Yes
 */

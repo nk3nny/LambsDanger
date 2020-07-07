@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_doSmoke;
+ * [bob, getpos angryJoe] call lambs_main_fnc_doSmoke;
  *
  * Public: Yes
 */

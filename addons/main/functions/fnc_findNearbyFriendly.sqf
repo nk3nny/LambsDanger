@@ -12,7 +12,7 @@
  * Array
  *
  * Example:
- * [bob, getpos angryBob] call lambs_danger_fnc_nearbyFriendly
+ * [bob, getpos angryBob] call lambs_main_fnc_nearbyFriendly
  *
  * Public: Yes
 */

@@ -10,7 +10,7 @@
  * unit indoor or not
  *
  * Example:
- * [bob] call lambs_danger_fnc_inside;
+ * [bob] call lambs_main_fnc_inside;
  *
  * Public: No
 */

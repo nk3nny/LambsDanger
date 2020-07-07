@@ -13,7 +13,7 @@
  * Array of buildings or house positions
  *
  * Example:
- * [bob, 100, true, true] call lambs_danger_fnc_findBuildings;
+ * [bob, 100, true, true] call lambs_main_fnc_findBuildings;
  *
  * Public: Yes
 */
