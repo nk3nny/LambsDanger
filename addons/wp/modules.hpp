@@ -14,7 +14,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             property = QGVAR(Side);
             defaultValue = "0";
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
             control = QGVAR(Side);
@@ -26,7 +26,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             property = QGVAR(MainSalvo);
             defaultValue = QUOTE(TASK_ARTILLERY_ROUNDS);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -36,7 +36,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             property = QGVAR(Spread);
             defaultValue = QUOTE(TASK_ARTILLERY_SPREAD);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -113,7 +113,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             property = QGVAR(DistanceThreshold);
             defaultValue = QUOTE(TASK_ASSAULT_DISTANCETHRESHOLD);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -123,7 +123,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             property = QGVAR(CycleTime);
             defaultValue = QUOTE(TASK_ASSAULT_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -200,7 +200,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             property = QGVAR(CycleTime);
             defaultValue = QUOTE(TASK_CQB_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -243,7 +243,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             property = QGVAR(ExitConditions);
             defaultValue = QUOTE(TASK_GARRISON_EXITCONDITIONS);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
             control = QGVAR(ExitConditions);
@@ -306,7 +306,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             property = QGVAR(WaypointCount);
             defaultValue = QUOTE(TASK_PATROL_WAYPOINTCOUNT);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -386,7 +386,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             property = QGVAR(CycleTime);
             defaultValue = QUOTE(TASK_CREEP_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -440,7 +440,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             property = QGVAR(CycleTime);
             defaultValue = QUOTE(TASK_HUNT_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -492,9 +492,9 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_RUSH_CYCLETIME)
+            defaultValue = QUOTE(TASK_RUSH_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
