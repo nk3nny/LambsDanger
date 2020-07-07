@@ -1262,26 +1262,25 @@ class FSM
                          "// call artillery if available " \n
                          "if (lambs_danger_Loaded_WP && {[side _this] call lambs_WP_fnc_sideHasArtillery}) then {" \n
                          "" \n
+                         "	private _target = (_dangerMode select 1) select 6;" \n
                          "	// do artillery " \n
-                         "	[_this, (_dangerMode select 1) select 6] call lambs_danger_fnc_leaderArtillery; " \n
+                         "	[_this, _target] call lambs_danger_fnc_leaderArtillery; " \n
                          "" \n
                          "	// clean array " \n
                          "	[_this, _evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
-                         "}; " \n
+                         "	// debug " \n
+                         "	if (lambs_main_debug_FSM) then {" \n
                          "" \n
-                         "// debug " \n
-                         "if (lambs_main_debug_FSM) then {" \n
+                         "		// message " \n
+                         "		format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
-                         "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_main_fnc_debugLog;" \n
+                         "		// marker " \n
+                         "		[_this, format [""%1 - LEADER ACTION -- Call artillery!"",side _this],_this call lambs_main_fnc_debugMarkerColor,""hd_warning""] call lambs_main_fnc_dotMarker; " \n
+                         "		[_target, ""Artillery target"",_this call lambs_main_fnc_debugMarkerColor,""hd_destroy""] call lambs_main_fnc_dotMarker;" \n
                          "" \n
-                         "	// marker " \n
-                         "	[_this,format [""%1 - LEADER ACTION -- Call artillery!"",side _this],_this call lambs_main_fnc_debugMarkerColor,""hd_warning""] call lambs_main_fnc_dotMarker; " \n
-                         "	[_target,""Artillery target"",_this call lambs_main_fnc_debugMarkerColor,""hd_destroy""] call lambs_main_fnc_dotMarker;" \n
-                         "" \n
-                         "};" \n
-                         ""/*%FSM</STATEINIT""">*/;
+                         "	};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
