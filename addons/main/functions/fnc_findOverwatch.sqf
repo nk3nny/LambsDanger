@@ -17,7 +17,7 @@
  * Position of a Possible Overwatch Position
  *
  * Example:
- * [getPos bob, 10, 50, 8, getPos jonny] call lambs_danger_fnc_findOverwatch;
+ * [getPos bob, 10, 50, 8, getPos jonny] call lambs_main_fnc_findOverwatch;
  *
  * Public: Yes
 */

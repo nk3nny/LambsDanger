@@ -15,7 +15,7 @@
  * Stance can be "UP", "MIDDLE" or "DOWN"
  *
  * Example:
- * [bob, angryJoe, 50] call lambs_danger_fnc_findCover
+ * [bob, angryJoe, 50] call lambs_main_fnc_findCover
  *
  * Public: Yes
 */

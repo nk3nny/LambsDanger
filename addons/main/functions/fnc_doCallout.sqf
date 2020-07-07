@@ -13,7 +13,7 @@
  * Nothing
  *
  * Example:
- * [bob, "Normal", "ManDown", 100] call lambs_danger_fnc_doCallout;
+ * [bob, "Normal", "ManDown", 100] call lambs_main_fnc_doCallout;
  *
  * Public: Yes
 */

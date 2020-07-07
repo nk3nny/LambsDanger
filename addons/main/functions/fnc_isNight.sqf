@@ -10,7 +10,7 @@
  * boolean
  *
  * Example:
- * [bob] call lambs_danger_fnc_isNight;
+ * [bob] call lambs_main_fnc_isNight;
  *
  * Public: No
 */
