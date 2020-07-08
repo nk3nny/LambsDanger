@@ -34,9 +34,9 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCQB_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
-                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21, 2],
-                        [LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName), "BOOLEAN", LSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip), false]
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], TASK_CQB_SIZE, 2],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], TASK_CQB_CYCLETIME, 2],
+                        [LSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName), "BOOLEAN", LSTRING(Module_TaskCQB_DeleteOnStartUp_Tooltip), TASK_CQB_DELETEONSTARTUP]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -68,8 +68,8 @@ switch (_mode) do {
                 [LSTRING(Module_TaskCQB_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], 50],
-                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], 21]
+                        [LSTRING(Module_TaskCQB_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_Radius_ToolTip), [10, 500], [2, 1], TASK_CQB_SIZE],
+                        [LSTRING(Module_TaskCQB_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskCQB_CycleTime_Tooltip), [1, 300], [1, 0.5], TASK_CQB_CYCLETIME]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
@@ -95,10 +95,10 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_CQB_SIZE, TASK_CQB_SIZE]];
             private _radius = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 4];
-            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), false];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_CQB_CYCLETIME];
+            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), TASK_CQB_DELETEONSTARTUP];
 
             {
                 private _target = _logic;

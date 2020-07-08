@@ -36,9 +36,9 @@ switch (_mode) do {
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
                     [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), [west, east, independent]],
-                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [2, 1], 6, 0],
-                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [2, 1], 75, 2],
-                    [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), false]
+                    [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [2, 1], TASK_ARTILLERY_ROUNDS, 0],
+                    [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [2, 1], TASK_ARTILLERY_SPREAD, 2],
+                    [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), TASK_ARTILLERY_SKIPCHECKROUNDS]
                 ], {
                     params ["_data", "_args"];
                     _args params ["_logic", "_fnc_callArtillery"];
@@ -56,9 +56,9 @@ switch (_mode) do {
             ] call EFUNC(main,showDialog);
         } else {
             private _sideIndex = _logic getVariable [QGVAR(Side), 0];
-            private _salvo = _logic getVariable [QGVAR(MainSalvo), 6];
-            private _spread = _logic getVariable [QGVAR(Spread), 75];
-            private _skipCheckround = _logic getVariable [QGVAR(SkipCheckRounds), false];
+            private _salvo = _logic getVariable [QGVAR(MainSalvo), TASK_ARTILLERY_ROUNDS];
+            private _spread = _logic getVariable [QGVAR(Spread), TASK_ARTILLERY_SPREAD];
+            private _skipCheckround = _logic getVariable [QGVAR(SkipCheckRounds), TASK_ARTILLERY_SKIPCHECKROUNDS];
             [[west, east, independent] select _sideIndex, _salvo, _spread, _skipCheckround, _logic] call _fnc_callArtillery;
 
             deleteVehicle _logic;

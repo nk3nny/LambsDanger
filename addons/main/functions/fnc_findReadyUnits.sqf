@@ -12,12 +12,16 @@
  * available units (only infantry)
  *
  * Example:
- * [bob, 200] call lambs_danger_fnc_findReadyUnits;
+ * [bob, 200] call lambs_main_fnc_findReadyUnits;
  *
  * Public: Yes
 */
 
-params ["_unit", ["_range", 200], ["_units", []]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_range", 200, [0]],
+    ["_units", [], [[]]]
+];
 
 if (_units isEqualTo []) then {
     _units = units _unit;
@@ -28,7 +32,7 @@ _units = _units select {
     //unitReady _x
     _x distance2D _unit < _range
     && { isNull objectParent _x }
-    && { _x call FUNC(isAlive) }
+    && { _x call EFUNC(main,isAlive) }
     && { !(_x getVariable [QGVAR(forceMove), false]) }
     && { !isPlayer _x }
     && { !fleeing _x }

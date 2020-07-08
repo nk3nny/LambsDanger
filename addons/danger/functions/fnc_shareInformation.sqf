@@ -27,8 +27,8 @@ if (
     || {GVAR(radio_disabled)}
 ) exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Share Information", EGVAR(main,debug_functions)];
 
 // range
 ([_unit, _range, _override] call FUNC(shareInformationRange)) params ["_unit", "_range"];
@@ -55,21 +55,21 @@ private _knowsAbout = _unit knowsAbout _target;
     };
 } forEach _groups;
 
-[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
+[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call EFUNC(main,eventCallback);
 
 // play animation
-if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call FUNC(gesture);};
+if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call EFUNC(main,doGesture);};
 
 // debug
-if (GVAR(debug_functions)) then {
+if (EGVAR(main,debug_functions)) then {
 
     // debug message
-    format ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call FUNC(debugLog);
+    format ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call EFUNC(main,debugLog);
 
     // debug marker
-    private _m = [_unit, "", _unit call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
-    private _mt = [_target, "target", _target call FUNC(debugMarkerColor),"mil_dot"] call FUNC(dotMarker);
-    private _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
+    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor),"mil_dot"] call EFUNC(main,dotMarker);
+    private _mt = [_target, "target", _target call EFUNC(main,debugMarkerColor),"mil_dot"] call EFUNC(main,dotMarker);
+    private _zm = [_unit, [_range,_range], _unit call EFUNC(main,debugMarkerColor), "Border"] call EFUNC(main,zoneMarker);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call CBA_fnc_waitAndExecute;
 };
 

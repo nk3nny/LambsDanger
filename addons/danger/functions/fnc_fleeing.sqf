@@ -28,12 +28,12 @@ if (
 private _onFoot = isNull (objectParent _unit);
 
 // variable
-_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 
 // this could have an event attached to it too - nkenny
 
-[QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
+[QGVAR(OnFleeing), [_unit, group _unit]] call EFUNC(main,eventCallback);
 
 // Abandon vehicles in need!
 if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
@@ -45,7 +45,7 @@ if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicl
 if (!_onFoot) exitWith {};
 
 // play gesture
-if (RND(0.85)) then {[_unit, ["GestureCover", "GestureCeaseFire"]] call FUNC(gesture);};
+if (RND(0.85)) then {[_unit, ["GestureCover", "GestureCeaseFire"]] call EFUNC(main,doGesture);};
 // ideally find better gestures or animations to represent things. But. It is what it is. - nkenny
 
 // indoor just hide
@@ -60,11 +60,11 @@ if (getSuppression _unit < 0.2 && {lineIntersects [eyepos _unit, (eyepos _unit) 
 
     // stance
     //_unit setUnitPosWeak selectRandom ["DOWN","DOWN","MIDDLE"]; <-- Seems to have little effect
-    //[_unit, ["AdjustB"], true] call FUNC(gesture);
+    //[_unit, ["AdjustB"], true] call EFUNC(main,doGesture);
 };
 
 // nearBuildings
-private _buildings = [_unit, 12, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, 12, true, true] call EFUNC(main,findBuildings);
 if !(_buildings isEqualTo []) exitWith {
 
     // pick a random building spot and move!
@@ -93,7 +93,7 @@ if (_unit distance2D _enemy < 120) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call FUNC(debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
 
 // end
 true

@@ -23,14 +23,14 @@ _inCQC = _inCQC select {_x distance2d _unit < _range + 25};
 
 // buildings present? ignore
 if (count _inCQC > 0) exitWith {};
-if (!(_target call FUNC(isAlive))) then {_target = _unit findNearestEnemy _unit;};
+if (!(_target call EFUNC(main,isAlive))) then {_target = _unit findNearestEnemy _unit;};
 
 // update
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader CQB", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader CQB", EGVAR(main,debug_functions)];
 
 // define buildings
-private _buildings = [_unit, _range] call FUNC(findBuildings);
+private _buildings = [_unit, _range] call EFUNC(main,findBuildings);
 
 // sort buildings near targets
 private _distance = _unit distance2d _target;

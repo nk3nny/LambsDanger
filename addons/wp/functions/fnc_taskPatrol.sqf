@@ -18,13 +18,20 @@
  * Example:
  * [bob, getPos bob, 500] call lambs_wp_fnc_taskPatrol;
  *
- * Public: No
+ * Public: Yes
 */
 
 if (canSuspend) exitWith { [FUNC(taskPatrol), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]], ["_moveWaypoints", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos",[], [[]]],
+    ["_radius", TASK_PATROL_SIZE, [0]],
+    ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
+    ["_area", [], [[]]],
+    ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -102,8 +109,8 @@ if (_moveWaypoints) then {
 };
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

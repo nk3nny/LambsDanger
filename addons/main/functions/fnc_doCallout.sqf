@@ -13,17 +13,22 @@
  * Nothing
  *
  * Example:
- * [bob, "Normal", "ManDown", 100] call lambs_danger_fnc_doCallout;
+ * [bob, "Normal", "ManDown", 100] call lambs_main_fnc_doCallout;
  *
- * Public: No
+ * Public: Yes
 */
 
 if (GVAR(disableAICallouts)) exitWith {};
 
 scopeName QGVAR(doCallout_main);
-params [["_unit", objNull, [objNull]], ["_behavior", ""], ["_callout", "micout"], ["_distance", 100]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_behavior", "", [""]],
+    ["_callout", "micout", [""]],
+    ["_distance", 100, [0]]
+];
 
-if (isPlayer _unit || {!(_unit call FUNC(isAlive))}) exitWith {};
+if (isPlayer _unit || {!(_unit call EFUNC(main,isAlive))}) exitWith {};
 
 // check timing
 private _time = _unit getVariable [QGVAR(calloutTime), 0];

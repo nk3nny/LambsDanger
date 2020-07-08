@@ -19,13 +19,20 @@
  * Example:
  * [bob, 500] spawn lambs_wp_fnc_taskHunt;
  *
- * Public: No
+ * Public: Yes
 */
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskHunt);
 };
 // 1. FIND TRACKER
-params ["_group", ["_radius", 500], ["_cycle", 60 + random 30], ["_area", [], [[]]], ["_pos", [], [[]]], ["_onlyPlayers", true]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_radius", TASK_HUNT_SIZE, [0]],
+    ["_cycle", TASK_HUNT_CYCLETIME, [0]],
+    ["_area", [], [[]]],
+    ["_pos", [], [[]]],
+    ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -67,7 +74,7 @@ waitUntil {
         _group enableIRLasers true;
 
         // debug
-        if (EGVAR(danger,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(danger,debugLog);};
+        if (EGVAR(main,debug_functions)) then {format ["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance _target)] call EFUNC(main,debugLog);};
 
         // flare
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };
@@ -83,7 +90,7 @@ waitUntil {
 
     // WAIT FOR IT! / end
     sleep _cycle;
-    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+    ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)
 
 };
 

@@ -45,12 +45,12 @@ _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultipl
 // final range check
 if (!_override && {_distance < GVAR(minSuppression_range)}) exitWith {false};
 
-private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(nearbyFriendly);
+private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // Callout!
 if (RND(0.4) && {count units _unit > 1}) then {
-    [_unit, "Combat", "suppress", 75] call FUNC(doCallout);
+    [_unit, "Combat", "suppress", 75] call EFUNC(main,doCallout);
 };
 
 // do it!
@@ -58,8 +58,8 @@ _unit forceSpeed 0;
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire
-_unit setVariable [QGVAR(currentTask), "Suppressive Fire", GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Suppressive Fire", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 
 // extend suppressive fire for machineguns
 if (_unit ammo (currentWeapon _unit) > 32) then {
@@ -67,11 +67,11 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call EFUNC(main,debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
-    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
 };
 

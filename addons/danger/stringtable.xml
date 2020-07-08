@@ -53,10 +53,6 @@
             <English>Settings CQB Formations</English>
             <German>CQB-Formationseinstellungen</German>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_Debug">
-            <English>Debug</English>
-            <German>Debug</German>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
             <English>Disable danger.fsm for player group</English>
             <German>Danger.fsm für Spielergruppe deaktivieren</German>
@@ -121,14 +117,6 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares_ToolTip">
             <English>Toggles AI group ability to autonomously use flares for illumation at nighttime unless NVGs are available or unit is in stealth mode</English>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures">
-            <English>Disable unit hand gestures</English>
-            <German>Handzeichen deaktivieren</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableHandGestures_Tooltip">
-            <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
-            <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
             <English>Disable unit immediate actions</English>
             <German>Sofortige KI-Aktionen ausschalten</German>
@@ -144,14 +132,6 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing_ToolTip">
             <English>Toggles enhanced fleeing function for units.</English>
             <German>Schaltet das verbesserte Fliehen für Einheiten aus.</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts">
-            <English>Disable unit callouts</English>
-            <German>Rufe ausschalten</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableCallouts_ToolTip">
-            <English>Toggles extra unit callouts based on situations</English>
-            <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
@@ -250,46 +230,6 @@
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
             <German>Einheiten die in CQB-Formationen gesetzt werden, werden bei Feindkontakt methodisch Häuser säubern.</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugFSM">
-            <English>Debug FSM</English>
-            <German>Debug FSM</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugFSM_ToolTip">
-            <English>Shows FSM debug messages</English>
-            <German>Zeigt FSM Debug-Meldungen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions">
-            <English>Debug Functions</English>
-            <German>Debug Funktionen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugFunctions_ToolTip">
-            <English>Shows Function debug messages</English>
-            <German>Zeigt Debug-Meldungen für Funktionen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugCiv">
-            <English>Debug Civ</English>
-            <German>Debug Zivilisten</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugCiv_ToolTip">
-            <English>Shows FSM debug messages for civilians</English>
-            <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugDraw">
-            <English>Debug Draw</English>
-            <German>Debug Zeichnen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugDraw_ToolTip">
-            <English>Draws 3d Text over Units with AI Informations</English>
-            <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest">
-            <English>Debug Draw Expected Destination</English>
-            <German>Debug Erwartete Ankuftsposition zeichnen</German>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DebugDrawExpDest_ToolTip">
-            <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
-            <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
             <English>AI Disabled</English>

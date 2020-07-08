@@ -17,7 +17,7 @@ params ["_group", "_pos", ["_radius", 0]];
 
 // get radius
 _radius = waypointCompletionRadius [_group, currentwaypoint _group];
-if (_radius isEqualTo 0) then { _radius = 200; };
+if (_radius isEqualTo 0) then { _radius = TASK_PATROL_SIZE; };
 
 // get other settings
 

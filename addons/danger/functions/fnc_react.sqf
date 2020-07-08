@@ -29,7 +29,7 @@ private _range = linearConversion [ 0, 150, (_unit distance2D _pos), 12, 35, tru
 private _stealth = behaviour _unit isEqualTo "STEALTH";
 
 // drop down!
-private _stance = [selectRandom ["DOWN", "DOWN", "MIDDLE"], "MIDDLE"] select (_unit distance2D (nearestBuilding _unit) < _range || {_unit call FUNC(indoor)});
+private _stance = [selectRandom ["DOWN", "DOWN", "MIDDLE"], "MIDDLE"] select (_unit distance2D (nearestBuilding _unit) < _range || {_unit call EFUNC(main,isIndoor)});
 _unit setUnitPos _stance;
 
 // sort enemy
@@ -39,7 +39,7 @@ if (isNull _enemy) then {_enemy = _unit findNearestEnemy _pos;};
 [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
 
 // leaders gestures
-if (count units _unit > 1) then {[formationLeader _unit, ["gestureFreeze"]] call FUNC(gesture);};
+if (count units _unit > 1) then {[formationLeader _unit, ["gestureFreeze"]] call EFUNC(main,doGesture);};
 
 // Callout
 _enemy = vehicle _enemy;
@@ -48,7 +48,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
 } else {
     "contact"
 };
-[ [formationLeader _unit, _unit] select (RND(0.33)), ["Combat", "Stealth"] select _stealth, _callout, 100] call FUNC(doCallout);
+[ [formationLeader _unit, _unit] select (RND(0.33)), ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
 
 // stealth ~ exits early to retain sneakiness or speed
 if (_stealth || {speedMode _unit isEqualTo "FULL"}) exitWith {
@@ -56,13 +56,13 @@ if (_stealth || {speedMode _unit isEqualTo "FULL"}) exitWith {
 };
 
 // get units
-private _units = [_unit] call FUNC(findReadyUnits);
+private _units = [_unit] call EFUNC(main,findReadyUnits);
 _units = _units select { currentCommand _x isEqualTo "" };
 
 // leaders get their subordinates to hide!
-private _buildings = [_unit, _range + 5, true, true] call FUNC(findBuildings);
+private _buildings = [_unit, _range + 5, true, true] call EFUNC(main,findBuildings);
 {
-    [_x, _pos, _range, _buildings] call FUNC(hideInside);
+    [_x, _pos, _range, _buildings] call FUNC(doHide);
 } foreach _units;
 
 // caller slowdown!

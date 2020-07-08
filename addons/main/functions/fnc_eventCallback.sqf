@@ -11,7 +11,7 @@
  * none
  *
  * Example:
- * ["MyAwesomeEventname", "MyAwsomeEventParameter110011"] call lambs_danger_fnc_eventCallback;
+ * ["MyAwesomeEventname", "MyAwsomeEventParameter110011"] call lambs_main_fnc_eventCallback;
  *
  * Public: No
 */

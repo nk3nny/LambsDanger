@@ -10,7 +10,7 @@
  * String value with texture colour
  *
  * Example:
- * [_bob] call lambs_danger_fnc_debugMarkerColor;
+ * [_bob] call lambs_main_fnc_debugMarkerColor;
  *
  * Public: No
 */

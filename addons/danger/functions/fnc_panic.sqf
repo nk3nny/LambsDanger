@@ -20,22 +20,22 @@ params ["_unit"];
 if (_unit distance (_unit findNearestEnemy _unit) < 35) exitWith {3};
 if ((_unit getVariable ["ace_captives_isHandcuffed", false]) || {_unit getVariable ["ace_captives_issurrendering", false]}) exitWith {22};
 //if (!(_unit checkAIFeature "PATH") || {!(_unit checkAIFeature "MOVE")}) exitWith {};
-[QGVAR(OnPanic), [_unit, group _unit]] call FUNC(eventCallback);
+[QGVAR(OnPanic), [_unit, group _unit]] call EFUNC(main,eventCallback);
 
 // settings
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Panic", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Panic", EGVAR(main,debug_functions)];
 
 // debug
-if (GVAR(debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call FUNC(debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call EFUNC(main,debugLog);};
 
 // callout
 if (RND(0.4)) then {
-    [_unit, "Stealth", "panic", 55] call FUNC(doCallout);
+    [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
 };
 
 // indoor -- gesture
-if (RND(0.8) || {_unit call FUNC(indoor)}) exitWith {
+if (RND(0.8) || {_unit call EFUNC(main,isIndoor)}) exitWith {
 
     // action
     _unit forceSpeed 0;
@@ -56,7 +56,7 @@ if (RND(0.5)) exitWith {
     // action
     _unit doWatch objNull;
     _unit setUnitPos "DOWN";
-    [_unit, ["FastB", "FastLB", "FastRB"], true] call FUNC(gesture);
+    [_unit, ["FastB", "FastLB", "FastRB"], true] call EFUNC(main,doGesture);
 
     // return
     6 + random 6;
@@ -66,7 +66,7 @@ if (RND(0.5)) exitWith {
 
 // action
 _unit doWatch objNull;
-[_unit, _unit getPos [100, getDir _unit], 55] call FUNC(hideInside);
+[_unit, _unit getPos [100, getDir _unit], 55] call FUNC(doHide);
 
 // chance action
 _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];
@@ -78,7 +78,7 @@ if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
 
 // chance to randomly wave
 if (RND(0.4)) then {
-    [_unit, ["GestureCover"]] call FUNC(gesture);
+    [_unit, ["GestureCover"]] call EFUNC(main,doGesture);
 };
 
 // return

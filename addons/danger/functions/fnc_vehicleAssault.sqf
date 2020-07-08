@@ -37,13 +37,13 @@ if (
 
 // define buildings
 if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
+    _buildings = [_pos, 28, false, false] call EFUNC(main,findBuildings);
     //_buildings = _buildings select {!(terrainIntersect [getPos _unit, getPos _x])};
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
 
 // find closest building
 if !(_buildings isEqualTo []) then {
@@ -70,7 +70,7 @@ _vehicle doWatch ASLtoAGL _pos;
 if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
 
 // check for friendlies
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call FUNC(nearbyFriendly);
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // suppression
@@ -94,11 +94,11 @@ if (_cannon) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call EFUNC(main,debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
-    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
 
 };

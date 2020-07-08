@@ -16,15 +16,16 @@ include = ["./include"]
 key_name = "{{prefix}}_danger_{{version}}"
 authority = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
 
-prebuild = [
+check = [
     "!version_set"
 ]
+
 postbuild = [
     "!version_unset"
 ]
 
 releasebuild = [
-    "@zip @LambsDanger"
+    "@zip @LambsDanger_{{semver.major}}_{{semver.minor}}_{{semver.patch}}"
 ]
 
 [header_exts]

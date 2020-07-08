@@ -10,12 +10,16 @@
  * available units
  *
  * Example:
- * [units bob] call lambs_danger_fnc_doUGL;
+ * [units bob] call lambs_main_fnc_doUGL;
  *
- * Public: No
+ * Public: Yes
 */
 
-params ["_units", ["_pos", []], ["_type", "shotIlluminating"]];
+params [
+    ["_units", objNull, [grpNull, objNull, []]],
+    ["_pos", [0, 0, 0], [[]]],
+    ["_type", "shotIlluminating", [""]]
+];
 
 // single unit
 if (_units isEqualType objNull) then {_units = [_units];};

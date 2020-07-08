@@ -12,12 +12,16 @@
  * boolean
  *
  * Example:
- * [bob, getpos angryJoe] call lambs_danger_fnc_doSmoke;
+ * [bob, getpos angryJoe] call lambs_main_fnc_doSmoke;
  *
- * Public: No
+ * Public: Yes
 */
 
-params ["_unit", ["_pos", []], ["_type", 6]];
+params [
+    ["_unit", objNull, [grpNull, objNull, []]],
+    ["_pos", [0, 0, 0], [[]]],
+    ["_type", 6, [0]]
+];
 
 // single unit
 if (_unit isEqualType []) then {_unit = selectRandom _unit;};

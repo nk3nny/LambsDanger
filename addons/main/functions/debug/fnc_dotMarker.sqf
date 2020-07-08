@@ -13,7 +13,7 @@
  * marker
  *
  * Example:
- * [bob, "Here is bob","colorRED","mil_dot"] call lambs_danger_fnc_dotMarker;
+ * [bob, "Here is bob","colorRED","mil_dot"] call lambs_main_fnc_dotMarker;
  *
  * Public: Yes
 */

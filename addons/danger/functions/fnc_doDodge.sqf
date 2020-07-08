@@ -11,7 +11,7 @@
  * stance
  *
  * Example:
- * [bob] call lambs_danger_fnc_immediateAction;
+ * [bob] call lambs_danger_fnc_doDodge;
  *
  * Public: No
 */
@@ -22,11 +22,11 @@ private _stance = stance _unit;
 private _dir = 360 - (_unit getRelDir _pos);
 
 // dodge
-_unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Dodge!", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 // prone override
-if (_stance isEqualTo "PRONE" && {!(_unit call FUNC(indoor))}) exitWith {
-    [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call FUNC(gesture);
+if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
+    [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call EFUNC(main,doGesture);
     _stance
 };
 
@@ -40,7 +40,7 @@ if (
 
 // callout
 if (RND(0.6)) then {
-    [_unit, "Combat", "UnderFireE", 125] call FUNC(doCallout);
+    [_unit, "Combat", "UnderFireE", 125] call EFUNC(main,doCallout);
 };
 
 // reset speed
@@ -88,7 +88,7 @@ if (_anim isEqualTo []) then {
 };
 
 // otherwise rush left or right
-[_unit, _anim, true] call FUNC(gesture);
+[_unit, _anim, true] call EFUNC(main,doGesture);
 
 // end
 _stance

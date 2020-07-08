@@ -12,11 +12,11 @@
  * Example:
  * [group bob] call lambs_wp_fnc_taskArtilleryRegister;
  *
- * Public: No
+ * Public: Yes
 */
 
 // init
-params ["_group"];
+params [["_group", grpNull, [grpNull, objNull]]];
 
 if (canSuspend) exitWith { [FUNC(taskArtilleryRegister), _this] call CBA_fnc_directCall; };
 // sort grp
@@ -38,8 +38,8 @@ if (_artillery isEqualTo []) exitWith {false};
 [QGVAR(RegisterArtillery), _artillery] call CBA_fnc_serverEvent;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery] call EFUNC(main,debugLog);
 };
 
 // end

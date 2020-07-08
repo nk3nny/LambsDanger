@@ -31,7 +31,7 @@ item26[] = {"Timeout",4,218,250.000000,325.000000,350.000000,375.000000,0.000000
 item27[] = {"Killed",4,218,100.000000,325.000000,200.000000,375.000000,0.000000,"Killed"};
 item28[] = {"Killed___Continu",2,250,100.000000,425.000000,200.000000,475.000000,0.000000,"Killed: " \n "Continue"};
 item29[] = {"Timeout__Continu",2,250,250.000000,425.000000,350.000000,475.000000,0.000000,"Timeout:" \n "Continue"};
-item30[] = {"____FUNCTIONS__lambs",-1,250,-1475.000000,-725.000000,-1225.000000,-100.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_danger_fnc_gesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_hideInside " \n "lambs_danger_fnc_immediateAction" \n "lambs_danger_fnc_indoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderFlank" \n "lambs_danger_fnc_leaderSuppress" \n "lambs_danger_fnc_leaderAssault" \n "lambs_danger_fnc_leaderGarrison" \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_danger_fnc_debugDangerType" \n "lambs_danger_fnc_debugMarkerColor" \n "lambs_danger_fnc_debugObjectColor" \n "lambs_danger_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
+item30[] = {"____FUNCTIONS__lambs",-1,250,-1475.000000,-725.000000,-1225.000000,-100.000000,0.000000,"// FUNCTIONS " \n "lambs_danger_fnc_assault" \n "lambs_danger_fnc_assaultBuilding" \n "lambs_danger_fnc_assaultCQB " \n "lambs_danger_fnc_checkBody " \n "lambs_danger_fnc_coward" \n "lambs_main_fnc_doGesture" \n "lambs_danger_fnc_findBuilding;" \n "lambs_danger_fnc_findCover;" \n "lambs_danger_fnc_findOverwatch;" \n "lambs_danger_fnc_fleeing;" \n "lambs_danger_fnc_doHide " \n "lambs_danger_fnc_doDodge" \n "lambs_main_fnc_isIndoor " \n "lambs_danger_fnc_panic " \n "lambs_danger_fnc_shareInformation " \n "lambs_danger_fnc_shareInformationRange" \n "lambs_danger_fnc_suppress " \n "lambs_danger_fnc_vehicleAssault " \n "lambs_danger_fnc_vehicleJink " \n "lambs_danger_fnc_vehicleRotate" \n "lambs_danger_fnc_vehicleSuppress " \n "lambs_danger_fnc_eventCallback" \n "" \n "// FUNCTIONS ~ leader" \n "lambs_danger_fnc_leaderArtillery " \n "lambs_danger_fnc_leaderAssess" \n "lambs_danger_fnc_leaderContact" \n "lambs_danger_fnc_leaderCQC" \n "lambs_danger_fnc_leaderHide" \n "lambs_danger_fnc_leaderFlank" \n "lambs_danger_fnc_leaderSuppress" \n "lambs_danger_fnc_leaderAssault" \n "lambs_danger_fnc_leaderGarrison" \n "lambs_danger_fnc_leaderMode " \n "lambs_danger_fnc_leaderModeUpdate " \n "" \n "// FUNCTIONS ~ debug " \n "lambs_main_fnc_debugDangerType" \n "lambs_main_fnc_debugMarkerColor" \n "lambs_main_fnc_debugObjectColor" \n "lambs_main_fnc_dotMarker" \n "lambs_danger_fnc_zoneMarker"};
 item31[] = {"React",4,218,-150.000000,0.000000,-50.000000,50.000000,7.000000,"React"};
 item32[] = {"Reaction__to_con",2,250,-150.000000,75.000000,-50.000000,125.000000,0.000000,"Reaction " \n "to contact"};
 item33[] = {"Investigate",4,218,-25.000000,0.000000,75.000000,50.000000,2.000000,"Investigate"};
@@ -279,8 +279,8 @@ class FSM
                         itemno = 3;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset variable" \n
-                         "_this setVariable [""lambs_danger_currentTarget"",nil,lambs_danger_debug_functions];" \n
-                         "_this setVariable [""lambs_danger_currentTask"",nil,lambs_danger_debug_functions];" \n
+                         "_this setVariable [""lambs_danger_currentTarget"",nil,lambs_main_debug_functions];" \n
+                         "_this setVariable [""lambs_danger_currentTask"",nil,lambs_main_debug_functions];" \n
                          "" \n
                          "// fleeing" \n
                          "if (fleeing _this) then {" \n
@@ -444,7 +444,7 @@ class FSM
                         name = "Ready_Vehicle";
                         itemno = 14;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_main_debug_FSM) then {format [""%1 - Vehicle Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_main_fnc_debugDangerType, getText (configFile >> ""CfgVehicles"" >> (typeOf (vehicle _this)) >> ""displayName""),round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;};" \n
                          "" \n
                          "// settings " \n
                          "private _vehicle = vehicle _this;" \n
@@ -516,7 +516,7 @@ class FSM
                         name = "Ready_Infantry";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_danger_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_danger_fnc_debugLog;};" \n
+                         "if (lambs_main_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_main_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;};" \n
                          "" \n
                          "// identify leader" \n
                          "private _leader = leader _this isEqualTo _this && { count units _this > 1} && { getSuppression _this < 0.5};" \n
@@ -721,13 +721,13 @@ class FSM
                          "_timeout = time + _delay; " \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	format [""%1 - PANIC! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - PANIC! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// markers " \n
-                         "	[_this,format [""PANIC -- %1"",name _this],""ColorKhaki"",""hd_Destroy""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_this,format [""PANIC -- %1"",name _this],""ColorKhaki"",""hd_Destroy""] call lambs_main_fnc_dotMarker; " \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -896,13 +896,13 @@ class FSM
                          "[_this, _dangerPos, _dangerCausedBy] call lambs_danger_fnc_react;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg" \n
-                         "	format [""%1 - REACT! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - REACT! - %2 for %3s"",side _this,name _this,round (_timeout - time)]  call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
-                         "	_m = [_dangerPos,format [""REACT -- %1"",_dangerCause call lambs_danger_fnc_debugDangerType],""colorOrange"",""hd_warning""] call lambs_danger_fnc_dotMarker;" \n
+                         "	_m = [_dangerPos,format [""REACT -- %1"",_dangerCause call lambs_main_fnc_debugDangerType],""colorOrange"",""hd_warning""] call lambs_main_fnc_dotMarker;" \n
                          "	if (!_leader) then {_m setMarkerSizeLocal [0.5,0.5]}; " \n
                          "" \n
                          "};" \n
@@ -945,16 +945,16 @@ class FSM
                          "_timeout = time + 12 + random 4; " \n
                          "" \n
                          "// check body" \n
-                         "[_this, _dangerPos] call lambs_danger_fnc_checkBody; " \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_doCheckBody; " \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
-                         "	format [""%1 - INVESTIGATING! - %2 for %3s"", side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - INVESTIGATING! - %2 for %3s"", side _this, name _this, round (_timeout - time)]  call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
-                         "	[_dangerPos,format [""INVESTIGATE -- %1"", _dangerCause call lambs_danger_fnc_debugDangerType], ""colorOrange"", ""hd_dot""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_dangerPos,format [""INVESTIGATE -- %1"", _dangerCause call lambs_main_fnc_debugDangerType], ""colorOrange"", ""hd_dot""] call lambs_main_fnc_dotMarker; " \n
                          "" \n
                          "}; " \n
                          ""/*%FSM</STATEINIT""">*/;
@@ -1141,13 +1141,13 @@ class FSM
                          "[_this, _dangerPos] call lambs_danger_fnc_leaderAssess;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// msg " \n
-                         "	format [""%1 - LEADER ASSESS! - %2 for %3s"", side _this, name _this, round (_timeout - time)] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ASSESS! - %2 for %3s"", side _this, name _this, round (_timeout - time)] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker" \n
-                         "	[_this,format [""LEADER ASSESS -- %1"", _dangerCause call lambs_danger_fnc_debugDangerType], ""colorOrange"", ""hd_unknown""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_this,format [""LEADER ASSESS -- %1"", _dangerCause call lambs_main_fnc_debugDangerType], ""colorOrange"", ""hd_unknown""] call lambs_main_fnc_dotMarker; " \n
                          " " \n
                          "}; " \n
                          ""/*%FSM</STATEINIT""">*/;
@@ -1184,13 +1184,13 @@ class FSM
                          "[_this, _this findNearestEnemy _dangerPos] call lambs_danger_fnc_leaderContact;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Contact"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Contact"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	[_this, format [""%1 - LEADER ACTION -- Contact!"", side _this], _this call lambs_danger_fnc_debugMarkerColor, ""hd_warning""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_this, format [""%1 - LEADER ACTION -- Contact!"", side _this], _this call lambs_main_fnc_debugMarkerColor, ""hd_warning""] call lambs_main_fnc_dotMarker; " \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1225,13 +1225,13 @@ class FSM
                          "[_this, (_dangerMode select 1) select 2] call lambs_danger_fnc_leaderHide;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Hide"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Hide"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	[_this,format [""%1 - LEADER ACTION -- Hide!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_join""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_this,format [""%1 - LEADER ACTION -- Hide!"",side _this],_this call lambs_main_fnc_debugMarkerColor,""hd_join""] call lambs_main_fnc_dotMarker; " \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -1262,26 +1262,25 @@ class FSM
                          "// call artillery if available " \n
                          "if (lambs_danger_Loaded_WP && {[side _this] call lambs_WP_fnc_sideHasArtillery}) then {" \n
                          "" \n
+                         "	private _target = (_dangerMode select 1) select 6;" \n
                          "	// do artillery " \n
-                         "	[_this, (_dangerMode select 1) select 6] call lambs_danger_fnc_leaderArtillery; " \n
+                         "	[_this, _target] call lambs_danger_fnc_leaderArtillery; " \n
                          "" \n
                          "	// clean array " \n
                          "	[_this, _evaluation] call lambs_danger_fnc_leaderModeUpdate;" \n
                          "" \n
-                         "}; " \n
+                         "	// debug " \n
+                         "	if (lambs_main_debug_FSM) then {" \n
                          "" \n
-                         "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "		// message " \n
+                         "		format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
-                         "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Call artillery"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "		// marker " \n
+                         "		[_this, format [""%1 - LEADER ACTION -- Call artillery!"",side _this],_this call lambs_main_fnc_debugMarkerColor,""hd_warning""] call lambs_main_fnc_dotMarker; " \n
+                         "		[_target, ""Artillery target"",_this call lambs_main_fnc_debugMarkerColor,""hd_destroy""] call lambs_main_fnc_dotMarker;" \n
                          "" \n
-                         "	// marker " \n
-                         "	[_this,format [""%1 - LEADER ACTION -- Call artillery!"",side _this],_this call lambs_danger_fnc_debugMarkerColor,""hd_warning""] call lambs_danger_fnc_dotMarker; " \n
-                         "	[_target,""Artillery target"",_this call lambs_danger_fnc_debugMarkerColor,""hd_destroy""] call lambs_danger_fnc_dotMarker;" \n
-                         "" \n
-                         "};" \n
-                         ""/*%FSM</STATEINIT""">*/;
+                         "	};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -1318,15 +1317,15 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderFlank;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Flank"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Flank"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	_m = [_this,format [""%1 - LEADER ACTION -- Flank!"", side _this], _this call lambs_danger_fnc_debugMarkerColor, ""hd_arrow""] call lambs_danger_fnc_dotMarker; " \n
+                         "	_m = [_this,format [""%1 - LEADER ACTION -- Flank!"", side _this], _this call lambs_main_fnc_debugMarkerColor, ""hd_arrow""] call lambs_main_fnc_dotMarker; " \n
                          "	_m setMarkerDirlocal (_this getDir _target); " \n
-                         "	[_target, """", _this call lambs_danger_fnc_debugMarkerColor, ""hd_objective""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_target, """", _this call lambs_main_fnc_debugMarkerColor, ""hd_objective""] call lambs_main_fnc_dotMarker; " \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1452,7 +1451,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Coward";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.7 && {[_this, _dangerCausedBy] call lambs_danger_fnc_coward};"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.7 && {[_this, _dangerCausedBy] call lambs_danger_fnc_isCoward};"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -1658,10 +1657,10 @@ class FSM
                          "_this setVariable [""ace_medical_ai_lastFired"", CBA_missionTime - 20];" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	format [""%1 - FORCE MOVE! - %2 for %3s"",side _this, name _this, round (_timeout - time)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - FORCE MOVE! - %2 for %3s"",side _this, name _this, round (_timeout - time)]  call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1739,16 +1738,16 @@ class FSM
                         itemno = 81;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// init dodge" \n
-                         "[_this, _dangerPos] call lambs_danger_fnc_immediateAction;" \n
+                         "[_this, _dangerPos] call lambs_danger_fnc_doDodge;" \n
                          "" \n
                          "// ACE3 medical ~ wait 6 seconds to bandage!" \n
                          "_this setVariable [""ace_medical_ai_lastFired"", CBA_missionTime - 24];" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	/// msg " \n
-                         "	format [""%1 - IMMEDIATE ACTION! - %2 - %3m"",side _this, name _this, round (_this distance2d _dangerPos)]  call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - IMMEDIATE ACTION! - %2 - %3m"",side _this, name _this, round (_this distance2d _dangerPos)]  call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1810,15 +1809,15 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderAssault;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Assault"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Assault"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	_m = [_this,format [""%1 - LEADER ACTION -- Assault!"", side _this], _this call lambs_danger_fnc_debugMarkerColor, ""hd_arrow""] call lambs_danger_fnc_dotMarker; " \n
+                         "	_m = [_this,format [""%1 - LEADER ACTION -- Assault!"", side _this], _this call lambs_main_fnc_debugMarkerColor, ""hd_arrow""] call lambs_main_fnc_dotMarker; " \n
                          "	_m setMarkerDirlocal (_this getDir _target); " \n
-                         "	[_target, """", _this call lambs_danger_fnc_debugMarkerColor, ""hd_objective""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_target, """", _this call lambs_main_fnc_debugMarkerColor, ""hd_objective""] call lambs_main_fnc_dotMarker; " \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1857,15 +1856,15 @@ class FSM
                          "[_this,  _target] call lambs_danger_fnc_leaderSuppress;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Suppress"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Suppress"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	_m = [_this,format [""%1 - LEADER ACTION -- Suppress!"", side _this], _this call lambs_danger_fnc_debugMarkerColor, ""hd_arrow""] call lambs_danger_fnc_dotMarker; " \n
+                         "	_m = [_this,format [""%1 - LEADER ACTION -- Suppress!"", side _this], _this call lambs_main_fnc_debugMarkerColor, ""hd_arrow""] call lambs_main_fnc_dotMarker; " \n
                          "	_m setMarkerDirlocal (_this getDir _target); " \n
-                         "	[_target, """", _this call lambs_danger_fnc_debugMarkerColor, ""hd_objective""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_target, """", _this call lambs_main_fnc_debugMarkerColor, ""hd_objective""] call lambs_main_fnc_dotMarker; " \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1904,13 +1903,13 @@ class FSM
                          "[_this,  _target, true] call lambs_danger_fnc_leaderGarrison;" \n
                          "" \n
                          "// debug " \n
-                         "if (lambs_danger_debug_FSM) then {" \n
+                         "if (lambs_main_debug_FSM) then {" \n
                          "" \n
                          "	// message " \n
-                         "	format [""%1 - LEADER ACTION! - Garrison"",side _this] call lambs_danger_fnc_debugLog;" \n
+                         "	format [""%1 - LEADER ACTION! - Garrison"",side _this] call lambs_main_fnc_debugLog;" \n
                          "" \n
                          "	// marker " \n
-                         "	[_target, format [""%1 - LEADER ACTION -- Garrison!"", side _this], _this call lambs_danger_fnc_debugMarkerColor, ""hd_flag""] call lambs_danger_fnc_dotMarker; " \n
+                         "	[_target, format [""%1 - LEADER ACTION -- Garrison!"", side _this], _this call lambs_main_fnc_debugMarkerColor, ""hd_flag""] call lambs_main_fnc_dotMarker; " \n
                          "" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

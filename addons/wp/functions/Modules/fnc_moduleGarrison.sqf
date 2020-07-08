@@ -34,11 +34,11 @@ switch (_mode) do {
                 [LSTRING(Module_TaskGarrison_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
-                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
-                        [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), false]
+                        [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], TASK_GARRISON_SIZE, 2],
+                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], TASK_GARRISON_EXITCONDITIONS],
+                        [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), TASK_GARRISON_SORTBYHEIGHT],
+                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_GARRISON_PATROL]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -63,11 +63,11 @@ switch (_mode) do {
                 [LSTRING(Module_TaskGarrison_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], 50, 2],
-                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], 0],
-                        [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), false],
-                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), false]
+                        [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], TASK_GARRISON_SIZE, 2],
+                        [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(FiredNear), LSTRING(Fired), LSTRING(Hit), LSTRING(None)], TASK_GARRISON_EXITCONDITIONS],
+                        [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), TASK_GARRISON_SORTBYHEIGHT],
+                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_GARRISON_PATROL]
 
                     ], {
                         params ["_data", "_args"];
@@ -89,12 +89,12 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_GARRISON_SIZE, TASK_GARRISON_SIZE]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), false];
-            private _teleport = _logic getVariable [QGVAR(Teleport), false];
-            private _exitCondition = _logic getVariable [QGVAR(ExitConditions), 0];
-            private _patrol = _logic getVariable [QGVAR(Patrol), 0];
+            private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), TASK_GARRISON_SORTBYHEIGHT];
+            private _teleport = _logic getVariable [QGVAR(Teleport), TASK_GARRISON_TELEPORT];
+            private _exitCondition = _logic getVariable [QGVAR(ExitConditions), TASK_GARRISON_EXITCONDITIONS];
+            private _patrol = _logic getVariable [QGVAR(Patrol), TASK_GARRISON_PATROL];
             {
                 [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _x];
             } forEach _groups;

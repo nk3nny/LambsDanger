@@ -11,6 +11,8 @@
  * 1: Central position camp should be made, <ARRAY>
  * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
+ * 4: Teleport <BOOL>
+ * 5: Patrol <BOOL>
  *
  * Return Value:
  * none
@@ -18,10 +20,17 @@
  * Example:
  * [bob, getPos bob, 50] call lambs_wp_fnc_taskCamp;
  *
- * Public: No
+ * Public: Yes
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false], ["_patrol", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_range", TASK_CAMP_SIZE, [0]],
+    ["_area", [], [[]], []],
+    ["_teleport", TASK_CAMP_TELEPORT, [false]],
+    ["_patrol", TASK_CAMP_PATROL, [false]]
+];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -44,7 +53,7 @@ _group setCombatMode "YELLOW";
 
 
 // find buildings
-private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuildings);
+private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns
@@ -116,7 +125,7 @@ reverse _units;
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
-    if ((count _units) < (count (units _group))/2) exitWith {};
+    if ((count _units) < (count (units _group))*0.5) exitWith {};
 
 } forEach _units;
 
@@ -230,8 +239,8 @@ private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select
 _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

@@ -20,8 +20,14 @@
 params ["_units", "_pos", ["_weaponPos", []]];
 
 // sort units
-if (_units isEqualType objNull) then { _units = [_units] call FUNC(findReadyUnits); };
-if (_units isEqualType grpNull) then { _units = [leader _units] call FUNC(findReadyUnits); };
+switch (typeName _units) do {
+    case ("OBJECT"): {
+        _units = [_units] call EFUNC(main,findReadyUnits);
+    };
+    case ("GROUP"): {
+        _units = [leader _units] call EFUNC(main,findReadyUnits);
+    };
+};
 
 // prevent deployment of static weapons
 if (_units isEqualTo []) exitWith { _units };
@@ -61,7 +67,7 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
         _unit moveInGunner _weapon;
 
         // check artillery
-        if (GVAR(Loaded_WP) && {_weapon getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
+        if (GVAR(Loaded_WP) && {_weapon getVariable [QEGVAR(wp,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
             [group _unit] call EFUNC(wp,taskArtilleryRegister);
         };
 
@@ -71,7 +77,7 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
 ];
 
 // callout
-[formationLeader _gunner, "aware", "AssembleThatWeapon"] call FUNC(doCallout);
+[formationLeader _gunner, "aware", "AssembleThatWeapon"] call EFUNC(main,doCallout);
 
 // find position ~ kept simple for now!
 if (_weaponPos isEqualTo []) then {
@@ -85,8 +91,8 @@ if (_weaponPos isEqualTo []) then {
     _x setUnitPosWeak "MIDDLE";
     _x forceSpeed 24;
     _x setVariable [QGVAR(forceMove), true];
-    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", GVAR(debug_functions)];
-    _x setVariable [QGVAR(currentTarget), _weaponPos, GVAR(debug_functions)];
+    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", EGVAR(main,debug_functions)];
+    _x setVariable [QGVAR(currentTarget), _weaponPos, EGVAR(main,debug_functions)];
     _x doMove _weaponPos;
 } foreach [_gunner, _assistant];
 
@@ -104,8 +110,8 @@ if (_weaponPos isEqualTo []) then {
         if (
             fleeing _gunner
             || {fleeing _assistant}
-            || {!(_gunner call FUNC(isAlive))}
-            || {!(_assistant call FUNC(isAlive))}
+            || {!(_gunner call EFUNC(main,isAlive))}
+            || {!(_assistant call EFUNC(main,isAlive))}
         ) exitWith {false};
 
         // assemble weapon
@@ -127,7 +133,7 @@ if (_weaponPos isEqualTo []) then {
         // assistant
         doStop _assistant;
         _assistant doWatch _pos;
-        [_assistant, ["gesturePoint"]] call FUNC(gesture);
+        [_assistant, ["gesturePoint"]] call EFUNC(main,doGesture);
     },
     [_gunner, _assistant, _pos, _weaponPos, _EH], 8,
     {

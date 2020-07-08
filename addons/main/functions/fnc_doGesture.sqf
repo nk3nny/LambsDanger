@@ -12,11 +12,15 @@
  * boolean
  *
  * Example:
- * [bob] call lambs_danger_fnc_gesture;
+ * [bob] call lambs_main_fnc_doGesture;
  *
- * Public: No
+ * Public: Yes
 */
-params ["_unit", ["_gesture", ["gestureFreeze"]], ["_force", false]];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_gesture", ["gestureFreeze"], [[]]],
+    ["_force", false, [false]]
+];
 
 // check global settings
 if (GVAR(disableAIGestures) && {!_force}) exitWith {false};

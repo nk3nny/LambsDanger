@@ -35,10 +35,10 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskHunt_DisplayName),
                     [
-                        [LSTRING(Module_TaskHunt_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskHunt_Radius_ToolTip), [25,5000], [1, 0.5], 1000, 1],
-                        [LSTRING(Module_TaskHunt_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskHunt_CycleTime_ToolTip), [1, 300], [1, 0.5], 70, 2],
-                        [LSTRING(Module_TaskHunt_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_MovingCenter_ToolTip), true],
-                        [LSTRING(Module_TaskHunt_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_PlayersOnly_ToolTip), true]
+                        [LSTRING(Module_TaskHunt_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskHunt_Radius_ToolTip), [25, 5000], [1, 0.5], TASK_HUNT_SIZE, 1],
+                        [LSTRING(Module_TaskHunt_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskHunt_CycleTime_ToolTip), [1, 300], [1, 0.5], TASK_HUNT_CYCLETIME, 2],
+                        [LSTRING(Module_TaskHunt_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_MovingCenter_ToolTip), TASK_HUNT_MOVINGCENTER],
+                        [LSTRING(Module_TaskHunt_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_PlayersOnly_ToolTip), TASK_HUNT_PLAYERSONLY]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
@@ -62,11 +62,11 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_HUNT_SIZE, TASK_HUNT_SIZE]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 70];
-            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
-            private _playerOnly = _logic getVariable [QGVAR(PlayerOnly), true];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_HUNT_CYCLETIME];
+            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_HUNT_MOVINGCENTER];
+            private _playerOnly = _logic getVariable [QGVAR(PlayerOnly), TASK_HUNT_PLAYERSONLY];
             {
                 private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
                 _args remoteExec [QFUNC(taskHunt), leader _x];

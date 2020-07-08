@@ -11,7 +11,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_coward;
+ * [bob, angryJoe] call lambs_danger_fnc_isCoward;
  *
  * Public: No
 */
@@ -42,8 +42,8 @@ private _noLauncher = secondaryWeapon _unit isEqualTo "";
 
 // tough vehicle and no launcher? hide
 if (_enemyVehicle && {_noLauncher}) exitWith {
-    _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Cowardice", GVAR(debug_functions)];
+    _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Cowardice", EGVAR(main,debug_functions)];
     true
 };
 

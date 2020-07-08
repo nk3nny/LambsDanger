@@ -28,24 +28,24 @@ if !(attackEnabled _unit) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 125] call FUNC(findReadyUnits);
+    _units = [_unit, 125] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
-private _pos = [_target, 12, true, false] call FUNC(findBuildings);
+private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);
 _pos = [_pos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
 _pos pushBack _target;
 
 // leader ~ rally animation here
-[_unit, ["gestureFollow"]] call FUNC(gesture);
+[_unit, ["gestureFollow"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", "RallyUp", 125] call FUNC(doCallout);
+[_unit, "combat", "RallyUp", 125] call EFUNC(main,doCallout);
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Rally", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Rally", EGVAR(main,debug_functions)];
 
 // rally unit
 {
@@ -55,7 +55,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally", GVAR(debug_functions)];
     // set mode
     _x forceSpeed 3;
     _x setVariable [QGVAR(forceMove), !_garrison];
-    _x setVariable [QGVAR(currentTask), "Group Garrison", GVAR(debug_functions)];
+    _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
 
     // execute move
     if !(_pos isEqualTo []) then {
@@ -67,8 +67,8 @@ _unit setVariable [QGVAR(currentTask), "Leader Rally", GVAR(debug_functions)];
 } count _units;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 group GARRISON (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 group GARRISON (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call EFUNC(main,debugLog);
 };
 
 // end

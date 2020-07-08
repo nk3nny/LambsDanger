@@ -17,7 +17,7 @@ params ["_group", "_pos", ["_radius",0]];
 
 // get radius
 _radius = waypointCompletionRadius [_group, currentwaypoint _group];
-if (_radius isEqualTo 0) then { _radius = 1000; };
+if (_radius isEqualTo 0) then { _radius = TASK_RUSH_SIZE; };
 
 // get other settings
 

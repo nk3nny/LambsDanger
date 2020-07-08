@@ -16,8 +16,11 @@ jobs:
       uses: arma-actions/bom-check@master
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
+    - name: Run Stringtable Checker
+      run: cd tools/stringtableChecker && npm i &> /dev/null && cd ../../ && node tools/stringtableChecker/stringTableChecker.js
     - name: Check Functions
-      run: node tools/PREPChecker/index.js
+      run: node tools/prepchecker.js
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -26,12 +29,13 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
-    - name: Validate SQFLinter Logs
-      run: python3 tools/sqf_linter_LogChecker.py
     - uses: actions/upload-artifact@master
       with:
        name: 'sqfLint Log'
        path: 'sqf.log'
+    - name: Validate SQFLinter Logs
+      run: python3 tools/sqf_linter_LogChecker.py
+
 
   build:
     runs-on: ubuntu-latest

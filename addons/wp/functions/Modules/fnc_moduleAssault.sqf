@@ -34,10 +34,10 @@ switch (_mode) do {
                 [LSTRING(Module_TaskAssault_DisplayName),
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
-                        [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 12, 2],
-                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], 3, 2],
-                        [LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip), false]
+                        [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), TASK_ASSAULT_ISRETREAT],
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], TASK_ASSAULT_DISTANCETHRESHOLD, 2],
+                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], TASK_ASSAULT_CYCLETIME, 2],
+                        [LSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_DeleteOnStartup_Tooltip), TASK_ASSAULT_DELETEONSTARTUP]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -67,9 +67,9 @@ switch (_mode) do {
                 [LSTRING(Module_TaskAssault_DisplayName),
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
-                        [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), false],
-                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], 12, 2],
-                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], 3, 2]
+                        [LSTRING(Module_TaskAssault_Retreating_DisplayName), "BOOLEAN", LSTRING(Module_TaskAssault_Retreating_Tooltip), TASK_ASSAULT_ISRETREAT],
+                        [LSTRING(Module_TaskAssault_DistanceThreshold_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_DistanceThreshold_Tooltip), [1, 100], [2, 1], TASK_ASSAULT_DISTANCETHRESHOLD, 2],
+                        [LSTRING(Module_TaskAssault_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskAssault_CycleTime_Tooltip), [1, 300], [1, 0.5], TASK_ASSAULT_CYCLETIME, 2]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
@@ -95,10 +95,10 @@ switch (_mode) do {
             private _groups = (synchronizedObjects _logic) apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _retreat = _logic getVariable [QGVAR(IsRetreat), false];
-            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), false];
-            private _threshold = _logic getVariable [QGVAR(DistanceThreshold), 15];
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 3];
+            private _retreat = _logic getVariable [QGVAR(IsRetreat), TASK_ASSAULT_ISRETREAT];
+            private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), TASK_ASSAULT_DELETEONSTARTUP];
+            private _threshold = _logic getVariable [QGVAR(DistanceThreshold), TASK_ASSAULT_DISTANCETHRESHOLD];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_ASSAULT_CYCLETIME];
             {
                 [_x, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
             } forEach _groups;

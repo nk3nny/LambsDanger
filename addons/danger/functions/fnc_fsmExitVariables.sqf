@@ -16,6 +16,6 @@
 */
 fleeing _this
 || {_this getVariable [QGVAR(disableAI), false]}
-|| {!(_this call FUNC(isAlive))}
+|| {!(_this call EFUNC(main,isAlive))}
 || {!((_this getVariable ["ace_medical_ai_healQueue", []]) isEqualTo [] )}
 || {GVAR(disableAIPlayerGroup) && {isPlayer leader _this}}

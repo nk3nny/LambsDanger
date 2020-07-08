@@ -31,37 +31,37 @@ if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
     [_unit, _target] call FUNC(leaderGarrison);
 
     // leader smoke
-    [_unit, _target] call FUNC(doSmoke);
+    [_unit, _target] call EFUNC(main,doSmoke);
 
     false
 };
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 250] call FUNC(findReadyUnits);
+    _units = [_unit, 250] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
-private _pos = [_target, 16, true, false] call FUNC(findBuildings);
+private _pos = [_target, 16, true, false] call EFUNC(main,findBuildings);
 _pos pushBack _target;
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Assault", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assault", EGVAR(main,debug_functions)];
 
 // gesture
-[_unit, ["gestureGo"]] call FUNC(gesture);
-[_units select (count _units - 1), ["gestureGoB"]] call FUNC(gesture);
+[_unit, ["gestureGo"]] call EFUNC(main,doGesture);
+[_units select (count _units - 1), ["gestureGoB"]] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", "Advance", 125] call FUNC(doCallout);
+[_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // leader smoke
-[_unit, _target] call FUNC(doSmoke);
+[_unit, _target] call EFUNC(main,doSmoke);
 
 // grenadier smoke
-[{_this call FUNC(doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -71,7 +71,7 @@ private _fnc_assault = {
     params ["_cycle", "_units", "_pos", "_fnc_assault"];
 
     // update
-    _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
+    _units = _units select {_x call EFUNC(main,isAlive) && {!isPlayer _x}};
     _cycle = _cycle - 1;
 
     {
@@ -88,7 +88,7 @@ private _fnc_assault = {
         // manoeuvre
         _x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
         _x setUnitPosWeak "UP";
-        _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
+        _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
         _x setVariable [QGVAR(forceMove), true];
 
     } foreach _units;
@@ -107,8 +107,8 @@ private _fnc_assault = {
 [_cycle, _units, _pos, _fnc_assault] call _fnc_assault;
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call EFUNC(main,debugLog);
 };
 
 // end

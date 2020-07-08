@@ -14,7 +14,7 @@
  * marker
  *
  * Example:
- * [bob, [200,200],"colorBLUE","Cross",false] call lambs_danger_fnc_zoneMarker;
+ * [bob, [200,200],"colorBLUE","Cross",false] call lambs_main_fnc_zoneMarker;
  *
  * Public: Yes
 */

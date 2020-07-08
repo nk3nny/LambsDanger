@@ -11,7 +11,10 @@
  * 1: Position to occupy, default group location <ARRAY or OBJECT>
  * 2: Range of tracking, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
- * 4: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <BOOL>
+ * 4: Teleprt Units to Position <BOOL>
+ * 5: Sort Based on Height <BOOL>
+ * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <NUMBER>
+ * 7: Patrol <BOOL>
  *
  * Return Value:
  * none
@@ -19,12 +22,21 @@
  * Example:
  * [bob, bob, 50] call lambs_wp_fnc_taskGarrison;
  *
- * Public: No
+ * Public: Yes
 */
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2], ["_patrol", false]];
+params [
+    ["_group", grpNull, [grpNull]],
+    ["_pos", []],
+    ["_radius", TASK_GARRISON_SIZE, [0]],
+    ["_area", [], [[]]],
+    ["_teleport", TASK_GARRISON_TELEPORT, [false]],
+    ["_sortBasedOnHeight", TASK_GARRISON_SORTBYHEIGHT, [false]],
+    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS - 2, [0]],
+    ["_patrol", TASK_GARRISON_PATROL, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -35,7 +47,7 @@ if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call CBA_fnc_getPos;
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle"];
@@ -193,8 +205,8 @@ _wp setWaypointType "HOLD";
 _wp setWaypointCompletionRadius _radius;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 

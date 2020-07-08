@@ -35,10 +35,10 @@ switch (_mode) do {
             if (_error == "") then {
                 [LSTRING(Module_TaskRush_DisplayName),
                     [
-                        [LSTRING(Module_TaskRush_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskRush_Radius_ToolTip), [25, 5000], [1, 0.5], 1000, 1],
-                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskRush_CycleTime_ToolTip), [1, 300], [1, 0.5], 15, 2],
-                        [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), true],
-                        [LSTRING(Module_TaskRush_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayersOnly_ToolTip), true]
+                        [LSTRING(Module_TaskRush_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskRush_Radius_ToolTip), [25, 5000], [1, 0.5], TASK_RUSH_SIZE, 1],
+                        [LSTRING(Module_TaskRush_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskRush_CycleTime_ToolTip), [1, 300], [1, 0.5], TASK_RUSH_CYCLETIME, 2],
+                        [LSTRING(Module_TaskRush_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_MovingCenter_ToolTip), TASK_RUSH_MOVINGCENTER],
+                        [LSTRING(Module_TaskRush_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskRush_PlayersOnly_ToolTip), TASK_RUSH_PLAYERSONLY]
 
                     ], {
                         params ["_data", "_args"];
@@ -63,11 +63,11 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea",[]];
+            private _area = _logic getVariable ["objectarea", [TASK_RUSH_SIZE, TASK_RUSH_SIZE]];
             private _range = _area select ((_area select 0) < (_area select 1));
-            private _cycle = _logic getVariable [QGVAR(CycleTime), 15];
-            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), true];
-            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), true];
+            private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_RUSH_CYCLETIME];
+            private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_RUSH_MOVINGCENTER];
+            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), TASK_RUSH_PLAYERSONLY];
             {
                 private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
                 _args remoteExec [QFUNC(taskRush), leader _x];

@@ -13,11 +13,16 @@
  * Array of buildings or house positions
  *
  * Example:
- * [bob, 100, true, true] call lambs_danger_fnc_findBuildings;
+ * [bob, 100, true, true] call lambs_main_fnc_findBuildings;
  *
  * Public: Yes
 */
-params ["_unit", ["_range", 100], ["_useHousePos", false], ["_onlyIndoor", false]];
+params [
+    ["_unit", objNull, [objNull, []]],
+    ["_range", 100, [0]],
+    ["_useHousePos", false, [false]],
+    ["_onlyIndoor", false, [false]]
+];
 
 // houses
 private _houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];

@@ -43,7 +43,7 @@ private _enemy = _unit targets [true, 600, [], 0, _pos];
 [_unit, 99, 66] call FUNC(leaderModeUpdate);
 
 // leader assess EH
-[QGVAR(OnAssess), [_unit, group _unit, _enemy]] call FUNC(eventCallback);
+[QGVAR(OnAssess), [_unit, group _unit, _enemy]] call EFUNC(main,eventCallback);
 
 // leadership assessment
 if !(_enemy isEqualTo []) then {
@@ -51,7 +51,7 @@ if !(_enemy isEqualTo []) then {
     // Enemy is in buildings or at lower position or near bunker or static weapon
     private _targets = _enemy findIf {
         _x isKindOf "Man" && {
-            _x call FUNC(indoor)
+            _x call EFUNC(main,isIndoor)
             || {( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 23) }
             || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
         }
@@ -96,7 +96,7 @@ if !(_enemy isEqualTo []) then {
         } else {
             "KeepFocused"
         };
-        [_unit, behaviour _unit, _callout, 125] call FUNC(doCallout);
+        [_unit, behaviour _unit, _callout, 125] call EFUNC(main,doCallout);
     };
 
     // Artillery
@@ -113,7 +113,7 @@ if !(_enemy isEqualTo []) then {
 } else {
 
     // callout
-    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call FUNC(doCallout);
+    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
 
 };
 
@@ -130,11 +130,11 @@ if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")
 };
 
 // find units
-private _units = [_unit] call FUNC(findReadyUnits);
+private _units = [_unit] call EFUNC(main,findReadyUnits);
 
 // deploy flares
-if (!(GVAR(disableAutonomousFlares)) && {_unit call FUNC(isNight)}) then {
-    _units = [_units] call FUNC(doUGL);
+if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
+    _units = [_units] call EFUNC(main,doUGL);
 };
 
 // deploy static weapons ~ also returns available units
@@ -148,8 +148,8 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // set current task
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Assess", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Assess", EGVAR(main,debug_functions)];
 
 // end
 true
