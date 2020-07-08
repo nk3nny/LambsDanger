@@ -93,7 +93,7 @@ for "_i" from 1 to _waypointCount do {
     _wp setWaypointType "MOVE";
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
-    _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
+    _wp setWaypointStatements ["true", "if (local this) then {(group this) enableGunLights 'forceOn';}"];
     if (_i == 1) then {
         _fistWPId = _wp select 1;
     };
@@ -103,9 +103,9 @@ _group setVariable [QGVAR(TaskPatrol_Position), _pos, true];
 _group setVariable [QGVAR(TaskPatrol_Area), _area, true];
 
 if (_moveWaypoints) then {
-    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId] + format ["call %1;", QFUNC(TaskPatrol_WaypointStatement)]];
+    _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1]; call %2;};", _fistWPId, QFUNC(TaskPatrol_WaypointStatement)]];
 } else {
-    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId]];
+    _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];};", _fistWPId]];
 };
 
 // debug
