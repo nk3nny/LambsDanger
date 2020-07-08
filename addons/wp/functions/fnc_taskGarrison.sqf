@@ -92,7 +92,7 @@ if (_patrol) then {
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
-        _area2 set [0, (_area2 select 1) * 2];
+        _area2 set [1, (_area2 select 1) * 2];
         [_group2, _group2, _radius, 4, _area2, true] call FUNC(taskPatrol);
     };
 };
