@@ -38,8 +38,8 @@ _units = _units select {
     && { (getPosATL _x) select 2 < 200 }
 };
 if !(_area isEqualTo []) then {
-    _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _units = _units select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
+    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+    _units = _units select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
 };
 if (_units isEqualTo []) exitWith {ObjNull};
 

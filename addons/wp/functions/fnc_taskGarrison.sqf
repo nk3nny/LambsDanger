@@ -50,8 +50,8 @@ _pos = _pos call CBA_fnc_getPos;
 private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 if !(_area isEqualTo []) then {
-    _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle] };
+    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
 };
 [_houses, true] call CBA_fnc_Shuffle;
 

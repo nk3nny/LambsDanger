@@ -60,9 +60,9 @@ private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings)
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _weapons = _weapons select {(_x emptyPositions "Gunner") > 0};
 if !(_area isEqualTo []) then {
-    _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
-    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
+    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 
 // STAGE 1 - PATROL --------------------------

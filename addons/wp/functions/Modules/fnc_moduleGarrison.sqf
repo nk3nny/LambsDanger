@@ -89,7 +89,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea", [TASK_GARRISON_SIZE, TASK_GARRISON_SIZE]];
+            private _area = _logic getVariable ["objectarea", [TASK_GARRISON_SIZE, TASK_GARRISON_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _sortByHeight = _logic getVariable [QGVAR(SortByHeight), TASK_GARRISON_SORTBYHEIGHT];
             private _teleport = _logic getVariable [QGVAR(Teleport), TASK_GARRISON_TELEPORT];

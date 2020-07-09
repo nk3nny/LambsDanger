@@ -61,7 +61,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea", [TASK_CREEP_SIZE, TASK_CREEP_SIZE]];
+            private _area = _logic getVariable ["objectarea", [TASK_CREEP_SIZE, TASK_CREEP_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_CREEP_CYCLETIME];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_CREEP_MOVINGCENTER];
