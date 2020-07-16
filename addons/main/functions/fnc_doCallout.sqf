@@ -39,6 +39,8 @@ if (_time >= time) exitWith {
 };
 
 private _speaker = speaker _unit;
+if (toUpper(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if Unit is "Mute"
+
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
