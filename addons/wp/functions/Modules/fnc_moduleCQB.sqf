@@ -95,7 +95,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea", [TASK_CQB_SIZE, TASK_CQB_SIZE]];
+            private _area = _logic getVariable ["objectarea", [TASK_CQB_SIZE, TASK_CQB_SIZE, 0, false, -1]];
             private _radius = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_CQB_CYCLETIME];
             private _deleteAfterStartup = _logic getVariable [QGVAR(DeleteOnStartUp), TASK_CQB_DELETEONSTARTUP];

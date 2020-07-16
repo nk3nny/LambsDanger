@@ -65,8 +65,8 @@ if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {
                 private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];
                 if !(_area isEqualTo []) then {
                     _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
-                    _area params ["_a", "_b", "_angle", "_isRectangle"];
-                    while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+                    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+                    while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle, _c])} do {
                         _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
                     };
                 };
@@ -83,8 +83,8 @@ for "_i" from 1 to _waypointCount do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
     if !(_area isEqualTo []) then {
         _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
-        _area params ["_a", "_b", "_angle", "_isRectangle"];
-        while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+        _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+        while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle, _c])} do {
             _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
         };
     };

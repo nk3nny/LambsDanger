@@ -90,7 +90,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea", [TASK_PATROL_SIZE, TASK_PATROL_SIZE]];
+            private _area = _logic getVariable ["objectarea", [TASK_PATROL_SIZE, TASK_PATROL_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), TASK_PATROL_MOVEWAYPOINTS];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];

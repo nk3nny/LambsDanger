@@ -63,7 +63,7 @@ switch (_mode) do {
             private _groups = synchronizedObjects _logic apply {group _x};
             _groups = _groups arrayIntersect _groups;
 
-            private _area = _logic getVariable ["objectarea", [TASK_RUSH_SIZE, TASK_RUSH_SIZE]];
+            private _area = _logic getVariable ["objectarea", [TASK_RUSH_SIZE, TASK_RUSH_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_RUSH_CYCLETIME];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_RUSH_MOVINGCENTER];
