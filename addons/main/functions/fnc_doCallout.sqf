@@ -52,10 +52,10 @@ switch (toLower(_callout)) do {
         _callout = selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
     };
     case ("suppress"): {
-        _callout = selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"]
+        _callout = selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"];
     };
     case ("panic"): {
-        _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"]
+        _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"];
     };
 };
 
@@ -72,7 +72,7 @@ if (isNil "_cachedSounds") then {
         breakOut QGVAR(doCallout_main);
     };
 
-    _cachedSounds = getArray (_protocolConfig >> _calloutConfigName);
+    _cachedSounds = getArray (_protocolConfig >> _callout);
 
     {
         private _sound = _x;
