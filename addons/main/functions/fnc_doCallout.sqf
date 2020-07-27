@@ -68,10 +68,7 @@ if (isNil "_cachedSounds") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
 
-    private _calloutConfigName = ["", _callout] select (isArray (_protocolConfig >> _callout))
-    };
-
-    if (_calloutConfigName == "") exitWith {
+    if (isArray (_protocolConfig >> _callout)) exitWith {
         breakOut QGVAR(doCallout_main);
     };
 
