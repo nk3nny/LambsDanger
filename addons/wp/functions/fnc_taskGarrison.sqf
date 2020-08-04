@@ -39,7 +39,10 @@ params [
 ];
 
 // sort grp
-if (!local _group) exitWith {false};
+if (!local _group) exitWith {
+    [QGVAR(taskGarrison), _this, _group] call CBA_fnc_targetEvent;
+};
+
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // sort pos
