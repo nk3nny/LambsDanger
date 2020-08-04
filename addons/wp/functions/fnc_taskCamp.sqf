@@ -35,7 +35,10 @@ params [
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
 // sort grp
-if (!local _group) exitWith {false};
+if (!local _group) exitWith {
+    [QGVAR(taskCamp), _this, _group] call CBA_fnc_targetEvent;
+};
+
 if (_group isEqualType objNull) then {_group = group _group};
 private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
 
