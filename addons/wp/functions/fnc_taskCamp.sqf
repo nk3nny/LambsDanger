@@ -84,12 +84,23 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
+    
+        if (local _group2) then {
+            [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
+        } else {
+            [QGVAR(taskPatrol), [_group2, _group2, _range * 2, 4, nil, true], _group2] call CBA_fnc_targetEvent;
+        };
+    
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
+        
+        if (local _group2) then {
+            [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
+        } else {
+            [QGVAR(taskPatrol), [_group2, _group2, _range * 2, 4, _area2, true], _group2] call CBA_fnc_targetEvent;
+        };
     };
 
     // update
