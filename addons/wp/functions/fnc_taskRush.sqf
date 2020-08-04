@@ -74,7 +74,10 @@ private _fnc_rushOrders = {
 // functions end ---
 
 // sort grp
-if (!local _group) exitWith {false};
+if (!local _group) exitWith {
+    [QGVAR(taskRush), _this, _group] call CBA_fnc_targetEvent;
+};
+
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
