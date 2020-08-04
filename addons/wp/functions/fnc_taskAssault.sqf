@@ -34,7 +34,10 @@ params [
 ];
 
 // sort grp
-if (!local _group) exitWith {false};
+if (!local _group) exitWith {
+    [QGVAR(taskAssault), _this, _group] call CBA_fnc_targetEvent;
+};
+
 _group = _group call CBA_fnc_getGroup;
 _group enableAttack false;
 _group allowFleeing 0;
