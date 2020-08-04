@@ -20,7 +20,10 @@
 params [["_group", grpNull, [grpNull, objNull]]];
 
 // sort group
-if (!local _group) exitWith {false};
+if (!local _group) exitWith {
+    [QGVAR(taskReset), _this, _group] call CBA_fnc_targetEvent;
+};
+
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // units
