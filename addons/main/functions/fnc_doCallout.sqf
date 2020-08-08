@@ -41,6 +41,24 @@ if (_time >= time) exitWith {
 private _speaker = speaker _unit;
 if (toUpper(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if Unit is "Mute"
 
+switch (toLower(_callout)) do {
+    case ("contact"): {
+        _callout = selectRandom ["ContactE_1", "ContactE_2", "ContactE_3", "Danger"];
+    };
+    case ("grenadeout"): {
+        _callout = selectRandom ["ThrowingGrenadeE_1", "ThrowingGrenadeE_2", "ThrowingGrenadeE_3"];
+    };
+    case ("mandown"): {
+        _callout = selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
+    };
+    case ("suppress"): {
+        _callout = selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"];
+    };
+    case ("panic"): {
+        _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"];
+    };
+};
+
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
 private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
 
@@ -50,36 +68,11 @@ if (isNil "_cachedSounds") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
 
-    private _calloutConfigName = switch (toLower(_callout)) do {
-        case ("contact"): {
-            selectRandom ["ContactE_1", "ContactE_2", "ContactE_3", "Danger"];
-        };
-        case ("grenadeout"): {
-            selectRandom ["ThrowingGrenadeE_1", "ThrowingGrenadeE_2", "ThrowingGrenadeE_3"];
-        };
-        case ("mandown"): {
-            selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
-        };
-        case ("suppress"): {
-            selectRandom ["CombatGenericE", "CheeringE", "SuppressingE", "Suppressing"]
-        };
-        case ("panic"): {
-            selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"]
-        };
-        default {
-            if (isArray (_protocolConfig >> _callout)) then {
-                _callout;
-            } else {
-                "";
-            };
-        };
-    };
-
-    if (_calloutConfigName == "") exitWith {
+    if (isArray (_protocolConfig >> _callout)) exitWith {
         breakOut QGVAR(doCallout_main);
     };
 
-    _cachedSounds = getArray (_protocolConfig >> _calloutConfigName);
+    _cachedSounds = getArray (_protocolConfig >> _callout);
 
     {
         private _sound = _x;
