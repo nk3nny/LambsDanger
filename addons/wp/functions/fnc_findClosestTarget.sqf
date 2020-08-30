@@ -36,14 +36,15 @@ _units = _units select {
     !(side _x in _sideExclusion)
     && { _x distance2D _pos < _radius }
     && { (getPosATL _x) select 2 < 200 }
+    && {[side _x, side _group] call BIS_fnc_sideIsEnemy}
 };
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _units = _units select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
 };
-if (_units isEqualTo []) exitWith {ObjNull};
+if (_units isEqualTo []) exitWith { objNull };
 
-private _unitDistances = _units apply {[_groupLeader distance2D _x, _x]};
+private _unitDistances = _units apply { [_groupLeader distance2D _x, _x] };
 _unitDistances sort true;
 
 (_unitDistances param [0, [0, objNull]]) param [1, objNull]
