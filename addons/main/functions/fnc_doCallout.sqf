@@ -94,7 +94,7 @@ if (_cachedSounds isEqualTo []) exitWith {
 private _sound = selectRandom _cachedSounds;
 if (_sound == "") exitWith {
     if (GVAR(debug_functions)) then {
-        private _str = format ["ERROR: Sound File for Callout %1 Found", _protocolConfig >> _callout];
+        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
         _str call FUNC(debugLog);
         _str call BIS_fnc_error;
     };
