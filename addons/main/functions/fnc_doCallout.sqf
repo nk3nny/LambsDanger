@@ -87,7 +87,9 @@ if (isNil "_cachedSounds") then {
 // no sounds found
 if (_cachedSounds isEqualTo []) exitWith {
     if (GVAR(debug_functions)) then {
-        format ["ERROR: Sound Files for Callout %1 Found", _cacheName] call FUNC(debugLog);
+        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        _str call FUNC(debugLog);
+        _str call BIS_fnc_error;
     };
 };
 
