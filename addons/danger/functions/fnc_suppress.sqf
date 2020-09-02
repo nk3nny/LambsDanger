@@ -68,7 +68,7 @@ if (_unit ammo (currentWeapon _unit) > 32) then {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call EFUNC(main,debugLog);
+    ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_unit distance ASLtoAGL _pos)] call EFUNC(main,debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];

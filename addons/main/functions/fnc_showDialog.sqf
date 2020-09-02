@@ -119,7 +119,7 @@ private _fnc_AddTextField = {
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };
-    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _cacheName = format ["%1_%2_%3", QGVAR(ZeusCache), _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
@@ -141,7 +141,7 @@ private _fnc_AddBoolean = {
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };
-    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _cacheName = format ["%1_%2_%3", QGVAR(ZeusCache), _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
@@ -161,7 +161,7 @@ private _fnc_AddDropDown = {
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };
-    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _cacheName = format ["%1_%2_%3", QGVAR(ZeusCache), _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
@@ -197,7 +197,7 @@ private _fnc_AddSlider = {
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };
-    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _cacheName = format ["%1_%2_%3", QGVAR(ZeusCache), _name, _text];
     _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     // if no Default is Given we use the middle of the Range input
@@ -279,7 +279,7 @@ private _fnc_AddSideSelector = {
     params ["_text", "", "_tooltip", "_sides", "_default"];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
-    private _cacheName = format ["lambs_%1_%2", _name, _text];
+    private _cacheName = format ["%1_%2_%3", QGVAR(ZeusCache), _name, _text];
     private _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     [_text, _tooltip] call _fnc_CreateLabel;

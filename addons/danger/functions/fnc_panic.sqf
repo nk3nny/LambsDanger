@@ -27,7 +27,7 @@ _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Panic", EGVAR(main,debug_functions)];
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 panic! (%2)", side _unit, name _unit] call EFUNC(main,debugLog);};
 
 // callout
 if (RND(0.4)) then {

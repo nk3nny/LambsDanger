@@ -50,7 +50,7 @@ if (RND(0.8) || { _buildings isEqualTo [] }) exitWith {
 
         // debug
         if (EGVAR(main,debug_functions)) then {
-            format ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call EFUNC(main,debugLog);
+            ["%1 assaulting position (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call EFUNC(main,debugLog);
             private _sphere = createSimpleObject ["Sign_Sphere25cm_F", ATLtoASL (_unit getHideFrom _target), true];
             _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
             [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
@@ -66,7 +66,7 @@ _unit doMove ((selectRandom _buildings) vectorAdd [0.5 - random 1, 0.5 - random 
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 assaulting buildings (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call EFUNC(main,debugLog);
+    ["%1 assaulting buildings (%2 @ %3m)", side _unit, name _unit, round (_unit distance _target)] call EFUNC(main,debugLog);
 
     private _sphereList = [];
     {

@@ -43,7 +43,7 @@ if ((_unit distance _enemy) < 7) exitWith {
 
     // debug
     if (EGVAR(main,debug_functions)) then {
-        format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call EFUNC(main,debugLog);
+        ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call EFUNC(main,debugLog);
         private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
     };
@@ -116,7 +116,7 @@ if (_buildingPos isEqualTo []) then {
 
 // debug
 if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
-    format ["%1 assaulting building (%2 @ %3m - %4x spots left)",
+    ["%1 assaulting building (%2 @ %3m - %4x spots left)",
         side _unit,
         name _unit,
         round (_unit distance _buildingPosSelected),

@@ -83,7 +83,7 @@ _unit forceSpeed ([_unit, _bodyPos] call FUNC(assaultSpeed));
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 checking body (%2 @ %3m)", side _unit, name _unit, round (_unit distance _body)] call EFUNC(main,debugLog);
+    ["%1 checking body (%2 @ %3m)", side _unit, name _unit, round (_unit distance _body)] call EFUNC(main,debugLog);
 
     // debug arrow
     private _help = createSimpleObject ["Sign_Arrow_Large_Yellow_F" ,getPosASL _body, true ];

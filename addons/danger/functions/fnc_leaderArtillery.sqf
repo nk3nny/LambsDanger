@@ -22,12 +22,12 @@ if (_pos isEqualTo []) then {
 };
 
 // check if mod active
-if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call EFUNC(main,debugLog);}};
+if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {["%1 Artillery failed -- mod not enabled", side _unit] call EFUNC(main,debugLog);}};
 
 // settings
 
 // exit on no ready artillery
-if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (EGVAR(main,debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);}};
+if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (EGVAR(main,debug_functions)) then {["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);}};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery", EGVAR(main,debug_functions)];

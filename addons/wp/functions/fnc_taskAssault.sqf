@@ -156,7 +156,7 @@ waitUntil {
 
     // debug
     if (EGVAR(main,debug_functions)) then {
-        format ["%1 %2: %3 units moving %4M",
+        ["%1 %2: %3 units moving %4M",
             side _group,
             ["taskAssault", "taskRetreat"] select _retreat,
             count (_group getVariable [QGVAR(taskAssaultMembers), []]),
@@ -177,7 +177,7 @@ _group setBehaviour "AWARE";
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 %2 %3 Completed",
+    ["%1 %2 %3 Completed",
         side _group,
         ["taskAssault", "taskRetreat"] select _retreat,
         _group

@@ -108,7 +108,7 @@ private _fnc_assault = {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call EFUNC(main,debugLog);
+    ["%1 group ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos] call EFUNC(main,debugLog);
 };
 
 // end

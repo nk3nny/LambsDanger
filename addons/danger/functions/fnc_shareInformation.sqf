@@ -64,7 +64,7 @@ if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call EFUNC(ma
 if (EGVAR(main,debug_functions)) then {
 
     // debug message
-    format ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call EFUNC(main,debugLog);
+    ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call EFUNC(main,debugLog);
 
     // debug marker
     private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor),"mil_dot"] call EFUNC(main,dotMarker);

@@ -45,7 +45,7 @@ private _fnc_find = {
     params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {!((_x buildingPos -1) isEqualTo [])};
-    _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
+    _building = _building select {count (_x getVariable [["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
     if !(_area isEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
@@ -80,7 +80,7 @@ private _fnc_act = {
 
         // debug
         if (EGVAR(main,debug_functions)) then {
-            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
+            ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
             createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         };
 
@@ -208,7 +208,7 @@ waitUntil {
     [_enemy, _group, _building] call _fnc_act;
 
     // debug
-    if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(main,debug_functions)) then {["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
@@ -226,7 +226,7 @@ waitUntil {
 } foreach units _group;
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
 
 // end
 true

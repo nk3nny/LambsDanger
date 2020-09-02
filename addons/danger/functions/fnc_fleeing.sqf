@@ -93,7 +93,7 @@ if (_unit distance2D _enemy < 120) then {
 };
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
 
 // end
 true

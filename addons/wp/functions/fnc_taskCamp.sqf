@@ -241,7 +241,7 @@ _wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end
