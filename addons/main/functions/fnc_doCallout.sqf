@@ -34,7 +34,7 @@ if (isPlayer _unit || {!(_unit call EFUNC(main,isAlive))}) exitWith {};
 private _time = _unit getVariable [QGVAR(calloutTime), 0];
 if (_time >= time) exitWith {
     if (GVAR(debug_functions)) then {
-        ["%1 callout too early (%2 in %3s)", side _unit, name _unit, time - _time] call FUNC(debugLog);
+        format ["%1 callout too early (%2 in %3s)", side _unit, name _unit, time - _time] call FUNC(debugLog);
     };
 };
 
