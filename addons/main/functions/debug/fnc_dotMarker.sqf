@@ -18,8 +18,12 @@
  * Public: Yes
 */
 params ["_pos", ["_text", ""], ["_color", "colorBlack"], ["_type", "mil_dot"]];
+
 _pos = _pos call CBA_fnc_getPos;
 
+if (_text isEqualType []) then {
+    _text = format _text;
+};
 // create
 private _m = createMarkerLocal [format["mdot_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
 _m setMarkerShapeLocal "Icon";

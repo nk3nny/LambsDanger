@@ -48,7 +48,7 @@ private _data = [];
         };
         default {
             _d = ctrlText _ctrl;
-            hint format ["%1 type unknown %2", _type, _x];
+            ["ERROR", format ["%1 type unknown %2", _type, _x], 10] call BIS_fnc_curatorHint;
         };
     };
     private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];

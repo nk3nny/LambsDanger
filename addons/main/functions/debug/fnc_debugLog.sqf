@@ -16,5 +16,8 @@
 */
 
 params ["_str"];
+if (_this isEqualType []) then {
+    _str = format _this;
+};
 systemChat _str;
 diag_log ("[LAMBS Danger FSM] : " + _str);
