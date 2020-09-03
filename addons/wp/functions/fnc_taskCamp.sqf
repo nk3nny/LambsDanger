@@ -58,7 +58,7 @@ private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings)
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
-_weapons = _weapons select {locked _x != 2 && (_x emptyPositions "Gunner") > 0};
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};

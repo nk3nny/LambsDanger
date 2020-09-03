@@ -61,7 +61,7 @@ if (_sortBasedOnHeight) then {
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 
 // orders
 _group setBehaviour "SAFE";
