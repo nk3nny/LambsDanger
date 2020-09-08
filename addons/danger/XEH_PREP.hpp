@@ -17,8 +17,6 @@ PREP(fsmAllowAnimation);
 PREP(isCoward);
 PREP(isForced);
 PREP(isLeader);
-PREP(doHide);
-PREP(doDodge);
 PREP(leaderArtillery);
 PREP(leaderAssault);
 PREP(leaderAssess);
