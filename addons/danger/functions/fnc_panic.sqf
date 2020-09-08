@@ -78,7 +78,7 @@ if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
 
 // chance to randomly wave
 if (RND(0.4)) then {
-    [_unit, ["GestureCover"]] call EFUNC(main,doGesture);
+    [_unit, "GestureCover"] call EFUNC(main,doGesture);
 };
 
 // return

@@ -114,7 +114,6 @@ if (_plan isEqualTo [] || {_target isEqualTo []} || {count units _unit < 2}) exi
     false
 };
 
-
 // group units
 private _units = [_unit] call EFUNC(main,findReadyUnits);
 
@@ -155,8 +154,8 @@ switch (_plan) do {
         [FUNC(tacticsGarrison), [_unit, _target], 12 + random 6] call CBA_fnc_waitAndExecute;
     };
     case 3: {
-        // rush
-        [FUNC(tacticsRush), [_unit, _target], 30] call CBA_fnc_waitAndExecute;
+        // rush ~ assault
+        [FUNC(tacticsAssault), [_unit, _target], 30] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case 4: {
@@ -164,7 +163,7 @@ switch (_plan) do {
         [FUNC(tacticsSuppress), [_unit, _target], 6 + random 4] call CBA_fnc_waitAndExecute;
     };
     default {
-        // hide
+        // hide from armor
         [FUNC(tacticsHide), [_unit, _target, true], random 3] call CBA_fnc_waitAndExecute;
     };
 };

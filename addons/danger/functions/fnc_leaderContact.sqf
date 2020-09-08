@@ -25,7 +25,7 @@ _unit forceSpeed 0;
 _unit setUnitPosWeak "MIDDLE";
 
 // gesture
-[_unit, ["gesturePoint"]] call EFUNC(main,doGesture);
+[_unit, "gesturePoint"] call EFUNC(main,doGesture);
 
 // gather the stray flock
 {

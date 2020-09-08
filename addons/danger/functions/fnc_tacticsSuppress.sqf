@@ -72,7 +72,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 // gesture
-[_unit, ["gesturePoint"]] call EFUNC(main,doGesture);
+[_unit, "gesturePoint"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", "SuppressiveFire", 125] call EFUNC(main,doCallout);

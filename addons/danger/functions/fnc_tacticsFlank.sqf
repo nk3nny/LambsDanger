@@ -83,7 +83,7 @@ _unit setVariable [QGVAR(currentTask), "Tactics Flank", EGVAR(main,debug_functio
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
-[_units select (count _units - 1), ["gestureGoB"]] call EFUNC(main,doGesture);
+[_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call EFUNC(main,doCallout);

@@ -51,8 +51,8 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Assault", EGVAR(main,debug_functions)];
 
 // gesture
-[_unit, ["gestureGo"]] call EFUNC(main,doGesture);
-[_units select (count _units - 1), ["gestureGoB"]] call EFUNC(main,doGesture);
+[_unit, "gestureGo"] call EFUNC(main,doGesture);
+[_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);

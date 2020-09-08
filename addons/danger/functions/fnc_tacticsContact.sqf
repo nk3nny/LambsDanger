@@ -83,8 +83,8 @@ private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
     //[{_this setVariable [QGVAR(forceMove), nil];}, _x, 2 + random 4] call CBA_fnc_waitAndExecute;
 
     // force stance
-    if (stance _x isEqualTo "STAND") then {_x setUnitPosWeak "MIDDLE";[_x, ["DOWN"], true] call EFUNC(main,doGesture);};
-    if (stance _x isEqualTo "CROUCH") then {_x setUnitPosWeak "DOWN";[_x, ["DOWN"], true] call EFUNC(main,doGesture);};
+    if (stance _x isEqualTo "STAND") then {_x setUnitPosWeak "MIDDLE";[_x, "DOWN", true] call EFUNC(main,doGesture);};
+    if (stance _x isEqualTo "CROUCH") then {_x setUnitPosWeak "DOWN";[_x, "DOWN", true] call EFUNC(main,doGesture);};
 
     // clear up existing building positions - nk
     _buildings deleteAt 0;

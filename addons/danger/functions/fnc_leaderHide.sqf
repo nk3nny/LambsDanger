@@ -25,7 +25,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Hide", EGVAR(main,debug_functions)];
 
 // gesture
-[_unit, ["gestureCover"]] call EFUNC(main,doGesture);
+[_unit, "gestureCover"] call EFUNC(main,doGesture);
 
 // callout
 [_unit, behaviour _unit, "TakeCover", 125] call EFUNC(main,doCallout);

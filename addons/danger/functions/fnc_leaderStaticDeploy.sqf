@@ -133,7 +133,7 @@ if (_weaponPos isEqualTo []) then {
         // assistant
         doStop _assistant;
         _assistant doWatch _pos;
-        [_assistant, ["gesturePoint"]] call EFUNC(main,doGesture);
+        [_assistant, "gesturePoint"] call EFUNC(main,doGesture);
     },
     [_gunner, _assistant, _pos, _weaponPos, _EH], 8,
     {

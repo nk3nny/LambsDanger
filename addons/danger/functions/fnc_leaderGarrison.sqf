@@ -38,7 +38,7 @@ _pos = [_pos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top t
 _pos pushBack _target;
 
 // leader ~ rally animation here
-[_unit, ["gestureFollow"]] call EFUNC(main,doGesture);
+[_unit, "gestureFollow"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", "RallyUp", 125] call EFUNC(main,doCallout);

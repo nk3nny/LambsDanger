@@ -39,7 +39,7 @@ if (isNull _enemy) then {_enemy = _unit findNearestEnemy _pos;};
 [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
 
 // leaders gestures
-if (count units _unit > 1) then {[formationLeader _unit, ["gestureFreeze"]] call EFUNC(main,doGesture);};
+if (count units _unit > 1) then {[formationLeader _unit, "gestureFreeze"] call EFUNC(main,doGesture);};
 
 // Callout
 _enemy = vehicle _enemy;
