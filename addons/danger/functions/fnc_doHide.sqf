@@ -42,7 +42,7 @@ if (_buildings isEqualTo []) then {
 
 // variables
 _unit setVariable [QGVAR(currentTarget), _danger, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Hide", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Hide!", EGVAR(main,debug_functions)];
 
 // settings
 _unit forceSpeed 24;

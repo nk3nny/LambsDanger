@@ -54,11 +54,11 @@ if (RND(0.4) && {count units _unit > 1}) then {
 };
 
 // do it!
-_unit forceSpeed 0;
+//_unit forceSpeed 0;
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire
-_unit setVariable [QGVAR(currentTask), "Suppressive Fire", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Suppress!", EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 
 // extend suppressive fire for machineguns

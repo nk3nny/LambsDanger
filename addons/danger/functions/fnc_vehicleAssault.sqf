@@ -24,7 +24,7 @@ private _vehicle = vehicle _unit;
 if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
-private _predictedPos = (_unit getHideFrom _target);
+private _predictedPos = _unit getHideFrom _target;
 if ((_unit distance2D _pos) < 50) then {_pos = _predictedPos};
 
 //  target not on foot or too close
@@ -32,13 +32,12 @@ if (
     isNull _target
     || {!(_target isKindOf "Man")}
     || {(_unit distance2D _predictedPos) < GVAR(minSuppression_range)}
-    || {terrainIntersectASL [eyePos _vehicle, ATLtoASL _predictedPos]}
+    || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
 // define buildings
 if (_buildings isEqualTo []) then {
     _buildings = [_pos, 28, false, false] call EFUNC(main,findBuildings);
-    //_buildings = _buildings select {!(terrainIntersect [getPos _unit, getPos _x])};
 };
 
 // set task
@@ -47,7 +46,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_funct
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = if (RND(0.4)) then { ([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0 } else { selectRandom _buildings };
+    _buildings = [([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0, selectRandom _buildings] select (RND(0.4));
     _buildings = _buildings buildingPos -1;
 };
 
@@ -60,7 +59,7 @@ private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit,
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // set max distance
-private _distance = (_unit distance _pos) min 650;
+private _distance = (_unit distance _pos) min 600;
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position

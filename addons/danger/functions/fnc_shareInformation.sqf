@@ -19,9 +19,15 @@
 */
 params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 
+// no target
+if (isNull _target) then {
+    _target = _unit findNearestEnemy _unit;
+};
+
 // nil or captured
 if (
-    _unit distance _target > viewDistance
+    isNull _target
+    //|| {_unit distance _target > viewDistance}
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
     || {GVAR(radio_disabled)}
@@ -35,7 +41,7 @@ _unit setVariable [QGVAR(currentTask), "Share Information", EGVAR(main,debug_fun
 
 // find units
 private _groups = allGroups select {
-    leader _x distance2d _unit < _range
+    leader _x distance2D _unit < _range
     && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
     && {behaviour leader _x != "CARELESS"}
     && {_x != group _unit}
@@ -50,15 +56,15 @@ private _knowsAbout = _unit knowsAbout _target;
     };
 
     if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
-        _x setBehaviour "COMBAT";
-        _x setFormDir ((leader _x) getDir _unit);
+        [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
+        [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];
     };
 } forEach _groups;
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call EFUNC(main,eventCallback);
 
 // play animation
-if (RND(0.2) && {_range > 100}) then {[_unit, ["HandSignalRadio"]] call EFUNC(main,doGesture);};
+if (RND(0.2) && {_range > 100}) then {[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);};
 
 // debug
 if (EGVAR(main,debug_functions)) then {

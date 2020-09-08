@@ -10,14 +10,13 @@ class CfgFSMs {
                 };
             };
             // drop to ground in cover
-            /*
             class Drop_to_ground_1 {
                 class Init {
                     function = "nothing";
                     parameters[] = {};
                     thresholds[] = {};
                 };
-            };*/
+            };
             class Search_path__Covering {
                 class Init {
                     function = "searchPath";

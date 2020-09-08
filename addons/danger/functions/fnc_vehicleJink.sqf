@@ -57,6 +57,9 @@ _destination = selectRandom _destination;
 // refresh ready
 (effectiveCommander _unit) doMove (getPosASL _unit);
 
+// make tanks pop smoke when moving
+// _vehicle forceweaponfire ["SmokeLauncher", "SmokeLauncher"];     <-- not working!
+
 // execute
 _vehicle doMove _destination;
 

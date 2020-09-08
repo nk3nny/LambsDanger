@@ -11,14 +11,23 @@ GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 GVAR(fsmPriorities) = [
     3,      // DCEnemyDetected
     1,      // DCFire
-    6,      // DCHit
-    5,      // DCEnemyNear
+    7,      // DCHit
+    4,      // DCEnemyNear
     3,      // DCExplosion
     1,      // DCDeadBodyGroup
     1,      // DCDeadBody
     2,      // DCScream
-    4,      // DCCanFire
-    6       // DCBulletClose
+    6,      // DCCanFire
+    5       // DCBulletClose
 ];
+
+// FSM setting ~ minimum time for danger to last
+GVAR(dangerUntil) = 25;
+
+// FSM setting ~ range to search for hide and cover
+GVAR(searchForHide) = 9;
+
+// FSM setting ~ indoor movement while assessing chance as a percentage
+GVAR(indoorMove) = 15;
 
 ADDON = true;

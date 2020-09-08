@@ -18,10 +18,14 @@
 params ["_unit", "_pos"];
 
 private _vehicle = vehicle _unit;
+private _pos = _pos call CBA_fnc_getPos;
+
+// pos
+_pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
 
 // too close + high speed + height over ground
 if (
-    _unit distance2d _pos < GVAR(minSuppression_range)
+    _unit distance2D _pos < GVAR(minSuppression_range)
     || {terrainIntersectASL [eyePos _unit, AGLtoASL _pos]}
     || {speed _vehicle > 12}
     || {(_pos select 2) > 45}
@@ -37,16 +41,12 @@ if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehic
 _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Suppress", EGVAR(main,debug_functions)];
 
-// pos
-_pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
-
 // trace
 private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // recheck
 if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
-
 private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 

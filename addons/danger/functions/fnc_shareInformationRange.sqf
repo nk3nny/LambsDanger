@@ -26,8 +26,8 @@ _range = switch (side _unit) do {
     default { GVAR(radio_GUER) };
 };
 
-// tweak by VD
-_range = _range min viewDistance;
+// tweak by VD ~ uncommented, not sure why it was there in the first place - nkenny
+//_range = _range min viewDistance;
 
 // Sort long range radios
 private _target = _unit;
