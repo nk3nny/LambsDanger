@@ -68,10 +68,6 @@ if (isNil "_cachedSounds") then {
         _protocolConfig = _protocolConfig >> _behavior;
     };
 
-    if (isArray (_protocolConfig >> _callout)) exitWith {
-        breakOut QGVAR(doCallout_main);
-    };
-
     _cachedSounds = getArray (_protocolConfig >> _callout);
 
     {
@@ -89,10 +85,22 @@ if (isNil "_cachedSounds") then {
 };
 
 // no sounds found
-if (_cachedSounds isEqualTo []) exitWith {};
+if (_cachedSounds isEqualTo []) exitWith {
+    if (GVAR(debug_functions)) then {
+        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        _str call FUNC(debugLog);
+        _str call BIS_fnc_error;
+    };
+};
 
 private _sound = selectRandom _cachedSounds;
-if (_sound == "") exitWith {};
+if (_sound == "") exitWith {
+    if (GVAR(debug_functions)) then {
+        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        _str call FUNC(debugLog);
+        _str call BIS_fnc_error;
+    };
+};
 playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{

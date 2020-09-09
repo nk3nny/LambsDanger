@@ -96,7 +96,7 @@ switch (_mode) do {
             private _exitCondition = _logic getVariable [QGVAR(ExitConditions), TASK_GARRISON_EXITCONDITIONS];
             private _patrol = _logic getVariable [QGVAR(Patrol), TASK_GARRISON_PATROL];
             {
-                [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition - 2, _patrol] remoteExec [QFUNC(taskGarrison), leader _x];
+                [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition, _patrol] remoteExec [QFUNC(taskGarrison), leader _x];
             } forEach _groups;
 
             deleteVehicle _logic;

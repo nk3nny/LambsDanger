@@ -27,22 +27,6 @@ class Cfg3DEN {
                 };
             };
         };
-        class GVAR(ExitConditions): Title {
-            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 5));
-            attributeSave = QUOTE(lbCurSel (_this controlsGroupCtrl 100));
-            class Controls: Controls {
-                class Title: Title {};
-                class Value: ctrlToolbox {
-                    idc = 100;
-                    x = QUOTE(48 * GRID_3DEN_W);
-                    w = QUOTE(82 * GRID_3DEN_W);
-                    h = QUOTE(5  * GRID_3DEN_H);
-                    rows = 1;
-                    columns = 6;
-                    strings[] = { CSTRING(Random), CSTRING(All), CSTRING(FiredNear), CSTRING(Fired), CSTRING(Hit), CSTRING(None) };
-                };
-            };
-        };
     };
     class Object {
         class AttributeCategories {
