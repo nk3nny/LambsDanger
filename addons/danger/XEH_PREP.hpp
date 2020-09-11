@@ -1,4 +1,3 @@
-//PREP(assaultBuilding);
 PREP(assaultSpeed);
 PREP(brain);
 PREP(brainAdjust);
@@ -8,6 +7,7 @@ PREP(brainForced);
 PREP(brainHide);
 PREP(brainReact);
 PREP(doAssault);
+PREP(doAssaultBuilding);
 PREP(doCover);
 PREP(doDodge);
 PREP(doFleeing);

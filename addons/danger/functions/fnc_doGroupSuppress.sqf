@@ -55,7 +55,7 @@ _cycle = _cycle - 1;
 // recursive cyclic
 if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
-        _fnc_suppress,
+        FUNC(doGroupSuppress,)
         [_cycle, _units, _vehicles, _pos],
         2 + random 2
     ] call CBA_fnc_waitAndExecute;

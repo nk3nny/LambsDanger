@@ -45,7 +45,7 @@ _cycle = _cycle - 1;
 // recursive cyclic
 if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
-        FUNC(tacticsAssaultActual),
+        FUNC(doGroupAssault),
         [_cycle, _units, _pos],
         10
     ] call CBA_fnc_waitAndExecute;

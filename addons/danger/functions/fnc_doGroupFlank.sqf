@@ -58,7 +58,7 @@ _cycle = _cycle - 1;
 // recursive cyclic
 if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
-        FUNC(tacticsFlankActual),
+        FUNC(doGroupFlank),
         [_cycle, _units, _vehicles, _pos, _overwatch],
         12 + random 9
     ] call CBA_fnc_waitAndExecute;
