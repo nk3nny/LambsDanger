@@ -21,6 +21,11 @@ params ["_unit", ["_queue", []]];
 // timeout
 private _timeout = time + 3;
 
+// unconscious or dead
+if !(_unit call EFUNC(main,isAlive)) exitWith {
+    -1
+};
+
 // fleeing
 if (fleeing _unit) exitWith {
     [_unit] call FUNC(doFleeing);

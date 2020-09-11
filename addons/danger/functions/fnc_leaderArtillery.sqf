@@ -42,7 +42,7 @@ _unit setVariable [QGVAR(forceMove), true];
 
 // Gesture
 doStop _unit;
-[_unit, ["HandSignalRadio"]] call EFUNC(main,doGesture);
+[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
 
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {

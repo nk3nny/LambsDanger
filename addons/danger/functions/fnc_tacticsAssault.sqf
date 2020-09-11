@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 2], ["_Zzz", 22]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 2], ["_delay", 22]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -30,14 +30,15 @@ _target = _target call CBA_fnc_getPos;
             _group setVariable [QGVAR(tactics), nil];
             _group setSpeedMode _speedMode;
             {_x setVariable [QGVAR(forceMove), nil];} foreach units _group;
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     [group _unit, speedMode _unit],
-    _Zzz
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
-if (!alive _unit) exitWith {false};
+if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
@@ -52,6 +53,9 @@ _buildings pushBack _target;
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
+
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "Assault"];
 
 // updates CQB group variable
 group _unit setVariable [QGVAR(CQB_pos), _buildings];
@@ -73,9 +77,9 @@ group _unit setVariable [QGVAR(CQB_pos), _buildings];
 (group _unit) setFormDir (_unit getDir _target);
 
 // execute function
-[_cycle, _units, _buildings] call FUNC(tacticsAssaultActual);
+[_cycle, _units, _buildings] call FUNC(doGroupAssault);
 
-// set speedmode
+// set speedmode    // experiment with this! - nkenny
 _unit setSpeedMode "FULL";
 
 // debug

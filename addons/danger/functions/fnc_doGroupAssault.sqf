@@ -12,7 +12,7 @@
  * bool
  *
  * Example:
- * [units bob] call lambs_danger_fnc_tacticsRushActual;
+ * [units bob] call lambs_danger_fnc_doGroupAssault;
  *
  * Public: No
 */

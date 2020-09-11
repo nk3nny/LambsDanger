@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Leader calls for group to hide a special mode adds anti-armour tactics
+ * Leader calls for group to hide a special mode with optional anti-armour tactics
  *
  * Arguments:
  * 0: Group leader <OBJECT>
@@ -17,7 +17,7 @@
  * Public: No
 */
 
-params ["_unit", "_target", ["_antiTank", false], ["_buildings", []], ["_Zzz", 180]];
+params ["_unit", "_target", ["_antiTank", false], ["_buildings", []], ["_delay", 180]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -28,17 +28,21 @@ _target = _target call CBA_fnc_getPos;
         params "_group";
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     group _unit,
-    _Zzz
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
-if (!alive _unit) exitWith {false};
+if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Hide", EGVAR(main,debug_functions)];
+
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "Hiding"];
 
 // gesture
 [_unit, "gestureCover"] call EFUNC(main,doGesture);

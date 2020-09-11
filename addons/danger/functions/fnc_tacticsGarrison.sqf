@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_Zzz", 60]];
+params ["_unit", "_target", ["_units", []], ["_delay", 60]];
 
 // reset tactics
 [
@@ -28,14 +28,15 @@ params ["_unit", "_target", ["_units", []], ["_Zzz", 60]];
             _group enableAttack _enableAttack;
             _group setSpeedMode _speedMode;
             _group setFormation _formation;
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     [group _unit, speedMode _unit, attackEnabled _unit, formation _unit],
-    _Zzz
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
-if (!alive _unit) exitWith {false};
+if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
@@ -56,6 +57,7 @@ _target = _target call CBA_fnc_getPos;
 
 // buildings
 private _buildings = [_target, 9, true, false] call EFUNC(main,findBuildings);
+_buildings = [_buildings, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
 if (_buildings isEqualTo []) exitWith {false};
 [_buildings, true] call CBA_fnc_shuffle;
 
@@ -73,6 +75,9 @@ _unit enableAttack false;
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_functions)];
+
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "Garrison/Rally"];
 
 // updates CQB group variable
 group _unit setVariable [QGVAR(CQB_pos), _buildings];

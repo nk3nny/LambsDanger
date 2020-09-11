@@ -28,18 +28,24 @@
 
 params ["_unit", ["_type", 0], ["_target", objNull]];
 
-// check
-if (isNull _target) exitWith {
-    time + random 2
-};
-
 // timeout
 private _timeout = time + 4;
+
+// check
+if (isNull _target) exitWith {
+    _unit forceSpeed 1;
+    _timeout
+};
+
+// look at_this 
+if (_unit knowsAbout _target > 3.5) then {
+    _unit lookAt _target; 
+};
 
 // distance
 private _distance = _unit distance2D _target;
 
-// near results in cqb?
+// near, go for CQB
 if (_distance < GVAR(CQB_range)) exitWith {
 
     [_unit, _target] call FUNC(doAssault);
@@ -47,7 +53,7 @@ if (_distance < GVAR(CQB_range)) exitWith {
 
 };
 
-// long range shoot
+// far, try to suppress
 if (_type in [0, 8] && {needReload _unit < 0.6}) exitWith {
 
     [_unit, eyePos _target] call FUNC(doSuppress);

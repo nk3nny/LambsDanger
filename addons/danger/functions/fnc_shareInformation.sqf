@@ -34,7 +34,7 @@ if (
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Share Information", EGVAR(main,debug_functions)];
+//_unit setVariable [QGVAR(currentTask), "Share Information", EGVAR(main,debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
 
 // range
 ([_unit, _range, _override] call FUNC(shareInformationRange)) params ["_unit", "_range"];

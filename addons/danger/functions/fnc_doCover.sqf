@@ -23,10 +23,6 @@ if (_pos isEqualTo []) then {
     _pos = [(_pos select 0) getPos [-1, _unit getDir (_pos select 0)], getpos _unit] select (_pos isEqualTo []);
 };
 
-// lower stance
-if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
-//if (stance _unit isEqualTo "CROUCH") then {_unit setUnitPosWeak "DOWN";};
-
 // force anim
 if (_unit distance2D _pos < 0.8) exitWith {_unit};
 private _direction = _unit getRelDir _pos;
@@ -39,6 +35,10 @@ private _anim = call {
 };
 [_unit, selectRandom _anim, true] call EFUNC(main,doGesture);
 _unit setDestination [_pos, "FORMATION PLANNED", false];
+
+// DEBUG BRUTE
+systemchat format ["%1 ## SEEKS COVER ## %2 (%3m)", side _unit, name _unit, round (_unit distance _pos)];
+[_pos, "", "ColorWhite"] call EFUNC(main,dotMarker);
 
 // end
 _unit

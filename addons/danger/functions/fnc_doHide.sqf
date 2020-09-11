@@ -31,7 +31,8 @@ if (
 // already inside -- exit
 if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
-    //_unit doWatch _danger;
+    _unit forceSpeed 0;
+    _unit doWatch _danger;
     false
 };
 

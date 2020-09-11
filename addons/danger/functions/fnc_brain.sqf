@@ -47,7 +47,7 @@ private _return = [false, false, false, false];
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
 
-    [false, false, false, true, [-1, getpos _unit, time + GVAR(dangerUntil), _unit findNearestEnemy _unit, 0]]
+    [false, false, false, true, [10, getpos _unit, time + GVAR(dangerUntil), _unit findNearestEnemy _unit, 0]]
 
 };
 
@@ -66,37 +66,45 @@ private _index = -1;
 
 // select cause
 private _causeArray = _queue select _index;
-_causeArray params ["_cause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
+_causeArray params ["_dangerCause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
 _causeArray pushBack (_unit distance2D _dangerPos); // add distance to dangerPos
 
 // Immediate actions
-if (_cause in [2, 9]) then {
+if (_dangerCause in [2, 9]) then {
     _return set [0, true];
 };
 
 // hide actions
-if (_cause in [0, 4, 7] || {getSuppression _unit > 0.9 && {random 100 < GVAR(panic_chance)}}) then {
+if (_dangerCause in [0, 4, 7] || {getSuppression _unit > 0.9 && {random 100 < GVAR(panic_chance)}}) then {
     _return set [1, true];
 
+    // callout
+    if (RND(0.4) && {getSuppression _unit > 0.8}) then {
+        [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
+    };
+
     // enemy near? don't hide
-    if (_cause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < GVAR(CQB_range)}) then {
+    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < GVAR(CQB_range)}) then {
         _return set [1, false];
     };
 };
 
 // engage actions   // should check all friendly sides?
-if (_cause in [0, 1, 3, 8] && {!(side _unit isEqualTo side _dangerCausedBy)}) then {
-    _return set [2, true];
+if (_dangerCause in [0, 1, 3, 8]) then {
+    _return set [2, !(side _unit isEqualTo side _dangerCausedBy)];
     _return set [1, _unit knowsAbout _dangerCausedBy < 1.4];    // hide if target unknown!
+
+    // look towards danger!
+    _unit doWatch _dangerPos;
 };
 
 // assess actions
-if (_cause in [5, 6]) then {
+if (_dangerCause in [5, 6]) then {
     _return set [3, true];
 };
 
 // gesture + share information
-if (_cause isEqualto 0) then {
+if (_dangerCause isEqualto 0) then {
     if (RND(0.5)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     if (isFormationLeader _unit) then {[_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);};
 };

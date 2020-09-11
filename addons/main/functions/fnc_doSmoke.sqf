@@ -28,7 +28,7 @@ if (_unit isEqualType []) then {_unit = selectRandom _unit;};
 if (_unit isEqualType grpNull) then {_unit = leader _unit;};
 
 // local
-if !(local _unit) exitWith {false};
+if (!local _unit || {isplayer _unit}) exitWith {false};
 
 // get magazines
 private _magazines = magazinesAmmo _unit;

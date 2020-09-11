@@ -8,7 +8,7 @@
  * 2: target threatening unit <ARRAY>
  *
  * Return Value:
- * bool
+ * timeout
  *
  * Example:
  * [bob, angryBob] call lambs_danger_fnc_brainReact;
@@ -28,4 +28,4 @@ params ["_unit", ["_pos", [0, 0, 0]]];
 [_unit, _pos] call FUNC(doDodge);
 
 // end
-true
+time + random 2

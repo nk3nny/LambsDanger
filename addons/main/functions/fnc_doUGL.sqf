@@ -26,7 +26,7 @@ if (_units isEqualType objNull) then {_units = [_units];};
 if (_units isEqualType grpNull) then {_units = units _units;};
 
 // local
-_units = _units select {local _x};
+_units = _units select {local _x || {isplayer _x}};
 
 // find grenade launcher
 private _flare = "";

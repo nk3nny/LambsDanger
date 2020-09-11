@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], ["_Zzz", 60]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], ["_delay", 60]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -31,18 +31,19 @@ _target = _target call CBA_fnc_getPos;
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
             _group setSpeedMode _speedMode;
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     [group _unit, speedMode _unit],
-    _Zzz
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
-if (!alive _unit) exitWith {false};
+if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
-    [_unit, _target] call FUNC(leaderGarrison);
+    [_unit, _target] call FUNC(tacticsGarrison);
     false
 };
 
@@ -81,6 +82,9 @@ if (_overwatch isEqualTo []) then {
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Flank", EGVAR(main,debug_functions)];
 
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "Flanking"];
+
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
 [_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
@@ -96,10 +100,10 @@ _unit doMove _overwatch;
 [_unit, _overwatch] call EFUNC(main,doSmoke);
 
 // function
-[_cycle, _units, _vehicles, _pos, _overwatch] call FUNC(tacticsFlankActual);
+[_cycle, _units, _vehicles, _pos, _overwatch] call FUNC(doGroupFlank);
 
-// set speedmode
-_unit setSpeedMode "FULL";
+// set speedmode    // NB: check this one - nkenny
+//_unit setSpeedMode "FULL";
 
 // debug
 if (EGVAR(main,debug_functions)) then {

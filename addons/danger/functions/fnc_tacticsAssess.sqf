@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_Zzz", 30]];
+params [["_unit", objNull, [objNull]], ["_delay", 30]];
 
 // check if group AI disabled
 if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
@@ -24,12 +24,19 @@ if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 group _unit setVariable [QGVAR(tactics), true];
 group _unit setVariable [QGVAR(contact), time + 300];
 
+// set current task
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
+
 // gather data
 private _enemies = (_unit targets [true, 600, [], 0]) select {_unit knowsAbout _x > 1};
 private _plan = [];
 
+// leader assess EH
+[QGVAR(OnAssess), [_unit, group _unit, _enemies]] call EFUNC(main,eventCallback);
+
 // sort plans
-private _target = [];
+private _pos = [];
 if !(_enemies isEqualTo []) then {
 
     // communicate
@@ -43,12 +50,30 @@ if !(_enemies isEqualTo []) then {
     };
     if (_tank != -1) then {
         _plan pushBack 0; // hide!
-        _target = _unit getHideFrom (_enemies select _tank);
+        _pos = _unit getHideFrom (_enemies select _tank);
+
+        // anti-vehicle callout
+        private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf (_enemies select _tank) >> "nameSound")) then {
+            getText (configFile >> "CfgVehicles" >> typeOf (_enemies select _tank) >> "nameSound")
+        } else {
+            "KeepFocused"
+        };
+        [_unit, behaviour _unit, _callout, 125] call EFUNC(main,doCallout);
+
     };
 
     // anti-infantry tactics
     _enemies = _enemies select {_x isKindOf "Man"};
     private _inside = _unit call EFUNC(main,isIndoor);
+
+    // Check for artillery ~ NB: support is far quicker now! and only targets infantry
+    private _artilleryTarget = _enemies findIf {
+        _x distance2D _unit > 200
+        && { isTouchingGround (vehicle _x) }
+    };
+    if (_artilleryTarget != -1 && { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
+        [_unit, getpos (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);
+    };
 
     // enemies within X meters of leader
     private _targets = _enemies findIf {
@@ -56,8 +81,8 @@ if !(_enemies isEqualTo []) then {
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
-        _plan append [2, 2, 3];    // garrison, garrison, rush
-        _target = [getpos (_enemies select _targets), getPos _unit] select _inside;
+        _plan append [2, 2, 3];    // garrison, garrison, assault
+        _pos = [getpos (_enemies select _targets), getPos _unit] select _inside;
     };
     
     // inside? stay safe
@@ -70,7 +95,7 @@ if !(_enemies isEqualTo []) then {
     };
     if (_targets != -1) exitWith {
         _plan pushBack 4;   // suppress
-        _target = getpos (_enemies select _targets);
+        _pos = getpos (_enemies select _targets);
     };
     // enemies away from buildings or below
     private _targets = _enemies findIf {
@@ -78,12 +103,17 @@ if !(_enemies isEqualTo []) then {
         && {_unit distance2D _x > GVAR(CQB_range)}
         && {
             ( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 10)
-            || { ([_x, GVAR(CQB_range) * 0.55] call liteDanger_fnc_findBuildings) isEqualTo []}
+            || { ([_x, GVAR(CQB_range) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
         };
     };
     if (_targets != -1) exitWith {
         _plan pushBack 1;   // flank
-        _target = getpos (_enemies select _targets);
+        if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
+        _pos = getpos (_enemies select _targets);
+
+        // mark enemy position for sympathetic fire
+        group _unit setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
+
     };
 
     // enemy inside buildings or fortified
@@ -91,36 +121,55 @@ if !(_enemies isEqualTo []) then {
         _x call EFUNC(main,isIndoor)
         || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
     };
-    if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
-        _plan append [1, 4];    // flank, suppress      // make smarter with examples from existing code from previous version! - nkenny
-        _target = getpos (_enemies select _targets);
-        [_unit, _target] call EFUNC(main,doSmoke);
+        if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
+
+        // basic plan
+        _plan append [1, 1];    // flank, flank
+        _pos = getpos (_enemies select _targets);
+
+        // combatmode
+        if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
+        if (combatMode _unit in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
+
+        // visibility / distance / no cover
+        if !(terrainIntersectASL [eyepos _unit, eyepos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
+        if (_unit distance2D _pos < 120) then {_plan pushBack 3;}; // assault
+        if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack 1;}; // flank
+
+        // conceal movement
+        [_unit, _pos] call EFUNC(main,doSmoke);
     };
 
 };
 
-// no plan ~exit with no executable plan
-if (_plan isEqualTo [] || {_target isEqualTo []} || {count units _unit < 2}) exitWith {
+// no plan ~ exit with no executable plan
+if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWith {
+
+    // callout
+    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
+
+    // recheck in a moment
     [
         {
             params ["_group"];
             if (!isNull _group) then {
                 _group setVariable [QGVAR(tactics), nil];
+                _group setVariable [QGVAR(tacticsTask), nil];
             };
         },
         group _unit,
-        _Zzz
+        _delay + random 5
     ] call CBA_fnc_waitAndExecute;
     false
 };
 
-// group units
-private _units = [_unit] call EFUNC(main,findReadyUnits);
+// update formation direction
+_unit setFormDir (_unit getDir _pos);
 
 // binoculars if appropriate!
-if (RND(0.2) && {(_unit distance _target > 150) && {!(binocular _unit isEqualTo "")}}) then {
+if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
     _unit selectWeapon (binocular _unit);
-    _unit doWatch _target;
+    _unit doWatch _pos;
 };
 
 // find units
@@ -133,7 +182,7 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
 
 // deploy static weapons ~ also returns available units
 if !(GVAR(disableAIDeployStaticWeapons)) then {
-    _units = [_units, _target] call FUNC(leaderStaticDeploy);
+    _units = [_units, _pos] call FUNC(leaderStaticDeploy);
 };
 
 // man empty static weapons
@@ -146,32 +195,27 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case 1: {
         // flank
-        [FUNC(tacticsFlank), [_unit, _target], 30] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsFlank), [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case 2: {
         // garrison
-        [FUNC(tacticsGarrison), [_unit, _target], 12 + random 6] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsGarrison), [_unit, _pos], 12 + random 6] call CBA_fnc_waitAndExecute;
     };
     case 3: {
         // rush ~ assault
-        [FUNC(tacticsAssault), [_unit, _target], 30] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsAssault), [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case 4: {
         // suppress
-        [FUNC(tacticsSuppress), [_unit, _target], 6 + random 4] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsSuppress), [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
-        [FUNC(tacticsHide), [_unit, _target, true], random 3] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsHide), [_unit, _pos, true], random 3] call CBA_fnc_waitAndExecute;
     };
 };
-
-// set current task
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
-
 
 // end
 true

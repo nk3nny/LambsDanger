@@ -80,9 +80,9 @@ waitUntil {
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };
 
         // suppress nearby buildings
-        if (_combat && {(nearestBuilding _target distance2d _target < 25)}) then {
+        if (_combat && {(nearestBuilding _target distance2D _target < 25)}) then {
             {
-                [_x, getPosASL _target] call EFUNC(danger,suppress);
+                [_x, getPosASL _target] call EFUNC(danger,doSuppress);
                 true
             } count units _group;
         };

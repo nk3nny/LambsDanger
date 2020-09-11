@@ -52,7 +52,7 @@ if (_type isEqualTo 5) exitWith {
 };
 
 // check bodies ~ enemy group!
-private _groupVariable = group _unit getVariable [QGVAR(CQB_pos), []];  // Will be checked / added in future versions
+private _groupVariable = group _unit getVariable [QGVAR(CQB_pos), []];
 if (_type isEqualTo 6) exitWith {
 
     // suppress nearby enemies
@@ -72,10 +72,10 @@ if (_type isEqualTo 6) exitWith {
 // Sympathetic CQB/Suppressive fire
 if !(_groupVariable isEqualTo []) exitWith {
 
-    _pos = _groupVariable select 0;
+    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_unit distance2D _pos < 10);
 
     // CQB or suppress
-    if (_unit distance2D _pos < (GVAR(CQB_range) * 1.1) || {RND(0.9)}) then {
+    if (RND(0.9) || {_unit distance2D _pos < (GVAR(CQB_range) * 1.1)}) then {
         
         // CQB movement mode
         _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
@@ -98,8 +98,7 @@ if !(_groupVariable isEqualTo []) exitWith {
         _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
     };
 
-    // near?
-    if (_unit distance2D _pos < 10) then {_groupVariable deleteAt 0;};
+    // update variable
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
     _timeout + 6
@@ -110,13 +109,11 @@ if !(_groupVariable isEqualTo []) exitWith {
 private _indoor = _unit call EFUNC(main,isIndoor);
 
 // cover
-private _cover = nearestTerrainObjects [_unit getPos [GVAR(searchForHide) + 3, formationDirection _unit], [], GVAR(searchForHide), false, true];
+private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
 if !(_cover isEqualTo [] || _indoor) exitWith {
 
     //move into cover
     [_unit, getPos (_cover select 0)] call FUNC(doCover);
-    //_unit setVariable [QGVAR(currentTarget), _cover select 0, EGVAR(main,debug_functions)];
-    //_unit setVariable [QGVAR(currentTask), "Seeking cover", EGVAR(main,debug_functions)];
 
     // end
     _timeout + 4

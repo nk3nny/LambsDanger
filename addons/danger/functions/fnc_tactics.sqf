@@ -16,6 +16,9 @@
 */
 params [["_unit", objNull, [objNull]]];
 
+// check if group AI disabled
+if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
+
 // Initated contact?
 private _contactState = group _unit getVariable [QGVAR(contact), 0];
 if (_contactState < time) exitWith {_unit call FUNC(tacticsContact)};

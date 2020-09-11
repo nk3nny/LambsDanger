@@ -37,7 +37,6 @@ private _pos = if (_buildings isEqualTo []) then {
     if (_unit call EFUNC(main,isIndoor) && {random 100 > GVAR(indoorMove)}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
         _unit doWatch _target;
-        //getposATL _unit
         _unit getPos [random 1 + 0.2, _unit getDir _target];
     };
 
@@ -62,6 +61,7 @@ private _pos = if (_buildings isEqualTo []) then {
 
 };
 
+// execute
 _unit doMove _pos;
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 

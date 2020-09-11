@@ -41,16 +41,22 @@ private _enemy = _unit findNearestEnemy _unit;
 if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
     [_unit] orderGetIn false;
     _unit setSuppression 1;  // prevents instant laser aim - nkenny
+    false
 };
 
 // no further action in vehicle
-if (!_onFoot) exitWith {};
+if (!_onFoot) exitWith {false};
 
 // get destination
 private _pos = expectedDestination _unit select 0;
 
 // on foot and seen by enemy
 if (_unit distance2D _enemy < 100 || {!(terrainIntersectASL [ eyePos _unit, eyePos _enemy])}) then {
+
+    // callout
+    if (RND(0.4) && {getSuppression _unit > 0.5}) then {
+        [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
+    };
 
     // inside or under cover!
     if (lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]) exitWith {

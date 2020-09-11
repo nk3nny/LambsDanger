@@ -12,7 +12,7 @@
  * success
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_leaderSuppressActual;
+ * [bob, angryJoe] call lambs_danger_fnc_doGroupSuppress;
  *
  * Public: No
 */

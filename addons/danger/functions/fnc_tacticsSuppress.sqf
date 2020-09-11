@@ -12,11 +12,11 @@
  * success
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_leaderSuppress;
+ * [bob, angryJoe] call lambs_danger_fnc_tacticsSuppress;
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_Zzz", 12]];
+params ["_unit", "_target", ["_units", []], ["_delay", 12]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -28,14 +28,15 @@ _target = _target call CBA_fnc_getPos;
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
             _group enableAttack _enableAttack;
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     [group _unit, attackEnabled _unit],
-    _Zzz
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
-// stopped or static
-if (!(attackEnabled _unit) || {stopped _unit}) exitWith {false};
+// alive unit
+if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // clear attacks!
 {
@@ -71,6 +72,9 @@ private _cycle = selectRandom [3, 3, 4, 5];
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "Suppressing"];
+
 // gesture
 [_unit, "gesturePoint"] call EFUNC(main,doGesture);
 
@@ -81,7 +85,7 @@ _unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_funct
 (group _unit) setFormDir (_unit getDir _target);
 
 // execute recursive cycle
-[_cycle, _units, _vehicles, _pos] call FUNC(tacticsSuppressActual);
+[_cycle, _units, _vehicles, _pos] call FUNC(doGroupSuppress);
 
 // debug
 if (EGVAR(main,debug_functions)) then {

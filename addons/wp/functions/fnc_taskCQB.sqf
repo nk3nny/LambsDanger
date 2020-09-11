@@ -64,7 +64,7 @@ private _fnc_enemy = {
     params ["_building", "_group"];
     private _pos = [ getPos _building, getPos leader _group] select isNull _building;
     private _enemy = (leader _group) findNearestEnemy _pos;
-    if (isNull _enemy || {_pos distance2d _enemy < 25}) exitWith { _enemy };
+    if (isNull _enemy || {_pos distance2D _enemy < 25}) exitWith { _enemy };
     objNull
 };
 
@@ -151,7 +151,7 @@ private _fnc_act = {
 
             // Unit is ready and outside -- try suppressive fire
             if (unitReady _x && {!(_x call EFUNC(main,isIndoor))}) then {
-                [_x, getPosASL _building] call EFUNC(danger,suppress);
+                [_x, getPosASL _building] call EFUNC(danger,doSuppress);
                 _x doFollow leader _x;
             };
         };

@@ -1,20 +1,21 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Unit in CQC mode moves to clear nearest free building location as declared by group leader
+ * Special CQB attack pattern clearing building by building
  *
  * Arguments:
  * 0: Unit assault cover <OBJECT>
+ * 1: Enemy <OBJECT> or <ARRAY>
  *
  * Return Value:
  * boolean
  *
  * Example:
- * [bob] call lambs_danger_fnc_assaultBuilding;
+ * [bob, angryJoe] call lambs_danger_fnc_assaultCQB;
  *
  * Public: No
 */
-params ["_unit"];
+params ["_unit", ["_target", objNull], ["_range", 20]];
 
 // check if stopped or busy
 if (
@@ -27,33 +28,12 @@ if (
 // settings
 _unit setUnitPosWeak "UP";
 
-// emergency break out of CQC loop
-private _enemy = _unit findNearestEnemy _unit;
-if ((_unit distance _enemy) < 7) exitWith {
-
-    _unit setVariable [QGVAR(currentTarget), _enemy, EGVAR(main,debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Assault Building (Enemy)", EGVAR(main,debug_functions)];
-
-    // movement
-    //_unit doWatch objNull;
-    _unit doTarget _enemy;
-    _unit doFire _enemy;
-    _unit doMove getPosATL _enemy;
-    _unit forceSpeed ([_unit, _enemy] call FUNC(assaultSpeed));
-
-    // debug
-    if (EGVAR(main,debug_functions)) then {
-        format ["%1 assault enemy (%2 @ %3m)", side _unit, name _unit, round (_unit distance _enemy)] call EFUNC(main,debugLog);
-        private _arrow = createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
-        [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
-    };
-
-    // return
-    true
-};
+// variables
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault Building", EGVAR(main,debug_functions)];
 
 // get buildings
-private _buildings = (group _unit) getVariable [QGVAR(inCQC), []];
+private _buildings = (group _unit) getVariable [QGVAR(inCQB), []];
 _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) > 0};
 
 // exit on no buildings -- middle unit pos
@@ -63,22 +43,18 @@ if (_buildings isEqualTo []) exitWith {
 
 };
 
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Assault Building", EGVAR(main,debug_functions)];
-
 // define building
-private _building = (_buildings select 0);
+private _building = _buildings select 0;
 
 // find spots
 private _buildingPos = _building getVariable [QGVAR(CQB_cleared_) + str (side _unit), (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 4]]}];
-
 private _buildingPosSelected = _buildingPos select 0;
 
 if (isNil "_buildingPosSelected") then {
     _buildingPosSelected = _building modelToWorld [0,0,0];
 };
-// remove current target and do move
-//_unit lookAt AGLtoASL _buildingPosSelected;
+
+// move to position
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
 // debug
@@ -105,13 +81,11 @@ if (RND(0.95) || {_unit distance _buildingPosSelected < 1.6}) then {
     if (_unit distance _building > 30) then {
         _unit setUnitPosWeak "MIDDLE";
     };
-    // possibly teleport fix here
-    // possibly suppression fire here
 };
 
 // update group variable
 if (_buildingPos isEqualTo []) then {
-    (group _unit) setVariable [QGVAR(inCQC), _buildings - [_building]];
+    (group _unit) setVariable [QGVAR(inCQB), _buildings - [_building]];
 };
 
 // debug
@@ -124,5 +98,7 @@ if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
     ] call EFUNC(main,debugLog);
 };
 
-// return
+// repeat
+
+// end
 true

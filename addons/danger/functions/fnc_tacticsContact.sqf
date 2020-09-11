@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_Zzz", 60]];
+params [["_unit", objNull, [objNull]], ["_delay", 60]];
 
 // identify enemy
 private _enemy = _unit findNearestEnemy _unit;
@@ -36,10 +36,11 @@ group _unit setVariable [QGVAR(contact), time + 300];
         params [["_group", grpNull, [grpNull]]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
     group _unit,
-    _Zzz + random 15
+    _delay + random 15
 ] call CBA_fnc_waitAndExecute;
 
 // change formation
@@ -61,8 +62,14 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemy >> "
 };
 [ _unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
 
+// check speed
+(leader _unit) forceSpeed 1;
+
 // rushing or ambushing units do not react
 if (_stealth || {_full}) exitWith {true};
+
+// disable Reaction phase for player group
+if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // initiate immediate action drills
 private _units = [_unit] call EFUNC(main,findReadyUnits);
@@ -77,14 +84,9 @@ private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
     // dodge!
     if (getSuppression _x > 0) then {[_x, getPosASL _enemy] call FUNC(doDodge);};
 
-    // force move
-    _x forceSpeed 2;
-    //_x setVariable [QGVAR(forceMove), true];
-    //[{_this setVariable [QGVAR(forceMove), nil];}, _x, 2 + random 4] call CBA_fnc_waitAndExecute;
-
     // force stance
-    if (stance _x isEqualTo "STAND") then {_x setUnitPosWeak "MIDDLE";[_x, "DOWN", true] call EFUNC(main,doGesture);};
-    if (stance _x isEqualTo "CROUCH") then {_x setUnitPosWeak "DOWN";[_x, "DOWN", true] call EFUNC(main,doGesture);};
+    [_x, "DOWN", true] call EFUNC(main,doGesture);
+    _x setUnitPosWeak "DOWN";
 
     // clear up existing building positions - nk
     _buildings deleteAt 0;
