@@ -169,7 +169,7 @@ private _fnc_DrawRect = {
             "Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
             "    Danger Pos:", _pos, "<br/>",
             "    Danger Until: ", round ( (_time - time) * 100 ) / 100, "<br/>",
-            "Current Target: ", format ["%1 (%2 visiblity)", _name, round (([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) *100], "<br/>"
+            "Current Target: ", format ["%1 (%2 visiblity)", _name, round (([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) * 100)], "<br/>"
         ];
 
         _textData append _targetKnowledge;
