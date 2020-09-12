@@ -67,6 +67,9 @@ if (_unit distance2D _enemy < 100 || {!(terrainIntersectASL [ eyePos _unit, eyeP
     private _cover = nearestTerrainObjects [_unit getPos [GVAR(searchForHide) + 4, _enemy getDir _unit], [], GVAR(searchForHide), false, true];
     if !(_cover isEqualTo []) then {_pos = _cover select 0;};
 
+    // speed
+    _unit forceSpeed -1;
+
     // force anim
     private _direction = _unit getRelDir _pos;
     private _relPos = _unit getRelPos [5, 0];
@@ -94,7 +97,7 @@ if (_unit distance2D _enemy < 100 || {!(terrainIntersectASL [ eyePos _unit, eyeP
 };
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! (%2m)", side _unit,round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! %2 (%3m)", side _unit, name _unit, round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
 
 // end
 true

@@ -28,4 +28,4 @@ params ["_unit", ["_pos", [0, 0, 0]]];
 [_unit, _pos] call FUNC(doDodge);
 
 // end
-time + random 2
+time + random 1

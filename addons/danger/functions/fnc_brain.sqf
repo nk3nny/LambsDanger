@@ -95,7 +95,7 @@ if (_dangerCause in [0, 1, 3, 8]) then {
     _return set [1, _unit knowsAbout _dangerCausedBy < 1.4];    // hide if target unknown!
 
     // look towards danger!
-    _unit doWatch _dangerPos;
+    _unit setFormDir (_unit getDir _dangerPos);
 };
 
 // assess actions

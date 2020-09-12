@@ -16,6 +16,11 @@
 */
 params [["_unit", objNull, [objNull]]];
 
+// CQB mode ~ disabled awaiting polish ~ nkenny
+//if (formation _unit in GVAR(cqb_formations)) exitWith {
+//    _unit call FUNC(tacticsCQB);
+//};
+
 // check if group AI disabled
 if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 

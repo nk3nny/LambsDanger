@@ -25,7 +25,7 @@ GVAR(fsmPriorities) = [
 GVAR(dangerUntil) = 25;
 
 // FSM setting ~ range to search for hide and cover
-GVAR(searchForHide) = 7;
+GVAR(searchForHide) = 4;
 
 // FSM setting ~ indoor movement while assessing chance as a percentage
 GVAR(indoorMove) = 15;

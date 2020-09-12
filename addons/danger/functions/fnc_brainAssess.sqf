@@ -26,7 +26,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 4;
+private _timeout = time;
 
 // enemy
 if (isNull _target) then {
@@ -48,7 +48,7 @@ if (_type isEqualTo 5) exitWith {
     [EFUNC(main,doSmoke), [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
 
     // end
-    _timeout + 2
+    _timeout + 6
 };
 
 // check bodies ~ enemy group!
@@ -65,24 +65,24 @@ if (_type isEqualTo 6) exitWith {
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
     // end
-    _timeout + 2
+    _timeout + 6
 
 };
 
 // Sympathetic CQB/Suppressive fire
 if !(_groupVariable isEqualTo []) exitWith {
 
-    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_unit distance2D _pos < 10);
+    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_unit distance2D _pos < 3);
 
     // CQB or suppress
     if (RND(0.9) || {_unit distance2D _pos < (GVAR(CQB_range) * 1.1)}) then {
         
         // CQB movement mode
         _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-        _unit forceSpeed ([_unit, _target] call FUNC(assaultSpeed));
+        _unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
 
         // execute CQB move
-        _unit doWatch objNull;
+        _unit lookAt _pos;
         _unit doMove _pos;
         
         // variables
@@ -93,15 +93,21 @@ if !(_groupVariable isEqualTo []) exitWith {
 
         // execute suppression
         _unit setUnitPosWeak "MIDDLE";
+        _unit forceSpeed 1;
         [_unit, (AGLToASL _pos) vectorAdd [0, 0, 1.2], true] call FUNC(doSuppress);
         _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
     };
 
+    // add to variable
+    if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _unit distance2D _pos}) then {
+        _groupVariable pushBack (getPosATL _target);
+    };
+
     // update variable
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
-    _timeout + 6
+    _timeout + 12
 
 };
 
@@ -116,7 +122,7 @@ if !(_cover isEqualTo [] || _indoor) exitWith {
     [_unit, getPos (_cover select 0)] call FUNC(doCover);
 
     // end
-    _timeout + 4
+    _timeout + 10
 };
 
 // building
@@ -135,7 +141,7 @@ if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
     };
 
     // end
-    _timeout + 2
+    _timeout + 6
 };
 
 // end

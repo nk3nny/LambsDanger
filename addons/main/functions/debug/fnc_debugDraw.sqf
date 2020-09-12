@@ -161,15 +161,15 @@ private _fnc_DrawRect = {
         if (_unit == leader _unit) then {
             private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
-                "Current Tactics: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
+                "Current Tactic: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
                 "Enemy QueueSize: ", _targetCount, "<br/>"
             ];
         };
         _textData append [
             "Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
             "    Danger Pos:", _pos, "<br/>",
-            "    Danger Until: ", round ( (_time - time) * 100 ) / 100, "<br/>",
-            "Current Target: ", format ["%1 (%2 visiblity)", _name, round (([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) * 100)], "<br/>"
+            "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select (_time isEqualTo -1)], "<br/>",
+            "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
         ];
 
         _textData append _targetKnowledge;
@@ -179,8 +179,8 @@ private _fnc_DrawRect = {
         //private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
-            "Supression: ", round (getSuppression _unit * 100), "<br/>",
-            "Morale: ", round (morale _unit * 100), "<br/>"
+            "Supression: ", getSuppression _unit, "<br/>",
+            "Morale: ", morale _unit, "<br/>"
             //"SpotDistance: ", _spotDistance, "<br/>",
             //"SpotTime: ", _spotTime, "<br/>",
         ];

@@ -54,7 +54,7 @@ if (RND(0.4) && {count units _unit > 1}) then {
 };
 
 // do it!
-//_unit forceSpeed 0;
+//_unit forceSpeed 1;   ~ handled one step out - nkenny
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire

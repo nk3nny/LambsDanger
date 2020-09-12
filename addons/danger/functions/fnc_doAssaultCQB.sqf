@@ -5,32 +5,24 @@
  *
  * Arguments:
  * 0: Unit assault cover <OBJECT>
- * 1: Enemy <OBJECT> or <ARRAY>
  *
  * Return Value:
  * boolean
  *
  * Example:
- * [bob, angryJoe] call lambs_danger_fnc_assaultCQB;
+ * [bob] call lambs_danger_fnc_assaultCQB;
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 20]];
+params ["_unit", ["_pos", [0, 0, 0]]];
 
 // check if stopped or busy
 if (
-    stopped _unit
+    !(_unit call EFUNC(main,isAlive))
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
 ) exitWith {false};
-
-// settings
-_unit setUnitPosWeak "UP";
-
-// variables
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Assault Building", EGVAR(main,debug_functions)];
 
 // get buildings
 private _buildings = (group _unit) getVariable [QGVAR(inCQB), []];
@@ -38,10 +30,19 @@ _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str
 
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
-
     _unit doFollow leader _unit;
-
+    _unit forceSpeed ([_unit, leader _unit] call FUNC(assaultSpeed));
+    if (_unit getVariable [QGVAR(forceMove), false]) then {_unit setVariable [QGVAR(forceMove), nil];}; // reset forceMove status!
+    false
 };
+
+// settings
+_unit setUnitPosWeak "UP";
+_unit setVariable [QGVAR(forceMove), true];
+
+// variables
+_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Assault Building", EGVAR(main,debug_functions)];
 
 // define building
 private _building = _buildings select 0;
@@ -54,8 +55,17 @@ if (isNil "_buildingPosSelected") then {
     _buildingPosSelected = _building modelToWorld [0,0,0];
 };
 
+// dodge or stuck counter!
+if ((_unit distance2D _pos < 1) || {getSuppression _unit > 0.8}) then {
+    [_unit, selectRandom ["WalkL", "WalkR"], true] call EFUNC(main,doGesture);
+};
+
+// look
+_unit lookAt _buildingPosSelected;
+
 // move to position
 _unit doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
+_unit setDestination [_buildingPosSelected, "FORMATION PLANNED", false];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
@@ -88,17 +98,28 @@ if (_buildingPos isEqualTo []) then {
     (group _unit) setVariable [QGVAR(inCQB), _buildings - [_building]];
 };
 
+// repeat
+if !(_buildingPos isEqualTo []) then {
+
+    [FUNC(doAssaultCQB),[_unit, getPos _unit], 7] call CBA_fnc_waitAndExecute;
+
+// or end
+} else {
+
+    // remove force move!
+    _unit setVariable [QGVAR(forceMove), nil];
+
+};
+
 // debug
 if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
-    format ["%1 assaulting building (%2 @ %3m - %4x spots left)",
+    format ["%1 assaulting building (%2 @ %3m - %4x spots left - %5 cycle)",
         side _unit,
         name _unit,
         round (_unit distance _buildingPosSelected),
         count _buildingPos
     ] call EFUNC(main,debugLog);
 };
-
-// repeat
 
 // end
 true

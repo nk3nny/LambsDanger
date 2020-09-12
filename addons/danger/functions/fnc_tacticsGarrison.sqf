@@ -84,8 +84,6 @@ group _unit setVariable [QGVAR(CQB_pos), _buildings];
 
 // execute
 {
-    //doStop _x;
-    _x doWatch objNull;
     private _pos = if (_buildings isEqualTo []) then {_target} else {_buildings deleteAt 0};
     _x doMove _pos;
     _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];

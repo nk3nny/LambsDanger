@@ -47,18 +47,15 @@ private _distance = _unit distance2D _target;
 
 // near, go for CQB
 if (_distance < GVAR(CQB_range)) exitWith {
-
     [_unit, _target] call FUNC(doAssault);
     _timeout
-
 };
 
 // far, try to suppress
 if (_type in [0, 8] && {needReload _unit < 0.6}) exitWith {
-
+    _unit forceSpeed 1;
     [_unit, eyePos _target] call FUNC(doSuppress);
     _timeout + 1
-
 };
 
 // end

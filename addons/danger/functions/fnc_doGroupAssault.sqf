@@ -35,7 +35,7 @@ _cycle = _cycle - 1;
 
     // manoeuvre
     //_x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
-    _x forceSpeed 3;
+    _x forceSpeed 2;
     _x setUnitPosWeak "UP";
     _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
     _x setVariable [QGVAR(forceMove), true];

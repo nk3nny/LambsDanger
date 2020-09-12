@@ -200,7 +200,7 @@ switch (_plan) do {
     };
     case 2: {
         // garrison
-        [FUNC(tacticsGarrison), [_unit, _pos], 12 + random 6] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsGarrison), [_unit, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
     };
     case 3: {
         // rush ~ assault
