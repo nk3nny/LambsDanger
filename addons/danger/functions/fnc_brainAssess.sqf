@@ -48,7 +48,7 @@ if (_type isEqualTo 5) exitWith {
     [EFUNC(main,doSmoke), [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
 
     // end
-    _timeout + 6
+    _timeout + 5
 };
 
 // check bodies ~ enemy group!
@@ -57,6 +57,7 @@ if (_type isEqualTo 6) exitWith {
 
     // suppress nearby enemies
     if (!isNull _target) then {
+        _unit forceSpeed 0;
         [FUNC(doSuppress), [_unit, eyePos _target], random 2] call CBA_fnc_waitAndExecute;
     };
 
@@ -65,7 +66,7 @@ if (_type isEqualTo 6) exitWith {
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
     // end
-    _timeout + 6
+    _timeout + 5
 
 };
 
@@ -119,10 +120,11 @@ private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, t
 if !(_cover isEqualTo [] || _indoor) exitWith {
 
     //move into cover
+    _unit forceSpeed 2;
     [_unit, getPos (_cover select 0)] call FUNC(doCover);
 
     // end
-    _timeout + 10
+    _timeout + random 2
 };
 
 // building
@@ -141,7 +143,7 @@ if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
     };
 
     // end
-    _timeout + 6
+    _timeout + 4
 };
 
 // end

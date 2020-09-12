@@ -54,7 +54,7 @@ private _pos = if (_buildings isEqualTo []) then {
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable];
 
     // debug
-    hint format ["CQB - %1   \n%2\n\n%3", side _unit, count _groupVariable, (_groupVariable apply {round (_unit distance2D _x), _x}) joinString "\n  "];    // debug
+    //hint format ["CQB - %1   \n%2\n\n%3", side _unit, count _groupVariable, (_groupVariable apply {round (_unit distance2D _x), _x}) joinString "\n  "];    // debug
 
     // select
     selectRandom _buildings

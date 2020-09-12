@@ -29,7 +29,7 @@
 params ["_unit", ["_type", 0], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 4;
+private _timeout = time + 2;
 
 // check
 if (isNull _target) exitWith {
@@ -55,7 +55,7 @@ if (_distance < GVAR(CQB_range)) exitWith {
 if (_type in [0, 8] && {needReload _unit < 0.6}) exitWith {
     _unit forceSpeed 1;
     [_unit, eyePos _target] call FUNC(doSuppress);
-    _timeout + 1
+    _timeout + 3
 };
 
 // end

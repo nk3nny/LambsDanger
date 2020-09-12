@@ -27,7 +27,7 @@
 params ["_unit", ["_type", 0], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 4;
+private _timeout = -1;
 
 // look at problem
 _unit lookAt _pos;
@@ -44,7 +44,7 @@ _buildingPos = _buildingPos select {_unit distance _x < ([GVAR(searchForHide), 2
 
 if !(_buildingPos isEqualTo []) exitWith {
     _unit doMove selectRandom _buildingPos;
-    _timeout + 6
+    time + 6
 };
 
 // find nearest cover
