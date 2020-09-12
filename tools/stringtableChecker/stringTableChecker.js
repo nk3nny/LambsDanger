@@ -13,6 +13,9 @@ var failedCount = 0;
 const stringtableEntries = [];
 const projectFiles = [];
 
+const regex = /LSTRING\((\w+)\)|ELSTRING\((\w+),(\w+)\)/gm;
+const commentRegex = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
+
 function getDirFiles(p, module) {
     var files = fs.readdirSync(p);
     for (const file of files) {
@@ -48,20 +51,20 @@ function getDirFiles(p, module) {
 function CheckStringtables() {
     for (const data of projectFiles) {
 
-        const content = fs.readFileSync(data.path);
-        const regex = /LSTRING\((\w+)\)|ELSTRING\((\w+),(\w+)\)/gm;
-        let m;
+        let content = fs.readFileSync(data.path).toString();
+        content = content.replace(commentRegex, '');
+        let match;
 
-        while ((m = regex.exec(content)) !== null) {
-            if (m.index === regex.lastIndex) {
+        while ((match = regex.exec(content)) !== null) {
+            if (match.index === regex.lastIndex) {
                 regex.lastIndex++;
             }
 
             var strName;
-            if (m[1]) {
-                strName = `STR_${PREFIX}_${data.module}_${m[1]}`
-            } else if (m[2] && m[3]) {
-                strName = `STR_${PREFIX}_${m[2]}_${m[3]}`
+            if (match[1]) {
+                strName = `STR_${PREFIX}_${data.module}_${match[1]}`
+            } else if (match[2] && match[3]) {
+                strName = `STR_${PREFIX}_${match[2]}_${match[3]}`
             }
 
             if (strName && !stringtableEntries.includes(strName.toLowerCase())) {
