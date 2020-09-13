@@ -29,7 +29,8 @@ params [
     ["_range", TASK_CAMP_SIZE, [0]],
     ["_area", [], [[]], []],
     ["_teleport", TASK_CAMP_TELEPORT, [false]],
-    ["_patrol", TASK_CAMP_PATROL, [false]]
+    ["_patrol", TASK_CAMP_PATROL, [false]],
+    ["_exitWP", TASK_CAMP_EXITWP, [0]]
 ];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
@@ -51,6 +52,8 @@ _group setBehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group setCombatMode "YELLOW";
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCamp", EGVAR(main,debug_functions)];
 
 // find buildings
 private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);
@@ -98,7 +101,7 @@ reverse _units;
 {
     // gun
     if !(_weapons isEqualTo []) then {
-        private _staticWeapon = (_weapons deleteAt 0);
+        private _staticWeapon = _weapons deleteAt 0;
         if (_teleport) then { _x moveInGunner _staticWeapon; };
         _x assignAsGunner _staticWeapon;
         [_x] orderGetIn true;
@@ -237,7 +240,15 @@ _wp setWaypointStatements ["true", "
 
 // followup orders - just stay put or move into buildings!
 private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
-_wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
+
+// set exitWP
+private _wp2Type = switch (_exitWP) do {
+    case 1: {"HOLD"};
+    case 2: {"GUARD"};
+    case 3: {"SAD"};
+    default {selectRandom ["HOLD", "GUARD", "SAD"]};
+};
+_wp2 setWaypointType _wp2Type;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

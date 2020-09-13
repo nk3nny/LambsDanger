@@ -150,6 +150,34 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
+        class GVAR(ExitWP): Combo {
+            displayName = CSTRING(Module_TaskCamp_ExitWP_DisplayName);
+            tooltip = CSTRING(Module_TaskCamp_ExitWP_Tooltip);
+            property = QGVAR(ExitWP);
+            defaultValue = QUOTE(TASK_CAMP_EXITWP);
+            unique = 0;
+            condition = "0";
+            typeName = "NUMBER";
+            expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class Random {
+                    name = CSTRING(Random);
+                    value = 0;
+                };
+                class All {
+                    name = CSTRING(Hold);
+                    value = 1;
+                };
+                class FiredNear {
+                    name = CSTRING(Guard);
+                    value = 2;
+                };
+                class Fired {
+                    name = CSTRING(SAD);
+                    value = 3;
+                };
+            };
+        };
         class GVAR(Teleport): Checkbox {
             displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);  // Strings and code lifted directly out of taskGarrison -- do we really need extra string entries for this? Might even make it generic -nkenny
             tooltip = CSTRING(Module_TaskCamp_Teleport_Tooltip);
@@ -170,7 +198,6 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         };
         class ModuleDescription: ModuleDescription {};
     };
-
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         position = 1;

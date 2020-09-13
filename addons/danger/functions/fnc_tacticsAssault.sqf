@@ -55,7 +55,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Assault"];
+group _unit setVariable [QGVAR(tacticsTask), "Assault", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
 group _unit setVariable [QGVAR(CQB_pos), _buildings];

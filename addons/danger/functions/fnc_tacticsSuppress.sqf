@@ -73,7 +73,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Suppressing"];
+group _unit setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, "gesturePoint"] call EFUNC(main,doGesture);

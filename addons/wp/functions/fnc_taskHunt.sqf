@@ -43,6 +43,9 @@ _group setbehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group enableAttack false;
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskHunt", EGVAR(main,debug_functions)];
+
 // FUNCTIONS -------------------------------------------------------------
 
 // FLARE SCRIPT

@@ -137,6 +137,14 @@
             <English>Teleport units instantly to position</English>
             <German>Teleportiert Einheiten sofort zur Position</German>
         </Key>
+
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
+            <English>Last Waypoint</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
+            <English>The waypoint the group adopts after leaving the camped state</English>
+        </Key>
+
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
             <German>Aufgabe CQB</German>
@@ -426,6 +434,15 @@
         <Key ID="STR_Lambs_WP_Hit">
             <English>Hit</English>
             <German>Getroffen</German>
+        </Key>
+        <Key ID="STR_Lambs_WP_HOLD">
+            <English>Hold</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_GUARD">
+            <English>Guard</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_SAD">
+            <English>Search and Destroy</English>
         </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>

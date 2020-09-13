@@ -19,7 +19,7 @@ params ["_unit", ["_target", objNull], ["_range", GVAR(CQB_range)], ["_delay", 1
 
 // update tactics and contact state
 group _unit setVariable [QGVAR(tactics), true];
-group _unit setVariable [QGVAR(tacticsTask), "CQB clearing"];
+group _unit setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
 group _unit setVariable [QGVAR(contact), time + 300];
 
 // reset tactics state

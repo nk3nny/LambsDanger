@@ -93,6 +93,9 @@ _group setCombatMode "GREEN";
 _group enableAttack false;
 ///{_x forceWalk true;} foreach units _group;  <-- Use this if behaviour set to "STEALTH"
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCreep", EGVAR(main,debug_functions)];
+
 // failsafe!
 {
     //doStop _x;

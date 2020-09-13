@@ -26,6 +26,7 @@
 #define TASK_CAMP_TELEPORT false
 #define TASK_CAMP_PATROL false
 #define TASK_CAMP_SIZE 50
+#define TASK_CAMP_EXITWP 0
 
 #define TASK_CQB_CYCLETIME 21
 #define TASK_CQB_DELETEONSTARTUP false

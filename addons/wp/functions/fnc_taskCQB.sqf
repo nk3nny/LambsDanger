@@ -188,6 +188,9 @@ _group allowFleeing 0;
     true
 } count units _group;
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCQB", EGVAR(main,debug_functions)];
+
 // loop
 waitUntil {
 

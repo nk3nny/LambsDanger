@@ -48,7 +48,7 @@ if (RND(0.6)) then {
 
 // settings
 private _suppression = (getSuppression _unit > 0.05) && {_unit distance2D _pos < 45};
-private _relPos = getpos _unit;
+private _relPos = getposASL _unit;
 private _anim = [];
 
 // move left

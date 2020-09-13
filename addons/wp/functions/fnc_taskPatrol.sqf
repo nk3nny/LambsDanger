@@ -51,6 +51,9 @@ _group setCombatMode "YELLOW";
 _group setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT", "VEE", "DIAMOND"];
 _group enableGunLights "forceOn";
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskPatrol", EGVAR(main,debug_functions)];
+
 private _fistWPId = 0;
 
 if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {

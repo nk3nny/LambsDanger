@@ -40,6 +40,12 @@ _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
 
+// reset forceMove
+[{
+    _this setVariable [QGVAR(forceMove), nil];
+    _this forceSpeed -1;
+}, _unit, 8] call CBA_fnc_waitAndExecute;
+
 // Gesture
 doStop _unit;
 [_unit, "HandSignalRadio"] call EFUNC(main,doGesture);

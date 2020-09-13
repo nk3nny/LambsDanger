@@ -83,7 +83,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Flank", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Flanking"];
+group _unit setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
