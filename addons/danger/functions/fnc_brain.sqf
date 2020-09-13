@@ -113,11 +113,10 @@ if (_dangerCause isEqualto 0 && {isFormationLeader _unit}) then {
 // Experiment with enemy Near
 if (_dangerCause isEqualto 3 || {!isNull _dangerCausedBy && { (group _unit getVariable [QGVAR(contact), 0]) < time }}) then {
 
-    [_unit, "gestureFreeze"] call EFUNC(main,doGesture);
+    [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerCausedBy < 50)] call EFUNC(main,doGesture);
 
     // Extra callout
     [ _unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
-    [_unit, "CALL OUT! ~ CONTACT!"] call EFUNC(main,dotMarker);
 
 };
 
