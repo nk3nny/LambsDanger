@@ -39,7 +39,7 @@ private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit,
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // max range pos
-private _distance = (_unit distance (ASLToAGL _pos)) min 280;
+private _distance = (eyePos _unit vectorDistance _pos) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check

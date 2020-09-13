@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_delay", 60]];
+params [["_unit", objNull, [objNull]], ["_delay", 50]];
 
 // identify enemy
 private _enemy = _unit findNearestEnemy _unit;
@@ -30,6 +30,9 @@ private _full = speedMode _unit isEqualTo "FULL";
 group _unit setVariable [QGVAR(tactics), true];
 group _unit setVariable [QGVAR(contact), time + 300];
 
+// set group task
+group _unit setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_functions)];
+
 // reset tactics state
 [
     {
@@ -40,7 +43,7 @@ group _unit setVariable [QGVAR(contact), time + 300];
         };
     },
     group _unit,
-    _delay + random 15
+    _delay + random 20
 ] call CBA_fnc_waitAndExecute;
 
 // change formation
@@ -51,7 +54,10 @@ group _unit setVariable [QGVAR(contact), time + 300];
 
 // Gesture
 [_unit, "gestureFreeze"] call EFUNC(main,doGesture);
-if (!isNull _enemy) then {[FUNC(shareInformation), [_unit, _enemy], 1 + random 3] call CBA_fnc_waitAndExecute;};
+
+if (!isNull _enemy) then {
+    [FUNC(shareInformation), [_unit, _enemy], 1 + random 3] call CBA_fnc_waitAndExecute;
+};
 
 // Callout
 _enemy = vehicle _enemy;
@@ -73,7 +79,6 @@ if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {f
 
 // initiate immediate action drills
 private _units = [_unit] call EFUNC(main,findReadyUnits);
-_units = _units select { currentCommand _x isEqualTo "" };
 
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);

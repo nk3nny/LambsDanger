@@ -32,7 +32,7 @@ params ["_unit", ["_type", 0], ["_target", objNull]];
 private _timeout = time + 3;
 
 // check
-if (isNull _target) exitWith {
+if (isNull _target || {stopped _unit}) exitWith {
     _unit forceSpeed 1;
     _timeout
 };
@@ -51,7 +51,7 @@ if (_distance < GVAR(CQB_range)) exitWith {
     // execute assault
     [_unit, _target] call FUNC(doAssault);
     // dynamic delay
-    private _delay = linearConversion [0, GVAR(CQB_range), _distance, 0, 3, true];
+    private _delay = linearConversion [0, GVAR(CQB_range), _distance, 0, 4, true];
     _timeout + _delay
 
 };

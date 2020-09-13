@@ -22,8 +22,6 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", EGVAR(main,debug_functions)];
 
 // settings
-_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-_unit forceSpeed ([_unit, _target] call FUNC(assaultSpeed));
 private _rangeBuilding = linearConversion [ 0, 200, _unit distance2D _target, 2.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
@@ -60,6 +58,10 @@ private _pos = if (_buildings isEqualTo []) then {
     selectRandom _buildings
 
 };
+
+// stance and speed
+_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+_unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
 
 // execute
 _unit doMove _pos;

@@ -20,7 +20,7 @@ item15[] = {"Roll_dodge",2,250,-175.000000,600.000000,-75.000000,650.000000,0.00
 item16[] = {"Stay_firm",2,250,0.000000,600.000000,100.000000,650.000000,0.000000,"Stay firm"};
 item17[] = {"Attack",2,250,175.000000,600.000000,275.000000,650.000000,0.000000,"Attack"};
 item18[] = {"Check_self_1",2,250,175.000000,275.000000,275.000000,325.000000,0.000000,"Check self"};
-item19[] = {"End_Danger",1,4346,700.000000,1200.000000,800.000000,1250.000000,0.000000,"End Danger"};
+item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.000000,"End Danger"};
 item20[] = {"Timeout",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"Timeout"};
 item21[] = {"danger_",4,218,-75.000000,750.000000,25.000000,800.000000,0.000000,"danger!"};
 item22[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
@@ -110,8 +110,8 @@ link42[] = {36,26};
 link43[] = {37,38};
 link44[] = {38,39};
 link45[] = {39,26};
-globals[] = {0.000000,0,0,0,0,640,480,1,61,6316128,1,104.789551,1002.776611,1410.857666,387.894165,776,884,1};
-window[] = {2,-1,-1,-1,-1,889,130,1570,130,3,794};
+globals[] = {0.000000,0,0,0,0,640,480,1,61,6316128,1,-619.413391,522.762634,1359.743896,58.605164,776,884,1};
+window[] = {2,-1,-1,-32000,-32000,889,130,1570,130,3,794};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -441,7 +441,7 @@ class FSM
                 {
                         name = "End_Danger";
                         itemno = 19;
-                        init = /*%FSM<STATEINIT""">*/"_this getVariable [""lambs_danger_currentTask"", nil];" \n
+                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_danger_currentTask"", nil];" \n
                          "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -552,7 +552,7 @@ class FSM
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"time > _timeout" \n
-                                         "//|| {!(_queue isEqualTo [])}"/*%FSM</CONDITION""">*/;
+                                         "|| {!(_queue isEqualTo [])}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

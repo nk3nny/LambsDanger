@@ -28,6 +28,11 @@ params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
 // timeout
 private _timeout = time + 2;
 
+// doStop
+if (stopped _unit) exitWith {
+    _timeout + random 4
+};
+
 // enemy
 if (isNull _target) then {
 
@@ -80,8 +85,8 @@ if (_type isEqualTo 6) exitWith {
 // Sympathetic CQB/Suppressive fire
 if !(_groupVariable isEqualTo []) exitWith {
 
+    private _pos = _groupVariable select 0;
     private _distance = _unit distance2D _pos;
-    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_distance < 3);
 
     // CQB or suppress
     if (RND(0.9) || {_distance < (GVAR(CQB_range) * 1.1)}) then {
@@ -113,9 +118,10 @@ if !(_groupVariable isEqualTo []) exitWith {
     };
 
     // update variable
+    if (_distance < 2) then {_groupVariable deleteAt 0;};
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
-    _timeout + 5
+    _timeout + 6
 
 };
 
@@ -123,7 +129,7 @@ if !(_groupVariable isEqualTo []) exitWith {
 private _indoor = _unit call EFUNC(main,isIndoor);
 
 // cover
-_unit forceSpeed ([2, 4] select (getSuppression _unit > 0.3));
+_unit forceSpeed ([2, 4] select (getSuppression _unit > 0));
 
 //private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
 /*

@@ -105,9 +105,20 @@ if (_dangerCause in [5, 6]) then {
 };
 
 // gesture + share information
-if (_dangerCause isEqualto 0) then {
-    //if (RND(0.5)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
-    if (isFormationLeader _unit) then {[_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);};
+if (_dangerCause isEqualto 0 && {isFormationLeader _unit}) then {
+    //if (RND(0.05)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
+    [_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);
+};
+
+// Experiment with enemy Near
+if (_dangerCause isEqualto 3 || {!isNull _dangerCausedBy && { (group _unit getVariable [QGVAR(contact), 0]) < time }}) then {
+
+    [_unit, "gestureFreeze"] call EFUNC(main,doGesture);
+
+    // Extra callout
+    [ _unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
+    [_unit, "CALL OUT! ~ CONTACT!"] call EFUNC(main,dotMarker);
+
 };
 
 // modify return
