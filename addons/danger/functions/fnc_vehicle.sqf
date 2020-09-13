@@ -53,10 +53,6 @@ if (_artillery) exitWith {
     // variable
     _vehicle setVariable [QGVAR(isArtillery), true];
 
-    if (_attack) then {
-        _vehicle doWatch _dangerPos;
-    };
-
     // end
     _timeout + 20
 };
