@@ -255,17 +255,17 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
                     name = CSTRING(All);
                     value = -1;
                 };
-                class FiredNear {
-                    name = CSTRING(FiredNear);
-                    value = 2;
+                class Hit {
+                    name = CSTRING(Hit);
+                    value = 0;
                 };
                 class Fired {
                     name = CSTRING(Fired);
                     value = 1;
                 };
-                class Hit {
-                    name = CSTRING(Hit);
-                    value = 0;
+                class FiredNear {
+                    name = CSTRING(FiredNear);
+                    value = 2;
                 };
                 class None {
                     name = CSTRING(None);

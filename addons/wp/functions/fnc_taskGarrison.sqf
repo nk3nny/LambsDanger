@@ -34,7 +34,7 @@ params [
     ["_area", [], [[]]],
     ["_teleport", TASK_GARRISON_TELEPORT, [false]],
     ["_sortBasedOnHeight", TASK_GARRISON_SORTBYHEIGHT, [false]],
-    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS - 2, [0, ""]],
+    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS, [0, ""]],
     ["_patrol", TASK_GARRISON_PATROL, [false]]
 ];
 
