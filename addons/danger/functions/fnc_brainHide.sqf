@@ -27,32 +27,28 @@
 params ["_unit", ["_type", 0], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = -1;
+private _timeout = time + 5;
 
-// look at problem
-_unit lookAt _pos;
+// look at problem  ~ looking at sky syndrome. - nkenny
+//_unit lookAt _pos;
 
 // indoor units exit
 if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    _unit forceSpeed 0;
+    //_unit forceSpeed 0;
     _timeout
 };
 
-// find nearby building
-private _buildingPos = [_unit, 22, true, true] call EFUNC(main,findBuildings);
-_buildingPos = _buildingPos select {_unit distance _x < ([GVAR(searchForHide), 2.5] select (_unit call EFUNC(main,isIndoor)))};
-
-if !(_buildingPos isEqualTo []) exitWith {
-    _unit doMove selectRandom _buildingPos;
-    time + 6
+// cover move when explosion
+if (_type isEqualTo 4) exitWith {
+    [_unit] call FUNC(doCover);
+    time + random 5
 };
 
-// find nearest cover
-private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), true, true]; //"BUSH", "TREE", "HIDE", "WALL", "FENCE"
-if !(_cover isEqualTo []) then {
-    _cover = (_cover select 0) getPos [-1.3, (_cover select 0) getDir _pos];
-    [_unit, _cover] call FUNC(doCover);
-};
+// speed
+_unit forceSpeed -1;
+
+// find cover
+[FUNC(doHide), [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
 
 // end
 _timeout

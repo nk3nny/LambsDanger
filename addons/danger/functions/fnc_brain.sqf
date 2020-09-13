@@ -28,7 +28,7 @@
         7 Scream
 
         Engage actions
-        0 Enemy detected (but near)
+        0 Enemy detected (but near or known)
         1 Fire
         3 Enemy near
         8 CanFire
@@ -47,7 +47,7 @@ private _return = [false, false, false, false];
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
 
-    [false, false, false, true, [10, getpos _unit, time + GVAR(dangerUntil), _unit findNearestEnemy _unit, 0]]
+    [false, false, false, true, [10, getpos _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
 
 };
 
@@ -75,16 +75,17 @@ if (_dangerCause in [2, 9]) then {
 };
 
 // hide actions
-if (_dangerCause in [0, 4, 7] || {getSuppression _unit > 0.9 && {random 100 < GVAR(panic_chance)}}) then {
+private _panic = random 100 < GVAR(panic_chance) && {getSuppression _unit > 0.9};
+if (_dangerCause in [0, 4, 7] || _panic) then {
     _return set [1, true];
 
     // callout
-    if (RND(0.4) && {getSuppression _unit > 0.8}) then {
+    if (_panic) then {
         [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
     };
 
     // enemy near? don't hide
-    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < GVAR(CQB_range)}) then {
+    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < ( GVAR(CQB_range) * 1.4)}) then {
         _return set [1, false];
     };
 };
@@ -92,7 +93,7 @@ if (_dangerCause in [0, 4, 7] || {getSuppression _unit > 0.9 && {random 100 < GV
 // engage actions   // should check all friendly sides?
 if (_dangerCause in [0, 1, 3, 8]) then {
     _return set [2, !(side _unit isEqualTo side _dangerCausedBy)];
-    _return set [1, _unit knowsAbout _dangerCausedBy < 1.4];    // hide if target unknown!
+    _return set [1, _unit knowsAbout _dangerCausedBy < 0.5];    // hide if target unknown!
 
     // look towards danger!
     _unit setFormDir (_unit getDir _dangerPos);
@@ -105,7 +106,7 @@ if (_dangerCause in [5, 6]) then {
 
 // gesture + share information
 if (_dangerCause isEqualto 0) then {
-    if (RND(0.5)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
+    //if (RND(0.5)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     if (isFormationLeader _unit) then {[_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);};
 };
 

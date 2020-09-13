@@ -29,7 +29,7 @@
 params ["_unit", ["_type", 0], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 2;
+private _timeout = time + 3;
 
 // check
 if (isNull _target) exitWith {
@@ -47,8 +47,13 @@ private _distance = _unit distance2D _target;
 
 // near, go for CQB
 if (_distance < GVAR(CQB_range)) exitWith {
+
+    // execute assault
     [_unit, _target] call FUNC(doAssault);
-    _timeout
+    // dynamic delay
+    private _delay = linearConversion [0, GVAR(CQB_range), _distance, 0, 3, true];
+    _timeout + _delay
+
 };
 
 // far, try to suppress

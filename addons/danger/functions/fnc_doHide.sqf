@@ -17,8 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
-
+params ["_unit", "_pos", ["_range", 55], ["_buildings", []]];
 
 // stopped -- exit
 if (
@@ -28,13 +27,13 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
-// already inside -- exit
+// already inside -- exit   ~ uncommented, handled eslewhere.
+/*
 if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
     _unit forceSpeed 0;
-    _unit doWatch _danger;
+    _unit doWatch _pos;
     false
-};
+};*/
 
 // define buildings
 if (_buildings isEqualTo []) then {
@@ -42,7 +41,7 @@ if (_buildings isEqualTo []) then {
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), _danger, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", EGVAR(main,debug_functions)];
 
 // Randomly scatter into buildings or hide!
@@ -68,10 +67,13 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     private _cover = nearestTerrainObjects [ _unit getPos [20, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
 
     // targetPos
-    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [10 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
+    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
 
     // water means hold
     if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
+
+    // cover move
+    [_unit, _targetPos] call FUNC(doCover);
 
     // execute move
     _unit doMove _targetPos;

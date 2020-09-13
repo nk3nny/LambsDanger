@@ -26,7 +26,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
 
 // timeout
-private _timeout = time;
+private _timeout = time + 2;
 
 // enemy
 if (isNull _target) then {
@@ -39,16 +39,20 @@ if (isNull _target) then {
 if (_type isEqualTo 5) exitWith {
 
     // find body + rearm
-    private _bodies = allDeadMen select { (_x distance2D _pos) < 3 };
-    if !(_bodies isEqualTo []) then {
-        _unit action ["rearm", _bodies select 0];
+    private _bodies = allDeadMen findIf { (_x distance2D _pos) < 3 };
+    if (_bodies != -1) then {
+        _unit action ["rearm", allDeadMen select _bodies];
+        _unit doMove _pos;
     };
 
     // pop smoke
     [EFUNC(main,doSmoke), [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
 
+    _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Checking bodies", EGVAR(main,debug_functions)];
+
     // end
-    _timeout + 5
+    _timeout + 3
 };
 
 // check bodies ~ enemy group!
@@ -57,7 +61,7 @@ if (_type isEqualTo 6) exitWith {
 
     // suppress nearby enemies
     if (!isNull _target) then {
-        _unit forceSpeed 0;
+        _unit forceSpeed 1;
         [FUNC(doSuppress), [_unit, eyePos _target], random 2] call CBA_fnc_waitAndExecute;
     };
 
@@ -65,27 +69,30 @@ if (_type isEqualTo 6) exitWith {
     _groupVariable pushBack _pos;
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
+    _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
+    _unit setVariable [QGVAR(currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
+
     // end
-    _timeout + 5
+    _timeout + 3
 
 };
 
 // Sympathetic CQB/Suppressive fire
 if !(_groupVariable isEqualTo []) exitWith {
 
-    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_unit distance2D _pos < 3);
+    private _distance = _unit distance2D _pos;
+    _pos = [_groupVariable select 0, _groupVariable deleteAt 0] select (_distance < 3);
 
     // CQB or suppress
-    if (RND(0.9) || {_unit distance2D _pos < (GVAR(CQB_range) * 1.1)}) then {
-        
+    if (RND(0.9) || {_distance < (GVAR(CQB_range) * 1.1)}) then {
+
         // CQB movement mode
         _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
         _unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
 
         // execute CQB move
-        _unit lookAt _pos;
         _unit doMove _pos;
-        
+
         // variables
         _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
@@ -94,21 +101,21 @@ if !(_groupVariable isEqualTo []) exitWith {
 
         // execute suppression
         _unit setUnitPosWeak "MIDDLE";
-        _unit forceSpeed 1;
+        _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
         [_unit, (AGLToASL _pos) vectorAdd [0, 0, 1.2], true] call FUNC(doSuppress);
         _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
     };
 
     // add to variable
-    if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _unit distance2D _pos}) then {
+    if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _distance}) then {
         _groupVariable pushBack (getPosATL _target);
     };
 
     // update variable
     group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
 
-    _timeout + 12
+    _timeout + 5
 
 };
 
@@ -116,34 +123,43 @@ if !(_groupVariable isEqualTo []) exitWith {
 private _indoor = _unit call EFUNC(main,isIndoor);
 
 // cover
-private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
+_unit forceSpeed ([2, 4] select (getSuppression _unit > 0.3));
+
+//private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
+/*
+private _cover = nearestTerrainObjects [_unit, [], 3, false, true];
 if !(_cover isEqualTo [] || _indoor) exitWith {
 
     //move into cover
-    _unit forceSpeed 2;
-    [_unit, getPos (_cover select 0)] call FUNC(doCover);
+    _unit forceSpeed ([2, -1] select (getSuppression _unit > 0.8));
+    //[_unit, getPos (_cover select 0)] call FUNC(doCover);
 
     // end
-    _timeout + random 2
-};
+    _timeout
+};*/
 
 // building
 if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
 
     // get building pos
     private _buildingPos = [_unit, 21, true, true] call EFUNC(main,findBuildings);
+    [_buildingPos, true] call CBA_fnc_shuffle;
 
     // destination
     private _distance = _unit distance2D _target;
     private _destination = _buildingPos findIf {_x distance2D _target < _distance};
     if (_destination != -1) then {
-        _unit doMove (_buildingPos select _destination);
+        _unit doMove ((_buildingPos select _destination) vectorAdd [-1 + random 2, -1 + random 2, 0]);
+        _unit forceSpeed ([_unit, _buildingPos select _destination] call FUNC(assaultSpeed));
         _unit setVariable [QGVAR(currentTarget), _buildingPos select _destination, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Repositioning", EGVAR(main,debug_functions)];
     };
 
+    // stay indoor
+    _unit setVariable [QGVAR(currentTask), "Stay inside (assessing)", EGVAR(main,debug_functions)];
+
     // end
-    _timeout + 4
+    _timeout + 5
 };
 
 // end

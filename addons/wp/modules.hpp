@@ -244,6 +244,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             defaultValue = QUOTE(TASK_GARRISON_EXITCONDITIONS);
             unique = 0;
             condition = "0";
+            typeName = "NUMBER";
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
                 class Random {

@@ -53,25 +53,25 @@ private _anim = [];
 
 // move left
 if (_dir > 250 && { random 1 > 0.1 }) then {
-    _relPos = _unit getRelPos [4, -60];
+    _relPos = _unit getRelPos [2, -60];
     _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
 };
 
 // move right
 if (_dir < 80 && { random 1 > 0.1 }) then {
-    _relPos = _unit getRelPos [4, 60];
+    _relPos = _unit getRelPos [2, 60];
     _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };
 
 // move back
 if ((_dir > 320 || { _dir < 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
-    _relPos = _unit getRelPos [3, 180];
+    _relPos = _unit getRelPos [1, 180];
     _anim pushBack (["WalkB", "FastB"] select _suppression);
 };
 
 // check
 if (_anim isEqualTo []) then {
-    _relPos = _unit getRelPos [5, 0];
+    _relPos = _unit getRelPos [3, 0];
     _anim pushBack (["WalkF", "WalkF"] select _suppression); //FastF
 };
 
