@@ -137,14 +137,12 @@
             <English>Teleport units instantly to position</English>
             <German>Teleportiert Einheiten sofort zur Position</German>
         </Key>
-
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
             <English>Last Waypoint</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
         </Key>
-
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
             <German>Aufgabe CQB</German>
