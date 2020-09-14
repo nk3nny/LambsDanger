@@ -38,7 +38,6 @@
         6 DeadBody
 */
 
-
 params ["_unit", ["_queue", []]];
 
 // init ~ immediate action, hide, engage, assess
@@ -47,7 +46,7 @@ private _return = [false, false, false, false];
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
 
-    [false, false, false, true, [10, getpos _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
+    [false, false, false, true, [10, getposASL _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
 
 };
 
@@ -93,10 +92,7 @@ if (_dangerCause in [0, 4, 7] || _panic) then {
 // engage actions   // should check all friendly sides?
 if (_dangerCause in [0, 1, 3, 8]) then {
     _return set [2, !(side _unit isEqualTo side _dangerCausedBy)];
-    _return set [1, _unit knowsAbout _dangerCausedBy < 0.5];    // hide if target unknown!
-
-    // look towards danger!
-    _unit setFormDir (_unit getDir _dangerPos);
+    _return set [1, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
 };
 
 // assess actions
@@ -110,8 +106,8 @@ if (_dangerCause isEqualto 0 && {isFormationLeader _unit}) then {
     [_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);
 };
 
-// Experiment with enemy Near
-if (_dangerCause isEqualto 3 || {!isNull _dangerCausedBy && { (group _unit getVariable [QGVAR(contact), 0]) < time }}) then {
+// Enemy Near
+if ( _dangerCause isEqualto 3 || {!isNull _dangerCausedBy && { (group _unit getVariable [QGVAR(contact), 0]) < time  && {!((group _unit) getVariable [QGVAR(disableGroupAI), false])}}}) then {
 
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerCausedBy < 50)] call EFUNC(main,doGesture);
 

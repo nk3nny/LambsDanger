@@ -15,7 +15,6 @@
  *
  * Public: No
 */
-
 params ["_unit", ["_target", objNull]];
 
 // distance

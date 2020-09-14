@@ -66,7 +66,7 @@ if (_dir < 80 && { random 1 > 0.1 }) then {
 // move back
 if ((_dir > 320 || { _dir < 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
     _relPos = _unit getRelPos [1, 180];
-    _anim pushBack (["WalkB", "FastB"] select _suppression);
+    _anim pushBack (["WalkB", "WalkB"] select _suppression); //"FastB"
 };
 
 // check

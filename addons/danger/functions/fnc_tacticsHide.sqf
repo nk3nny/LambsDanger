@@ -16,7 +16,6 @@
  *
  * Public: No
 */
-
 params ["_unit", "_target", ["_antiTank", false], ["_buildings", []], ["_delay", 180]];
 
 // find target

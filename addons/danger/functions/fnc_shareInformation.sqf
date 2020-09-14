@@ -64,7 +64,7 @@ private _knowsAbout = _unit knowsAbout _target;
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call EFUNC(main,eventCallback);
 
 // play animation
-if (RND(0.2) && {_range > 100}) then {[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);};
+if (RND(0.2) && {_range > 100} && {_unit distance2D _target > 4}) then {[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);};
 
 // debug
 if (EGVAR(main,debug_functions)) then {

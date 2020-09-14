@@ -15,7 +15,6 @@
  *
  * Public: No
 */
-
 params ["_unit", ["_queue", []], ["_timeout", 5]];
 
 // commander

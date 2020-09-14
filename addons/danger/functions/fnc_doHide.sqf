@@ -28,12 +28,11 @@ if (
 ) exitWith {false};
 
 // already inside -- exit   ~ uncommented, handled eslewhere.
-/*
-if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    _unit forceSpeed 0;
+if (random 100 > GVAR(indoorMove) && {_unit call EFUNC(main,isIndoor)}) exitWith {
+    doStop _unit;
     _unit doWatch _pos;
     false
-};*/
+};
 
 // define buildings
 if (_buildings isEqualTo []) then {
@@ -64,16 +63,16 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     //[_unit, ["DOWN"], true] call EFUNC(main,doGesture);
 
     // find cover
-    private _cover = nearestTerrainObjects [ _unit getPos [20, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
+    private _cover = nearestTerrainObjects [ _unit getPos [-16, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, true, true ];
 
     // targetPos
-    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
+    private _targetPos = [getPosASL (_cover select 0), _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
 
     // water means hold
     if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
 
     // cover move
-    [_unit, _targetPos] call FUNC(doCover);
+    if !(_cover isEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};
 
     // execute move
     _unit doMove _targetPos;

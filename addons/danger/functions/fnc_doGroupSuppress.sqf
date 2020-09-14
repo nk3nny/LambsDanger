@@ -16,7 +16,6 @@
  *
  * Public: No
 */
-
 params ["_cycle", "_units", "_vehicles", "_pos"];
 
 // update

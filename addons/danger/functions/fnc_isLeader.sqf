@@ -18,4 +18,3 @@ params ["_unit"];
 isformationLeader _unit
 && {getSuppression _unit < 0.2}
 && {!(group _unit getVariable [QGVAR(tactics), false])}
-&& {!isplayer leader _unit}

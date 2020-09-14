@@ -72,7 +72,7 @@ if !(_enemies isEqualTo []) then {
         && { isTouchingGround (vehicle _x) }
     };
     if (_artilleryTarget != -1 && { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
-        [_unit, getpos (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);
+        [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);
     };
 
     // enemies within X meters of leader
@@ -82,7 +82,7 @@ if !(_enemies isEqualTo []) then {
     };
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
         _plan append [2, 2, 3];    // garrison, garrison, assault
-        _pos = [getpos (_enemies select _targets), getPos _unit] select _inside;
+        _pos = [_unit getHideFrom (_enemies select _targets), getPosASL _unit] select _inside;
     };
     
     // inside? stay safe
@@ -95,7 +95,7 @@ if !(_enemies isEqualTo []) then {
     };
     if (_targets != -1) exitWith {
         _plan pushBack 4;   // suppress
-        _pos = getpos (_enemies select _targets);
+        _pos = _unit getHideFrom (_enemies select _targets);
     };
     // enemies away from buildings or below
     private _targets = _enemies findIf {
@@ -109,7 +109,7 @@ if !(_enemies isEqualTo []) then {
     if (_targets != -1) exitWith {
         _plan pushBack 1;   // flank
         if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
-        _pos = getpos (_enemies select _targets);
+        _pos = _unit getHideFrom (_enemies select _targets);
 
         // mark enemy position for sympathetic fire
         group _unit setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
@@ -125,7 +125,7 @@ if !(_enemies isEqualTo []) then {
 
         // basic plan
         _plan append [1, 1];    // flank, flank
-        _pos = getpos (_enemies select _targets);
+        _pos = _unit getHideFrom (_enemies select _targets);
 
         // combatmode
         if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
@@ -148,6 +148,17 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
     // callout
     [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
 
+    // has taken casualties: hide
+    private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
+    if (_alive != -1) then {
+        [FUNC(tacticsHide), [_unit, getPosASL _unit, false], random 3] call CBA_fnc_waitAndExecute;
+    };
+
+    // check new random direction if no enemy found!
+    if (isNull (_unit findNearestEnemy _unit)) then {
+        _unit setFormDir (random 360);
+    };
+
     // recheck in a moment
     [
         {
@@ -167,7 +178,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
 _unit setFormDir (_unit getDir _pos);
 
 // binoculars if appropriate!
-if (RND(0.2) && {(_unit distance _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
+if (RND(0.2) && {(_unit distance2D _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
     _unit selectWeapon (binocular _unit);
     _unit doWatch _pos;
 };

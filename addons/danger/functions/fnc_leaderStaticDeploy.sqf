@@ -16,7 +16,6 @@
  *
  * Public: No
 */
-
 params ["_units", "_pos", ["_weaponPos", []]];
 
 // sort units

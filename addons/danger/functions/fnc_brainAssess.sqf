@@ -26,9 +26,9 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 2;
+private _timeout = time + 3;
 
-// doStop
+// stopped units stay put   // || {currentCommand _unit isEqualTo "MOVE"}
 if (stopped _unit) exitWith {
     _timeout + random 4
 };
@@ -83,7 +83,7 @@ if (_type isEqualTo 6) exitWith {
 };
 
 // Sympathetic CQB/Suppressive fire
-if !(_groupVariable isEqualTo []) exitWith {
+if !(_groupVariable isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
 
     private _pos = _groupVariable select 0;
     private _distance = _unit distance2D _pos;
@@ -129,7 +129,7 @@ if !(_groupVariable isEqualTo []) exitWith {
 private _indoor = _unit call EFUNC(main,isIndoor);
 
 // cover
-_unit forceSpeed ([2, 4] select (getSuppression _unit > 0));
+//_unit forceSpeed ([2, 4] select (getSuppression _unit > 0));
 
 //private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
 /*
@@ -147,11 +147,11 @@ if !(_cover isEqualTo [] || _indoor) exitWith {
 // building
 if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
 
-    // get building pos
+    // get building positions
     private _buildingPos = [_unit, 21, true, true] call EFUNC(main,findBuildings);
     [_buildingPos, true] call CBA_fnc_shuffle;
 
-    // destination
+    // Check if there is a closer building position
     private _distance = _unit distance2D _target;
     private _destination = _buildingPos findIf {_x distance2D _target < _distance};
     if (_destination != -1) then {
@@ -159,10 +159,10 @@ if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
         _unit forceSpeed ([_unit, _buildingPos select _destination] call FUNC(assaultSpeed));
         _unit setVariable [QGVAR(currentTarget), _buildingPos select _destination, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Repositioning", EGVAR(main,debug_functions)];
+    } else {
+        // stay indoors
+        _unit setVariable [QGVAR(currentTask), "Stay inside (assessing)", EGVAR(main,debug_functions)];
     };
-
-    // stay indoor
-    _unit setVariable [QGVAR(currentTask), "Stay inside (assessing)", EGVAR(main,debug_functions)];
 
     // end
     _timeout + 5

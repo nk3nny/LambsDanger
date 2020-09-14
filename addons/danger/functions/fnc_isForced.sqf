@@ -19,7 +19,7 @@ fleeing _unit
 || {_unit getVariable [QGVAR(disableAI), false]}
 || {_unit getVariable [QGVAR(forceMove), false]}
 || {!(_unit call EFUNC(main,isAlive))}
-|| {!((_unit getVariable ["ace_medical_ai_healQueue", []]) isEqualTo [] )}
+|| {!((_unit getVariable ["ace_medical_ai_healQueue", []]) isEqualTo [])}
 || {GVAR(disableAIPlayerGroup) && {isPlayer leader _unit}}
 || {currentCommand _unit in ["ATTACK", "GET IN", "ACTION", "Suppress"]}
 || {!(_unit checkAIFeature "PATH")}
