@@ -19,7 +19,7 @@
 
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
-    ["_pos", [0, 0, 0], [[]]],
+    ["_pos", [], [[]]],
     ["_type", 6, [0]]
 ];
 
@@ -67,16 +67,11 @@ if !(_pos isEqualTo []) then {
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 };
 
-
 // variable
 _unit setVariable [QGVAR(currentTask), "Throwing smoke grenade", GVAR(debug_functions)];
 
 // execute
-[
-    {
-        _this call BIS_fnc_fire;
-    }, [_unit, _muzzle], 1
-] call CBA_fnc_waitAndExecute;
+[BIS_fnc_fire, [_unit, _muzzle], 1] call CBA_fnc_waitAndExecute;
 
 // end
 true

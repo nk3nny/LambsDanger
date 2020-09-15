@@ -101,7 +101,7 @@ if (_buildingPos isEqualTo []) then {
 // repeat
 if !(_buildingPos isEqualTo []) then {
 
-    [FUNC(doAssaultCQB),[_unit, getPos _unit], 7] call CBA_fnc_waitAndExecute;
+    [FUNC(doAssaultCQB), [_unit, getPos _unit], 7] call CBA_fnc_waitAndExecute;
 
 // or end
 } else {

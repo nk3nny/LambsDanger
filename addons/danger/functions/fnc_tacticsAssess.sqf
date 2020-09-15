@@ -142,6 +142,19 @@ if !(_enemies isEqualTo []) then {
 
 };
 
+// find units
+private _units = [_unit] call EFUNC(main,findReadyUnits);
+
+// deploy flares
+if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
+    _units = [_units] call EFUNC(main,doUGL);
+};
+
+// man empty static weapons
+if !(GVAR(disableAIFindStaticWeapons)) then {
+    _units = [_units, _unit] call FUNC(leaderStaticFind);
+};
+
 // no plan ~ exit with no executable plan
 if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWith {
 
@@ -151,7 +164,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
     // has taken casualties: hide
     private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
     if (_alive != -1) then {
-        [FUNC(tacticsHide), [_unit, getPosASL _unit, false], random 3] call CBA_fnc_waitAndExecute;
+        [FUNC(tacticsHide), [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
     };
 
     // check new random direction if no enemy found!
@@ -174,7 +187,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
     false
 };
 
-// update formation direction
+// update formation direction ~ enemy pos known!
 _unit setFormDir (_unit getDir _pos);
 
 // binoculars if appropriate!
@@ -183,22 +196,9 @@ if (RND(0.2) && {(_unit distance2D _pos > 150) && {!(binocular _unit isEqualTo "
     _unit doWatch _pos;
 };
 
-// find units
-private _units = [_unit] call EFUNC(main,findReadyUnits);
-
-// deploy flares
-if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
-    _units = [_units] call EFUNC(main,doUGL);
-};
-
-// deploy static weapons ~ also returns available units
+// deploy static weapons
 if !(GVAR(disableAIDeployStaticWeapons)) then {
     _units = [_units, _pos] call FUNC(leaderStaticDeploy);
-};
-
-// man empty static weapons
-if !(GVAR(disableAIFindStaticWeapons)) then {
-    _units = [_units, _unit] call FUNC(leaderStaticFind);
 };
 
 // enact plan

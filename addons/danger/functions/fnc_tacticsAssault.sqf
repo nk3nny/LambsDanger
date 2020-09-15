@@ -71,7 +71,7 @@ group _unit setVariable [QGVAR(CQB_pos), _buildings];
 [_unit, _target] call EFUNC(main,doSmoke);
 
 // grenadier smoke
-[{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+[EFUNC(main,doUGL), [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
 
 // ready group
 (group _unit) setFormDir (_unit getDir _target);
@@ -80,7 +80,7 @@ group _unit setVariable [QGVAR(CQB_pos), _buildings];
 [_cycle, _units, _buildings] call FUNC(doGroupAssault);
 
 // set speedmode    // experiment with this! - nkenny
-_unit setSpeedMode "FULL";
+//_unit setSpeedMode "FULL";
 
 // debug
 if (EGVAR(main,debug_functions)) then {
