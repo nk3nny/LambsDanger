@@ -4,14 +4,17 @@
         <Key ID="STR_Lambs_Main_NoUnitSelected">
             <English>No Unit Selected</English>
             <German>Keine Einheit ausgewählt</German>
+            <Polish>Nie wybrano jednostki</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
             <German>Spieler sind keine gültige Auswahl</German>
+            <Polish>Gracze nie pasują do wybranej czynności</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
             <German>Keine Gruppe ausgewählt</German>
+            <Polish>Nie wybrano żadnej grupy</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
@@ -31,66 +34,82 @@
         <Key ID="STR_Lambs_Main_Settings_MainCat">
             <English>Settings</English>
             <German>Einstellungen</German>
+            <Polish>Ustawienia</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
             <German>Handzeichen deaktivieren</German>
+            <Polish>Wyłącz używanie przez SI gestów ręką</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
             <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
+            <Polish>Wyłącza używanie gestów ręką podczas reagowania na niebezpieczeństwo lub podczas wykonywania manewrów</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
             <German>Rufe ausschalten</German>
+            <Polish>Wyłącz połączenia</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
             <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
+            <Polish>Wyłącza dodatkowe wywołania od jednostek w zależności od sytuacji</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
             <German>Debug</German>
+            <Polish>Debug</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
             <German>Debug FSM</German>
+            <Polish>Debug FSM</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
             <German>Zeigt FSM Debug-Meldungen</German>
+            <Polish>Pokazuje komunikaty debugowania FSM</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
             <German>Debug Funktionen</German>
+            <Polish>Funkcje Debug</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
             <German>Zeigt Debug-Meldungen für Funktionen</German>
+            <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
             <German>Debug Zivilisten</German>
+            <Polish>Debug Civ</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
             <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
+            <Polish>Pokazuje komunikaty debugowania FSM dla cywilów</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
             <German>Debug Zeichnen</German>
+            <Polish>Debug Draw</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
             <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
+            <Polish>Wyświetla tekst 3D nad jednostkami SI z informacjami</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
             <German>Debug Erwartete Ankuftsposition zeichnen</German>
+            <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
             <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
+            <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek SI (Wymaga włączenia Debug Draw)</Polish>
         </Key>
     </Package>
 </Project>
