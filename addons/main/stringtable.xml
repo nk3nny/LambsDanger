@@ -39,7 +39,7 @@
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
             <German>Handzeichen deaktivieren</German>
-            <Polish>Wyłącz używanie przez SI gestów ręką</Polish>
+            <Polish>Wyłącz używanie przez AI gestów ręką</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
@@ -99,7 +99,7 @@
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
             <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
-            <Polish>Wyświetla tekst 3D nad jednostkami SI z informacjami</Polish>
+            <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
@@ -109,7 +109,7 @@
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
             <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
-            <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek SI (Wymaga włączenia Debug Draw)</Polish>
+            <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
         </Key>
     </Package>
 </Project>
