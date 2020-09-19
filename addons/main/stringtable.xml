@@ -49,12 +49,12 @@
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
             <German>Rufe ausschalten</German>
-            <Polish>Wyłącz połączenia</Polish>
+            <Polish>Wyłącz okrzyki</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
             <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
-            <Polish>Wyłącza dodatkowe wywołania od jednostek w zależności od sytuacji</Polish>
+            <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>

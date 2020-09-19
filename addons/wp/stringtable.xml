@@ -119,7 +119,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
             <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
             <German>Entfernt das Modul beim Start.\n Wenn nicht aktiviert ist es möglich das Module zu verschieben um den Zielort dynamisch anzupassen.</German>
-            <Polish>Usuwa moduł podczas uruchamiania. \n Jeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
+            <Polish>Usuwa moduł podczas uruchamiania. \nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
@@ -159,7 +159,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
             <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
-            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone. \n Obszar dwa razy większy jest używany do patroli.</Polish>
+            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone. \nObszar dwa razy większy jest używany do patroli.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
             <English>Teleport units</English>
@@ -184,7 +184,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Eine höherer Wert sorgt dafür das Gebäude vorsichtiger von Einheiten durchsucht werden.\nStandardwert ist 21 Sekunden.</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie. \n Domyślnie 21 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie. \nDomyślnie 21 sekund</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_DisplayName">
             <English>Remove Dynamic center</English>
@@ -194,7 +194,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_Tooltip">
             <English>With the dynamic center present, it is possible to move the center point of the building search pattern</English>
             <German>Wenn der dynamische Mittelpunkt vorhanden ist, kann der Mittelpunkt für das Gebäudesuchmuster verschoben werden.</German>
-            <Polish>Gdy dynamiczne centrum jest widoczne, jest możliwe, żeby poruszać zasięgiem zadania.</Polish>
+            <Polish>Gdy dynamiczne centrum jest widoczne, jest możliwe, żeby poruszać centralnym punktem przeszukiwania budynku.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_DisplayName">
             <English>Radius</English>
@@ -254,7 +254,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
             <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
-            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje/ \n Opcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
+            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje. \nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
             <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
@@ -312,7 +312,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
             <English>Task Reset</English>
             <German>Aufgabe Zurücksetzen</German>
-            <Polish>Task - Reset</Polish>
+            <Polish>Zadanie - Reset</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
             <English>This module resets all custom LAMBS scripts running on the unit</English>
@@ -322,7 +322,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
             <German>Aufgabe Schleichen</German>
-            <Polish>Task - Zasadzka</Polish>
+            <Polish>Zadanie - Zasadzka</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -352,7 +352,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \n Domyślnie 15 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 15 sekund</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
             <English>Radius</English>
@@ -362,7 +362,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_ToolTip">
             <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników. \n Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom.</Polish>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
@@ -377,7 +377,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
             <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
             <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Zadanie - Polowanie sprawia, że jednostki patrolują obszar określony przez moduł. Grupa podchodzi do celu spiralnie i spokojnie. Jednostka użyje latarek jeśli będzie to możliwe. &lt;br/&gt; &lt;br/&gt; Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom.</Polish>
+            <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu uniknięcia wykrycia. Domyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -407,7 +407,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \n Domyślnie 70 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 70 sekund</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
             <English>Radius</English>
@@ -417,7 +417,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_ToolTip">
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników. \n Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom.</Polish>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -457,7 +457,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \n Domyślnie 4 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 4 sekund</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
             <English>Radius</English>
@@ -467,7 +467,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników. \n Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom.</Polish>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
@@ -492,7 +492,7 @@
         <Key ID="STR_Lambs_WP_Groups_ToolTip">
             <English>Select which unit script applies to.\nList is sorted by distance</English>
             <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
-            <Polish>Określa na jaką jednostkę ma zadziałać skrypt. \n Lista jest sortowana po dystansie.</Polish>
+            <Polish>Określa na jaką jednostkę ma zadziałać skrypt. \nLista jest sortowana po dystansie.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Centers_DisplayName">
             <English>Center</English>
