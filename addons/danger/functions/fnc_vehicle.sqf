@@ -93,7 +93,7 @@ if (_armored && {_attack}) exitWith {
             [
                 FUNC(vehicleAssault),
                 [_unit, _dangerPos, _dangerCausedBy],
-                ( 3 + random 3 )
+                (3 + random 3)
             ] call CBA_fnc_waitAndExecute;
         };
     };
