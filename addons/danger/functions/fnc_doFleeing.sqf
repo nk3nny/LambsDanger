@@ -51,7 +51,7 @@ if (!_onFoot) exitWith {false};
 private _pos = expectedDestination _unit select 0;
 
 // on foot and seen by enemy
-if (_unit distance2D _enemy < 100 || {!(terrainIntersectASL [ eyePos _unit, eyePos _enemy])}) then {
+if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eyePos _enemy])}) then {
 
     // callout
     if (RND(0.4) && {getSuppression _unit > 0.5}) then {
