@@ -18,9 +18,10 @@
 params ["_unit", ["_target", objNull], ["_range", GVAR(CQB_range)], ["_delay", 180]];
 
 // update tactics and contact state
-group _unit setVariable [QGVAR(tactics), true];
-group _unit setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
-group _unit setVariable [QGVAR(contact), time + 300];
+private _group = group _unit;
+_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(contact), time + 300];
 
 // reset tactics state
 [
@@ -32,15 +33,15 @@ group _unit setVariable [QGVAR(contact), time + 300];
             _group enableAttack _attackEnabled;
         };
     },
-    [group _unit, attackEnabled _unit],
+    [_group, attackEnabled _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
 // disable attack!
-group _unit enableAttack false;
+_group enableAttack false;
 
 // new variable + distance check + exit if none
-private _inCQB = group _unit getVariable [QGVAR(inCQB), []];
+private _inCQB = _group getVariable [QGVAR(inCQB), []];
 _inCQB = _inCQB select {_x distance2D _unit < _range + 25};
 if (count _inCQB > 0) exitWith {[]};
 
@@ -66,7 +67,7 @@ _buildings = _buildings select {
     _inCQB pushBackUnique _x;
     true
 } count _buildings;
-(group _unit) setVariable [QGVAR(inCQB), _inCQB];
+(_group) setVariable [QGVAR(inCQB), _inCQB];
 
 
 // debug

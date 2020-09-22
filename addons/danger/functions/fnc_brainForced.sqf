@@ -36,14 +36,12 @@ if (!isNull objectParent _unit) exitWith {_timeout + 6};
 
 // suppression -- high go prone
 if (getSuppression _unit > 0.9) exitWith {
-    [_unit, "Down", true] call EFUNC(main,doGesture);
     _unit setUnitPosWeak "DOWN";
     _timeout + 1
 };
 
 // mid -- go crouched
 if (getSuppression _unit > 0) then {
-    [_unit, "Crouch", true] call EFUNC(main,doGesture);
     _unit setUnitPosWeak "MIDDLE";
 };
 

@@ -30,36 +30,39 @@ private _stealth = behaviour _unit isEqualTo "STEALTH";
 private _full = speedMode _unit isEqualTo "FULL";
 
 // update tactics and contact state
-group _unit setVariable [QGVAR(tactics), true];
-group _unit setVariable [QGVAR(contact), time + 300];
+private _group = group _unit;
+_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(contact), time + 300];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_functions)];
 
 // reset tactics state
 [
     {
-        params [["_group", grpNull, [grpNull]]];
+        params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
+            _group enableAttack _enableAttack;
         };
     },
-    group _unit,
+    [_group, attackEnabled _group],
     _delay + random 20
 ] call CBA_fnc_waitAndExecute;
 
-// change formation
-(group _unit) setFormation (group _unit getVariable [QGVAR(dangerFormation), formation _unit]);
+// change formation and attack state
+_group enableAttack false;
+_group setFormation (_group getVariable [QGVAR(dangerFormation), formation _unit]);
 
 // call event system
-[QGVAR(onContact), [_unit, group _unit, _enemy]] call EFUNC(main,eventCallback);
+[QGVAR(onContact), [_unit, _group, _enemy]] call EFUNC(main,eventCallback);
 
 // Gesture
 [_unit, "gestureFreeze", true] call EFUNC(main,doGesture);
 
 if (!isNull _enemy) then {
-    [FUNC(shareInformation), [_unit, _enemy], 1 + random 3] call CBA_fnc_waitAndExecute;
+    [{_this call FUNC(shareInformation)}, [_unit, _enemy], 1 + random 3] call CBA_fnc_waitAndExecute;
 };
 
 // Callout
@@ -96,7 +99,7 @@ private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
     if (getSuppression _x > 0) then {[_x, getPosASL _enemy] call FUNC(doDodge);};
 
     // force stance
-    [EFUNC(main,doGesture), [_x, "DOWN", true], random 3] call CBA_fnc_waitAndExecute;
+    //[{_this call EFUNC(main,doGesture)}, [_x, "DOWN", true], random 3] call CBA_fnc_waitAndExecute;
     _x setUnitPosWeak "DOWN";
 
     // clear up existing building positions - nk
@@ -111,15 +114,15 @@ if !(_units isEqualTo []) then {
     private _unit2 = _units select (count _units - 1);
     
     // point
-    [EFUNC(main,doGesture), [_unit2, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doGesture)}, [_unit2, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
 
     // contact!
-    [EFUNC(main,doCallout), [_unit2, ["Combat", "Stealth"] select _stealth, "contact", 100], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doCallout)}, [_unit2, ["Combat", "Stealth"] select _stealth, "contact", 100], random 4] call CBA_fnc_waitAndExecute;
 };
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS CONTACT! %2", side _unit, groupId group _unit] call EFUNC(main,debugLog);
+    format ["%1 TACTICS CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
 };
 
 // set current task

@@ -39,6 +39,7 @@ _target = _target call CBA_fnc_getPos;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
+private _group = group _unit;
 
 // find units
 if (_units isEqualTo []) then {
@@ -55,10 +56,10 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Assault", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Assault", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-group _unit setVariable [QGVAR(CQB_pos), _buildings];
+_group setVariable [QGVAR(CQB_pos), _buildings];
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
@@ -71,10 +72,10 @@ group _unit setVariable [QGVAR(CQB_pos), _buildings];
 [_unit, _target] call EFUNC(main,doSmoke);
 
 // grenadier smoke
-[EFUNC(main,doUGL), [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
 
 // ready group
-(group _unit) setFormDir (_unit getDir _target);
+_group setFormDir (_unit getDir _target);
 
 // execute function
 [_cycle, _units, _buildings] call FUNC(doGroupAssault);

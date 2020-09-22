@@ -53,7 +53,7 @@ for "_i" from 0 to 5 do {
     _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
 
     // water or exit
-    if !(_pos isEqualTo [] || {surfaceIsWater _pos}) exitWith {_pos};
+    if !(_pos isEqualTo [] || {surfaceIsWater _pos}) exitWith {};
 
     // update
     _min = _min + 15;

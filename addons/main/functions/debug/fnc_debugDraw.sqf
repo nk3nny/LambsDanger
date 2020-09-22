@@ -126,9 +126,9 @@ private _fnc_DrawRect = {
              };
              private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
              _targetKnowledge append [
-                "<t color='#C7CCC1'>Target Knowledge: </t><br/>",
-                "<t color='#C7CCC1'>    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")</t><br/>",
-                "<t color='#C7CCC1'>    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
+                "<t color='#C7CCC1'>Target Knowledge: <br/>",
+                "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
+                "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
             ];
 
             drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
@@ -140,12 +140,6 @@ private _fnc_DrawRect = {
             drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
-            _targetKnowledge append [
-                "","",""
-               //"Target Knowledge:<br/>",          // uncommented -- just to clean up interface a bit  nkenny
-               //"    Last Seen: N/A (N/A)<br/>",
-               //"    Position Error: N/A<br/>"
-           ];
             if (_currentTarget isEqualType []) then {
                 drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
                 format ["POS %1", _currentTarget];
@@ -166,9 +160,9 @@ private _fnc_DrawRect = {
             ];
         };
         _textData append [
-            "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "</t><br/>",
-            "<t color='#C7CCC1'>    Danger Pos: ", _pos, "</t><br/>",
-            "<t color='#C7CCC1'>    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
+            "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
+            "    Danger Pos: ", _pos, "<br/>",
+            "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
             "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
         ];
 

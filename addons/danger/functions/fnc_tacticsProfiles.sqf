@@ -17,11 +17,9 @@
 false
 
 /*
-
     Here we handle: 
         forward observers
         Dumb rushing militia
         Withdrawing recon troops
         Whatever else we want
-
 */

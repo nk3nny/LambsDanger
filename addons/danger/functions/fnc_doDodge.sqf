@@ -48,17 +48,17 @@ if (RND(0.6)) then {
 
 // settings
 private _suppression = (getSuppression _unit > 0.05) && {_unit distance2D _pos < 45};
-private _relPos = getposASL _unit;
+private _relPos = getPosASL _unit;
 private _anim = [];
 
 // move left
-if (_dir > 250 && { random 1 > 0.1 }) then {
+if (_dir > 250 && { RND(0.1) }) then {
     _relPos = _unit getRelPos [2, -60];
     _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
 };
 
 // move right
-if (_dir < 80 && { random 1 > 0.1 }) then {
+if (_dir < 80 && { RND(0.1) }) then {
     _relPos = _unit getRelPos [2, 60];
     _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };

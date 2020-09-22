@@ -83,10 +83,7 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     // hide
     private _buildings = [_unit, GVAR(searchForHide), true, true] call EFUNC(main,findBuildings);
     if !(_buildings isEqualTo []) then {
-
-        // move
         _unit doMove (_buildings select 0);
-
     };
 
 };

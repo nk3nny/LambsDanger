@@ -28,7 +28,7 @@ if (
 ) exitWith {false};
 
 // already inside -- exit   ~ uncommented, handled eslewhere.
-if (random 100 > GVAR(indoorMove) && {_unit call EFUNC(main,isIndoor)}) exitWith {
+if (RND(GVAR(indoorMove)/100) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     doStop _unit;
     _unit doWatch _pos;
     false

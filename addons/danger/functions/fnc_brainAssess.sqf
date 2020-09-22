@@ -35,9 +35,7 @@ if (stopped _unit) exitWith {
 
 // enemy
 if (isNull _target) then {
-
     _target = _unit findNearestEnemy _pos;
-
 };
 
 // check bodies ~ own group!
@@ -46,12 +44,37 @@ if (_type isEqualTo 5) exitWith {
     // find body + rearm
     private _bodies = allDeadMen findIf { (_x distance2D _pos) < 3 };
     if (_bodies != -1) then {
-        _unit action ["rearm", allDeadMen select _bodies];
         _unit doMove _pos;
+        _unit setVariable [QGVAR(forceMove), true];
+        [
+            {
+                // condition
+                params ["_unit", "_body"];
+                (_unit distance _body < 0.7) || {!(_unit call EFUNC(main,isAlive))}
+            },
+            {
+                // on near body
+                params ["_unit", "_body"];
+                if (_unit call EFUNC(main,isAlive)) then {
+                    [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call EFUNC(main,eventCallback);
+                    _unit action ["rearm", _body];
+                    _unit doFollow leader _unit;
+                };
+            },
+            [_unit, allDeadMen select _bodies], 8,
+            {
+                // on timeout
+                params ["_unit"];
+                if (_unit call EFUNC(main,isAlive)) then {
+                    _unit doFollow leader _unit;
+                    _unit setVariable [QGVAR(forceMove), nil];
+                };
+            }
+        ] call CBA_fnc_waitUntilAndExecute;
     };
 
     // pop smoke
-    [EFUNC(main,doSmoke), [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doSmoke)}, [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
 
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Checking bodies", EGVAR(main,debug_functions)];
@@ -61,18 +84,19 @@ if (_type isEqualTo 5) exitWith {
 };
 
 // check bodies ~ enemy group!
-private _groupVariable = group _unit getVariable [QGVAR(CQB_pos), []];
+private _group = group _unit;
+private _groupMemory = _group getVariable [QGVAR(CQB_pos), []];
 if (_type isEqualTo 6) exitWith {
 
     // suppress nearby enemies
     if (!isNull _target) then {
         _unit forceSpeed 1;
-        [FUNC(doSuppress), [_unit, eyePos _target], random 2] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(doSuppress)}, [_unit, eyePos _target], random 2] call CBA_fnc_waitAndExecute;
     };
 
     // add body to move routine
-    _groupVariable pushBack _pos;
-    group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
+    _groupMemory pushBack _pos;
+    _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
 
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
@@ -83,9 +107,9 @@ if (_type isEqualTo 6) exitWith {
 };
 
 // Sympathetic CQB/Suppressive fire
-if !(_groupVariable isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
+if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
 
-    private _pos = _groupVariable select 0;
+    private _pos = _groupMemory select 0;
     private _distance = _unit distance2D _pos;
 
     // CQB or suppress
@@ -114,12 +138,12 @@ if !(_groupVariable isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exi
 
     // add to variable
     if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _distance}) then {
-        _groupVariable pushBack (getPosATL _target);
+        _groupMemory pushBack (getPosATL _target);
     };
 
     // update variable
-    if (_distance < 2) then {_groupVariable deleteAt 0;};
-    group _unit setVariable [QGVAR(CQB_pos), _groupVariable, false];
+    if (_distance < 2) then {_groupMemory deleteAt 0;};
+    _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
 
     _timeout + 6
 
@@ -145,7 +169,7 @@ if !(_cover isEqualTo [] || _indoor) exitWith {
 };*/
 
 // building
-if (_indoor && {random 100 < GVAR(indoorMove)}) exitWith {
+if (_indoor && {RND(GVAR(indoorMove)/100)}) exitWith {
 
     // get building positions
     private _buildingPos = [_unit, 21, true, true] call EFUNC(main,findBuildings);

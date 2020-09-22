@@ -65,7 +65,7 @@ if (_static) exitWith {
 
     // suppression 
     if (_attack) then {
-        [FUNC(vehicleSuppress), [_unit, _dangerPos], random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleSuppress)}, [_unit, _dangerPos], random 1] call CBA_fnc_waitAndExecute;
     };
 
     // get out if enemy near
@@ -86,14 +86,14 @@ if (_armored && {_attack}) exitWith {
     if (speed _vehicle < 8) then {
 
         // rotate + suppression (internal to vehicle rotate)
-        [FUNC(vehicleRotate), [_vehicle, getPosATL _dangerCausedBy], 0] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleRotate)}, [_vehicle, getPosATL _dangerCausedBy], 0] call CBA_fnc_waitAndExecute;
 
         // assault
         if (_vehicle distance2D _dangerCausedBy < 550 && {_dangerCausedBy isKindOf "Man"}) then {
             [
-                FUNC(vehicleAssault),
+                {_this call FUNC(vehicleAssault)},
                 [_unit, _dangerPos, _dangerCausedBy],
-                (3 + random 3)
+                3 + random 3
             ] call CBA_fnc_waitAndExecute;
         };
     };
@@ -126,7 +126,7 @@ if (_car && {_attack}) exitWith {
 
     // suppression 
     if (speed _vehicle < 8) then {
-        [FUNC(vehicleSuppress), [_unit, ASLtoAGL eyePos _dangerCausedBy], random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleSuppress)}, [_unit, ASLtoAGL eyePos _dangerCausedBy], random 1] call CBA_fnc_waitAndExecute;
     };
 
     // end

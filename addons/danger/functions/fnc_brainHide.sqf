@@ -48,7 +48,7 @@ if (_type isEqualTo 4) exitWith {
 _unit forceSpeed -1;
 
 // find cover
-[FUNC(doHide), [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
+[{_this call FUNC(doHide)}, [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
 
 // end
 _timeout

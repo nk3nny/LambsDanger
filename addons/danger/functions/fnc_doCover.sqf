@@ -36,9 +36,5 @@ private _anim = call {
 [_unit, selectRandom _anim, true] call EFUNC(main,doGesture);
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 
-// DEBUG BRUTE
-//systemchat format ["%1 ## SEEKS COVER ## %2 (%3m)", side _unit, name _unit, round (_unit distance _pos)];
-//[_pos, "", "ColorWhite"] call EFUNC(main,dotMarker);
-
 // end
 _unit

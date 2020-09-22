@@ -90,7 +90,7 @@ switch (_mode) do {
             private _area = _logic getVariable ["objectarea", [TASK_CAMP_SIZE, TASK_CAMP_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _teleport = _logic getVariable [QGVAR(Teleport), TASK_CAMP_TELEPORT];
-            private _exitWP = _logic getVariable [QGVAR(_exitWP), TASK_CAMP_EXITWP];
+            private _exitWP = _logic getVariable [QGVAR(exitWP), TASK_CAMP_EXITWP];
             private _patrol = _logic getVariable [QGVAR(Patrol), TASK_CAMP_PATROL];
 
             {

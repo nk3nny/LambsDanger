@@ -18,11 +18,12 @@
 params [["_unit", objNull, [objNull]], ["_delay", 30]];
 
 // check if group AI disabled
-if ((group _unit) getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
+private _group = group _unit;
+if (_group getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
 // set variable
-group _unit setVariable [QGVAR(tactics), true];
-group _unit setVariable [QGVAR(contact), time + 300];
+_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(contact), time + 300];
 
 // set current task
 _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
@@ -33,7 +34,7 @@ private _enemies = (_unit targets [true, 600, [], 0]) select {_unit knowsAbout _
 private _plan = [];
 
 // leader assess EH
-[QGVAR(OnAssess), [_unit, group _unit, _enemies]] call EFUNC(main,eventCallback);
+[QGVAR(OnAssess), [_unit, _group, _enemies]] call EFUNC(main,eventCallback);
 
 // sort plans
 private _pos = [];
@@ -112,7 +113,7 @@ if !(_enemies isEqualTo []) then {
         _pos = _unit getHideFrom (_enemies select _targets);
 
         // mark enemy position for sympathetic fire
-        group _unit setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
+        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
 
     };
 
@@ -128,8 +129,9 @@ if !(_enemies isEqualTo []) then {
         _pos = _unit getHideFrom (_enemies select _targets);
 
         // combatmode
-        if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
-        if (combatMode _unit in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
+        private _combatMode = combatMode _unit;
+        if (_combatMode isEqualTo "RED") then {_plan pushBack 3;}; // assault
+        if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
 
         // visibility / distance / no cover
         if !(terrainIntersectASL [eyepos _unit, eyepos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
@@ -164,12 +166,12 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
     // has taken casualties: hide
     private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
     if (_alive != -1) then {
-        [FUNC(tacticsHide), [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
     };
 
     // check new random direction if no enemy found!
     if (isNull (_unit findNearestEnemy _unit)) then {
-        _unit setFormDir (random 360);
+        _group setFormDir (random 360);
     };
 
     // recheck in a moment
@@ -181,7 +183,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
                 _group setVariable [QGVAR(tacticsTask), nil];
             };
         },
-        group _unit,
+        _group,
         _delay + random 5
     ] call CBA_fnc_waitAndExecute;
     false
@@ -206,25 +208,25 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case 1: {
         // flank
-        [FUNC(tacticsFlank), [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case 2: {
         // garrison
-        [FUNC(tacticsGarrison), [_unit, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsGarrison)}, [_unit, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
     };
     case 3: {
         // rush ~ assault
-        [FUNC(tacticsAssault), [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case 4: {
         // suppress
-        [FUNC(tacticsSuppress), [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsSuppress)}, [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
-        [FUNC(tacticsHide), [_unit, _pos, true], random 3] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsHide)}, [_unit, _pos, true], random 3] call CBA_fnc_waitAndExecute;
     };
 };
 

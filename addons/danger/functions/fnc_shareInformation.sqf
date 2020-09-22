@@ -58,6 +58,7 @@ private _knowsAbout = _unit knowsAbout _target;
     if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
         [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
         [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];
+        if (local leader _x && {_x getVariable [QGVAR(contact), 0] < time}) then {[leader _x] call FUNC(tactics);};
     };
 } forEach _groups;
 

@@ -30,33 +30,26 @@ _buildings = _buildings select { _x distance _target < _rangeBuilding };
 
 // set destination
 private _pos = if (_buildings isEqualTo []) then {
-
-    // indoor
+    // unit is indoor and happy
     if (_unit call EFUNC(main,isIndoor) && {random 100 > GVAR(indoorMove)}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
-        _unit doWatch _target;
         _unit getPos [random 1 + 0.2, _unit getDir _target];
     };
 
     // select
     _unit getHideFrom _target
-
 } else {
-
-    // add position
+    // add unit position to array
     _buildings pushBack getPosATL _target;
 
-    // updates group variable
-    private _groupVariable = group _unit getVariable [QGVAR(CQB_pos), []];
-    _groupVariable pushBackUnique selectRandom _buildings;
-    group _unit setVariable [QGVAR(CQB_pos), _groupVariable];
-
-    // debug
-    //hint format ["CQB - %1   \n%2\n\n%3", side _unit, count _groupVariable, (_groupVariable apply {round (_unit distance2D _x), _x}) joinString "\n  "];    // debug
+    // updates group memory variable
+    private _group = group _unit;
+    private _groupMemory = _group getVariable [QGVAR(CQB_pos), []];
+    _groupMemory pushBackUnique selectRandom _buildings;
+    _group setVariable [QGVAR(CQB_pos), _groupMemory];
 
     // select
     selectRandom _buildings
-
 };
 
 // stance and speed
