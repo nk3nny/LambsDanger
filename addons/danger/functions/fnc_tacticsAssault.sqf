@@ -21,6 +21,7 @@ params ["_unit", "_target", ["_units", []], ["_cycle", 2], ["_delay", 22]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
+private _group = group _unit;
 
 // reset tactics
 [
@@ -29,17 +30,16 @@ _target = _target call CBA_fnc_getPos;
         if (!isNull _group) then {
             _group setVariable [QGVAR(tactics), nil];
             _group setSpeedMode _speedMode;
-            {_x setVariable [QGVAR(forceMove), nil];} foreach units _group;
+            {_x setVariable [QGVAR(forceMove), nil];} foreach (units _group);
             _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
-    [group _unit, speedMode _unit],
+    [_group, speedMode _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
-private _group = group _unit;
 
 // find units
 if (_units isEqualTo []) then {

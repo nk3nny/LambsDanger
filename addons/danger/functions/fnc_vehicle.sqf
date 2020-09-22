@@ -48,11 +48,7 @@ if (_attack && {RND(0.4)}) then {[_unit, _dangerCausedBy] call FUNC(shareInforma
 // vehicle type ~ Artillery
 private _artillery = _vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
-
-    // variable
     _vehicle setVariable [QGVAR(isArtillery), true];
-
-    // end
     _timeout + 20
 };
 
@@ -81,10 +77,8 @@ if (_static) exitWith {
 // vehicle type ~ Armoured vehicle
 private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F"};
 if (_armored && {_attack}) exitWith {
-
     // tank assault
     if (speed _vehicle < 8) then {
-
         // rotate + suppression (internal to vehicle rotate)
         [{_this call FUNC(vehicleRotate)}, [_vehicle, getPosATL _dangerCausedBy], 0] call CBA_fnc_waitAndExecute;
 
@@ -124,7 +118,7 @@ if (_armored && {_attack}) exitWith {
 private _car = _vehicle isKindOf "Car_F" && {!(([typeOf _vehicle, false] call BIS_fnc_allTurrets) isEqualTo [])};
 if (_car && {_attack}) exitWith {
 
-    // suppression 
+    // suppression
     if (speed _vehicle < 8) then {
         [{_this call FUNC(vehicleSuppress)}, [_unit, ASLtoAGL eyePos _dangerCausedBy], random 1] call CBA_fnc_waitAndExecute;
     };

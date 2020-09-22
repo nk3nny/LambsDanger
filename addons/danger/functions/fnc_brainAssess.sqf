@@ -103,7 +103,6 @@ if (_type isEqualTo 6) exitWith {
 
     // end
     _timeout + 3
-
 };
 
 // Sympathetic CQB/Suppressive fire
@@ -146,7 +145,6 @@ if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitW
     _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
 
     _timeout + 6
-
 };
 
 // check self
@@ -169,7 +167,7 @@ if !(_cover isEqualTo [] || _indoor) exitWith {
 };*/
 
 // building
-if (_indoor && {RND(GVAR(indoorMove)/100)}) exitWith {
+if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
 
     // get building positions
     private _buildingPos = [_unit, 21, true, true] call EFUNC(main,findBuildings);

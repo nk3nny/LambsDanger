@@ -62,13 +62,9 @@ _buildings = _buildings select {
     && !((_x getVariable [QGVAR(CQB_cleared_) + str (side _unit), [0, 0]]) isEqualTo [])
 };
 
-// update variable
-{
-    _inCQB pushBackUnique _x;
-    true
-} count _buildings;
-(_group) setVariable [QGVAR(inCQB), _inCQB];
-
+_inCQB append _buildings;
+_inCQB = _inCQB arrayIntersect _inCQB;
+_group setVariable [QGVAR(inCQB), _inCQB];
 
 // debug
 if (EGVAR(main,debug_functions)) then {

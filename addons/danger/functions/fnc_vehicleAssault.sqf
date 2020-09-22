@@ -25,7 +25,7 @@ if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
 private _predictedPos = _unit getHideFrom _target;
-if ((_unit distance2D _pos) < 50) then {_pos = _predictedPos};
+if ((_unit distance2D _pos) < 50) then { _pos = _predictedPos; };
 
 //  target not on foot or too close
 if (
@@ -56,7 +56,7 @@ _buildings pushBack _predictedPos;
 // pos
 _pos = AGLToASL (selectRandom _buildings);
 private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
-if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+if !(_vis isEqualTo []) then { _pos = (_vis select 0) select 0; };
 
 // set max distance
 private _distance = (_unit distance _pos) min 600;
@@ -99,7 +99,6 @@ if (EGVAR(main,debug_functions)) then {
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
-
 };
 
 // end

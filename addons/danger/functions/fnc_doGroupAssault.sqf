@@ -23,7 +23,6 @@ _units = _units select {_x call EFUNC(main,isAlive) && {!isPlayer _x}};
 _cycle = _cycle - 1;
 
 {
-
     private _targetPos = selectRandom _pos;
 
     // setpos
@@ -39,7 +38,6 @@ _cycle = _cycle - 1;
     _x setUnitPosWeak "UP";
     _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
     _x setVariable [QGVAR(forceMove), true];
-
 } foreach _units;
 
 // recursive cyclic

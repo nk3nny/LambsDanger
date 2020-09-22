@@ -24,6 +24,7 @@ params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], [
 // find target
 _target = _target call CBA_fnc_getPos;
 
+private _group = group _unit;
 // reset tactics
 [
     {
@@ -34,7 +35,7 @@ _target = _target call CBA_fnc_getPos;
             _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
-    [group _unit, speedMode _unit],
+    [_group, speedMode _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -67,7 +68,6 @@ _pos pushBack _target;
 
 // find overwatch position
 if (_overwatch isEqualTo []) then {
-
     private _distance2D = ((_unit distance2D _target) / 2) min 200;
     _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2D _unit, _x select 0]};
     _overwatch sort true;
@@ -75,7 +75,6 @@ if (_overwatch isEqualTo []) then {
     _overwatch = _overwatch select {!(surfaceIsWater _x)};
     _overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));
     _overwatch = _overwatch select 0;
-
 };
 
 // set tasks
@@ -83,7 +82,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Flank", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
@@ -93,7 +92,7 @@ group _unit setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functi
 [_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call EFUNC(main,doCallout);
 
 // ready group
-(group _unit) setFormDir (_unit getDir _target);
+_group setFormDir (_unit getDir _target);
 _unit doMove _overwatch;
 
 // leader smoke ~ deploy concealment to enable movement

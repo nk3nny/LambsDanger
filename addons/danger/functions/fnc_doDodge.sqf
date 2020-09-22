@@ -8,7 +8,7 @@
  * 1: Position of dange <ARRAY>
  *
  * Return Value:
- * stance
+ * stance <STRING>
  *
  * Example:
  * [bob] call lambs_danger_fnc_doDodge;

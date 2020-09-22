@@ -55,9 +55,7 @@ _vehicle doSuppressiveFire _pos;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-
     format ["%1 suppression (%2 @ %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance ASLToAGL _pos)] call EFUNC(main,debugLog);
-
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;

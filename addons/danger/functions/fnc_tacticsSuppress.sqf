@@ -53,16 +53,19 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
-private _vehicles = [];
-{
-    if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
-        _vehicles pushBackUnique vehicle _x;
-    };
-} foreach (units _unit select { _unit distance2D _x < 350 && { canFire _x }});
+private _vehicles = (units _unit) select {
+    (_unit distance2D _x) < 350
+    && { canFire _x }
+    && { !(isNull objectParent _x) }
+    && { isTouchingGround vehicle _x }
+    && { canFire vehicle _x };
+};
+_vehicles apply { vehicle _x };
+_vehicles arrayIntersect _vehicles;
 
 // sort building locations
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
-_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true ]) apply {getPos _x});
+_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true ]) apply { getPos _x });
 _pos pushBack _target;
 
 // sort cycles
@@ -72,8 +75,9 @@ private _cycle = selectRandom [3, 3, 4, 5];
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
+private _group = group _unit;
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, "gesturePoint"] call EFUNC(main,doGesture);
@@ -82,7 +86,7 @@ group _unit setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_fun
 [_unit, "combat", "SuppressiveFire", 125] call EFUNC(main,doCallout);
 
 // ready group
-(group _unit) setFormDir (_unit getDir _target);
+_group setFormDir (_unit getDir _target);
 
 // execute recursive cycle
 [_cycle, _units, _vehicles, _pos] call FUNC(doGroupSuppress);

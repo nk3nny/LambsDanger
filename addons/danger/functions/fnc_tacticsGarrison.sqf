@@ -19,6 +19,7 @@
 */
 params ["_unit", "_target", ["_units", []], ["_delay", 60]];
 
+private _group = group _unit;
 // reset tactics
 [
     {
@@ -31,7 +32,7 @@ params ["_unit", "_target", ["_units", []], ["_delay", 60]];
             _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
-    [group _unit, speedMode _unit, attackEnabled _unit, formation _unit],
+    [_group, speedMode _unit, attackEnabled _unit, formation _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -77,10 +78,10 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-group _unit setVariable [QGVAR(CQB_pos), _buildings];
+_group setVariable [QGVAR(CQB_pos), _buildings];
 
 // execute
 {

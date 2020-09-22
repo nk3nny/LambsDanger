@@ -79,13 +79,11 @@ _unit forceSpeed ([_unit, _buildingPosSelected] call FUNC(assaultSpeed));
 
 // Close range cleanups
 if (RND(0.95) || {_unit distance _buildingPosSelected < 1.6}) then {
-
     // remove buildingpos
     _buildingPos deleteAt 0;
 
     // update variable
     _building setVariable [QGVAR(CQB_cleared_) + str (side _unit), _buildingPos];
-
 } else {
     // distant units crouch
     if (_unit distance _building > 30) then {

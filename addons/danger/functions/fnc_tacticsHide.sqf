@@ -22,6 +22,7 @@ params ["_unit", "_target", ["_antiTank", false], ["_buildings", []], ["_delay",
 _target = _target call CBA_fnc_getPos;
 
 // reset tactics
+private _group = group _unit;
 [
     {
         params [["_group", grpNull]];
@@ -30,7 +31,7 @@ _target = _target call CBA_fnc_getPos;
             _group setVariable [QGVAR(tacticsTask), nil];
         };
     },
-    group _unit,
+    _group,
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -41,7 +42,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Hide", EGVAR(main,debug_functions)];
 
 // set group task
-group _unit setVariable [QGVAR(tacticsTask), "Hiding", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Hiding", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, "gestureCover"] call EFUNC(main,doGesture);
@@ -58,24 +59,18 @@ if (_units isEqualTo []) exitWith {false};
 // find launcher ~ if present, exit with preparation for armoured/air contact
 private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
 if (_antiTank && {!(_launchers isEqualTo [])}) exitWith {
-
     {
-
         // launcher units target air/tank
         _x commandTarget _target;
 
         // extra impetuous to select launcher
         _x selectWeapon (secondaryWeapon _x);
         _x setUnitPosWeak "MIDDLE";
-
     } forEach _launchers;
 
     // extra aggression from unit
     _unit doFire _target;
-
-    // end
     true
-
 };
 
 // find buildings
@@ -85,14 +80,10 @@ if (_buildings isEqualTo []) then {
 
 // hide for the rest
 {
-
     // ready
     doStop _x;
 
     // hide
     [_x, _target, 45, _buildings] call FUNC(doHide);
-
 } forEach _units;
-
-// end
 true

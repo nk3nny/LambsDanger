@@ -31,7 +31,7 @@ _buildings = _buildings select { _x distance _target < _rangeBuilding };
 // set destination
 private _pos = if (_buildings isEqualTo []) then {
     // unit is indoor and happy
-    if (_unit call EFUNC(main,isIndoor) && {random 100 > GVAR(indoorMove)}) exitWith {
+    if (_unit call EFUNC(main,isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
         _unit getPos [random 1 + 0.2, _unit getDir _target];
     };

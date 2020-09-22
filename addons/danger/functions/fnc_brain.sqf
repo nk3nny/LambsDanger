@@ -46,7 +46,7 @@ private _return = [false, false, false, false];
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
 
-    [false, false, false, true, [10, getposASL _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
+    [false, false, false, true, [10, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
 
 };
 
@@ -66,7 +66,6 @@ private _index = -1;
 // select cause
 private _causeArray = _queue select _index;
 _causeArray params ["_dangerCause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
-_causeArray pushBack (_unit distance2D _dangerPos); // add distance to dangerPos
 
 // Immediate actions
 if (_dangerCause in [2, 9]) then {
@@ -74,7 +73,7 @@ if (_dangerCause in [2, 9]) then {
 };
 
 // hide actions
-private _panic = random 100 < GVAR(panic_chance) && {getSuppression _unit > 0.9};
+private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.9};
 if (_dangerCause in [0, 4, 7] || _panic) then {
     _return set [1, true];
 

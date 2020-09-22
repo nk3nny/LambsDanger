@@ -28,7 +28,7 @@ if (
 ) exitWith {false};
 
 // already inside -- exit   ~ uncommented, handled eslewhere.
-if (RND(GVAR(indoorMove)/100) && {_unit call EFUNC(main,isIndoor)}) exitWith {
+if (RND(GVAR(indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     doStop _unit;
     _unit doWatch _pos;
     false
@@ -45,7 +45,6 @@ _unit setVariable [QGVAR(currentTask), "Hide!", EGVAR(main,debug_functions)];
 
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
-
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", EGVAR(main,debug_functions)];
 
     // hide
@@ -54,10 +53,10 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // execute move
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
-    if (EGVAR(main,debug_functions)) then {format ["%1 hide in building", side _unit] call EFUNC(main,debugLog);};
-
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 hide in building", side _unit] call EFUNC(main,debugLog);
+    };
 } else {
-
     // hide
     _unit setUnitPosWeak "DOWN";
     //[_unit, ["DOWN"], true] call EFUNC(main,doGesture);
@@ -76,7 +75,9 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // execute move
     _unit doMove _targetPos;
-    if (EGVAR(main,debug_functions)) then {format ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);};
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);
+    };
 };
 
 // end

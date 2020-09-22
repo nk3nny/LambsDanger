@@ -18,7 +18,7 @@
 params [["_unit", objNull, [objNull]], ["_delay", 30]];
 
 // only leader
-if !(leader _unit isEqualTo _unit || {isPlayer leader _unit}) exitWith {false};
+if !((leader _unit) isEqualTo _unit || {isPlayer (leader _unit)}) exitWith {false};
 
 // identify enemy
 private _enemy = _unit findNearestEnemy _unit;
@@ -26,8 +26,7 @@ private _pos = getPosASL _enemy;
 
 // get info
 private _range = linearConversion [ 0, 150, (_unit distance2D _pos), 12, 35, true];
-private _stealth = behaviour _unit isEqualTo "STEALTH";
-private _full = speedMode _unit isEqualTo "FULL";
+private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 
 // update tactics and contact state
 private _group = group _unit;
@@ -78,7 +77,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> _typeOf >> "nameSo
 //(leader _unit) forceSpeed 1;
 
 // rushing or ambushing units do not react
-if (_stealth || {_full}) exitWith {true};
+if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
 
 // disable Reaction phase for player group
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
@@ -104,7 +103,6 @@ private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
 
     // clear up existing building positions - nk
     _buildings deleteAt 0;
-
 } foreach _units;
 
 // gesture + call!
@@ -112,7 +110,7 @@ if !(_units isEqualTo []) then {
 
     // unit
     private _unit2 = _units select (count _units - 1);
-    
+
     // point
     [{_this call EFUNC(main,doGesture)}, [_unit2, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
 

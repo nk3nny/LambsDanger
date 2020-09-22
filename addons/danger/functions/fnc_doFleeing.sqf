@@ -89,13 +89,15 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
 };
 
 // inside or under cover!
-if ((lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]) && {getSuppression _unit < 0.2}) then {
+if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) then {
     doStop _unit;
 };
 
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 Fleeing! %2 (%3m)", side _unit, name _unit, round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {
+    format ["%1 Fleeing! %2 (%3m)", side _unit, name _unit, round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);
+};
 
 // end
 true

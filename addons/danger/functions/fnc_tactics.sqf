@@ -32,7 +32,7 @@ if (_contactState < time) exitWith {_unit call FUNC(tacticsContact)};
 if (_unit call FUNC(tacticsProfiles)) exitWith {true};
 
 // Leader assessment
-if (!isplayer leader _unit) then {_unit call FUNC(tacticsAssess);};
+if (!isPlayer (leader _unit)) then {_unit call FUNC(tacticsAssess);};
 
 // end
 true

@@ -85,7 +85,7 @@ if !(_enemies isEqualTo []) then {
         _plan append [2, 2, 3];    // garrison, garrison, assault
         _pos = [_unit getHideFrom (_enemies select _targets), getPosASL _unit] select _inside;
     };
-    
+
     // inside? stay safe
     if (_inside) exitWith {_plan = [];};
 
@@ -109,12 +109,11 @@ if !(_enemies isEqualTo []) then {
     };
     if (_targets != -1) exitWith {
         _plan pushBack 1;   // flank
-        if (combatMode _unit isEqualTo "RED") then {_plan pushBack 3;}; // assault
+        if ((combatMode _unit) isEqualTo "RED") then {_plan pushBack 3;}; // assault
         _pos = _unit getHideFrom (_enemies select _targets);
 
         // mark enemy position for sympathetic fire
         _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
-
     };
 
     // enemy inside buildings or fortified
@@ -122,7 +121,7 @@ if !(_enemies isEqualTo []) then {
         _x call EFUNC(main,isIndoor)
         || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
     };
-        if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
+    if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
 
         // basic plan
         _plan append [1, 1];    // flank, flank
@@ -141,7 +140,6 @@ if !(_enemies isEqualTo []) then {
         // conceal movement
         [_unit, _pos] call EFUNC(main,doSmoke);
     };
-
 };
 
 // find units
@@ -159,7 +157,6 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 
 // no plan ~ exit with no executable plan
 if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWith {
-
     // callout
     [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
 

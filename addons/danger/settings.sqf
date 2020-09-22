@@ -146,11 +146,21 @@ private _curCat = LSTRING(Settings_GeneralCat);
 
 // Chance of panic expressed as percentage
 [
-    QGVAR(panic_chance),
+    QGVAR(panicChance),
     "SLIDER",
     [LSTRING(Settings_PanicChance), LSTRING(Settings_PanicChance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [1, 100, 10, 0],
+    [0, 1, 0.1, 0],
+    1
+] call CBA_fnc_addSetting;
+
+// indoor movement while assessing chance as a percentage
+[
+    QGVAR(indoorMove),
+    "SLIDER",
+    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 1, 0.1, 0],
     1
 ] call CBA_fnc_addSetting;
 
