@@ -164,15 +164,15 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
                     name = CSTRING(Random);
                     value = 0;
                 };
-                class All {
+                class Hold {
                     name = CSTRING(Hold);
                     value = 1;
                 };
-                class FiredNear {
+                class Guard {
                     name = CSTRING(Guard);
                     value = 2;
                 };
-                class Fired {
+                class SAD {
                     name = CSTRING(SAD);
                     value = 3;
                 };
