@@ -162,24 +162,24 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             class Values {
                 class Random {
                     name = CSTRING(Random);
-                    value = 0;
+                    value = -1;
                 };
                 class Hold {
-                    name = CSTRING(Hold);
-                    value = 1;
+                    name = "$STR_ac_hold";
+                    value = 0;
                 };
                 class Guard {
-                    name = CSTRING(Guard);
-                    value = 2;
+                    name = "$STR_ac_guard";
+                    value = 1;
                 };
                 class SAD {
-                    name = CSTRING(SAD);
-                    value = 3;
+                    name = "$STR_ac_seekanddestroy";
+                    value = 2;
                 };
             };
         };
         class GVAR(Teleport): Checkbox {
-            displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);  // Strings and code lifted directly out of taskGarrison -- do we really need extra string entries for this? Might even make it generic -nkenny
+            displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskCamp_Teleport_Tooltip);
             property = QGVAR(Teleport);
             unique = 0;

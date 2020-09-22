@@ -20,7 +20,7 @@
 params [["_group", grpNull, [grpNull, objNull]]];
 
 // sort group
-if (!local _group) exitWith {false};
+if (!local _group) exitWith { _group };
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // units

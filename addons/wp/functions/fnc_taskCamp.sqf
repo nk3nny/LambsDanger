@@ -30,7 +30,7 @@ params [
     ["_area", [], [[]], []],
     ["_teleport", TASK_CAMP_TELEPORT, [false]],
     ["_patrol", TASK_CAMP_PATROL, [false]],
-    ["_exitWP", TASK_CAMP_EXITWP, [0]]
+    ["_exitWP", TASK_CAMP_EXITWP, [-1]]
 ];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
@@ -242,11 +242,14 @@ _wp setWaypointStatements ["true", "
 private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
 
 // set exitWP
+if (_exitWP == -1) then {
+    _exitWP = floor (random 3);
+};
+
 private _wp2Type = switch (_exitWP) do {
-    case 1: {"HOLD"};
-    case 2: {"GUARD"};
-    case 3: {"SAD"};
-    default {selectRandom ["HOLD", "GUARD", "SAD"]};
+    case 1: {"GUARD"};
+    case 2: {"SAD"};
+    default {"HOLD"};
 };
 _wp2 setWaypointType _wp2Type;
 

@@ -433,15 +433,6 @@
             <English>Hit</English>
             <German>Getroffen</German>
         </Key>
-        <Key ID="STR_Lambs_WP_HOLD">
-            <English>Hold</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_GUARD">
-            <English>Guard</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_SAD">
-            <English>Search and Destroy</English>
-        </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
         </Key>

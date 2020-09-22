@@ -37,14 +37,14 @@ switch (_mode) do {
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskCamp_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCamp_Radius_ToolTip), [10, 400], [2, 1], TASK_CAMP_SIZE, 2],
                         [LSTRING(Module_TaskCamp_ExitWP_DisplayName), "DROPDOWN", LSTRING(Module_TaskCamp_ExitWP_Tooltip), [LSTRING(Random), LSTRING(HOLD), LSTRING(GUARD), LSTRING(SAD)], TASK_CAMP_EXITWP],
-                        [LSTRING(Module_TaskCamp_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskCamp_Teleport_Tooltip), falTASK_CAMP_TELEPORTse],
+                        [LSTRING(Module_TaskCamp_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskCamp_Teleport_Tooltip), TASK_CAMP_TELEPORT],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_CAMP_PATROL]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_exitWP", "_teleport", "_patrol"];
                         private _group = _groups select _groupIndex;
-                        [_group, getPos _logic, _range, nil, _teleport, _patrol, _exitWP] remoteExecCall [QFUNC(taskCamp), leader _group];
+                        [_group, getPos _logic, _range, nil, _teleport, _patrol, _exitWP - 1] remoteExecCall [QFUNC(taskCamp), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -72,7 +72,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_exitWP", "_teleport", "_patrol"];
-                        [_group, getPos (_targets select _targetIndex), _range, nil, _teleport, _patrol] remoteExecCall [QFUNC(taskCamp), leader _group];
+                        [_group, getPos (_targets select _targetIndex), _range, nil, _teleport, _patrol, _exitWP - 1] remoteExecCall [QFUNC(taskCamp), leader _group];
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -90,11 +90,10 @@ switch (_mode) do {
             private _area = _logic getVariable ["objectarea", [TASK_CAMP_SIZE, TASK_CAMP_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _teleport = _logic getVariable [QGVAR(Teleport), TASK_CAMP_TELEPORT];
-            private _exitWP = _logic getVariable [QGVAR(exitWP), TASK_CAMP_EXITWP];
             private _patrol = _logic getVariable [QGVAR(Patrol), TASK_CAMP_PATROL];
-
+            private _exitWP = _logic getVariable [QGVAR(exitWP), TASK_CAMP_EXITWP];
             {
-                [_x, getPos _logic, _range, _area, _teleport, _patrol] remoteExecCall [QFUNC(taskCamp), leader _x];
+                [_x, getPos _logic, _range, _area, _teleport, _patrol, _exitWP - 1] remoteExecCall [QFUNC(taskCamp), leader _x];
             } forEach _groups;
             deleteVehicle _logic;
         };
