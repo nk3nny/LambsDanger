@@ -36,7 +36,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskCamp_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCamp_Radius_ToolTip), [10, 400], [2, 1], TASK_CAMP_SIZE, 2],
-                        [LSTRING(Module_TaskCamp_ExitWP_DisplayName), "DROPDOWN", LSTRING(Module_TaskCamp_ExitWP_Tooltip), [LSTRING(Random), LSTRING(HOLD), LSTRING(GUARD), LSTRING(SAD)], TASK_CAMP_EXITWP],
+                        [LSTRING(Module_TaskCamp_ExitWP_DisplayName), "DROPDOWN", LSTRING(Module_TaskCamp_ExitWP_Tooltip), [LSTRING(Random), "STR_ac_hold", "STR_ac_guard", "STR_ac_seekanddestroy"], TASK_CAMP_EXITWP],
                         [LSTRING(Module_TaskCamp_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskCamp_Teleport_Tooltip), TASK_CAMP_TELEPORT],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_CAMP_PATROL]
                     ], {
@@ -65,7 +65,7 @@ switch (_mode) do {
                     [
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         [LSTRING(Module_TaskCamp_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskCamp_Radius_ToolTip), [10, 400], [2, 1], TASK_CAMP_SIZE, 2],
-                        [LSTRING(Module_TaskCamp_ExitWP_DisplayName), "DROPDOWN", LSTRING(Module_TaskCamp_ExitWP_Tooltip), [LSTRING(Random), LSTRING(HOLD), LSTRING(GUARD), LSTRING(SAD)], TASK_CAMP_EXITWP],
+                        [LSTRING(Module_TaskCamp_ExitWP_DisplayName), "DROPDOWN", LSTRING(Module_TaskCamp_ExitWP_Tooltip), [LSTRING(Random), "STR_ac_hold", "STR_ac_guard", "STR_ac_seekanddestroy"], TASK_CAMP_EXITWP],
                         [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_CAMP_TELEPORT],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_CAMP_PATROL]
                     ], {
