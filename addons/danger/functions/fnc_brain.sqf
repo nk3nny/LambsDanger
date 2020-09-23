@@ -104,15 +104,17 @@ if (_dangerCause isEqualto 0 && {isFormationLeader _unit}) then {
     //if (RND(0.05)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     [_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);
 };
-
+private _group = group _unit;
 // Enemy Near
-if ( _dangerCause isEqualto 3 || {!isNull _dangerCausedBy && { (group _unit getVariable [QGVAR(contact), 0]) < time  && {!((group _unit) getVariable [QGVAR(disableGroupAI), false])}}}) then {
-
+if (_dangerCause isEqualto 3
+    || {!isNull _dangerCausedBy}
+    && { (_group getVariable [QGVAR(contact), 0]) < time }
+    && { !(_group getVariable [QGVAR(disableGroupAI), false]) }
+) then {
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerCausedBy < 50)] call EFUNC(main,doGesture);
 
     // Extra callout
     [ _unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
-
 };
 
 // modify return
