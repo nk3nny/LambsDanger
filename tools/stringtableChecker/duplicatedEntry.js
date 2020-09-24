@@ -60,7 +60,7 @@ function ParseString(Keys) {
             if (key != "$" && entry.hasOwnProperty(key)) {
                 const element = entry[key][0];
                 const index = stringtableEntries.indexOf(element);
-                if (index != -1) {
+                if (index != -1 && !stringtableIDs.includes(entry.$.ID)) {
                     const log = `${entry.$.ID} is a Duplicated string ${stringtableIDs[index]} : ${key}`;
                     fs.appendFileSync("duplicated.log", log + EOL);
                     console.log(log);
@@ -77,7 +77,7 @@ getDirFiles("addons", "");
 
 while (running != 0) {}
 if (failedCount == 0) {
-    console.log("No Errors in Found");
+    console.log("No Duplicated Entrys found");
 } else {
     console.log(`${failedCount} Duplicated Entrys found`)
 }
