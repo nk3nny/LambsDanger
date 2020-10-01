@@ -27,7 +27,11 @@ if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {format ["
 // settings
 
 // exit on no ready artillery
-if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (EGVAR(main,debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);}};
+if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);
+    };
+};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Leader Artillery", EGVAR(main,debug_functions)];
@@ -40,9 +44,15 @@ _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
 
+// reset forceMove
+[{
+    _this setVariable [QGVAR(forceMove), nil];
+    _this forceSpeed -1;
+}, _unit, 8] call CBA_fnc_waitAndExecute;
+
 // Gesture
 doStop _unit;
-[_unit, ["HandSignalRadio"]] call EFUNC(main,doGesture);
+[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
 
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {

@@ -28,7 +28,7 @@ if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; 
 
 // init
 params [
-    ["_group", grpNull, [grpNull]],
+    ["_group", grpNull, [grpNull, objNull]],
     ["_pos", []],
     ["_radius", TASK_GARRISON_SIZE, [0]],
     ["_area", [], [[]]],
@@ -46,26 +46,31 @@ if (_group isEqualType objNull) then { _group = group _group; };
 if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call CBA_fnc_getPos;
 
+// find guns
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
+_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
+
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 if !(_area isEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 [_houses, true] call CBA_fnc_Shuffle;
 
+// sort based on height
 if (_sortBasedOnHeight) then {
     _houses = [_houses, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
 };
 
-// find guns
-private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
-
 // orders
 _group setBehaviour "SAFE";
 _group enableAttack false;
+
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskGarrison", EGVAR(main,debug_functions)];
 
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;
@@ -88,12 +93,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _radius, 4, nil, true] call FUNC(taskPatrol);
+        [_group2, _pos, _radius, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [1, (_area2 select 1) * 2];
-        [_group2, _group2, _radius, 4, _area2, true] call FUNC(taskPatrol);
+        [_group2, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
     };
 };
 

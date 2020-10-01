@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: Unit doing gesture <OBJECT>
- * 1: Array of possible gestures, default freeze gesture <ARRAY>
+ * 1: Array of possible gestures, default freeze gesture <ARRAY> or <STRING>
  * 2: Force Gesture <BOOL> (Default: false)
  *
  * Return Value:
@@ -18,7 +18,7 @@
 */
 params [
     ["_unit", objNull, [objNull]],
-    ["_gesture", ["gestureFreeze"], [[]]],
+    ["_gesture", "gestureFreeze", [[], ""]],
     ["_force", false, [false]]
 ];
 
@@ -28,8 +28,13 @@ if (GVAR(disableAIGestures) && {!_force}) exitWith {false};
 // not for players
 if (isPlayer _unit) exitWith {false};
 
+// sort gestures
+if (_gesture isEqualType []) then {
+    _gesture = selectRandom _gesture;
+};
+
 // do it
-_unit playActionNow (selectRandom _gesture);
+_unit playActionNow _gesture;
 
 // end
 true

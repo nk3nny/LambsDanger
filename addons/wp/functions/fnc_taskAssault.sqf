@@ -53,6 +53,9 @@ _group setVariable [QGVAR(taskAssaultMembers), _units];
 _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
 _group setSpeedMode "FULL";
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
+
 // sort units
 {
     _x setVariable [QEGVAR(danger,disableAI), true];
@@ -60,6 +63,9 @@ _group setSpeedMode "FULL";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
     _x setUnitPos "UP";
+
+    // variable
+    _x setVariable [QEGVAR(danger,currentTask), ["Rushing Assault", "Rushing Retreat"] select _retreat, EGVAR(main,debug_functions)];
 
     // check retreat
     if (_retreat) then {
@@ -107,7 +113,7 @@ _group setSpeedMode "FULL";
                 if !((expectedDestination _unit select 0) isEqualTo _destination) then {_unit doMove _destination};
                 _unit forceSpeed ([ [_unit, _destination] call EFUNC(danger,assaultSpeed), 24] select _retreat);
                 _unit doWatch _destination;
-                _unit setVariable [QEGVAR(danger,forceMove), true];
+                //_unit setVariable [QEGVAR(danger,forceMove), true];   ~ speedmode "FULL" should replicate this behaviour in new FSM. ~ nkenny
 
                 // force move
                 private _dir = 360 - (_unit getRelDir _destination);
@@ -129,10 +135,12 @@ _group setSpeedMode "FULL";
                 };
 
                 // forward
-                if (_anim isEqualTo []) then {_anim = ["FastF"];};
+                if (_anim isEqualTo []) then {
+                    _anim = ["FastF"];
+                };
 
                 // execute
-                _unit playActionNow selectRandom _anim;
+                [_unit, _anim, true] call EFUNC(main,doGesture);
             },
             _cycle,
             [_x, _group, _retreat, _threshold]

@@ -213,6 +213,12 @@
             <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
             <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
         </Key>
+        <Key ID="STR_Lambs_danger_Settings_IndoorMove">
+            <English>Indoor Move Chance</English>
+        </Key>
+        <Key ID="STR_Lambs_danger_Settings_IndoorMove_ToolTip">
+            <English>Indoor Move Chance</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
             <English>Accuracy of shared information</English>
             <German>Genauigkeit der geteilten Informationen</German>

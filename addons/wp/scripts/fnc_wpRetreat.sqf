@@ -15,11 +15,8 @@
 // init
 params ["_group", "_pos"];
 
-
-// prepare troops ~ pre-set for raid!
-[leader _group, 99, 170] call EFUNC(danger,leaderModeUpdate);
-
 // group
+_group setVariable [QEGVAR(danger,tactics), true];
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
 _group setSpeedMode "FULL";
 

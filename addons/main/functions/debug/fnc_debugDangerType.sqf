@@ -28,4 +28,5 @@ if (_select isEqualTo 6) exitWith { "Dead Body" };
 if (_select isEqualTo 7) exitWith { "Scream heard" };
 if (_select isEqualTo 8) exitWith { "Can Fire" };
 if (_select isEqualTo 9) exitWith { "Bullet close!" };
+if (_select isEqualTo 10) exitWith { "Assessing" };
 "UNKNOWN"

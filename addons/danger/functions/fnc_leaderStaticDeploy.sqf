@@ -16,7 +16,6 @@
  *
  * Public: No
 */
-
 params ["_units", "_pos", ["_weaponPos", []]];
 
 // sort units
@@ -60,21 +59,20 @@ private _assistant = _units deleteAt _assistantIndex;
 
 // Manoeuvre gunner
 private _EH = _gunner addEventHandler ["WeaponAssembled", {
-        params ["_unit", "_weapon"];
+    params ["_unit", "_weapon"];
 
-        // get in weapon
-        _unit assignAsGunner _weapon;
-        _unit moveInGunner _weapon;
+    // get in weapon
+    _unit assignAsGunner _weapon;
+    _unit moveInGunner _weapon;
 
-        // check artillery
-        if (GVAR(Loaded_WP) && {_weapon getVariable [QEGVAR(wp,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
-            [group _unit] call EFUNC(wp,taskArtilleryRegister);
-        };
+    // check artillery
+    if (GVAR(Loaded_WP) && {_weapon getVariable [QEGVAR(wp,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
+        [group _unit] call EFUNC(wp,taskArtilleryRegister);
+    };
 
-        // remove EH
-        _unit removeEventHandler ["WeaponAssembled", _thisEventHandler];
-    }
-];
+    // remove EH
+    _unit removeEventHandler ["WeaponAssembled", _thisEventHandler];
+}];
 
 // callout
 [formationLeader _gunner, "aware", "AssembleThatWeapon"] call EFUNC(main,doCallout);
@@ -133,7 +131,7 @@ if (_weaponPos isEqualTo []) then {
         // assistant
         doStop _assistant;
         _assistant doWatch _pos;
-        [_assistant, ["gesturePoint"]] call EFUNC(main,doGesture);
+        [_assistant, "gesturePoint"] call EFUNC(main,doGesture);
     },
     [_gunner, _assistant, _pos, _weaponPos, _EH], 8,
     {
