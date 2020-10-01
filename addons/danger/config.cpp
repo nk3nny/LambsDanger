@@ -16,3 +16,4 @@ class CfgPatches {
 #include "CfgFSMs.hpp"
 #include "Cfg3DEN.hpp"
 #include "ZEN_CfgContext.hpp"
+#include "CfgAIProfile.hpp"

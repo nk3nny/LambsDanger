@@ -12,6 +12,7 @@ class CfgPatches {
 };
 #include "CfgFactionClasses.hpp"
 #include "CfgEventHandlers.hpp"
+#include "CfgAIProfile.hpp"
 
 class GVAR(Display) {
     idd = -1;

@@ -27,3 +27,8 @@ SUBPREP(debug,debugMarkerColor);
 SUBPREP(debug,debugObjectColor);
 SUBPREP(debug,dotMarker);
 SUBPREP(debug,zoneMarker);
+
+SUBPREP(Profiles,parseAIProfiles);
+SUBPREP(Profiles,setProfileAllow);
+SUBPREP(Profiles,setupProfile);
+SUBPREP(Profiles,doesProfileAllow);

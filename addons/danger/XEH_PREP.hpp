@@ -35,7 +35,6 @@ PREP(tacticsCQB);
 PREP(tacticsFlank);
 PREP(tacticsGarrison);
 PREP(tacticsHide);
-PREP(tacticsProfiles);
 PREP(tacticsSuppress);
 PREP(vehicle);
 PREP(vehicleAssault);
