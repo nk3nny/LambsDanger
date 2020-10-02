@@ -211,7 +211,7 @@ _wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 

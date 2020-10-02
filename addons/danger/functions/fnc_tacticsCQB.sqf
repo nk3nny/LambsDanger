@@ -68,7 +68,7 @@ _group setVariable [QGVAR(inCQB), _inCQB];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS CQB (%2 with %3 units @ assaults %4 buildings)", side _unit, name _unit, count units _unit, count _inCQB] call EFUNC(main,debugLog);
+    ["%1 TACTICS CQB (%2 with %3 units @ assaults %4 buildings)", side _unit, name _unit, count units _unit, count _inCQB] call EFUNC(main,debugLog);
 };
 
 // end

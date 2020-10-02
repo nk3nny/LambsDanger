@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: Position to place dot, either as position <ARRAY>, unit <OBJECT> or group <GROUP>
- * 1: Text to display at location, default is none <STRING>
+ * 1: Text to display at location, default is none <STRING, ARRAY>
  * 2: Color of marker, default is black <STRING>
  * 3: Type of dot, default is military dot, <STRING>
  *
@@ -17,11 +17,16 @@
  *
  * Public: Yes
 */
-params ["_pos", ["_text", ""], ["_color", "colorBlack"], ["_type", "mil_dot"]];
+params ["_pos", ["_text", "", ["", []]], ["_color", "colorBlack"], ["_type", "mil_dot"]];
+if (_text isEqualType []) then {
+    _text = format _text;
+};
+
 _pos = _pos call CBA_fnc_getPos;
 
 // create
-private _m = createMarkerLocal [format["mdot_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allmapMarkers], _pos];
+private _m = format["LAMBS_MAIN_mdot_%1%2%3", (floor(_pos select 0)), (floor(_pos select 1)), count allMapMarkers];
+createMarkerLocal [_m, _pos];
 _m setMarkerShapeLocal "Icon";
 _m setMarkerColorLocal _color;
 _m setMarkerTypeLocal _type;

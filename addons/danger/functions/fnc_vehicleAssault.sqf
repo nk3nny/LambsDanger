@@ -94,7 +94,7 @@ if (_cannon) then {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call EFUNC(main,debugLog);
+    ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call EFUNC(main,debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];

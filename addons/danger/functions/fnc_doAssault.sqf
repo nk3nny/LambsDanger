@@ -62,7 +62,7 @@ _unit setDestination [_pos, "FORMATION PLANNED", false];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 assaulting (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call EFUNC(main,debugLog);
+    ["%1 assaulting (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call EFUNC(main,debugLog);
     private _sphere = createSimpleObject ["Sign_Sphere10cm_F", ATLtoASL (_unit getHideFrom _target), true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;

@@ -96,7 +96,7 @@ if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 Fleeing! %2 (%3m)", side _unit, name _unit, round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);
+    ["%1 Fleeing! %2 (%3m)", side _unit, name _unit, round (_unit distance (expectedDestination _unit select 0))] call EFUNC(main,debugLog);
 };
 
 // end

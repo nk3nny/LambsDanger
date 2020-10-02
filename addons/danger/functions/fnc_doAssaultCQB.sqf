@@ -107,7 +107,7 @@ if !(_buildingPos isEqualTo []) then {
 
 // debug
 if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
-    format ["%1 assaulting building (%2 @ %3m - %4x spots left - %5 cycle)",
+    ["%1 assaulting building (%2 @ %3m - %4x spots left - %5 cycle)",
         side _unit,
         name _unit,
         round (_unit distance _buildingPosSelected),

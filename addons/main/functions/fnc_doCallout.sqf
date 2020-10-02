@@ -34,7 +34,7 @@ if (isPlayer _unit || {!(_unit call EFUNC(main,isAlive))}) exitWith {};
 private _time = _unit getVariable [QGVAR(calloutTime), 0];
 if (_time >= time) exitWith {
     if (GVAR(debug_functions)) then {
-        format ["%1 callout too early (%2 in %3s)", side _unit, name _unit, time - _time] call FUNC(debugLog);
+        ["%1 callout too early (%2 in %3s)", side _unit, name _unit, time - _time] call FUNC(debugLog);
     };
 };
 
@@ -87,18 +87,18 @@ if (isNil "_cachedSounds") then {
 // no sounds found
 if (_cachedSounds isEqualTo []) exitWith {
     if (GVAR(debug_functions)) then {
-        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
-        _str call FUNC(debugLog);
-        _str call BIS_fnc_error;
+        private _arr = ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        _arr call FUNC(debugLog);
+        _arr call BIS_fnc_error;
     };
 };
 
 private _sound = selectRandom _cachedSounds;
 if (_sound == "") exitWith {
     if (GVAR(debug_functions)) then {
-        private _str = format ["ERROR: Sound File for Callout %1 Found", _cacheName];
-        _str call FUNC(debugLog);
-        _str call BIS_fnc_error;
+        private _arr = ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        _arr call FUNC(debugLog);
+        _arr call BIS_fnc_error;
     };
 };
 playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pitch _unit, _distance];
@@ -107,7 +107,7 @@ playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pit
     _this remoteExecCall ["setRandomLip", 0];
 }, [_unit, false], 1] call CBA_fnc_waitAndExecute;
 if (GVAR(debug_functions)) then {
-    format ["%1 callout (%2 called %3!)", side _unit, name _unit, _callout] call FUNC(debugLog);
+    ["%1 callout (%2 called %3!)", side _unit, name _unit, _callout] call FUNC(debugLog);
 };
 
 // set time until next callout

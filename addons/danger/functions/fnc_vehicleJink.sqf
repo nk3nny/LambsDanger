@@ -62,7 +62,7 @@ _destination = selectRandom _destination;
 _vehicle doMove _destination;
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _destination)] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _destination)] call EFUNC(main,debugLog);};
 
 // end
 _destination

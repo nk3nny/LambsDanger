@@ -4,7 +4,7 @@
  * Logs Debug Informations
  *
  * Arguments:
- * String
+ * String, format Array
  *
  * Return Value:
  * none
@@ -14,7 +14,9 @@
  *
  * Public: No
 */
-
-params ["_str"];
+private _str = _this;
+if (_this isEqualType []) then {
+    _str = format _this;
+};
 systemChat _str;
-diag_log ("[LAMBS Danger FSM] : " + _str);
+diag_log text ("[LAMBS Danger FSM] : " + _str);

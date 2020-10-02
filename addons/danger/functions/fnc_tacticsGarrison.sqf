@@ -92,7 +92,7 @@ _group setVariable [QGVAR(CQB_pos), _buildings];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS GARRISON %2 (%3m)", side _unit, groupId group _unit, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    ["%1 TACTICS GARRISON %2 (%3m)", side _unit, groupId group _unit, round (_unit distance2D _target)] call EFUNC(main,debugLog);
 };
 
 // end
