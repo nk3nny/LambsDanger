@@ -20,6 +20,24 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Default AI Profiles
+private _profiles = []; // TODO(joko): find a way to add the profiles create via script even in the editor
+
+{
+    {
+        _profiles pushBackUnique toLower(configName _x);
+    } forEach configProperties [_x >> "LAMBS_CfgAIProfiles", "isClass _x", true];
+} forEach [configFile, missionConfigFile];
+
+[
+    QGVAR(defaultAIProfile),
+    "LIST",
+    [LSTRING(Settings_DefaultAIProfile), LSTRING(Settings_DefaultAIProfile_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [_profiles, _profiles, _profiles find "default"],
+    0
+] call CBA_fnc_addSetting;
+
 // debug
 _curCat = LSTRING(Settings_Debug);
 // FSM level debug messages

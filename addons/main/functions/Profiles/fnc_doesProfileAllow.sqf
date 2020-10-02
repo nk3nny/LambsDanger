@@ -17,7 +17,7 @@
 */
 params [["_target", objNull, [objNull, grpNull]], ["_tactic", "unkown", [""]]];
 
-private _profile = _target getVariable [QGVAR(AIProfile), "default"];
+private _profile = _target getVariable [QGVAR(AIProfile), GVAR(defaultAIProfile)];
 
 private _profileData = GVAR(ProfilesNamespace) getVariable toLower(_profile);
 if (isNil "_profileData") then {
