@@ -8,7 +8,7 @@
  * 1: Position of dange <ARRAY>
  *
  * Return Value:
- * stance
+ * stance <STRING>
  *
  * Example:
  * [bob] call lambs_danger_fnc_doDodge;
@@ -24,16 +24,19 @@ private _dir = 360 - (_unit getRelDir _pos);
 // dodge
 _unit setVariable [QGVAR(currentTask), "Dodge!", EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
+
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
-    [_unit, [["EvasiveLeft"], ["EvasiveRight"]] select (_dir > 330), true] call EFUNC(main,doGesture);
+    [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir > 330), true] call EFUNC(main,doGesture);
+    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir > 330), "FORMATION PLANNED", false];
     _stance
 };
 
 // ACE3 captive exit
 if (
     GVAR(disableAIImediateAction)
-    || {!(_unit checkAIFeature "MOVE")} // not stopping with PATH for gameplay reasons -nkenny
+    || {!(_unit checkAIFeature "MOVE")}
+    || {!(_unit checkAIFeature "PATH")}
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
 ) exitWith {_stance};
@@ -43,51 +46,37 @@ if (RND(0.6)) then {
     [_unit, "Combat", "UnderFireE", 125] call EFUNC(main,doCallout);
 };
 
-// reset speed
-_unit forceSpeed -1;
-
-private _suppression = getSuppression _unit > 0.55;
+// settings
+private _suppression = (getSuppression _unit > 0.05) && {_unit distance2D _pos < 45};
+private _relPos = getPosASL _unit;
 private _anim = [];
 
-// move right
+// move left
 if (_dir > 250 && { RND(0.1) }) then {
-
-    if (_suppression) then {
-        _anim append ["FastL", "FastLB"];
-        _unit setUnitPosWeak "DOWN";
-    } else {
-        _anim append ["TactL", "TactLB", "WalkL"];
-    };
+    _relPos = _unit getRelPos [2, -60];
+    _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
 };
 
-// move left
+// move right
 if (_dir < 80 && { RND(0.1) }) then {
-
-    if (_suppression) then {
-        _anim append ["FastR", "FastRB"];
-        _unit setUnitPosWeak "DOWN";
-    } else {
-        _anim append ["TactR", "TactRB", "WalkR"];
-    };
+    _relPos = _unit getRelPos [2, 60];
+    _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };
 
 // move back
-if ((_dir > 320 || _dir < 40) && {speed _unit < 8} && {_unit distance2d _pos < 20}) then {
-
-  if (_suppression) then {
-        _anim pushBack "FastB";
-    } else {
-        _anim append ["TactB", "WalkB"];
-    };
+if ((_dir > 320 || { _dir < 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
+    _relPos = _unit getRelPos [1, 180];
+    _anim pushBack (["WalkB", "WalkB"] select _suppression); //"FastB"
 };
 
 // check
 if (_anim isEqualTo []) then {
-    _anim pushBack "FastF";
-    _unit setUnitPosWeak "DOWN";
+    _relPos = _unit getRelPos [3, 0];
+    _anim pushBack (["WalkF", "WalkF"] select _suppression); //FastF
 };
 
 // otherwise rush left or right
+_unit setDestination [_relPos, "FORMATION PLANNED", false];    // <-- check to see if this fixes running in place bug. - nk
 [_unit, _anim, true] call EFUNC(main,doGesture);
 
 // end

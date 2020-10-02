@@ -17,7 +17,7 @@
 
 params [
     ["_units", objNull, [grpNull, objNull, []]],
-    ["_pos", [0, 0, 0], [[]]],
+    ["_pos", [], [[]]],
     ["_type", "shotIlluminating", [""]]
 ];
 
@@ -26,7 +26,7 @@ if (_units isEqualType objNull) then {_units = [_units];};
 if (_units isEqualType grpNull) then {_units = units _units;};
 
 // local
-_units = _units select {local _x};
+_units = _units select {local _x && {!isPlayer _x}};
 
 // find grenade launcher
 private _flare = "";
@@ -66,14 +66,15 @@ _unit = _units deleteAt _unit;
 // force
 doStop _unit;
 _unit setUnitPosWeak "MIDDLE";
-_unit setVariable [QGVAR(forceMove), true];
+_unit setVariable [QEGVAR(danger,forceMove), true];
 
 // variable
 _unit setVariable [QGVAR(currentTask), "Shoot UGL", GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
+
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
 private _flarePos = [_pos, (_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]] select (_pos isEqualTo []);
-private _dummy = "Target_F" createVehicle _flarePos;
+private _dummy = "Skeet_Clay_F" createVehicle _flarePos;
 _dummy setPos _flarePos;
 _unit reveal _dummy;
 
@@ -97,6 +98,7 @@ _unit doTarget _dummy;
         // clean
         _unit doWatch objNull;
         _unit doFollow (leader _unit);
+        _unit setVariable [QEGVAR(danger,forceMove), nil];
         deleteVehicle _dummy;
 
     }, [_unit, _muzzle, _dummy], 2

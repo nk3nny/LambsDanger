@@ -11,6 +11,11 @@ const projectFiles = [];
 const prepedFunctions = ["lambs_main_fnc_roundvalue"];
 const ignoreFiles = ["addons/main/functions/fnc_fncName.sqf", "addons/main/functions/fnc_var1.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/wp/functions/fnc_TaskPatrol_WaypointStatement.sqf", "addons/wp/functions/fnc_ArtilleryScan.sqf", "addons/danger/functions/fnc_UpdateCQBFormations.sqf"]
 const ignoredFiles = [];
+
+const commentRegex = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
+const prepRegex = /PREP\((\w+)\)|SUBPREP\((\w+),(\w+)\);|DFUNC\((\w+)\)/gm;
+const funcPrep = /FUNC\((\w+)\)|EFUNC\((\w+),(\w+)\)/gm;
+
 for (const file of ignoreFiles) {
     var temp = "";
     for (const p of file.split("/")) {
@@ -47,25 +52,26 @@ function getDirFiles(p, module) {
 };
 
 function getFunctions(file, module) {
-    var data = fs.readFileSync(file);
-    var regex = /PREP\((\w+)\)|SUBPREP\((\w+),(\w+)\);|DFUNC\((\w+)\)/gm;
-    let m;
-    while ((m = regex.exec(data)) !== null) {
+    let content = fs.readFileSync(file).toString();
+    content = content.replace(commentRegex, '');
+
+    let match;
+    while ((match = prepRegex.exec(content)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
+        if (match.index === prepRegex.lastIndex) {
+            prepRegex.lastIndex++;
         }
 
         // The result can be accessed through the `m`-variable.
-        for (let groupIndex = 0; groupIndex < m.length; groupIndex++) {
-            const match = m[groupIndex];
-            if (!match) continue;
+        for (let groupIndex = 0; groupIndex < match.length; groupIndex++) {
+            const functionName = match[groupIndex];
+            if (!functionName) continue;
             if (groupIndex != 0 && groupIndex != 2) {
-                prepedFunctions.push(`${PREFIX}_${module}_fnc_${match}`.toLowerCase());
-                if (!m[2] && groupIndex != 3)
-                    requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `fnc_${match}.sqf`));
+                prepedFunctions.push(`${PREFIX}_${module}_fnc_${functionName}`.toLowerCase());
+                if (!match[2] && groupIndex != 3)
+                    requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `fnc_${functionName}.sqf`));
             } else if (groupIndex != 0 && groupIndex == 2) {
-                requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `${match}`, `fnc_${m[groupIndex+1]}.sqf`));
+                requiredFunctionFiles.push(path.join(`addons`, `${module}`, `functions`, `${functionName}`, `fnc_${match[groupIndex+1]}.sqf`));
             }
         }
     }
@@ -78,19 +84,19 @@ function CheckFunctions() {
             requiredFunctionFiles.splice(index, 1);
         }
 
-        var content = fs.readFileSync(data.path);
-        var regex = /FUNC\((\w+)\)|EFUNC\((\w+),(\w+)\)/gm;
-        let m;
-        while ((m = regex.exec(content)) !== null) {
+        let content = fs.readFileSync(data.path).toString();
+        content = content.replace(commentRegex, '');
+        let match;
+        while ((match = funcPrep.exec(content)) !== null) {
             // This is necessary to avoid infinite loops with zero-width matches
-            if (m.index === regex.lastIndex) {
-                regex.lastIndex++;
+            if (match.index === funcPrep.lastIndex) {
+                funcPrep.lastIndex++;
             }
             var fncName;
-            if (m[1]) {
-                fncName = `${PREFIX}_${data.module}_fnc_${m[1]}`;
-            } else if (m[2] && m[3]) {
-                fncName = `${PREFIX}_${m[2]}_fnc_${m[3]}`;
+            if (match[1]) {
+                fncName = `${PREFIX}_${data.module}_fnc_${match[1]}`;
+            } else if (match[2] && match[3]) {
+                fncName = `${PREFIX}_${match[2]}_fnc_${match[3]}`;
             }
             if (fncName) {
                 if (!prepedFunctions.includes(fncName.toLowerCase())) {

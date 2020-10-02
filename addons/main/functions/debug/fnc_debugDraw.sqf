@@ -44,36 +44,6 @@ private _fnc_getEyePos = {
     };
 };
 
-private _fnc_dangerModeTypes = {
-    params ["_type"];
-    switch (_type) do {
-        case (1): {
-            "Contact";
-        };
-        case (2): {
-            "Group Hide (air/armor)";
-        };
-        case (3): {
-            "Group Flank";
-        };
-        case (4): {
-            "Group Assault"
-        };
-        case (5): {
-            "Group Suppress"
-        };
-        case (6): {
-            "Call Artillery"
-        };
-        case (7): {
-            "Call CAS"
-        };
-        case (8): {
-            "Group Garrison"
-        };
-    };
-};
-
 private _fnc_getRect = {
     private _control = controlNull;
     if (!isNull _displayCurator) exitWith {
@@ -156,9 +126,9 @@ private _fnc_DrawRect = {
              };
              private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
              _targetKnowledge append [
-                "Target Knowledge:<br/>",
+                "<t color='#C7CCC1'>Target Knowledge: <br/>",
                 "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
-                "    Position Error: ", round ((_knowledge select 5) *100)/100, "<br/>"
+                "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
             ];
 
             drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
@@ -168,13 +138,8 @@ private _fnc_DrawRect = {
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
 
             drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
-            ["None", name _currentTarget] select (isNull _currentTarget);
+            [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
-            _targetKnowledge append [
-               "Target Knowledge:<br/>",
-               "    Last Seen: N/A (N/A)<br/>",
-               "    Position Error: N/A<br/>"
-           ];
             if (_currentTarget isEqualType []) then {
                 drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
                 format ["POS %1", _currentTarget];
@@ -185,36 +150,33 @@ private _fnc_DrawRect = {
 
         _textData append [
             "Behaviour: ", behaviour _unit, "<br/>",
-            "Current Task: ", _unit getVariable [QEGVAR(danger,currentTask), "None"], "<br/>"
+            "    Current Task: ", _unit getVariable [QEGVAR(danger,currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
-            private _dangeModeData = (group _unit) getVariable [QEGVAR(danger,dangerMode), [[], [], true, time]];
-            private _queue = (_dangeModeData select 0) apply { _x call _fnc_dangerModeTypes };
+            private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
-                "Danger Mode Queue: ", [_queue, "None"] select (_queue isEqualTo []), "<br/>",
-                format [ "Danger Mode Timeout: %1s <br/>", round ( (_dangeModeData select 3) - time )]
+                "    Current Tactic: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
+                "    Known enemies: ", _targetCount, "<br/>"
             ];
         };
         _textData append [
-            "Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
-            "    Danger Pos:", _pos, "<br/>",
-            "    Danger Until: ", round (_time *100)/100, "<br/>",
-            "Current Target: ", _name, "<br/>",
-            "Visibility:", round (([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) *100)/100, "<br/>"
+            "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
+            "    Danger Pos: ", _pos, "<br/>",
+            "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
+            "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
         ];
 
         _textData append _targetKnowledge;
 
         //private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
         //private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
-        private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
+        //private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",
-            "Morale: ", morale _unit, "<br/>",
+            "Morale: ", morale _unit, "<br/>"
             //"SpotDistance: ", _spotDistance, "<br/>",
             //"SpotTime: ", _spotTime, "<br/>",
-            "Enemy QueueSize: ", _targetCount, "<br/>"
         ];
         [_headPos, _textData] call _fnc_DrawRect;
 

@@ -36,19 +36,17 @@ _destination pushBack (_vehicle modelToWorldVisual [_range * -1, -(random 10), 0
 // near enemy?
 private _enemy = _unit findNearestEnemy _unit;
 if (!isNull _enemy) then {
-
     _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call EFUNC(main,findOverwatch));
 
     // Share information!
     [_unit, _enemy, GVAR(radio_shout), true] call FUNC(shareInformation);
-
 };
 
 // tweak
-_destination apply {_x findEmptyPosition [0, 25, typeOf _vehicle];};
+_destination = _destination apply {_x findEmptyPosition [0, 25, typeOf _vehicle];}; // TODO(nkenny): What is going on here?
 
 // actual position and no water
-_destination = _destination select {count _x > 0 && {!(surfaceIsWater _x)}};
+_destination = _destination select {!(_x isEqualTo []) && {!(surfaceIsWater _x)}};
 
 // check -- no location -- exit
 if (_destination isEqualTo []) exitWith { _vehicle modelToWorldVisual [0, -(random 30), 0] };
@@ -56,6 +54,9 @@ _destination = selectRandom _destination;
 
 // refresh ready
 (effectiveCommander _unit) doMove (getPosASL _unit);
+
+// make tanks pop smoke when moving
+// _vehicle forceweaponfire ["SmokeLauncher", "SmokeLauncher"];     <-- not working!
 
 // execute
 _vehicle doMove _destination;

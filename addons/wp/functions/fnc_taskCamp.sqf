@@ -29,7 +29,8 @@ params [
     ["_range", TASK_CAMP_SIZE, [0]],
     ["_area", [], [[]], []],
     ["_teleport", TASK_CAMP_TELEPORT, [false]],
-    ["_patrol", TASK_CAMP_PATROL, [false]]
+    ["_patrol", TASK_CAMP_PATROL, [false]],
+    ["_exitWP", TASK_CAMP_EXITWP, [-1]]
 ];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
@@ -51,6 +52,8 @@ _group setBehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group setCombatMode "YELLOW";
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCamp", EGVAR(main,debug_functions)];
 
 // find buildings
 private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);
@@ -81,12 +84,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
+        [_group2, _pos, _range * 2, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
+        [_group2, _pos, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
     };
 
     // update
@@ -98,7 +101,7 @@ reverse _units;
 {
     // gun
     if !(_weapons isEqualTo []) then {
-        private _staticWeapon = (_weapons deleteAt 0);
+        private _staticWeapon = _weapons deleteAt 0;
         if (_teleport) then { _x moveInGunner _staticWeapon; };
         _x assignAsGunner _staticWeapon;
         [_x] orderGetIn true;
@@ -237,7 +240,18 @@ _wp setWaypointStatements ["true", "
 
 // followup orders - just stay put or move into buildings!
 private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
-_wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
+
+// set exitWP
+if (_exitWP == -1) then {
+    _exitWP = floor (random 3);
+};
+
+private _wp2Type = switch (_exitWP) do {
+    case 1: {"GUARD"};
+    case 2: {"SAD"};
+    default {"HOLD"};
+};
+_wp2 setWaypointType _wp2Type;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

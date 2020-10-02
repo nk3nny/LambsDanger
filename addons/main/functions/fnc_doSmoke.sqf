@@ -19,7 +19,7 @@
 
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
-    ["_pos", [0, 0, 0], [[]]],
+    ["_pos", [], [[]]],
     ["_type", 6, [0]]
 ];
 
@@ -28,7 +28,7 @@ if (_unit isEqualType []) then {_unit = selectRandom _unit;};
 if (_unit isEqualType grpNull) then {_unit = leader _unit;};
 
 // local
-if !(local _unit) exitWith {false};
+if (!local _unit || {isPlayer _unit}) exitWith {false};
 
 // get magazines
 private _magazines = magazinesAmmo _unit;
@@ -67,16 +67,11 @@ if !(_pos isEqualTo []) then {
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 };
 
-
 // variable
 _unit setVariable [QGVAR(currentTask), "Throwing smoke grenade", GVAR(debug_functions)];
 
 // execute
-[
-    {
-        _this call BIS_fnc_fire;
-    }, [_unit, _muzzle], 1
-] call CBA_fnc_waitAndExecute;
+[BIS_fnc_fire, [_unit, _muzzle], 1] call CBA_fnc_waitAndExecute;
 
 // end
 true

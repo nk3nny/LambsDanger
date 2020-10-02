@@ -17,8 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_danger", ["_range", 55], ["_buildings", []]];
-
+params ["_unit", "_pos", ["_range", 55], ["_buildings", []]];
 
 // stopped -- exit
 if (
@@ -28,10 +27,10 @@ if (
     || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
-// already inside -- exit
-if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    if (stance _unit isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE"};
-    //_unit doWatch _danger;
+// already inside -- exit   ~ uncommented, handled eslewhere.
+if (RND(GVAR(indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
+    doStop _unit;
+    _unit doWatch _pos;
     false
 };
 
@@ -41,15 +40,11 @@ if (_buildings isEqualTo []) then {
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), _danger, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Hide", EGVAR(main,debug_functions)];
-
-// settings
-_unit forceSpeed 24;
+_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Hide!", EGVAR(main,debug_functions)];
 
 // Randomly scatter into buildings or hide!
 if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
-
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", EGVAR(main,debug_functions)];
 
     // hide
@@ -58,26 +53,31 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
 
     // execute move
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
-    if (EGVAR(main,debug_functions)) then {format ["%1 hide in building", side _unit] call EFUNC(main,debugLog);};
-
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 hide in building", side _unit] call EFUNC(main,debugLog);
+    };
 } else {
-
     // hide
     _unit setUnitPosWeak "DOWN";
     //[_unit, ["DOWN"], true] call EFUNC(main,doGesture);
 
     // find cover
-    private _cover = nearestTerrainObjects [ _unit getPos [20, getDir _unit + 180], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, false, true ];
+    private _cover = nearestTerrainObjects [ _unit getPos [-16, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, true, true ];
 
     // targetPos
-    private _targetPos = [getPosASL (selectRandom _cover), _unit getPos [10 + random _range, (_danger getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
+    private _targetPos = [getPosASL (_cover select 0), _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
 
     // water means hold
     if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
 
+    // cover move
+    if !(_cover isEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};
+
     // execute move
     _unit doMove _targetPos;
-    if (EGVAR(main,debug_functions)) then {format ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);};
+    if (EGVAR(main,debug_functions)) then {
+        format ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);
+    };
 };
 
 // end
