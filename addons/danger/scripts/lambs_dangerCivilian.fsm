@@ -316,7 +316,7 @@ class FSM
                         name = "Clean_up";
                         itemno = 7;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if lambs_danger_debug_FSM_civ then {""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if lambs_main_debug_FSM_civ then {""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// get back in vehicle " \n
                          "if (_orderedOut) then {[_this] orderGetIn true};" \n
@@ -348,7 +348,7 @@ class FSM
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,  _dangerPos, 55 + random 50] call lambs_danger_fnc_hideInside; " \n
+                         "[_this,  _dangerPos, 55 + random 50] call lambs_danger_fnc_doHide; " \n
                          "" \n
                          "// animation" \n
                          "if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
@@ -548,7 +548,7 @@ class FSM
                         name = "Hide";
                         itemno = 20;
                         init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "if (lambs_danger_debug_FSM_civ) then {""dangerCivilian.fsm HIDE"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm HIDE"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// tweak behaviour " \n
                          "_this setBehaviour ""STEALTH"";"/*%FSM</STATEINIT""">*/;
@@ -586,7 +586,7 @@ class FSM
                         name = "Run";
                         itemno = 24;
                         init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "if (lambs_danger_debug_FSM_civ) then {""dangerCivilian.fsm RUN"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm RUN"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// tweak behaviour" \n
                          "_this setBehaviour ""COMBAT"";"/*%FSM</STATEINIT""">*/;
@@ -771,7 +771,7 @@ class FSM
                         name = "Inspect_body";
                         itemno = 40;
                         init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "if (lambs_danger_debug_FSM_civ) then {""dangerCivilian.fsm INSPECT"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm INSPECT"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// tweak behaviour" \n
                          "_this setBehaviour ""COMBAT"";" \n
@@ -835,7 +835,7 @@ class FSM
                         itemno = 44;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// script " \n
-                         "[_this,  getPos _this,  25] call lambs_danger_fnc_checkBody; " \n
+                         "[_this,  getPos _this,  25] call lambs_danger_fnc_doCheckBody; " \n
                          "" \n
                          "// stance " \n
                          "_this setUnitPosWeak ""Middle"";" \n
@@ -866,7 +866,7 @@ class FSM
                         name = "Clean_up_1";
                         itemno = 47;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM_civ) then {""dangerCivilian.fsm CLEAN-UP and RESTART"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm CLEAN-UP and RESTART"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "_this doWatch objNull;" \n
                          "_this stop false;" \n
@@ -894,7 +894,7 @@ class FSM
                         name = "Clean_up_2";
                         itemno = 49;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM_civ) then {""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// get back in vehicle " \n
                          "if (_orderedOut) then {[_this] orderGetIn true};" \n
@@ -1079,7 +1079,7 @@ class FSM
                         name = "Clean_up_3";
                         itemno = 65;
                         init = /*%FSM<STATEINIT""">*/"// debug" \n
-                         "if (lambs_danger_debug_FSM_civ) then { ""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_danger_fnc_debugLog;}; " \n
+                         "if (lambs_main_debug_FSM_civ) then { ""dangerCivilian.fsm CLEAN-UP and RESET"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// get back in vehicle " \n
                          "if (_orderedOut) then {[_this] orderGetIn true};" \n

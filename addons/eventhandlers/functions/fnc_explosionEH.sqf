@@ -22,7 +22,7 @@ private _dir = 360 - (_unit getRelDir _pos);
 _unit setVariable [QGVAR(explosionReactionTime), time + GVAR(ExplosionReactionTime)];
 
 if (RND(0.5)) then {
-    [_unit, "Combat", selectRandom ["ScreamingE", "EndangeredE"], 125] call EFUNC(danger,doCallout);
+    [_unit, "Combat", selectRandom ["ScreamingE", "EndangeredE"], 125] call EFUNC(main,doCallout);
 };
 
 // standing to Right prone
@@ -30,7 +30,7 @@ if (_dir > 330 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";
     [
         {
-            if (_this call EFUNC(danger,isAlive)) then {
+            if (_this call EFUNC(main,isAlive)) then {
                 _this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
@@ -42,7 +42,7 @@ if (_dir < 30 && { RND(0.2) }) exitWith {
     _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright";
     [
         {
-            if (_this call EFUNC(danger,isAlive)) then {
+            if (_this call EFUNC(main,isAlive)) then {
                 _this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
@@ -63,7 +63,7 @@ _unit setUnitPos "DOWN";
 // get back
 [
     {
-        if (_this call EFUNC(danger,isAlive)) then {
+        if (_this call EFUNC(main,isAlive)) then {
             _this setUnitPos "AUTO"
         };
     }, _unit, (GVAR(ExplosionReactionTime) - 3) + random 3

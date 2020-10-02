@@ -17,18 +17,14 @@ params ["_group", "_pos", ["_radius",0]];
 
 // get radius
 _radius = waypointCompletionRadius [_group, currentwaypoint _group];
-if (_radius isEqualTo 0) then { _radius = 1000; };
-
-// get other settings
-
-// prepare troops ~ pre-set for raid!
-[leader _group, 99, 999999] call EFUNC(danger,leaderModeUpdate);
+if (_radius isEqualTo 0) then { _radius = TASK_RUSH_SIZE; };
 
 // low level move order
 _group move _pos;
 
 // group
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
+_group setVariable [QEGVAR(danger,tactics), true];
 
 // execute script
 [_group, _radius] call FUNC(taskRush);

@@ -22,12 +22,21 @@
  * Example:
  * [bob, getPos angryJoe, 50] spawn lambs_wp_fnc_taskCQB;
  *
- * Public: No
+ * Public: Yes
 */
 
 if !(canSuspend) exitWith {
     _this spawn FUNC(taskCQB);
 };
+// init
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_radius", TASK_CQB_SIZE, [0]],
+    ["_cycle", TASK_CQB_CYCLETIME, [0]],
+    ["_area", [], [[]]],
+    ["_useWaypoint", false, [false]]
+];
 
 // functions ---
 
@@ -39,8 +48,8 @@ private _fnc_find = {
     _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
     if !(_area isEqualTo []) then {
-        _area params ["_a", "_b", "_angle", "_isRectangle"];
-        _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle] };
+        _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+        _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     };
 
     if (_building isEqualTo []) exitWith { objNull };
@@ -55,7 +64,7 @@ private _fnc_enemy = {
     params ["_building", "_group"];
     private _pos = [ getPos _building, getPos leader _group] select isNull _building;
     private _enemy = (leader _group) findNearestEnemy _pos;
-    if (isNull _enemy || {_pos distance2d _enemy < 25}) exitWith { _enemy };
+    if (isNull _enemy || {_pos distance2D _enemy < 25}) exitWith { _enemy };
     objNull
 };
 
@@ -64,20 +73,20 @@ private _fnc_act = {
     params ["_enemy", "_group", "_building"];
 
     // units
-    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(danger,isAlive)}};
+    private _units = (units _group) select {isNull objectParent _x && {_x call EFUNC(main,isAlive)}};
 
     // deal with close enemy
     if (!isNull _enemy) exitWith {
 
         // debug
-        if (EGVAR(danger,debug_functions)) then {
-            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(danger,debugLog);
+        if (EGVAR(main,debug_functions)) then {
+            ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
             createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         };
 
         // posture
         doStop _units;
-        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(danger,gesture);
+        [leader _group, ["gestureAttack", "gestureGo", "gestureGoB"]] call EFUNC(main,doGesture);
 
         // location
         private _buildingPos = ((nearestBuilding _enemy) buildingPos -1) select {_x distance _enemy < 5};
@@ -92,8 +101,8 @@ private _fnc_act = {
             _x lookAt _enemy;
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
             true
         } count _units;
     };
@@ -112,21 +121,21 @@ private _fnc_act = {
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
-            if (EGVAR(danger,debug_functions)) then {
+            if (EGVAR(main,debug_functions)) then {
                 private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLtoASL _buildingPosSelected, true];
-                _arrow setObjectTexture [0, [_x] call EFUNC(danger,debugObjectColor)];
+                _arrow setObjectTexture [0, [_x] call EFUNC(main,debugObjectColor)];
             };
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(danger,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(danger,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
 
             // clean list
             if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {
                 _buildingPos deleteAt 0;
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
-                if (RND(0.6) && {_x call EFUNC(danger,indoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
+                if (RND(0.6) && {_x call EFUNC(main,isIndoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
                     _x setVehiclePosition [getPos _x, [], 3.5];
                 };
 
@@ -141,8 +150,8 @@ private _fnc_act = {
             _x setUnitPos "MIDDLE";
 
             // Unit is ready and outside -- try suppressive fire
-            if (unitReady _x && {!(_x call EFUNC(danger,indoor))}) then {
-                [_x, getPosASL _building] call EFUNC(danger,suppress);
+            if (unitReady _x && {!(_x call EFUNC(main,isIndoor))}) then {
+                [_x, getPosASL _building] call EFUNC(danger,doSuppress);
                 _x doFollow leader _x;
             };
         };
@@ -154,9 +163,6 @@ private _fnc_act = {
 };
 
 // functions end ---
-
-// init
-params ["_group", "_pos", ["_radius", 50], ["_cycle", 21], ["_area", [], [[]]], ["_useWaypoint", false]];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -182,6 +188,9 @@ _group allowFleeing 0;
     true
 } count units _group;
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCQB", EGVAR(main,debug_functions)];
+
 // loop
 waitUntil {
 
@@ -202,13 +211,13 @@ waitUntil {
     [_enemy, _group, _building] call _fnc_act;
 
     // debug
-    if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(danger,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(main,debug_functions)) then {["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
 
     // end
-    ((units _group) findIf {_x call EFUNC(danger,isAlive)} == -1)
+    ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)
 
 };
 
@@ -220,7 +229,7 @@ waitUntil {
 } foreach units _group;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(danger,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
 
 // end
 true

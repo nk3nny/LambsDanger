@@ -11,7 +11,10 @@
  * 1: Position to occupy, default group location <ARRAY or OBJECT>
  * 2: Range of tracking, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
- * 4: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <BOOL>
+ * 4: Teleprt Units to Position <BOOL>
+ * 5: Sort Based on Height <BOOL>
+ * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <NUMBER>
+ * 7: Patrol <BOOL>
  *
  * Return Value:
  * none
@@ -19,12 +22,21 @@
  * Example:
  * [bob, bob, 50] call lambs_wp_fnc_taskGarrison;
  *
- * Public: No
+ * Public: Yes
 */
 if (canSuspend) exitWith { [FUNC(taskGarrison), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos", []], ["_radius", 50], ["_area", [], [[]]], ["_teleport", false], ["_sortBasedOnHeight", false], ["_exitCondition", -2], ["_patrol", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", []],
+    ["_radius", TASK_GARRISON_SIZE, [0]],
+    ["_area", [], [[]]],
+    ["_teleport", TASK_GARRISON_TELEPORT, [false]],
+    ["_sortBasedOnHeight", TASK_GARRISON_SORTBYHEIGHT, [false]],
+    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS - 2, [0]],
+    ["_patrol", TASK_GARRISON_PATROL, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -34,26 +46,31 @@ if (_group isEqualType objNull) then { _group = group _group; };
 if (_pos isEqualTo []) then {_pos = _group;};
 _pos = _pos call CBA_fnc_getPos;
 
+// find guns
+private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
+
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _radius, true, false] call EFUNC(danger,findBuildings);
+private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
 if !(_area isEqualTo []) then {
-    _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle] };
+    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 [_houses, true] call CBA_fnc_Shuffle;
 
+// sort based on height
 if (_sortBasedOnHeight) then {
     _houses = [_houses, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
 };
 
-// find guns
-private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
-
 // orders
 _group setBehaviour "SAFE";
 _group enableAttack false;
+
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskGarrison", EGVAR(main,debug_functions)];
 
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;
@@ -76,12 +93,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _radius, 4, nil, true] call FUNC(taskPatrol);
+        [_group2, _pos, _radius, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
-        _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _radius, 4, _area2, true] call FUNC(taskPatrol);
+        _area2 set [1, (_area2 select 1) * 2];
+        [_group2, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
     };
 };
 
@@ -193,8 +210,8 @@ _wp setWaypointType "HOLD";
 _wp setWaypointCompletionRadius _radius;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 

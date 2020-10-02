@@ -18,13 +18,20 @@
  * Example:
  * [bob, getPos bob, 500] call lambs_wp_fnc_taskPatrol;
  *
- * Public: No
+ * Public: Yes
 */
 
 if (canSuspend) exitWith { [FUNC(taskPatrol), _this] call CBA_fnc_directCall; };
 
 // init
-params ["_group", ["_pos",[]], ["_radius", 200], ["_waypointCount", 4], ["_area", [], [[]]], ["_moveWaypoints", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos",[], [[]]],
+    ["_radius", TASK_PATROL_SIZE, [0]],
+    ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
+    ["_area", [], [[]]],
+    ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -47,6 +54,9 @@ _group enableGunLights "forceOn";
 // dynamic reinforcements
 _group setVariable [QGVAR(enableGroupReinforce), true, true];
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskPatrol", EGVAR(main,debug_functions)];
+
 private _fistWPId = 0;
 
 if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {
@@ -61,8 +71,8 @@ if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {
                 private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];
                 if !(_area isEqualTo []) then {
                     _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
-                    _area params ["_a", "_b", "_angle", "_isRectangle"];
-                    while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+                    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+                    while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle, _c])} do {
                         _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
                     };
                 };
@@ -79,8 +89,8 @@ for "_i" from 1 to _waypointCount do {
     private _pos2 = _pos getPos [_radius * (1 - abs random [-1, 0, 1]), random 360];  // thnx Dedmen
     if !(_area isEqualTo []) then {
         _pos2 = _pos getPos [(_radius *  1.2) * (1 - abs random [-1, 0, 1]), random 360];
-        _area params ["_a", "_b", "_angle", "_isRectangle"];
-        while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle])} do {
+        _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+        while {!(_pos2 inArea [_pos, _a, _b, _angle, _isRectangle, _c])} do {
             _pos2 = _pos getPos [(_radius * 1.2) * (1 - abs random [-1, 0, 1]), random 360];
         };
     };
@@ -89,7 +99,7 @@ for "_i" from 1 to _waypointCount do {
     _wp setWaypointType "MOVE";
     _wp setWaypointTimeout [8, 10, 15];
     _wp setWaypointCompletionRadius 10;
-    _wp setWaypointStatements ["true", "(group this) enableGunLights 'forceOn';"];
+    _wp setWaypointStatements ["true", "if (local this) then {(group this) enableGunLights 'forceOn';}"];
     if (_i == 1) then {
         _fistWPId = _wp select 1;
     };
@@ -99,14 +109,14 @@ _group setVariable [QGVAR(TaskPatrol_Position), _pos, true];
 _group setVariable [QGVAR(TaskPatrol_Area), _area, true];
 
 if (_moveWaypoints) then {
-    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId] + format ["call %1;", QFUNC(TaskPatrol_WaypointStatement)]];
+    _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1]; call %2;};", _fistWPId, QFUNC(TaskPatrol_WaypointStatement)]];
 } else {
-    _wp setWaypointStatements ["true", format ["(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];", _fistWPId]];
+    _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];};", _fistWPId]];
 };
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

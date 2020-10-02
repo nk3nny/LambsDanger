@@ -17,9 +17,8 @@
  * Example:
  * [side bob, getPos angryJoe, bob] spawn lambs_wp_fnc_taskArtillery;
  *
- * Public: No
+ * Public: Yes
 */
-
 if ((_this select 0) isEqualType objNull) then {
     [QGVAR(FireArtillery), _this, (_this select 0)] call CBA_fnc_targetEvent;
 } else {

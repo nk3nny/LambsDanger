@@ -24,30 +24,29 @@ private _vehicle = vehicle _unit;
 if (!canFire _vehicle) exitWith {false};
 
 // tweaks target to remain usefully close
-private _predictedPos = (_unit getHideFrom _target);
-if ((_unit distance2D _pos) < 50) then {_pos = _predictedPos};
+private _predictedPos = _unit getHideFrom _target;
+if ((_unit distance2D _pos) < 50) then { _pos = _predictedPos; };
 
 //  target not on foot or too close
 if (
     isNull _target
     || {!(_target isKindOf "Man")}
     || {(_unit distance2D _predictedPos) < GVAR(minSuppression_range)}
-    || {terrainIntersectASL [eyePos _vehicle, ATLtoASL _predictedPos]}
+    || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
 // define buildings
 if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 28, false, false] call FUNC(findBuildings);
-    //_buildings = _buildings select {!(terrainIntersect [getPos _unit, getPos _x])};
+    _buildings = [_pos, 28, false, false] call EFUNC(main,findBuildings);
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = if (RND(0.4)) then { ([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0 } else { selectRandom _buildings };
+    _buildings = [([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0, selectRandom _buildings] select (RND(0.4));
     _buildings = _buildings buildingPos -1;
 };
 
@@ -57,10 +56,10 @@ _buildings pushBack _predictedPos;
 // pos
 _pos = AGLToASL (selectRandom _buildings);
 private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit, true, 1];
-if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+if !(_vis isEqualTo []) then { _pos = (_vis select 0) select 0; };
 
 // set max distance
-private _distance = (_unit distance _pos) min 650;
+private _distance = (_unit distance _pos) min 600;
 _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRandom _buildings))) vectorMultiply _distance);
 
 // look at position
@@ -70,7 +69,7 @@ _vehicle doWatch ASLtoAGL _pos;
 if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
 
 // check for friendlies
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call FUNC(nearbyFriendly);
+private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendly);
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // suppression
@@ -94,13 +93,12 @@ if (_cannon) then {
 };
 
 // debug
-if (GVAR(debug_functions)) then {
-    format ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call FUNC(debugLog);
+if (EGVAR(main,debug_functions)) then {
+    ["%1 Vehicle assault building (%2 @ %3 buildingPos %4)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), count _buildings, [""," with cannon"] select _cannon] call EFUNC(main,debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
-    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 20] call CBA_fnc_waitAndExecute;
-
 };
 
 // end

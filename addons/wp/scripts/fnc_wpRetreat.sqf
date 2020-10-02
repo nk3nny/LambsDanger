@@ -15,11 +15,8 @@
 // init
 params ["_group", "_pos"];
 
-
-// prepare troops ~ pre-set for raid!
-[leader _group, 99, 170] call EFUNC(danger,leaderModeUpdate);
-
 // group
+_group setVariable [QEGVAR(danger,tactics), true];
 _group setVariable [QEGVAR(danger,disableGroupAI), true];
 _group setSpeedMode "FULL";
 
@@ -33,7 +30,7 @@ _group setSpeedMode "FULL";
 _group move _pos;
 
 // execute script
-[_group, _pos, true, 25, 3, true] call FUNC(taskAssault);
+[_group, _pos, true, TASK_ASSAULT_DISTANCETHRESHOLD, TASK_ASSAULT_CYCLETIME, true] call FUNC(taskAssault);
 
 // end
 true

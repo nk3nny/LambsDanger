@@ -22,15 +22,19 @@ if (_pos isEqualTo []) then {
 };
 
 // check if mod active
-if (!GVAR(Loaded_WP)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call FUNC(debugLog);}};
+if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {["%1 Artillery failed -- mod not enabled", side _unit] call EFUNC(main,debugLog);}};
 
 // settings
 
 // exit on no ready artillery
-if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {if (GVAR(debug_functions)) then {format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call FUNC(debugLog);}};
+if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {
+    if (EGVAR(main,debug_functions)) then {
+        ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);
+    };
+};
 
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Artillery", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Leader Artillery", EGVAR(main,debug_functions)];
 
 // find caller
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
@@ -40,9 +44,15 @@ _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
 
+// reset forceMove
+[{
+    _this setVariable [QGVAR(forceMove), nil];
+    _this forceSpeed -1;
+}, _unit, 8] call CBA_fnc_waitAndExecute;
+
 // Gesture
 doStop _unit;
-[_unit, ["HandSignalRadio"]] call FUNC(gesture);
+[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
 
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {
@@ -51,7 +61,7 @@ if (!(binocular _unit isEqualTo "")) then {
 };
 
 // callout
-[_unit, "aware", "SupportRequestRGArty", 75] call FUNC(doCallout);
+[_unit, "aware", "SupportRequestRGArty", 75] call EFUNC(main,doCallout);
 
 // perform it
 [side _unit, _pos, _unit] call EFUNC(WP,taskArtillery);

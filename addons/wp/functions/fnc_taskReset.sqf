@@ -12,15 +12,15 @@
  * Example:
  * [bob] call lambs_wp_fnc_taskReset;
  *
- * Public: No
+ * Public: Yes
 */
 
 
 // init
-params ["_group"];
+params [["_group", grpNull, [grpNull, objNull]]];
 
 // sort group
-if (!local _group) exitWith {false};
+if (!local _group) exitWith { _group };
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // units
@@ -36,8 +36,8 @@ _groupNew setFormation (formation _group);
 _group deleteGroupWhenEmpty true;
 
 // remove LAMBS group variables
-_group setVariable [QGVAR(taskAssaultDestination), nil];
-_group setVariable [QGVAR(taskAssaultMembers), nil];
+_group setVariable [QGVAR(taskAssaultDestination), nil, true];
+_group setVariable [QGVAR(taskAssaultMembers), nil, true];
 
 // reset
 {
@@ -64,10 +64,10 @@ _group setVariable [QGVAR(taskAssaultMembers), nil];
     _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables
-    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(danger,debug_functions)];
-    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(danger,debug_functions)];
-    _x setVariable [QEGVAR(danger,disableAI), nil];
-    _x setVariable [QEGVAR(danger,forceMove), true];        // one FSM cycle of forced movement to get AI into action! -nkenny
+    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(danger,disableAI), nil, true];
+    _x setVariable [QEGVAR(danger,forceMove), nil, true];
 
     // rejoin group
     [_x] joinSilent _groupNew;
@@ -85,4 +85,4 @@ _groupNew move (getPosASL (leader _groupNew));
 _groupNew setBehaviour "AWARE";
 
 // end
-true
+_groupNew

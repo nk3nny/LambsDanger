@@ -11,6 +11,8 @@
  * 1: Central position camp should be made, <ARRAY>
  * 2: Range of patrols and turrets found, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
+ * 4: Teleport <BOOL>
+ * 5: Patrol <BOOL>
  *
  * Return Value:
  * none
@@ -18,10 +20,18 @@
  * Example:
  * [bob, getPos bob, 50] call lambs_wp_fnc_taskCamp;
  *
- * Public: No
+ * Public: Yes
 */
 // init
-params ["_group", ["_pos",[]], ["_range", 50], ["_area", [], [[]]], ["_teleport", false], ["_patrol", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_range", TASK_CAMP_SIZE, [0]],
+    ["_area", [], [[]], []],
+    ["_teleport", TASK_CAMP_TELEPORT, [false]],
+    ["_patrol", TASK_CAMP_PATROL, [false]],
+    ["_exitWP", TASK_CAMP_EXITWP, [-1]]
+];
 
 if (canSuspend) exitWith { [FUNC(taskCamp), _this] call CBA_fnc_directCall; };
 
@@ -42,18 +52,20 @@ _group setBehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group setCombatMode "YELLOW";
 
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), "taskCamp", EGVAR(main,debug_functions)];
 
 // find buildings
-private _buildings = [_pos, _range, false, false] call EFUNC(danger,findBuildings);
+private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);
 [_buildings, true] call CBA_fnc_shuffle;
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
-_weapons = _weapons select {(_x emptyPositions "Gunner") > 0};
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 if !(_area isEqualTo []) then {
-    _area params ["_a", "_b", "_angle", "_isRectangle"];
-    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
-    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle]};
+    _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
+    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
+    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 
 // STAGE 1 - PATROL --------------------------
@@ -72,12 +84,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _group2, _range * 2, 4, nil, true] call FUNC(taskPatrol);
+        [_group2, _pos, _range * 2, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _group2, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
+        [_group2, _pos, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
     };
 
     // update
@@ -89,7 +101,7 @@ reverse _units;
 {
     // gun
     if !(_weapons isEqualTo []) then {
-        private _staticWeapon = (_weapons deleteAt 0);
+        private _staticWeapon = _weapons deleteAt 0;
         if (_teleport) then { _x moveInGunner _staticWeapon; };
         _x assignAsGunner _staticWeapon;
         [_x] orderGetIn true;
@@ -116,7 +128,7 @@ reverse _units;
         ] call CBA_fnc_waitUntilAndExecute;
         _units set [_foreachIndex, objNull];
     };
-    if ((count _units) < (count (units _group))/2) exitWith {};
+    if ((count _units) < (count (units _group))*0.5) exitWith {};
 
 } forEach _units;
 
@@ -217,21 +229,33 @@ private _dir = random 360;
 private _wp = _group addWaypoint [_pos, 0];
 _wp setWaypointType "SENTRY";
 _wp setWaypointStatements ["true", "
+    if (local this) then {
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
             [_x, '', 2] call lambs_main_fnc_doAnimation;
         } foreach thisList;
-    "
+    };"
 ];
 
 // followup orders - just stay put or move into buildings!
 private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
-_wp2 setWaypointType selectRandom ["HOLD", "GUARD", "SAD"];
+
+// set exitWP
+if (_exitWP == -1) then {
+    _exitWP = floor (random 3);
+};
+
+private _wp2Type = switch (_exitWP) do {
+    case 1: {"GUARD"};
+    case 2: {"SAD"};
+    default {"HOLD"};
+};
+_wp2 setWaypointType _wp2Type;
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(danger,debugLog);
+if (EGVAR(main,debug_functions)) then {
+    ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 // end

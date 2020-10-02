@@ -24,7 +24,14 @@ if !(canSuspend) exitWith {
 };
 
 // init --
-params ["_group", "_pos", ["_retreat", false ], ["_threshold", 12], [ "_cycle", 3], ["_useWaypoint", false]];
+params [
+    ["_group", grpNull, [grpNull, objNull]],
+    ["_pos", [0, 0, 0]],
+    ["_retreat", TASK_ASSAULT_ISRETREAT, [false]],
+    ["_threshold", TASK_ASSAULT_DISTANCETHRESHOLD, [0]],
+    [ "_cycle", TASK_ASSAULT_CYCLETIME, [0]],
+    ["_useWaypoint", false, [false]]
+];
 
 // sort grp
 if (!local _group) exitWith {false};
@@ -38,13 +45,16 @@ if (_useWaypoint) then {
 };
 
 // sort group
-private _units = units _group select {!isPlayer _x && {_x call EFUNC(danger,isAlive)} && {isNull objectParent _x}};
+private _units = units _group select {!isPlayer _x && {_x call EFUNC(main,isAlive)} && {isNull objectParent _x}};
 
 // add group variables
 _group setVariable [QGVAR(taskAssaultDestination), _pos];
 _group setVariable [QGVAR(taskAssaultMembers), _units];
 _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
 _group setSpeedMode "FULL";
+
+// set group task
+_group setVariable [QEGVAR(danger,tacticsTask), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
 
 // sort units
 {
@@ -53,6 +63,9 @@ _group setSpeedMode "FULL";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
     _x setUnitPos "UP";
+
+    // variable
+    _x setVariable [QEGVAR(danger,currentTask), ["Rushing Assault", "Rushing Retreat"] select _retreat, EGVAR(main,debug_functions)];
 
     // check retreat
     if (_retreat) then {
@@ -75,13 +88,13 @@ _group setSpeedMode "FULL";
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
                 // exit
-                if (!(_unit call EFUNC(danger,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
+                if (!(_unit call EFUNC(main,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
                     _groupMembers = _groupMembers - [_unit];
                     _group setVariable [QGVAR(taskAssaultMembers), _groupMembers];
-                    
+
                     // handle
                     _handle call CBA_fnc_removePerFrameHandler;
                     _unit setVariable [QGVAR(taskAssault), nil];
@@ -100,7 +113,7 @@ _group setSpeedMode "FULL";
                 if !((expectedDestination _unit select 0) isEqualTo _destination) then {_unit doMove _destination};
                 _unit forceSpeed ([ [_unit, _destination] call EFUNC(danger,assaultSpeed), 24] select _retreat);
                 _unit doWatch _destination;
-                _unit setVariable [QEGVAR(danger,forceMove), true];
+                //_unit setVariable [QEGVAR(danger,forceMove), true];   ~ speedmode "FULL" should replicate this behaviour in new FSM. ~ nkenny
 
                 // force move
                 private _dir = 360 - (_unit getRelDir _destination);
@@ -122,10 +135,12 @@ _group setSpeedMode "FULL";
                 };
 
                 // forward
-                if (_anim isEqualTo []) then {_anim = ["FastF"];};
+                if (_anim isEqualTo []) then {
+                    _anim = ["FastF"];
+                };
 
                 // execute
-                _unit playActionNow selectRandom _anim;
+                [_unit, _anim, true] call EFUNC(main,doGesture);
             },
             _cycle,
             [_x, _group, _retreat, _threshold]
@@ -148,13 +163,13 @@ waitUntil {
     if (_wPos isEqualTo [0,0,0]) exitWith {true};
 
     // debug
-    if (EGVAR(danger,debug_functions)) then {
-        format ["%1 %2: %3 units moving %4M",
+    if (EGVAR(main,debug_functions)) then {
+        ["%1 %2: %3 units moving %4M",
             side _group,
             ["taskAssault", "taskRetreat"] select _retreat,
             count (_group getVariable [QGVAR(taskAssaultMembers), []]),
-            round ( [ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2D _wPos )
-        ] call EFUNC(danger,debugLog);
+            round ([ (_units select 0), leader _group] select ( _units isEqualTo [] ) distance2D _wPos)
+        ] call EFUNC(main,debugLog);
     };
 
     // delay and end
@@ -169,12 +184,12 @@ _group setVariable [QGVAR(taskAssaultMembers), nil];
 _group setBehaviour "AWARE";
 
 // debug
-if (EGVAR(danger,debug_functions)) then {
-    format ["%1 %2 %3 Completed",
+if (EGVAR(main,debug_functions)) then {
+    ["%1 %2 %3 Completed",
         side _group,
         ["taskAssault", "taskRetreat"] select _retreat,
         _group
-    ] call EFUNC(danger,debugLog);
+    ] call EFUNC(main,debugLog);
 };
 
 // end

@@ -23,17 +23,20 @@
 params ["_unit", ["_target", []], ["_threshold", 18]];
 
 if (_target isEqualTo []) then {
-    _target = _unit findNearestEnemy _unit;
+    _target = getPosATL (_unit findNearestEnemy _unit);
 };
 
 // cannot move or moving
 if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {true};
 
-// CQB tweak <-- disabled! more dynamic vehicles is better!!
-if (_unit distance _target < GVAR(CQB_range)) exitWith {true};
+// CQB tweak -- look instead
+if (_unit distance _target < GVAR(CQB_range)) exitWith {
+    (vehicle _unit) doWatch _target;
+    true
+};
 
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functions)];
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
@@ -46,17 +49,16 @@ private _pos = [];
 private _min = 20;      // Minimum range
 private _i = 0;         // iterations
 
-while {_pos isEqualTo []} do {
+for "_i" from 0 to 5 do {
     _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
 
-    // water
-    if !(_pos isEqualTo []) then {if (surfaceIsWater _pos) then {_pos = []};};
+    // water or exit
+    if !(_pos isEqualTo [] || {surfaceIsWater _pos}) exitWith {};
 
     // update
     _min = _min + 15;
-    _i = _i + 1;
-    if (_i > 6) exitWith {_pos = _unit modelToWorldVisual [0, -100, 0]};
 };
+if (_pos isEqualTo []) then {_pos = _unit modelToWorldVisual [0, -100, 0]};
 
 // move
 _unit doMove _pos;
@@ -70,6 +72,7 @@ _unit doMove _pos;
         params ["_unit", "_target"];
         // check vehicle
         if (canMove _unit && {!((crew _unit) isEqualTo [])}) then {
+
             // refresh ready (For HC apparently)
             (effectiveCommander _unit) doMove (getPosASL _unit);
 

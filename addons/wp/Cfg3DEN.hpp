@@ -18,28 +18,12 @@ class Cfg3DEN {
                 class Title: Title {};
                 class Value: ctrlToolbox {
                     idc = 100;
-                    x = 48 * GRID_3DEN_W;
-                    w = 82 * GRID_3DEN_W;
-                    h = 5  * GRID_3DEN_H;
+                    x = QUOTE(48 * GRID_3DEN_W);
+                    w = QUOTE(82 * GRID_3DEN_W);
+                    h = QUOTE(5  * GRID_3DEN_H);
                     rows = 1;
                     columns = 3;
                     strings[] = { "$STR_A3_CfgGroups_West0", "$STR_A3_CfgGroups_East0", "$STR_A3_CfgGroups_Indep0" };
-                };
-            };
-        };
-        class GVAR(ExitConditions): Title {
-            attributeLoad = QUOTE((_this controlsGroupCtrl 100) lbSetCurSel (0 max _value min 5));
-            attributeSave = QUOTE(lbCurSel (_this controlsGroupCtrl 100));
-            class Controls: Controls {
-                class Title: Title {};
-                class Value: ctrlToolbox {
-                    idc = 100;
-                    x = 48 * GRID_3DEN_W;
-                    w = 82 * GRID_3DEN_W;
-                    h = 5  * GRID_3DEN_H;
-                    rows = 1;
-                    columns = 6;
-                    strings[] = { CSTRING(Random), CSTRING(All), CSTRING(FiredNear), CSTRING(Fired), CSTRING(Hit), CSTRING(None) };
                 };
             };
         };

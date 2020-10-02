@@ -15,12 +15,17 @@
  *
  * Public: No
 */
-
 params ["_units", "_unit"];
 
 // sort units
-if (_units isEqualType objNull) then { _units = [_unit] call FUNC(findReadyUnits); };
-if (_units isEqualType grpNull) then { _units = [leader _unit] call FUNC(findReadyUnits); };
+switch (typeName _units) do {
+    case ("OBJECT"): {
+        _units = [_units] call EFUNC(main,findReadyUnits);
+    };
+    case ("GROUP"): {
+        _units = [leader _units] call EFUNC(main,findReadyUnits);
+    };
+};
 
 // never leader
 _units = _units - [_unit];
@@ -30,7 +35,7 @@ if (_units isEqualTo []) exitWith { _units };
 
 // man empty statics
 private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 
 // orders
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW

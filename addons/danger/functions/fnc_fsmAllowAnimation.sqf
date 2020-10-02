@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-!(GVAR(disableAIGestures))
+!(EGVAR(main,disableAIGestures))
 && {isNull objectParent _this}
 && {weapons _this isEqualTo []}
 && {_this checkAIFeature "PATH"}

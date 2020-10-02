@@ -14,7 +14,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             property = QGVAR(Side);
             defaultValue = "0";
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
             control = QGVAR(Side);
@@ -24,9 +24,9 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskArtillery_MainSalvo_DisplayName);
             tooltip = CSTRING(Module_TaskArtillery_MainSalvo_Tooltip);
             property = QGVAR(MainSalvo);
-            defaultValue = "6";
+            defaultValue = QUOTE(TASK_ARTILLERY_ROUNDS);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -34,9 +34,9 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskArtillery_Spread_DisplayName);
             tooltip = CSTRING(Module_TaskArtillery_Spread_Tooltip);
             property = QGVAR(Spread);
-            defaultValue = "75";
+            defaultValue = QUOTE(TASK_ARTILLERY_SPREAD);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -111,9 +111,9 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskAssault_DistanceThreshold_DisplayName);
             tooltip = CSTRING(Module_TaskAssault_DistanceThreshold_Tooltip);
             property = QGVAR(DistanceThreshold);
-            defaultValue = "15";
+            defaultValue = QUOTE(TASK_ASSAULT_DISTANCETHRESHOLD);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -121,9 +121,9 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskAssault_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskAssault_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = "3";
+            defaultValue = QUOTE(TASK_ASSAULT_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -146,12 +146,40 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {50, 50, -1};
+        size3[] = {TASK_CAMP_SIZE, TASK_CAMP_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
+        class GVAR(ExitWP): Combo {
+            displayName = CSTRING(Module_TaskCamp_ExitWP_DisplayName);
+            tooltip = CSTRING(Module_TaskCamp_ExitWP_Tooltip);
+            property = QGVAR(ExitWP);
+            defaultValue = QUOTE(TASK_CAMP_EXITWP);
+            unique = 0;
+            condition = "0";
+            typeName = "NUMBER";
+            expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class Random {
+                    name = CSTRING(Random);
+                    value = -1;
+                };
+                class Hold {
+                    name = "$STR_ac_hold";
+                    value = 0;
+                };
+                class Guard {
+                    name = "$STR_ac_guard";
+                    value = 1;
+                };
+                class SAD {
+                    name = "$STR_ac_seekanddestroy";
+                    value = 2;
+                };
+            };
+        };
         class GVAR(Teleport): Checkbox {
-            displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);  // Strings and code lifted directly out of taskGarrison -- do we really need extra string entries for this? Might even make it generic -nkenny
+            displayName = CSTRING(Module_TaskCamp_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskCamp_Teleport_Tooltip);
             property = QGVAR(Teleport);
             unique = 0;
@@ -170,7 +198,6 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
         };
         class ModuleDescription: ModuleDescription {};
     };
-
     class ModuleDescription: ModuleDescription {
         duplicate = 1;
         position = 1;
@@ -190,7 +217,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {50, 50, -1};
+        size3[] = {TASK_CQB_SIZE, TASK_CQB_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
@@ -198,9 +225,9 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCQB_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCQB_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = "21";
+            defaultValue = QUOTE(TASK_CQB_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -233,21 +260,45 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {50, 50, -1};
+        size3[] = {TASK_GARRISON_SIZE, TASK_GARRISON_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
-        class GVAR(ExitConditions) {
+        class GVAR(ExitConditions): Combo {
             displayName = CSTRING(Module_TaskGarrison_ExitCondition_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_ExitCondition_Tooltip);
             property = QGVAR(ExitConditions);
-            defaultValue = "0";
+            defaultValue = QUOTE(TASK_GARRISON_EXITCONDITIONS);
             unique = 0;
-            validate = "none";
             condition = "0";
             typeName = "NUMBER";
-            control = QGVAR(ExitConditions);
             expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class Random {
+                    name = CSTRING(Random);
+                    value = -2;
+                };
+                class All {
+                    name = CSTRING(All);
+                    value = -1;
+                };
+                class Hit {
+                    name = CSTRING(Hit);
+                    value = 0;
+                };
+                class Fired {
+                    name = CSTRING(Fired);
+                    value = 1;
+                };
+                class FiredNear {
+                    name = CSTRING(FiredNear);
+                    value = 2;
+                };
+                class None {
+                    name = CSTRING(None);
+                    value = 3;
+                };
+            };
         };
         class GVAR(SortByHeight): Checkbox {
             displayName = CSTRING(Module_TaskGarrison_SortByHeight_DisplayName);
@@ -296,7 +347,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {200, 200, -1};
+        size3[] = {TASK_PATROL_SIZE, TASK_PATROL_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
@@ -304,9 +355,9 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskPatrol_Waypoints_DisplayName);
             tooltip = CSTRING(Module_TaskPatrol_Waypoints_Tooltip);
             property = QGVAR(WaypointCount);
-            defaultValue = "4";
+            defaultValue = QUOTE(TASK_PATROL_WAYPOINTCOUNT);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -356,7 +407,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {1000, 1000, -1};
+        size3[] = {TASK_CREEP_SIZE, TASK_CREEP_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
@@ -384,9 +435,9 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = "30";
+            defaultValue = QUOTE(TASK_CREEP_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -410,7 +461,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {1000, 1000, -1};
+        size3[] = {TASK_HUNT_SIZE, TASK_HUNT_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
@@ -438,9 +489,9 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskHunt_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskHunt_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = "70";
+            defaultValue = QUOTE(TASK_HUNT_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
@@ -464,7 +515,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     canSetArea = 1;
     canSetAreaShape = 1;
     class AttributeValues {
-        size3[] = {1000, 1000, -1};
+        size3[] = {TASK_RUSH_SIZE, TASK_RUSH_SIZE, -1};
         isRectangle = 0;
     };
     class Attributes: AttributesBase {
@@ -492,9 +543,9 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = "15";
+            defaultValue = QUOTE(TASK_RUSH_CYCLETIME);
             unique = 0;
-            validate = "none";
+            validate = "number";
             condition = "0";
             typeName = "NUMBER";
         };
