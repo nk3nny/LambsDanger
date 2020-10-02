@@ -247,7 +247,7 @@ class FSM
                          "_this setVariable [""lambs_main_FSMDangerCauseData"", [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy]];" \n
                          "" \n
                          "// debug setting" \n
-                         "if (lambs_main_debug_FSM) then {format [""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_main_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;};" \n
+                         "if (lambs_main_debug_FSM) then {[""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_main_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;};" \n
                          "" \n
                          "// reset queue" \n
                          "_queue = [];" \n

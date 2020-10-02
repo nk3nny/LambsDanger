@@ -106,7 +106,7 @@ _unit doMove _overwatch;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
+    ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
 
     _overwatch set [2, 0];
     private _arrow = createSimpleObject ["Sign_Arrow_F", AGLToASL _overwatch, true];

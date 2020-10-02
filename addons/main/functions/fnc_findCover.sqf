@@ -93,7 +93,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
 };
 
 if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
-    format ["Found %1 cover positions", count _ret] call FUNC(debugLog);
+    ["Found %1 cover positions", count _ret] call FUNC(debugLog);
     {
         "Sign_Arrow_Large_F" createVehicleLocal ((_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8]);
         private _add = if ((_x select 1) isEqualTo "UP") then {

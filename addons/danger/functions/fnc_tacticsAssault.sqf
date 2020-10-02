@@ -85,7 +85,7 @@ _group setFormDir (_unit getDir _target);
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
+    ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
 };
 
 // end

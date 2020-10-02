@@ -120,7 +120,7 @@ if !(_units isEqualTo []) then {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+    ["%1 TACTICS CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
 };
 
 // set current task
