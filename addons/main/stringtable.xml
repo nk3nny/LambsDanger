@@ -98,5 +98,8 @@
         <Key ID="STR_Lambs_Main_Settings_DefaultAIProfile_ToolTip">
             <English>TODO(nkenny)</English>
         </Key>
+        <Key ID="STR_Lambs_Main_OpenAIProfileEditor">
+            <English>Open LAMBS AI Profile Editor</English>
+        </Key>
     </Package>
 </Project>
