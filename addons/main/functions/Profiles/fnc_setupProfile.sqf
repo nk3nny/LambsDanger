@@ -13,14 +13,14 @@
  * Example:
  * [bob] call lambs_danger_fnc_setupProfile;
  *
- * Public: No
+ * Public: Yes
 */
-params ["_tacticName", "_tactics"];
-
+params ["_profileName", "_tactics"];
+private _profileName = toLower _profileName;
 private _profile = +GVAR(ProfilesNamespace) getVariable "default"; // Create a Copy of the default Profile
 
 {
     _profile = [_profile, toLower(_x select 0), _x select 1] call CBA_fnc_hashSet;
 } forEach _tactics;
 
-GVAR(ProfilesNamespace) setVariable [toLower(_tacticName), _profile, true];
+GVAR(ProfilesNamespace) setVariable [_profileName, _profile, true];

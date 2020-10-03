@@ -14,7 +14,7 @@
  * Example:
  * ["default", "tacticHidding", true] call lambs_danger_fnc_setProfileAllow;
  *
- * Public: No
+ * Public: Yes
 */
 params [["_profileName", "", [""]], ["_tacticName", "", [""]], ["_enabled", true, [true, 0, {}]]];
 _profileName = toLower(_profileName);

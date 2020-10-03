@@ -14,5 +14,3 @@
  *
  * Public: No
 */
-diag_log "it Worked!";
-systemChat "it Worked!";

@@ -20,8 +20,11 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-// Default AI Profiles
-private _profiles = []; // TODO(joko): find a way to add the profiles create via script even in the editor
+private _profiles = [getMissionConfigValue [QGVAR(AIProfiles), HASH_NULL] call CBA_fnc_hashKeys, "Scenario" get3DENMissionAttribute QGVAR(AIProfiles)] select is3DEN;
+
+if (isNil "_profiles" || {_profiles isEqualType []}) then {
+    _profiles = [];
+};
 
 {
     {
@@ -29,6 +32,7 @@ private _profiles = []; // TODO(joko): find a way to add the profiles create via
     } forEach configProperties [_x >> "LAMBS_CfgAIProfiles", "isClass _x", true];
 } forEach [configFile, missionConfigFile];
 
+// Default AI Profiles
 [
     QGVAR(defaultAIProfile),
     "LIST",
