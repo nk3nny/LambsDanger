@@ -50,7 +50,7 @@ _target = _target call CBA_fnc_getPos;
 
 // clear attacks! ( https://community.bistudio.com/wiki/getAttackTarget )
 {
-    if (currentCommand _x isEqualTo "ATTACK") then {
+    if ((currentCommand _x) isEqualTo "ATTACK") then {
         _x forgetTarget (assignedTarget _x);
         _x doWatch objNull;
     };

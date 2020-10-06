@@ -133,7 +133,7 @@ if !(_enemies isEqualTo []) then {
         if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
 
         // visibility / distance / no cover
-        if !(terrainIntersectASL [eyepos _unit, eyepos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
+        if !(terrainIntersectASL [eyePos _unit, eyePos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
         if (_unit distance2D _pos < 120) then {_plan pushBack 3;}; // assault
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack 1;}; // flank
 

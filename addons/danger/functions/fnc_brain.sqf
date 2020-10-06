@@ -82,7 +82,7 @@ if (_dangerCause in [0, 4, 7] || _panic) then {
     };
 
     // enemy near? don't hide
-    if (_dangerCause == 0 && {(_unit distance2D _dangerCausedBy) < (GVAR(CQB_range) * 1.4)}) then {
+    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < (GVAR(CQB_range) * 1.4)}) then {
         _return set [1, false];
     };
 };
@@ -99,14 +99,14 @@ if (_dangerCause in [5, 6]) then {
 };
 
 // gesture + share information
-if (_dangerCause == 0 && {isFormationLeader _unit}) then {
+if (_dangerCause isEqualTo 0 && {isFormationLeader _unit}) then {
     //if (RND(0.05)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     [_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);
 };
 private _group = group _unit;
 // Enemy Near
 if (
-    _dangerCause == 3
+    _dangerCause isEqualTo 3
     || { !isNull _dangerCausedBy }
     && { (_group getVariable [QGVAR(contact), 0]) < time }
     && { !(_group getVariable [QGVAR(disableGroupAI), false]) }

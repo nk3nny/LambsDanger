@@ -57,10 +57,11 @@ if (_units isEqualTo []) exitWith {false};
 // find vehicles
 private _vehicles = [];
 {
-    if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
-        _vehicles pushBackUnique vehicle _x;
+    private _vehicle = vehicle _x;
+    if (_x != _vehicle && { isTouchingGround _vehicle } && { canFire _vehicle }) then {
+        _vehicles pushBackUnique _vehicle;
     };
-} foreach (units _unit select { _unit distance2D _x < 350 && { canFire _x }});
+} foreach ((units _unit) select { (_unit distance2D _x) < 350 && { canFire _x }});
 
 // sort building locations
 private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);

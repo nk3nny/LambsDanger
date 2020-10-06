@@ -40,7 +40,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functi
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    [_unit, _target call cba_fnc_getPos] call FUNC(vehicleSuppress);
+    [_unit, _target call CBA_fnc_getPos] call FUNC(vehicleSuppress);
     true
 };
 

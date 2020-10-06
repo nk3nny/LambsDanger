@@ -46,7 +46,11 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_funct
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = [([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0, selectRandom _buildings] select (RND(0.4));
+    _buildings = if (RND(0.4)) then {
+        selectRandom _buildings
+    } else {
+        ([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0
+    };
     _buildings = _buildings buildingPos -1;
 };
 

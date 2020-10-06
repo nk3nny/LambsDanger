@@ -43,7 +43,7 @@ _group enableAttack false;
 // new variable + distance check + exit if none
 private _inCQB = _group getVariable [QGVAR(inCQB), []];
 _inCQB = _inCQB select {_x distance2D _unit < _range + 25};
-if (count _inCQB > 0) exitWith {[]};
+if (_inCQB isEqualTo []) exitWith {[]};
 
 // check target
 if (isNull _target) then {_target = _unit findNearestEnemy _unit;};

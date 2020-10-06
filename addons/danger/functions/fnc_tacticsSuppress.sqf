@@ -65,7 +65,7 @@ _vehicles arrayIntersect _vehicles;
 
 // sort building locations
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
-_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true ]) apply { getPos _x });
+_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { getPos _x });
 _pos pushBack _target;
 
 // sort cycles

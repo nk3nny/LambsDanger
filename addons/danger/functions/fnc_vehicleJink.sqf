@@ -30,7 +30,7 @@ _unit setVariable [QGVAR(currentTask), "Jink Vehicle", EGVAR(main,debug_function
 // Find positions
 private _destination = [];
 _destination pushBack (_vehicle modelToWorldVisual [_range, -(random 10), 0]);
-_destination pushBack (_vehicle modelToWorldVisual [_range * -1, -(random 10), 0]);
+_destination pushBack (_vehicle modelToWorldVisual [-_range, -(random 10), 0]);
 //_destination pushBack (_vehicle modelToWorldVisual [0, (20 + random 50) * -1, 0]);  <-- rear movement just confuses AI
 
 // near enemy?
