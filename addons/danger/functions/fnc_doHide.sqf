@@ -65,7 +65,11 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     private _cover = nearestTerrainObjects [ _unit getPos [-16, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, true, true ];
 
     // targetPos
-    private _targetPos = [getPosASL (_cover select 0), _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]] select (_cover isEqualTo []);
+    private _targetPos = if (_cover isEqualTo []) then {
+        _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
+    } else {
+        getPosASL (_cover select 0)
+    };
 
     // water means hold
     if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
