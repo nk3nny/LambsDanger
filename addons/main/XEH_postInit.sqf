@@ -2,12 +2,12 @@
 
 GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
 
-GVAR(drawRectCacheGame) = [];
-GVAR(drawRectInUseGame) = [];
+GVAR(debug_drawRectCacheGame) = [];
+GVAR(debug_drawRectInUseGame) = [];
 
-GVAR(drawRectCacheEGSpectator) = [];
-GVAR(drawRectInUseEGSpectator) = [];
+GVAR(debug_drawRectCacheEGSpectator) = [];
+GVAR(debug_drawRectInUseEGSpectator) = [];
 
-GVAR(drawRectCacheCurator) = [];
-GVAR(drawRectInUseCurator) = [];
+GVAR(debug_drawRectCacheCurator) = [];
+GVAR(debug_drawRectInUseCurator) = [];
 addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
