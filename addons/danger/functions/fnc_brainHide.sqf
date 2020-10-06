@@ -39,7 +39,7 @@ if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
 };
 
 // cover move when explosion
-if (_type isEqualTo 4) exitWith {
+if (_type == 4) exitWith {
     [_unit] call FUNC(doCover);
     time + random 5
 };

@@ -45,9 +45,7 @@ private _return = [false, false, false, false];
 
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
-
     [false, false, false, true, [10, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
-
 };
 
 // modify priorities ~ own function!
@@ -83,14 +81,14 @@ if (_dangerCause in [0, 4, 7] || _panic) then {
     };
 
     // enemy near? don't hide
-    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < ( GVAR(CQB_range) * 1.4)}) then {
+    if (_dangerCause == 0 && {(_unit distance2D _dangerCausedBy) < (GVAR(CQB_range) * 1.4)}) then {
         _return set [1, false];
     };
 };
 
 // engage actions   // should check all friendly sides?
 if (_dangerCause in [0, 1, 3, 8]) then {
-    _return set [2, !(side _unit isEqualTo side _dangerCausedBy)];
+    _return set [2, side (group _unit) isEqualTo side (group _dangerCausedBy)];
     _return set [1, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
 };
 
@@ -100,14 +98,15 @@ if (_dangerCause in [5, 6]) then {
 };
 
 // gesture + share information
-if (_dangerCause isEqualto 0 && {isFormationLeader _unit}) then {
+if (_dangerCause == 0 && {isFormationLeader _unit}) then {
     //if (RND(0.05)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     [_unit, _dangerCausedBy, GVAR(radio_shout), true] call FUNC(shareInformation);
 };
 private _group = group _unit;
 // Enemy Near
-if (_dangerCause isEqualto 3
-    || {!isNull _dangerCausedBy}
+if (
+    _dangerCause == 3
+    || { !isNull _dangerCausedBy }
     && { (_group getVariable [QGVAR(contact), 0]) < time }
     && { !(_group getVariable [QGVAR(disableGroupAI), false]) }
 ) then {

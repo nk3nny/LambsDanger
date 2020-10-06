@@ -17,11 +17,10 @@
 */
 params ["_unit", ["_target", objNull]];
 
-// distance
-private _distance = _unit distance2D _target;
 
 // speed
 if ((behaviour _unit) isEqualTo "STEALTH") exitWith {1};
+private _distance = _unit distance2D _target;
 if ((speedMode _unit) isEqualTo "FULL") exitWith {[24, 3] select (_distance < 12)};
 if (_distance > (GVAR(CQB_range) + 20)) exitWith {-1};
 if (_distance > 15) exitWith {3};

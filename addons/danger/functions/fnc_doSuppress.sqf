@@ -49,7 +49,7 @@ private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistanc
 if !(_friendlys isEqualTo []) exitWith {false};
 
 // Callout!
-if (RND(0.4) && {count units _unit > 1}) then {
+if (RND(0.4) && {count (units _unit) > 1}) then {
     [_unit, "Combat", "suppress", 75] call EFUNC(main,doCallout);
 };
 

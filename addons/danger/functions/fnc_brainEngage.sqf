@@ -19,7 +19,7 @@
 */
 
 /*
-    Engage actions 
+    Engage actions
     0 Enemy detected (but near)
     1 Fire
     3 Enemy near
@@ -37,9 +37,9 @@ if (isNull _target || {stopped _unit}) exitWith {
     _timeout
 };
 
-// look at_this 
+// look at_this
 if (_unit knowsAbout _target > 3.5) then {
-    _unit lookAt _target; 
+    _unit lookAt _target;
 };
 
 // distance
