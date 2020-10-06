@@ -113,7 +113,7 @@ if !(_enemies isEqualTo []) then {
         _pos = _unit getHideFrom (_enemies select _targets);
 
         // mark enemy position for sympathetic fire
-        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
+        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
     };
 
     // enemy inside buildings or fortified

@@ -240,7 +240,7 @@ class FSM
                          "private _evaluation = [_this, _queue] call lambs_danger_fnc_brain;" \n
                          "" \n
                          "// get variables" \n
-                         "_evaluation params [ [""_immediate"", false], [""_hide"", false], [""_engage"", false], [""_assess"", false], [""_cause"", [-1, getpos _this, time + lambs_danger_dangerUntil, objNull, 0]]];" \n
+                         "_evaluation params [ [""_immediate"", false], [""_hide"", false], [""_engage"", false], [""_assess"", false], [""_cause"", [-1, getPos _this, time + lambs_danger_dangerUntil, objNull, 0]]];" \n
                          "_cause params [""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy"", ""_dangerDistance""];" \n
                          "" \n
                          "// debug variable" \n
