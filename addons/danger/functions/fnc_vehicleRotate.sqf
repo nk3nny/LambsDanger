@@ -30,7 +30,7 @@ if (_target isEqualTo []) then {
 if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {true};
 
 // CQB tweak -- look instead
-if (_unit distance _target < GVAR(CQB_range)) exitWith {
+if (_unit distance _target < GVAR(cqbRange)) exitWith {
     (vehicle _unit) doWatch _target;
     true
 };

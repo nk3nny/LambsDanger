@@ -30,7 +30,7 @@ private _group = group _unit;
     {
         params ["_group", "_speedMode"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setSpeedMode _speedMode;
             _group setVariable [QGVAR(tacticsTask), nil];
         };
@@ -43,7 +43,7 @@ private _group = group _unit;
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
-if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
+if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
     [_unit, _target] call FUNC(tacticsGarrison);
     false
 };

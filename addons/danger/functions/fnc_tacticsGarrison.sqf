@@ -25,7 +25,7 @@ private _group = group _unit;
     {
         params ["_group", "_speedMode", "_enableAttack", "_formation"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group enableAttack _enableAttack;
             _group setSpeedMode _speedMode;
             _group setFormation _formation;

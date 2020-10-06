@@ -46,11 +46,11 @@ if (_unit knowsAbout _target > 3.5) then {
 private _distance = _unit distance2D _target;
 
 // near, go for CQB
-if (_distance < GVAR(CQB_range)) exitWith {
+if (_distance < GVAR(cqbRange)) exitWith {
     // execute assault
     [_unit, _target] call FUNC(doAssault);
     // dynamic delay
-    private _delay = linearConversion [0, GVAR(CQB_range), _distance, 0, 4, true];
+    private _delay = linearConversion [0, GVAR(cqbRange), _distance, 0, 4, true];
     _timeout + _delay
 };
 

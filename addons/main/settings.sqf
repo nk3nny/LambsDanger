@@ -81,7 +81,7 @@ _curCat = LSTRING(Settings_Debug);
 
 // Debug Renderer for Expected Destination
 [
-    QGVAR(RenderExpectedDestination),
+    QGVAR(debug_RenderExpectedDestination),
     "CHECKBOX",
     [LSTRING(Settings_DebugDrawExpDest), LSTRING(Settings_DebugDrawExpDest_ToolTip)],
     [COMPONENT_NAME, _curCat],

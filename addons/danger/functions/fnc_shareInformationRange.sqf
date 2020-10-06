@@ -21,9 +21,9 @@ if (_override) exitWith { [_unit, _range, _radio] };
 
 // get range by faction
 _range = switch (side _unit) do {
-    case WEST: { GVAR(radio_WEST) };
-    case EAST: { GVAR(radio_EAST) };
-    default { GVAR(radio_GUER) };
+    case WEST: { GVAR(radioWest) };
+    case EAST: { GVAR(radioEast) };
+    default { GVAR(radioGuer) };
 };
 
 // tweak by VD ~ uncommented, not sure why it was there in the first place - nkenny
@@ -42,7 +42,7 @@ private _index = _units findIf {
 _radio = _index != -1;
 if (_radio) then {
     _target = _units select _index;
-    _range = _range + GVAR(radio_Backpack);
+    _range = _range + GVAR(radioBackpack);
 };
 // tweak by height above sea-level
 _range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400, 1000, true]);

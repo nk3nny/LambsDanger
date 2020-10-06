@@ -28,7 +28,7 @@ private _group = group _unit;
     {
         params ["_group", "_speedMode"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setSpeedMode _speedMode;
             {_x setVariable [QGVAR(forceMove), nil];} foreach (units _group);
             _group setVariable [QGVAR(tacticsTask), nil];

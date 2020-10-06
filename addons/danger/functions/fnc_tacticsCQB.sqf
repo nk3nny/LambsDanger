@@ -15,11 +15,11 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", GVAR(CQB_range)], ["_delay", 180]];
+params ["_unit", ["_target", objNull], ["_range", GVAR(cqbRange)], ["_delay", 180]];
 
 // update tactics and contact state
 private _group = group _unit;
-_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(contact), time + 300];
 
@@ -28,7 +28,7 @@ _group setVariable [QGVAR(contact), time + 300];
     {
         params [["_group", grpNull, [grpNull]], ["_attackEnabled", false]];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
             _group enableAttack _attackEnabled;
         };

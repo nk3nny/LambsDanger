@@ -30,7 +30,7 @@ private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 
 // update tactics and contact state
 private _group = group _unit;
-_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 300];
 
 // set group task
@@ -41,7 +41,7 @@ _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_function
     {
         params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
             _group enableAttack _enableAttack;
         };

@@ -30,7 +30,7 @@ if (
     //|| {_unit distance _target > viewDistance}
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
-    || {GVAR(radio_disabled)}
+    || {GVAR(radioDisabled)}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];

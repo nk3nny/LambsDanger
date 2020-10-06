@@ -31,7 +31,7 @@ if ((_unit distance2D _pos) < 50) then { _pos = _predictedPos; };
 if (
     isNull _target
     || {!(_target isKindOf "Man")}
-    || {(_unit distance2D _predictedPos) < GVAR(minSuppression_range)}
+    || {(_unit distance2D _predictedPos) < GVAR(minSuppressionRange)}
     || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
@@ -70,7 +70,7 @@ _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRan
 _vehicle doWatch ASLtoAGL _pos;
 
 // recheck
-if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
+if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppressionRange)) exitWith {false};
 
 // check for friendlies
 private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendly);

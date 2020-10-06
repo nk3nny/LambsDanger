@@ -26,7 +26,7 @@ _target = _target call CBA_fnc_getPos;
     {
         params ["_group", "_enableAttack"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group enableAttack _enableAttack;
             _group setVariable [QGVAR(tacticsTask), nil];
         };
