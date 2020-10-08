@@ -37,6 +37,10 @@
         5 DeadBodyGroup
         6 DeadBody
 */
+#define ACTION_IMMEDIATE 0
+#define ACTION_HIDE 1
+#define ACTION_ENGAGE 2
+#define ACTION_ASSESS 3
 
 params ["_unit", ["_queue", []]];
 
@@ -67,14 +71,14 @@ private _causeArray = _queue select _index;
 _causeArray params ["_dangerCause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
 
 // Immediate actions
-if (_dangerCause in [2, 9]) then {
-    _return set [0, true];
+if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE]) then {
+    _return set [ACTION_IMMEDIATE, true];
 };
 
 // hide actions
 private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.9};
-if (_dangerCause in [0, 4, 7] || _panic) then {
-    _return set [1, true];
+if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_EXPLOSION, DANGER_SCREAM] || _panic) then {
+    _return set [ACTION_HIDE, true];
 
     // callout
     if (_panic) then {
@@ -82,31 +86,31 @@ if (_dangerCause in [0, 4, 7] || _panic) then {
     };
 
     // enemy near? don't hide
-    if (_dangerCause isEqualTo 0 && {(_unit distance2D _dangerCausedBy) < (GVAR(cqbRange) * 1.4)}) then {
-        _return set [1, false];
+    if (_dangerCause isEqualTo DANGER_ENEMYDETECTED && {(_unit distance2D _dangerCausedBy) < (GVAR(cqbRange) * 1.4)}) then {
+        _return set [ACTION_HIDE, false];
     };
 };
 
 // engage actions   // should check all friendly sides?
-if (_dangerCause in [0, 1, 3, 8]) then {
-    _return set [2, side (group _unit) isEqualTo side (group _dangerCausedBy)];
-    _return set [1, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
+if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_FIRE, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
+    _return set [ACTION_ENGAGE, !(side (group _unit) isEqualTo side (group _dangerCausedBy))];
+    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
 };
 
 // assess actions
-if (_dangerCause in [5, 6]) then {
-    _return set [3, true];
+if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY]) then {
+    _return set [ACTION_ASSESS, true];
 };
 
 // gesture + share information
-if (_dangerCause isEqualTo 0 && {isFormationLeader _unit}) then {
+if (_dangerCause isEqualTo DANGER_ENEMYDETECTED && {isFormationLeader _unit}) then {
     //if (RND(0.05)) then {[_unit, "gesturePoint"] call EFUNC(main,doGesture);};
     [_unit, _dangerCausedBy, GVAR(radioShout), true] call FUNC(shareInformation);
 };
 private _group = group _unit;
 // Enemy Near
 if (
-    _dangerCause isEqualTo 3
+    _dangerCause isEqualTo DANGER_ENEMYNEAR
     || { !isNull _dangerCausedBy }
     && { (_group getVariable [QGVAR(contact), 0]) < time }
     && { !(_group getVariable [QGVAR(disableGroupAI), false]) }

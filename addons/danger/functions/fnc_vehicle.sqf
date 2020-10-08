@@ -40,7 +40,7 @@ _causeArray params ["_cause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
 
 // is it an attack?
 private _vehicle = vehicle _unit;
-private _attack = _cause in [0, 2, 8, 9] && {!(side _dangerCausedBy isEqualTo side _unit)};
+private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
 
 // update information
 if (_attack && {RND(0.4)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
@@ -59,7 +59,7 @@ _vehicle setVariable [QGVAR(isArtillery), false];
 private _static = _vehicle isKindOf "StaticWeapon";
 if (_static) exitWith {
 
-    // suppression 
+    // suppression
     if (_attack) then {
         [{_this call FUNC(vehicleSuppress)}, [_unit, _dangerPos], random 1] call CBA_fnc_waitAndExecute;
     };
