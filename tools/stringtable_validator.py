@@ -22,8 +22,7 @@ PROJECT_NAME = "Lambs"
 
 def check_stringtable(filepath):
     try:
-        with open(filepath, 'r') as stringtable:
-            tree = ET.parse(stringtable)
+        tree = ET.parse(filepath)
     except:
         print("  ERROR: Failed to parse file.")
         return 1
@@ -117,7 +116,7 @@ def check_stringtable(filepath):
                 errors += 1
 
     # Check whitespace for tabs and correct number of indenting spaces
-    with open(filepath, "r") as file:
+    with open(filepath, "r", encoding = 'utf-8') as file:
        spacing_depth = 0
 
        for line_number, line in enumerate(file, 1):

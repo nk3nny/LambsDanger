@@ -14,17 +14,17 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_ToolTip">
             <English>Toggle AI Reactions to nearby explosions</English>
             <German>KI-Reaktionen auf umliegende Explosionen umschalten</German>
-            <French>Les unités IA réagissent aux explosions à proximité d'elles.</French>
+            <French>Les unitÃ©s IA rÃ©agissent aux explosions Ã  proximitÃ© d'elles.</French>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
             <English>Explosion Eventhandler reset time</English>
             <German>Explosionsereignis-Handler Reset-Timer</German>
-            <French>Délai de réinitialisation de l'eventhandler</French>
+            <French>DÃ©lai de rÃ©initialisation de l'eventhandler</French>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_ToolTip">
             <English>Configures explosions reset time.</English>
-            <German>Legt den Reset-Timer für den Explosionsereignis-Handler fest.</German>
-            <French>Règle le minuteur de réinitialisation de l'eventhandler des explosions.</French>
+            <German>Legt den Reset-Timer fÃ¼r den Explosionsereignis-Handler fest.</German>
+            <French>RÃ¨gle le minuteur de rÃ©initialisation de l'eventhandler des explosions.</French>
         </Key>
     </Package>
 </Project>

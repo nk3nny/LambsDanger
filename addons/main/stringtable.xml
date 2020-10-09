@@ -3,18 +3,18 @@
     <Package name="Main">
         <Key ID="STR_Lambs_Main_NoUnitSelected">
             <English>No Unit Selected</English>
-            <German>Keine Einheit ausgewählt</German>
-            <French>Aucune unité sélectionnée</French>
+            <German>Keine Einheit ausgewÃ¤hlt</German>
+            <French>Aucune unitÃ© sÃ©lectionnÃ©e</French>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
-            <German>Spieler sind keine gültige Auswahl</German>
-            <French>Les joueurs ne sont pas des sélections valides</French>
+            <German>Spieler sind keine gÃ¼ltige Auswahl</German>
+            <French>Les joueurs ne sont pas des sÃ©lections valides</French>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
-            <German>Keine Gruppe ausgewählt</German>
-            <French>Aucun groupe sélectionné</French>
+            <German>Keine Gruppe ausgewÃ¤hlt</German>
+            <French>Aucun groupe sÃ©lectionnÃ©</French>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
@@ -25,7 +25,7 @@
             <Czech>LAMBS Danger Dev Team</Czech>
             <Spanish>LAMBS Danger Dev Team</Spanish>
             <Italian>LAMBS Danger Dev Team</Italian>
-            <French>LAMBS Danger Équipe de développement</French>
+            <French>LAMBS Danger Ã‰quipe de dÃ©veloppement</French>
             <Korean>LAMBS Danger Dev Team</Korean>
             <Japanese>LAMBS Danger Dev Team</Japanese>
             <Chinese>LAMBS Danger Dev Team</Chinese>
@@ -38,22 +38,22 @@
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
             <German>Handzeichen deaktivieren</German>
-            <French>Désactiver les signes de main</French>
+            <French>DÃ©sactiver les signes de main</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
-            <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
-            <French>Les unités ne feront plus de signes de mains lorsqu'elles répondent à un danger ou effectuent des manœuvres.</French>
+            <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchfÃ¼hren von ManÃ¶vern.</German>
+            <French>Les unitÃ©s ne feront plus de signes de mains lorsqu'elles rÃ©pondent Ã  un danger ou effectuent des manÅ“uvres.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
             <German>Rufe ausschalten</German>
-            <French>Désactiver les appels d'unité</French>
+            <French>DÃ©sactiver les appels d'unitÃ©</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
-            <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
-            <French>Désactive les appels supplémentaires que font les unités en fonction des situations rencontrées.</French>
+            <German>Deaktiviert zusÃ¤tzliche Rufe von Einheiten basierend auf der Sitation.</German>
+            <French>DÃ©sactive les appels supplÃ©mentaires que font les unitÃ©s en fonction des situations rencontrÃ©es.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
@@ -63,52 +63,52 @@
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
             <German>Debug FSM</German>
-            <French>Débogage FSM</French>
+            <French>DÃ©bogage FSM</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
             <German>Zeigt FSM Debug-Meldungen</German>
-            <French>Affiche les messages de débogage FSM.</French>
+            <French>Affiche les messages de dÃ©bogage FSM.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
             <German>Debug Funktionen</German>
-            <French>Débogage des fonctions</French>
+            <French>DÃ©bogage des fonctions</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
-            <German>Zeigt Debug-Meldungen für Funktionen</German>
-            <French>Affiche les messages de débogage des fonctions.</French>
+            <German>Zeigt Debug-Meldungen fÃ¼r Funktionen</German>
+            <French>Affiche les messages de dÃ©bogage des fonctions.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
             <German>Debug Zivilisten</German>
-            <French>Débogage des civils</French>
+            <French>DÃ©bogage des civils</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
-            <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
-            <French>Affiche les messages de débogage des civils.</French>
+            <German>Zeigt FSM Debug-Meldungen fÃ¼r Zivilisten</German>
+            <French>Affiche les messages de dÃ©bogage des civils.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
             <German>Debug Zeichnen</German>
-            <French>Informations de débogage</French>
+            <French>Informations de dÃ©bogage</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
-            <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
-            <French>Affiche un texte 3d au-dessus des unités IA, donnant diverses informations concernant leur état.</French>
+            <German>Zeichnet 3D-Text Ã¼ber Einheiten mit KI-Informationen</German>
+            <French>Affiche un texte 3d au-dessus des unitÃ©s IA, donnant diverses informations concernant leur Ã©tat.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
             <German>Debug Erwartete Ankuftsposition zeichnen</German>
-            <French>Affichage des trajets planifiées</French>
+            <French>Affichage des trajets planifiÃ©es</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
-            <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
-            <French>Affiche les trajets prévus par les unités IA.</French>
+            <German>Zeichnet die erwartete Ankunftsposition fÃ¼r KI-Einheiten (BenÃ¶tigt Debug Zeichnen)</German>
+            <French>Affiche les trajets prÃ©vus par les unitÃ©s IA.</French>
         </Key>
     </Package>
 </Project>
