@@ -4,70 +4,87 @@
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_DisplayName">
             <English>Register as LAMBS artillery</English>
             <German>Als LAMBS Artillerie registrieren</German>
+            <French>Définir comme artillerie LAMBS</French>
         </Key>
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_ToolTip">
             <English>Vehicle will be automatically registered as available artillery for dynamic strikes</English>
             <German>Das Fahrzeug wird automatisch als verfügbare Artillerie für dynamische Angriffe registriert.</German>
+            <French>Le véhicule est automatiquement enregistré en tant qu'artillerie disponible pour des attaques dynamiques.</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Target_DisplayName">
             <English>Dynamic Target</English>
             <German>Dynamisches Ziel</German>
+            <French>Objectif dynamique</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_DisplayName">
             <English>Task Artillery</English>
             <German>Aufgabe Artillerie</German>
+            <French>Objectif d'artillerie</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ModuleDescription">
             <English>This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance</English>
             <German>Diese Position wird durch die erste, verfügbare Artillerie der gegebenen Seite anvisiert. Die Artillerie muss für die Seite registriert und in Reichweite sein.</German>
+            <French>Cette position est ciblée par la première unité d'artillerie disponible du camp sélectionné. L'unité d'artillerie doit être enregistrée pour le camp, et se trouver à portée de tir.</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
             <English>Side</English>
             <German>Seite</German>
+            <French>Camp</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip">
             <English>Which side is calling for artillery</English>
             <German>Die Seite die die Artillerie ruft.</German>
+            <French>Le camp qui attaquera l'objectif</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName">
             <English>Main Salvo</English>
             <German>Hauptsalve</German>
+            <French>Salve principale</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
             <English>Number of rounds in the main salvo</English>
             <German>Anzahl an Schüssen der Hauptsalve.</German>
+            <French>Le nombre de coups de la salve principale</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
             <English>Spread</English>
             <German>Streuung</German>
+            <French>Dispersion</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
             <English>Default dispersion of the main salvo</English>
             <German>Standard Streuung der Hauptsalve.</German>
+            <French>La dispersion par défaut de la salve principale</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName">
             <English>Skip adjusting rounds</English>
             <German>Anpassen der Schüsse überspringen</German>
+            <French>Désactiver les tirs d'ajustement</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
             <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
+            <French>Si cette option est cochée, les premiers tirs effectués pour affiner la précision sur cible, ne sont plus effectués.\nDans ce cas, la cible subira immédiatement le tir de barrage.</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
             <German>Artillerie-Ziel erstellt für %1</German>
+            <French>Cible d'artillerie crée pour %1</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
             <English>Task Artillery Register</English>
             <German>Aufgabe Artillerie-Register</German>
+            <French>Définir comme artillerie</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ModuleDescription">
             <English>Register units to that sides artillery pool.</English>
             <German>Registriere Einheiten zum Artillerie-Pool dieser Seite hinzugefügt.</German>
+            <French>Définit l'unité en tant qu'artillerie disponible.</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_UnitAdded">
             <English>Units have been added to Artillery Pool</English>
             <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
+            <French>Les unités ont été ajoutées à la réserve d'artillerie</French>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded">
             <English>No Units have been added to Artillery Pool</English>
