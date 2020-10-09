@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_distance", 55]];
+params ["_unit"];
 
 // check disabled
 if (
@@ -64,6 +64,11 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
         [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
     };
 
+    // inside or under cover!
+    if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) exitWith {
+        doStop _unit;
+    };
+
     // update pos
     private _cover = nearestTerrainObjects [_unit getPos [GVAR(searchForHide) + 2, _enemy getDir _unit], [], GVAR(searchForHide), false, true];
     if !(_cover isEqualTo []) then {_pos = _cover select 0;};
@@ -91,14 +96,7 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     if !(_buildings isEqualTo []) then {
         _unit doMove (_buildings select 0);
     };
-
 };
-
-// inside or under cover!
-if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) then {
-    doStop _unit;
-};
-
 
 // debug
 if (EGVAR(main,debug_functions)) then {
