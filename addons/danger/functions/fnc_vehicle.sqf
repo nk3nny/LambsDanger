@@ -31,6 +31,7 @@ private _index = -1;
     private _cause = _x select 0;
     if ((_priorities select _cause) > _priority) then {
         _index = _forEachIndex;
+        _priority = _priorities select _cause;
     };
 } foreach _queue;
 

@@ -111,9 +111,10 @@ private _group = group _unit;
 // Enemy Near
 if (
     _dangerCause isEqualTo DANGER_ENEMYNEAR
-    || { !isNull _dangerCausedBy }
-    && { (_group getVariable [QGVAR(contact), 0]) < time }
-    && { !(_group getVariable [QGVAR(disableGroupAI), false]) }
+    || {
+        !isNull _dangerCausedBy 
+        && { (_group getVariable [QGVAR(contact), 0]) < time }
+    }
 ) then {
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerCausedBy < 50)] call EFUNC(main,doGesture);
 
