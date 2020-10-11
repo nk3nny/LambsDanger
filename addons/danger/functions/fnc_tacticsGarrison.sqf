@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_delay", 60]];
+params ["_unit", "_target", ["_units", []], ["_delay", 90]];
 
 private _group = group _unit;
 // reset tactics
@@ -30,6 +30,7 @@ private _group = group _unit;
             _group setSpeedMode _speedMode;
             _group setFormation _formation;
             _group setVariable [QGVAR(tacticsTask), nil];
+            {_x doFollow leader _x} foreach units _group;
         };
     },
     [_group, speedMode _unit, attackEnabled _unit, formation _unit],
@@ -41,7 +42,7 @@ if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 125] call EFUNC(main,findReadyUnits);
+    _units = [_unit, 150] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -52,7 +53,6 @@ _target = _target call CBA_fnc_getPos;
 {
     if ((currentCommand _x) isEqualTo "ATTACK") then {
         _x forgetTarget (assignedTarget _x);
-        _x doWatch objNull;
     };
 } foreach _units;
 
@@ -81,18 +81,23 @@ _unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_func
 _group setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-_group setVariable [QGVAR(CQB_pos), _buildings];
+_group setVariable [QGVAR(CQB_pos), _buildings select {_unit distance2D _x < 25}];
 
 // execute
 {
     private _pos = if (_buildings isEqualTo []) then {_target} else {_buildings deleteAt 0};
+    doStop _x;
     _x doMove _pos;
+    _unit setDestination [_pos, "FORMATION PLANNED", true];
     _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
 } forEach _units;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS GARRISON %2 (%3m)", side _unit, groupId group _unit, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    ["%1 TACTICS GARRISON %2 (%3m)", side _unit, groupId _group, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    private _m = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
+    _m setMarkerSizeLocal [0.6, 0.6];
+    [{{deleteMarker _x;true} count _this;}, [_m], _delay + 30] call CBA_fnc_waitAndExecute;
 };
 
 // end

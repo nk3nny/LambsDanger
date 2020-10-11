@@ -33,7 +33,6 @@ _cycle = _cycle - 1;
     _x setSuppression 0;
 
     // manoeuvre
-    //_x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
     _x forceSpeed 2;
     _x setUnitPosWeak "UP";
     _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
@@ -45,6 +44,6 @@ if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
         {_this call FUNC(doGroupAssault)},
         [_cycle, _units, _pos],
-        10
+        8
     ] call CBA_fnc_waitAndExecute;
 };

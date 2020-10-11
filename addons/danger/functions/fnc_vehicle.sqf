@@ -81,7 +81,7 @@ if (_armored && {_attack}) exitWith {
     // tank assault
     if (speed _vehicle < 8) then {
         // rotate + suppression (internal to vehicle rotate)
-        [{_this call FUNC(vehicleRotate)}, [_vehicle, getPosATL _dangerCausedBy], 0] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleRotate)}, [_vehicle, _unit getHideFrom _dangerCausedBy], 0] call CBA_fnc_waitAndExecute;
 
         // assault
         if (_vehicle distance2D _dangerCausedBy < 550 && {_dangerCausedBy isKindOf "Man"}) then {
@@ -121,7 +121,7 @@ if (_car && {_attack}) exitWith {
 
     // suppression
     if (speed _vehicle < 8) then {
-        [{_this call FUNC(vehicleSuppress)}, [_unit, ASLtoAGL eyePos _dangerCausedBy], random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleSuppress)}, [_unit, ATLtoASL (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]], random 1] call CBA_fnc_waitAndExecute;
     };
 
     // end

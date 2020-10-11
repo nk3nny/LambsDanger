@@ -26,11 +26,10 @@ if (isNull _target) then {
 
 // nil or captured
 if (
-    isNull _target
+    GVAR(radioDisabled)
     //|| {_unit distance _target > viewDistance}
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_issurrendering", false]}
-    || {GVAR(radioDisabled)}
 ) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
@@ -58,7 +57,6 @@ private _knowsAbout = _unit knowsAbout _target;
     if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
         [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
         [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];
-        if (local leader _x && {_x getVariable [QGVAR(contact), 0] < time}) then {[leader _x] call FUNC(tactics);};
     };
 } forEach _groups;
 
@@ -74,10 +72,14 @@ if (EGVAR(main,debug_functions)) then {
     ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call EFUNC(main,debugLog);
 
     // debug marker
-    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor),"mil_dot"] call EFUNC(main,dotMarker);
-    private _mt = [_target, "target", _target call EFUNC(main,debugMarkerColor),"mil_dot"] call EFUNC(main,dotMarker);
     private _zm = [_unit, [_range,_range], _unit call EFUNC(main,debugMarkerColor), "Border"] call EFUNC(main,zoneMarker);
-    [{{deleteMarker _x;true} count _this;}, [_m, _mt, _zm], 60] call CBA_fnc_waitAndExecute;
+    private _markers = [_zm];
+    {
+        private _m = [_unit getHideFrom _x, "", _x call EFUNC(main,debugMarkerColor), "hd_dot"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.5, 0.5];
+        _markers pushBack _m;
+    } foreach ((units _target) select {_unit knowsAbout _x > 0});
+    [{{deleteMarker _x;true} count _this;}, _markers, 60] call CBA_fnc_waitAndExecute;
 };
 
 // end

@@ -86,4 +86,14 @@ if (_buildings isEqualTo []) then {
     // hide
     [_x, _target, 45, _buildings] call FUNC(doHide);
 } forEach _units;
+
+// debug
+if (EGVAR(main,debug_functions)) then {
+    ["%1 TACTICS HIDE %2 (%3m)", side _unit, groupId _group, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_join"] call EFUNC(main,dotMarker);
+    _m setMarkerSizeLocal [0.6, 0.6];
+    [{{deleteMarker _x;true} count _this;}, [_m], _delay + 30] call CBA_fnc_waitAndExecute;
+};
+
+// end
 true

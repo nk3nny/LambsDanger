@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 2], ["_delay", 22]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_delay", 35]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -48,7 +48,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort building locations
-private _buildings = [_target, 9, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
 _buildings pushBack _target;
 
 // set tasks
@@ -68,11 +68,16 @@ _group setVariable [QGVAR(CQB_pos), _buildings];
 // leader callout
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
-// leader smoke
-[_unit, _target] call EFUNC(main,doSmoke);
+// concealment
+if (_unit distance2D _target > 25) then {
 
-// grenadier smoke
-[{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+    // leader smoke
+    [_unit, _target] call EFUNC(main,doSmoke);
+
+    // grenadier smoke
+    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+
+};
 
 // ready group
 _group setFormDir (_unit getDir _target);
@@ -86,6 +91,11 @@ _group setFormDir (_unit getDir _target);
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
+    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
+    private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor),"hd_objective"] call EFUNC(main,dotMarker);
+    {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
+    _m setMarkerDirLocal (_unit getDir _target);
+    [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;
 };
 
 // end

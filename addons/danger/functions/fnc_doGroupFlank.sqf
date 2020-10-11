@@ -25,6 +25,10 @@ _cycle = _cycle - 1;
 
 {
     private _posASL = AGLtoASL (selectRandom _pos);
+
+    // stance
+    _x setUnitPosWeak "MIDDLE";
+
     // suppress
     if (!(terrainIntersectASL [eyePos _x, _posASL]) && {RND(0.65)}) then {
         _x doWatch ASLtoAGL _posASL;
@@ -32,7 +36,6 @@ _cycle = _cycle - 1;
     } else {
         // manoeuvre
         _x forceSpeed 4;
-        _x setUnitPosWeak "MIDDLE";
         _x setVariable [QGVAR(currentTask), "Group Flank", EGVAR(main,debug_functions)];
         _x doMove _overwatch;
     };

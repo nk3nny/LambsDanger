@@ -18,9 +18,9 @@
 */
 
 /*
-        Assess actions
-        5 DeadBodyGroup
-        6 DeadBody
+    Assess actions
+    5 DeadBodyGroup
+    6 DeadBody
 */
 
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
@@ -91,7 +91,7 @@ if (_type isEqualTo 6) exitWith {
     // suppress nearby enemies
     if (!isNull _target) then {
         _unit forceSpeed 1;
-        [{_this call FUNC(doSuppress)}, [_unit, eyePos _target], random 2] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(doSuppress)}, [_unit, ATLtoASL (_unit getHideFrom _target) vectorAdd [0, 0, 1.2]], random 2] call CBA_fnc_waitAndExecute;
     };
 
     // add body to move routine
@@ -106,13 +106,15 @@ if (_type isEqualTo 6) exitWith {
 };
 
 // Sympathetic CQB/Suppressive fire
-if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
+_groupMemory = _groupMemory select {_unit distance2D _x < 200 && {_unit distance2D _x > 3}};
+//if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
+if !(_groupMemory isEqualTo []) exitWith {
 
     private _pos = _groupMemory select 0;
     private _distance = _unit distance2D _pos;
 
     // CQB or suppress
-    if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
+    if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.9)}) then {
 
         // CQB movement mode
         _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
@@ -120,10 +122,19 @@ if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitW
 
         // execute CQB move
         _unit doMove _pos;
+        _unit setDestination [_pos, "FORMATION PLANNED", true];
 
         // variables
         _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
         _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
+
+        // debug
+        if (EGVAR(main,debug_functions)) then {
+            ["%1 assaulting (sympathetic) (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
+            private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
+            _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
+            [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
+        };
 
     } else {
 
@@ -141,7 +152,7 @@ if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitW
     };
 
     // update variable
-    if (_distance < 2) then {_groupMemory deleteAt 0;};
+    if (RND(0.95) || {_distance < 5}) then {_groupMemory deleteAt 0;};
     _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
 
     _timeout + 6
@@ -150,21 +161,20 @@ if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitW
 // check self
 private _indoor = _unit call EFUNC(main,isIndoor);
 
-// cover
-//_unit forceSpeed ([2, 4] select (getSuppression _unit > 0));
+// speed adjustment
+if (!isFormationLeader _unit) then {
+    _unit forceSpeed ([_unit, formLeader _unit] call FUNC(assaultSpeed));
+};
 
-//private _cover = nearestTerrainObjects [_unit, [], GVAR(searchForHide), false, true];
-/*
-private _cover = nearestTerrainObjects [_unit, [], 3, false, true];
-if !(_cover isEqualTo [] || _indoor) exitWith {
+// cover
+if (!_indoor && {speed _unit < 1}) exitWith {
 
     //move into cover
-    _unit forceSpeed ([2, -1] select (getSuppression _unit > 0.8));
-    //[_unit, getPos (_cover select 0)] call FUNC(doCover);
+    [_unit] call FUNC(doCover);
 
     // end
     _timeout
-};*/
+};
 
 // building
 if (_indoor && {RND(GVAR(indoorMove))}) exitWith {

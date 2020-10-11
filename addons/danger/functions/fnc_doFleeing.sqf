@@ -59,6 +59,9 @@ private _pos = (expectedDestination _unit) select 0;
 // on foot and seen by enemy
 if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eyePos _enemy])}) then {
 
+    // variable
+    _unit setVariable [QGVAR(currentTask), "Fleeing (enemy near)", EGVAR(main,debug_functions)];
+
     // callout
     if (RND(0.4) && {getSuppression _unit > 0.5}) then {
         [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);

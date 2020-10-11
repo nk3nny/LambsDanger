@@ -33,7 +33,7 @@ private _pos = if (_buildings isEqualTo []) then {
     // unit is indoor and happy
     if (_unit call EFUNC(main,isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
-        _unit getPos [random 1 + 0.2, _unit getDir _target];
+        _unit getPos [random 1 + 0.2, _unit getDir _target]
     };
 
     // select
@@ -58,7 +58,7 @@ _unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "FORMATION PLANNED", false];
+_unit setDestination [_pos, "FORMATION PLANNED", true];
 
 // debug
 if (EGVAR(main,debug_functions)) then {

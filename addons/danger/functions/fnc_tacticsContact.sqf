@@ -5,33 +5,35 @@
  *
  * Arguments:
  * 0: group leader <OBJECT>
- * 1: Time until tactics state ends <NUMBER>, 60 seconds default
+ * 1: enemy <OBJECT>
+ * 2: Time until tactics state ends <NUMBER>, 18 seconds default
  *
  * Return Value:
  * bool
  *
  * Example:
- * [bob] call lambs_danger_fnc_tacticsContact;
+ * [bob, angryJoe] call lambs_danger_fnc_tacticsContact;
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_delay", 30]];
+params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 22]];
 
 // only leader
 if !((leader _unit) isEqualTo _unit || {isPlayer (leader _unit)}) exitWith {false};
 
 // identify enemy
-private _enemy = _unit findNearestEnemy _unit;
-private _pos = getPosASL _enemy;
+if (isNull _enemy) then {
+    _enemy = _unit findNearestEnemy _unit;
+};
 
 // get info
-private _range = linearConversion [ 0, 150, (_unit distance2D _pos), 12, 35, true];
+private _range = linearConversion [ 0, 150, (_unit distance2D _enemy), 12, 35, true];
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 
 // update tactics and contact state
 private _group = group _unit;
 _group setVariable [QGVAR(isExecutingTactic), true];
-_group setVariable [QGVAR(contact), time + 300];
+_group setVariable [QGVAR(contact), time + 600];
 
 // set group task
 _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_functions)];
@@ -47,7 +49,7 @@ _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_function
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 20
+    _delay + random 6
 ] call CBA_fnc_waitAndExecute;
 
 // change formation and attack state
@@ -61,7 +63,7 @@ _group setFormation (_group getVariable [QGVAR(dangerFormation), formation _unit
 [_unit, "gestureFreeze", true] call EFUNC(main,doGesture);
 
 if (!isNull _enemy) then {
-    [{_this call FUNC(shareInformation)}, [_unit, _enemy], 1 + random 3] call CBA_fnc_waitAndExecute;
+    [{_this call FUNC(shareInformation)}, [_unit, _enemy, GVAR(radioShout), true], 1 + random 3] call CBA_fnc_waitAndExecute;
 };
 
 // Callout
@@ -72,9 +74,6 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> _typeOf >> "nameSo
     "contact"
 };
 [ _unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
-
-// check speed
-//(leader _unit) forceSpeed 1;
 
 // rushing or ambushing units do not react
 if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
@@ -91,15 +90,13 @@ private _units = [_unit] call EFUNC(main,findReadyUnits);
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
 {
-    // hide
-    [_x, getPosASL _enemy, _range * 0.7, _buildings] call FUNC(doHide);
 
     // dodge!
     if (getSuppression _x > 0) then {[_x, getPosASL _enemy] call FUNC(doDodge);};
 
-    // force stance
-    //[{_this call EFUNC(main,doGesture)}, [_x, "DOWN", true], random 3] call CBA_fnc_waitAndExecute;
-    _x setUnitPosWeak "DOWN";
+    // hide
+    [_x, getPosASL _enemy, _range * 0.7, _buildings] call FUNC(doHide);
+    _x setVariable [QGVAR(currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
 
     // clear up existing building positions - nk
     _buildings deleteAt 0;
