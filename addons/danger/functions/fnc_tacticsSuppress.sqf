@@ -97,7 +97,7 @@ if (EGVAR(main,debug_functions)) then {
     private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor),"hd_destroy"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
-    _m setMarkerDirLocal (_unit getDir _overwatch);
+    _m setMarkerDirLocal (_unit getDir _target);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;
 };
 
