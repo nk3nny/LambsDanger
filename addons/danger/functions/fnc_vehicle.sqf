@@ -107,7 +107,7 @@ if (_armored && {_attack}) exitWith {
             {
                 params ["_vehicle", "_dangerCausedBy"];
                 _vehicle call FUNC(vehicleJink);
-                if ( _dangerCausedBy call EFUNC(main,isAlive) ) then {_vehicle doWatch _dangerCausedBy;};
+                if (_dangerCausedBy call EFUNC(main,isAlive)) then {_vehicle doWatch _dangerCausedBy;};
             },
             [_vehicle, _dangerCausedBy, damage _vehicle + 0.1],
             10
