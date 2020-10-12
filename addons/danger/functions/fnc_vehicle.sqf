@@ -100,14 +100,14 @@ if (_armored && {_attack}) exitWith {
     if (!isNull _dangerCausedBy) then {
         [
             {
-                params ["_vehicle", "_dangerCausedBy", "_health"];
+                params ["_vehicle", "", "_health"];
                 _vehicle distance2D _vehicle < 20
                 || {_health > damage _vehicle}
             },
             {
-                params ["_vehicle"];
+                params ["_vehicle", "_dangerCausedBy"];
                 _vehicle call FUNC(vehicleJink);
-                if (alive _dangerCausedBy) then {_vehicle doWatch _dangerCausedBy;};
+                if ( _dangerCausedBy call EFUNC(main,isAlive) ) then {_vehicle doWatch _dangerCausedBy;};
             },
             [_vehicle, _dangerCausedBy, damage _vehicle + 0.1],
             10
@@ -124,7 +124,7 @@ if (_car && {_attack}) exitWith {
 
     // suppression
     if (speed _vehicle < 8) then {
-        [{_this call FUNC(vehicleSuppress)}, [_unit, ATLtoASL (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]], random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(vehicleSuppress)}, [_unit, (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]], random 1] call CBA_fnc_waitAndExecute;
     };
 
     // end
