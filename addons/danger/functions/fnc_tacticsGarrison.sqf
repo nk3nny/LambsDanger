@@ -81,7 +81,7 @@ _unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_func
 _group setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-_group setVariable [QGVAR(CQB_pos), _buildings select {_unit distance2D _x < 25}];
+_group setVariable [QGVAR(groupMemory), _buildings select {_unit distance2D _x < 25}];
 
 // execute
 {

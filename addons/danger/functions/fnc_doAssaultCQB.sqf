@@ -4,7 +4,7 @@
  * Special CQB attack pattern clearing building by building
  *
  * Arguments:
- * 0: Unit assault cover <OBJECT>
+ * 0: Unit assaulting into CQB <OBJECT>
  *
  * Return Value:
  * boolean

@@ -98,7 +98,7 @@ if !(_enemies isEqualTo []) then {
 
     // enemies far away or above!
     _target = _enemies findIf {
-        _unit distance2D _x > 350
+        _unit distance2D _x > 300
         || {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
     };
     if (_target != -1) exitWith {
@@ -120,7 +120,7 @@ if !(_enemies isEqualTo []) then {
         _pos = _unit getHideFrom (_enemies select _target);
 
         // mark enemy position for sympathetic fire
-        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
+        _group setVariable [QGVAR(groupMemory), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
     };
 
     // enemy inside buildings or fortified

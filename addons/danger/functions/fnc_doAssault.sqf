@@ -4,7 +4,7 @@
  * Unit assaults building positions or open terrain according ot enemy position
  *
  * Arguments:
- * 0: Unit assault cover <OBJECT>
+ * 0: Unit assaulting <OBJECT>
  * 1: Enemy <OBJECT>
  * 2: Range to find buildings, default 30 <NUMBER>
  *
@@ -44,9 +44,9 @@ private _pos = if (_buildings isEqualTo []) then {
 
     // updates group memory variable
     private _group = group _unit;
-    private _groupMemory = _group getVariable [QGVAR(CQB_pos), []];
+    private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
     _groupMemory pushBackUnique selectRandom _buildings;
-    _group setVariable [QGVAR(CQB_pos), _groupMemory];
+    _group setVariable [QGVAR(groupMemory), _groupMemory];
 
     // select
     selectRandom _buildings

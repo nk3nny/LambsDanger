@@ -41,43 +41,11 @@ if (isNull _target) then {
 // check bodies ~ own group!
 if (_type isEqualTo 5) exitWith {
 
-    // find body + rearm
-    private _bodies = allDeadMen findIf { (_x distance2D _pos) < 3 };
-    if (_bodies != -1) then {
-        _unit doMove _pos;
-        _unit setVariable [QGVAR(forceMove), true];
-        [
-            {
-                // condition
-                params ["_unit", "_body"];
-                (_unit distance _body < 0.7) || {!(_unit call EFUNC(main,isAlive))}
-            },
-            {
-                // on near body
-                params ["_unit", "_body"];
-                if (_unit call EFUNC(main,isAlive)) then {
-                    [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call EFUNC(main,eventCallback);
-                    _unit action ["rearm", _body];
-                    _unit doFollow leader _unit;
-                };
-            },
-            [_unit, allDeadMen select _bodies], 8,
-            {
-                // on timeout
-                params ["_unit"];
-                if (_unit call EFUNC(main,isAlive)) then {
-                    _unit doFollow leader _unit;
-                    _unit setVariable [QGVAR(forceMove), nil];
-                };
-            }
-        ] call CBA_fnc_waitUntilAndExecute;
-    };
+    // check body
+    [_unit, _pos] call FUNC(doCheckBody);
 
     // pop smoke
     [{_this call EFUNC(main,doSmoke)}, [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
-
-    _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Checking bodies", EGVAR(main,debug_functions)];
 
     // end
     _timeout + 3
@@ -85,18 +53,15 @@ if (_type isEqualTo 5) exitWith {
 
 // check bodies ~ enemy group!
 private _group = group _unit;
-private _groupMemory = _group getVariable [QGVAR(CQB_pos), []];
+private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
 if (_type isEqualTo 6) exitWith {
 
-    // suppress nearby enemies
-    if (!isNull _target) then {
-        _unit forceSpeed 1;
-        [{_this call FUNC(doSuppress)}, [_unit, ATLtoASL (_unit getHideFrom _target) vectorAdd [0, 0, 1.2]], random 2] call CBA_fnc_waitAndExecute;
-    };
+    // communicate danger!
+    [{_this call FUNC(shareInformation)}, [_unit, objNull, GVAR(radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
     // add body to move routine
     _groupMemory pushBack _pos;
-    _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
+    _group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
@@ -106,55 +71,8 @@ if (_type isEqualTo 6) exitWith {
 };
 
 // Sympathetic CQB/Suppressive fire
-_groupMemory = _groupMemory select {_unit distance2D _x < 200 && {_unit distance2D _x > 3}};
-//if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitWith {
 if !(_groupMemory isEqualTo []) exitWith {
-
-    private _pos = _groupMemory select 0;
-    private _distance = _unit distance2D _pos;
-
-    // CQB or suppress
-    if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.9)}) then {
-
-        // CQB movement mode
-        _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-        _unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
-
-        // execute CQB move
-        _unit doMove _pos;
-        _unit setDestination [_pos, "FORMATION PLANNED", true];
-
-        // variables
-        _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-        _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
-
-        // debug
-        if (EGVAR(main,debug_functions)) then {
-            ["%1 assaulting (sympathetic) (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
-            private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
-            _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
-            [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
-        };
-
-    } else {
-
-        // execute suppression
-        _unit setUnitPosWeak "MIDDLE";
-        _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
-        [_unit, (AGLToASL _pos) vectorAdd [0, 0, 1.2], true] call FUNC(doSuppress);
-        _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-        _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
-    };
-
-    // add to variable
-    if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _distance}) then {
-        _groupMemory pushBack (getPosATL _target);
-    };
-
-    // update variable
-    if (RND(0.95) || {_distance < 5}) then {_groupMemory deleteAt 0;};
-    _group setVariable [QGVAR(CQB_pos), _groupMemory, false];
-
+    [_unit, _groupMemory] call FUNC(doAssaultMemory);
     _timeout + 6
 };
 

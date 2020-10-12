@@ -49,7 +49,9 @@ private _return = [false, false, false, false];
 
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
-    [false, false, false, true, [10, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit, 0]]
+    private _causeArray = [10, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit];
+    _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];    // debug variable
+    [false, false, false, true, _causeArray]
 };
 
 // modify priorities ~ own function!
@@ -69,6 +71,9 @@ private _index = -1;
 // select cause
 private _causeArray = _queue select _index;
 _causeArray params ["_dangerCause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
+
+// debug variable
+_unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
 // Immediate actions
 if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE]) then {

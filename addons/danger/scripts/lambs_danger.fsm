@@ -110,8 +110,8 @@ link42[] = {36,26};
 link43[] = {37,38};
 link44[] = {38,39};
 link45[] = {39,26};
-globals[] = {0.000000,0,0,0,0,640,480,1,61,6316128,1,-1193.790527,1088.237549,1872.671387,-726.958435,776,884,1};
-window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,794};
+globals[] = {0.000000,0,0,0,0,640,480,1,61,6316128,1,-315.957947,568.146606,1210.872803,203.721497,776,884,1};
+window[] = {2,-1,-1,-1,-1,915,156,1596,156,3,794};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -242,9 +242,6 @@ class FSM
                          "// get variables" \n
                          "_evaluation params [ [""_immediate"", false], [""_hide"", false], [""_engage"", false], [""_assess"", false], [""_cause"", [-1, getPos _this, time + lambs_danger_dangerUntil, objNull, 0]]];" \n
                          "_cause params [""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy"", ""_dangerDistance""];" \n
-                         "" \n
-                         "// debug variable" \n
-                         "_this setVariable [""lambs_main_FSMDangerCauseData"", [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy]];" \n
                          "" \n
                          "// debug setting" \n
                          "if (lambs_main_debug_FSM) then {[""%1 - Danger! - %2 (%3 @ %4m)"",side _this,_dangerCause call lambs_main_fnc_debugDangerType,name _this,  round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;};" \n

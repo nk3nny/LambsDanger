@@ -39,6 +39,9 @@ private _index = -1;
 private _causeArray = _queue select _index;
 _causeArray params ["_cause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
 
+// debug variable
+_unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
+
 // is it an attack?
 private _vehicle = vehicle _unit;
 private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};

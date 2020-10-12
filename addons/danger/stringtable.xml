@@ -37,6 +37,12 @@
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
             <German>Das Ausschalten verhindert das autonome Stürmen und Säubern von Gebäuden sowie das verstecken vor Panzern und Flugobjekten.</German>
         </Key>
+        <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
+            <English>Enable Dynamic Reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
+            <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nThis feature will not override garrison or other features which disable AI settings.</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
             <German>Einstellungen</German>

@@ -26,7 +26,7 @@
     8 CanFire
 */
 
-params ["_unit", ["_type", 0], ["_target", objNull]];
+params ["_unit", ["_type", DANGER_ENEMYDETECTED], ["_target", objNull]];
 
 // timeout
 private _timeout = time + 4;
@@ -55,7 +55,7 @@ if (_distance < GVAR(cqbRange)) exitWith {
 };
 
 // far, try to suppress
-if (_type in [0, 8] && {needReload _unit < 0.4}) exitWith {
+if (_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE] && {needReload _unit < 0.4}) exitWith {
     _unit forceSpeed ([1, 3] select (_type isEqualTo 0));
     [_unit, ATLtoASL (_unit getHideFrom _target) vectorAdd [0, 0, 1.2]] call FUNC(doSuppress);
     _timeout + 3

@@ -47,13 +47,19 @@ private _groups = allGroups select {
 };
 
 private _knowsAbout = _unit knowsAbout _target;
-
-// share information
 {
+    // share information
     if !(isNull _target) then {
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
     };
 
+    // reinforce
+    if ((_x getVariable [QGVAR(enableGroupReinforce), false]) && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time}) then {
+        [_x, [getpos _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec ["move", leader _x];
+        _x setVariable [QGVAR(enableGroupReinforceTime), time + 30, true];
+    };
+
+    // set behaviour
     if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
         [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
         [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];

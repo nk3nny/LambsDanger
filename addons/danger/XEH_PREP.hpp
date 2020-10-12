@@ -8,6 +8,8 @@ PREP(brainHide);
 PREP(brainReact);
 PREP(doAssault);
 PREP(doAssaultCQB);
+PREP(doAssaultMemory);
+PREP(doCheckBody);
 PREP(doCover);
 PREP(doDodge);
 PREP(doFleeing);

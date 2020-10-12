@@ -59,7 +59,7 @@ _unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_funct
 _group setVariable [QGVAR(tacticsTask), "Assault", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-_group setVariable [QGVAR(CQB_pos), _buildings];
+_group setVariable [QGVAR(groupMemory), _buildings];
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
