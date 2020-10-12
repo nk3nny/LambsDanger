@@ -64,7 +64,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
             <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
-            <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt</Polish>
+            <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt.\nWłączenie tej opcji spowoduje natychmiastowy ostrzał na wyznaczony cel.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
@@ -119,7 +119,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
             <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
             <German>Entfernt das Modul beim Start.\n Wenn nicht aktiviert ist es möglich das Module zu verschieben um den Zielort dynamisch anzupassen.</German>
-            <Polish>Usuwa moduł podczas uruchamiania. \nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
+            <Polish>Usuwa moduł podczas uruchamiania.\nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
@@ -184,7 +184,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Eine höherer Wert sorgt dafür das Gebäude vorsichtiger von Einheiten durchsucht werden.\nStandardwert ist 21 Sekunden.</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie. \nDomyślnie 21 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie.\nDomyślnie 21 sekund</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_DisplayName">
             <English>Remove Dynamic center</English>
