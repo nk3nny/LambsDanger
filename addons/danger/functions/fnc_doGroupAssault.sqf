@@ -29,14 +29,15 @@ _cycle = _cycle - 1;
     _x doMove _targetPos;
     _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
 
-    // brave!
-    _x setSuppression 0;
-
     // manoeuvre
-    _x forceSpeed ([2, 4] select {getSuppression _x > 0 || {_x distance _targetPos < 30}});
+    _x forceSpeed ([2, 4] select (getSuppression _x > 0 || {_x distance _targetPos < 35}));
     _x setUnitPosWeak "UP";
     _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
     _x setVariable [QGVAR(forceMove), true];
+
+    // brave!
+    _x setSuppression 0;
+
 } foreach _units;
 
 // recursive cyclic
