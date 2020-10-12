@@ -98,7 +98,7 @@ if (_buildings isEqualTo []) exitWith {
             unitReady _unit
         }, {
             params ["_unit", "_pos"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
+            if (surfaceIsWater (getPos _unit) || (_unit distance _pos > 1.5)) exitWith { _unit doFollow (leader _unit); };
             doStop _unit;
         }, [_x, _pos], 10
     ] call CBA_fnc_waitUntilAndExecute;
