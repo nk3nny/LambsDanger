@@ -70,7 +70,7 @@ private _index = -1;
 
 // select cause
 private _causeArray = _queue select _index;
-_causeArray params ["_dangerCause", "_dangerPos", "_dangerUntil", "_dangerCausedBy"];
+_causeArray params ["_dangerCause", "_dangerPos", "", "_dangerCausedBy"]; // "_dangerUntil" - skipped for future use -nkenny
 
 // debug variable
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];

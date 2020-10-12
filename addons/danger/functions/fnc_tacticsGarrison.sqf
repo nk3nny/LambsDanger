@@ -54,10 +54,12 @@ _target = _target call CBA_fnc_getPos;
     };
 } foreach _units;
 
-// buildings
+// buildings ~ sorted by height ~ add other cover
 private _buildings = [_target, 25, true, false] call EFUNC(main,findBuildings);
-_buildings = [_buildings, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
-_buildings append ((nearestTerrainObjects [_target, [], 25, false, true]) apply {_x getPos [1.2, random 360]});
+_buildings = _buildings apply { [_x select 2, _x] };
+_buildings sort false;
+_buildings = _buildings apply { _x select 1 };
+_buildings append ((nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], 25, false, true]) apply {_x getPos [1.2, random 360]});
 
 // set speed and enableAttack
 _unit setBehaviour "COMBAT";
