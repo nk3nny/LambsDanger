@@ -102,7 +102,7 @@ if !(_enemies isEqualTo []) then {
         || {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
     };
     if (_target != -1) exitWith {
-        _plan append [TACTICS_SUPPRESS, TACTICS_FLANK];
+        _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_FLANK];
         if ((combatMode _unit) isEqualTo "RED" || {speedMode _unit isEqualTo "FULL"}) then {_plan pushBack TACTICS_ASSAULT;};
         _pos = _unit getHideFrom (_enemies select _target);
     };

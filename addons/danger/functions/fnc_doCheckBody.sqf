@@ -25,9 +25,12 @@ if (_pos isEqualTo []) then {_pos = getPosASL _unit;};
 private _bodies = allDeadMen findIf { (_x distance2D _pos) < _radius };
 if (_bodies isEqualTo -1) exitWith {false};
 
+// body
+private _body = (allDeadMen select _bodies);
+
 // execute
 _unit setUnitPosWeak "MIDDLE";
-_unit doMove getPosATL (allDeadMen select _bodies);
+_unit doMove getPosATL _body;
 _unit lookAt _body;
 _unit setVariable [QGVAR(forceMove), true];
 [
@@ -46,7 +49,7 @@ _unit setVariable [QGVAR(forceMove), true];
             _unit setVariable [QGVAR(forceMove), nil];
         };
     },
-    [_unit, allDeadMen select _bodies], 8,
+    [_unit, _body], 8,
     {
         // on timeout
         params ["_unit"];
