@@ -19,7 +19,7 @@ params ["_unit", ["_groupMemory", []]];
 
 // check it
 if (_groupMemory isEqualTo []) then {
-    _groupMemory = group _unit getVariable [QGVAR(groupMemory)];
+    _groupMemory = (group _unit) getVariable [QGVAR(groupMemory)];
 };
 
 // sort it
@@ -65,14 +65,9 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.9)}) then {
 
 };
 
-// add to variable
-if (!isNull _target && {_target call EFUNC(main,isAlive)} && {_unit distance2D _target < _distance}) then {
-    _groupMemory pushBack (getPosATL _target);
-};
-
 // update variable
 if (RND(0.95) || {_distance < 5}) then {_groupMemory deleteAt 0;};
-_group setVariable [QGVAR(groupMemory), _groupMemory, false];
+(group _unit) setVariable [QGVAR(groupMemory), _groupMemory, false];
 
 // end
 true
