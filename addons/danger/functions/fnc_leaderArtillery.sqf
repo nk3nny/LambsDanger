@@ -43,12 +43,13 @@ private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
+_unit doWatch _pos;
 
 // reset forceMove
 [{
     _this setVariable [QGVAR(forceMove), nil];
     _this forceSpeed -1;
-}, _unit, 8] call CBA_fnc_waitAndExecute;
+}, _unit, 20] call CBA_fnc_waitAndExecute;
 
 // Gesture
 doStop _unit;
@@ -57,7 +58,6 @@ doStop _unit;
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {
     _unit selectWeapon (binocular _unit);
-    _unit doWatch _pos;
 };
 
 // callout

@@ -51,7 +51,7 @@ if !(_enemies isEqualTo []) then {
 
     // vehicle response
     private _tankTarget = _enemies findIf {
-        _x isKindOf "Tank"
+        (vehicle _x) isKindOf "Tank"
         && {_unit distance2D _x < 350}
         && {!(terrainIntersectASL [eyePos _unit, eyePos _x])};
     };
@@ -85,32 +85,39 @@ if !(_enemies isEqualTo []) then {
 
     // enemies within X meters of leader
     private _target = _enemies findIf {
-        _unit distance2D _x < GVAR(cqbRange)
+        _unit distance2D _x < 25
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_target != -1) exitWith {
-        _plan append [TACTICS_GARRISON, TACTICS_GARRISON, TACTICS_ASSAULT];
+        _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
         _pos = [_unit getHideFrom (_enemies select _target), getPosASL _unit] select _inside;
     };
 
     // inside? stay safe
     if (_inside) exitWith {_plan = [];};
 
-    // enemies far away or above!
+    // enemies far away and above height and has LOS
     _target = _enemies findIf {
         _unit distance2D _x > 300
-        || {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
+        && {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
+        && {!(terrainIntersectASL [(eyePos _unit) vectorAdd [0, 0, 5], eyePos _x])};
     };
     if (_target != -1) exitWith {
-        _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_FLANK];
-        if ((combatMode _unit) isEqualTo "RED" || {speedMode _unit isEqualTo "FULL"}) then {_plan pushBack TACTICS_ASSAULT;};
-        _pos = _unit getHideFrom (_enemies select _target);
+        // active or passive
+        if (RND(0.5)) then {
+            _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_HIDE];
+            if ((combatMode _unit) isEqualTo "RED" || {speedMode _unit isEqualTo "FULL"}) then {_plan pushBack TACTICS_ASSAULT;};
+            _pos = _unit getHideFrom (_enemies select _target);
+        } else {
+            _plan append [TACTICS_GARRISON, TACTICS_GARRISON];
+            _pos = getPos _unit;
+        };
     };
-    // enemies away from buildings or below
+    // enemies at a distance and away from buildings or below
     _target = _enemies findIf {
         _unit distance2D _x < 220
         && {
-            ( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 10)
+            ( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 15)
             || { ([_x, GVAR(cqbRange) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
         };
     };
@@ -123,7 +130,17 @@ if !(_enemies isEqualTo []) then {
         _group setVariable [QGVAR(groupMemory), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
     };
 
-    // enemy inside buildings or fortified
+    // enemy at long range
+    _target = _enemies findIf {
+        _unit distance2D _x > 300
+    };
+    if (_target != -1) then {
+        // suppress or flank
+        _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_FLANK];
+        _pos = _unit getHideFrom (_enemies select _target);
+    };
+
+    // enemy at inside buildings or fortified
     _target = _enemies findIf {
         _x call EFUNC(main,isIndoor)
         || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}

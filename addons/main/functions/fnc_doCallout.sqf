@@ -57,6 +57,9 @@ switch (toLower(_callout)) do {
     case ("panic"): {
         _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"];
     };
+    case ("flank"): {
+        _callout = selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"];
+    }
 };
 
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];

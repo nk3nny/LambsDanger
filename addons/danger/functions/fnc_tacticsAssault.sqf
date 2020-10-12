@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_delay", 35]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_delay", 60]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -26,15 +26,18 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group", "_speedMode"];
+        params ["_group"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setSpeedMode _speedMode;
-            {_x setVariable [QGVAR(forceMove), nil];} foreach (units _group);
             _group setVariable [QGVAR(tacticsTask), nil];
+            {
+                _x setVariable [QGVAR(forceMove), nil];
+                _x doFollow leader _x;
+                _x forceSpeed -1;
+            } foreach (units _group);
         };
     },
-    [_group, speedMode _unit],
+    _group,
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -85,14 +88,11 @@ _group setFormDir (_unit getDir _target);
 // execute function
 [_cycle, _units, _buildings] call FUNC(doGroupAssault);
 
-// set speedmode    // experiment with this! - nkenny
-//_unit setSpeedMode "FULL";
-
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
     private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
-    private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor),"hd_objective"] call EFUNC(main,dotMarker);
+    private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor),"hd_join"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _target);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;

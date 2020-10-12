@@ -32,7 +32,7 @@ private _distance = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // CQB or suppress
-if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.9)}) then {
+if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
 
     // CQB movement mode
     _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];

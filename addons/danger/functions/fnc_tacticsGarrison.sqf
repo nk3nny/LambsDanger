@@ -17,23 +17,21 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_delay", 90]];
+params ["_unit", "_target", ["_units", []], ["_delay", 180]];
 
 private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group", "_speedMode", "_enableAttack", "_formation"];
+        params ["_group", "_enableAttack", "_formation"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group enableAttack _enableAttack;
-            _group setSpeedMode _speedMode;
-            _group setFormation _formation;
             _group setVariable [QGVAR(tacticsTask), nil];
-            {_x doFollow leader _x} foreach units _group;
+            _group enableAttack _enableAttack;
+            _group setFormation _formation;
         };
     },
-    [_group, speedMode _unit, attackEnabled _unit, formation _unit],
+    [_group, attackEnabled _unit, formation _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -57,14 +55,13 @@ _target = _target call CBA_fnc_getPos;
 } foreach _units;
 
 // buildings
-private _buildings = [_target, 9, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, 25, true, false] call EFUNC(main,findBuildings);
 _buildings = [_buildings, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;    // ~ top to bottom
-if (_buildings isEqualTo []) exitWith {false};
-[_buildings, true] call CBA_fnc_shuffle;
+_buildings append ((nearestTerrainObjects [_target, [], 25, false, true]) apply {_x getPos [1.2, random 360]});
 
 // set speed and enableAttack
+_unit setBehaviour "COMBAT";
 _unit setFormation "FILE";
-_unit setSpeedMode "LIMITED";
 _unit enableAttack false;
 
 // leader ~ rally animation here
@@ -80,16 +77,31 @@ _unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_func
 // set group task
 _group setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
 
-// updates CQB group variable
-_group setVariable [QGVAR(groupMemory), _buildings select {_unit distance2D _x < 25}];
+// clear CQB group variable
+_group setVariable [QGVAR(groupMemory), []];
+
+// failsafe
+if (_buildings isEqualTo []) exitWith {
+    {_x doFollow leader _x} foreach _units;
+};
 
 // execute
 {
     private _pos = if (_buildings isEqualTo []) then {_target} else {_buildings deleteAt 0};
     doStop _x;
     _x doMove _pos;
-    _unit setDestination [_pos, "FORMATION PLANNED", true];
+    _x setDestination [_pos, "FORMATION PLANNED", true];
     _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
+    [
+        {
+            params ["_unit"];
+            unitReady _unit
+        }, {
+            params ["_unit", "_pos"];
+            if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
+            doStop _unit;
+        }, [_x, _pos], 10
+    ] call CBA_fnc_waitUntilAndExecute;
 } forEach _units;
 
 // debug

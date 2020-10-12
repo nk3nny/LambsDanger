@@ -33,7 +33,7 @@ _cycle = _cycle - 1;
     _x setSuppression 0;
 
     // manoeuvre
-    _x forceSpeed 2;
+    _x forceSpeed ([2, 4] select {getSuppression _x > 0 || {_x distance _targetPos < 30}});
     _x setUnitPosWeak "UP";
     _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
     _x setVariable [QGVAR(forceMove), true];
@@ -44,6 +44,6 @@ if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
         {_this call FUNC(doGroupAssault)},
         [_cycle, _units, _pos],
-        8
+        8 + random 4
     ] call CBA_fnc_waitAndExecute;
 };

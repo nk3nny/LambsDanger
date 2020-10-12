@@ -24,6 +24,12 @@ params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], [
 // find target
 _target = _target call CBA_fnc_getPos;
 
+// check CQB ~ exit if in close combat other functions will do the work - nkenny
+if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
+    [_unit, _target] call FUNC(tacticsAssault);
+    false
+};
+
 private _group = group _unit;
 // reset tactics
 [
@@ -31,8 +37,8 @@ private _group = group _unit;
         params ["_group", "_speedMode"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setSpeedMode _speedMode;
             _group setVariable [QGVAR(tacticsTask), nil];
+            _group setSpeedMode _speedMode;
         };
     },
     [_group, speedMode _unit],
@@ -41,12 +47,6 @@ private _group = group _unit;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
-
-// check CQB ~ exit if in close combat other functions will do the work - nkenny
-if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
-    [_unit, _target] call FUNC(tacticsGarrison);
-    false
-};
 
 // find units
 if (_units isEqualTo []) then {
@@ -90,7 +90,7 @@ _group setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)]
 [_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call EFUNC(main,doCallout);
+[_unit, "combat", "flank", 125] call EFUNC(main,doCallout);
 
 // ready group
 _group setFormDir (_unit getDir _target);
@@ -102,8 +102,8 @@ _unit doMove _overwatch;
 // function
 [_cycle, _units, _vehicles, _pos, _overwatch] call FUNC(doGroupFlank);
 
-// set speedmode    // NB: check this one - nkenny
-//_unit setSpeedMode "FULL";
+// set speedmode
+_unit setSpeedMode "FULL";
 
 // debug
 if (EGVAR(main,debug_functions)) then {
