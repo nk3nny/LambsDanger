@@ -182,13 +182,16 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 // no plan ~ exit with no executable plan
 if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 3}) exitWith {
 
-    // callout
-    if (count units _unit > 2) then {[_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);};
+    // callout for groups
+    if (count units _unit > 2) then {
+        
+        [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
 
-    // has taken casualties: hide
-    private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
-    if (_alive != -1) then {
-        [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
+        // has taken casualties: hide
+        private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
+        if (_alive != -1) then {
+            [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
+        };
     };
 
     // check new random direction if no enemy found!

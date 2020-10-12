@@ -46,15 +46,15 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debu
 private _vehicle = vehicle _unit;
 private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
 
-// update information
-if (_attack && {RND(0.4)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
-
 // vehicle type ~ Artillery
 private _artillery = _vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
     _vehicle setVariable [QGVAR(isArtillery), true];
     _timeout + 20
 };
+
+// update information
+if (_attack && {RND(0.4)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
 
 // variable
 _vehicle setVariable [QGVAR(isArtillery), false];
