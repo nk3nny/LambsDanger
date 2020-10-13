@@ -2,7 +2,7 @@
 /*%FSM<HEAD>*/
 /*
 item0[] = {"LAMBS_DANGER___v2",-1,250,-1225.000000,-425.000000,-875.000000,-175.000000,0.000000,"LAMBS DANGER - v2.5.0  ~ civilian fsm" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "8 - DCCanFire // can fire weapon ~nkenny" \n "9 - DCBulletClose // bullet whizzes by head - nkenny"};
-item1[] = {"Init",0,250,-825.000000,-375.000000,-700.000000,-325.000000,0.000000,"Init"};
+item1[] = {"Init",0,4346,-825.000000,-375.000000,-700.000000,-325.000000,0.000000,"Init"};
 item2[] = {"End",1,250,150.000000,500.000000,250.000000,550.000000,0.000000,"End"};
 item3[] = {"Causes__4__7__9",4,218,-840.000000,-60.000000,-700.000000,0.000000,4.000000,"Causes:" \n "4, 7, 9"};
 item4[] = {"",7,210,-1454.000000,-141.500000,-1446.000000,-133.500000,0.000000,""};
@@ -180,8 +180,8 @@ link63[] = {55,2};
 link64[] = {56,54};
 link65[] = {57,2};
 link66[] = {58,4};
-globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-1101.830811,26.685059,1678.196533,363.825073,759,884,1};
-window[] = {2,-1,-1,-1,-1,1000,182,803,182,3,777};
+globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-1210.467041,-282.641602,405.575500,-675.054443,759,884,1};
+window[] = {2,-1,-1,-1,-1,870,52,673,52,3,777};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -233,7 +233,7 @@ class FSM
                          "	} forEach _queue;" \n
                          "" \n
                          "    // debug variable" \n
-                         "    _this setVariable [""lambs_main_FSMDangerCauseData"", [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy]];" \n
+                         "    _this setVariable [""lambs_main_FSMDangerCauseData"", [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy], lambs_main_debug_functions];" \n
                          "	_queue = [];" \n
                          "};" \n
                          "" \n
@@ -268,6 +268,7 @@ class FSM
                         name = "End";
                         itemno = 2;
                         init = /*%FSM<STATEINIT""">*/"// reset" \n
+                         "_this setVariable [""lambs_danger_currentTask "", nil, lambs_main_debug_functions];" \n
                          "_this setBehaviour _behaviour;" \n
                          "_this setVariable [""DC"", false];		// from vanilla. Uncertain what it does " \n
                          ""/*%FSM</STATEINIT""">*/;
@@ -355,7 +356,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Run";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/" random 1 > 0.4"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"random 1 > 0.4"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
