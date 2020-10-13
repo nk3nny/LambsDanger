@@ -46,6 +46,11 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
 
+    // callout!
+    if (RND(0.6) && {count (units _unit) > 1}) then {
+        [_unit, behaviour _unit, selectRandom ["Attack", "Attacking", "CoverMeE", "OnTheMove"], 75] call EFUNC(main,doCallout);
+    };
+
     // debug
     if (EGVAR(main,debug_functions)) then {
         ["%1 assaulting (sympathetic) (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
