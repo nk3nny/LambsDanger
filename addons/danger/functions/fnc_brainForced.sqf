@@ -5,17 +5,16 @@
  *
  * Arguments:
  * 0: Unit toggled <OBJECT>
- * 1: Action queue as it exists <ARRAY>
  *
  * Return Value:
  * Bool
  *
  * Example:
- * [_this, _queue] call lambs_danger_fnc_brainForced;
+ * [bob] call lambs_danger_fnc_brainForced;
  *
  * Public: No
 */
-params ["_unit", ["_queue", []]];
+params ["_unit"];
 
 // timeout
 private _timeout = time + 3;

@@ -27,7 +27,7 @@ private _group = group _unit;
     {
         params [["_group", grpNull]];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
         };
     },

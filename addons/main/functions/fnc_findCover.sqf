@@ -67,7 +67,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
 
         {
             if (_found) exitWith {};
-            if ((_dangerPos distance2d _x) > 20) then {
+            if ((_dangerPos distance2D _x) > 20) then {
                 _pos = _x;
                 _posASL = AGLToASL _x;
 

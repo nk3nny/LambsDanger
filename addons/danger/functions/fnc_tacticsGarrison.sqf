@@ -25,7 +25,7 @@ private _group = group _unit;
     {
         params ["_group", "_speedMode", "_enableAttack", "_formation"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group enableAttack _enableAttack;
             _group setSpeedMode _speedMode;
             _group setFormation _formation;
@@ -50,7 +50,7 @@ _target = _target call CBA_fnc_getPos;
 
 // clear attacks! ( https://community.bistudio.com/wiki/getAttackTarget )
 {
-    if (currentCommand _x isEqualTo "ATTACK") then {
+    if ((currentCommand _x) isEqualTo "ATTACK") then {
         _x forgetTarget (assignedTarget _x);
         _x doWatch objNull;
     };

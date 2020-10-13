@@ -17,4 +17,4 @@
 params ["_unit"];
 isFormationLeader _unit
 && {getSuppression _unit < 0.2}
-&& {!(group _unit getVariable [QGVAR(tactics), false])}
+&& {!(group _unit getVariable [QGVAR(isExecutingTactic), false])}

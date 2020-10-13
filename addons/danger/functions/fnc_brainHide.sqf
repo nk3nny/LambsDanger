@@ -12,7 +12,7 @@
  * bool
  *
  * Example:
- * [bob, 0, getpos angryBob] call lambs_danger_fnc_brainHide;
+ * [bob, 0, getPos angryBob] call lambs_danger_fnc_brainHide;
  *
  * Public: No
 */

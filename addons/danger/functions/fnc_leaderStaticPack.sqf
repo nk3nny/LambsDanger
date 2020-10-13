@@ -81,7 +81,7 @@ _assistant forceSpeed 24;
 _assistant setVariable [QGVAR(forceMove), true];
 _assistant setVariable [QGVAR(currentTask), "Pack Static Weapon", EGVAR(main,debug_functions)];
 _assistant setVariable [QGVAR(currentTarget), getPos _gunner, EGVAR(main,debug_functions)];
-_assistant doMove getposATL (vehicle _gunner);
+_assistant doMove getPosATL (vehicle _gunner);
 
 // do it
 [
@@ -111,7 +111,7 @@ _assistant doMove getposATL (vehicle _gunner);
         group _gunner setVariable [QGVAR(staticWeaponList), _weaponList, true];
 
     },
-    [_gunner, _assistant, getposATL _weapon, _EH], 8,
+    [_gunner, _assistant, getPosATL _weapon, _EH], 8,
     {
         // on timeout
         params ["_gunner", "_assistant", "", "_EH"];

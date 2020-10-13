@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_distance", 55]];
+params ["_unit"];
 
 // check disabled
 if (
@@ -38,7 +38,13 @@ _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 private _enemy = _unit findNearestEnemy _unit;
 
 // Abandon vehicles in need!
-if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicle _unit < 3} && {isTouchingGround vehicle _unit}) exitWith {
+if (
+    RND(0.5)
+    && { !_onFoot }
+    && { canUnloadInCombat (vehicle _unit) }
+    && { (speed (vehicle _unit)) < 3 }
+    && { isTouchingGround vehicle _unit }
+) exitWith {
     [_unit] orderGetIn false;
     _unit setSuppression 1;  // prevents instant laser aim - nkenny
     false
@@ -48,7 +54,7 @@ if (RND(0.5) && {!_onFoot} && {canUnloadInCombat vehicle _unit} && {speed vehicl
 if (!_onFoot) exitWith {false};
 
 // get destination
-private _pos = expectedDestination _unit select 0;
+private _pos = (expectedDestination _unit) select 0;
 
 // on foot and seen by enemy
 if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eyePos _enemy])}) then {
@@ -56,6 +62,11 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     // callout
     if (RND(0.4) && {getSuppression _unit > 0.5}) then {
         [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
+    };
+
+    // inside or under cover!
+    if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) exitWith {
+        doStop _unit;
     };
 
     // update pos
@@ -85,14 +96,7 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     if !(_buildings isEqualTo []) then {
         _unit doMove (_buildings select 0);
     };
-
 };
-
-// inside or under cover!
-if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) then {
-    doStop _unit;
-};
-
 
 // debug
 if (EGVAR(main,debug_functions)) then {

@@ -20,7 +20,11 @@ params ["_unit", ["_pos", [], [[]]]];
 // find cover
 if (_pos isEqualTo []) then {
     _pos = nearestTerrainObjects [_unit, [], GVAR(searchForHide), true, true]; //"BUSH", "TREE", "HIDE", "WALL", "FENCE"
-    _pos = [(_pos select 0) getPos [-1, _unit getDir (_pos select 0)], getpos _unit] select (_pos isEqualTo []);
+    _pos = if (_pos isEqualTo []) then {
+        getPos _unit
+    } else {
+        (_pos select 0) getPos [-1, _unit getDir (_pos select 0)]
+    };
 };
 
 // force anim

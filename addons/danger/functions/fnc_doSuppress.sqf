@@ -43,13 +43,13 @@ private _distance = (eyePos _unit vectorDistance _pos) min 280;
 _pos = ((eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo _pos) vectorMultiply _distance));
 
 // final range check
-if (!_override && {_distance < GVAR(minSuppression_range)}) exitWith {false};
+if (!_override && {_distance < GVAR(minSuppressionRange)}) exitWith {false};
 
-private _friendlys = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendly);
-if !(_friendlys isEqualTo []) exitWith {false};
+private _friendlies = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendlies);
+if !(_friendlies isEqualTo []) exitWith {false};
 
 // Callout!
-if (RND(0.4) && {count units _unit > 1}) then {
+if (RND(0.4) && {count (units _unit) > 1}) then {
     [_unit, "Combat", "suppress", 75] call EFUNC(main,doCallout);
 };
 

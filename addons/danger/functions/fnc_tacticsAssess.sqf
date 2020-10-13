@@ -22,7 +22,7 @@ private _group = group _unit;
 if (_group getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
 // set variable
-_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 300];
 
 // set current task
@@ -78,7 +78,7 @@ if !(_enemies isEqualTo []) then {
 
     // enemies within X meters of leader
     private _targets = _enemies findIf {
-        _unit distance2D _x < GVAR(CQB_range)
+        _unit distance2D _x < GVAR(cqbRange)
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
@@ -101,10 +101,10 @@ if !(_enemies isEqualTo []) then {
     // enemies away from buildings or below
     private _targets = _enemies findIf {
         _unit distance2D _x < 220
-        && {_unit distance2D _x > GVAR(CQB_range)}
+        && {_unit distance2D _x > GVAR(cqbRange)}
         && {
             ( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 10)
-            || { ([_x, GVAR(CQB_range) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
+            || { ([_x, GVAR(cqbRange) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
         };
     };
     if (_targets != -1) exitWith {
@@ -113,7 +113,7 @@ if !(_enemies isEqualTo []) then {
         _pos = _unit getHideFrom (_enemies select _targets);
 
         // mark enemy position for sympathetic fire
-        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getpos _x}];
+        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
     };
 
     // enemy inside buildings or fortified
@@ -133,7 +133,7 @@ if !(_enemies isEqualTo []) then {
         if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
 
         // visibility / distance / no cover
-        if !(terrainIntersectASL [eyepos _unit, eyepos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
+        if !(terrainIntersectASL [eyePos _unit, eyePos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
         if (_unit distance2D _pos < 120) then {_plan pushBack 3;}; // assault
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack 1;}; // flank
 
@@ -176,7 +176,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWi
         {
             params ["_group"];
             if (!isNull _group) then {
-                _group setVariable [QGVAR(tactics), nil];
+                _group setVariable [QGVAR(isExecutingTactic), nil];
                 _group setVariable [QGVAR(tacticsTask), nil];
             };
         },
