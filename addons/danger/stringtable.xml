@@ -172,7 +172,6 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
             <English>Disable units using flares for illumination </English>
             <Polish>Wyłącz autonomiczne używanie flar przez AI</Polish>
-            <English>Disable units using flares for illumination</English>
             <French>Désactiver l'utilisation des fusées éclairantes</French>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares_ToolTip">
