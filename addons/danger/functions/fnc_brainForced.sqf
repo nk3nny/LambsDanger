@@ -45,7 +45,7 @@ if (getSuppression _unit > 0) then {
 };
 
 // attack speed Future versions can use ( https://community.bistudio.com/wiki/getAttackTarget )
-if (currentCommand _unit isEqualTo "ATTACK") then {
+if ((currentCommand _unit) isEqualTo "ATTACK") then {
     [_unit, _unit findNearestEnemy _unit] call FUNC(assaultSpeed);
 };
 
