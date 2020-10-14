@@ -112,7 +112,7 @@ if !(_groupMemory isEqualTo [] || {currentCommand _unit isEqualTo "MOVE"}) exitW
     private _distance = _unit distance2D _pos;
 
     // CQB or suppress
-    if (RND(0.9) || {_distance < (GVAR(CQB_range) * 1.1)}) then {
+    if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
 
         // CQB movement mode
         _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];

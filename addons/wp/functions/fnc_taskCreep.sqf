@@ -44,7 +44,7 @@ private _fnc_creepOrders = {
     params ["_group", "_target"];
 
     // distance
-    private _newDist = (leader _group) distance2d _target;
+    private _newDist = (leader _group) distance2D _target;
     private _in_forest = ((selectBestPlaces [getPos (leader _group), 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1;
 
     // danger mode? go for it!
@@ -121,7 +121,7 @@ waitUntil {
     if (!isNull _target) then {
         [_group, _target] call _fnc_creepOrders;
         if (EGVAR(main,debug_functions)) then {
-            ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2d _target), ((selectBestPlaces [getPos leader _group, 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(main,debugLog);
+            ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupID _group, name _target, _group knowsAbout _target, floor (leader _group distance2D _target), ((selectBestPlaces [getPos leader _group, 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(main,debugLog);
         };
         sleep _cycle;
     } else {

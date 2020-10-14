@@ -13,7 +13,7 @@ if (_activated && local _logic) then {
         _error = LELSTRING(main,NoGroupSelected);
     };
 
-    if (_error == "") then {
+    if (_error isEqualTo "") then {
         [LSTRING(Module_DisableGroupAI_DisplayName),
             [
                 [LSTRING(Module_DisableGroupAI_SettingName), "BOOLEAN", LSTRING(Module_DisableGroupAI_SettingToolTip), _group getVariable [QGVAR(disableGroupAI), false], ""]

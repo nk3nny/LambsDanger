@@ -31,7 +31,7 @@ if ((_unit distance2D _pos) < 50) then { _pos = _predictedPos; };
 if (
     isNull _target
     || {!(_target isKindOf "Man")}
-    || {(_unit distance2D _predictedPos) < GVAR(minSuppression_range)}
+    || {(_unit distance2D _predictedPos) < GVAR(minSuppressionRange)}
     || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
@@ -46,7 +46,11 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_funct
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = [([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0, selectRandom _buildings] select (RND(0.4));
+    _buildings = if (RND(0.4)) then {
+        selectRandom _buildings
+    } else {
+        ([_buildings, [], {_unit distance _x}, "ASCEND"] call BIS_fnc_sortBy) select 0
+    };
     _buildings = _buildings buildingPos -1;
 };
 
@@ -66,11 +70,11 @@ _pos = (eyePos _unit) vectorAdd ((eyePos _unit vectorFromTo (AGLToASL (selectRan
 _vehicle doWatch ASLtoAGL _pos;
 
 // recheck
-if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
+if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppressionRange)) exitWith {false};
 
 // check for friendlies
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendly);
-if !(_friendlys isEqualTo []) exitWith {false};
+private _friendlies = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 3] call EFUNC(main,findNearbyFriendlies);
+if !(_friendlies isEqualTo []) exitWith {false};
 
 // suppression
 _vehicle doSuppressiveFire _pos;

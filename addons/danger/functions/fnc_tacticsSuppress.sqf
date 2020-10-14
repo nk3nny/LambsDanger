@@ -26,7 +26,7 @@ _target = _target call CBA_fnc_getPos;
     {
         params ["_group", "_enableAttack"];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group enableAttack _enableAttack;
             _group setVariable [QGVAR(tacticsTask), nil];
         };
@@ -65,7 +65,7 @@ _vehicles arrayIntersect _vehicles;
 
 // sort building locations
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
-_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true ]) apply { getPos _x });
+_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { getPos _x });
 _pos pushBack _target;
 
 // sort cycles

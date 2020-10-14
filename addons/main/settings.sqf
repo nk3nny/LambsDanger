@@ -64,24 +64,24 @@ _curCat = LSTRING(Settings_Debug);
     {
         {
             ctrlDelete _x;
-        } count GVAR(drawRectCacheGame) + GVAR(drawRectInUseGame)           // this is only called once
-        + GVAR(drawRectCacheEGSpectator) + GVAR(drawRectInUseEGSpectator)   // when the setting is changed
-        + GVAR(drawRectCacheCurator) + GVAR(drawRectInUseCurator);          // we can use the + operator here
+        } count GVAR(debug_drawRectCacheGame) + GVAR(debug_drawRectInUseGame)           // this is only called once
+        + GVAR(debug_drawRectCacheEGSpectator) + GVAR(debug_drawRectInUseEGSpectator)   // when the setting is changed
+        + GVAR(debug_drawRectCacheCurator) + GVAR(debug_drawRectInUseCurator);          // we can use the + operator here
 
-        GVAR(drawRectCacheGame) = [];
-        GVAR(drawRectInUseGame) = [];
+        GVAR(debug_drawRectCacheGame) = [];
+        GVAR(debug_drawRectInUseGame) = [];
 
-        GVAR(drawRectCacheEGSpectator) = [];
-        GVAR(drawRectInUseEGSpectator) = [];
+        GVAR(debug_drawRectCacheEGSpectator) = [];
+        GVAR(debug_drawRectInUseEGSpectator) = [];
 
-        GVAR(drawRectCacheCurator) = [];
-        GVAR(drawRectInUseCurator) = [];
+        GVAR(debug_drawRectCacheCurator) = [];
+        GVAR(debug_drawRectInUseCurator) = [];
     }
 ] call CBA_fnc_addSetting;
 
 // Debug Renderer for Expected Destination
 [
-    QGVAR(RenderExpectedDestination),
+    QGVAR(debug_RenderExpectedDestination),
     "CHECKBOX",
     [LSTRING(Settings_DebugDrawExpDest), LSTRING(Settings_DebugDrawExpDest_ToolTip)],
     [COMPONENT_NAME, _curCat],

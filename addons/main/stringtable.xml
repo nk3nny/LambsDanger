@@ -4,16 +4,19 @@
         <Key ID="STR_Lambs_Main_NoUnitSelected">
             <English>No Unit Selected</English>
             <German>Keine Einheit ausgewählt</German>
+            <Polish>Nie wybrano jednostki</Polish>
             <French>Aucune unité sélectionnée</French>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
             <German>Spieler sind keine gültige Auswahl</German>
+            <Polish>Gracze nie pasują do wybranej czynności</Polish>
             <French>Les joueurs ne sont pas des sélections valides</French>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
             <German>Keine Gruppe ausgewählt</German>
+            <Polish>Nie wybrano żadnej grupy</Polish>
             <French>Aucun groupe sélectionné</French>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
@@ -34,80 +37,96 @@
         <Key ID="STR_Lambs_Main_Settings_MainCat">
             <English>Settings</English>
             <German>Einstellungen</German>
+            <Polish>Ustawienia</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
             <German>Handzeichen deaktivieren</German>
+            <Polish>Wyłącz używanie przez AI gestów ręką</Polish>
             <French>Désactiver les signes de main</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
             <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
+            <Polish>Wyłącza używanie gestów ręką podczas reagowania na niebezpieczeństwo lub podczas wykonywania manewrów</Polish>
             <French>Les unités ne feront plus de signes de mains lorsqu'elles répondent à un danger ou effectuent des manœuvres.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
             <German>Rufe ausschalten</German>
+            <Polish>Wyłącz okrzyki</Polish>
             <French>Désactiver les appels d'unité</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
             <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
+            <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
             <French>Désactive les appels supplémentaires que font les unités en fonction des situations rencontrées.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
             <German>Debug</German>
+            <Polish>Debug</Polish>
             <French>Debogage</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
             <German>Debug FSM</German>
+            <Polish>Debug FSM</Polish>
             <French>Débogage FSM</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
             <German>Zeigt FSM Debug-Meldungen</German>
+            <Polish>Pokazuje komunikaty debugowania FSM</Polish>
             <French>Affiche les messages de débogage FSM.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
             <German>Debug Funktionen</German>
+            <Polish>Funkcje Debug</Polish>
             <French>Débogage des fonctions</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
             <German>Zeigt Debug-Meldungen für Funktionen</German>
+            <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
             <French>Affiche les messages de débogage des fonctions.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
             <German>Debug Zivilisten</German>
+            <Polish>Debug Civ</Polish>
             <French>Débogage des civils</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
             <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
+            <Polish>Pokazuje komunikaty debugowania FSM dla cywilów</Polish>
             <French>Affiche les messages de débogage des civils.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
             <German>Debug Zeichnen</German>
+            <Polish>Debug Draw</Polish>
             <French>Informations de débogage</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
             <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
+            <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
             <French>Affiche un texte 3d au-dessus des unités IA, donnant diverses informations concernant leur état.</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
             <German>Debug Erwartete Ankuftsposition zeichnen</German>
+            <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
             <French>Affichage des trajets planifiées</French>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
             <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
+            <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
             <French>Affiche les trajets prévus par les unités IA.</French>
         </Key>
     </Package>

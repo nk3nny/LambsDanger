@@ -19,7 +19,7 @@ params ["_unit", ["_pos", [0, 0, 0]]];
 
 // settings
 private _stance = stance _unit;
-private _dir = 360 - (_unit getRelDir _pos);
+private _dir = _unit getRelDir _pos;
 
 // dodge
 _unit setVariable [QGVAR(currentTask), "Dodge!", EGVAR(main,debug_functions)];
@@ -27,18 +27,18 @@ _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
-    [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir > 330), true] call EFUNC(main,doGesture);
-    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir > 330), "FORMATION PLANNED", false];
+    [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir < 330), true] call EFUNC(main,doGesture);
+    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir < 330), "FORMATION PLANNED", false];
     _stance
 };
 
 // ACE3 captive exit
 if (
     GVAR(disableAIImediateAction)
-    || {!(_unit checkAIFeature "MOVE")}
-    || {!(_unit checkAIFeature "PATH")}
-    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
-    || {_unit getVariable ["ace_captives_issurrendering", false]}
+    || { !(_unit checkAIFeature "MOVE") }
+    || { !(_unit checkAIFeature "PATH") }
+    || { _unit getVariable ["ace_captives_isHandcuffed", false] }
+    || { _unit getVariable ["ace_captives_isSurrendering", false] }
 ) exitWith {_stance};
 
 // callout
@@ -52,19 +52,19 @@ private _relPos = getPosASL _unit;
 private _anim = [];
 
 // move left
-if (_dir > 250 && { RND(0.1) }) then {
+if (_dir < 250 && { RND(0.1) }) then {
     _relPos = _unit getRelPos [2, -60];
     _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
 };
 
 // move right
-if (_dir < 80 && { RND(0.1) }) then {
+if (_dir > 80 && { RND(0.1) }) then {
     _relPos = _unit getRelPos [2, 60];
     _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };
 
 // move back
-if ((_dir > 320 || { _dir < 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
+if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
     _relPos = _unit getRelPos [1, 180];
     _anim pushBack (["WalkB", "WalkB"] select _suppression); //"FastB"
 };

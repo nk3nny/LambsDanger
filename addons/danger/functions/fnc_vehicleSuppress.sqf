@@ -25,7 +25,7 @@ _pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1
 
 // too close + high speed + height over ground
 if (
-    _unit distance2D _pos < GVAR(minSuppression_range)
+    _unit distance2D _pos < GVAR(minSuppressionRange)
     || {terrainIntersectASL [eyePos _unit, AGLtoASL _pos]}
     || {speed _vehicle > 12}
     || {(_pos select 2) > 45}
@@ -46,9 +46,9 @@ private _vis = lineIntersectsSurfaces [eyePos _unit, _pos, _unit, vehicle _unit,
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // recheck
-if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppression_range)) exitWith {false};
-private _friendlys = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendly);
-if !(_friendlys isEqualTo []) exitWith {false};
+if (_vehicle distance (ASLToAGL _pos) < GVAR(minSuppressionRange)) exitWith {false};
+private _friendlies = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendlies);
+if !(_friendlies isEqualTo []) exitWith {false};
 
 // do it
 _vehicle doSuppressiveFire _pos;

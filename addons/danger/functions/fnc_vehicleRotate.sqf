@@ -16,7 +16,7 @@
  * success
  *
  * Example:
- * [bob, 100] call lambs_danger_fnc_vehicleRotate;
+ * [bob, angryJoe] call lambs_danger_fnc_vehicleRotate;
  *
  * Public: No
 */
@@ -30,7 +30,7 @@ if (_target isEqualTo []) then {
 if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {true};
 
 // CQB tweak -- look instead
-if (_unit distance _target < GVAR(CQB_range)) exitWith {
+if (_unit distance _target < GVAR(cqbRange)) exitWith {
     (vehicle _unit) doWatch _target;
     true
 };
@@ -40,14 +40,13 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functi
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    [_unit, _target call cba_fnc_getPos] call FUNC(vehicleSuppress);
+    [_unit, _target call CBA_fnc_getPos] call FUNC(vehicleSuppress);
     true
 };
 
 // settings
 private _pos = [];
 private _min = 20;      // Minimum range
-private _i = 0;         // iterations
 
 for "_i" from 0 to 5 do {
     _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
