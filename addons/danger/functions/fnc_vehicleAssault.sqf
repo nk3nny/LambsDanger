@@ -26,7 +26,7 @@ private _vehicle = vehicle _unit;
 if (
     isNull _target
     || {!canFire _vehicle}
-    || {(_unit distance2D _predictedPos) < GVAR(minSuppressionRange)}
+    || {(_unit distance2D _pos) < GVAR(minSuppressionRange)}
     || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 

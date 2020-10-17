@@ -52,7 +52,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-_buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
 _buildings append ((_unit targets [true, 10, [], 0, _target]) apply {_unit getHideFrom _x});
 _buildings pushBack _target;
 
