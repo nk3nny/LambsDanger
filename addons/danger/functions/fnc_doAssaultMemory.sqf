@@ -18,8 +18,9 @@
 params ["_unit", ["_groupMemory", []]];
 
 // check it
+private _group = group _unit;
 if (_groupMemory isEqualTo []) then {
-    _groupMemory = (group _unit) getVariable [QGVAR(groupMemory)];
+    _groupMemory = _group getVariable [QGVAR(groupMemory)];
 };
 
 // sort it
@@ -32,7 +33,7 @@ private _distance = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // CQB or suppress
-if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
+if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.2)}) then {
 
     // CQB movement mode
     _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
@@ -40,7 +41,7 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
 
     // execute CQB move
     _unit doMove _pos;
-    _unit setDestination [_pos, "FORMATION PLANNED", true];
+    _unit setDestination [_pos, "FORMATION PLANNED", _distance < 20];
 
     // variables
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
@@ -58,9 +59,7 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
         _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
         [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
     };
-
 } else {
-
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
@@ -72,7 +71,7 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.1)}) then {
 
 // update variable
 if (RND(0.95) || {_distance < 5}) then {_groupMemory deleteAt 0;};
-(group _unit) setVariable [QGVAR(groupMemory), _groupMemory, false];
+_group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
 // end
 true

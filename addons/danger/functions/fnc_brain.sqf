@@ -46,6 +46,7 @@ params ["_unit", ["_queue", []]];
 
 // init ~ immediate action, hide, engage, assess
 private _return = [false, false, false, false];
+private _group = group _unit;
 
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
@@ -98,7 +99,7 @@ if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_EXPLOSION, DANGER_SCREAM] || _
 
 // engage actions   // should check all friendly sides?
 if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_FIRE, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
-    _return set [ACTION_ENGAGE, !(side (group _unit) isEqualTo side (group _dangerCausedBy))];
+    _return set [ACTION_ENGAGE, !((side _group) isEqualTo side (group _dangerCausedBy))];
     _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
 };
 
@@ -108,8 +109,7 @@ if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY]) then {
 };
 
 // gesture + share information
-private _group = group _unit;
-if ( RND(0.6) && { (_group getVariable [QGVAR(contact), 0]) < time } ) then {
+if (RND(0.6) && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
     [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
     [_unit, _dangerCausedBy, GVAR(radioShout), true] call FUNC(shareInformation);

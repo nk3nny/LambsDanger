@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_delay", 60]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 15], ["_delay", 90]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -26,10 +26,11 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group"];
+        params ["_group", "_enableAttack"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
+            _group enableAttack _enableAttack;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x doFollow leader _x;
@@ -37,7 +38,7 @@ private _group = group _unit;
             } foreach (units _group);
         };
     },
-    _group,
+    [_group, attackEnabled _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -50,8 +51,9 @@ if (_units isEqualTo []) then {
 };
 if (_units isEqualTo []) exitWith {false};
 
-// sort building locations
-private _buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
+// sort potential targets
+_buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
+_buildings append ((_unit targets [true, 10, [], 0, _target]) apply {_unit getHideFrom _x});
 _buildings pushBack _target;
 
 // set tasks
@@ -84,6 +86,7 @@ if (_unit distance2D _target > 25) then {
 
 // ready group
 _group setFormDir (_unit getDir _target);
+_units doWatch _target;
 
 // execute function
 [_cycle, _units, _buildings] call FUNC(doGroupAssault);

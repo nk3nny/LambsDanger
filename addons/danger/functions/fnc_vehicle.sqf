@@ -8,18 +8,22 @@
  * 2: current action queue <ARRAY>
  *
  * Return Value:
- * number - timeout for FSM
+ * timeout and danger result for FSM
  *
  * Example:
- * [bob, angryBob] call lambs_danger_fnc_brainReact;
+ * [bob, []] call lambs_danger_fnc_vehicle;
  *
  * Public: No
 */
-params ["_unit", ["_queue", []], ["_timeout", 5]];
+params ["_unit", ["_queue", []]];
+
+// timeout
+private _timeout = time + 5;
 
 // commander
-if !(effectiveCommander vehicle _unit isEqualTo _unit) exitWith {_timeout};
-if (_queue isEqualTo []) exitWith {_timeout};
+if (_queue isEqualTo []|| {!(effectiveCommander vehicle _unit isEqualTo _unit)}) exitWith {
+    [_timeout, 10, getPosASL _unit, time + GVAR(dangerUntil), objNull]
+};
 
 // modify priorities ~ consider adding vehicle specific changes!
 private _priorities = _unit call FUNC(brainAdjust);
@@ -44,17 +48,14 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debu
 
 // is it an attack?
 private _vehicle = vehicle _unit;
-private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
+private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
 
 // vehicle type ~ Artillery
 private _artillery = _vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
     _vehicle setVariable [QGVAR(isArtillery), true];
-    _timeout + 20
+    [_timeout + 20] + _causeArray
 };
-
-// update information
-if (_attack && {RND(0.4)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
 
 // variable
 _vehicle setVariable [QGVAR(isArtillery), false];
@@ -75,12 +76,32 @@ if (_static) exitWith {
     };
 
     // end
-    _timeout + 15
+    [_timeout + 3] + _causeArray
 };
+
+// vehicle type ~ Armed Car
+private _car = _vehicle isKindOf "Car_F" && {!(([typeOf _vehicle, false] call BIS_fnc_allTurrets) isEqualTo [])};
+if (_car && {_attack}) exitWith {
+
+    // suppression
+    if (speed _vehicle < 8) then {
+        _vehicle doWatch _dangerPos;
+        [{_this call FUNC(vehicleSuppress)}, [_unit, (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]], random 1] call CBA_fnc_waitAndExecute;
+    };
+
+    // end
+    [_timeout] + _causeArray
+};
+
+// update information
+if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
 
 // vehicle type ~ Armoured vehicle
 private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F"};
 if (_armored && {_attack}) exitWith {
+    // delay
+    private _delay = 2 + random 9;
+
     // tank assault
     if (speed _vehicle < 8) then {
         // rotate + suppression (internal to vehicle rotate)
@@ -100,36 +121,23 @@ if (_armored && {_attack}) exitWith {
     if (!isNull _dangerCausedBy) then {
         [
             {
-                params ["_vehicle", "", "_health"];
-                _vehicle distance2D _vehicle < 20
-                || {_health > damage _vehicle}
+                params ["_vehicle", "_dangerCausedBy", "_damage"];
+                _vehicle distance2D _dangerCausedBy < 18
+                || {_damage > (damage _vehicle + 0.1)}
             },
             {
                 params ["_vehicle", "_dangerCausedBy"];
-                _vehicle call FUNC(vehicleJink);
+                [effectiveCommander _vehicle] call FUNC(vehicleJink);
                 if (_dangerCausedBy call EFUNC(main,isAlive)) then {_vehicle doWatch _dangerCausedBy;};
             },
-            [_vehicle, _dangerCausedBy, damage _vehicle + 0.1],
-            10
+            [_vehicle, _dangerCausedBy, damage _vehicle],
+            5 +_delay
         ] call CBA_fnc_waitUntilAndExecute;
     };
 
     // timeout
-    _timeout + 2 + random 9
-};
-
-// vehicle type ~ Armed Car
-private _car = _vehicle isKindOf "Car_F" && {!(([typeOf _vehicle, false] call BIS_fnc_allTurrets) isEqualTo [])};
-if (_car && {_attack}) exitWith {
-
-    // suppression
-    if (speed _vehicle < 8) then {
-        [{_this call FUNC(vehicleSuppress)}, [_unit, (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]], random 1] call CBA_fnc_waitAndExecute;
-    };
-
-    // end
-    _timeout + 8
+    [_timeout + _delay] + _causeArray;
 };
 
 // end
-_timeout
+[_timeout] + _causeArray

@@ -6,7 +6,7 @@
  * Arguments:
  * 0: unit doing the avaluation <OBJECT>
  * 1: type of data <NUMBER>
- * 2: position of danger<OBJECT>
+ * 2: position of danger <OBJECT>
  *
  * Return Value:
  * bool

@@ -11,7 +11,7 @@
  * timeout
  *
  * Example:
- * [bob, angryBob] call lambs_danger_fnc_brainReact;
+ * [bob, getPos angryBob] call lambs_danger_fnc_brainReact;
  *
  * Public: No
 */

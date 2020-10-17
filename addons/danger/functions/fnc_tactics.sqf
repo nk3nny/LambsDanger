@@ -32,7 +32,7 @@ private _contactState = _group getVariable [QGVAR(contact), 0];
 if (_contactState < time) exitWith {[_unit, _target] call FUNC(tacticsContact)};
 
 // ai profiles ~ here is where AI profiles will be extrapolated - nkenny
-if (_unit call FUNC(tacticsProfiles)) exitWith {true};
+// if (_unit call FUNC(tacticsProfiles)) exitWith {true};
 
 // Leader assessment
 if (!isPlayer (leader _unit)) then {_unit call FUNC(tacticsAssess);};

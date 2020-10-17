@@ -26,8 +26,11 @@ _cycle = _cycle - 1;
     private _targetPos = selectRandom _pos;
 
     // setpos
-    _x doMove _targetPos;
-    _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
+    if !(currentCommand _x isEqualTo "MOVE") then {
+        _x doMove _targetPos;
+        _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
+        _x doWatch _targetPos;
+    };
 
     // manoeuvre
     _x forceSpeed ([2, 4] select (getSuppression _x > 0 || {_x distance _targetPos < 35}));
@@ -45,6 +48,6 @@ if (_cycle > 0 && {!(_units isEqualTo [])}) then {
     [
         {_this call FUNC(doGroupAssault)},
         [_cycle, _units, _pos],
-        8 + random 4
+        5
     ] call CBA_fnc_waitAndExecute;
 };

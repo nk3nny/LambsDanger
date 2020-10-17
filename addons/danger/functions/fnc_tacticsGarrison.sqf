@@ -47,10 +47,10 @@ if (_units isEqualTo []) exitWith {false};
 // sort target
 _target = _target call CBA_fnc_getPos;
 
-// clear attacks! ( https://community.bistudio.com/wiki/getAttackTarget )
+// clear attacks!
 {
     if ((currentCommand _x) isEqualTo "ATTACK") then {
-        _x forgetTarget (assignedTarget _x);
+        _x forgetTarget (getAttackTarget _x);
     };
 } foreach _units;
 

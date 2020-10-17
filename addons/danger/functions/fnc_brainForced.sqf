@@ -44,9 +44,16 @@ if (getSuppression _unit > 0) then {
     _unit setUnitPosWeak "MIDDLE";
 };
 
-// attack speed Future versions can use ( https://community.bistudio.com/wiki/getAttackTarget )
+// attack speed
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
-    [_unit, _unit findNearestEnemy _unit] call FUNC(assaultSpeed);
+    private _attackTarget = getAttackTarget _unit;
+    // dodge if pressed
+    if (getSuppression _unit > 0.8) exitWith {
+        [_unit, getPosASL _attackTarget] call FUNC(doDodge);
+        _timeout = time + random 1;
+    };
+    // tactical movement if not
+    [_unit, _attackTarget] call FUNC(assaultSpeed);
 };
 
 // end

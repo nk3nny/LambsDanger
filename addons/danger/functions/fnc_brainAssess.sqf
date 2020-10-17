@@ -98,7 +98,7 @@ if (!_indoor && {speed _unit < 1}) exitWith {
 if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
 
     // get building positions
-    private _buildingPos = [_unit, 21, true, true] call EFUNC(main,findBuildings);
+    private _buildingPos = [_unit, 21, true, true, true] call EFUNC(main,findBuildings);
     [_buildingPos, true] call CBA_fnc_shuffle;
 
     // Check if there is a closer building position
