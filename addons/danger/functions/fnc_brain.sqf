@@ -36,6 +36,7 @@
         Assess actions
         5 DeadBodyGroup
         6 DeadBody
+        10 Assess
 */
 #define ACTION_IMMEDIATE 0
 #define ACTION_HIDE 1
@@ -50,7 +51,7 @@ private _group = group _unit;
 
 // empty queue ~ exit with assess!
 if (_queue isEqualTo []) exitWith {
-    private _causeArray = [10, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit];
+    private _causeArray = [DANGER_ASSESS, getPosASL _unit, time + GVAR(dangerUntil), assignedTarget _unit];
     _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];    // debug variable
     [false, false, false, true, _causeArray]
 };

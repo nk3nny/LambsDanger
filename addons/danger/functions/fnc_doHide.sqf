@@ -54,7 +54,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     // execute move
     _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
     if (EGVAR(main,debug_functions)) then {
-        ["%1 hide in building", side _unit] call EFUNC(main,debugLog);
+        ["%1 hide in building (%2 - positions %3)", side _unit, name _unit, count _buildings] call EFUNC(main,debugLog);
     };
 } else {
     // hide
@@ -80,7 +80,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     // execute move
     _unit doMove _targetPos;
     if (EGVAR(main,debug_functions)) then {
-        ["%1 hide in bush", side _unit] call EFUNC(main,debugLog);
+        ["%1 hide in bush (%2)", side _unit, name _unit] call EFUNC(main,debugLog);
     };
 };
 

@@ -17,7 +17,7 @@
 params ["_unit"];
 
 // timeout
-private _timeout = time + 3;
+private _timeout = time + 2;
 
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
@@ -27,16 +27,18 @@ if !(_unit call EFUNC(main,isAlive)) exitWith {
 // fleeing
 if (fleeing _unit) exitWith {
     [_unit] call FUNC(doFleeing);
-    _timeout + 1
+    _timeout
 };
 
 // vehicles are simpler
-if (!isNull objectParent _unit) exitWith {_timeout + 6};
+if (!isNull objectParent _unit) exitWith {
+    _timeout + 6
+};
 
 // suppression -- high go prone
 if (getSuppression _unit > 0.9) exitWith {
     _unit setUnitPosWeak "DOWN";
-    _timeout + 1
+    _timeout
 };
 
 // mid -- go crouched
@@ -46,7 +48,7 @@ if (getSuppression _unit > 0) then {
 
 // attack speed
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
-    private _attackTarget = getAttackTarget _unit;
+    private _attackTarget = _unit findNearestEnemy _unit;
     // dodge if pressed
     if (getSuppression _unit > 0.8) exitWith {
         [_unit, getPosASL _attackTarget] call FUNC(doDodge);

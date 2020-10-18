@@ -30,7 +30,7 @@ private _timeout = time + 3;
 
 // stopped units stay put   // || {currentCommand _unit isEqualTo "MOVE"}
 if (stopped _unit) exitWith {
-    _timeout + random 4
+    _timeout
 };
 
 // enemy
@@ -73,7 +73,7 @@ if (_type isEqualTo 6) exitWith {
 // Sympathetic CQB/Suppressive fire
 if !(_groupMemory isEqualTo []) exitWith {
     [_unit, _groupMemory] call FUNC(doAssaultMemory);
-    _timeout + 6
+    _timeout + 4
 };
 
 // check self
@@ -95,7 +95,7 @@ if (!_indoor && {speed _unit < 1}) exitWith {
 };
 
 // building
-if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
+if (_indoor && {RND(GVAR(indoorMove))}) then {
 
     // get building positions
     private _buildingPos = [_unit, 21, true, true, true] call EFUNC(main,findBuildings);
@@ -113,9 +113,6 @@ if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
         // stay indoors
         _unit setVariable [QGVAR(currentTask), "Stay inside (assessing)", EGVAR(main,debug_functions)];
     };
-
-    // end
-    _timeout + 5
 };
 
 // end

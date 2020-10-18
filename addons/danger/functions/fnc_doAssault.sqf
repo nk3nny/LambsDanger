@@ -22,7 +22,7 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", EGVAR(main,debug_functions)];
 
 // settings
-private _rangeBuilding = linearConversion [ 0, 200, _unit distance2D _target, 2.5, 22, true];
+private _rangeBuilding = linearConversion [ 0, 150, _unit distance2D _target, 3.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, true] call EFUNC(main,findBuildings);
@@ -33,7 +33,7 @@ private _pos = if (_buildings isEqualTo []) then {
     // unit is indoor and happy
     if (_unit call EFUNC(main,isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
-        _unit getPos [random 1 + 0.2, _unit getDir _target]
+        getPos _unit
     };
 
     // select
@@ -62,10 +62,10 @@ _unit setDestination [_pos, "FORMATION PLANNED", true];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 assaulting (%2 @ %3m)", side _unit, name _unit, round (_unit distance (_unit getHideFrom _target))] call EFUNC(main,debugLog);
-    private _sphere = createSimpleObject ["Sign_Sphere10cm_F", ATLtoASL (_unit getHideFrom _target), true];
+    ["%1 assaulting %2(%3 @ %4m)", side _unit, ["Building ", ""] select (_buildings isEqualTo []), name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
+    private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
-    [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
+    [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;
 };
 
 // end

@@ -25,7 +25,7 @@ if (isNil QGVAR(fsmPriorities)) then {
 
 // FSM setting ~ minimum time for danger to last
 if (isNil QGVAR(dangerUntil)) then {
-    GVAR(dangerUntil) = 15;
+    GVAR(dangerUntil) = 3;
 };
 
 // FSM setting ~ range to search for hide and cover

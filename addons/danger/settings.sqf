@@ -246,6 +246,10 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     1
 ] call CBA_fnc_addSetting;
 
+/*
+TEMPORARILY DISABLED FOR VERSION 2.5 RELEASE
+WAITING BETTER OR OTHER SOLUTION
+nkenny
 
 // Configures CQC formations
 _curCat = LSTRING(Settings_CQBFormationsCat);
@@ -278,3 +282,5 @@ DFUNC(UpdateCQBFormations) = {
         1, _code
     ] call CBA_fnc_addSetting;
 } forEach GVAR(allPossibleFormations);
+
+*/
