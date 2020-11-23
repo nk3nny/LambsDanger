@@ -4,8 +4,8 @@
  * Unit performs a mutual assault or suppressive fire on a location listed in the group "memory"
  *
  * Arguments:
- * 0: Unit assaulting <OBJECT>
- * 1: Group memory <ARRAY>
+ * 0: unit assaulting <OBJECT>
+ * 1: group memory <ARRAY>
  *
  * Return Value:
  * boolean
@@ -23,9 +23,16 @@ if (_groupMemory isEqualTo []) then {
     _groupMemory = _group getVariable [QGVAR(groupMemory)];
 };
 
-// sort it
-_groupMemory = _groupMemory select {_unit distance2D _x < 200 && {_unit distance2D _x > 3}};
-if (_groupMemory isEqualTo []) exitWith {_unit doFollow leader _unit; false};
+// check if stopped
+if (!(_unit checkAIFeature "PATH")) exitWith {false};
+
+// exit or sort it!
+_groupMemory = _groupMemory select {(leader _unit) distance _x < 200 && {_unit distance2D _x > 2}};
+if (_groupMemory isEqualTo []) exitWith {
+    _group setVariable [QGVAR(groupMemory), _groupMemory, false];
+    _unit doFollow leader _unit;
+    false
+};
 
 // check
 private _pos = _groupMemory select 0;
@@ -33,22 +40,22 @@ private _distance = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // CQB or suppress
-if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.2)}) then {
+if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.8)}) then {
 
     // CQB movement mode
     _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-    _unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
+    _unit forceSpeed 4;
 
     // execute CQB move
     _unit doMove _pos;
-    _unit setDestination [_pos, "FORMATION PLANNED", _distance < 20];
+    _unit setDestination [_pos, "FORMATION PLANNED", _distance < 10];
 
     // variables
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
 
     // callout!
-    if (RND(0.6) && {count (units _unit) > 1}) then {
+    if (RND(0.9) && {count (units _unit) > 1}) then {
         [_unit, behaviour _unit, selectRandom ["Attack", "Attacking", "CoverMeE", "OnTheMove"], 75] call EFUNC(main,doCallout);
     };
 
@@ -63,10 +70,9 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 1.2)}) then {
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0, 0, 1.2], true] call FUNC(doSuppress);
+    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 1.2], true] call FUNC(doSuppress);
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
-
 };
 
 // update variable

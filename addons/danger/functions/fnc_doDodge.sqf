@@ -4,8 +4,8 @@
  * Plays an immediate reaction unit getting hit (Internal to FSM)
  *
  * Arguments:
- * 0: Unit hit <OBJECT>
- * 1: Position of dange <ARRAY>
+ * 0: unit hit <OBJECT>
+ * 1: position of dange <ARRAY>
  *
  * Return Value:
  * stance <STRING>
@@ -53,31 +53,34 @@ private _anim = [];
 
 // move left
 if (_dir < 250 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [2, -60];
+    _relPos = _unit getRelPos [3, -60];
     _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
 };
 
 // move right
 if (_dir > 80 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [2, 60];
+    _relPos = _unit getRelPos [3, 60];
     _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };
 
 // move back
-if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 20 }) then {
-    _relPos = _unit getRelPos [1, 180];
-    _anim pushBack (["WalkB", "WalkB"] select _suppression); //"FastB"
+if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 3 }) then {
+    _relPos = _unit getRelPos [3, 180];
+    _anim pushBack (["WalkB", "TactB"] select _suppression); //"FastB"
 };
 
 // check
 if (_anim isEqualTo []) then {
     _relPos = _unit getRelPos [3, 0];
-    _anim pushBack (["WalkF", "WalkF"] select _suppression); //FastF
+    _anim pushBack (["WalkF", "TactF"] select _suppression); //FastF
 };
 
 // otherwise rush left or right
-_unit setDestination [_relPos, "FORMATION PLANNED", false];    // <-- check to see if this fixes running in place bug. - nk
+_unit setDestination [_relPos, "FORMATION PLANNED", false];
 [_unit, _anim, true] call EFUNC(main,doGesture);
+
+// drop stance
+if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
 
 // end
 _stance

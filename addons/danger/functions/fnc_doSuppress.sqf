@@ -4,9 +4,9 @@
  * Unit performs suppressive fire on target location
  *
  * Arguments:
- * 0: Unit suppressing <OBJECT>
- * 1: Target position <ARRAY> (ASL position)
- * 2: Override target search <BOOL>
+ * 0: unit suppressing <OBJECT>
+ * 1: target position <ARRAY> (ASL position)
+ * 2: override target search <BOOL>
  *
  * Return Value:
  * success

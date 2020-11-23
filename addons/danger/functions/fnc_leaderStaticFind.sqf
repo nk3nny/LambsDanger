@@ -4,8 +4,8 @@
  * Find and man nearby static weapons
  *
  * Arguments:
- * 0: Units <ARRAY>
- * 1: Unit leader <OBJECT>
+ * 0: units <ARRAY>
+ * 1: unit leader <OBJECT>
  *
  * Return Value:
  * units in array

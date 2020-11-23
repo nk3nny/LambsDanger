@@ -4,9 +4,9 @@
  * Deploy static weapons
  *
  * Arguments:
- * 0: Units <ARRAY>
- * 1: Danger pos <ARRAY>
- * 2: Position to deploy weapon <ARRAY>
+ * 0: units <ARRAY>
+ * 1: danger pos <ARRAY>
+ * 2: oosition to deploy weapon <ARRAY>
  *
  * Return Value:
  * units in array

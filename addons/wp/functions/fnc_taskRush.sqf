@@ -66,7 +66,6 @@ private _fnc_rushOrders = {
     {
         _x setUnitPos "UP";
         _x doMove (getPosATL _target);
-        //_x forceSpeed ([_x, _target] call EFUNC(danger,assaultSpeed));
         true
     } count (units _group);
     _group enableGunLights "forceOn";

@@ -4,16 +4,16 @@
  * Group garrisons buildings near enemies!
  *
  * Arguments:
- * 0: Unit checked <OBJECT>
- * 1: Unit being attacked <OBJECT>
- * 2: Units list <ARRAY>, default is blank
- * 2: Time until tactics is reset, default 30s <NUMBERS>
+ * 0: group leader <OBJECT>
+ * 1: group target <OBJECT> or position <ARRAY>
+ * 2: units in group, default all <ARRAY>
+ * 3: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * Bool
  *
  * Example:
- * [bob, angryBob] call liteDanger_fnc_tacticsGarrison;
+ * [bob, angryBob] call lambs_danger__fnc_tacticsGarrison;
  *
  * Public: No
 */

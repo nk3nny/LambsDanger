@@ -5,9 +5,9 @@
  *
  * Arguments:
  * 0: vehicle suppressing <OBJECT>
- * 1: Target position <ARRAY>
- * 2: Target of suppressing <OBJECT>
- * 3: Predefined buildings, default none, <ARRAY>
+ * 1: target position <ARRAY>
+ * 2: target of suppressing <OBJECT>
+ * 3: predefined buildings, default none, <ARRAY>
  *
  * Return Value:
  * success
@@ -26,7 +26,7 @@ private _vehicle = vehicle _unit;
 if (
     isNull _target
     || {!canFire _vehicle}
-    || {(_unit distance2D _pos) < GVAR(minSuppressionRange)}
+    || {(_unit distance2D _target) < GVAR(minSuppressionRange)}
     || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
@@ -34,30 +34,34 @@ if (
 private _predictedPos = _unit getHideFrom _target;
 
 // define buildings
-if (_buildings isEqualTo []) then {
-    _buildings = [_pos, 16, false, false] call EFUNC(main,findBuildings);
+private _visibility = [objNull, "VIEW", objNull] checkVisibility [eyePos _vehicle, ATLtoASL (_predictedPos vectorAdd [0, 0, 1 + random 1])];
+if (_buildings isEqualTo [] && {_visibility < 0.5}) then {
+    _buildings = [_target, 12, false, false] call EFUNC(main,findBuildings);
 };
-
-// set task
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
 
 // find closest building
 if !(_buildings isEqualTo []) then {
-    _buildings = ((selectRandom _buildings) buildingPos -1) apply {AGLtoASL _x};
+    _buildings = (selectRandom _buildings) buildingPos -1;
 };
 
 // add predicted location -- just to ensure shots fired!
-_buildings pushBack (ATLtoASL _predictedPos);
+_buildings pushBack _predictedPos;
 
 // pos
 _pos = selectRandom _buildings;
 
 // look at position
-_vehicle doWatch ASLtoAGL _pos;
+_vehicle doWatch _pos;
 
 // suppression
-private _suppression = [_unit, ASLtoAGL _pos] call FUNC(vehicleSuppress);
+private _suppression = [_unit, _pos] call FUNC(vehicleSuppress);
+
+// set task
+_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
+
+// minor jink if no suppression possible
+if (!_suppression) then {[_unit, 22] call FUNC(vehicleJink)};
 
 // cannon direction ~ threshold 30 degrees
 private _fnc_turretDir = {
@@ -70,8 +74,8 @@ private _fnc_turretDir = {
     _atan < _threshold
 };
 
-// shoot cannon ~ random chance, enough positions, 80m+ and turret pointed right way
-private _cannon = RND(0.2) && {_suppression} && {(_vehicle distance _pos) > 80} && {[_vehicle, _pos] call _fnc_turretDir};
+// shoot cannon ~ random chance and turret pointed right way
+private _cannon = RND(0.2) && {_suppression} && {[_vehicle, _pos] call _fnc_turretDir};
 if (_cannon) then {
     _vehicle action ["useWeapon", _vehicle, gunner _vehicle, random 2];
 };

@@ -12,20 +12,21 @@ if (isNil QGVAR(fsmPriorities)) then {
     GVAR(fsmPriorities) = [
         3,      // DCEnemyDetected
         1,      // DCFire
-        7,      // DCHit
+        9,      // DCHit
         4,      // DCEnemyNear
         3,      // DCExplosion
-        1,      // DCDeadBodyGroup
+        4,      // DCDeadBodyGroup
         1,      // DCDeadBody
-        2,      // DCScream
-        6,      // DCCanFire
-        5       // DCBulletClose
+        5,      // DCScream
+        8,      // DCCanFire
+        7,      // DCBulletClose
+        0       // LAMBS Assess
     ];
 };
 
 // FSM setting ~ minimum time for danger to last
 if (isNil QGVAR(dangerUntil)) then {
-    GVAR(dangerUntil) = 3;
+    GVAR(dangerUntil) = 4;
 };
 
 // FSM setting ~ range to search for hide and cover

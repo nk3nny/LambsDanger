@@ -4,9 +4,10 @@
  * Actualisation of Suppression cycle
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
+ * 0: cycles <NUMBER>
+ * 1: units list <ARRAY>
+ * 2: list of group vehicles <ARRAY>
+ * 3: list of building/enemy positions <ARRAY>
  *
  * Return Value:
  * success
@@ -26,7 +27,7 @@ _cycle = _cycle - 1;
 // infantry
 {
     // ready
-    private _posAGL = selectRandom _pos;
+    private _posAGL = (selectRandom _pos) vectorAdd [0, 0, random 4];
 
     // suppressive fire
     _x forceSpeed 1;

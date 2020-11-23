@@ -4,8 +4,9 @@
  * Unit calls friendly artillery if available
  *
  * Arguments:
- * 0: Unit calling artillery <OBJECT>
- * 1: Target of artillery, unit <OBJECT> or position <ARRAY>
+ * 0: unit calling artillery <OBJECT>
+ * 1: target of artillery, unit <OBJECT> or position <ARRAY>
+ * 2: position of artillery target <ARRAY>
  *
  * Return Value:
  * success

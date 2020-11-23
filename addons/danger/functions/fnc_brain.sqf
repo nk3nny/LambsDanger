@@ -19,23 +19,23 @@
 /*
     DESIGN
         Immediate actions
+        1 Fire
         2 Hit
+        4 Explosion
         9 BulletClose
 
         Hide actions
-        0 Enemy detected (but far)
-        4 Explosion
-        7 Scream
+        5 DeadBodyGroup
+        6 DeadBody
+        - Panic
 
         Engage actions
-        0 Enemy detected (but near or known)
-        1 Fire
+        0 Enemy detected
         3 Enemy near
         8 CanFire
 
         Assess actions
-        5 DeadBodyGroup
-        6 DeadBody
+        7 Scream
         10 Assess
 */
 #define ACTION_IMMEDIATE 0
@@ -78,34 +78,29 @@ _causeArray params ["_dangerCause", "_dangerPos", "", "_dangerCausedBy"]; // "_d
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
 // Immediate actions
-if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE]) then {
+if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) then {
     _return set [ACTION_IMMEDIATE, true];
 };
 
 // hide actions
 private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.9};
-if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_EXPLOSION, DANGER_SCREAM] || _panic) then {
+if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
     _return set [ACTION_HIDE, true];
 
     // callout
     if (_panic) then {
         [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
     };
-
-    // enemy near? don't hide
-    if (_dangerCause isEqualTo DANGER_ENEMYDETECTED && {(_unit distance2D _dangerCausedBy) < (GVAR(cqbRange) * 1.4)}) then {
-        _return set [ACTION_HIDE, false];
-    };
 };
 
 // engage actions   // should check all friendly sides?
-if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_FIRE, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
+if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
     _return set [ACTION_ENGAGE, !((side _group) isEqualTo side (group _dangerCausedBy))];
     _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
 };
 
 // assess actions
-if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY]) then {
+if (_dangerCause in [DANGER_ASSESS, DANGER_SCREAM]) then {
     _return set [ACTION_ASSESS, true];
 };
 

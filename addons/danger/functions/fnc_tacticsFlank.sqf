@@ -4,18 +4,18 @@
  * Group conducts probing flanking manoeuvre
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
- * 3: How many assault cycles, default four <NUMBER>
- * 4: Overwatch destination <ARRAY>
- * 5: Time until tactics is reset, default 30s <NUMBERS>
+ * 0: group leader <OBJECT>
+ * 1: group target <OBJECT> or position <ARRAY>
+ * 2: units in group, default all <ARRAY>
+ * 3: how many assault cycles <NUMBER>
+ * 4: default overwatch destination <ARRAY>
+ * 4: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * Bool
  *
  * Example:
- * [bob, angryBob] call liteDanger_fnc_tacticsFlank;
+ * [bob, angryBob] call lambs_danger__fnc_tacticsFlank;
  *
  * Public: No
 */

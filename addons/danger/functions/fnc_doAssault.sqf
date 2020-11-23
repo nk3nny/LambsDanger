@@ -4,9 +4,9 @@
  * Unit assaults building positions or open terrain according ot enemy position
  *
  * Arguments:
- * 0: Unit assaulting <OBJECT>
- * 1: Enemy <OBJECT>
- * 2: Range to find buildings, default 30 <NUMBER>
+ * 0: unit assaulting <OBJECT>
+ * 1: enemy <OBJECT>
+ * 2: range to find buildings, default 20 <NUMBER>
  *
  * Return Value:
  * boolean
@@ -17,6 +17,9 @@
  * Public: No
 */
 params ["_unit", ["_target", objNull], ["_range", 20]];
+
+// check if stopped
+if (!(_unit checkAIFeature "PATH")) exitWith {_unit doWatch _target; false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", EGVAR(main,debug_functions)];
@@ -54,7 +57,7 @@ private _pos = if (_buildings isEqualTo []) then {
 
 // stance and speed
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-_unit forceSpeed ([_unit, _pos] call FUNC(assaultSpeed));
+[_unit, _pos] call FUNC(assaultSpeed);
 
 // execute
 _unit doMove _pos;

@@ -4,7 +4,7 @@
  * Checks if unit is allowed to play animations. Used in civilian danger.fsm
  *
  * Arguments:
- * 0: Unit fleeing <OBJECT>
+ * 0: unit fleeing <OBJECT>
  *
  * Return Value:
  * boolean

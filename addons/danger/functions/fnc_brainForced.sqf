@@ -4,7 +4,7 @@
  * Actions on forced movement
  *
  * Arguments:
- * 0: Unit toggled <OBJECT>
+ * 0: unit toggled <OBJECT>
  *
  * Return Value:
  * Bool
@@ -48,14 +48,12 @@ if (getSuppression _unit > 0) then {
 
 // attack speed
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
-    private _attackTarget = _unit findNearestEnemy _unit;
-    // dodge if pressed
-    if (getSuppression _unit > 0.8) exitWith {
-        [_unit, getPosASL _attackTarget] call FUNC(doDodge);
-        _timeout = time + random 1;
-    };
-    // tactical movement if not
-    [_unit, _attackTarget] call FUNC(assaultSpeed);
+
+    // attacking
+    _unit setVariable [QGVAR(currentTask), "Attacking", EGVAR(main,debug_functions)];
+
+    // tactical movement speed
+    [_unit, _unit findNearestEnemy _unit] call FUNC(assaultSpeed);
 };
 
 // end

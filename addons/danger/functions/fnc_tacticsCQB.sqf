@@ -4,8 +4,9 @@
  * Leader finds and declares nearest building as assault position
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Range to check buildings, default is CQB range <NUMBER>
+ * 0: group leader <OBJECT>
+ * 1: group target <OBJECT>
+ * 1: range to check buildings, default is CQB range <NUMBER>
  *
  * Return Value:
  * buildings found

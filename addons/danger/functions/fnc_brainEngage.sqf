@@ -5,9 +5,8 @@
  *
  * Arguments:
  * 0: unit doing the avaluation <OBJECT>
- * 1: yype of data <NUMBER>
- * 2: yarget <OBJECT>
- * 3: distance to target <NUMBER>
+ * 1: type of data <NUMBER>
+ * 2: known target <OBJECT>
  *
  * Return Value:
  * number, timeout
@@ -20,20 +19,22 @@
 
 /*
     Engage actions
-    0 Enemy detected (but near)
-    1 Fire
+    0 Enemy detected
     3 Enemy near
     8 CanFire
 */
 
-params ["_unit", ["_type", DANGER_ENEMYDETECTED], ["_target", objNull]];
+params ["_unit", ["_type", -1], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 4;
+private _timeout = time + 2;
+
+// ACE3
+_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];
 
 // check
-if (isNull _target || {stopped _unit}) exitWith {
-    _unit forceSpeed 1;
+if (isNull _target) exitWith {
+    _unit forceSpeed 2;
     _timeout
 };
 
@@ -50,15 +51,15 @@ if (_distance < GVAR(cqbRange)) exitWith {
     // execute assault
     [_unit, _target] call FUNC(doAssault);
     // dynamic delay
-    private _delay = linearConversion [0, GVAR(cqbRange), _distance, 0, 4, true];
+    private _delay = linearConversion [0, GVAR(cqbRange), _distance, 0, 3, true];
     _timeout + _delay
 };
 
 // far, try to suppress
-if (_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE] && {needReload _unit < 0.4} && {_distance < 400}) exitWith {
-    _unit forceSpeed ([1, 3] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL (_unit getHideFrom _target) vectorAdd [0, 0, 1.2]] call FUNC(doSuppress);
-    _timeout + 3
+if (_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE] && {needReload _unit < 0.4} && {_distance < 800}) exitWith {
+    _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
+    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 1.2])] call FUNC(doSuppress);
+    _timeout + random 6
 };
 
 // end

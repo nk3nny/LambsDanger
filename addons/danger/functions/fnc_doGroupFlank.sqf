@@ -4,9 +4,11 @@
  * Actualises flanking cycle
  *
  * Arguments:
- * 0: Units list <ARRAY>
- * 1: List of building/enemy positions <ARRAY>
- * 2: Cycles <NUMBER>
+ * 0: cycles <NUMBER>
+ * 1: units list <ARRAY>
+ * 2: list of group vehicles <ARRAY>
+ * 3: list of building/enemy positions <ARRAY>
+ * 4: destination <ARRAY>
  *
  * Return Value:
  * bool

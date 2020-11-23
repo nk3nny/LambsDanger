@@ -4,10 +4,11 @@
  * Leader calls for extended aggressive assault towards buildings or location
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
- * 3: How many assault cycles, default four <NUMBER>
+ * 0: group leader <OBJECT>
+ * 1: group threat unit <OBJECT> or position <ARRAY>
+ * 2: units in group, default all <ARRAY>
+ * 3: how many assault cycles <NUMBER>
+ * 4: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * success

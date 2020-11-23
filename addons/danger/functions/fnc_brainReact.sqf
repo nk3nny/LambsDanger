@@ -5,7 +5,8 @@
  *
  * Arguments:
  * 0: unit doing the avaluation <OBJECT>
- * 2: target threatening unit <ARRAY>
+ * 1: type of danger <NUMBER>
+ * 2: position of danger <ARRAY>
  *
  * Return Value:
  * timeout
@@ -18,11 +19,26 @@
 
 /*
     Immediate actions
+    1 Fire
     2 Hit
+    4 Explosion
     9 BulletClose
 */
 
-params ["_unit", ["_pos", [0, 0, 0]]];
+params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
+
+// ACE3
+_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];
+_unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
+
+// check it
+_unit lookAt _pos;
+
+// cover move when explosion
+if (_type in [DANGER_EXPLOSION, DANGER_FIRE]) exitWith {
+    [_unit] call FUNC(doCover);
+    time + random 2
+};
 
 // dodge!
 [_unit, _pos] call FUNC(doDodge);

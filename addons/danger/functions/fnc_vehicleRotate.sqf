@@ -9,8 +9,8 @@
  *
  * Arguments:
  * 0: Vehicle rotating <OBJECT>
- * 1: Direction which to turn towards, default is nearest enemy, position <ARRAY>
- * 2: Acceptible threshold in degrees, default 18 <NUMBER>
+ * 1: Direction which to turn towards <ARRAY>
+ * 2: Acceptible threshold in degrees <NUMBER>
  *
  * Return Value:
  * success
@@ -40,7 +40,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functi
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    [_unit, _target call CBA_fnc_getPos] call FUNC(vehicleSuppress);
+    [_unit, _unit getHideFrom (_unit findNearestEnemy _target)] call FUNC(vehicleSuppress);
     true
 };
 
@@ -61,6 +61,7 @@ if (_pos isEqualTo []) then {_pos = _unit modelToWorldVisual [0, -100, 0]};
 
 // move
 _unit doMove _pos;
+_unit setFormDir (_unit getDir _pos);
 
 // waitUntil
 [

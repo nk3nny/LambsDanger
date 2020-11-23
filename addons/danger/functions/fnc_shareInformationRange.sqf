@@ -4,7 +4,10 @@
  * Determines range which information is shared
  *
  * Arguments:
- * 0: Unit sharing information <OBJECT>
+ * 0: unit sharing information <OBJECT>
+ * 1: default range <NUMBER>
+ * 2: override range <BOOLEAN>
+ * 3: unit has has a long range radio <BOOLEAN>
  *
  * Return Value:
  * Array containing, unit doing the call, radio range, and presence of backpack radio
@@ -14,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_range",1000], ["_override",false], ["_radio",false]];
+params ["_unit", ["_range", 1000], ["_override", false], ["_radio", false]];
 
 // override
 if (_override) exitWith { [_unit, _range, _radio] };

@@ -6,7 +6,7 @@
  * Arguments:
  * 0: group leader <OBJECT>
  * 1: enemy <OBJECT>
- * 2: Time until tactics state ends <NUMBER>, 18 seconds default
+ * 2: Time until tactics state ends <NUMBER>
  *
  * Return Value:
  * bool
@@ -27,7 +27,7 @@ if (isNull _enemy) then {
 };
 
 // get info
-private _range = linearConversion [ 0, 150, (_unit distance2D _enemy), 12, 35, true];
+private _range = linearConversion [ 0, 150, _unit distance2D _enemy, 12, 35, true];
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 
 // update tactics and contact state
@@ -46,6 +46,10 @@ _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_function
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
             _group enableAttack _enableAttack;
+            private _leader = leader _group;
+            if (_leader call EFUNC(main,isAlive) && {_leader call FUNC(isLeader)}) then {
+                [{_this call FUNC(tactics)}, [_leader], random 2] call CBA_fnc_waitAndExecute;
+            };
         };
     },
     [_group, attackEnabled _group],
@@ -82,7 +86,7 @@ if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // behaviour
-if (behaviour _unit isEqualTo "AWARE") then {_unit setBehaviour "COMBAT";};
+if ((behaviour _unit) isEqualTo "AWARE") then {_unit setBehaviour "COMBAT";};
 
 // initiate immediate action drills
 private _units = [_unit] call EFUNC(main,findReadyUnits);
@@ -98,8 +102,6 @@ private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
     [_x, getPosASL _enemy, _range * 0.7, _buildings] call FUNC(doHide);
     _x setVariable [QGVAR(currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
 
-    // clear up existing building positions - nk
-    _buildings deleteAt 0;
 } foreach _units;
 
 // gesture + call!

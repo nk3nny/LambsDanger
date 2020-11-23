@@ -4,8 +4,8 @@
  * Jink vehicle shifts the vehicle 25-150 meters left or right or rear, in response to danger
  *
  * Arguments:
- * 0: Vehicle moving <OBJECT>
- * 1: Max range to move, default is 25 to 150 meters <NUMBER>
+ * 0: vehicle moving <OBJECT>
+ * 1: max range to move <NUMBER>
  *
  * Return Value:
  * destination to move

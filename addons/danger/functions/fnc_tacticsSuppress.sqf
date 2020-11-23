@@ -4,9 +4,10 @@
  * Leader calls for extended suppressive fire towards buildings or location
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
+ * 0: group leader <OBJECT>
+ * 1: group threat unit <OBJECT> or position <ARRAY>
+ * 2: units in group, default all <ARRAY>
+ * 3: delay until group is ready <NUMBER>
  *
  * Return Value:
  * success
@@ -65,7 +66,7 @@ _vehicles arrayIntersect _vehicles;
 
 // sort building locations
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
-_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { getPos _x });
+_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPos _x) vectorAdd [0, 0, 0.5 + random 3] });
 _pos pushBack _target;
 
 // sort cycles

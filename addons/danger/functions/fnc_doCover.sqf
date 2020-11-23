@@ -17,11 +17,14 @@
 */
 params ["_unit", ["_pos", [], [[]]]];
 
+// check if stopped
+if (!(_unit checkAIFeature "PATH")) exitWith {-1};
+
 // find cover
 if (_pos isEqualTo []) then {
-    _pos = nearestTerrainObjects [_unit, [], GVAR(searchForHide), true, true]; //"BUSH", "TREE", "HIDE", "WALL", "FENCE"
+    _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE"], GVAR(searchForHide), true, true];
     _pos = if (_pos isEqualTo []) then {
-        getPos _unit
+        getPosASL _unit
     } else {
         (_pos select 0) getPos [-1, _unit getDir (_pos select 0)]
     };
@@ -37,7 +40,7 @@ private _anim = call {
     if (_direction > 45) exitWith {["WalkR", "WalRF"]};
     ["WalkF", "WalkRF"]
 };
-[_unit, selectRandom _anim, true] call EFUNC(main,doGesture);
+[_unit, _anim, true] call EFUNC(main,doGesture);
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 
 // end

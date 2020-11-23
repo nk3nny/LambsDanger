@@ -4,10 +4,10 @@
  * Unit shares information with nearby allies modified by current radio settings
  *
  * Arguments:
- * 0: Unit sharing information <OBJECT>
- * 1: Enemy target <OBJECT>
- * 2: Range to share information, default 350 <NUMBER>
- * 3: Override radio ranges, default false <BOOLEAN>
+ * 0: unit sharing information <OBJECT>
+ * 1: enemy target <OBJECT>
+ * 2: range to share information, default 350 <NUMBER>
+ * 3: override radio ranges, default false <BOOLEAN>
  *
  * Return Value:
  * success
@@ -40,23 +40,22 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 
 // find units
 private _groups = allGroups select {
-    leader _x distance2D _unit < _range
+    (leader _x) distance2D _unit < _range
     && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
     && {behaviour leader _x != "CARELESS"}
     && {_x != group _unit}
 };
 
-private _knowsAbout = _unit knowsAbout _target;
 {
     // share information
     if !(isNull _target) then {
+        private _knowsAbout = _unit knowsAbout _target;
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
-    };
 
-    // reinforce
-    if ((_x getVariable [QGVAR(enableGroupReinforce), false]) && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time}) then {
-        [_x, [getPos _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec ["move", leader _x];
-        _x setVariable [QGVAR(enableGroupReinforceTime), time + 30, true];
+        // reinforce
+        if ((_x getVariable [QGVAR(enableGroupReinforce), false]) && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time}) then {
+            [leader _x, [getPosASL _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec [QFUNC(tacticsReinforce), leader _x];
+        };
     };
 
     // set behaviour
@@ -69,11 +68,16 @@ private _knowsAbout = _unit knowsAbout _target;
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call EFUNC(main,eventCallback);
 
 // play animation
-if (RND(0.2) && {_range > 100} && {_unit distance2D _target > 4}) then {[_unit, "HandSignalRadio"] call EFUNC(main,doGesture);};
+if (
+    RND(0.2)
+    && {_range > 100}
+    && {_unit distance2D _target > 4}
+    ) then {
+        [_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
+};
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-
     // debug message
     ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call EFUNC(main,debugLog);
 
