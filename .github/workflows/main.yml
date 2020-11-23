@@ -19,7 +19,7 @@ jobs:
     - name: Check for BOM
       uses: arma-actions/bom-check@master
     - name: Setup Node.js environment
-      uses: actions/setup-node@v1.4.2
+      uses: actions/setup-node@v2.1.2
     - name: Run Stringtable Checker
       run: cd tools/stringtableChecker && npm i &> /dev/null && cd ../../ && node tools/stringtableChecker/stringTableChecker.js
     - name: Check Functions
