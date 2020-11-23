@@ -48,7 +48,7 @@ _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_function
             _group enableAttack _enableAttack;
             private _leader = leader _group;
             if (_leader call EFUNC(main,isAlive) && {_leader call FUNC(isLeader)}) then {
-                [{_this call FUNC(tactics)}, [_leader], random 2] call CBA_fnc_waitAndExecute;
+                [_leader, _leader findNearestEnemy _leader] call FUNC(tactics);
             };
         };
     },

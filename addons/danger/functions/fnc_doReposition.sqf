@@ -19,7 +19,7 @@ params ["_unit", ["_target", ObjNull, [objNull, []]]];
 
 // enemy
 if (isNull _target) then {
-    _target = _unit findNearestEnemy _pos;
+    _target = _unit findNearestEnemy _unit;
 };
 
 // get building positions
