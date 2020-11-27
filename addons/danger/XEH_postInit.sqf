@@ -11,7 +11,7 @@
 }] call CBA_fnc_addEventHandler;
 
 [QGVAR(OnAssess), {
-     [_this select 0, QGVAR(OnAssess), _this] call BIS_fnc_callScriptedEventHandler;
+    [_this select 0, QGVAR(OnAssess), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnAssess), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
 
