@@ -117,26 +117,26 @@ def check_stringtable(filepath):
 
     # Check whitespace for tabs and correct number of indenting spaces
     with open(filepath, "r", encoding = "utf-8") as file:
-       spacing_depth = 0
+        spacing_depth = 0
 
-       for line_number, line in enumerate(file, 1):
-           if "\t" in line:
-               print("  ERROR: Found a tab on line {}.".format(line_number))
-               errors += 1
+        for line_number, line in enumerate(file, 1):
+            if "\t" in line:
+                print("  ERROR: Found a tab on line {}.".format(line_number))
+                errors += 1
 
-           line_clean = line.lstrip().lower()
+            line_clean = line.lstrip().lower()
 
-           if line_clean.startswith("</key") or line_clean.startswith("</package") or line_clean.startswith("</project") or line_clean.startswith("</container"):
-               spacing_depth -= 4
+        if line_clean.startswith("</key") or line_clean.startswith("</package") or line_clean.startswith("</project") or line_clean.startswith("</container"):
+            spacing_depth -= 4
 
-           line_spacing = len(line) - len(line_clean)
+        line_spacing = len(line) - len(line_clean)
 
-           if line_spacing != spacing_depth:
-               print("  ERROR: Incorrect number of indenting spaces on line {}, currently {}, should be {}.".format(line_number, line_spacing, spacing_depth))
-               errors += 1
+        if line_spacing != spacing_depth:
+            print("  ERROR: Incorrect number of indenting spaces on line {}, currently {}, should be {}.".format(line_number, line_spacing, spacing_depth))
+            errors += 1
 
-           if line_clean.startswith("<key") or line_clean.startswith("<package") or line_clean.startswith("<project") or line_clean.startswith("<container"):
-               spacing_depth += 4
+            if line_clean.startswith("<key") or line_clean.startswith("<package") or line_clean.startswith("<project") or line_clean.startswith("<container"):
+                spacing_depth += 4
 
     return errors
 
