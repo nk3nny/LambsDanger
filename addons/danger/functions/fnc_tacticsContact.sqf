@@ -47,7 +47,7 @@ _group setVariable [QGVAR(tacticsTask), "In contact!", EGVAR(main,debug_function
             _group setVariable [QGVAR(tacticsTask), nil];
             _group enableAttack _enableAttack;
             private _leader = leader _group;
-            if (_leader call EFUNC(main,isAlive) && {_leader call FUNC(isLeader)}) then {
+            if (_leader call FUNC(isLeader)) then {
                 [_leader, _leader findNearestEnemy _leader] call FUNC(tactics);
             };
         };
