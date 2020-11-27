@@ -17,10 +17,13 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_delay", 12]];
+params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
+
+// sort cycles
+private _cycle = selectRandom [2, 3, 3, 4];
 
 // reset tactics
 [
@@ -33,7 +36,7 @@ _target = _target call CBA_fnc_getPos;
         };
     },
     [group _unit, attackEnabled _unit],
-    _delay
+    _delay * _cycle
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
@@ -68,9 +71,6 @@ _vehicles arrayIntersect _vehicles;
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
 _pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPos _x) vectorAdd [0, 0, 0.5 + random 3] });
 _pos pushBack _target;
-
-// sort cycles
-private _cycle = selectRandom [3, 3, 4, 5];
 
 // set tasks
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];

@@ -103,7 +103,6 @@ if (_antiTank && { _tankAir != -1 } && { !(_launchers isEqualTo []) }) then {
     _unit doFire (_enemies select _tankAir);
 };
 
-
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS HIDE %2 (%3m)", side _unit, groupId _group, round (_unit distance2D _target)] call EFUNC(main,debugLog);

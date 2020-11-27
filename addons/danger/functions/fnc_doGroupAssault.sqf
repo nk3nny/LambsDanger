@@ -21,11 +21,9 @@ params ["_cycle", "_units", "_pos"];
 // update
 _units = _units select {_x call EFUNC(main,isAlive) && {!isPlayer _x}};
 if (_units isEqualTo []) exitWith {};
-_cycle = _cycle - 1;
 
 {
     private _targetPos = selectRandom _pos;
-
     // setpos
     if !(currentCommand _x isEqualTo "MOVE") then {
         _x doMove _targetPos;
@@ -42,14 +40,13 @@ _cycle = _cycle - 1;
 
     // brave!
     _x setSuppression 0;
-
 } foreach _units;
 
 // recursive cyclic
-if (_cycle > 0 && {!(_units isEqualTo [])}) then {
+if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupAssault)},
-        [_cycle, _units, _pos],
+        [_cycle - 1, _units, _pos],
         5
     ] call CBA_fnc_waitAndExecute;
 };

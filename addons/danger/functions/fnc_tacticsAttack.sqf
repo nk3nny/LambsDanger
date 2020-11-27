@@ -29,7 +29,7 @@ if (isNull _target) exitWith {false};
 // update tactics and contact state
 private _group = group _unit;
 _group setVariable [QGVAR(isExecutingTactic), true];
-_group setVariable [QGVAR(tacticsTask), "Tactics Attack", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Attacking", EGVAR(main,debug_functions)];
 
 // reset tactics
 [

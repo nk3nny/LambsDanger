@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 15], ["_delay", 90]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 15], ["_delay", 80]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -62,10 +62,11 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Assault", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(tacticsTask), "Assaulting", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
 _group setVariable [QGVAR(groupMemory), _buildings];
+_group enableAttack false;
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
@@ -75,14 +76,13 @@ _group setVariable [QGVAR(groupMemory), _buildings];
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // concealment
-if (_unit distance2D _target > 25) then {
+if (_unit distance2D _target > 15) then {
 
     // leader smoke
     [_unit, _target] call EFUNC(main,doSmoke);
 
     // grenadier smoke
     [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
-
 };
 
 // ready group
