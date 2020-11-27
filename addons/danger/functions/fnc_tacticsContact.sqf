@@ -77,7 +77,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> _typeOf >> "nameSo
 } else {
     "contact"
 };
-[ _unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
+[_unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
 
 // rushing or ambushing units do not react
 if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
@@ -93,28 +93,26 @@ private _units = [_unit] call EFUNC(main,findReadyUnits);
 
 // leaders get their subordinates to hide!
 private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
+private _enemyPos = getPosASL _enemy;
 {
-
     // dodge!
-    if (getSuppression _x > 0) then {[_x, getPosASL _enemy] call FUNC(doDodge);};
+    if (getSuppression _x > 0) then {[_x, _enemyPos] call FUNC(doDodge);};
 
     // hide
-    [_x, getPosASL _enemy, _range * 0.7, _buildings] call FUNC(doHide);
+    [_x, _enemyPos, _range * 0.7, _buildings] call FUNC(doHide);
     _x setVariable [QGVAR(currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
-
 } foreach _units;
 
 // gesture + call!
 if !(_units isEqualTo []) then {
-
     // unit
-    private _unit2 = _units select (count _units - 1);
+    private _unitCaller = _units select (count _units - 1);
 
     // point
-    [{_this call EFUNC(main,doGesture)}, [_unit2, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
 
     // contact!
-    [{_this call EFUNC(main,doCallout)}, [_unit2, ["Combat", "Stealth"] select _stealth, "contact", 100], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doCallout)}, [_unitCaller, ["Combat", "Stealth"] select _stealth, "contact", 100], random 4] call CBA_fnc_waitAndExecute;
 };
 
 // debug
