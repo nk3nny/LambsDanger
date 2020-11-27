@@ -126,14 +126,14 @@ def check_stringtable(filepath):
 
             line_clean = line.lstrip().lower()
 
-        if line_clean.startswith("</key") or line_clean.startswith("</package") or line_clean.startswith("</project") or line_clean.startswith("</container"):
-            spacing_depth -= 4
+            if line_clean.startswith("</key") or line_clean.startswith("</package") or line_clean.startswith("</project") or line_clean.startswith("</container"):
+                spacing_depth -= 4
 
-        line_spacing = len(line) - len(line_clean)
+            line_spacing = len(line) - len(line_clean)
 
-        if line_spacing != spacing_depth:
-            print("  ERROR: Incorrect number of indenting spaces on line {}, currently {}, should be {}.".format(line_number, line_spacing, spacing_depth))
-            errors += 1
+            if line_spacing != spacing_depth:
+                print("  ERROR: Incorrect number of indenting spaces on line {}, currently {}, should be {}.".format(line_number, line_spacing, spacing_depth))
+                errors += 1
 
             if line_clean.startswith("<key") or line_clean.startswith("<package") or line_clean.startswith("<project") or line_clean.startswith("<container"):
                 spacing_depth += 4
