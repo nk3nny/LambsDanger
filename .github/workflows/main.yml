@@ -18,6 +18,8 @@ jobs:
       run: python3 tools/config_style_checker.py
     - name: Check for BOM
       uses: arma-actions/bom-check@master
+    - name: EditorConfig Check
+      uses: wow-rp-addons/actions-editorconfig-check@v1.0.1
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
     - name: Run Stringtable Checker
