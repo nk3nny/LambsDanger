@@ -27,7 +27,7 @@ _vehicles = _vehicles select { canFire _x };
 {
     // ready
     private _posAGL = selectRandom _pos;
-    _posAGL = _posAGL vectorAdd [0, 0, linearConversion [0, 600, _unit distance2D _posAGL, 0.5, 4.5, true]];
+    _posAGL = _posAGL vectorAdd [0, 0, linearConversion [0, 600, _x distance2D _posAGL, 0.5, 4.5, true]];
 
     // suppressive fire
     _x forceSpeed 1;
