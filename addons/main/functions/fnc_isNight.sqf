@@ -18,9 +18,7 @@
 params ["_unit"];
 
 // stealth mode or has nightvision
-if (behaviour _unit isEqualTo "STEALTH" 
-    || { !( (hmd _unit) isEqualTo "" )}
-) exitWith {false};
+if (behaviour _unit isEqualTo "STEALTH" || { !( (hmd _unit) isEqualTo "" )}) exitWith {false};
 
 // night check
 private _shift = date call BIS_fnc_sunriseSunsetTime;

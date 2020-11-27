@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: Danger type number <NUMBER>
-  *
+ *
  * Return Value:
  * String value of type of danger
  *

@@ -43,7 +43,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
     if(_sortMode in ["ASCEND", "DESCEND"]) then {
         _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, _sortMode] call BIS_fnc_sortBy;
     } else {
-       _allObjs = (_terrainObjects + _vehicles) call BIS_fnc_arrayShuffle;
+        _allObjs = (_terrainObjects + _vehicles) call BIS_fnc_arrayShuffle;
     };
 
     private _found = false;

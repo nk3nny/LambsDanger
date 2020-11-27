@@ -106,7 +106,6 @@ private _fnc_debug_drawRect = {
     private _unit = _x;
     private _headPos = _unit call CBA_fnc_getPos;
     if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
-    // if (true) then {
         private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
@@ -120,12 +119,12 @@ private _fnc_debug_drawRect = {
 
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
-             private _knowledge = _unit targetKnowledge _currentTarget;
-             if (_knowledge select 2 == time && local _unit) then {
+            private _knowledge = _unit targetKnowledge _currentTarget;
+            if (_knowledge select 2 == time && local _unit) then {
                 _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6, GVAR(debug_functions)];
-             };
-             private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
-             _targetKnowledge append [
+            };
+            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
+            _targetKnowledge append [
                 "<t color='#C7CCC1'>Target Knowledge: <br/>",
                 "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
                 "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"

@@ -6,7 +6,7 @@
  * Arguments:
  * 0: unit doing the avaluation <OBJECT>
  * 1: danger queue <ARRAY>
-  *
+ *
  * Return Value:
  * array
  *
@@ -112,7 +112,7 @@ private _group = group _unit;
 if (
     _dangerCause isEqualTo DANGER_ENEMYNEAR
     || {
-        !isNull _dangerCausedBy 
+        !isNull _dangerCausedBy
         && { (_group getVariable [QGVAR(contact), 0]) < time }
     }
 ) then {

@@ -12,7 +12,7 @@ The goal is to make buildings part of the AI's available terrain. The AI will dy
  * Check dead bodies (Rearms if possible)
  * Tanks will react by rotating towards threats
  * Improved civilian reactions, hiding in buildings and checking dead bodies
- 
+
 ### Settings
 Use CBA settings to configure the mod.
 
@@ -20,5 +20,3 @@ Use CBA settings to configure the mod.
 diwako / joko / nkenny
 
 Thanks for playing.
-
-

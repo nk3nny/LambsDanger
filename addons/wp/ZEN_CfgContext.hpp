@@ -1,4 +1,4 @@
- class ZEN_context_menu_actions {
+class ZEN_context_menu_actions {
     class ADDON {
         displayName = CSTRING(Context_Main_DisplayName);
         priority = 3;

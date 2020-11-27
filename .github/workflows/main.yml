@@ -5,7 +5,7 @@ on:
     branches:
     - master
   pull_request:
-    
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -20,6 +20,8 @@ jobs:
       uses: arma-actions/bom-check@master
     - name: EditorConfig Check
       uses: wow-rp-addons/actions-editorconfig-check@v1.0.1
+      with:
+          files: $(git ls-files 'addons/*.sqf' 'addons/*.cpp' 'addons/*.hpp')
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
     - name: Run Stringtable Checker

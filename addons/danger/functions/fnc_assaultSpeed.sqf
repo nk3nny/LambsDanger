@@ -6,7 +6,7 @@
  * Arguments:
  * 0: Unit assaulting <OBJECT> or <ARRAY>
  * 1: Destination <OBJECT> or <ARRAY>
-  *
+ *
  * Return Value:
  * appropriate speed
  *
