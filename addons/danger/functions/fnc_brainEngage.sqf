@@ -45,13 +45,14 @@ if (_unit knowsAbout _target > 3.5) then {
 
 // distance
 private _distance = _unit distance2D _target;
+private _canMove = _unit checkAIFeature "PATH" && {!isForcedWalk _unit};
 
 // near, go for CQB
-if (_distance < GVAR(cqbRange)) exitWith {
+if (_canMove && {_distance < GVAR(cqbRange)}) exitWith {
     // execute assault
     [_unit, _target] call FUNC(doAssault);
     // dynamic delay
-    private _delay = linearConversion [0, GVAR(cqbRange), _distance, 0, 3, true];
+    private _delay = linearConversion [0, GVAR(cqbRange), _distance, 0.5, 3.5, true];
     _timeout + _delay
 };
 

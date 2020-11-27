@@ -27,14 +27,15 @@ _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
-    [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir < 330), true] call EFUNC(main,doGesture);
-    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir < 330), "FORMATION PLANNED", false];
+    [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir > 180), true] call EFUNC(main,doGesture);
+    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir > 180), "FORMATION PLANNED", false];
     _stance
 };
 
 // ACE3 captive exit
 if (
     GVAR(disableAIImediateAction)
+    || {isForcedWalk _unit}
     || { !(_unit checkAIFeature "MOVE") }
     || { !(_unit checkAIFeature "PATH") }
     || { _unit getVariable ["ace_captives_isHandcuffed", false] }
@@ -63,7 +64,7 @@ if (_dir > 80 && { RND(0.1) }) then {
     _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
 };
 
-// move back
+// move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
 if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 3 }) then {
     _relPos = _unit getRelPos [3, 180];
     _anim pushBack (["WalkB", "TactB"] select _suppression); //"FastB"

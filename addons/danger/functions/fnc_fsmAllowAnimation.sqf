@@ -19,3 +19,4 @@
 && {weapons _this isEqualTo []}
 && {_this checkAIFeature "PATH"}
 && {_this checkAIFeature "MOVE"}
+&& {!isForcedWalk _this}

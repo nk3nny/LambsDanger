@@ -84,7 +84,7 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     private _direction = _unit getRelDir _pos;
     private _relPos = _unit getRelPos [3, 0];
     private _anim = call {
-        if (_unit distance2D _pos < 1) exitWith {["Down"];};
+        if (_unit distance2D _pos < 1 || {isForcedWalk _unit}) exitWith {["Down"];};
         if (_direction > 315) exitWith {_relPos = _unit getRelPos [5, -15];["SlowF", "SlowLF"]};
         if (_direction > 225) exitWith {_relPos = _unit getRelPos [5, -60];["SlowL", "SlowLF"]};
         if (_direction > 135) exitWith {_relPos = _unit getRelPos [5, 180];["SlowB"]};

@@ -18,7 +18,7 @@
 params ["_unit", ["_pos", [], [[]]]];
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {-1};
+if (!(_unit checkAIFeature "PATH") || {isForcedWalk _unit}) exitWith {_unit};
 
 // find cover
 if (_pos isEqualTo []) then {

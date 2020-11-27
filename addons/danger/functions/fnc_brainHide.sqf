@@ -33,7 +33,7 @@ private _timeout = time + 5;
 _unit lookAt _pos;
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {_unit doWatch _pos; -1};
+if (!(_unit checkAIFeature "PATH")) exitWith {-1};
 
 // indoor units exit
 if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {

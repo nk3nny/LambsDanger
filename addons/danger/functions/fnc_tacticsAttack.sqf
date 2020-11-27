@@ -66,18 +66,19 @@ _unit setCombatMode "RED";
 _unit setFormation "DIAMOND";
 
 // the attack
+private _targetVehicle = vehicle _target;
 {
     _x setUnitPosWeak "MIDDLE";
-    _x doWatch vehicle _target;
-    _x doTarget vehicle _target;
-    _x doFire vehicle _target;
+    _x doWatch _targetVehicle;
+    _x doTarget _targetVehicle;
+    _x doFire _targetVehicle;
 } foreach _units;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS ATTACK (%2 with %3 units @ %4m)", side _unit, name _unit, count _units, round (_unit distance2D _target)] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics attack", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
-    private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor),"hd_destroy"] call EFUNC(main,dotMarker);
+    private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_destroy"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _target);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;

@@ -109,7 +109,7 @@ _unit setSpeedMode "FULL";
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
     private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
-    private _mt = [_overwatch, "", _unit call EFUNC(main,debugMarkerColor),"hd_objective"] call EFUNC(main,dotMarker);
+    private _mt = [_overwatch, "", _unit call EFUNC(main,debugMarkerColor), "hd_objective"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _overwatch);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;

@@ -19,7 +19,7 @@
 params ["_unit", ["_target", objNull], ["_range", 20]];
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {_unit doWatch _target; false};
+if (!(_unit checkAIFeature "PATH")) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", EGVAR(main,debug_functions)];
