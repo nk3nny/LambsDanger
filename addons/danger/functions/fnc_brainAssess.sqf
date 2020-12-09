@@ -44,6 +44,21 @@ if (_type isEqualTo DANGER_SCREAM) exitWith {
     _timeout - 1
 };
 
+// check if stopped
+if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
+
+// assigned target
+private _assignedTarget = assignedTarget _unit;
+if (
+    !isNull _assignedTarget
+    && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
+    && {_assignedTarget call EFUNC(main,isAlive)}
+    && {!(typeOf _assignedTarget isEqualTo "SuppressTarget")}
+) exitWith {
+    [_unit, _assignedTarget] call FUNC(doAssault);
+    _timeout + 2
+};
+
 // group memory
 private _group = group _unit;
 private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
@@ -51,21 +66,21 @@ private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
 // sympathetic CQB/suppressive fire
 if !(_groupMemory isEqualTo []) exitWith {
     [_unit, _groupMemory] call FUNC(doAssaultMemory);
-    _timeout + 3
+    _timeout + 2
 };
 
 // check self
 private _indoor = _unit call EFUNC(main,isIndoor);
 
-// cover
-if (!_indoor && {speed _unit < 1}) exitWith {
-    [_unit] call FUNC(doCover);
-    _timeout
+// building
+if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
+    [_unit, _target] call FUNC(doReposition);
+    _timeout + 1
 };
 
-// building
-if (_indoor && {RND(GVAR(indoorMove))}) then {
-    [_unit, _target] call FUNC(doReposition);
+// cover
+if (speed _unit < 1) then {
+    [_unit] call FUNC(doCover);
 };
 
 // end

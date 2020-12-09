@@ -27,10 +27,10 @@ private _buildingPos = [_unit, 21, true, true, true] call EFUNC(main,findBuildin
 [_buildingPos, true] call CBA_fnc_shuffle;
 
 // Check if there is a closer building position
-private _distance = (_unit distance2D _target) - 0.25;
+private _distance = (_unit distance2D _target) - 0.5;
 private _destination = _buildingPos findIf {_x distance2D _target < _distance};
 if (_destination != -1) then {
-    _unit doMove ((_buildingPos select _destination) vectorAdd [-1 + random 2, -1 + random 2, 0]);
+    _unit doMove (_buildingPos select _destination);
     _unit setVariable [QGVAR(currentTarget), _buildingPos select _destination, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Repositioning", EGVAR(main,debug_functions)];
 } else {

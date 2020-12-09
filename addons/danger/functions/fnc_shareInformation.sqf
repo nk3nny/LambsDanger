@@ -19,18 +19,18 @@
 */
 params ["_unit", ["_target", objNull], ["_range", 350], ["_override", false]];
 
+// nil or captured
+if (
+    GVAR(radioDisabled)
+    || {!(_unit call EFUNC(main,isAlive))}
+    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
+    || {_unit getVariable ["ace_captives_issurrendering", false]}
+) exitWith {false};
+
 // no target
 if (isNull _target) then {
     _target = _unit findNearestEnemy _unit;
 };
-
-// nil or captured
-if (
-    GVAR(radioDisabled)
-    //|| {_unit distance _target > viewDistance}
-    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
-    || {_unit getVariable ["ace_captives_issurrendering", false]}
-) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", EGVAR(main,debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny

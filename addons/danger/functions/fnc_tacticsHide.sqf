@@ -27,15 +27,19 @@ _target = _target call CBA_fnc_getPos;
 private _group = group _unit;
 [
     {
-        params [["_group", grpNull]];
+        params [["_group", grpNull], ["_combatMode", "YELLOW"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
+            _group setCombatMode _combatMode;
         };
     },
-    _group,
+    [_group, combatMode _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
+
+// hold-fire combat mode
+_group setCombatMode "GREEN";
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
@@ -60,7 +64,7 @@ if (_units isEqualTo []) exitWith {false};
 
 // find cover
 if (_cover isEqualTo []) then {
-    private _coverPos = _unit getPos [16, _target getDir _unit];
+    private _coverPos = _unit getPos [10, _target getDir _unit];
     // find bushes
     _cover = (nearestTerrainObjects [ _coverPos, ["BUSH", "TREE", "SMALL TREE", "HIDE"], 45, true, true]) apply {_x getPos [1.2, _target getDir _x]};
 
@@ -92,6 +96,7 @@ private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x
 if (_antiTank && { _tankAir != -1 } && { !(_launchers isEqualTo []) }) then {
     {
         // launcher units target air/tank
+        _x setCombatMode "RED";
         _x commandTarget (_enemies select _tankAir);
 
         // extra impetuous to select launcher
@@ -105,7 +110,7 @@ if (_antiTank && { _tankAir != -1 } && { !(_launchers isEqualTo []) }) then {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS HIDE %2 (%3m)", side _unit, groupId _group, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    ["%1 TACTICS HIDE %2 (cover %3)", side _unit, groupId _group, count _cover] call EFUNC(main,debugLog);
     private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
     _m setMarkerDirLocal ((_unit getDir _target) - 90);

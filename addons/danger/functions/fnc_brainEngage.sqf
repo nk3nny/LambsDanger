@@ -59,7 +59,7 @@ if (_canMove && {_distance < GVAR(cqbRange)}) exitWith {
 // far, try to suppress
 if (_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE] && {needReload _unit < 0.4} && {_distance < 800}) exitWith {
     _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 1.2])] call FUNC(doSuppress);
+    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.3 + random 1])] call FUNC(doSuppress);
     _timeout + random 6
 };
 

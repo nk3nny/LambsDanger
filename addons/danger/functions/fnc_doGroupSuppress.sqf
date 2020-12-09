@@ -33,7 +33,7 @@ _vehicles = _vehicles select { canFire _x };
     _x forceSpeed 1;
     _x setUnitPosWeak "MIDDLE";
     _x doWatch _posAGL;
-    private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(doSuppress);
+    private _suppress = [_x, AGLtoASL _posAGL] call FUNC(doSuppress);
     _x setVariable [QGVAR(currentTask), "Group Suppress", EGVAR(main,debug_functions)];
 
     // no LOS

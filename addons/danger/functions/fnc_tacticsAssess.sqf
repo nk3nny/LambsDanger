@@ -103,23 +103,18 @@ if !(_enemies isEqualTo []) then {
     // inside? stay safe
     if (_inside) exitWith {_plan = [];};
 
-    // enemies far away and above height and has LOS
+    // enemies far away and above height and has LOS and limited knowledge!
     private _farHighertarget = _enemies findIf {
         _unit distance2D _x > 300
+        && {_unit knowsAbout _x < 2}
         && {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
         && {!(terrainIntersectASL [(eyePos _unit) vectorAdd [0, 0, 5], eyePos _x])};
     };
     if (_farHighertarget != -1 && {!(_speedMode isEqualTo "FULL")}) exitWith {
-        // active or passive
-        if (RND(0.5)) then {
-            _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_HIDE];
-            _pos = _unit getHideFrom (_enemies select _farHighertarget);
-        } else {
-            _plan append [TACTICS_GARRISON, TACTICS_GARRISON];
-            _pos = getPos _unit;
-        };
+        _plan append [TACTICS_SUPPRESS, TACTICS_HIDE, TACTICS_HIDE];
+        _pos = _unit getHideFrom (_enemies select _farHighertarget);
     };
-    // enemies at a distance and away from buildings and below
+    // enemies near and away from buildings and below
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < 220
         && {((getPosASL _x) select 2) < ((getPosASL _unit select 2) - 15)}

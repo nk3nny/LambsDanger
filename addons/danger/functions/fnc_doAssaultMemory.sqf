@@ -41,27 +41,21 @@ if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // CQB or suppress
 if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.8)}) then {
-
-    // CQB movement mode
+    // Movement
     _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
     _unit forceSpeed 4;
 
     // execute CQB move
     _unit doMove _pos;
-    _unit setDestination [_pos, "FORMATION PLANNED", _distance < 10];
+    _unit setDestination [_pos, "FORMATION PLANNED", _distance > 10];
 
     // variables
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Assault (Sympathetic)", EGVAR(main,debug_functions)];
 
-    // callout!
-    if (RND(0.9) && {count (units _unit) > 1}) then {
-        [_unit, behaviour _unit, selectRandom ["Attack", "Attacking", "CoverMeE", "OnTheMove"], 75] call EFUNC(main,doCallout);
-    };
-
     // debug
     if (EGVAR(main,debug_functions)) then {
-        ["%1 assaulting (sympathetic) (%2 @ %3m)", side _unit, name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
+        ["%1 assaulting (sympathetic) (%2 @ %3m - %4 spots)", side _unit, name _unit, round (_unit distance _pos), count _groupMemory] call EFUNC(main,debugLog);
         private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
         _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
         [{deleteVehicle _this}, _sphere, 10] call CBA_fnc_waitAndExecute;
@@ -70,7 +64,7 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.8)}) then {
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 1.2], true] call FUNC(doSuppress);
+    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 1.2]] call FUNC(doSuppress);
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
 };

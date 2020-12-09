@@ -83,7 +83,7 @@ if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FI
 };
 
 // hide actions
-private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.9};
+private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.95};
 if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
     _return set [ACTION_HIDE, true];
 
@@ -96,7 +96,7 @@ if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
 // engage actions   // should check all friendly sides?
 if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
     _return set [ACTION_ENGAGE, !((side _group) isEqualTo side (group _dangerCausedBy))];
-    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1];    // hide if target unknown!
+    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1 && {!(typeOf _dangerCausedBy isEqualTo "SuppressTarget")}];    // hide if target unknown!
 };
 
 // assess actions

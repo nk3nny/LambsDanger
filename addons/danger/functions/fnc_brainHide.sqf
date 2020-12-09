@@ -29,9 +29,6 @@ params ["_unit", ["_type", 0], ["_pos", [0, 0, 0]]];
 // timeout
 private _timeout = time + 5;
 
-// look at problem  ~ looking at sky syndrome. - nkenny
-_unit lookAt _pos;
-
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {-1};
 

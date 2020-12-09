@@ -35,7 +35,7 @@ _range = switch (side _unit) do {
 // Sort long range radios
 private _target = _unit;
 
-private _units = (units _unit select {_x call EFUNC(main,isAlive) && {_x distance2D _unit < 150} && {!isPlayer _x}});
+private _units = units _unit select {_x call EFUNC(main,isAlive) && {_x distance2D _unit < 150} && {!isPlayer _x}};
 private _index = _units findIf {
         _x getVariable [QGVAR(dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2D _unit < 70})}

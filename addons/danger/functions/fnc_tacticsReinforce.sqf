@@ -30,6 +30,21 @@ _unit setVariable [QGVAR(currentTask), "Reinforce", EGVAR(main,debug_functions)]
 
 // set group task
 _group setVariable [QGVAR(tacticsTask), "Reinforcing", EGVAR(main,debug_functions)];
+_group setVariable [QGVAR(isExecutingTactic), true];
+_group setVariable [QGVAR(contact), time + _delay];
+_group enableAttack false;  // ~ gives better fine control of AI - nkenny
+
+// reset
+[
+    {
+        params [["_group", grpNull, [grpNull]]];
+        if (!isNull _group) then {
+            _group setVariable [QGVAR(isExecutingTactic), nil];
+        };
+    },
+    _group,
+    _delay * 0.5
+] call CBA_fnc_waitAndExecute;
 
 // gesture
 [_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
@@ -42,15 +57,21 @@ if (_units isEqualTo []) then {
 // check waypoints -- if none add new?
 // commander vehicles? ~ future versions with setting ~ nkenny
 // has artillery? ~ if so fire in support?
-// is aircraft or tank? Differrent movement waypoint?
+// is aircraft or tank? Different movement waypoint?
 
 // formation changes ~ allowed here as Reinforcing units have full autonomy - nkenny
 private _distance = _unit distance2D _target;
-if (_distance > 600) then {
+if (_distance > 500) then {
+    _unit setBehaviour "AWARE";
     _unit setFormation "COLUMN";
 } else {
-    if (_distance > 200) then {_unit setFormation selectRandom ["WEDGE", "VEE", "LINE"];};
-    if (_distance < GVAR(cqbRange)) then {_unit setFormation "FILE";};
+    if (_distance > 200) then {
+        _unit setFormation selectRandom ["WEDGE", "VEE", "LINE"];
+    };
+    if (_distance < GVAR(cqbRange)) then {
+        _unit setFormation "FILE";
+        [_unit, _target] call FUNC(tacticsAssault);
+    };
 };
 
 // pack & deploy static weapons
@@ -70,7 +91,15 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
 };
 
 // order move
-_units doMove _target;
+[
+    {
+        params ["_group", "_target"];
+        _group move _target;
+    },
+    [_group, _target],
+    2 + random 3
+] call CBA_fnc_waitAndExecute;
+// _units doMove _target;  ~ uncommented for a test period before release. We allow overriding WP as Reinforcement feature is already invasive, AND enabled by mission makers - nkenny
 
 // debug
 if (EGVAR(main,debug_functions)) then {

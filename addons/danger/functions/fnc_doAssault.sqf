@@ -25,7 +25,8 @@ _unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", EGVAR(main,debug_functions)];
 
 // settings
-private _rangeBuilding = linearConversion [ 0, 150, _unit distance2D _target, 3.5, 22, true];
+private _distance2D = _unit distance2D _target;
+private _rangeBuilding = linearConversion [ 0, 150, _distance2D, 3.5, 22, true];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, true] call EFUNC(main,findBuildings);
@@ -36,14 +37,13 @@ private _pos = if (_buildings isEqualTo []) then {
     // unit is indoor and happy
     if (_unit call EFUNC(main,isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
         _unit setVariable [QGVAR(currentTask), "Stay inside", EGVAR(main,debug_functions)];
-        getPos _unit
+        getPosATL _unit
     };
 
-    // select
-    _unit getHideFrom _target
+    // select expected location
+    private _hide = _unit getHideFrom _target;
+    if (_hide isEqualTo [0,0,0]) then {getPos _target} else {_hide}
 } else {
-    // add unit position to array
-    _buildings pushBack getPosATL _target;
 
     // updates group memory variable
     private _group = group _unit;
@@ -51,7 +51,10 @@ private _pos = if (_buildings isEqualTo []) then {
     _groupMemory pushBackUnique selectRandom _buildings;
     _group setVariable [QGVAR(groupMemory), _groupMemory];
 
-    // select
+    // add unit position to array
+    _buildings pushBack getPosATL _target;
+
+    // select building position
     selectRandom _buildings
 };
 
@@ -61,7 +64,7 @@ _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "FORMATION PLANNED", true];
+_unit setDestination [_pos, "FORMATION PLANNED", _distance2D > 12];
 
 // debug
 if (EGVAR(main,debug_functions)) then {

@@ -47,7 +47,6 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", EGVAR(main,debug_functions)];
 
     // hide
-    //doStop _unit;
     _unit setUnitPosWeak "MIDDLE";
 
     // execute move
