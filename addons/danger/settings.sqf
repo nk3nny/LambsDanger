@@ -92,9 +92,9 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-// Toggles AI Immediate (re)Actions
+// Toggles AI Dodging
 [
-    QGVAR(disableAIImediateAction),
+    QGVAR(disableAIDodge),
     "CHECKBOX",
     [LSTRING(Settings_DisableImmediateActions), LSTRING(Settings_DisableImmediateActions_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -130,7 +130,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
     "SLIDER",
     [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [1, 500, 20, 0],
+    [1, 500, 25, 0],
     1
 ] call CBA_fnc_addSetting;
 

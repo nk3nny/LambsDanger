@@ -17,20 +17,20 @@
 */
 params ["_unit", ["_groupMemory", []]];
 
+// check if stopped
+if (!(_unit checkAIFeature "PATH")) exitWith {false};
+
 // check it
 private _group = group _unit;
 if (_groupMemory isEqualTo []) then {
     _groupMemory = _group getVariable [QGVAR(groupMemory)];
 };
 
-// check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {false};
-
 // exit or sort it!
 _groupMemory = _groupMemory select {(leader _unit) distance _x < 200 && {_unit distance2D _x > 2}};
 if (_groupMemory isEqualTo []) exitWith {
     _group setVariable [QGVAR(groupMemory), _groupMemory, false];
-    _unit doFollow leader _unit;
+    _unit doFollow (leader _unit);
     false
 };
 
@@ -40,14 +40,14 @@ private _distance = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // CQB or suppress
-if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.8)}) then {
+if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.75)}) then {
     // Movement
     _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
     _unit forceSpeed 4;
 
     // execute CQB move
     _unit doMove _pos;
-    _unit setDestination [_pos, "FORMATION PLANNED", _distance > 10];
+    _unit setDestination [_pos, "LEADER PLANNED", _distance > 10];
 
     // variables
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
@@ -64,7 +64,7 @@ if (RND(0.9) || {_distance < (GVAR(cqbRange) * 0.8)}) then {
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([1, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 1.2]] call FUNC(doSuppress);
+    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5]] call FUNC(doSuppress);
     _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Suppress (Sympathetic)!", EGVAR(main,debug_functions)];
 };

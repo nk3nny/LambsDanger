@@ -15,6 +15,8 @@
  *
  * Public: No
 */
+#define DODGE_DISTANCE 2
+
 params ["_unit", ["_pos", [0, 0, 0]]];
 
 // settings
@@ -34,12 +36,12 @@ if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith 
 
 // ACE3 captive exit
 if (
-    GVAR(disableAIImediateAction)
+    GVAR(disableAIDodge)
     || {isForcedWalk _unit}
-    || { !(_unit checkAIFeature "MOVE") }
-    || { !(_unit checkAIFeature "PATH") }
-    || { _unit getVariable ["ace_captives_isHandcuffed", false] }
-    || { _unit getVariable ["ace_captives_isSurrendering", false] }
+    || {!(_unit checkAIFeature "MOVE")}
+    || {!(_unit checkAIFeature "PATH")}
+    || {_unit getVariable ["ace_captives_isHandcuffed", false]}
+    || {_unit getVariable ["ace_captives_isSurrendering", false]}
 ) exitWith {_stance};
 
 // callout
@@ -48,40 +50,48 @@ if (RND(0.6)) then {
 };
 
 // settings
-private _suppression = (getSuppression _unit > 0.05) && {_unit distance2D _pos < 45};
-private _relPos = getPosASL _unit;
+private _nearDistance = (_unit distance2D _pos) < 3.5;
+private _suppression = getSuppression _unit > 0 && { _nearDistance };
+private _relPos = [];
 private _anim = [];
 
 // move left
 if (_dir < 250 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [3, -60];
-    _anim append ([["WalkL", "WalkLB"], ["FastL", "FastLB"]] select _suppression);
+    _relPos = _unit getRelPos [DODGE_DISTANCE, -60];
+    _anim append ([["WalkL", "WalkLB"], ["FastL", "TactLB"]] select _suppression);
 };
 
 // move right
 if (_dir > 80 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [3, 60];
-    _anim append ([["WalkR", "WalkRB"], ["FastR", "FastRB"]] select _suppression);
+    _relPos = _unit getRelPos [DODGE_DISTANCE, 60];
+    _anim append ([["WalkR", "WalkRB"], ["FastR", "TactRB"]] select _suppression);
 };
 
 // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
-if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _unit distance2D _pos < 3 }) then {
-    _relPos = _unit getRelPos [3, 180];
-    _anim pushBack (["WalkB", "TactB"] select _suppression); //"FastB"
+if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _nearDistance }) then {
+    _relPos = _unit getRelPos [DODGE_DISTANCE, 180];
+    _anim pushBack (["WalkB", "TactB"] select _suppression);
 };
 
 // check
 if (_anim isEqualTo []) then {
-    _relPos = _unit getRelPos [3, 0];
-    _anim pushBack (["WalkF", "TactF"] select _suppression); //FastF
+    _relPos = _unit getRelPos [DODGE_DISTANCE, 0];
+    _anim pushBack (["WalkF", "TactF"] select _suppression);
 };
 
+// dodge
+if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit doMove _relPos;};
+
 // otherwise rush left or right
-_unit setDestination [_relPos, "FORMATION PLANNED", false];
 [_unit, _anim, true] call EFUNC(main,doGesture);
+_unit setDestination [_relPos, ["DoNotPlanFormation", "FORMATION PLANNED"] select (_unit call EFUNC(main,isIndoor)), false];
 
 // drop stance
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
+if (_stance isEqualTo "CROUCH" && { _nearDistance }) then {_unit setUnitPosWeak "DOWN";};
+
+// watch distant shots
+if (!_nearDistance) then {_unit doWatch _pos;};
 
 // end
 _stance

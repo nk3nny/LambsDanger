@@ -64,7 +64,7 @@ _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "FORMATION PLANNED", _distance2D > 12];
+_unit setDestination [_pos, "LEADER PLANNED", _distance2D > 12];
 
 // debug
 if (EGVAR(main,debug_functions)) then {

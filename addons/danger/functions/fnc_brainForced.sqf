@@ -19,6 +19,9 @@ params ["_unit"];
 // timeout
 private _timeout = time + 2;
 
+// debug variable
+_unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosASL _unit, _timeout, assignedTarget _unit], EGVAR(main,debug_functions)];
+
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
     -1

@@ -27,6 +27,10 @@ if (
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupSuppression)}}
 ) exitWith {false};
 
+// check for friendlies
+private _friendlies = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendlies);
+if !(_friendlies isEqualTo []) exitWith {false};
+
 // adjust pos
 private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];
 if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
@@ -38,15 +42,13 @@ _pos = (_eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance)
 // final range check
 if (_eyePos vectorDistance _pos < GVAR(minSuppressionRange)) exitWith {false};
 
-private _friendlies = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call EFUNC(main,findNearbyFriendlies);
-if !(_friendlies isEqualTo []) exitWith {false};
-
 // Callout!
 if (RND(0.4) && {count (units _unit) > 1}) then {
     [_unit, "Combat", "suppress", 75] call EFUNC(main,doCallout);
 };
 
 // do it!
+_unit doWatch (ASLtoAGL _pos);
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire

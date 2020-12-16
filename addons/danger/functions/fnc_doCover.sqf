@@ -40,6 +40,11 @@ private _anim = call {
     if (_direction > 45) exitWith {["WalkR", "WalRF"]};
     ["WalkF", "WalkRF"]
 };
+
+// prevent run in place
+if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit doMove _pos;};
+
+// do anim
 [_unit, _anim, true] call EFUNC(main,doGesture);
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 

@@ -37,6 +37,7 @@ _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
 // gather data
+private _unitCount = count units _unit;     // how many soldiers the leader believes he is leading - nk
 private _enemies = (_unit targets [true, 800]) select {_unit knowsAbout _x > 1};
 private _plan = [];
 
@@ -45,7 +46,7 @@ private _plan = [];
 
 // sort plans
 private _pos = [];
-if !(_enemies isEqualTo []) then {
+if !(_enemies isEqualTo [] || {_unitCount < 3}) then {
 
     // get modes
     private _speedMode = speedMode _unit;
@@ -80,15 +81,15 @@ if !(_enemies isEqualTo []) then {
     // Check for artillery ~ NB: support is far quicker now! and only targets infantry
     if (GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
         private _artilleryTarget = _enemies findIf {
-            _x distance2D _unit > 200
+            _unit distance2D _x > 200
         };
         if (_artilleryTarget != -1) then {
             [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);   // possibly add delay? ~ nkenny
         };
     };
 
-    // no manoeuvres -- exit
-    if (GVAR(disableAIAutonomousManoeuvres)) exitWith {_plan = [];};
+    // no manoeuvres or no weapons -- exit
+    if (GVAR(disableAIAutonomousManoeuvres) || {weapons _unit isEqualTo []}) exitWith {_plan = [];};
 
     // enemies within X meters of leader and either attacker or unit is inside buildings
     private _nearIndoorTarget = _enemies findIf {
@@ -176,17 +177,22 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // no plan ~ exit with no executable plan
-if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 3}) exitWith {
+if (_plan isEqualTo [] || {_pos isEqualTo []}) exitWith {
 
     // callout for groups
-    if (count units _unit > 2) then {
+    if (_unitCount > 2) then {
         [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
 
         // has taken casualties and no real orders: hide
-        if (GVAR(disableAIAutonomousManoeuvres) && {_unit distance2D ((expectedDestination _unit) select 0) < 50} && {!((speedMode _unit isEqualTo "FULL"))}) then {
-            private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
-            if (_alive != -1) then {
-                [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
+        if (
+            !(GVAR(disableAIAutonomousManoeuvres))
+            && {((expectedDestination _unit) select 1) isEqualTo "DoNotPlan"}
+            && {!((speedMode _unit) isEqualTo "FULL")}
+        ) then {
+            private _deadOrSuppressed = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
+            if (_deadOrSuppressed != -1) then {
+                _group setBehaviour "COMBAT";
+                [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [400, random 360], false], random 3] call CBA_fnc_waitAndExecute;
             };
         };
     };

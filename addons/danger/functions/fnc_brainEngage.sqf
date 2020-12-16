@@ -33,13 +33,13 @@ private _timeout = time + 2;
 _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];
 
 // check
-if (isNull _target) exitWith {
+if (isNull _target || {(weapons _unit) isEqualTo []}) exitWith {
     _unit forceSpeed 2;
     _timeout
 };
 
 // look at_this
-if (_unit knowsAbout _target > 3.5) then {
+if (_unit knowsAbout _target > 3.9) then {
     _unit lookAt _target;
 };
 
@@ -59,7 +59,7 @@ if (_canMove && {_distance < GVAR(cqbRange)}) exitWith {
 // far, try to suppress
 if (_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE] && {needReload _unit < 0.4} && {_distance < 800}) exitWith {
     _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.3 + random 1])] call FUNC(doSuppress);
+    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
     _timeout + random 6
 };
 

@@ -23,7 +23,7 @@ private _timeout = time + 1;
 // commander
 private _vehicle = vehicle _unit;
 if !((effectiveCommander _vehicle) isEqualTo _unit) exitWith {
-    [_timeout + 1, 10, getPosASL _vehicle, time + GVAR(dangerUntil), objNull]
+    [_timeout + 1, -2, getPosASL _vehicle, time + GVAR(dangerUntil), objNull]
 };
 
 // no queue

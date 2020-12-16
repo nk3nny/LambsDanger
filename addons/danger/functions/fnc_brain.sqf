@@ -77,7 +77,7 @@ _causeArray params ["_dangerCause", "_dangerPos", "", "_dangerCausedBy"]; // "_d
 // debug variable
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
-// Immediate actions
+// immediate actions
 if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) then {
     _return set [ACTION_IMMEDIATE, true];
 };
@@ -87,9 +87,9 @@ private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.95};
 if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
     _return set [ACTION_HIDE, true];
 
-    // callout
+    // panic function
     if (_panic) then {
-        [_unit, "Stealth", "panic", 55] call EFUNC(main,doCallout);
+        [_unit] call FUNC(doPanic);
     };
 };
 
@@ -105,7 +105,7 @@ if (_dangerCause in [DANGER_ASSESS, DANGER_SCREAM]) then {
 };
 
 // gesture + share information
-if (RND(0.6) && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
+if (RND(0.75) && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
     [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
     [_unit, _dangerCausedBy, GVAR(radioShout), true] call FUNC(shareInformation);

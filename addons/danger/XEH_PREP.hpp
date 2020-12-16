@@ -17,6 +17,7 @@ PREP(doGroupAssault);
 PREP(doGroupFlank);
 PREP(doGroupSuppress);
 PREP(doHide);
+PREP(doPanic);
 PREP(doReposition);
 PREP(doSuppress);
 PREP(fsmAllowAnimation);

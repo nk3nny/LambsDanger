@@ -124,7 +124,7 @@
             <English>Toggles AI group ability to autonomously use flares for illumation at nighttime unless NVGs are available or unit is in stealth mode</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
-            <English>Disable unit immediate actions</English>
+            <English>Disable unit dodging</English>
             <German>Sofortige KI-Aktionen ausschalten</German>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions_ToolTip">

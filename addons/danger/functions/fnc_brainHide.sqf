@@ -34,7 +34,7 @@ if (!(_unit checkAIFeature "PATH")) exitWith {-1};
 
 // indoor units exit
 if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    //_unit forceSpeed 0;
+    doStop _unit;   // test this more thoroughly!-- might make units too static! - nkenny
     _timeout
 };
 
@@ -59,6 +59,9 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
     // communicate danger!
     [{_this call FUNC(shareInformation)}, [_unit, objNull, GVAR(radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
+    // gesture
+    [_unit, "gestureGoB"] call EFUNC(main,doGesture);
+
     // add body to move routine
     _groupMemory pushBack _pos;
     _group setVariable [QGVAR(groupMemory), _groupMemory, false];
@@ -73,8 +76,9 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
 // speed
 _unit forceSpeed -1;
 
-// find cover
-[{_this call FUNC(doHide)}, [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
+// find cover ~ prefer buildings near leader - nkenny
+private _buildings = if (_unit distance2D (leader _unit) < 80) then {[leader _unit, nil, true, true] call EFUNC(main,findBuildings)} else {[]};
+[{_this call FUNC(doHide)}, [_unit, _pos, nil, _buildings], random 1] call CBA_fnc_waitAndExecute;
 
 // end
 _timeout

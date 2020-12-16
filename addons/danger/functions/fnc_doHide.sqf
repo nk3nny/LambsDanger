@@ -69,7 +69,7 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     };
 
     // water means hold
-    if (surfaceIsWater _targetPos) then { _targetPos = getPosASL _unit;};
+    if (surfaceIsWater _targetPos) then {_targetPos = getPosASL _unit;};
 
     // cover move
     if !(_cover isEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};

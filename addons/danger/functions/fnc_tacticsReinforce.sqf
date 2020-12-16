@@ -19,6 +19,9 @@
 */
 params ["_unit", ["_target", []], ["_units", []], ["_delay", 300]];
 
+// exit on dead leader
+if (!(_unit call EFUNC(main,isAlive))) exitWith {false};
+
 // set new time
 private _group = group _unit;
 _group setVariable [QGVAR(enableGroupReinforceTime), time + _delay, true];
@@ -32,7 +35,8 @@ _unit setVariable [QGVAR(currentTask), "Reinforce", EGVAR(main,debug_functions)]
 _group setVariable [QGVAR(tacticsTask), "Reinforcing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + _delay];
-_group enableAttack false;  // ~ gives better fine control of AI - nkenny
+_group enableAttack false;      // gives better fine control of AI - nkenny
+_group setBehaviour "AWARE";    // more tractacle speed
 
 // reset
 [
@@ -45,6 +49,9 @@ _group enableAttack false;  // ~ gives better fine control of AI - nkenny
     _group,
     _delay * 0.5
 ] call CBA_fnc_waitAndExecute;
+
+// eventhandler
+[QGVAR(OnReinforce), [_unit, group _unit, _target]] call EFUNC(main,eventCallback);
 
 // gesture
 [_unit, "HandSignalRadio"] call EFUNC(main,doGesture);
@@ -62,13 +69,13 @@ if (_units isEqualTo []) then {
 // formation changes ~ allowed here as Reinforcing units have full autonomy - nkenny
 private _distance = _unit distance2D _target;
 if (_distance > 500) then {
-    _unit setBehaviour "AWARE";
     _unit setFormation "COLUMN";
 } else {
     if (_distance > 200) then {
         _unit setFormation selectRandom ["WEDGE", "VEE", "LINE"];
     };
     if (_distance < GVAR(cqbRange)) then {
+        _unit setBehaviour "COMBAT";
         _unit setFormation "FILE";
         [_unit, _target] call FUNC(tacticsAssault);
     };

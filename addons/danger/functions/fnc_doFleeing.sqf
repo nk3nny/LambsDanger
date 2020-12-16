@@ -14,6 +14,8 @@
  *
  * Public: No
 */
+#define FLEE_DISTANCE 10
+
 params ["_unit"];
 
 // check disabled
@@ -35,16 +37,13 @@ _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 // eventhandler
 [QGVAR(OnFleeing), [_unit, group _unit]] call EFUNC(main,eventCallback);
 
-// enemy
-private _enemy = _unit findNearestEnemy _unit;
-
 // Abandon vehicles in need!
 if (
     RND(0.5)
-    && { !_onFoot }
-    && { canUnloadInCombat (vehicle _unit) }
-    && { (speed (vehicle _unit)) < 3 }
-    && { isTouchingGround vehicle _unit }
+    && {!_onFoot}
+    && {canUnloadInCombat (vehicle _unit)}
+    && {(speed (vehicle _unit)) < 3}
+    && {isTouchingGround vehicle _unit}
 ) exitWith {
     [_unit] orderGetIn false;
     _unit setSuppression 1;  // prevents instant laser aim - nkenny
@@ -54,11 +53,16 @@ if (
 // no further action in vehicle
 if (!_onFoot) exitWith {false};
 
+// enemy
+private _enemy = _unit findNearestEnemy _unit;
+
 // get destination
 private _pos = (expectedDestination _unit) select 0;
+private _eyePos = eyePos _unit;
 
 // on foot and seen by enemy
-if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eyePos _enemy])} || {getSuppression _unit > 0.9}) then {
+private _onFootAndSeen = (_unit distance2D _enemy) < 100 || {getSuppression _unit > 0.9} || {!(terrainIntersectASL [_eyePos, eyePos _enemy])};
+if (_onFootAndSeen) then {
 
     // variable
     _unit setVariable [QGVAR(currentTask), "Fleeing (enemy near)", EGVAR(main,debug_functions)];
@@ -69,37 +73,47 @@ if ((_unit distance2D _enemy) < 100 || {!(terrainIntersectASL [eyePos _unit, eye
     };
 
     // inside or under cover!
-    if ((getSuppression _unit < 0.2) && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 10], _unit]}) exitWith {
+    if ((getSuppression _unit < 0.2) && {lineIntersects [_eyePos, _eyePos vectorAdd [0, 0, 10], _unit] || {_unit distance2D _pos < 1}}) exitWith {
+        if (RND(0.9)) then {[_unit, "treated", true] call EFUNC(main,doGesture);};
         doStop _unit;
     };
-
-    // update pos
-    private _cover = nearestTerrainObjects [_unit getPos [GVAR(searchForHide) + 3, _unit getDir _pos], [], GVAR(searchForHide), false, true];
-    if !(_cover isEqualTo []) then {_pos = _cover select 0;};
 
     // speed
     _unit forceSpeed -1;
 
+    // update pos
+    private _cover = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE", "ROCK", "WALL", "FENCE"], GVAR(searchForHide), false, true];
+
     // force anim
-    private _direction = _unit getRelDir _pos;
-    private _relPos = _unit getRelPos [3, 0];
-    private _anim = call {
-        if (_unit distance2D _pos < 1 || {isForcedWalk _unit}) exitWith {["Down"];};
-        if (_direction > 315) exitWith {_relPos = _unit getRelPos [5, -15];["SlowF", "SlowLF"]};
-        if (_direction > 225) exitWith {_relPos = _unit getRelPos [5, -60];["SlowL", "SlowLF"]};
-        if (_direction > 135) exitWith {_relPos = _unit getRelPos [5, 180];["SlowB"]};
-        if (_direction > 45) exitWith {_relPos = _unit getRelPos [5, 60];["SlowR", "SlowRF"]};
-        _relPos = _unit getRelPos [5, 15];
-        ["SlowF", "SlowRF"]
+    if (_cover isEqualTo [] || {getSuppression _unit > 0.8}) exitWith {
+        private _direction = _unit getRelDir _pos;
+        private _relPos = [];
+        private _anim = call {
+            if (_direction > 315) exitWith {_relPos = _unit getRelPos [FLEE_DISTANCE, -15];["SlowF", "SlowLF"]};
+            if (_direction > 225) exitWith {_relPos = _unit getRelPos [FLEE_DISTANCE, -60];["SlowL", "SlowLF"]};
+            if (_direction > 135) exitWith {_relPos = _unit getRelPos [FLEE_DISTANCE, 180];["SlowB"]};
+            if (_direction > 45) exitWith {_relPos = _unit getRelPos [FLEE_DISTANCE, 60];["SlowR", "SlowRF"]};
+            _relPos = _unit getRelPos [FLEE_DISTANCE, 15];
+            ["SlowF", "SlowRF"]
+        };
+
+        // dodge
+        if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit doMove _relPos;};
+
+        // force anim
+        [_unit, _anim, true] call EFUNC(main,doGesture);
+        _unit setDestination [_relPos, ["DoNotPlanFormation", "FORMATION PLANNED"] select (_unit call EFUNC(main,isIndoor)), false];
     };
-    _unit setDestination [_relPos, "FORMATION PLANNED", false];
-    [_unit, _anim, true] call EFUNC(main,doGesture);
 
     // hide
-    private _buildings = [_unit, GVAR(searchForHide), true, true] call EFUNC(main,findBuildings);
+    private _buildings = [_unit, GVAR(searchForHide) * 2, true, true] call EFUNC(main,findBuildings);
+    _buildings append (_cover apply {getPosATL _x});
     if !(_buildings isEqualTo []) then {
         _unit doMove (_buildings select 0);
     };
+} else {
+    // follow self! ~ bugfix which prevents untis from getting stuck in fleeing loop inside fsm. - nkenny
+    _unit doFollow (leader _unit);
 };
 
 // debug

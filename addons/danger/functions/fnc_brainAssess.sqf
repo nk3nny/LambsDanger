@@ -69,6 +69,11 @@ if !(_groupMemory isEqualTo []) exitWith {
     _timeout + 2
 };
 
+// stance
+private _stance = stance _unit;
+if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
+if (_stance isEqualTo "CROUCH" && {getSuppression _unit > 0}) then {_unit setUnitPosWeak "DOWN";};
+
 // check self
 private _indoor = _unit call EFUNC(main,isIndoor);
 
