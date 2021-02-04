@@ -120,12 +120,12 @@ private _fnc_debug_drawRect = {
 
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
-             private _knowledge = _unit targetKnowledge _currentTarget;
-             if (_knowledge select 2 == time && local _unit) then {
+            private _knowledge = _unit targetKnowledge _currentTarget;
+            if (_knowledge select 2 == time && local _unit) then {
                 _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6, GVAR(debug_functions)];
-             };
-             private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
-             _targetKnowledge append [
+            };
+            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
+            _targetKnowledge append [
                 "<t color='#C7CCC1'>Target Knowledge: <br/>",
                 "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
                 "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
@@ -156,12 +156,13 @@ private _fnc_debug_drawRect = {
             private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
                 "    Current Tactic: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
-                "    Known enemies: ", _targetCount, "<br/>"
+                "    Known enemies: ", _targetCount, "<br/>",
+                "    Group memory: ", count (group _unit getVariable [QEGVAR(danger,groupMemory), []]), "<br/>"
             ];
         };
         _textData append [
             "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
-            "    Danger Pos: ", _pos, "<br/>",
+            "    Danger Pos: ", format ["%1m", round (_unit distance _pos)], "<br/>",
             "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
             "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
         ];

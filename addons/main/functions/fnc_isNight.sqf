@@ -18,7 +18,7 @@
 params ["_unit"];
 
 // stealth mode or has nightvision
-if (behaviour _unit isEqualTo "STEALTH" 
+if (behaviour _unit isEqualTo "STEALTH"
     || { !( (hmd _unit) isEqualTo "" )}
 ) exitWith {false};
 

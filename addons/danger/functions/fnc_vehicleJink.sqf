@@ -4,8 +4,8 @@
  * Jink vehicle shifts the vehicle 25-150 meters left or right or rear, in response to danger
  *
  * Arguments:
- * 0: Vehicle moving <OBJECT>
- * 1: Max range to move, default is 25 to 150 meters <NUMBER>
+ * 0: vehicle moving <OBJECT>
+ * 1: max range to move <NUMBER>
  *
  * Return Value:
  * destination to move
@@ -21,7 +21,13 @@ params ["_unit", ["_range", 25 + random [0, 25, 125]]];
 private _vehicle = vehicle _unit;
 
 // cannot move or moving
-if (!canMove _vehicle || {currentCommand _vehicle isEqualTo "MOVE" || currentCommand _vehicle isEqualTo "ATTACK"}) exitWith {getPosASL _unit};
+if (
+    !canMove _vehicle
+    || {currentCommand _vehicle isEqualTo "MOVE"
+    || currentCommand _vehicle isEqualTo "ATTACK"}
+    ) exitWith {
+    getPosASL _unit
+};
 
 // variables
 _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
@@ -53,7 +59,7 @@ if (_destination isEqualTo []) exitWith { _vehicle modelToWorldVisual [0, -(rand
 _destination = selectRandom _destination;
 
 // refresh ready
-(effectiveCommander _unit) doMove (getPosASL _unit);
+_vehicle doMove (getPosASL _vehicle);
 
 // make tanks pop smoke when moving
 // _vehicle forceweaponfire ["SmokeLauncher", "SmokeLauncher"];     <-- not working!
@@ -62,7 +68,13 @@ _destination = selectRandom _destination;
 _vehicle doMove _destination;
 
 // debug
-if (EGVAR(main,debug_functions)) then {["%1 jink (%2 moves %3m)", side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"), round (_unit distance _destination)] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {
+    [
+        "%1 jink (%2 moves %3m)",
+        side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"),
+        round (_unit distance _destination)
+    ] call EFUNC(main,debugLog);
+};
 
 // end
 _destination

@@ -74,7 +74,7 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 
 // dummy ~ seems necessary to get the AI to shoot up! -nkenny
 private _flarePos = [_pos, (_unit getPos [80, getDir leader _unit]) vectorAdd [0, 0, 200]] select (_pos isEqualTo []);
-private _dummy = "Skeet_Clay_F" createVehicle _flarePos;
+private _dummy = "CBA_buildingPos" createVehicle _flarePos;
 _dummy setPos _flarePos;
 _unit reveal _dummy;
 

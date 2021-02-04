@@ -12,7 +12,7 @@
  * Array
  *
  * Example:
- * [bob, getPos angryBob] call lambs_main_fnc_nearbyFriendly
+ * [bob, getPos angryBob] call lambs_main_fnc_findNearbyFriendlies
  *
  * Public: Yes
 */
@@ -30,6 +30,6 @@ _ignoredSides append [sideUnknown, sideEmpty, sideEnemy, sideLogic, sideFriendly
         false
     } else {
         private _targetPos = (_unit targetKnowledge _x) select 6; // Dont use Actual position but use AI Estimated position
-        (_unit distance2D _targetPos) < _distance
+        (_x distance2D _targetPos) < _distance
     };
 };

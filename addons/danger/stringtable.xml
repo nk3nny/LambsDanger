@@ -55,6 +55,12 @@
             <Polish>Wyłącza LAMBS AI dla grupy. \nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
             <French>Désactive l'IA LAMBS de groupe.\nCela empêche les assauts autonomes et le nettoyage des bâtiments, ainsi que les tentatives de se cacher face aux avions et aux chars.</French>
         </Key>
+        <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
+            <English>Enable Dynamic Reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
+            <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nThis feature will not override garrison or other features which disable AI settings.</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
             <German>Einstellungen</German>
@@ -180,7 +186,7 @@
             <French>Les unités IA n'utiliseront plus de fusées éclairantes.\nDans tous les cas, les fusées éclairantes ne sont pas utilisées si les unités IA sont munies de JVN ou si elles sont en mode furtif.</French>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
-            <English>Disable unit immediate actions</English>
+            <English>Disable unit dodging</English>
             <German>Sofortige KI-Aktionen ausschalten</German>
             <Polish>Wyłącz natychmiastowe reakcje jednostki</Polish>
             <French>Désactiver les actions immédiates</French>

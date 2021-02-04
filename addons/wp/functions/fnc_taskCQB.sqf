@@ -96,7 +96,7 @@ private _fnc_act = {
 
         // act
         {
-            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
+            _x forceSpeed 4;
             _x doMove _buildingPosSelected;
             _x lookAt _enemy;
 
@@ -117,7 +117,7 @@ private _fnc_act = {
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
+            [_x, _buildingPosSelected] call EFUNC(danger,assaultSpeed);
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug

@@ -46,6 +46,9 @@ _group enableAttack false;
 // set group task
 _group setVariable [QEGVAR(danger,tacticsTask), "taskHunt", EGVAR(main,debug_functions)];
 
+// dynamic reinforcements
+_group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+
 // FUNCTIONS -------------------------------------------------------------
 
 // FLARE SCRIPT
