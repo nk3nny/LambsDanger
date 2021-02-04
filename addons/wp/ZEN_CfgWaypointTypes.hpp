@@ -8,7 +8,7 @@ class ZEN_WaypointTypes {
         displayName = "TASK FORCED RETREAT";
         type = "SCRIPTED";
         script = QPATHTOF(scripts\fnc_wpRetreat.sqf);
-    };    
+    };
     class EGVAR(danger,Garrison) {
         displayName = "TASK GARRISON";
         type = "SCRIPTED";
