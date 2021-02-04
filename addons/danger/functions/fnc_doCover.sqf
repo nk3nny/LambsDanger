@@ -17,10 +17,17 @@
 */
 params ["_unit", ["_pos", [], [[]]]];
 
+// check if stopped
+if (!(_unit checkAIFeature "PATH") || {isForcedWalk _unit}) exitWith {_unit};
+
 // find cover
 if (_pos isEqualTo []) then {
-    _pos = nearestTerrainObjects [_unit, [], GVAR(searchForHide), true, true]; //"BUSH", "TREE", "HIDE", "WALL", "FENCE"
-    _pos = [(_pos select 0) getPos [-1, _unit getDir (_pos select 0)], getpos _unit] select (_pos isEqualTo []);
+    _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE"], GVAR(searchForHide), true, true];
+    _pos = if (_pos isEqualTo []) then {
+        getPosASL _unit
+    } else {
+        (_pos select 0) getPos [-1.2, _unit getDir (_pos select 0)]
+    };
 };
 
 // force anim
@@ -33,7 +40,12 @@ private _anim = call {
     if (_direction > 45) exitWith {["WalkR", "WalRF"]};
     ["WalkF", "WalkRF"]
 };
-[_unit, selectRandom _anim, true] call EFUNC(main,doGesture);
+
+// prevent run in place
+if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit moveTo _pos;};
+
+// do anim
+[_unit, _anim, false] call EFUNC(main,doGesture);       // gesture is not forced to allow cover movement to appear smoother - nkenny
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 
 // end

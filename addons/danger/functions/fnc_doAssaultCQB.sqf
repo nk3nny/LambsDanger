@@ -4,7 +4,8 @@
  * Special CQB attack pattern clearing building by building
  *
  * Arguments:
- * 0: Unit assault cover <OBJECT>
+ * 0: unit assaulting into CQB <OBJECT>
+ * 0: position being assaulted <ARRAY>
  *
  * Return Value:
  * boolean
@@ -31,7 +32,7 @@ _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
     _unit doFollow leader _unit;
-    _unit forceSpeed ([_unit, leader _unit] call FUNC(assaultSpeed));
+    [_unit, leader _unit] call FUNC(assaultSpeed);
     if (_unit getVariable [QGVAR(forceMove), false]) then {_unit setVariable [QGVAR(forceMove), nil];}; // reset forceMove status!
     false
 };
@@ -75,7 +76,7 @@ if (EGVAR(main,debug_functions)) then {
 };
 
 // speed
-_unit forceSpeed ([_unit, _buildingPosSelected] call FUNC(assaultSpeed));
+[_unit, _buildingPosSelected] call FUNC(assaultSpeed);
 
 // Close range cleanups
 if (RND(0.95) || {_unit distance _buildingPosSelected < 1.6}) then {
@@ -107,7 +108,7 @@ if !(_buildingPos isEqualTo []) then {
 
 // debug
 if (EGVAR(main,debug_functions) && {leader _unit isEqualTo _unit}) then {
-    format ["%1 assaulting building (%2 @ %3m - %4x spots left - %5 cycle)",
+    ["%1 assaulting building (%2 @ %3m - %4x spots left - %5 cycle)",
         side _unit,
         name _unit,
         round (_unit distance _buildingPosSelected),

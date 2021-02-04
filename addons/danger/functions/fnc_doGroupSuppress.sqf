@@ -4,9 +4,10 @@
  * Actualisation of Suppression cycle
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
+ * 0: cycles <NUMBER>
+ * 1: units list <ARRAY>
+ * 2: list of group vehicles <ARRAY>
+ * 3: list of building/enemy positions <ARRAY>
  *
  * Return Value:
  * success
@@ -21,25 +22,25 @@ params ["_cycle", "_units", "_vehicles", "_pos"];
 // update
 _units = _units select {_x call EFUNC(main,isAlive) && { !isPlayer _x }};
 _vehicles = _vehicles select { canFire _x };
-_cycle = _cycle - 1;
 
 // infantry
 {
     // ready
     private _posAGL = selectRandom _pos;
+    _posAGL = _posAGL vectorAdd [0, 0, linearConversion [0, 600, _x distance2D _posAGL, 0.5, 2, true]];
 
     // suppressive fire
     _x forceSpeed 1;
     _x setUnitPosWeak "MIDDLE";
     _x doWatch _posAGL;
-    private _suppress = [_x, AGLtoASL _posAGL, true] call FUNC(doSuppress);
+    private _suppress = [_x, AGLtoASL _posAGL] call FUNC(doSuppress);
     _x setVariable [QGVAR(currentTask), "Group Suppress", EGVAR(main,debug_functions)];
 
     // no LOS
-    if !(_suppress) then {
+    if !(_suppress || {(currentCommand _x isEqualTo "Suppress")}) then {
         // move forward
         _x forceSpeed 3;
-        _x doMove (_x getPos [8 + random 6, _x getdir _posAGL]);
+        _x doMove (_x getPos [12 + random 6, _x getDir _posAGL]);
         _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", EGVAR(main,debug_functions)];
     };
 } foreach _units;
@@ -52,11 +53,11 @@ _cycle = _cycle - 1;
 } foreach _vehicles;
 
 // recursive cyclic
-if (_cycle > 0 && {!(_units isEqualTo [])}) then {
+if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupSuppress)},
-        [_cycle, _units, _vehicles, _pos],
-        2 + random 2
+        [_cycle - 1, _units, _vehicles, _pos],
+        16 + random 2
     ] call CBA_fnc_waitAndExecute;
 };
 

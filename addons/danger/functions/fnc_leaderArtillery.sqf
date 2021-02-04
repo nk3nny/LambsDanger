@@ -4,8 +4,9 @@
  * Unit calls friendly artillery if available
  *
  * Arguments:
- * 0: Unit calling artillery <OBJECT>
- * 1: Target of artillery, unit <OBJECT> or position <ARRAY>
+ * 0: unit calling artillery <OBJECT>
+ * 1: target of artillery, unit <OBJECT> or position <ARRAY>
+ * 2: position of artillery target <ARRAY>
  *
  * Return Value:
  * success
@@ -22,14 +23,14 @@ if (_pos isEqualTo []) then {
 };
 
 // check if mod active
-if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {format ["%1 Artillery failed -- mod not enabled", side _unit] call EFUNC(main,debugLog);}};
+if (!GVAR(Loaded_WP)) exitWith {if (EGVAR(main,debug_functions)) then {["%1 Artillery failed -- mod not enabled", side _unit] call EFUNC(main,debugLog);}};
 
 // settings
 
 // exit on no ready artillery
 if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {
     if (EGVAR(main,debug_functions)) then {
-        format ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);
+        ["%1 Artillery failed -- no available artillery in range of Target", side _unit] call EFUNC(main,debugLog);
     };
 };
 
@@ -43,12 +44,13 @@ private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
+_unit doWatch _pos;
 
 // reset forceMove
 [{
     _this setVariable [QGVAR(forceMove), nil];
     _this forceSpeed -1;
-}, _unit, 8] call CBA_fnc_waitAndExecute;
+}, _unit, 20] call CBA_fnc_waitAndExecute;
 
 // Gesture
 doStop _unit;
@@ -57,7 +59,6 @@ doStop _unit;
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {
     _unit selectWeapon (binocular _unit);
-    _unit doWatch _pos;
 };
 
 // callout

@@ -4,18 +4,18 @@
  * Group conducts probing flanking manoeuvre
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Group threat unit <OBJECT> or position <ARRAY>
- * 2: Units in group, default all <ARRAY>
- * 3: How many assault cycles, default four <NUMBER>
- * 4: Overwatch destination <ARRAY>
- * 5: Time until tactics is reset, default 30s <NUMBERS>
+ * 0: group leader <OBJECT>
+ * 1: group target <OBJECT> or position <ARRAY>
+ * 2: units in group, default all <ARRAY>
+ * 3: how many assault cycles <NUMBER>
+ * 4: default overwatch destination <ARRAY>
+ * 4: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * Bool
  *
  * Example:
- * [bob, angryBob] call liteDanger_fnc_tacticsFlank;
+ * [bob, angryBob] call lambs_danger__fnc_tacticsFlank;
  *
  * Public: No
 */
@@ -24,15 +24,21 @@ params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], [
 // find target
 _target = _target call CBA_fnc_getPos;
 
+// check CQB ~ exit if in close combat other functions will do the work - nkenny
+if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
+    [_unit, _target] call FUNC(tacticsAssault);
+    false
+};
+
 private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group", "_speedMode"];
+        params [["_group", grpNull], ["_speedMode", "NORMAL"]];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
-            _group setSpeedMode _speedMode;
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
+            _group setSpeedMode _speedMode;
         };
     },
     [_group, speedMode _unit],
@@ -42,25 +48,20 @@ private _group = group _unit;
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
-// check CQB ~ exit if in close combat other functions will do the work - nkenny
-if (_unit distance2D _target < GVAR(CQB_range)) exitWith {
-    [_unit, _target] call FUNC(tacticsGarrison);
-    false
-};
-
 // find units
 if (_units isEqualTo []) then {
-    _units = [_unit, 200] call EFUNC(main,findReadyUnits);
+    _units = _unit call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
 private _vehicles = [];
 {
-    if (!(isNull objectParent _x) && { isTouchingGround vehicle _x } && { canFire vehicle _x }) then {
-        _vehicles pushBackUnique vehicle _x;
+    private _vehicle = vehicle _x;
+    if (_x != _vehicle && { isTouchingGround _vehicle } && { canFire _vehicle }) then {
+        _vehicles pushBackUnique _vehicle;
     };
-} foreach (units _unit select { _unit distance2D _x < 350 && { canFire _x }});
+} foreach ((units _unit) select { (_unit distance2D _x) < 350 && { canFire _x }});
 
 // sort building locations
 private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);
@@ -89,11 +90,11 @@ _group setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)]
 [_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
-[_unit, "combat", selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"], 125] call EFUNC(main,doCallout);
+[_unit, "combat", "flank", 125] call EFUNC(main,doCallout);
 
 // ready group
 _group setFormDir (_unit getDir _target);
-_unit doMove _overwatch;
+_units doMove _overwatch;
 
 // leader smoke ~ deploy concealment to enable movement
 [_unit, _overwatch] call EFUNC(main,doSmoke);
@@ -101,17 +102,17 @@ _unit doMove _overwatch;
 // function
 [_cycle, _units, _vehicles, _pos, _overwatch] call FUNC(doGroupFlank);
 
-// set speedmode    // NB: check this one - nkenny
-//_unit setSpeedMode "FULL";
+// set speedmode
+_unit setSpeedMode "FULL";
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
-
-    _overwatch set [2, 0];
-    private _arrow = createSimpleObject ["Sign_Arrow_F", AGLToASL _overwatch, true];
-    _arrow setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
-    [{deleteVehicle _this}, _arrow, 30] call CBA_fnc_waitAndExecute;
+    ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
+    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
+    private _mt = [_overwatch, "", _unit call EFUNC(main,debugMarkerColor), "hd_objective"] call EFUNC(main,dotMarker);
+    {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
+    _m setMarkerDirLocal (_unit getDir _overwatch);
+    [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;
 };
 
 // end

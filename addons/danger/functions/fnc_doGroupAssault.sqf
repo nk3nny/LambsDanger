@@ -4,9 +4,9 @@
  * Actualises assault cycle
  *
  * Arguments:
- * 0: Units list <ARRAY>
- * 1: List of building/enemy positions <ARRAY>
- * 2: Cycles <NUMBER>
+ * 0: cycles <NUMBER>
+ * 1: units list <ARRAY>
+ * 2: list of building/enemy positions <ARRAY>
  *
  * Return Value:
  * bool
@@ -20,31 +20,33 @@ params ["_cycle", "_units", "_pos"];
 
 // update
 _units = _units select {_x call EFUNC(main,isAlive) && {!isPlayer _x}};
-_cycle = _cycle - 1;
+if (_units isEqualTo []) exitWith {};
 
 {
     private _targetPos = selectRandom _pos;
-
     // setpos
-    _x doMove _targetPos;
-    _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
+    if !(currentCommand _x isEqualTo "MOVE") then {
+        _x doMove _targetPos;
+        _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
+        _x doWatch _targetPos;
+    };
+
+    // manoeuvre
+    //_x forceSpeed ([2, 4] select (getSuppression _x > 0 || {_x distance _targetPos < 45} || {terrainIntersectASL [eyePos _x, AGLtoASL _targetPos]}));
+    _x forceSpeed 4;
+    _x setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x > 0));
+    _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
+    _x setVariable [QGVAR(forceMove), true];
 
     // brave!
     _x setSuppression 0;
-
-    // manoeuvre
-    //_x forceSpeed ([2, 3] select (speedMode _x isEqualTo "FULL"));
-    _x forceSpeed 2;
-    _x setUnitPosWeak "UP";
-    _x setVariable [QGVAR(currentTask), "Group Assault", EGVAR(main,debug_functions)];
-    _x setVariable [QGVAR(forceMove), true];
 } foreach _units;
 
 // recursive cyclic
-if (_cycle > 0 && {!(_units isEqualTo [])}) then {
+if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupAssault)},
-        [_cycle, _units, _pos],
-        10
+        [_cycle - 1, _units, _pos],
+        5
     ] call CBA_fnc_waitAndExecute;
 };

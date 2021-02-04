@@ -20,5 +20,3 @@ Use CBA settings to configure the mod.
 diwako / joko / nkenny
 
 Thanks for playing.
-
-

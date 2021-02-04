@@ -48,7 +48,7 @@ _pos = _pos call CBA_fnc_getPos;
 
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
-_weapons = _weapons select {locked _x != 2 && {(_x emptyPositions "Gunner") > 0}};
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
@@ -211,7 +211,7 @@ _wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
 };
 
 

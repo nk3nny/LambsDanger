@@ -66,7 +66,6 @@ private _fnc_rushOrders = {
     {
         _x setUnitPos "UP";
         _x doMove (getPosATL _target);
-        //_x forceSpeed ([_x, _target] call EFUNC(danger,assaultSpeed));
         true
     } count (units _group);
     _group enableGunLights "forceOn";
@@ -102,7 +101,7 @@ waitUntil {
     // act
     if (!isNull _target) then  {
         [_group, _target] call _fnc_rushOrders;
-        if (EGVAR(main,debug_functions)) then { format ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2D _target)] call EFUNC(main,debugLog); };
+        if (EGVAR(main,debug_functions)) then { ["%1 taskRush: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2D _target)] call EFUNC(main,debugLog); };
         sleep (linearConversion [1000, 2000, (leader _group distance2D _target), _cycle, _cycle * 4, true]);
     } else {
         sleep (_cycle * 4);

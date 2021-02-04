@@ -4,8 +4,9 @@
  * Leader finds and declares nearest building as assault position
  *
  * Arguments:
- * 0: Group leader <OBJECT>
- * 1: Range to check buildings, default is CQB range <NUMBER>
+ * 0: group leader <OBJECT>
+ * 1: group target <OBJECT>
+ * 1: range to check buildings, default is CQB range <NUMBER>
  *
  * Return Value:
  * buildings found
@@ -15,11 +16,11 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", GVAR(CQB_range)], ["_delay", 180]];
+params ["_unit", ["_target", objNull], ["_range", GVAR(cqbRange)], ["_delay", 180]];
 
 // update tactics and contact state
 private _group = group _unit;
-_group setVariable [QGVAR(tactics), true];
+_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(contact), time + 300];
 
@@ -28,7 +29,7 @@ _group setVariable [QGVAR(contact), time + 300];
     {
         params [["_group", grpNull, [grpNull]], ["_attackEnabled", false]];
         if (!isNull _group) then {
-            _group setVariable [QGVAR(tactics), nil];
+            _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
             _group enableAttack _attackEnabled;
         };
@@ -43,7 +44,7 @@ _group enableAttack false;
 // new variable + distance check + exit if none
 private _inCQB = _group getVariable [QGVAR(inCQB), []];
 _inCQB = _inCQB select {_x distance2D _unit < _range + 25};
-if (count _inCQB > 0) exitWith {[]};
+if (_inCQB isEqualTo []) exitWith {[]};
 
 // check target
 if (isNull _target) then {_target = _unit findNearestEnemy _unit;};
@@ -68,7 +69,7 @@ _group setVariable [QGVAR(inCQB), _inCQB];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    format ["%1 TACTICS CQB (%2 with %3 units @ assaults %4 buildings)", side _unit, name _unit, count units _unit, count _inCQB] call EFUNC(main,debugLog);
+    ["%1 TACTICS CQB (%2 with %3 units @ assaults %4 buildings)", side _unit, name _unit, count units _unit, count _inCQB] call EFUNC(main,debugLog);
 };
 
 // end

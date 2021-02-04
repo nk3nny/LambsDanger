@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: unit being checked <OBJECT>
-  *
+ *
  * Return Value:
  * String value with texture colour
  *

@@ -32,7 +32,7 @@ if(local _logic && _activated) then {
             [GVAR(TargetIndex)] call BIS_fnc_phoneticalWord,
             format ["%1 %2", localize "STR_A3_RADIO_Z", GVAR(TargetIndex)]
         ] select (GVAR(TargetIndex) > 26);
-         _name = format ["Dynamic Target %1", _callName];
+        _name = format ["Dynamic Target %1", _callName];
     };
     _logic setVehicleVarName _name;
     [objNull, format ["%1 created", vehicleVarName _logic]] call BIS_fnc_showCuratorFeedbackMessage;

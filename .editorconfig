@@ -1,0 +1,57 @@
+root = true
+
+[*]
+end_of_line = crlf
+charset = utf-8
+
+[*.sqf]
+indent_size = 4
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.cpp]
+indent_size = 4
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.hpp]
+indent_size = 4
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.json]
+indent_size = 2
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.js]
+indent_size = 2
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.xml]
+indent_size = 4
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.paa]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
+
+[*.fsm]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset

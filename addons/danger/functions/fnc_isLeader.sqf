@@ -15,6 +15,6 @@
  * Public: No
 */
 params ["_unit"];
-isFormationLeader _unit
-&& {getSuppression _unit < 0.2}
-&& {!(group _unit getVariable [QGVAR(tactics), false])}
+getSuppression _unit < 0.1
+&& {!(group _unit getVariable [QGVAR(isExecutingTactic), false])}
+&& {(leader _unit) isEqualTo _unit || {RND(0.9) && {isFormationLeader _unit || {!((leader _unit) call EFUNC(main,isAlive))}}}}

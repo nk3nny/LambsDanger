@@ -92,9 +92,9 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-// Toggles AI Immediate (re)Actions
+// Toggles AI Dodging
 [
-    QGVAR(disableAIImediateAction),
+    QGVAR(disableAIDodge),
     "CHECKBOX",
     [LSTRING(Settings_DisableImmediateActions), LSTRING(Settings_DisableImmediateActions_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -116,7 +116,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
 
 // Range at which units consider themselves in CQB
 [
-    QGVAR(CQB_range),
+    QGVAR(cqbRange),
     "SLIDER",
     [LSTRING(Settings_CQBRange), LSTRING(Settings_CQBRange_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -126,11 +126,11 @@ private _curCat = LSTRING(Settings_GeneralCat);
 
 // Minimum range for suppression
 [
-    QGVAR(minSuppression_range),
+    QGVAR(minSuppressionRange),
     "SLIDER",
     [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [1, 500, 20, 0],
+    [1, 500, 25, 0],
     1
 ] call CBA_fnc_addSetting;
 
@@ -168,7 +168,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Toggle communication for all units
 [
-    QGVAR(radio_disabled),
+    QGVAR(radioDisabled),
     "CHECKBOX",
     [LSTRING(Settings_DisableInformationSharing), LSTRING(Settings_DisableInformationSharing_Tooltip)],
     [COMPONENT_NAME, _curCat],
@@ -198,7 +198,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Ranges at which groups share information
 [
-    QGVAR(radio_shout),
+    QGVAR(radioShout),
     "SLIDER",
     [LSTRING(Settings_Shout), LSTRING(Settings_Shout_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -208,7 +208,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Base range of WEST side
 [
-    QGVAR(radio_WEST),
+    QGVAR(radioWest),
     "SLIDER",
     [LSTRING(Settings_BaseWest), LSTRING(Settings_BaseWest_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -218,7 +218,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Base range of EAST side
 [
-    QGVAR(radio_EAST),
+    QGVAR(radioEast),
     "SLIDER",
     [LSTRING(Settings_BaseEast), LSTRING(Settings_BaseEast_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -228,7 +228,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Base range of INDEPENDENT side
 [
-    QGVAR(radio_GUER),
+    QGVAR(radioGuer),
     "SLIDER",
     [LSTRING(Settings_BaseIndependent), LSTRING(Settings_BaseIndependent_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -238,7 +238,7 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
 
 // Base range of RadioBackpack
 [
-    QGVAR(radio_backpack),
+    QGVAR(radioBackpack),
     "SLIDER",
     [LSTRING(Settings_BackpackRadios), LSTRING(Settings_BackpackRadios_ToolTip)],
     [COMPONENT_NAME, _curCat],
@@ -246,6 +246,10 @@ private _curCat = LSTRING(Settings_ShareInformationCat);
     1
 ] call CBA_fnc_addSetting;
 
+/*
+TEMPORARILY DISABLED FOR VERSION 2.5 RELEASE
+WAITING BETTER OR OTHER SOLUTION
+nkenny
 
 // Configures CQC formations
 _curCat = LSTRING(Settings_CQBFormationsCat);
@@ -278,3 +282,5 @@ DFUNC(UpdateCQBFormations) = {
         1, _code
     ] call CBA_fnc_addSetting;
 } forEach GVAR(allPossibleFormations);
+
+*/

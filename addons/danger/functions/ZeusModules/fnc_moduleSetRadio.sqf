@@ -15,7 +15,7 @@ if (_activated && local _logic) then {
     if (isPlayer _unit) then {
         _error = LELSTRING(main,PlayerNotValid);
     };
-    if (_error == "") then {
+    if (_error isEqualTo "") then {
         [LSTRING(Module_SetRadio_DisplayName),
             [
                 [LSTRING(Module_SetRadio_SettingName), "BOOLEAN", LSTRING(Module_SetRadio_SettingToolTip), _unit getVariable [QGVAR(dangerRadio), false]]

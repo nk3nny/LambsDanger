@@ -5,16 +5,17 @@
  *
  * Arguments:
  * 0: group leader <OBJECT>
+ * 1: known enemy <OBJECT>
  *
  * Return Value:
  * bool
  *
  * Example:
- * [bob] call lambs_danger_fnc_tactics;
+ * [bob, angryJoe] call lambs_danger_fnc_tactics;
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]]];
+params [["_unit", objNull, [objNull]], ["_target", objNull, [objNull]]];
 
 // CQB mode ~ disabled awaiting polish ~ nkenny
 //if (formation _unit in GVAR(cqb_formations)) exitWith {

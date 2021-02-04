@@ -21,7 +21,8 @@ params [
     ["_unit", objNull, [objNull, []]],
     ["_range", 100, [0]],
     ["_useHousePos", false, [false]],
-    ["_onlyIndoor", false, [false]]
+    ["_onlyIndoor", false, [false]],
+    ["_findDoors", false, [false]]
 ];
 
 // houses
@@ -31,7 +32,18 @@ _houses = _houses select {!((_x buildingPos -1) isEqualTo [])};
 // find house positions
 if (!_useHousePos) exitWith {_houses}; // return if not use House Pos
 private _housePos = [];
-{_housePos append (_x buildingPos -1)} forEach _houses;
+{
+    private _house = _x;
+    _housePos append (_house buildingPos -1);
+    if (_findDoors) then {
+        {
+            if ("door" in toLower (_x)) then {
+                _housePos pushBack (_house modelToWorld (_house selectionPosition _x));
+            };
+        } forEach (selectionNames _house);
+    };
+} forEach _houses;
+
 
 // sort indoor positions
 if (_onlyIndoor) then {

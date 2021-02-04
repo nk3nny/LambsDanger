@@ -80,7 +80,7 @@ private _fnc_act = {
 
         // debug
         if (EGVAR(main,debug_functions)) then {
-            format ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
+            ["%1 taskCQB: RUSH ENEMY!",side _group] call EFUNC(main,debugLog);
             createSimpleObject ["Sign_Arrow_Large_F", getPosASL _enemy, true];
         };
 
@@ -96,7 +96,7 @@ private _fnc_act = {
 
         // act
         {
-            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
+            _x forceSpeed 4;
             _x doMove _buildingPosSelected;
             _x lookAt _enemy;
 
@@ -117,7 +117,7 @@ private _fnc_act = {
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            _x forceSpeed ([_x,_buildingPosSelected] call EFUNC(danger,assaultSpeed));
+            [_x, _buildingPosSelected] call EFUNC(danger,assaultSpeed);
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
@@ -211,7 +211,7 @@ waitUntil {
     [_enemy, _group, _building] call _fnc_act;
 
     // debug
-    if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(main,debug_functions)) then {["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
@@ -229,7 +229,7 @@ waitUntil {
 } foreach units _group;
 
 // debug
-if (EGVAR(main,debug_functions)) then {format ["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
+if (EGVAR(main,debug_functions)) then {["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
 
 // end
 true

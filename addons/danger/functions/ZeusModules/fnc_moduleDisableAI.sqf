@@ -15,7 +15,7 @@ if (_activated && local _logic) then {
     if (isPlayer _unit) then {
         _error = LELSTRING(main,PlayerNotValid);
     };
-    if (_error == "") then {
+    if (_error isEqualTo "") then {
         [LSTRING(Module_DisableAI_DisplayName),
             [
                 [LSTRING(Module_DisableAI_SettingName), "BOOLEAN", LSTRING(Module_DisableAI_SettingToolTip), _unit getVariable [QGVAR(disableAI), false]]

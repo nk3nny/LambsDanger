@@ -7,7 +7,7 @@ PREP(eventCallback);
 
 PREP(findBuildings);
 PREP(findCover);
-PREP(findNearbyFriendly);
+PREP(findNearbyFriendlies);
 PREP(findOverwatch);
 PREP(findReadyUnits);
 
