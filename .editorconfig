@@ -2,8 +2,60 @@ root = true
 
 [*]
 charset = utf-8
+indent_style = space
+
+[*.sqf]
+charset = utf-8
 end_of_line = crlf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.cpp]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.hpp]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.json]
+charset = utf-8
+end_of_line = crlf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.js]
+charset = utf-8
+end_of_line = crlf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.xml]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.hpp]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
