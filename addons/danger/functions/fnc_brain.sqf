@@ -6,7 +6,7 @@
  * Arguments:
  * 0: unit doing the avaluation <OBJECT>
  * 1: danger queue <ARRAY>
-  *
+ *
  * Return Value:
  * array
  *
