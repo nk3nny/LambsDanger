@@ -18,6 +18,8 @@ jobs:
       run: python3 tools/config_style_checker.py
     - name: Check for BOM
       uses: arma-actions/bom-check@master
+    - name: .editorconfig Checker
+      uses: editorconfig-checker/action-editorconfig-checker@v1.0.0
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.2
     - name: Run Stringtable Checker
