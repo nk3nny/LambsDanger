@@ -15,7 +15,9 @@
  *
  * Public: No
 */
-params ["_unit", ["_priorties", GVAR(fsmPriorities)]];
+params ["", ["_priorties", GVAR(fsmPriorities)]];
+
+// this function may have use in the future - nkenny
 
 // end
 _priorties

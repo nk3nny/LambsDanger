@@ -29,15 +29,15 @@ if (_units isEqualTo []) then {
 
 // sort
 _units = _units select {
-    //unitReady _x
     _x distance2D _unit < _range
-    && { isNull objectParent _x }
-    && { _x call EFUNC(main,isAlive) }
-    && { !(_x getVariable [QGVAR(forceMove), false]) }
-    && { !isPlayer _x }
-    && { !fleeing _x }
-    && { _x checkAIFeature "PATH" }
-    && { _x checkAIFeature "MOVE" }
+    && {!isPlayer _x}
+    && {!fleeing _x}
+    && {isNull objectParent _x}
+    && {_x checkAIFeature "PATH"}
+    && {_x checkAIFeature "MOVE"}
+    && {_x call EFUNC(main,isAlive)}
+    && {!(_x getVariable [QEGVAR(danger,forceMove), false])}
+    && {!(currentCommand _x in ["GET IN", "ACTION", "HEAL"])}
 };
 
 _units

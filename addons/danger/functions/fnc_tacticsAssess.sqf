@@ -5,7 +5,6 @@
  *
  * Arguments:
  * 0: group leader <OBJECT>
- * 1: Time until tactics state ends <NUMBER>, 60 seconds default
  *
  * Return Value:
  * bool
@@ -15,7 +14,14 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_delay", 30]];
+#define TACTICS_HIDE 0
+#define TACTICS_FLANK 1
+#define TACTICS_GARRISON 2
+#define TACTICS_ASSAULT 3
+#define TACTICS_SUPPRESS 4
+#define TACTICS_ATTACK 5
+
+params [["_unit", objNull, [objNull]]];
 
 // check if group AI disabled
 private _group = group _unit;
@@ -23,14 +29,15 @@ if (_group getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
 // set variable
 _group setVariable [QGVAR(isExecutingTactic), true];
-_group setVariable [QGVAR(contact), time + 300];
+_group setVariable [QGVAR(contact), time + 600];
 
 // set current task
 _unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
 // gather data
-private _enemies = (_unit targets [true, 600, [], 0]) select {_unit knowsAbout _x > 1};
+private _unitCount = count units _unit;     // how many soldiers the leader believes he is leading - nk
+private _enemies = (_unit targets [true, 1200]) select {_unit knowsAbout _x > 1};
 private _plan = [];
 
 // leader assess EH
@@ -38,104 +45,125 @@ private _plan = [];
 
 // sort plans
 private _pos = [];
-if !(_enemies isEqualTo []) then {
+if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
+
+    // get modes
+    private _speedMode = speedMode _unit;
+    private _combatMode = combatMode _unit;
+    private _eyePos = eyePos _unit;
 
     // communicate
     [_unit, selectRandom _enemies] call FUNC(shareInformation);
 
     // vehicle response
-    private _tank = _enemies findIf {
-        _x isKindOf "Tank"
-        && {_unit distance2D _x < 350}
-        && {!(terrainIntersectASL [eyePos _unit, eyePos _x])};
+    private _tankTarget = _enemies findIf {
+        (vehicle _x) isKindOf "Tank"
+        && {_unit distance2D _x < 450}
+        && {!(terrainIntersectASL [_eyePos, (eyePos _x) vectorAdd [0, 0, 5]])};
     };
-    if (_tank != -1) then {
-        _plan pushBack 0; // hide!
-        _pos = _unit getHideFrom (_enemies select _tank);
+    if (_tankTarget != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)} && {!(_speedMode isEqualTo "FULL")}) exitWith {
+        private _enemyVehicle = (_enemies select _tankTarget);
+        _plan pushBack TACTICS_HIDE;
+        _pos = _unit getHideFrom _enemyVehicle;
 
         // anti-vehicle callout
-        private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf (_enemies select _tank) >> "nameSound")) then {
-            getText (configFile >> "CfgVehicles" >> typeOf (_enemies select _tank) >> "nameSound")
+        private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemyVehicle >> "nameSound")) then {
+            getText (configFile >> "CfgVehicles" >> typeOf _enemyVehicle >> "nameSound")
         } else {
             "KeepFocused"
         };
         [_unit, behaviour _unit, _callout, 125] call EFUNC(main,doCallout);
-
     };
 
     // anti-infantry tactics
-    _enemies = _enemies select {_x isKindOf "Man"};
+    _enemies = _enemies select {(vehicle _x) isKindOf "Man"};
     private _inside = _unit call EFUNC(main,isIndoor);
 
     // Check for artillery ~ NB: support is far quicker now! and only targets infantry
-    private _artilleryTarget = _enemies findIf {
-        _x distance2D _unit > 200
-        && { isTouchingGround (vehicle _x) }
-    };
-    if (_artilleryTarget != -1 && { GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)} }) then {
-        [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);
+    if (GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
+        private _artilleryTarget = _enemies findIf {
+            _unit distance2D _x > 200
+        };
+        if (_artilleryTarget != -1) then {
+            [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);   // possibly add delay? ~ nkenny
+        };
     };
 
-    // enemies within X meters of leader
-    private _targets = _enemies findIf {
-        _unit distance2D _x < GVAR(cqbRange)
+    // no manoeuvres or no weapons -- exit
+    if (
+        GVAR(disableAIAutonomousManoeuvres)
+        || {weapons _unit isEqualTo []}
+        || {!(_unit checkAIFeature "PATH")}
+        || {!(_unit checkAIFeature "MOVE")}
+    ) exitWith {_plan = [];};
+
+    // enemies within X meters of leader and either attacker or unit is inside buildings
+    private _nearIndoorTarget = _enemies findIf {
+        _unit distance2D _x < 25
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
-    if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
-        _plan append [2, 2, 3];    // garrison, garrison, assault
-        _pos = [_unit getHideFrom (_enemies select _targets), getPosASL _unit] select _inside;
+    if (_nearIndoorTarget != -1) exitWith {
+        _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
+        _pos = [_unit getHideFrom (_enemies select _nearIndoorTarget), getPosASL _unit] select _inside;
     };
 
     // inside? stay safe
     if (_inside) exitWith {_plan = [];};
 
-    // enemies far away or above!
-    private _targets = _enemies findIf {
+    // enemies far away and above height and has LOS and limited knowledge!
+    private _farHighertarget = _enemies findIf {
         _unit distance2D _x > 300
-        && {(getPosASL _x select 2 ) < ((getPosASL _unit select 2) + 15)}
+        && {_unit knowsAbout _x < 2}
+        && {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
+        && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])};
     };
-    if (_targets != -1) exitWith {
-        _plan pushBack 4;   // suppress
-        _pos = _unit getHideFrom (_enemies select _targets);
+    if (_farHighertarget != -1 && {!(_speedMode isEqualTo "FULL")}) exitWith {
+        _plan append [TACTICS_SUPPRESS, TACTICS_HIDE, TACTICS_HIDE];
+        _pos = _unit getHideFrom (_enemies select _farHighertarget);
     };
-    // enemies away from buildings or below
-    private _targets = _enemies findIf {
+
+    // enemies near and away from buildings and below
+    private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < 220
-        && {_unit distance2D _x > GVAR(cqbRange)}
-        && {
-            ( getPosASL _x select 2 ) < ( (getPosASL _unit select 2) - 10)
-            || { ([_x, GVAR(cqbRange) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
-        };
+        && {((getPosASL _x) select 2) < ((getPosASL _unit select 2) - 15)}
+        && {([_x, GVAR(cqbRange) * 0.55] call EFUNC(main,findBuildings)) isEqualTo []}
     };
-    if (_targets != -1) exitWith {
-        _plan pushBack 1;   // flank
-        if ((combatMode _unit) isEqualTo "RED") then {_plan pushBack 3;}; // assault
-        _pos = _unit getHideFrom (_enemies select _targets);
-
-        // mark enemy position for sympathetic fire
-        _group setVariable [QGVAR(CQB_pos), (nearestTerrainObjects [_pos, [], 5, false, true]) apply {getPos _x}];
+    if (_farNoCoverTarget != -1) exitWith {
+        // trust in default attack routines!
+        _plan pushBack TACTICS_ATTACK;
+        _pos = _enemies select _farNoCoverTarget;
     };
 
-    // enemy inside buildings or fortified
-    private _targets = _enemies findIf {
+    // enemy at long range
+    private _farTarget = _enemies findIf {
+        _unit distance2D _x > 300
+    };
+    if (_farTarget != -1) then {
+        // suppress or flank
+        _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_FLANK];
+        if (_speedMode isEqualTo "FULL") then {_plan pushBack TACTICS_ASSAULT;};
+        _pos = _unit getHideFrom (_enemies select _farTarget);
+    };
+
+    // enemy at inside buildings or fortified
+    private _fortifiedTarget = _enemies findIf {
         _x call EFUNC(main,isIndoor)
         || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
     };
-    if (_targets != -1 && {!GVAR(disableAIAutonomousManoeuvres)}) exitWith {
+    if (_fortifiedTarget != -1) exitWith {
 
         // basic plan
-        _plan append [1, 1];    // flank, flank
-        _pos = _unit getHideFrom (_enemies select _targets);
+        _plan append [TACTICS_FLANK, TACTICS_FLANK];
+        _pos = _unit getHideFrom (_enemies select _fortifiedTarget);
 
         // combatmode
-        private _combatMode = combatMode _unit;
-        if (_combatMode isEqualTo "RED") then {_plan pushBack 3;}; // assault
-        if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack 4;}; // suppress
+        if (_combatMode isEqualTo "RED") then {_plan pushBack TACTICS_ASSAULT;};
+        if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack TACTICS_SUPPRESS;};
 
         // visibility / distance / no cover
-        if !(terrainIntersectASL [eyePos _unit, eyePos (_enemies select _targets)]) then {_plan pushBack 4;}; // suppress
-        if (_unit distance2D _pos < 120) then {_plan pushBack 3;}; // assault
-        if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack 1;}; // flank
+        if !(terrainIntersectASL [_eyePos, eyePos (_enemies select _fortifiedTarget)]) then {_plan pushBack TACTICS_SUPPRESS;};
+        if (_unit distance2D _pos < 120) then {_plan pushBack TACTICS_ASSAULT;};
+        if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
         [_unit, _pos] call EFUNC(main,doSmoke);
@@ -156,33 +184,12 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // no plan ~ exit with no executable plan
-if (_plan isEqualTo [] || {_pos isEqualTo []} || {count units _unit < 2}) exitWith {
-    // callout
-    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
+if (_plan isEqualTo [] || {_pos isEqualTo []}) exitWith {
 
-    // has taken casualties: hide
-    private _alive = units _unit findIf {!(_x call EFUNC(main,isAlive))};
-    if (_alive != -1) then {
-        [{_this call FUNC(tacticsHide)}, [_unit, _unit getPos [100, random 360], false], random 3] call CBA_fnc_waitAndExecute;
-    };
+    // holding tactics
+    [_unit] call FUNC(tacticsHold);
 
-    // check new random direction if no enemy found!
-    if (isNull (_unit findNearestEnemy _unit)) then {
-        _group setFormDir (random 360);
-    };
-
-    // recheck in a moment
-    [
-        {
-            params ["_group"];
-            if (!isNull _group) then {
-                _group setVariable [QGVAR(isExecutingTactic), nil];
-                _group setVariable [QGVAR(tacticsTask), nil];
-            };
-        },
-        _group,
-        _delay + random 5
-    ] call CBA_fnc_waitAndExecute;
+    // end
     false
 };
 
@@ -203,23 +210,27 @@ if !(GVAR(disableAIDeployStaticWeapons)) then {
 // enact plan
 _plan = selectRandom _plan;
 switch (_plan) do {
-    case 1: {
+    case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
-    case 2: {
+    case TACTICS_GARRISON: {
         // garrison
         [{_this call FUNC(tacticsGarrison)}, [_unit, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
     };
-    case 3: {
+    case TACTICS_ASSAULT: {
         // rush ~ assault
-        [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 30] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
         if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
-    case 4: {
+    case TACTICS_SUPPRESS: {
         // suppress
         [{_this call FUNC(tacticsSuppress)}, [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
+    };
+    case TACTICS_ATTACK: {
+        // group attacks as one
+        [{_this call FUNC(tacticsAttack)}, [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor

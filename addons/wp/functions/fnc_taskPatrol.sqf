@@ -54,6 +54,9 @@ _group enableGunLights "forceOn";
 // set group task
 _group setVariable [QEGVAR(danger,tacticsTask), "taskPatrol", EGVAR(main,debug_functions)];
 
+// dynamic reinforcements
+_group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+
 private _fistWPId = 0;
 
 if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {

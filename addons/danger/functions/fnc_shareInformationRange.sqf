@@ -4,7 +4,10 @@
  * Determines range which information is shared
  *
  * Arguments:
- * 0: Unit sharing information <OBJECT>
+ * 0: unit sharing information <OBJECT>
+ * 1: default range <NUMBER>
+ * 2: override range <BOOLEAN>
+ * 3: unit has has a long range radio <BOOLEAN>
  *
  * Return Value:
  * Array containing, unit doing the call, radio range, and presence of backpack radio
@@ -14,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_range",1000], ["_override",false], ["_radio",false]];
+params ["_unit", ["_range", 1000], ["_override", false], ["_radio", false]];
 
 // override
 if (_override) exitWith { [_unit, _range, _radio] };
@@ -32,7 +35,7 @@ _range = switch (side _unit) do {
 // Sort long range radios
 private _target = _unit;
 
-private _units = (units _unit select {_x call EFUNC(main,isAlive) && {_x distance2D _unit < 150} && {!isPlayer _x}});
+private _units = units _unit select {_x call EFUNC(main,isAlive) && {_x distance2D _unit < 150} && {!isPlayer _x}};
 private _index = _units findIf {
         _x getVariable [QGVAR(dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2D _unit < 70})}
@@ -45,7 +48,7 @@ if (_radio) then {
     _range = _range + GVAR(radioBackpack);
 };
 // tweak by height above sea-level
-_range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400, 1000, true]);
+_range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400, 1200, true]);
 
 // return unit and range
 [_target, _range, _radio]

@@ -4,8 +4,9 @@
  * Unit calls friendly artillery if available
  *
  * Arguments:
- * 0: Unit calling artillery <OBJECT>
- * 1: Target of artillery, unit <OBJECT> or position <ARRAY>
+ * 0: unit calling artillery <OBJECT>
+ * 1: target of artillery, unit <OBJECT> or position <ARRAY>
+ * 2: position of artillery target <ARRAY>
  *
  * Return Value:
  * success
@@ -43,12 +44,13 @@ private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
 _unit forceSpeed 0;
 _unit setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
 _unit setVariable [QGVAR(forceMove), true];
+_unit doWatch _pos;
 
 // reset forceMove
 [{
     _this setVariable [QGVAR(forceMove), nil];
     _this forceSpeed -1;
-}, _unit, 8] call CBA_fnc_waitAndExecute;
+}, _unit, 20] call CBA_fnc_waitAndExecute;
 
 // Gesture
 doStop _unit;
@@ -57,7 +59,6 @@ doStop _unit;
 // binoculars if appropriate!
 if (!(binocular _unit isEqualTo "")) then {
     _unit selectWeapon (binocular _unit);
-    _unit doWatch _pos;
 };
 
 // callout

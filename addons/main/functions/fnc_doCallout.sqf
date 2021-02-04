@@ -57,6 +57,9 @@ switch (toLower(_callout)) do {
     case ("panic"): {
         _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"];
     };
+    case ("flank"): {
+        _callout = selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"];
+    };
 };
 
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
@@ -69,17 +72,26 @@ if (isNil "_cachedSounds") then {
     };
 
     _cachedSounds = getArray (_protocolConfig >> _callout);
-
+    private _deleted = false;
     {
         private _sound = _x;
-        if (_sound select [0, 1] != "\") then {
-            _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
-        };
-        if (_sound select [0, 1] == "\") then {
-            _sound = _sound select [1];
+        if (_sound == "") then {
+            _sound = objNull;
+            _deleted = true;
+        } else {
+            if (_sound select [0, 1] != "\") then {
+                _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
+            };
+            if (_sound select [0, 1] == "\") then {
+                _sound = _sound select [1];
+            };
         };
         _cachedSounds set [_forEachIndex, _sound];
     } forEach _cachedSounds;
+
+    if (_deleted) then {
+        _cachedSounds = _cachedSounds - [objNull];
+    };
 
     GVAR(CalloutCacheNamespace) setVariable [_cacheName, _cachedSounds];
 };
@@ -87,20 +99,14 @@ if (isNil "_cachedSounds") then {
 // no sounds found
 if (_cachedSounds isEqualTo []) exitWith {
     if (GVAR(debug_functions)) then {
-        private _arr = ["ERROR: Sound File for Callout %1 Found", _cacheName];
+        private _str = ["WARNING: Callout %1 in behavior %3 for speaker %2 was not found!", "WARNING: Callout %1 for speaker %2 was not found!"] select (_behavior == "");
+        private _arr = [_str, _callout, _speaker, _behavior];
         _arr call FUNC(debugLog);
         _arr call BIS_fnc_error;
     };
 };
 
 private _sound = selectRandom _cachedSounds;
-if (_sound == "") exitWith {
-    if (GVAR(debug_functions)) then {
-        private _arr = ["ERROR: Sound File for Callout %1 Found", _cacheName];
-        _arr call FUNC(debugLog);
-        _arr call BIS_fnc_error;
-    };
-};
 playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{

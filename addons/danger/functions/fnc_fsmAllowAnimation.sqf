@@ -4,7 +4,7 @@
  * Checks if unit is allowed to play animations. Used in civilian danger.fsm
  *
  * Arguments:
- * 0: Unit fleeing <OBJECT>
+ * 0: unit fleeing <OBJECT>
  *
  * Return Value:
  * boolean
@@ -19,3 +19,6 @@
 && {weapons _this isEqualTo []}
 && {_this checkAIFeature "PATH"}
 && {_this checkAIFeature "MOVE"}
+&& {!(((expectedDestination _this) select 1) isEqualTo "DoNotPlan")}
+&& {!isForcedWalk _this}
+&& {!(surfaceIsWater getPosASL _this)}
