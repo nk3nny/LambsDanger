@@ -64,10 +64,11 @@ if (_units isEqualTo []) exitWith {false};
 
 // buildings ~ sorted by height ~ add other cover
 private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
+private _cover = ((nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]});
 _buildings = _buildings apply { [_x select 2, _x] };
 _buildings sort false;
 _buildings = _buildings apply { _x select 1 };
-_buildings append ((nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]});
+_buildings append _cover;
 
 // leader ~ rally animation here
 [_unit, "gestureFollow"] call EFUNC(main,doGesture);
