@@ -20,18 +20,18 @@
 */
 
 /*
-  BRUSH LISTS:
-    "Solid"
-    "SolidFull"
-    "Horizontal"
-    "Vertical"
-    "Grid"
-    "FDiagonal" (Default)
-    "BDiagonal"
-    "DiagGrid"
-    "Cross"
-    "Border"
-    "SolidBorder"
+    BRUSH LISTS:
+        "Solid"
+        "SolidFull"
+        "Horizontal"
+        "Vertical"
+        "Grid"
+        "FDiagonal" (Default)
+        "BDiagonal"
+        "DiagGrid"
+        "Cross"
+        "Border"
+        "SolidBorder"
 */
 params ["_pos", ["_size", [100, 100]], ["_color", "colorEAST"], ["_brush", "FDiagonal"], ["_shape", false]];
 _pos = _pos call CBA_fnc_getPos;
