@@ -53,6 +53,7 @@ if (
     !isNull _assignedTarget
     && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
     && {_assignedTarget call EFUNC(main,isAlive)}
+    && {(vehicle _assignedTarget) isKindOf "CAManBase"}
     && {!(typeOf _assignedTarget isEqualTo "SuppressTarget")}
 ) exitWith {
     [_unit, _assignedTarget] call FUNC(doAssault);
@@ -84,7 +85,7 @@ if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
 };
 
 // cover
-if (speed _unit < 1) then {
+if (speed _unit < 1 && {_unit distance2D (formationLeader _unit) < 32}) then {
     [_unit] call FUNC(doCover);
 };
 

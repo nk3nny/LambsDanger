@@ -43,15 +43,14 @@ if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's law
     // pick a random unit
     _weapons = selectRandom _weapons;
     _units = [_units, [], { _weapons distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-    _units = _units select 0;
+    private _unit = _units select 0;
 
     // asign no target
-    _units doWatch ObjNull;
-    _units setVariable [QGVAR(forceMOVE), true];
+    _unit doWatch ObjNull;
 
     // order to man the vehicle
-    _units assignAsGunner _weapons;
-    [_units] orderGetIn true;
+    _unit assignAsGunner _weapons;
+    [_unit] orderGetIn true;
     (group _unit) addVehicle _weapons;
 };
 

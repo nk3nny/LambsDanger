@@ -33,7 +33,7 @@ _vehicles = _vehicles select { canFire _x };
     // suppress
     if (RND(0.65) && {!(terrainIntersectASL [eyePos _x, _posASL])}) then {
         _x doWatch ASLtoAGL _posASL;
-        [_x, _posASL vectorAdd [0, 0, random 4]] call FUNC(doSuppress);
+        [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1]], random 3] call CBA_fnc_waitAndExecute;
     } else {
         // manoeuvre
         _x forceSpeed 4;

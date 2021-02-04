@@ -29,7 +29,6 @@ if (_units isEqualTo []) then {
 
 // sort
 _units = _units select {
-    //unitReady _x
     _x distance2D _unit < _range
     && {!isPlayer _x}
     && {!fleeing _x}
@@ -37,7 +36,7 @@ _units = _units select {
     && {_x checkAIFeature "PATH"}
     && {_x checkAIFeature "MOVE"}
     && {_x call EFUNC(main,isAlive)}
-    && {!(_x getVariable [QGVAR(forceMove), false])}
+    && {!(_x getVariable [QEGVAR(danger,forceMove), false])}
     && {!(currentCommand _x in ["GET IN", "ACTION", "HEAL"])}
 };
 

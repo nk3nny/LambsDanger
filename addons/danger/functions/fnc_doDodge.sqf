@@ -15,7 +15,8 @@
  *
  * Public: No
 */
-#define DODGE_DISTANCE 2
+#define DODGE_DISTANCE 3
+#define NEAR_DISTANCE 22
 
 params ["_unit", ["_pos", [0, 0, 0]]];
 
@@ -30,7 +31,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 // prone override
 if (_stance isEqualTo "PRONE" && {!(_unit call EFUNC(main,isIndoor))}) exitWith {
     [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir > 180), true] call EFUNC(main,doGesture);
-    _unit setDestination [[_unit getRelPos [3, -60], _unit getRelPos [3, 60]] select (_dir > 180), "FORMATION PLANNED", false];
+    _unit setDestination [[_unit getRelPos [DODGE_DISTANCE, -90], _unit getRelPos [DODGE_DISTANCE, 90]] select (_dir > 180), "FORMATION PLANNED", false];
     _stance
 };
 
@@ -42,6 +43,7 @@ if (
     || {!(_unit checkAIFeature "PATH")}
     || {_unit getVariable ["ace_captives_isHandcuffed", false]}
     || {_unit getVariable ["ace_captives_isSurrendering", false]}
+    || {_unit distance2D (_unit findNearestEnemy _unit) < (5 + random 15)}
 ) exitWith {_stance};
 
 // callout
@@ -50,41 +52,42 @@ if (RND(0.6)) then {
 };
 
 // settings
-private _nearDistance = (_unit distance2D _pos) < 3.5;
-private _suppression = getSuppression _unit > 0 && { _nearDistance };
+private _nearDistance = (_unit distance2D _pos) < NEAR_DISTANCE;
+private _suppression = _nearDistance && {getSuppression _unit > 0.1};
 private _relPos = [];
 private _anim = [];
 
 // move left
 if (_dir < 250 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [DODGE_DISTANCE, -60];
-    _anim append ([["WalkL", "WalkLB"], ["FastL", "TactLB"]] select _suppression);
+    _relPos = _unit getRelPos [DODGE_DISTANCE, -120];
+    _anim = ([["FastL", "FastLB"], ["TactL", "TactLB"]] select _suppression);
 };
 
 // move right
 if (_dir > 80 && { RND(0.1) }) then {
-    _relPos = _unit getRelPos [DODGE_DISTANCE, 60];
-    _anim append ([["WalkR", "WalkRB"], ["FastR", "TactRB"]] select _suppression);
+    _relPos = _unit getRelPos [DODGE_DISTANCE, 120];
+    _anim = ([["FastR", "FastRB"], ["TactR", "TactRB"]] select _suppression);
 };
 
 // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
-if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { _nearDistance }) then {
+if ((_dir < 320 || { _dir > 40 }) && { speed _unit < 2 } && { !_nearDistance }) then {
     _relPos = _unit getRelPos [DODGE_DISTANCE, 180];
-    _anim pushBack (["WalkB", "TactB"] select _suppression);
+    _anim = (["FastB", "TactB"] select _suppression);
 };
 
 // check
 if (_anim isEqualTo []) then {
     _relPos = _unit getRelPos [DODGE_DISTANCE, 0];
-    _anim pushBack (["WalkF", "TactF"] select _suppression);
+    _anim = (["FastF", "TactF"] select _suppression);
 };
 
-// dodge
-if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit doMove _relPos;};
+// tweak dodge (in case unit is standing still!)
+_relPos set [2, (getPosATL _unit) select 2];
+if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit moveTo _relPos;};
 
-// otherwise rush left or right
+// execute dodge
+_unit setDestination [_relPos, ["doNotPlanFormation", "FORMATION PLANNED"] select (_unit call EFUNC(main,isIndoor)), true];
 [_unit, _anim, true] call EFUNC(main,doGesture);
-_unit setDestination [_relPos, ["DoNotPlanFormation", "FORMATION PLANNED"] select (_unit call EFUNC(main,isIndoor)), false];
 
 // drop stance
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};

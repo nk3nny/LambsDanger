@@ -18,7 +18,7 @@
 params ["_unit", ["_target", ObjNull, [objNull, []]]];
 
 // enemy
-if (isNull _target) then {
+if (!(_target isEqualType []) && {isNull _target}) then {
     _target = _unit findNearestEnemy _unit;
 };
 
@@ -27,7 +27,7 @@ private _buildingPos = [_unit, 21, true, true, true] call EFUNC(main,findBuildin
 [_buildingPos, true] call CBA_fnc_shuffle;
 
 // Check if there is a closer building position
-private _distance = (_unit distance2D _target) - 0.5;
+private _distance = (_unit distance2D _target) - 0.8;
 private _destination = _buildingPos findIf {_x distance2D _target < _distance};
 if (_destination != -1) then {
     _unit doMove (_buildingPos select _destination);

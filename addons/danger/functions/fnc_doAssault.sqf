@@ -42,7 +42,7 @@ private _pos = if (_buildings isEqualTo []) then {
 
     // select expected location
     private _hide = _unit getHideFrom _target;
-    if (_hide isEqualTo [0,0,0]) then {getPos _target} else {_hide}
+    if (_hide isEqualTo [0,0,0]) then {getPosATL _target} else {_hide}
 } else {
 
     // updates group memory variable
@@ -64,11 +64,18 @@ _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", _distance2D > 12];
+_unit setDestination [_pos, "LEADER PLANNED", _distance2D < 15];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 assaulting %2(%3 @ %4m)", side _unit, ["Building ", ""] select (_buildings isEqualTo []), name _unit, round (_unit distance _pos)] call EFUNC(main,debugLog);
+    [
+        "%1 %2 %3(%4 @ %5m)",
+        side _unit,
+        ["assaulting ", "staying inside "] select (_unit distance2D _pos < 1),
+        ["(building) ", ""] select (_buildings isEqualTo []),
+        name _unit,
+        round (_unit distance _pos)
+    ] call EFUNC(main,debugLog);
     private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
     _sphere setObjectTexture [0, [_unit] call EFUNC(main,debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;

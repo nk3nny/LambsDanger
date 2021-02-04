@@ -13,11 +13,17 @@
  * Bool
  *
  * Example:
- * [bob, angryBob] call lambs_danger__fnc_tacticsGarrison;
+ * [bob, angryBob] call lambs_danger_fnc_tacticsGarrison;
  *
  * Public: No
 */
+#define COVER_DISTANCE 25
+#define BUILDING_DISTANCE 25
+
 params ["_unit", "_target", ["_units", []], ["_delay", 180]];
+
+// sort target
+_target = _target call CBA_fnc_getPos;
 
 private _group = group _unit;
 // reset tactics
@@ -31,21 +37,23 @@ private _group = group _unit;
             _group setFormation _formation;
         };
     },
-    [_group, attackEnabled _unit, formation _unit],
+    [_group, attackEnabled _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
+// set speed and enableAttack
+_group setBehaviour "COMBAT";
+_group setFormation "FILE";
+_group enableAttack false;
+
 // find units
 if (_units isEqualTo []) then {
     _units = [_unit, 150] call EFUNC(main,findReadyUnits);
 };
 if (_units isEqualTo []) exitWith {false};
-
-// sort target
-_target = _target call CBA_fnc_getPos;
 
 // clear attacks!
 {
@@ -55,16 +63,11 @@ _target = _target call CBA_fnc_getPos;
 } foreach _units;
 
 // buildings ~ sorted by height ~ add other cover
-private _buildings = [_target, 25, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
 _buildings = _buildings apply { [_x select 2, _x] };
 _buildings sort false;
 _buildings = _buildings apply { _x select 1 };
-_buildings append ((nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], 25, false, true]) apply {_x getPos [1.2, random 360]});
-
-// set speed and enableAttack
-_unit setBehaviour "COMBAT";
-_unit setFormation "FILE";
-_unit enableAttack false;
+_buildings append ((nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]});
 
 // leader ~ rally animation here
 [_unit, "gestureFollow"] call EFUNC(main,doGesture);
@@ -87,31 +90,32 @@ if (_buildings isEqualTo []) exitWith {
     {_x doFollow leader _x} foreach _units;
 };
 
+// update target ~ better both for debugging and stacking soldiers
+_target = _buildings select 0;
+
+// make group ready
+doStop _units;
+_units doWatch _target;
+
 // execute
 {
     private _pos = if (_buildings isEqualTo []) then {_target} else {_buildings deleteAt 0};
-    doStop _x;
-    _x doMove _pos;
-    _x setDestination [_pos, "FORMATION PLANNED", true];
-    _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
     [
         {
-            params ["_unit"];
-            unitReady _unit
-        }, {
             params ["_unit", "_pos"];
-            if (surfaceIsWater (getPos _unit) || (_unit distance _pos > 1.5)) exitWith { _unit doFollow (leader _unit); };
-            doStop _unit;
-        }, [_x, _pos], 10
-    ] call CBA_fnc_waitUntilAndExecute;
+            _unit moveTo _pos;
+            _unit setDestination [_pos, "FORMATION PLANNED", true];
+        }, [_x, _pos], random 2
+    ] call CBA_fnc_waitAndExecute;
+    _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
 } forEach _units;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS GARRISON %2 (%3m)", side _unit, groupId _group, round (_unit distance2D _target)] call EFUNC(main,debugLog);
+    ["%1 TACTICS GARRISON %2 (%3m) (%4 units)", side _unit, groupId _group, round (_unit distance2D _target), count _units] call EFUNC(main,debugLog);
     private _m = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
-    [{{deleteMarker _x;true} count _this;}, [_m], _delay + 30] call CBA_fnc_waitAndExecute;
+    [{deleteMarker _this}, _m, _delay + 30] call CBA_fnc_waitAndExecute;
 };
 
 // end

@@ -33,8 +33,7 @@ if (_guns isEqualTo []) then {
 };
 
 // check if weapon is unmanned
-_guns = _guns select {!(crew _x isEqualTo [])};
-_guns = _guns select {_x isKindOf "StaticWeapon"};
+_guns = _guns select {alive _x && {_x isKindOf "StaticWeapon"} && !((crew _x) isEqualTo [])};
 if (_guns isEqualTo []) exitWith { _units };
 
 // get gunner
@@ -88,7 +87,7 @@ _assistant doMove getPosATL (vehicle _gunner);
     {
         // condition
         params ["_gunner", "_assistant", "_pos"];
-        (_assistant distance2D _pos < 5 || {unitReady _assistant}) || {fleeing _gunner} || {fleeing _assistant}
+        (_assistant distance2D _pos < 4 || {unitReady _assistant})
     },
     {
         // on success
@@ -113,6 +112,7 @@ _assistant doMove getPosATL (vehicle _gunner);
 
         // follow!
         [_gunner, _assistant] doFollow (leader _gunner);
+        _assistant setVariable [QGVAR(forceMove), nil];
     },
     [_gunner, _assistant, getPosATL _weapon, _EH], 8,
     {
@@ -121,6 +121,7 @@ _assistant doMove getPosATL (vehicle _gunner);
 
         // assistant reverts
         _assistant doFollow (leader _assistant);
+        _assistant setVariable [QGVAR(forceMove), nil];
 
         // removes eventhandler
         _gunner removeEventHandler ["WeaponDisassembled", _EH];

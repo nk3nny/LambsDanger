@@ -24,19 +24,16 @@
     - Panic
 */
 
-params ["_unit", ["_type", 0], ["_pos", [0, 0, 0]]];
+params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 5;
+private _timeout = time + 3;
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {-1};
 
-// indoor units exit
-if (RND(0.05) && {_unit call EFUNC(main,isIndoor)}) exitWith {
-    doStop _unit;   // test this more thoroughly!-- might make units too static! - nkenny
-    _timeout
-};
+// is indoor
+private _indoor = _unit call EFUNC(main,isIndoor);
 
 // check bodies ~ own group!
 if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
@@ -45,10 +42,17 @@ if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
     [_unit, _pos] call FUNC(doCheckBody);
 
     // pop smoke
-    [{_this call EFUNC(main,doSmoke)}, [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;
+    if (!_indoor) then {[{_this call EFUNC(main,doSmoke)}, [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;};
 
     // end
     _timeout + 3
+};
+
+// indoor units exit
+if (RND(0.05) && {_indoor}) exitWith {
+    //doStop _unit;   // test this more thoroughly!-- might make units too static! - nkenny
+    if (RND(GVAR(indoorMove))) then {[_unit, _pos] call FUNC(doReposition);};
+    _timeout
 };
 
 // check bodies ~ enemy group!
@@ -70,15 +74,12 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
     _unit setVariable [QGVAR(currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
 
     // end
-    _timeout + 3
+    _timeout
 };
 
-// speed
-_unit forceSpeed -1;
-
-// find cover ~ prefer buildings near leader - nkenny
-private _buildings = if (_unit distance2D (leader _unit) < 80) then {[leader _unit, nil, true, true] call EFUNC(main,findBuildings)} else {[]};
-[{_this call FUNC(doHide)}, [_unit, _pos, nil, _buildings], random 1] call CBA_fnc_waitAndExecute;
+// drop down into cover
+_unit setUnitPosWeak "DOWN";
+[_unit, "WalkB", false] call EFUNC(main,doGesture);
 
 // end
 _timeout

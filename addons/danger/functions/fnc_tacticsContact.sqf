@@ -27,7 +27,7 @@ if (isNull _enemy) then {
 };
 
 // get info
-private _range = linearConversion [0, 150, _unit distance2D _enemy, 12, 40, true];
+private _range = linearConversion [0, 150, _unit distance2D _enemy, 8, 30, true];
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 
 // update tactics and contact state
@@ -105,7 +105,7 @@ _unit setVariable [QGVAR(currentTask), "Tactics Contact", EGVAR(main,debug_funct
 
 // set combat behaviour and focus team
 if ((behaviour _unit) isEqualTo "AWARE") then {_unit setBehaviour "COMBAT";};
-if (!isNull _enemy) then {_units doWatch _enemy;};
+if (!isNull _enemy && {_unit knowsAbout _enemy > 1}) then {_units doWatch _enemy;};
 
 // immediate action -- leaders near to enemy go aggressive!
 private _deadOrSuppressed = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
@@ -117,7 +117,10 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
         } else {
             [_x, ATLtoASL ((_unit getHideFrom _enemy) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1])] call FUNC(doSuppress);
         };
-    } foreach (_units select {getSuppression _x < 0.4});
+    } foreach _units;
+
+    // group variable
+    _group setVariable [QGVAR(tacticsTask), "Contact! (aggressive)", EGVAR(main,debug_functions)];
 
     // debug
     if (EGVAR(main,debug_functions)) then {
@@ -126,7 +129,7 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
 };
 
 // immediate action -- leaders further away get their subordinates to hide!
-private _buildings = [_unit, _range, true, true] call EFUNC(main,findBuildings);
+private _buildings = [leader _unit, _range, true, true] call EFUNC(main,findBuildings);
 {
     [_x, _enemy, _range * 0.7, _buildings] call FUNC(doHide);
     _x setVariable [QGVAR(currentTask), "Hide (contact)", EGVAR(main,debug_functions)];

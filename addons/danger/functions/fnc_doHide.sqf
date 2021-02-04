@@ -43,14 +43,14 @@ _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", EGVAR(main,debug_functions)];
 
 // Randomly scatter into buildings or hide!
-if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
+if (!(_buildings isEqualTo []) && { RND(0.1) }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", EGVAR(main,debug_functions)];
 
     // hide
     _unit setUnitPosWeak "MIDDLE";
 
     // execute move
-    _unit doMove ((selectRandom _buildings) vectorAdd [0.7 - random 1.4, 0.7 - random 1.4, 0]);
+    _unit doMove (selectRandom _buildings);
     if (EGVAR(main,debug_functions)) then {
         ["%1 hide in building (%2 - positions %3)", side _unit, name _unit, count _buildings] call EFUNC(main,debugLog);
     };
@@ -58,14 +58,14 @@ if (!(_buildings isEqualTo []) && { RND(0.05) }) then {
     // hide
     _unit setUnitPosWeak "DOWN";
 
-    // find cover
-    private _cover = nearestTerrainObjects [ _unit getPos [-16, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE"], 15, true, true ];
+    // check for rear-cover
+    private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 9, true, true ];
 
     // targetPos
     private _targetPos = if (_cover isEqualTo []) then {
         _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
     } else {
-        getPosASL (_cover select 0)
+        (_cover select 0) getPos [-1.2, _unit getDir (_cover select 0)]
     };
 
     // water means hold

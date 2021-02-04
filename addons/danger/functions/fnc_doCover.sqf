@@ -26,7 +26,7 @@ if (_pos isEqualTo []) then {
     _pos = if (_pos isEqualTo []) then {
         getPosASL _unit
     } else {
-        (_pos select 0) getPos [-1, _unit getDir (_pos select 0)]
+        (_pos select 0) getPos [-1.2, _unit getDir (_pos select 0)]
     };
 };
 
@@ -42,10 +42,10 @@ private _anim = call {
 };
 
 // prevent run in place
-if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit doMove _pos;};
+if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit moveTo _pos;};
 
 // do anim
-[_unit, _anim, true] call EFUNC(main,doGesture);
+[_unit, _anim, false] call EFUNC(main,doGesture);       // gesture is not forced to allow cover movement to appear smoother - nkenny
 _unit setDestination [_pos, "FORMATION PLANNED", false];
 
 // end

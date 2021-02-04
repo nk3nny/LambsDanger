@@ -24,7 +24,8 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosASL _unit, _timeo
 
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
-    -1
+    _unit setVariable [QGVAR(currentTask), "Incapacitated", EGVAR(main,debug_functions)];
+    _timeout + 1
 };
 
 // fleeing
@@ -56,7 +57,8 @@ if ((currentCommand _unit) isEqualTo "ATTACK") then {
     _unit setVariable [QGVAR(currentTask), "Attacking", EGVAR(main,debug_functions)];
 
     // tactical movement speed
-    [_unit, _unit findNearestEnemy _unit] call FUNC(assaultSpeed);
+    [_unit, getAttackTarget _unit] call FUNC(assaultSpeed);
+
 };
 
 // end

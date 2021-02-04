@@ -34,7 +34,7 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group", "_speedMode"];
+        params [["_group", grpNull], ["_speedMode", "NORMAL"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QGVAR(tacticsTask), nil];
@@ -94,7 +94,7 @@ _group setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)]
 
 // ready group
 _group setFormDir (_unit getDir _target);
-_unit doMove _overwatch;
+_units doMove _overwatch;
 
 // leader smoke ~ deploy concealment to enable movement
 [_unit, _overwatch] call EFUNC(main,doSmoke);

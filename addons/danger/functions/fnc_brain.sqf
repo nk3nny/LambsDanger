@@ -83,7 +83,7 @@ if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FI
 };
 
 // hide actions
-private _panic = RND(GVAR(panicChance)) && {getSuppression _unit > 0.95};
+private _panic = RND(1 - GVAR(panicChance)) && {getSuppression _unit > 0.9};
 if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
     _return set [ACTION_HIDE, true];
 

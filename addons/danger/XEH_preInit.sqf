@@ -15,8 +15,8 @@ if (isNil QGVAR(fsmPriorities)) then {
         9,      // DCHit
         4,      // DCEnemyNear
         3,      // DCExplosion
-        4,      // DCDeadBodyGroup
-        1,      // DCDeadBody
+        6,      // DCDeadBodyGroup
+        2,      // DCDeadBody
         5,      // DCScream
         8,      // DCCanFire
         7,      // DCBulletClose

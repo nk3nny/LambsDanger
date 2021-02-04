@@ -34,7 +34,7 @@ if (_gesture isEqualType []) then {
 };
 
 // do it
-_unit playActionNow _gesture;
+if (_force) then {_unit playActionNow _gesture;} else {_unit playAction _gesture;};
 
 // end
 true
