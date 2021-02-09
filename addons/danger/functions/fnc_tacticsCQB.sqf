@@ -21,7 +21,7 @@ params ["_unit", ["_target", objNull], ["_range", GVAR(cqbRange)], ["_delay", 18
 // update tactics and contact state
 private _group = group _unit;
 _group setVariable [QGVAR(isExecutingTactic), true];
-_group setVariable [QGVAR(tacticsTask), "CQB clearing", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "CQB clearing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(contact), time + 300];
 
 // reset tactics state
@@ -30,7 +30,7 @@ _group setVariable [QGVAR(contact), time + 300];
         params [["_group", grpNull, [grpNull]], ["_attackEnabled", false]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _attackEnabled;
         };
     },
@@ -50,8 +50,8 @@ if (_inCQB isEqualTo []) exitWith {[]};
 if (isNull _target) then {_target = _unit findNearestEnemy _unit;};
 
 // update
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics CQB", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics CQB", EGVAR(main,debug_functions)];
 
 // define buildings
 private _buildings = [_unit, _range] call EFUNC(main,findBuildings);

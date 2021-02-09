@@ -28,7 +28,7 @@ params [
     ["_distance", 100, [0]]
 ];
 
-if (isPlayer _unit || {!(_unit call EFUNC(main,isAlive))}) exitWith {};
+if (isPlayer _unit || {!(_unit call FUNC(isAlive))}) exitWith {};
 
 // check timing
 private _time = _unit getVariable [QGVAR(calloutTime), 0];

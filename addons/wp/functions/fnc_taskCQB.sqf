@@ -101,8 +101,8 @@ private _fnc_act = {
             _x lookAt _enemy;
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
             true
         } count _units;
     };
@@ -127,8 +127,8 @@ private _fnc_act = {
             };
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
 
             // clean list
             if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {
@@ -151,7 +151,7 @@ private _fnc_act = {
 
             // Unit is ready and outside -- try suppressive fire
             if (unitReady _x && {!(_x call EFUNC(main,isIndoor))}) then {
-                [_x, getPosASL _building] call EFUNC(danger,doSuppress);
+                [_x, getPosASL _building] call EFUNC(main,doSuppress);
                 _x doFollow leader _x;
             };
         };
@@ -189,7 +189,7 @@ _group allowFleeing 0;
 } count units _group;
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskCQB", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskCQB", EGVAR(main,debug_functions)];
 
 // loop
 waitUntil {

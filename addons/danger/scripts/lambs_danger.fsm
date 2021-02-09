@@ -8,7 +8,7 @@ item3[] = {"Init",2,250,-75.000000,50.000000,25.000000,100.000000,0.000000,"Init
 item4[] = {"Vehicle",4,218,-325.000000,150.000000,-225.000000,200.000000,0.000000,"Vehicle"};
 item5[] = {"Foot",4,218,-75.000000,150.000000,25.000000,200.000000,2.000000,"Foot"};
 item6[] = {"Forced",4,218,175.000000,150.000000,275.000000,200.000000,4.000000,"Forced"};
-item7[] = {"Check_self",2,250,-325.000000,275.000000,-225.000000,325.000000,0.000000,"Check self"};
+item7[] = {"Check_self",2,4346,-325.000000,275.000000,-225.000000,325.000000,0.000000,"Check self"};
 item8[] = {"timeout",4,218,-550.000000,275.000000,-450.000000,325.000000,0.000000,"timeout"};
 item9[] = {"Reset_vehicle",2,250,-550.000000,50.000000,-450.000000,100.000000,0.000000,"Reset vehicle"};
 item10[] = {"Evaluate",2,250,-75.000000,275.000000,25.000000,325.000000,0.000000,"Evaluate"};
@@ -104,8 +104,8 @@ link38[] = {34,35};
 link39[] = {35,36};
 link40[] = {36,24};
 link41[] = {37,3};
-globals[] = {0.000000,0,0,0,0,640,480,1,63,6316128,1,-823.566223,1290.568604,1767.005249,-275.503174,915,884,1};
-window[] = {2,-1,-1,-1,-1,967,208,1648,208,3,933};
+globals[] = {0.000000,0,0,0,0,640,480,1,63,6316128,1,-985.303589,1128.831177,1429.661621,-612.847046,915,884,1};
+window[] = {2,-1,-1,-1,-1,941,182,1622,182,3,933};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -293,7 +293,7 @@ class FSM
                                         priority = 4.000000;
                                         to="Stay_firm";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_hide"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -433,7 +433,7 @@ class FSM
                 {
                         name = "End_Danger";
                         itemno = 19;
-                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_danger_currentTask"", nil];" \n
+                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_main_currentTask"", nil];" \n
                          "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -452,7 +452,7 @@ class FSM
                          "};" \n
                          "" \n
                          "// has group memory" \n
-                         "if (_queue isEqualTo [] && {!(((group _this) getVariable [""lambs_danger_groupMemory"", []]) isEqualTo [])}) then {" \n
+                         "if (_queue isEqualTo [] && {!(((group _this) getVariable [""lambs_main_groupMemory"", []]) isEqualTo [])}) then {" \n
                          "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, objNull];" \n
                          "};" \n
                          "" \n

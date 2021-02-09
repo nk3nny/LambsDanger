@@ -30,7 +30,7 @@ private _group = group _unit;
         params ["_group", "_enableAttack"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
             {
                 _x setVariable [QGVAR(forceMove), nil];
@@ -58,14 +58,14 @@ _buildings append ((_unit targets [true, 10, [], 0, _target]) apply {_unit getHi
 _buildings pushBack _target;
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Assault", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Assaulting", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Assaulting", EGVAR(main,debug_functions)];
 
 // updates CQB group variable
-_group setVariable [QGVAR(groupMemory), _buildings];
+_group setVariable [QEGVAR(main,groupMemory), _buildings];
 _group enableAttack false;
 
 // gesture
@@ -90,7 +90,7 @@ _group setFormDir (_unit getDir _target);
 _units doWatch _target;
 
 // execute function
-[_cycle, _units, _buildings] call FUNC(doGroupAssault);
+[_cycle, _units, _buildings] call EFUNC(main,doGroupAssault);
 
 // debug
 if (EGVAR(main,debug_functions)) then {

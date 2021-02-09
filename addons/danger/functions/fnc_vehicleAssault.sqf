@@ -57,8 +57,8 @@ _vehicle doWatch _pos;
 private _suppression = [_unit, _pos] call FUNC(vehicleSuppress);
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
 
 // minor jink if no suppression possible
 if (!_suppression) then {[_unit, 22] call FUNC(vehicleJink)};

@@ -32,7 +32,7 @@ private _group = group _unit;
         params ["_group", "_enableAttack", "_formation"];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
             _group setFormation _formation;
         };
@@ -77,14 +77,14 @@ _buildings append _cover;
 [_unit, "combat", "RallyUp", 125] call EFUNC(main,doCallout);
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Garrison", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Garrison", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Garrison/Rally", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Garrison/Rally", EGVAR(main,debug_functions)];
 
 // clear CQB group variable
-_group setVariable [QGVAR(groupMemory), []];
+_group setVariable [QEGVAR(main,groupMemory), []];
 
 // failsafe
 if (_buildings isEqualTo []) exitWith {
@@ -108,7 +108,7 @@ _units doWatch _target;
             _unit setDestination [_pos, "FORMATION PLANNED", true];
         }, [_x, _pos], random 2
     ] call CBA_fnc_waitAndExecute;
-    _x setVariable [QGVAR(currentTask), "Group Garrison", EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTask), "Group Garrison", EGVAR(main,debug_functions)];
 } forEach _units;
 
 // debug

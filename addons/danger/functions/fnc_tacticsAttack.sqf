@@ -29,7 +29,7 @@ if (isNull _target) exitWith {false};
 // update tactics and contact state
 private _group = group _unit;
 _group setVariable [QGVAR(isExecutingTactic), true];
-_group setVariable [QGVAR(tacticsTask), "Attacking", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Attacking", EGVAR(main,debug_functions)];
 
 // reset tactics
 [
@@ -37,7 +37,7 @@ _group setVariable [QGVAR(tacticsTask), "Attacking", EGVAR(main,debug_functions)
         params [["_group", grpNull, [grpNull]], ["_combatMode", "YELLOW"], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group setCombatMode _combatMode;
             _group setFormation _formation;
         };
@@ -52,8 +52,8 @@ if (_units isEqualTo []) then {
 };
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Attack", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Attack", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureAttack"]] call EFUNC(main,doGesture);

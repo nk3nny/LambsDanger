@@ -30,8 +30,8 @@ if (
 };
 
 // variables
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Jink Vehicle", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Jink Vehicle", EGVAR(main,debug_functions)];
 
 // Find positions
 private _destination = [];

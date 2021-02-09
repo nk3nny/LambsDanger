@@ -54,7 +54,7 @@ _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
 _group setSpeedMode "FULL";
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
 
 // sort units
 {
@@ -65,7 +65,7 @@ _group setVariable [QEGVAR(danger,tacticsTask), ["taskAssault", "taskRetreat"] s
     _x setUnitPos "UP";
 
     // variable
-    _x setVariable [QEGVAR(danger,currentTask), ["Rushing Assault", "Rushing Retreat"] select _retreat, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTask), ["Rushing Assault", "Rushing Retreat"] select _retreat, EGVAR(main,debug_functions)];
 
     // check retreat
     if (_retreat) then {

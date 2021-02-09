@@ -28,11 +28,11 @@ _group setVariable [QGVAR(enableGroupReinforceTime), time + _delay, true];
 
 // set tasks
 _target = _target call CBA_fnc_getPos;
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Reinforce", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Reinforce", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Reinforcing", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Reinforcing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + _delay];
 _group enableAttack false;      // gives better fine control of AI - nkenny

@@ -62,11 +62,6 @@
             <German>Allgemein</German>
             <Polish>Główne</Polish>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_ShareInformationCat">
-            <English>Settings Share information</English>
-            <German>Informationen-Teilen Einstellungen</German>
-            <Polish>Ustawienia udostępniania informacji</Polish>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormationsCat">
             <English>Settings CQB Formations</English>
             <German>CQB-Formationseinstellungen</German>
@@ -81,16 +76,6 @@
             <English>Toggle advanced danger.fsm features on player group</English>
             <German>Erweiterte danger.fsm Funktionen für Spielergruppe umschalten</German>
             <Polish>Przełącz zaawansowane opcje danger.fsm na grupie gracza</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup">
-            <English>Disable suppression from player group</English>
-            <German>Unterdrückungsfeuer für Spielergruppe deaktivieren</German>
-            <Polish>Wyłącz ogień zaporowy dla grupy gracza</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableSuppressionPlayerGroup_ToolTip">
-            <English>Toggle autonomous suppression for units in player group</English>
-            <German>Autonomes Unterdrückungsfeuer für Einheiten der Spielergruppe umschalten</German>
-            <Polish>Przełącza autonomiczny ogień zaporowy dla jednostek w grupie gracza</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
@@ -154,26 +139,6 @@
             <English>Toggles AI group ability to autonomously use flares for illumation at nighttime unless NVGs are available or unit is in stealth mode</English>
             <Polish>Przełącza zdolność grupy AI do autonomicznego używania flar do oświetlania w czasie nocy, w razie gdy noktowizja nie jest dostępna lub gdy jednostka jest w trybie "stealth"</Polish>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions">
-            <English>Disable unit dodging</English>
-            <German>Sofortige KI-Aktionen ausschalten</German>
-            <Polish>Wyłącz natychmiastowe reakcje jednostki</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableImmediateActions_ToolTip">
-            <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
-            <German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
-            <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym. \nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing">
-            <English>Disable enhanced unit fleeing</English>
-            <German>Verbessertes Fliehen ausschalten</German>
-            <Polish>Wyłącz ulepszoną ucieczkę</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableEnhancedFleeing_ToolTip">
-            <English>Toggles enhanced fleeing function for units.</English>
-            <German>Schaltet das verbesserte Fliehen für Einheiten aus.</German>
-            <Polish>Przełącza funkcję ulepszonej ucieczki dla jednostek AI</Polish>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
             <German>CQB Reichweite</German>
@@ -184,26 +149,6 @@
             <German>Legt die Angriffsreichweite fest.</German>
             <Polish>Określa zasięg ataku</Polish>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance">
-            <English>Minimum distance for Suppression Fire</English>
-            <German>Minimale Distanz für Unterdrückungsfeuer</German>
-            <Polish>Minimalny dystans dla ognia zaporowego</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_MinSuppressDistance_ToolTip">
-            <English>Within this distance AI will not perform suppression fire</English>
-            <German>Unter dieser Distanz führt die KI kein Unterdrückungsfeuer aus.</German>
-            <Polish>Poniżej tej odległości AI nie strzela ogniem zaporowym</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance">
-            <English>Minimum safe zone for Suppression Fire</English>
-            <German>Minimaler Sicherheitsbereich für Unterdrückungsfeuer</German>
-            <Polish>Minimalny obszar bezpieczeństwa dla ognia zaporowego</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_minFriendlySuppressionDistance_ToolTip">
-            <English>If there are allies within this distance AI will not perform suppression fire. Set to 0 to disable.</English>
-            <German>Wenn sich befreundete Einheiten innerhalb des Sicherheitsradius befinden für die KI kein Unterdrückungsfeuer durch. Auf 0 setzen um die Funktion zu deaktivieren.</German>
-            <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>
             <German>Panikwahrscheinlichkeit</German>
@@ -213,90 +158,6 @@
             <English>Chance to panic in percentage</English>
             <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
             <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing">
-            <English>Disable information sharing</English>
-            <German>Teilen von Informationen deaktivieren</German>
-            <Polish>Wyłącz dzielenie się informacjami</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_DisableInformationSharing_Tooltip">
-            <English>Toggle information sharing betweem units</English>
-            <German>Schaltet das Teilen von Informationen zwischen Einheiten aus.</German>
-            <Polish>Przełącza dzielenie się informacjami pomiędzy jednostkami</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_Shout">
-            <English>Shout</English>
-            <German>Rufen</German>
-            <Polish>Krzyk</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_Shout_ToolTip">
-            <English>Range AI units share information without radios</English>
-            <German>Die Distanz über die KI Einheiten ohne Radius informationen teilen.</German>
-            <Polish>Dystans na którym AI może komunikować się bez pomocy radia</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseWest">
-            <English>Base West</English>
-            <German>Basis Westen</German>
-            <Polish>Podstawa WEST</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseWest_ToolTip">
-            <English>Base range side WEST share information</English>
-            <German>Basisreichweite über die westliche Einheiten Informationen teilen</German>
-            <Polish>Podstawowy zasięg dzielenie się informacjami dla strony WEST</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseEast">
-            <English>Base East</English>
-            <German>Basis Osten</German>
-            <Polish>Podstawa EAST</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseEast_ToolTip">
-            <English>Base range side EAST share information</English>
-            <German>Basisreichweite über die östliche Einheiten Informationen teilen</German>
-            <Polish>Podstawowy zasięg dzielenia się informacjami dla strony EAST</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent">
-            <English>Base Independent</English>
-            <German>Basis Unabhängige</German>
-            <Polish>Podstawa INDEPENDENT</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BaseIndependent_ToolTip">
-            <English>Base range independent and civilian sides share information</English>
-            <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
-            <Polish>Podstawowy zasięg dzielenia się informacjami dla strony INDEPENDENT</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios">
-            <English>Backpack radios</English>
-            <German>Rucksackradios</German>
-            <Polish>Plecak z radiem długim</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_BackpackRadios_ToolTip">
-            <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
-            <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
-            <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami </Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_IndoorMove">
-            <English>Indoor Move Chance</English>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_IndoorMove_ToolTip">
-            <English>Indoor Move Chance</English>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue">
-            <English>Accuracy of shared information</English>
-            <German>Genauigkeit der geteilten Informationen</German>
-            <Polish>Dokładność udostępnianych informacji</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_maxRevealValue_ToolTip">
-            <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
-            <German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
-            <Polish>Maksymalna wartość „knowsAbout” dzielona między jednostki. \nUstawienie tej wartości większej niż 1 może spowodować, że odlegli sojusznicy przejdą w tryb zagrożenia.</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_combatShareRange">
-            <English>Range combat mode is shared</English>
-            <Polish>Obszar wspólnej walki</Polish>
-        </Key>
-        <Key ID="STR_Lambs_Danger_Settings_combatShareRange_ToolTip">
-            <English>Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.</English>
-            <Polish>Obszar na którym sojusznicze jednostki dołączą do walki. Jednostki w trybie walki będą szukały osłony i kierowały się w stronę najbliższego znanego zagrożenia.</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>

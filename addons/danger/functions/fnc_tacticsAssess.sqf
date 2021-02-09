@@ -32,8 +32,8 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
 
 // set current task
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
 // gather data
 private _unitCount = count units _unit;     // how many soldiers the leader believes he is leading - nk

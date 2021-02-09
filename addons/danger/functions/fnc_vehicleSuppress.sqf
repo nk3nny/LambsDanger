@@ -39,8 +39,8 @@ if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehic
 };
 
 // set task
-_unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Suppress", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Vehicle Suppress", EGVAR(main,debug_functions)];
 
 // trace
 private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];

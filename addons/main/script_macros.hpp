@@ -18,7 +18,8 @@
     _unit \
 }
 
-// #define DISABLE_COMPILE_CACHE
+#define DISABLE_COMPILE_CACHE
+// REMEMBER TO UNCOMMENT THIS, nkenny, you stupid bastard!
 
 #ifdef DISABLE_COMPILE_CACHE
     #undef PREP

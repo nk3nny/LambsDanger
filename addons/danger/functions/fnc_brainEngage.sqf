@@ -57,7 +57,7 @@ if (
     && {(vehicle _target) isKindOf "CAManBase"}
     && {_target call EFUNC(main,isAlive)}
 ) exitWith {
-    [_unit, _target] call FUNC(doAssault);
+    [_unit, _target] call EFUNC(main,doAssault);
     _timeout + random 1
 };
 
@@ -68,7 +68,7 @@ if (
     && {getSuppression _unit < 0.9}
 ) exitWith {
     _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, random 1])] call EFUNC(main,doSuppress);
     _timeout + 2
 };
 

@@ -70,7 +70,7 @@ _group setBehaviour "SAFE";
 _group enableAttack false;
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskGarrison", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskGarrison", EGVAR(main,debug_functions)];
 
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;

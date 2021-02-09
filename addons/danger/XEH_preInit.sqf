@@ -29,9 +29,4 @@ if (isNil QGVAR(dangerUntil)) then {
     GVAR(dangerUntil) = 4;
 };
 
-// FSM setting ~ range to search for hide and cover
-if (isNil QGVAR(searchForHide)) then {
-    GVAR(searchForHide) = 4;
-};
-
 ADDON = true;

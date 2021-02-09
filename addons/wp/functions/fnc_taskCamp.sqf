@@ -53,7 +53,7 @@ _group setSpeedMode "LIMITED";
 _group setCombatMode "YELLOW";
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskCamp", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskCamp", EGVAR(main,debug_functions)];
 
 // find buildings
 private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings);

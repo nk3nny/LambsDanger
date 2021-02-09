@@ -89,8 +89,8 @@ if (_weaponPos isEqualTo []) then {
     _x setUnitPosWeak "MIDDLE";
     _x forceSpeed 24;
     _x setVariable [QGVAR(forceMove), true];
-    _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", EGVAR(main,debug_functions)];
-    _x setVariable [QGVAR(currentTarget), _weaponPos, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTask), "Deploy Static Weapon", EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTarget), _weaponPos, EGVAR(main,debug_functions)];
     _x doMove _weaponPos;
 } foreach [_gunner, _assistant];
 

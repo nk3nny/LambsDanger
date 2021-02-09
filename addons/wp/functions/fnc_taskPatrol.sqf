@@ -52,7 +52,7 @@ _group setFormation selectRandom ["STAG COLUMN", "WEDGE", "ECH LEFT", "ECH RIGHT
 _group enableGunLights "forceOn";
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskPatrol", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskPatrol", EGVAR(main,debug_functions)];
 
 // dynamic reinforcements
 _group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];

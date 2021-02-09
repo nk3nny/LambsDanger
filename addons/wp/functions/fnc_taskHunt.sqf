@@ -44,7 +44,7 @@ _group setSpeedMode "LIMITED";
 _group enableAttack false;
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskHunt", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskHunt", EGVAR(main,debug_functions)];
 
 // dynamic reinforcements
 _group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
@@ -88,7 +88,7 @@ waitUntil {
         // suppress nearby buildings
         if (_combat && {(nearestBuilding _target distance2D _target < 25)}) then {
             {
-                [_x, getPosASL _target] call EFUNC(danger,doSuppress);
+                [_x, getPosASL _target] call EFUNC(main,doSuppress);
                 true
             } count units _group;
         };

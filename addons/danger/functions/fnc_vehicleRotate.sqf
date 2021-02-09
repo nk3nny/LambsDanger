@@ -35,8 +35,8 @@ if (_unit distance _target < GVAR(cqbRange)) exitWith {
     true
 };
 
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Vehicle Rotate", EGVAR(main,debug_functions)];
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {

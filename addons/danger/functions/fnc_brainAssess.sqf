@@ -37,8 +37,8 @@ if (_type isEqualTo DANGER_SCREAM) exitWith {
 
     // check danger
     _unit doWatch _pos;
-    _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Heard scream!", EGVAR(main,debug_functions)];
+    _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
+    _unit setVariable [QEGVAR(main,currentTask), "Heard scream!", EGVAR(main,debug_functions)];
 
     // exit
     _timeout - 1
@@ -56,17 +56,17 @@ if (
     && {(vehicle _assignedTarget) isKindOf "CAManBase"}
     && {!(typeOf _assignedTarget isEqualTo "SuppressTarget")}
 ) exitWith {
-    [_unit, _assignedTarget] call FUNC(doAssault);
+    [_unit, _assignedTarget] call EFUNC(main,doAssault);
     _timeout + 2
 };
 
 // group memory
 private _group = group _unit;
-private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
+private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
 
 // sympathetic CQB/suppressive fire
 if !(_groupMemory isEqualTo []) exitWith {
-    [_unit, _groupMemory] call FUNC(doAssaultMemory);
+    [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
     _timeout + 2
 };
 
@@ -79,14 +79,14 @@ if (_stance isEqualTo "CROUCH" && {getSuppression _unit > 0}) then {_unit setUni
 private _indoor = _unit call EFUNC(main,isIndoor);
 
 // building
-if (_indoor && {RND(GVAR(indoorMove))}) exitWith {
-    [_unit, _target] call FUNC(doReposition);
+if (_indoor && {RND(EGVAR(main,indoorMove))}) exitWith {
+    [_unit, _target] call EFUNC(main,doReposition);
     _timeout + 1
 };
 
 // cover
 if (speed _unit < 1 && {_unit distance2D (formationLeader _unit) < 32}) then {
-    [_unit] call FUNC(doCover);
+    [_unit] call EFUNC(main,doCover);
 };
 
 // end

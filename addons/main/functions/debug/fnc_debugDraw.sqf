@@ -150,14 +150,14 @@ private _fnc_debug_drawRect = {
 
         _textData append [
             "Behaviour: ", behaviour _unit, "<br/>",
-            "    Current Task: ", _unit getVariable [QEGVAR(danger,currentTask), "None"], "<br/>"
+            "    Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
             private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
-                "    Current Tactic: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
+                "    Current Tactic: ", group _unit getVariable [QGVAR(currentTactic), "None"], "<br/>",
                 "    Known enemies: ", _targetCount, "<br/>",
-                "    Group memory: ", count (group _unit getVariable [QEGVAR(danger,groupMemory), []]), "<br/>"
+                "    Group memory: ", count (group _unit getVariable [QGVAR(groupMemory), []]), "<br/>"
             ];
         };
         _textData append [

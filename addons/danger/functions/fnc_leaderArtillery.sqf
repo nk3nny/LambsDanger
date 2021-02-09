@@ -34,8 +34,8 @@ if !([side _unit, _pos] call EFUNC(WP,sideHasArtillery)) exitWith {
     };
 };
 
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Artillery", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Leader Artillery", EGVAR(main,debug_functions)];
 
 // find caller
 private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;

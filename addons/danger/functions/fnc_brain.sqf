@@ -89,7 +89,7 @@ if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
 
     // panic function
     if (_panic) then {
-        [_unit] call FUNC(doPanic);
+        [_unit] call EFUNC(main,doPanic);
     };
 };
 
