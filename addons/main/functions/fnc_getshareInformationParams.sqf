@@ -35,9 +35,13 @@ _range = switch (side _unit) do {
 // Sort long range radios
 private _target = _unit;
 
-private _units = units _unit select {_x call FUNC(isAlive) && {_x distance2D _unit < 150} && {!isPlayer _x}};
+private _units = units _unit select {
+    _x call FUNC(isAlive)
+    && {_x distance2D _unit < 150}
+    && {!isPlayer _x}
+};
 private _index = _units findIf {
-        _x getVariable [QGVAR(dangerRadio), false]
+        _x getVariable [QEGVAR(danger,dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2D _unit < 70})}
         || {(toLower backpack _x) find "b_radiobag_01_" isEqualTo 0}
         || {(getNumber (configFile >> "CfgVehicles" >> (backpack _x) >> "tf_hasLRradio")) isEqualTo 1}

@@ -111,7 +111,7 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
                 // move
                 if !((expectedDestination _unit select 0) isEqualTo _destination) then {_unit doMove _destination};
-                _unit forceSpeed ([ [_unit, _destination] call EFUNC(danger,assaultSpeed), 24] select _retreat);
+                _unit forceSpeed ([ [_unit, _destination] call EFUNC(main,doAssaultSpeed), 24] select _retreat);
                 _unit doWatch _destination;
                 //_unit setVariable [QEGVAR(danger,forceMove), true];   ~ speedmode "FULL" should replicate this behaviour in new FSM. ~ nkenny
 

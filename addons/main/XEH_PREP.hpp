@@ -2,6 +2,7 @@ PREP(doAnimation);
 PREP(doAssault);
 PREP(doAssaultCQB);
 PREP(doAssaultMemory);
+PREP(doAssaultSpeed);
 PREP(doCallout);
 PREP(doCheckBody);
 PREP(doCover);

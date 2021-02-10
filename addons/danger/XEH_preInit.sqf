@@ -29,4 +29,28 @@ if (isNil QGVAR(dangerUntil)) then {
     GVAR(dangerUntil) = 4;
 };
 
+// EH handling reinforcement and combat mode
+[
+    QEGVAR(main,OnInformationShared), {
+        params [["_unit", objNull], ["_group", grpNull], ["_target", objNull], ["_groups", []]];
+
+        _groups = _groups select {local leader _x};
+        {
+            private _leader = leader _x;
+
+            // reinforce
+            if (!isNull _target && { _x getVariable [QGVAR(enableGroupReinforce), false] } && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }) then {
+                [_leader, [getPosASL _unit, (_leader targetKnowledge _target) select 6] select (_leader knowsAbout _target > 1.5)] call FUNC(tacticsReinforce);
+            };
+
+            // set combatMode
+            if !(_leader distance2D _unit > (EGVAR(main,combatShareRange)) && {_leader getVariable [QGVAR(disableAI), false]}) then {
+                _x setBehaviour "COMBAT";
+                _x setFormDir (_leader getDir _unit);
+            };
+        } forEach _groups;
+
+        hint str _this;
+}] call CBA_fnc_addEventHandler;
+
 ADDON = true;

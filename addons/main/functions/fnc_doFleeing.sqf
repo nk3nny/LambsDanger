@@ -14,6 +14,9 @@
  *
  * Public: No
 */
+#define SEARCH_FOR_HIDE 4
+#define SEARCH_FOR_BUILDING 8
+
 params ["_unit"];
 
 // check disabled
@@ -83,14 +86,14 @@ if (_onFootAndSeen) then {
     };
 
     // find nearby cover
-    private _cover = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE", "ROCK", "WALL", "FENCE"], GVAR(searchForHide), false, true];
+    private _cover = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE", "ROCK", "WALL", "FENCE"], SEARCH_FOR_HIDE, false, true];
 
     // speed and stance (based on cover)
     _unit forceSpeed -1;
     _unit setUnitPos (["MIDDLE", "DOWN"] select (_suppression > 0 || {!(_cover isEqualTo [])})); // test nkenny
 
     // find buildings to hide
-    private _buildings = [_unit, GVAR(searchForHide) * 2, true, true] call FUNC(findBuildings);
+    private _buildings = [_unit, SEARCH_FOR_BUILDING, true, true] call FUNC(findBuildings);
     if (!(_buildings isEqualTo []) && {_distance2D > random 5}) then {
         _unit doMove selectRandom _buildings;
     };

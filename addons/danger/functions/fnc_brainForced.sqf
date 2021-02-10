@@ -57,7 +57,7 @@ if ((currentCommand _unit) isEqualTo "ATTACK") then {
     _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];
 
     // tactical movement speed
-    [_unit, getAttackTarget _unit] call FUNC(assaultSpeed);
+    [_unit, getAttackTarget _unit] call EFUNC(main,doAssaultSpeed);
 
 };
 

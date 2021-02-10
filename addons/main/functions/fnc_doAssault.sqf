@@ -60,7 +60,7 @@ private _pos = if (_buildings isEqualTo []) then {
 
 // stance and speed
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
-[_unit, _pos] call FUNC(assaultSpeed);
+[_unit, _pos] call FUNC(doAssaultSpeed);
 
 // execute
 _unit doMove _pos;

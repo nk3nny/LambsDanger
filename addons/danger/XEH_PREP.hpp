@@ -1,4 +1,3 @@
-PREP(assaultSpeed);
 PREP(brain);
 PREP(brainAdjust);
 PREP(brainAssess);

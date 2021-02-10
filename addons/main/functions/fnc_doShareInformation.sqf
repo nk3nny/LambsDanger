@@ -40,9 +40,11 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 
 // find units
 private _groups = allGroups select {
-    (leader _x) distance2D _unit < _range
+    private _leader = leader _x;
+    _leader distance2D _unit < _range
+    && {simulationEnabled (vehicle _leader)}
     && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
-    && {behaviour leader _x != "CARELESS"}
+    && {behaviour _leader != "CARELESS"}
     && {_x != group _unit}
 };
 
@@ -51,17 +53,6 @@ private _groups = allGroups select {
     if !(isNull _target) then {
         private _knowsAbout = _unit knowsAbout _target;
         [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
-
-        // reinforce
-        if ((_x getVariable [QGVAR(enableGroupReinforce), false]) && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time}) then {
-            [leader _x, [getPosASL _unit, (_unit targetKnowledge _target) select 6] select (_knowsAbout > 0.5)] remoteExec [QFUNC(tacticsReinforce), leader _x];
-        };
-    };
-
-    // set behaviour
-    if ((leader _x) distance2D _unit < ((GVAR(combatShareRange)) min _range) && {!((leader _x) getVariable [QGVAR(disableAI), false])}) then {
-        [_x, "COMBAT"] remoteExec ["setBehaviour", leader _x];
-        [_x, (leader _x) getDir _unit] remoteExec ["setFormDir", leader _x];
     };
 } forEach _groups;
 
@@ -72,8 +63,8 @@ if (
     RND(0.2)
     && {_range > 100}
     && {_unit distance2D _target > 4}
-    ) then {
-        [_unit, "HandSignalRadio"] call FUNC(doGesture);
+) then {
+    [_unit, "HandSignalRadio"] call FUNC(doGesture);
 };
 
 // debug
@@ -84,11 +75,22 @@ if (EGVAR(main,debug_functions)) then {
     // debug marker
     private _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
     private _markers = [_zm];
+
+    // enemy units
     {
-        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "hd_dot"] call FUNC(dotMarker);
+        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
+        _m setMarkerDirLocal (getDir _x);
         _markers pushBack _m;
     } foreach ((units _target) select {_unit knowsAbout _x > 0});
+
+    // friendly units
+    {
+        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
+        _m setMarkerSizeLocal [0.5, 0.5];
+        _m setMarkerDirLocal (getDir _x);
+        _markers pushBack _m;
+    } foreach units _unit;
     [{{deleteMarker _x;true} count _this;}, _markers, 60] call CBA_fnc_waitAndExecute;
 };
 

@@ -32,7 +32,7 @@ _buildings = _buildings select {count (_x getVariable [QGVAR(CQB_cleared_) + str
 // exit on no buildings -- middle unit pos
 if (_buildings isEqualTo []) exitWith {
     _unit doFollow leader _unit;
-    [_unit, leader _unit] call FUNC(assaultSpeed);
+    [_unit, leader _unit] call FUNC(doAssaultSpeed);
     if (_unit getVariable [QGVAR(forceMove), false]) then {_unit setVariable [QGVAR(forceMove), nil];}; // reset forceMove status!
     false
 };
@@ -76,7 +76,7 @@ if (GVAR(debug_functions)) then {
 };
 
 // speed
-[_unit, _buildingPosSelected] call FUNC(assaultSpeed);
+[_unit, _buildingPosSelected] call FUNC(doAssaultSpeed);
 
 // Close range cleanups
 if (RND(0.95) || {_unit distance _buildingPosSelected < 1.6}) then {

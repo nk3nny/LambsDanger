@@ -45,7 +45,7 @@ private _fnc_find = {
     params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
     _building = _building select {!((_x buildingPos -1) isEqualTo [])};
-    _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
+    _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
     if !(_area isEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
@@ -108,7 +108,7 @@ private _fnc_act = {
     };
 
     // clear and check buildings
-    private _buildingPos = _building getVariable [format["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+    private _buildingPos = _building getVariable [format["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     {
 
         // this is the pos to clear!
@@ -117,7 +117,7 @@ private _fnc_act = {
         // the assault
         if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            [_x, _buildingPosSelected] call EFUNC(danger,assaultSpeed);
+            [_x, _buildingPosSelected] call EFUNC(main,doAssaultSpeed);
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
@@ -159,7 +159,7 @@ private _fnc_act = {
     } count _units;
 
     // update variable
-    _building setVariable [format["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], _buildingPos];
+    _building setVariable [format["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], _buildingPos];
 };
 
 // functions end ---
