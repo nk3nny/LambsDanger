@@ -56,3 +56,4 @@ _range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400
 
 // return unit and range
 [_target, _range, _radio]
+
