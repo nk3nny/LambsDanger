@@ -12,7 +12,7 @@
  * units in array
  *
  * Example:
- * [units bob, getPos angryJoe] call lambs_danger_fnc_leaderStaticDeploy;
+ * [units bob, getPos angryJoe] call lambs_main_fnc_leaderStaticDeploy;
  *
  * Public: No
 */
@@ -66,7 +66,7 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
     _unit moveInGunner _weapon;
 
     // check artillery
-    if (GVAR(Loaded_WP) && {_weapon getVariable [QEGVAR(wp,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
+    if (GVAR(Loaded_WP) && {_weapon getVariable [QEGVAR(main,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
         [group _unit] call EFUNC(wp,taskArtilleryRegister);
     };
 

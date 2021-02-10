@@ -80,12 +80,13 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     private _inside = _unit call EFUNC(main,isIndoor);
 
     // Check for artillery ~ NB: support is far quicker now! and only targets infantry
-    if (GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
+    if (EGVAR(main,Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
         private _artilleryTarget = _enemies findIf {
             _unit distance2D _x > 200
+            && {([_unit, getPos _x, 100] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
         };
         if (_artilleryTarget != -1) then {
-            [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);   // possibly add delay? ~ nkenny
+            [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call EFUNC(main,doCallArtillery);   // possibly add delay? ~ nkenny
         };
     };
 

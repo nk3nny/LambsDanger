@@ -5,11 +5,11 @@ PREP(brainEngage);
 PREP(brainForced);
 PREP(brainHide);
 PREP(brainReact);
+PREP(brainVehicle);
 PREP(fsmAllowAnimation);
 PREP(isForced);
 PREP(isLeader);
 
-PREP(leaderArtillery);
 PREP(leaderStaticDeploy);
 PREP(leaderStaticFind);
 PREP(leaderStaticPack);
@@ -27,11 +27,6 @@ PREP(tacticsHold);
 PREP(tacticsProfiles);
 PREP(tacticsReinforce);
 PREP(tacticsSuppress);
-PREP(vehicle);
-PREP(vehicleAssault);
-PREP(vehicleJink);
-PREP(vehicleRotate);
-PREP(vehicleSuppress);
 
 SUBPREP(ZeusModules,moduleDisableGroupAI);
 SUBPREP(ZeusModules,moduleDisableAI);

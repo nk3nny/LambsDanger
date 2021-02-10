@@ -3,6 +3,7 @@ PREP(doAssault);
 PREP(doAssaultCQB);
 PREP(doAssaultMemory);
 PREP(doAssaultSpeed);
+PREP(doCallArtillery);
 PREP(doCallout);
 PREP(doCheckBody);
 PREP(doCover);
@@ -19,7 +20,10 @@ PREP(doSmoke);
 PREP(doShareInformation);
 PREP(doSuppress);
 PREP(doUGL);
-
+PREP(doVehicleAssault);
+PREP(doVehicleJink);
+PREP(doVehicleRotate);
+PREP(doVehicleSuppress);
 PREP(eventCallback);
 
 PREP(findBuildings);

@@ -1,6 +1,5 @@
 #include "script_component.hpp"
 
-
 [QGVAR(OnArtilleryCalled), {
     [_this select 0, QGVAR(OnArtilleryCalled), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnArtilleryCalled), _this] call BIS_fnc_callScriptedEventHandler;
@@ -14,4 +13,9 @@
 [QGVAR(OnContact), {
     [_this select 0, QGVAR(OnContact), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnContact), _this] call BIS_fnc_callScriptedEventHandler;
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(OnReinforce), {
+    [_this select 0, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
+    [_this select 1, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
