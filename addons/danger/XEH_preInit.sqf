@@ -49,8 +49,6 @@ if (isNil QGVAR(dangerUntil)) then {
                 _x setFormDir (_leader getDir _unit);
             };
         } forEach _groups;
-
-        hint str _this;
 }] call CBA_fnc_addEventHandler;
 
 ADDON = true;

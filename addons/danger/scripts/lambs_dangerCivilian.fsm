@@ -3,7 +3,7 @@
 /*
 item0[] = {"LAMBS_DANGER___v2",-1,250,-1225.000000,-425.000000,-875.000000,-175.000000,0.000000,"LAMBS DANGER - v2.5.0  ~ civilian fsm" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "8 - DCCanFire // can fire weapon ~nkenny" \n "9 - DCBulletClose // bullet whizzes by head - nkenny"};
 item1[] = {"Init",0,250,-825.000000,-375.000000,-700.000000,-325.000000,0.000000,"Init"};
-item2[] = {"End",1,4346,150.000000,500.000000,250.000000,550.000000,0.000000,"End"};
+item2[] = {"End",1,250,150.000000,500.000000,250.000000,550.000000,0.000000,"End"};
 item3[] = {"Causes__4__7__9",4,218,-840.000000,-60.000000,-700.000000,0.000000,4.000000,"Causes:" \n "4, 7, 9"};
 item4[] = {"",7,210,-1454.000000,-141.500000,-1446.000000,-133.500000,0.000000,""};
 item5[] = {"Causes__1__2__3",4,218,-620.000000,-60.000000,-500.000000,0.000000,0.000000,"Causes:" \n "1, 2, 3, 8, 0"};
@@ -18,7 +18,7 @@ item13[] = {"Man",4,218,-700.000000,360.000000,-600.000000,420.000000,0.000000,"
 item14[] = {"Man",2,250,-680.000000,600.000000,-580.000000,660.000000,0.000000,"Man"};
 item15[] = {"Order_out",2,250,-940.000000,600.000000,-840.000000,660.000000,0.000000,"Order out"};
 item16[] = {"Always",8,218,-800.000000,600.000000,-700.000000,660.000000,0.000000,"Always"};
-item17[] = {"Select_danger",2,250,-820.000000,-160.000000,-720.000000,-100.000000,0.000000,"Select danger"};
+item17[] = {"Select_danger",2,4346,-820.000000,-160.000000,-720.000000,-100.000000,0.000000,"Select danger"};
 item18[] = {"Hide",2,250,-820.000000,240.000000,-720.000000,300.000000,0.000000,"Hide"};
 item19[] = {"Hide",4,218,-700.000000,120.000000,-580.000000,180.000000,0.000000,"Hide"};
 item20[] = {"Run",4,218,-400.000000,120.000000,-280.000000,180.000000,1.000000,"Run"};
@@ -180,8 +180,8 @@ link63[] = {55,2};
 link64[] = {56,54};
 link65[] = {57,2};
 link66[] = {58,4};
-globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-1767.490723,428.709106,2439.423340,-118.469543,759,884,1};
-window[] = {2,-1,-1,-1,-1,896,78,699,78,3,777};
+globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-1862.979004,333.220825,1993.816895,-564.075623,759,884,1};
+window[] = {2,-1,-1,-1,-1,870,52,673,52,3,777};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -456,7 +456,7 @@ class FSM
                          "" \n
                          "// shout! ~ Disabled as it seems to have an adverse effect on AI - nkenny" \n
                          "//if (random 1 > 0.2 && {getSuppression _this isEqualTo 0} && {leader _this isEqualTo _this}) then {" \n
-                         "//    [_this, objNull, 10 + random 100, true] call lambs_danger_fnc_shareInformation;" \n
+                         "//    [_this, objNull, 10 + random 100, true] call lambs_main_fnc_doShareInformation;" \n
                          "//};" \n
                          "" \n
                          "// settings " \n

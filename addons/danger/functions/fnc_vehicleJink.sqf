@@ -45,7 +45,7 @@ if (!isNull _enemy) then {
     _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call EFUNC(main,findOverwatch));
 
     // Share information!
-    [_unit, _enemy, GVAR(radioShout), true] call FUNC(shareInformation);
+    [_unit, _enemy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
 };
 
 // tweak

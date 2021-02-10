@@ -91,7 +91,7 @@ if !(_units isEqualTo []) then {
 };
 
 // share information
-[{_this call FUNC(shareInformation)}, [_unit, _enemy, EGVAR(main,radioShout), true], 1 + random 5] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doShareInformation)}, [_unit, _enemy, EGVAR(main,radioShout), true], 1 + random 5] call CBA_fnc_waitAndExecute;
 
 // disable Reaction phase for rushing or ambushing groups
 if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};

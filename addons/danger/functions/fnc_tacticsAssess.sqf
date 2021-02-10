@@ -53,7 +53,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     private _eyePos = eyePos _unit;
 
     // communicate
-    [_unit, selectRandom _enemies] call FUNC(shareInformation);
+    [_unit, selectRandom _enemies] call EFUNC(main,doShareInformation);
 
     // vehicle response
     private _tankTarget = _enemies findIf {

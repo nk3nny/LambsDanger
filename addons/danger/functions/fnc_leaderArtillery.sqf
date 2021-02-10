@@ -38,7 +38,7 @@ _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functio
 _unit setVariable [QEGVAR(main,currentTask), "Leader Artillery", EGVAR(main,debug_functions)];
 
 // find caller
-private _unit = ([_unit, nil, false] call FUNC(shareInformationRange)) select 0;
+private _unit = ([_unit, nil, false] call EFUNC(main,doShareInformationRange)) select 0;
 
 // movement
 _unit forceSpeed 0;

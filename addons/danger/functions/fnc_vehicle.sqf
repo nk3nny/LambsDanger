@@ -112,7 +112,7 @@ if (_car) exitWith {
 };
 
 // update information
-if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call FUNC(shareInformation);};
+if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
 
 // vehicle type ~ Armoured vehicle
 private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F"};

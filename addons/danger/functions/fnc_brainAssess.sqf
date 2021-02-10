@@ -33,7 +33,7 @@ private _timeout = time + 2;
 if (_type isEqualTo DANGER_SCREAM) exitWith {
 
     // communicate danger!
-    [{_this call FUNC(shareInformation)}, [_unit, objNull, GVAR(radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
     // check danger
     _unit doWatch _pos;

@@ -36,7 +36,7 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
 
 // range
-([_unit, _range, _override] call FUNC(shareInformationRange)) params ["_unit", "_range"];
+([_unit, _range, _override] call FUNC(getShareInformationParams)) params ["_unit", "_range"];
 
 // find units
 private _groups = allGroups select {
