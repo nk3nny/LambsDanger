@@ -32,7 +32,7 @@ if (isNil QGVAR(dangerUntil)) then {
 // EH handling reinforcement and combat mode
 [
     QEGVAR(main,OnInformationShared), {
-        params [["_unit", objNull], ["_group", grpNull], ["_target", objNull], ["_groups", []]];
+        params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
 
         _groups = _groups select {local leader _x};
         {

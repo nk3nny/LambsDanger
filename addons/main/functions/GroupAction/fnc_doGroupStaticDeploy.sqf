@@ -84,7 +84,7 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
 
 // find position ~ kept simple for now!
 if (_weaponPos isEqualTo []) then {
-    _weaponPos = [getPos _leader, 0, 15, 2, 0, 0.19, 0, [], [getPos _assistant, getPos _assistant]] call BIS_fnc_findSafePos;
+    _weaponPos = [getPos (leader _gunner), 0, 15, 2, 0, 0.19, 0, [], [getPos _assistant, getPos _assistant]] call BIS_fnc_findSafePos;
     _weaponPos set [2, 0];
 };
 
