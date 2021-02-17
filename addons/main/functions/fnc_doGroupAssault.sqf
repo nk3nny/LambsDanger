@@ -50,3 +50,6 @@ if !(_cycle <= 1 || {_units isEqualTo []}) then {
         5
     ] call CBA_fnc_waitAndExecute;
 };
+
+// end
+true
