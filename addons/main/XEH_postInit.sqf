@@ -3,7 +3,7 @@
 GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
 
 {
-    private _controls = uiNamespace getVariable [_x, []];
+    private _controls = missionNamespace getVariable [_x, []];
     if !(_controls isEqualTo []) then {
         {
             if !(isNull _x) then {
@@ -11,7 +11,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
             };
         } forEach _controls;
     };
-    uiNamespace setVariable [_x, []];
+    missionNamespace setVariable [_x, []];
 } foreach [
     QGVAR(debug_drawRectCacheGame),
     QGVAR(debug_drawRectInUseGame),
