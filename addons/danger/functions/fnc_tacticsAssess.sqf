@@ -181,7 +181,7 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
 
 // man empty static weapons
 if !(GVAR(disableAIFindStaticWeapons)) then {
-    _units = [_units, _unit] call FUNC(leaderStaticFind);
+    _units = [_units, _unit] call EFUNC(main,doGroupStaticFind);
 };
 
 // no plan ~ exit with no executable plan
@@ -205,7 +205,7 @@ if (RND(0.2) && {(_unit distance2D _pos > 150) && {!(binocular _unit isEqualTo "
 
 // deploy static weapons
 if !(GVAR(disableAIDeployStaticWeapons)) then {
-    _units = [_units, _pos] call FUNC(leaderStaticDeploy);
+    _units = [_units, _pos] call EFUNC(main,doGroupStaticDeploy);
 };
 
 // enact plan

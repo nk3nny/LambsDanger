@@ -10,10 +10,6 @@ PREP(fsmAllowAnimation);
 PREP(isForced);
 PREP(isLeader);
 
-PREP(leaderStaticDeploy);
-PREP(leaderStaticFind);
-PREP(leaderStaticPack);
-
 PREP(tactics);
 PREP(tacticsAssault);
 PREP(tacticsAssess);

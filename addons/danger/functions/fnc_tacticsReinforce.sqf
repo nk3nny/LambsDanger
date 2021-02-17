@@ -85,10 +85,10 @@ if (_distance > 500) then {
 if !(GVAR(disableAIDeployStaticWeapons)) then {
     private _intersect = terrainIntersectASL [eyePos _unit, AGLtoASL (_target vectorAdd [0, 0, 10])];
     if (_distance > 400 || {_intersect}) then {
-        _units = [_units] call FUNC(leaderStaticPack);
+        _units = [_units] call EFUNC(main,doGroupStaticPack);
     };
     if (!_intersect) then {
-        _units = [_units, _target] call FUNC(leaderStaticDeploy);
+        _units = [_units, _target] call EFUNC(main,doGroupStaticDeploy);
     };
 };
 

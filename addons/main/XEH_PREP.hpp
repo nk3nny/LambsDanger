@@ -1,37 +1,15 @@
 PREP(doAnimation);
-PREP(doAssault);
-PREP(doAssaultCQB);
-PREP(doAssaultMemory);
-PREP(doAssaultSpeed);
-PREP(doCallArtillery);
 PREP(doCallout);
-PREP(doCheckBody);
-PREP(doCover);
-PREP(doDodge);
-PREP(doFleeing);
 PREP(doGesture);
-PREP(doGroupAssault);
-PREP(doGroupFlank);
-PREP(doGroupSuppress);
-PREP(doHide);
-PREP(doPanic);
-PREP(doReposition);
-PREP(doSmoke);
 PREP(doShareInformation);
-PREP(doSuppress);
-PREP(doUGL);
-PREP(doVehicleAssault);
-PREP(doVehicleJink);
-PREP(doVehicleRotate);
-PREP(doVehicleSuppress);
-PREP(eventCallback);
+PREP(getShareInformationParams);
 
+PREP(eventCallback);
 PREP(findBuildings);
 PREP(findCover);
 PREP(findNearbyFriendlies);
 PREP(findOverwatch);
 PREP(findReadyUnits);
-PREP(getShareInformationParams);
 
 PREP(initModules);
 
@@ -41,6 +19,34 @@ PREP(isNight);
 
 PREP(showDialog);
 PREP(parseData);
+
+SUBPREP(GroupAction,doGroupAssault);
+SUBPREP(GroupAction,doGroupFlank);
+SUBPREP(GroupAction,doGroupSuppress);
+SUBPREP(GroupAction,doGroupStaticDeploy);
+SUBPREP(GroupAction,doGroupStaticFind);
+SUBPREP(GroupAction,doGroupStaticPack);
+
+SUBPREP(UnitAction,doAssault);
+SUBPREP(UnitAction,doAssaultCQB);
+SUBPREP(UnitAction,doAssaultMemory);
+SUBPREP(UnitAction,doAssaultSpeed);
+SUBPREP(UnitAction,doCallArtillery);
+SUBPREP(UnitAction,doCheckBody);
+SUBPREP(UnitAction,doCover);
+SUBPREP(UnitAction,doDodge);
+SUBPREP(UnitAction,doFleeing);
+SUBPREP(UnitAction,doHide);
+SUBPREP(UnitAction,doPanic);
+SUBPREP(UnitAction,doReposition);
+SUBPREP(UnitAction,doSmoke);
+SUBPREP(UnitAction,doSuppress);
+SUBPREP(UnitAction,doUGL);
+
+SUBPREP(VehicleAction,doVehicleAssault);
+SUBPREP(VehicleAction,doVehicleJink);
+SUBPREP(VehicleAction,doVehicleRotate);
+SUBPREP(VehicleAction,doVehicleSuppress);
 
 SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);
