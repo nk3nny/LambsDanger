@@ -49,7 +49,7 @@ _vehicles = _vehicles select { canFire _x };
 {
     private _posAGL = selectRandom _pos;
     _x doWatch _posAGL;
-    [_x, _posAGL] call FUNC(vehicleSuppress);
+    [_x, _posAGL] call FUNC(doVehicleSuppress);
 } foreach _vehicles;
 
 // recursive cyclic
