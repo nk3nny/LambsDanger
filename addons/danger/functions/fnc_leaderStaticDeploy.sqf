@@ -6,7 +6,7 @@
  * Arguments:
  * 0: units <ARRAY>
  * 1: danger pos <ARRAY>
- * 2: oosition to deploy weapon <ARRAY>
+ * 2: position to deploy weapon <ARRAY>
  *
  * Return Value:
  * units in array
