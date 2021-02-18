@@ -62,7 +62,7 @@ private _pos = if (_buildings isEqualTo []) then {
 _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 [_unit, _pos] call FUNC(doAssaultSpeed);
 
-// execute
+// execute  THIS IS A SMALL EDIT -nkenny
 _unit doMove _pos;
 _unit setDestination [_pos, "LEADER PLANNED", _distance2D < 15];
 
