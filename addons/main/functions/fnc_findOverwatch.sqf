@@ -71,7 +71,7 @@ for "_i" from 0 to 300 do {
     };
 };
 
-if !(_selectedPositions isEqualTo []) then {
+if (_selectedPositions isNotEqualTo []) then {
     call _fnc_selectResult;
 } else {
     if (_result isEqualTo []) then {

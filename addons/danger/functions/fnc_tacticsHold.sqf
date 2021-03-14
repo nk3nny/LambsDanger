@@ -50,7 +50,7 @@ if (count _units > 2) then {
     if (
         !(GVAR(disableAIAutonomousManoeuvres))
         && {((expectedDestination _unit) select 1) isEqualTo "DoNotPlan"}
-        && {!((speedMode _unit) isEqualTo "FULL")}
+        && {(speedMode _unit) isNotEqualTo "FULL"}
         && {_group getVariable [QEGVAR(main,groupMemory), []] isEqualTo []}
     ) then {
         private _deadOrSuppressed = _units findIf {

@@ -61,7 +61,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         && {_unit distance2D _x < 450}
         && {!(terrainIntersectASL [_eyePos, (eyePos _x) vectorAdd [0, 0, 5]])};
     };
-    if (_tankTarget != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)} && {!(_speedMode isEqualTo "FULL")}) exitWith {
+    if (_tankTarget != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)} && {_speedMode isNotEqualTo "FULL"}) exitWith {
         private _enemyVehicle = (_enemies select _tankTarget);
         _plan pushBack TACTICS_HIDE;
         _pos = _unit getHideFrom _enemyVehicle;
@@ -118,7 +118,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         && {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
         && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])};
     };
-    if (_farHighertarget != -1 && {!(_speedMode isEqualTo "FULL")}) exitWith {
+    if (_farHighertarget != -1 && {_speedMode isNotEqualTo "FULL"}) exitWith {
         _plan append [TACTICS_SUPPRESS, TACTICS_HIDE, TACTICS_HIDE];
         _pos = _unit getHideFrom (_enemies select _farHighertarget);
     };
@@ -149,7 +149,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     // enemy at inside buildings or fortified
     private _fortifiedTarget = _enemies findIf {
         _x call EFUNC(main,isIndoor)
-        || {!((nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isEqualTo [])}
+        || {(nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isNotEqualTo []}
     };
     if (_fortifiedTarget != -1) exitWith {
 
@@ -198,7 +198,7 @@ if (_plan isEqualTo [] || {_pos isEqualTo []}) exitWith {
 _unit setFormDir (_unit getDir _pos);
 
 // binoculars if appropriate!
-if (RND(0.2) && {(_unit distance2D _pos > 150) && {!(binocular _unit isEqualTo "")}}) then {
+if (RND(0.2) && {(_unit distance2D _pos > 150) && {(binocular _unit) isNotEqualTo ""}}) then {
     _unit selectWeapon (binocular _unit);
     _unit doWatch _pos;
 };
@@ -214,7 +214,7 @@ switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
         [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
+        if (_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_GARRISON: {
         // garrison
@@ -223,7 +223,7 @@ switch (_plan) do {
     case TACTICS_ASSAULT: {
         // rush ~ assault
         [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if !(_units isEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
+        if !(_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_SUPPRESS: {
         // suppress

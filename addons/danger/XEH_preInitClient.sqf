@@ -44,7 +44,7 @@ private _fnc_suppress_AI = {
         private _firePos = [0, 0, 0];
         if (isNull _target) then {
             private _intersections = lineIntersectsSurfaces [positionCameraToWorld [0, 0, 0], positionCameraToWorld [0, 0, 10000], player, objNull, true, 1];
-            if !(_intersections isEqualTo []) then {
+            if (_intersections isNotEqualTo []) then {
                 _firePos = (_intersections select 0) select 0;
                 _target = _x findNearestEnemy _firePos;
                 if !(isNull _target) then {
@@ -54,7 +54,7 @@ private _fnc_suppress_AI = {
         } else {
             _firePos = getPosASL _target;
         };
-        if !(_firePos isEqualTo [0, 0, 0]) then {
+        if (_firePos isNotEqualTo [0, 0, 0]) then {
             _x doSuppressiveFire _firePos;
             _x suppressFor 6 + (random 5);
         };

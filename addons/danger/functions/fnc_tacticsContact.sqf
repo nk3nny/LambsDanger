@@ -79,7 +79,7 @@ private _callout = if (isText (configFile >> "CfgVehicles" >> _typeOf >> "nameSo
 
 // gesture + call!
 private _units = [_unit] call EFUNC(main,findReadyUnits);
-if !(_units isEqualTo []) then {
+if (_units isNotEqualTo []) then {
     // unit
     private _unitCaller = _units select (count _units - 1);
 

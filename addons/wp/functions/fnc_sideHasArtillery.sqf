@@ -21,7 +21,7 @@ params [
 ];
 
 private _artillery = [GVAR(SideArtilleryHash), _side] call CBA_fnc_hashGet;
-if !(_pos isEqualTo []) then {
+if (_pos isNotEqualTo []) then {
     _artillery = _artillery select {
         canFire _x
         && {unitReady _x}
@@ -30,4 +30,4 @@ if !(_pos isEqualTo []) then {
     };
 };
 
-!(_artillery isEqualTo [])
+_artillery isNotEqualTo []

@@ -74,7 +74,7 @@ _unit setFormDir (_unit getDir _pos);
     }, {
         params ["_unit", "_target"];
         // check vehicle
-        if (canMove _unit && {!((crew _unit) isEqualTo [])}) then {
+        if (canMove _unit && {(crew _unit) isNotEqualTo []}) then {
 
             // refresh ready
             (effectiveCommander _unit) doMove (getPosASL _unit);

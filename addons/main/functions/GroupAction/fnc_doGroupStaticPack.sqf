@@ -33,7 +33,7 @@ if (_guns isEqualTo []) then {
 };
 
 // check if weapon is unmanned
-_guns = _guns select {alive _x && {_x isKindOf "StaticWeapon"} && !((crew _x) isEqualTo [])};
+_guns = _guns select {alive _x && {_x isKindOf "StaticWeapon"} && ((crew _x) isNotEqualTo [])};
 if (_guns isEqualTo []) exitWith { _units };
 
 // get gunner

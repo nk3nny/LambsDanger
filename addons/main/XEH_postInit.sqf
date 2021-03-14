@@ -4,7 +4,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
 
 {
     private _controls = missionNamespace getVariable [_x, []];
-    if !(_controls isEqualTo []) then {
+    if (_controls isNotEqualTo []) then {
         {
             if !(isNull _x) then {
                 ctrlDelete _x

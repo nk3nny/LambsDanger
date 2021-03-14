@@ -62,7 +62,7 @@ _muzzle = configName (_muzzleList select _muzzle);
 
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // turn towards target
-if !(_pos isEqualTo []) then {
+if (_pos isNotEqualTo []) then {
     _unit doWatch _pos;
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 };

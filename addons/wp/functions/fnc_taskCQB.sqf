@@ -44,10 +44,10 @@ params [
 private _fnc_find = {
     params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
-    _building = _building select {!((_x buildingPos -1) isEqualTo [])};
+    _building = _building select {(_x buildingPos -1) isNotEqualTo []};
     _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
-    if !(_area isEqualTo []) then {
+    if (_area isNotEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
         _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     };
@@ -115,7 +115,7 @@ private _fnc_act = {
         private _buildingPosSelected = _buildingPos param [0, []];
 
         // the assault
-        if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
+        if ((_buildingPos isNotEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
             [_x, _buildingPosSelected] call EFUNC(main,doAssaultSpeed);
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);

@@ -51,7 +51,7 @@ _causeArray params ["_cause", "_dangerPos", "", "_dangerCausedBy"]; // "_dangerU
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
 // is it an attack?
-private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
+private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {(side _dangerCausedBy) isNotEqualTo (side _unit)};
 
 // vehicle type ~ Artillery
 private _artillery = _vehicle getVariable [QEGVAR(main,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
@@ -133,7 +133,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 };
 
 // vehicle type ~ Armed Car
-private _car = _vehicle isKindOf "Car_F" && {!(([typeOf _vehicle, false] call BIS_fnc_allTurrets) isEqualTo [])};
+private _car = _vehicle isKindOf "Car_F" && {([typeOf _vehicle, false] call BIS_fnc_allTurrets) isNotEqualTo []};
 if (_car) exitWith {
 
     // speed

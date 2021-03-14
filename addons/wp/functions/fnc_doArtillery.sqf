@@ -137,7 +137,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
     };
 
     // clean markers!
-    if !(_mlist isEqualTo []) then {
+    if (_mlist isNotEqualTo []) then {
         [
             {
                 {deleteMarker _x; true} count _this

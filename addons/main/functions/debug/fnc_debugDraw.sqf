@@ -153,7 +153,7 @@ private _fnc_debug_drawRect = {
             "    Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
-            private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
+            private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {((side _unit) isNotEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
                 "    Current Tactic: ", group _unit getVariable [QGVAR(currentTactic), "None"], "<br/>",
                 "    Known enemies: ", _targetCount, "<br/>",
@@ -171,7 +171,7 @@ private _fnc_debug_drawRect = {
 
         //private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
         //private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
-        //private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
+        //private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {((side _unit) isNotEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",
