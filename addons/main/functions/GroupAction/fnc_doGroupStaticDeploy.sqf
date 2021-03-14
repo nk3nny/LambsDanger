@@ -71,7 +71,7 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
     _unit moveInGunner _weapon;
 
     // check artillery
-    if (GVAR(Loaded_WP) && {_weapon getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _weapon) >> "artilleryScanner") > 0]}) then {
+    if (GVAR(Loaded_WP) && {_weapon getVariable [QGVAR(isArtillery), getNumber (configOf _weapon >> "artilleryScanner") > 0]}) then {
         [group _unit] call EFUNC(wp,taskArtilleryRegister);
     };
 

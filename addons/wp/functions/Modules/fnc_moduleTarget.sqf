@@ -24,7 +24,7 @@ if(local _logic && _activated) then {
         if (_unit isKindOf "CAManBase") then {
             _name = format ["Dynamic Target %1", name _unit];
         } else {
-            _name = format ["Dynamic Target %1", getText (configFile >> "CfgVehicles" >> typeOf _unit >> "displayName")];
+            _name = format ["Dynamic Target %1", getText (configOf _unit >> "displayName")];
         };
     } else {
         GVAR(TargetIndex) = GVAR(TargetIndex) + 1;

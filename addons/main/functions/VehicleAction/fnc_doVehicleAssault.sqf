@@ -85,7 +85,7 @@ if (GVAR(debug_functions)) then {
     [
         "%1 Vehicle assault building (%2 @ %3 buildingPos %4 %5)",
         side _unit,
-        getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"),
+        getText (configOf _vehicle >> "displayName"),
         count _buildings,
         [""," suppressing targets"] select _suppression,
         [""," with cannon"] select _cannon

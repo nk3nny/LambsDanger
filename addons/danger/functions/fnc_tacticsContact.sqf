@@ -69,12 +69,8 @@ _group setFormDir (_unit getDir _enemy);
 [_unit, "gestureFreeze", true] call EFUNC(main,doGesture);
 
 // Callout
-private _typeOf = typeOf vehicle _enemy;
-private _callout = if (isText (configFile >> "CfgVehicles" >> _typeOf >> "nameSound")) then {
-    getText (configFile >> "CfgVehicles" >> _typeOf >> "nameSound")
-} else {
-    "contact"
-};
+private _nameSoundConfig = configOf vehicle _enemy >> "nameSound";
+private _callout = if (isText _nameSoundConfig) then { getText _nameSoundConfig } else { "contact" };
 [_unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
 
 // gesture + call!

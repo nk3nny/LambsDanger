@@ -54,7 +54,7 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debu
 private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {!(side _dangerCausedBy isEqualTo side _unit)};
 
 // vehicle type ~ Artillery
-private _artillery = _vehicle getVariable [QEGVAR(main,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
+private _artillery = _vehicle getVariable [QEGVAR(main,isArtillery), getNumber (configOf _vehicle >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
     _vehicle setVariable [QEGVAR(main,isArtillery), true];
     [_timeout] + _causeArray

@@ -68,7 +68,7 @@ _vehicle doMove _destination;
 if (GVAR(debug_functions)) then {
     [
         "%1 jink (%2 moves %3m)",
-        side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"),
+        side _unit, getText (configOf _vehicle >> "displayName"),
         round (_unit distance _destination)
     ] call FUNC(debugLog);
 };

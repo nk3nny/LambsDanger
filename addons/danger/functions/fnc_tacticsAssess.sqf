@@ -67,11 +67,8 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         _pos = _unit getHideFrom _enemyVehicle;
 
         // anti-vehicle callout
-        private _callout = if (isText (configFile >> "CfgVehicles" >> typeOf _enemyVehicle >> "nameSound")) then {
-            getText (configFile >> "CfgVehicles" >> typeOf _enemyVehicle >> "nameSound")
-        } else {
-            "KeepFocused"
-        };
+        private _nameSoundConfig = configOf _enemyVehicle >> "nameSound";
+        private _callout = if (isText _nameSoundConfig) then { getText _nameSoundConfig } else { "KeepFocused" };
         [_unit, behaviour _unit, _callout, 125] call EFUNC(main,doCallout);
     };
 
