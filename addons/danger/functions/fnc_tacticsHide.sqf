@@ -101,7 +101,7 @@ doStop _units;
     _x setUnitPosWeak "DOWN";
 
     // disperse!
-    if !(_cover isEqualTo []) then {
+    if (_cover isNotEqualTo []) then {
         [
             {
                 params ["_unit", "_pos"];
@@ -120,7 +120,7 @@ private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
 private _enemies = _unit targets [true, 600, [], 0, _target];
 private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
 
-if (_antiTank && { _tankAir != -1 } && { !(_launchers isEqualTo []) }) then {
+if (_antiTank && { _tankAir != -1 } && { _launchers isNotEqualTo [] }) then {
     {
         // launcher units target air/tank
         _x setCombatMode "RED";

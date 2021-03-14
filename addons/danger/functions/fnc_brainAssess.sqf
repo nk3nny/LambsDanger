@@ -55,7 +55,7 @@ if (
     && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
     && {_assignedTarget call EFUNC(main,isAlive)}
     && {(vehicle _assignedTarget) isKindOf "CAManBase"}
-    && {!(typeOf _assignedTarget isEqualTo "SuppressTarget")}
+    && {(typeOf _assignedTarget) isNotEqualTo "SuppressTarget"}
 ) exitWith {
     [_unit, _assignedTarget] call EFUNC(main,doAssault);
     _timeout + 2

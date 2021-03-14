@@ -115,7 +115,7 @@ _group setFormation "LINE";
                 };
 
                 // move
-                if !((expectedDestination _unit select 0) isEqualTo _destination) then {_unit doMove _destination};
+                if ((expectedDestination _unit select 0) isNotEqualTo _destination) then {_unit doMove _destination};
                 _unit forceSpeed ([3, 24] select _retreat);
 
                 // force move

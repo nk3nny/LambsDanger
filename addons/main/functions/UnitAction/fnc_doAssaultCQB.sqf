@@ -98,7 +98,7 @@ if (_buildingPos isEqualTo []) then {
 };
 
 // repeat
-if !(_buildingPos isEqualTo []) then {
+if (_buildingPos isNotEqualTo []) then {
     [{_this call FUNC(doAssaultCQB)}, [_unit, getPos _unit], 7] call CBA_fnc_waitAndExecute;
 // or end
 } else {

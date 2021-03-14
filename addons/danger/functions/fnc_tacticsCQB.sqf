@@ -60,7 +60,7 @@ private _buildings = [_unit, _range] call EFUNC(main,findBuildings);
 private _distance = _unit distance2D _target;
 _buildings = _buildings select {
     _x distance2D _target < (_distance + 8)
-    && !((_x getVariable [QEGVAR(main,CQB_cleared_) + str (side _unit), [0, 0]]) isEqualTo [])
+    && ((_x getVariable [QEGVAR(main,CQB_cleared_) + str (side _unit), [0, 0]]) isNotEqualTo [])
 };
 
 _inCQB append _buildings;

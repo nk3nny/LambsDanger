@@ -62,7 +62,7 @@ private _buildings = [_pos, _range, false, false] call EFUNC(main,findBuildings)
 // find guns
 private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
-if !(_area isEqualTo []) then {
+if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
     _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
@@ -100,7 +100,7 @@ if (_patrol) then {
 reverse _units;
 {
     // gun
-    if !(_weapons isEqualTo []) then {
+    if (_weapons isNotEqualTo []) then {
         private _staticWeapon = _weapons deleteAt 0;
         if (_teleport) then { _x moveInGunner _staticWeapon; };
         _x assignAsGunner _staticWeapon;
@@ -108,7 +108,7 @@ reverse _units;
         _units set [_foreachIndex, objNull];
     };
 
-    if (!(_buildings isEqualTo []) && { RND(0.6) }) then {
+    if ((_buildings isNotEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
         if (_teleport) then { _x setPos _buildingPos; };
@@ -187,7 +187,7 @@ private _dir = random 360;
 
     // sort anims
     private _anims = _unarmedAnims;
-    if !(primaryWeapon _x isEqualTo "") then {_anims append _armedAnims};
+    if (primaryWeapon _x isNotEqualTo "") then {_anims append _armedAnims};
 
     // wait for it
     [{

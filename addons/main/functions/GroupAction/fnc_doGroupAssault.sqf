@@ -25,7 +25,7 @@ if (_units isEqualTo []) exitWith {};
 {
     private _targetPos = selectRandom _pos;
     // setpos
-    if !(currentCommand _x isEqualTo "MOVE") then {
+    if ((currentCommand _x) isNotEqualTo "MOVE") then {
         _x doMove _targetPos;
         _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
         _x doWatch _targetPos;

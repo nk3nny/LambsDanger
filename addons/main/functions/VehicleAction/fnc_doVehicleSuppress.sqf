@@ -45,7 +45,7 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Suppress", GVAR(debug_functions)
 
 // trace
 private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];
-if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // reAdjust
 private _distance = (_eyePos vectorDistance _pos) - 4;
@@ -54,7 +54,7 @@ _pos = (_eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance)
 // recheck
 if (_eyePos vectorDistance _pos < GVAR(minSuppressionRange)) exitWith {false};
 private _friendlies = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 4] call FUNC(findNearbyFriendlies);
-if !(_friendlies isEqualTo []) exitWith {false};
+if (_friendlies isNotEqualTo []) exitWith {false};
 
 // do it
 _vehicle doSuppressiveFire _pos;

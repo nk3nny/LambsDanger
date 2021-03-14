@@ -79,7 +79,7 @@ switch (_mode) do {
                             _target = getPos _target;
                         };
                         [_group, _target, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
-                        if !(_target isEqualTo _logic) then {
+                        if (_target isNotEqualTo _logic) then {
                             deleteVehicle _logic;
                         };
                     }, {

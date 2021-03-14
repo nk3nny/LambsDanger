@@ -35,12 +35,12 @@ private _unit = _units findIf {
 
     private _weapon = primaryWeapon _x;
 
-    if !(_weapon isEqualTo "") then {
+    if (_weapon isNotEqualTo "") then {
 
         _muzzle = (getArray (configfile >> "CfgWeapons" >> _weapon >> "muzzles") - ["SAFE", "this"]) param [0, ""];
 
         // find flares
-        if !(_muzzle isEqualTo "") then {
+        if (_muzzle isNotEqualTo "") then {
             private _findFlares = getArray (configfile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
             _findFlares = _findFlares arrayIntersect (magazines _x);
             if (_findFlares isEqualTo []) exitWith {false};
@@ -56,7 +56,7 @@ private _unit = _units findIf {
             _flare = _findFlares select _index;
         };
     };
-    !(_flare isEqualTo "")
+    (_flare isNotEqualTo "")
 };
 
 // execute

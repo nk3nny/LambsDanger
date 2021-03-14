@@ -34,7 +34,7 @@ if (_maxResults isEqualTo 0) exitWith {_ret};
 
 private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8];
 
-if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
+if (_dangerPos isNotEqualTo [0, 0, 1.8]) then {
     _dangerPos = AGLToASL _dangerPos;
     private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
     private _vehicles = nearestObjects  [_unit, ["building", "Car"], _range];
@@ -53,7 +53,7 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
     private _posASL = [];
     private _buildingPos = [];
 
-    while {!_found && {!(_allObjs isEqualTo [])}} do {
+    while {!_found && {_allObjs isNotEqualTo []}} do {
         _obj = _allObjs deleteAt 0;
         _buildingPos = [_obj, 5] call CBA_fnc_buildingPositions;
         if (_buildingPos isEqualTo []) then {
@@ -85,14 +85,14 @@ if !(_dangerPos isEqualTo [0, 0, 1.8]) then {
                     _ret pushback [_pos, selectRandom _stances];
                     _numFound = _numFound + 1;
 
-                    _found = (!(_maxResults isEqualTo -1) && {_numFound isEqualTo _maxResults});
+                    _found = ((_maxResults isNotEqualTo -1) && {_numFound isEqualTo _maxResults});
                 };
             };
         } forEach _buildingPos
     };
 };
 
-if (GVAR(debug_functions) && {!(_ret isEqualTo [])}) then {
+if (GVAR(debug_functions) && {(_ret isNotEqualTo [])}) then {
     ["Found %1 cover positions", count _ret] call FUNC(debugLog);
     {
         "Sign_Arrow_Large_F" createVehicleLocal ((_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8]);
