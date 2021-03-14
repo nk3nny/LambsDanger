@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Jink vehicle shifts the vehicle 25-150 meters left or right or rear, in response to danger
+ * Jink vehicle shifts the vehicle 50-150 meters left or right or rear, in response to danger
  *
  * Arguments:
  * 0: vehicle moving <OBJECT>
@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_range", 25 + random [0, 25, 125]]];
+params ["_unit", ["_range", 50 + random [0, 0, 100]]];
 
 // settings
 private _vehicle = vehicle _unit;
@@ -35,14 +35,14 @@ _unit setVariable [QGVAR(currentTask), "Jink Vehicle", GVAR(debug_functions)];
 
 // Find positions
 private _destination = [];
-_destination pushBack (_vehicle modelToWorldVisual [_range, -(random 10), 0]);
-_destination pushBack (_vehicle modelToWorldVisual [-_range, -(random 10), 0]);
-//_destination pushBack (_vehicle modelToWorldVisual [0, (20 + random 50) * -1, 0]);  <-- rear movement just confuses AI - nkenny
+_destination pushBack (_vehicle modelToWorldVisual [_range, -5, 0]);
+_destination pushBack (_vehicle modelToWorldVisual [-_range, -5, 0]);
+//_destination pushBack (_vehicle modelToWorldVisual [0, -50, 0]);  <-- rear movement just confuses AI - nkenny
 
 // near enemy?
 private _enemy = _unit findNearestEnemy _unit;
 if (!isNull _enemy) then {
-    _destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call FUNC(findOverwatch));
+    //_destination pushBack ([getPos _enemy, 120 + _range, _range, 8, getPos _vehicle] call FUNC(findOverwatch));
 
     // Share information!
     [_unit, _enemy, GVAR(radioShout), true] call FUNC(doShareInformation);
@@ -55,11 +55,8 @@ _destination = _destination apply {_x findEmptyPosition [0, 25, typeOf _vehicle]
 _destination = _destination select {!(_x isEqualTo []) && {!(surfaceIsWater _x)}};
 
 // check -- no location -- exit
-if (_destination isEqualTo []) exitWith { _vehicle modelToWorldVisual [0, -(random 30), 0] };
+if (_destination isEqualTo []) exitWith { getPosASL _unit };
 _destination = selectRandom _destination;
-
-// refresh ready
-_vehicle doMove (getPosASL _vehicle);
 
 // make tanks pop smoke when moving
 // _vehicle forceweaponfire ["SmokeLauncher", "SmokeLauncher"];     <-- not working! Will revist at a later date - nkenny

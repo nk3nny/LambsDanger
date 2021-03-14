@@ -26,13 +26,13 @@ private _bodies = allDeadMen findIf { (_x distance2D _pos) < _radius };
 if (_bodies isEqualTo -1) exitWith {false};
 
 // body
-private _body = (allDeadMen select _bodies);
+private _body = allDeadMen select _bodies;
 
 // execute
 _unit setUnitPosWeak "MIDDLE";
-_unit doMove getPosATL _body;
+_unit doMove (getPosATL _body);
 _unit lookAt _body;
-_unit setVariable [QGVAR(forceMove), true];
+_unit setVariable [QEGVAR(danger,forceMove), true];
 [
     {
         // condition
@@ -46,7 +46,7 @@ _unit setVariable [QGVAR(forceMove), true];
             [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
             _unit action ["rearm", _body];
             _unit doFollow leader _unit;
-            _unit setVariable [QGVAR(forceMove), nil];
+            _unit setVariable [QEGVAR(danger,forceMove), nil];
         };
     },
     [_unit, _body], 8,
@@ -55,7 +55,7 @@ _unit setVariable [QGVAR(forceMove), true];
         params ["_unit"];
         if (_unit call FUNC(isAlive)) then {
             _unit doFollow leader _unit;
-            _unit setVariable [QGVAR(forceMove), nil];
+            _unit setVariable [QEGVAR(danger,forceMove), nil];
         };
     }
 ] call CBA_fnc_waitUntilAndExecute;

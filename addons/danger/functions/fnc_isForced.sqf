@@ -21,7 +21,7 @@ fleeing _unit
 || {!(_unit call EFUNC(main,isAlive))}
 || {!((_unit getVariable ["ace_medical_ai_healQueue", []]) isEqualTo [])}
 || {GVAR(disableAIPlayerGroup) && {isPlayer leader _unit}}
-|| {currentCommand _unit in ["ATTACK", "GET IN", "ACTION", "HEAL", "Suppress", "REARM", "JOIN"]}
+|| {currentCommand _unit in ["ATTACK", "GET IN", "ACTION", "HEAL", "REARM", "JOIN"]}
 || {(behaviour _unit) isEqualTo "CARELESS"}
 //|| {!(_unit checkAIFeature "PATH")}
 || {!(_unit checkAIFeature "MOVE")}

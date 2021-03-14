@@ -49,6 +49,7 @@ if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
 
 // assigned target
 private _assignedTarget = assignedTarget _unit;
+private _canMove = _unit checkAIFeature "PATH";
 if (
     !isNull _assignedTarget
     && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
@@ -61,11 +62,10 @@ if (
 };
 
 // group memory
-private _group = group _unit;
-private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
+private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 
 // sympathetic CQB/suppressive fire
-if !(_groupMemory isEqualTo []) exitWith {
+if (_canMove && {_groupMemory isNotEqualTo []}) exitWith {
     [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
     _timeout + 2
 };

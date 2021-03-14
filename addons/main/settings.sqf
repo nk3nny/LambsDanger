@@ -197,7 +197,7 @@ _curCat = LSTRING(Settings_Debug);
     false,
     1
 ] call CBA_fnc_addSetting;
-/*
+
 // Debug Renderer
 [
     QGVAR(debug_Drawing),
@@ -223,7 +223,7 @@ _curCat = LSTRING(Settings_Debug);
         GVAR(debug_drawRectInUseCurator) = [];
     }
 ] call CBA_fnc_addSetting;
-*/
+
 // Debug Renderer for Expected Destination
 [
     QGVAR(debug_RenderExpectedDestination),

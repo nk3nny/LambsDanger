@@ -33,7 +33,7 @@ private _group = group _unit;
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 25
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // unit alive and allowed to move

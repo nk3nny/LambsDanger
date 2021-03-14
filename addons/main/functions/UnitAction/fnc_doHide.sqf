@@ -52,7 +52,7 @@ if (!(_buildings isEqualTo []) && { RND(0.1) }) then {
     // execute move
     _unit doMove (selectRandom _buildings);
     if (GVAR(debug_functions)) then {
-        ["%1 hide in building (%2 - positions %3)", side _unit, name _unit, count _buildings] call FUNC(debugLog);
+        ["%1 hide in building (%2 - %3x positions)", side _unit, name _unit, count _buildings] call FUNC(debugLog);
     };
 } else {
     // hide

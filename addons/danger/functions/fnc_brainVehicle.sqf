@@ -23,7 +23,7 @@ private _timeout = time + 1;
 // commander
 private _vehicle = vehicle _unit;
 if !((effectiveCommander _vehicle) isEqualTo _unit && {_unit call EFUNC(main,isAlive)}) exitWith {
-    [_timeout + 1, -2, getPosASL _vehicle, time + GVAR(dangerUntil), objNull]
+    [_timeout, -2, getPosASL _vehicle, time + GVAR(dangerUntil), objNull]
 };
 
 // no queue
@@ -57,7 +57,7 @@ private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT,
 private _artillery = _vehicle getVariable [QEGVAR(main,isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
     _vehicle setVariable [QEGVAR(main,isArtillery), true];
-    [_timeout + 20] + _causeArray
+    [_timeout] + _causeArray
 };
 
 // variable
@@ -67,16 +67,16 @@ _vehicle setVariable [QEGVAR(main,isArtillery), false];
 private _static = _vehicle isKindOf "StaticWeapon";
 if (_static) exitWith {
 
-    // suppression
-    if (_attack) then {
-        [_unit, _dangerPos] call EFUNC(main,doVehicleSuppress);
-        [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
-    };
-
     // get out if enemy near
     if ((_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)) then {
         [_unit] orderGetIn false;
         _unit setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
+    };
+
+    // suppression
+    if (_attack) then {
+        [_unit, _dangerPos] call EFUNC(main,doVehicleSuppress);
+        [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
     };
 
     // end
@@ -143,17 +143,18 @@ if (_car) exitWith {
     // look to danger
     if (!isNull _dangerCausedBy) then {_vehicle doWatch _dangerCausedBy;};
 
-    // suppression
-    if (_attack && {_slow}) then {
-        [_unit, (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, 1.2]] call EFUNC(main,doVehicleSuppress);
-        [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
-        _delay = random 4;
+    // escape
+    if (_slow && {_vehicle distance _dangerCausedBy < (15 + random 35)}) then {
+        [_unit] call EFUNC(main,doVehicleJink);
+        _slow = false;
+        _delay = 3;
     };
 
-    // escape
-    if (_slow && {_vehicle distance _dangerCausedBy < (3 + random 5)}) then {
-        [_unit] call EFUNC(main,doVehicleJink);
-        _delay = 3;
+    // suppression
+    if (_attack && {_slow}) then {
+        [_unit, (_unit getHideFrom _dangerCausedBy) vectorAdd [0, 0, random 1]] call EFUNC(main,doVehicleSuppress);
+        [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
+        _delay = random 4;
     };
 
     // end

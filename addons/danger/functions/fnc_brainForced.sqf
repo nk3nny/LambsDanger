@@ -54,10 +54,16 @@ if (getSuppression _unit > 0) then {
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
 
     // attacking
+    private _attackTarget = getAttackTarget _unit;
     _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];
 
+    // forget dead or incapacitated targets --> exits bad attack routine ~ nkenny
+    if !(_attackTarget call EFUNC(main,isAlive)) exitWith {
+        (group _unit) forgetTarget _attackTarget;
+    };
+
     // tactical movement speed
-    [_unit, getAttackTarget _unit] call EFUNC(main,doAssaultSpeed);
+    [_unit, _attackTarget] call EFUNC(main,doAssaultSpeed);
 
 };
 

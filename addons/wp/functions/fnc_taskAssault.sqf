@@ -23,7 +23,7 @@ if !(canSuspend) exitWith {
     _this spawn FUNC(taskAssault);
 };
 
-// init --
+// init
 params [
     ["_group", grpNull, [grpNull, objNull]],
     ["_pos", [0, 0, 0]],
@@ -33,11 +33,9 @@ params [
     ["_useWaypoint", false, [false]]
 ];
 
-// sort grp
+// sort group
 if (!local _group) exitWith {false};
 _group = _group call CBA_fnc_getGroup;
-_group enableAttack false;
-_group allowFleeing 0;
 
 // sort wp
 if (_useWaypoint) then {
@@ -50,15 +48,23 @@ private _units = units _group select {!isPlayer _x && {_x call EFUNC(main,isAliv
 // add group variables
 _group setVariable [QGVAR(taskAssaultDestination), _pos];
 _group setVariable [QGVAR(taskAssaultMembers), _units];
-_group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
-_group setSpeedMode "FULL";
 
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
 
+// set group orders
+_group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
+_group setCombatMode (["WHITE", "BLUE"] select _retreat);
+_group enableAttack false;
+_group allowFleeing 0;
+_group setSpeedMode "FULL";
+_group setFormation "LINE";
+
 // sort units
 {
     _x setVariable [QEGVAR(danger,disableAI), true];
+    _x setVariable [QEGVAR(danger,forceMove), true];
+    _x disableAI "TARGET";
     _x disableAI "FSM";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
@@ -69,14 +75,13 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
     // check retreat
     if (_retreat) then {
-        _x disableAI "TARGET";
         _x disableAI "AUTOTARGET";
-        _x switchMove "ApanPercMrunSnonWnonDf";
-        _x playMoveNow selectRandom [
+        [_x, "ApanPercMrunSnonWnonDf"] remoteExec ["switchMove", 0];
+        [_x, selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
-        ];
+        ]] remoteExec["switchMove", 0];
     };
 
     // adds frame handler
@@ -111,9 +116,7 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
                 // move
                 if !((expectedDestination _unit select 0) isEqualTo _destination) then {_unit doMove _destination};
-                _unit forceSpeed ([ [_unit, _destination] call EFUNC(main,doAssaultSpeed), 24] select _retreat);
-                _unit doWatch _destination;
-                //_unit setVariable [QEGVAR(danger,forceMove), true];   ~ speedmode "FULL" should replicate this behaviour in new FSM. ~ nkenny
+                _unit forceSpeed ([3, 24] select _retreat);
 
                 // force move
                 private _dir = 360 - (_unit getRelDir _destination);
@@ -121,12 +124,12 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
                 // move right
                 if (_dir > 250 && {_dir < 320}) then {
-                    _anim append ["FastR", "FastRF"];
+                    _anim append ["TactR", "TactRF"];
                 };
 
                 // move left
                 if (_dir < 110 && {_dir > 40}) then {
-                    _anim append ["FastL", "FastLF"];
+                    _anim append ["TactL", "TactLF"];
                 };
 
                 // move back
@@ -136,18 +139,17 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
                 // forward
                 if (_anim isEqualTo []) then {
-                    _anim = ["FastF"];
+                    _anim = ["TactF"];
                 };
 
                 // execute
                 [_unit, _anim, true] call EFUNC(main,doGesture);
             },
-            _cycle,
+            _cycle - 0.5 + random 1.2,
             [_x, _group, _retreat, _threshold]
         ] call CBA_fnc_addPerFrameHandler;
         _x setVariable [QGVAR(taskAssault), true];
     };
-
 } foreach _units;
 
 // execute move
@@ -175,13 +177,15 @@ waitUntil {
     // delay and end
     sleep _cycle;
     _group getVariable [QGVAR(taskAssaultMembers), []] isEqualTo []
-
 };
 
 // clean up
 _group setVariable [QGVAR(taskAssaultDestination), nil];
 _group setVariable [QGVAR(taskAssaultMembers), nil];
+_group setFormation "WEDGE";
 _group setBehaviour "AWARE";
+_group setCombatMode "YELLOW";
+_group enableAttack true;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

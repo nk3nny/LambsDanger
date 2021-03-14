@@ -27,7 +27,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 3;
+private _timeout = time + 2;
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {-1};
