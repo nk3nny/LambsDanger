@@ -25,6 +25,7 @@ if !(_pos isEqualTo []) then {
     _artillery = _artillery select {
         canFire _x
         && {unitReady _x}
+        && {simulationEnabled _x}
         && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
     };
 };

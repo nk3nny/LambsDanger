@@ -36,7 +36,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Contact!", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_functions)];
 
 // reset tactics state
 [
@@ -44,7 +44,7 @@ _group setVariable [QGVAR(tacticsTask), "Contact!", EGVAR(main,debug_functions)]
         params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
             {_x setUnitPosWeak "AUTO"} foreach units _group;
             private _leader = leader _group;
@@ -91,7 +91,7 @@ if !(_units isEqualTo []) then {
 };
 
 // share information
-[{_this call FUNC(shareInformation)}, [_unit, _enemy, GVAR(radioShout), true], 1 + random 5] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doShareInformation)}, [_unit, _enemy, EGVAR(main,radioShout), true], 1 + random 5] call CBA_fnc_waitAndExecute;
 
 // disable Reaction phase for rushing or ambushing groups
 if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
@@ -100,8 +100,8 @@ if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
 if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
 
 // set current task
-//_unit setVariable [QGVAR(currentTarget), _enemy, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
+//_unit setVariable [QEGVAR(main,currentTarget), _enemy, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
 
 // set combat behaviour and focus team
 if ((behaviour _unit) isEqualTo "AWARE") then {_unit setBehaviour "COMBAT";};
@@ -113,14 +113,15 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
     {
         private _distanceAssault = RND(0.2) && {_x distance2D _enemy < GVAR(cqbRange)};
         if (_distanceAssault) then {
-            [_x, _enemy] call FUNC(doAssault);
+            [_x, _enemy] call EFUNC(main,doAssault);
+            _x doFire (vehicle _enemy);
         } else {
-            [_x, ATLtoASL ((_unit getHideFrom _enemy) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1])] call FUNC(doSuppress);
+            [_x, ATLtoASL ((_unit getHideFrom _enemy) vectorAdd [0, 0, 0.3 + random 1])] call EFUNC(main,doSuppress);
         };
     } foreach _units;
 
     // group variable
-    _group setVariable [QGVAR(tacticsTask), "Contact! (aggressive)", EGVAR(main,debug_functions)];
+    _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
 
     // debug
     if (EGVAR(main,debug_functions)) then {
@@ -131,8 +132,8 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
 // immediate action -- leaders further away get their subordinates to hide!
 private _buildings = [leader _unit, _range, true, true] call EFUNC(main,findBuildings);
 {
-    [_x, _enemy, _range * 0.7, _buildings] call FUNC(doHide);
-    _x setVariable [QGVAR(currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
+    [_x, _enemy, _range * 0.7, _buildings] call EFUNC(main,doHide);
+    _x setVariable [QEGVAR(main,currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
 } foreach _units;
 
 // debug

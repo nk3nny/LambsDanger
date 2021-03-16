@@ -32,8 +32,8 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
 
 // set current task
-_unit setVariable [QGVAR(currentTarget), objNull, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
 // gather data
 private _unitCount = count units _unit;     // how many soldiers the leader believes he is leading - nk
@@ -53,7 +53,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     private _eyePos = eyePos _unit;
 
     // communicate
-    [_unit, selectRandom _enemies] call FUNC(shareInformation);
+    [_unit, selectRandom _enemies] call EFUNC(main,doShareInformation);
 
     // vehicle response
     private _tankTarget = _enemies findIf {
@@ -80,12 +80,13 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     private _inside = _unit call EFUNC(main,isIndoor);
 
     // Check for artillery ~ NB: support is far quicker now! and only targets infantry
-    if (GVAR(Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
+    if (EGVAR(main,Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
         private _artilleryTarget = _enemies findIf {
             _unit distance2D _x > 200
+            && {([_unit, getPos _x, 100] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
         };
         if (_artilleryTarget != -1) then {
-            [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call FUNC(leaderArtillery);   // possibly add delay? ~ nkenny
+            [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call EFUNC(main,doCallArtillery);   // possibly add delay? ~ nkenny
         };
     };
 
@@ -180,7 +181,7 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
 
 // man empty static weapons
 if !(GVAR(disableAIFindStaticWeapons)) then {
-    _units = [_units, _unit] call FUNC(leaderStaticFind);
+    _units = [_units, _unit] call EFUNC(main,doGroupStaticFind);
 };
 
 // no plan ~ exit with no executable plan
@@ -204,7 +205,7 @@ if (RND(0.2) && {(_unit distance2D _pos > 150) && {!(binocular _unit isEqualTo "
 
 // deploy static weapons
 if !(GVAR(disableAIDeployStaticWeapons)) then {
-    _units = [_units, _pos] call FUNC(leaderStaticDeploy);
+    _units = [_units, _pos] call EFUNC(main,doGroupStaticDeploy);
 };
 
 // enact plan

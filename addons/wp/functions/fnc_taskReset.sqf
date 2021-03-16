@@ -64,8 +64,8 @@ _group setVariable [QGVAR(taskAssaultMembers), nil, true];
     _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
 
     // LAMBS variables
-    _x setVariable [QEGVAR(danger,currentTask), nil, EGVAR(main,debug_functions)];
-    _x setVariable [QEGVAR(danger,currentTarget), nil, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
+    _x setVariable [QEGVAR(main,currentTarget), nil, EGVAR(main,debug_functions)];
     _x setVariable [QEGVAR(danger,disableAI), nil, true];
     _x setVariable [QEGVAR(danger,forceMove), nil, true];
 

@@ -26,7 +26,7 @@ item21[] = {"Escape_",-1,250,-360.000000,440.000000,-200.000000,560.000000,0.000
 item22[] = {"Run",2,250,-340.000000,240.000000,-240.000000,300.000000,0.000000,"Run"};
 item23[] = {"Vehicle",4,218,-440.000000,360.000000,-340.000000,420.000000,1.000000,"Vehicle"};
 item24[] = {"Man",4,218,-220.000000,360.000000,-120.000000,420.000000,0.000000,"Man"};
-item25[] = {"Man_1",2,4346,-200.000000,600.000000,-100.000000,650.000000,0.000000,"Man"};
+item25[] = {"Man_1",2,250,-200.000000,600.000000,-100.000000,650.000000,0.000000,"Man"};
 item26[] = {"Order_out_1",2,250,-460.000000,600.000000,-360.000000,660.000000,0.000000,"Order out"};
 item27[] = {"Always",8,218,-320.000000,600.000000,-220.000000,660.000000,0.000000,"Always"};
 item28[] = {"Max__time",4,218,-775.000000,775.000000,-675.000000,825.000000,1.000000,"Max. time"};
@@ -180,8 +180,8 @@ link63[] = {55,2};
 link64[] = {56,54};
 link65[] = {57,2};
 link66[] = {58,4};
-globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-666.411133,134.919434,1405.655029,472.352661,759,884,1};
-window[] = {2,-1,-1,-32000,-32000,844,26,647,26,3,777};
+globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-1568.206055,-91.363159,928.922363,-791.142883,759,884,1};
+window[] = {2,-1,-1,-1,-1,844,26,647,26,3,777};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -201,6 +201,9 @@ class FSM
                          "// settings " \n
                          "_this setUnitPos ""UP"";" \n
                          "_this setVariable [""DC"", true];" \n
+                         "" \n
+                         "// add current data to queue for evaluation" \n
+                         "_queue pushBack [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy];" \n
                          "" \n
                          "// Function to retrieve the highest priority event from the _queue" \n
                          "private _civilianPriorities = [" \n
@@ -267,7 +270,7 @@ class FSM
                         name = "End";
                         itemno = 2;
                         init = /*%FSM<STATEINIT""">*/"// reset" \n
-                         "_this setVariable [""lambs_danger_currentTask "", nil, lambs_main_debug_functions];" \n
+                         "_this setVariable [""lambs_main_currentTask "", nil, lambs_main_debug_functions];" \n
                          "_this setBehaviour _behaviour;" \n
                          "_this setVariable [""DC"", false];		// from vanilla. Uncertain what it does " \n
                          ""/*%FSM</STATEINIT""">*/;
@@ -386,7 +389,7 @@ class FSM
                          "" \n
                          "// execute hide" \n
                          "doStop _this;" \n
-                         "[_this,  _dangerPos] call lambs_danger_fnc_doHide; " \n
+                         "[_this,  _dangerPos] call lambs_main_fnc_doHide; " \n
                          "" \n
                          "// animation" \n
                          "if (_this call lambs_danger_fnc_fsmAllowAnimation) then {" \n
@@ -456,7 +459,7 @@ class FSM
                          "" \n
                          "// shout! ~ Disabled as it seems to have an adverse effect on AI - nkenny" \n
                          "//if (random 1 > 0.2 && {getSuppression _this isEqualTo 0} && {leader _this isEqualTo _this}) then {" \n
-                         "//    [_this, objNull, 10 + random 100, true] call lambs_danger_fnc_shareInformation;" \n
+                         "//    [_this, objNull, 10 + random 100, true] call lambs_main_fnc_doShareInformation;" \n
                          "//};" \n
                          "" \n
                          "// settings " \n
@@ -517,15 +520,7 @@ class FSM
                 {
                         name = "Hide";
                         itemno = 18;
-                        init = /*%FSM<STATEINIT""">*/"// debug " \n
-                         "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm Hide!"" call lambs_main_fnc_debugLog;}; " \n
-                         "" \n
-                         "// variable" \n
-                         "_this setVariable [""lambs_danger_currentTask"", ""Hide!"", lambs_main_debug_functions];" \n
-                         "" \n
-                         "// tweak behaviour " \n
-                         "_this setBehaviour ""STEALTH"";" \n
-                         "_this stop false;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -564,7 +559,7 @@ class FSM
                          "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm Escape!"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// variable" \n
-                         "_this setVariable [""lambs_danger_currentTask"", ""Escape!"", lambs_main_debug_functions];" \n
+                         "_this setVariable [""lambs_main_currentTask"", ""Escape!"", lambs_main_debug_functions];" \n
                          "" \n
                          "// tweak behaviour" \n
                          "_this setBehaviour ""COMBAT"";" \n
@@ -762,7 +757,7 @@ class FSM
                          "if (lambs_main_debug_FSM_civ) then {""dangerCivilian.fsm Check Body"" call lambs_main_fnc_debugLog;}; " \n
                          "" \n
                          "// variable" \n
-                         "_this setVariable [""lambs_danger_currentTask"", ""Check body"", lambs_main_debug_functions];" \n
+                         "_this setVariable [""lambs_main_currentTask"", ""Check body"", lambs_main_debug_functions];" \n
                          "" \n
                          "// tweak behaviour" \n
                          "_this setBehaviour ""COMBAT"";" \n

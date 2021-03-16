@@ -87,7 +87,7 @@ _group enableAttack false;
 } count (units _group);
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskRush", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskRush", EGVAR(main,debug_functions)];
 
 // Hunting loop
 waitUntil {

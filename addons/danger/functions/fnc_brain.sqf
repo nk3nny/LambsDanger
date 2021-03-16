@@ -89,7 +89,7 @@ if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
 
     // panic function
     if (_panic) then {
-        [_unit] call FUNC(doPanic);
+        [_unit] call EFUNC(main,doPanic);
     };
 };
 
@@ -108,7 +108,7 @@ if (_dangerCause in [DANGER_ASSESS, DANGER_SCREAM]) then {
 if (RND(0.75) && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
     [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
     [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
-    [_unit, _dangerCausedBy, GVAR(radioShout), true] call FUNC(shareInformation);
+    [_unit, _dangerCausedBy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
 };
 
 // modify return

@@ -27,7 +27,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 3;
+private _timeout = time + 2;
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {-1};
@@ -39,7 +39,7 @@ private _indoor = _unit call EFUNC(main,isIndoor);
 if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
 
     // check body
-    [_unit, _pos] call FUNC(doCheckBody);
+    [_unit, _pos] call EFUNC(main,doCheckBody);
 
     // pop smoke
     if (!_indoor) then {[{_this call EFUNC(main,doSmoke)}, [_unit, _pos], random 2] call CBA_fnc_waitAndExecute;};
@@ -51,27 +51,27 @@ if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
 // indoor units exit
 if (RND(0.05) && {_indoor}) exitWith {
     //doStop _unit;   // test this more thoroughly!-- might make units too static! - nkenny
-    if (RND(GVAR(indoorMove))) then {[_unit, _pos] call FUNC(doReposition);};
+    if (RND(EGVAR(main,indoorMove))) then {[_unit, _pos] call EFUNC(main,doReposition);};
     _timeout
 };
 
 // check bodies ~ enemy group!
 private _group = group _unit;
-private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
+private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
 if (_type isEqualTo DANGER_DEADBODY) exitWith {
 
     // communicate danger!
-    [{_this call FUNC(shareInformation)}, [_unit, objNull, GVAR(radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
     // gesture
     [_unit, "gestureGoB"] call EFUNC(main,doGesture);
 
     // add body to move routine
     _groupMemory pushBack _pos;
-    _group setVariable [QGVAR(groupMemory), _groupMemory, false];
+    _group setVariable [QEGVAR(main,groupMemory), _groupMemory, false];
 
-    _unit setVariable [QGVAR(currentTarget), _pos, EGVAR(main,debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
+    _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
+    _unit setVariable [QEGVAR(main,currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
 
     // end
     _timeout

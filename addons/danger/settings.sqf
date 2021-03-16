@@ -9,16 +9,6 @@ private _curCat = LSTRING(Settings_MainCat);
     0         // players may configure their own preferences
 ] call CBA_fnc_addSetting;
 
-// Toggle advanced danger.fsm features on player group
-[
-    QGVAR(disableAIPlayerGroupSuppression),
-    "CHECKBOX",
-    [LSTRING(Settings_DisableSuppressionPlayerGroup), LSTRING(Settings_DisableSuppressionPlayerGroup_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    false,
-    0
-] call CBA_fnc_addSetting;
-
 // Toggle reaction state danger.fsm features on player group
 [
     QGVAR(disableAIPlayerGroupReaction),
@@ -72,6 +62,9 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+/*
+APPARENTLY UNUSED?
+
 // Toggles units self-use of smoke grenades for cover
 [
     QGVAR(disableAutonomousSmokeGrenades),
@@ -81,6 +74,8 @@ private _curCat = LSTRING(Settings_MainCat);
     false,
     0
 ] call CBA_fnc_addSetting;
+*/
+
 
 // Toggles units self-use of flares for illumation
 [
@@ -92,25 +87,6 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-// Toggles AI Dodging
-[
-    QGVAR(disableAIDodge),
-    "CHECKBOX",
-    [LSTRING(Settings_DisableImmediateActions), LSTRING(Settings_DisableImmediateActions_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    false,
-    0
-] call CBA_fnc_addSetting;
-
-// Toggles AI Enhanced fleeing
-[
-    QGVAR(disableAIFleeing),
-    "CHECKBOX",
-    [LSTRING(Settings_DisableEnhancedFleeing), LSTRING(Settings_DisableEnhancedFleeing_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    false,
-    0
-] call CBA_fnc_addSetting;
 
 private _curCat = LSTRING(Settings_GeneralCat);
 
@@ -124,25 +100,6 @@ private _curCat = LSTRING(Settings_GeneralCat);
     1
 ] call CBA_fnc_addSetting;
 
-// Minimum range for suppression
-[
-    QGVAR(minSuppressionRange),
-    "SLIDER",
-    [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [1, 500, 25, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// 'Danger close' distance for suppression
-[
-    QGVAR(minFriendlySuppressionDistance),
-    "SLIDER",
-    [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [0, 50, 5, 0],
-    1
-] call CBA_fnc_addSetting;
 
 // Chance of panic expressed as percentage
 [
@@ -151,98 +108,6 @@ private _curCat = LSTRING(Settings_GeneralCat);
     [LSTRING(Settings_PanicChance), LSTRING(Settings_PanicChance_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 1, 0.1, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// indoor movement while assessing chance as a percentage
-[
-    QGVAR(indoorMove),
-    "SLIDER",
-    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)], // TODO(nkenny): Add Stringtable Entries!
-    [COMPONENT_NAME, _curCat],
-    [0, 1, 0.1, 0],
-    1
-] call CBA_fnc_addSetting;
-
-private _curCat = LSTRING(Settings_ShareInformationCat);
-
-// Toggle communication for all units
-[
-    QGVAR(radioDisabled),
-    "CHECKBOX",
-    [LSTRING(Settings_DisableInformationSharing), LSTRING(Settings_DisableInformationSharing_Tooltip)],
-    [COMPONENT_NAME, _curCat],
-    false,
-    0
-] call CBA_fnc_addSetting;
-
-// Maximum Reveal Value -- Accuracy of shared information
-[
-    QGVAR(maxRevealValue),
-    "SLIDER",
-    [ LSTRING(Settings_maxRevealValue),  LSTRING(Settings_maxRevealValue_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [0, 4, 1, 2],
-    1
-] call CBA_fnc_addSetting;
-
-// Combat share range
-[
-    QGVAR(combatShareRange),
-    "SLIDER",
-    [ LSTRING(Settings_combatShareRange),  LSTRING(Settings_combatShareRange_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [0, 1000, 200, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// Ranges at which groups share information
-[
-    QGVAR(radioShout),
-    "SLIDER",
-    [LSTRING(Settings_Shout), LSTRING(Settings_Shout_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [20, 200, 100, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// Base range of WEST side
-[
-    QGVAR(radioWest),
-    "SLIDER",
-    [LSTRING(Settings_BaseWest), LSTRING(Settings_BaseWest_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [20, 3000, 500, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// Base range of EAST side
-[
-    QGVAR(radioEast),
-    "SLIDER",
-    [LSTRING(Settings_BaseEast), LSTRING(Settings_BaseEast_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [20, 3000, 500, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// Base range of INDEPENDENT side
-[
-    QGVAR(radioGuer),
-    "SLIDER",
-    [LSTRING(Settings_BaseIndependent), LSTRING(Settings_BaseIndependent_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [20, 3000, 500, 0],
-    1
-] call CBA_fnc_addSetting;
-
-// Base range of RadioBackpack
-[
-    QGVAR(radioBackpack),
-    "SLIDER",
-    [LSTRING(Settings_BackpackRadios), LSTRING(Settings_BackpackRadios_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [500, 6000, 2000, 0],
     1
 ] call CBA_fnc_addSetting;
 

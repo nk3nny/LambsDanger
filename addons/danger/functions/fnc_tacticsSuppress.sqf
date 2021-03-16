@@ -32,7 +32,7 @@ private _cycle = selectRandom [2, 3, 3, 4];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group enableAttack _enableAttack;
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
         };
     },
     [group _unit, attackEnabled _unit],
@@ -73,12 +73,12 @@ _pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL T
 _pos pushBack _target;
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 private _group = group _unit;
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, "gesturePoint"] call EFUNC(main,doGesture);
@@ -90,7 +90,7 @@ _group setVariable [QGVAR(tacticsTask), "Suppressing", EGVAR(main,debug_function
 _group setFormDir (_unit getDir _target);
 
 // execute recursive cycle
-[_cycle, _units, _vehicles, _pos] call FUNC(doGroupSuppress);
+[_cycle, _units, _vehicles, _pos] call EFUNC(main,doGroupSuppress);
 
 // debug
 if (EGVAR(main,debug_functions)) then {
