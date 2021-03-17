@@ -2,7 +2,7 @@ name = "LAMBS Danger"
 prefix = "lambs"
 author = "LAMBS Dev Team"
 sig_version = 3
-version = "2.4.4"
+version = "2.5.0"
 reuse_private_key = false
 files = [
     "mod.cpp",
@@ -25,6 +25,7 @@ postbuild = [
 ]
 
 releasebuild = [
+    "!version_set_release",
     "@zip @LambsDanger_{{semver.major}}_{{semver.minor}}_{{semver.patch}}"
 ]
 
@@ -59,6 +60,16 @@ steps_windows = [
     "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MAJOR {{semver.major}}', '#define MAJOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define MINOR {{semver.minor}}', '#define MINOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/main/script_version.hpp') {(Get-Content $f) -replace '#define PATCHLVL {{semver.patch}}', '#define PATCHLVL 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+]
+only_release = true
+show_output = true
+
+[scripts.version_set_release]
+steps_linux = [
+    "sed -i -r -s 's/{version}/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/g' releases/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/@lambs/mod.cpp",
+]
+steps_windows = [
+    "powershell -Command foreach ($f in 'releases/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/@lambs/mod.cpp') {(Get-Content $f) -replace '{version}', '{{semver.major}}.{{semver.minor}}.{{semver.patch}}' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
 ]
 only_release = true
 show_output = true

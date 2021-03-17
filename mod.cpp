@@ -1,4 +1,4 @@
-name = "LAMBS Danger.fsm";
+name = "LAMBS Danger.fsm {version}";
 dir = "@lambs";
 author = "LAMBS Dev Team";
 
