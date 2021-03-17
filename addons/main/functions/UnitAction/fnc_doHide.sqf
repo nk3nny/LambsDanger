@@ -43,7 +43,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", GVAR(debug_functions)];
 
 // Randomly scatter into buildings or hide!
-if (!(_buildings isEqualTo []) && { RND(0.1) }) then {
+if ((_buildings isNotEqualTo []) && { RND(0.1) }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
     // hide
@@ -72,7 +72,7 @@ if (!(_buildings isEqualTo []) && { RND(0.1) }) then {
     if (surfaceIsWater _targetPos) then {_targetPos = getPosASL _unit;};
 
     // cover move
-    if !(_cover isEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};
+    if (_cover isNotEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};
 
     // execute move
     _unit doMove _targetPos;

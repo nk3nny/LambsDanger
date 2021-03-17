@@ -58,7 +58,7 @@ doStop _unit;
 [_unit, "HandSignalRadio"] call FUNC(doGesture);
 
 // binoculars if appropriate!
-if (!(binocular _unit isEqualTo "")) then {
+if ((binocular _unit) isNotEqualTo "") then {
     _unit selectWeapon (binocular _unit);
 };
 

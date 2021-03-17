@@ -90,11 +90,11 @@ if (_onFootAndSeen) then {
 
     // speed and stance (based on cover)
     _unit forceSpeed -1;
-    _unit setUnitPos (["MIDDLE", "DOWN"] select (_suppression > 0 || {!(_cover isEqualTo [])})); // test nkenny
+    _unit setUnitPos (["MIDDLE", "DOWN"] select (_suppression > 0 || {_cover isNotEqualTo []})); // test nkenny
 
     // find buildings to hide
     private _buildings = [_unit, SEARCH_FOR_BUILDING, true, true] call FUNC(findBuildings);
-    if (!(_buildings isEqualTo []) && {_distance2D > random 5}) then {
+    if ((_buildings isNotEqualTo []) && {_distance2D > random 5}) then {
         _unit doMove selectRandom _buildings;
     };
 

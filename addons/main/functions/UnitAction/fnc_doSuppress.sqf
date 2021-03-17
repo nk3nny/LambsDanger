@@ -29,11 +29,11 @@ if (
 
 // check for friendlies
 private _friendlies = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
-if !(_friendlies isEqualTo []) exitWith {false};
+if (_friendlies isNotEqualTo []) exitWith {false};
 
 // adjust pos
 private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];
-if !(_vis isEqualTo []) then {_pos = (_vis select 0) select 0;};
+if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // max range pos
 private _distance = (_eyePos vectorDistance _pos) min 280;

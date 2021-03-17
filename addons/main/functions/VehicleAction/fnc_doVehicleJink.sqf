@@ -52,7 +52,7 @@ if (!isNull _enemy) then {
 _destination = _destination apply {_x findEmptyPosition [0, 25, typeOf _vehicle];};
 
 // actual position and no water
-_destination = _destination select {!(_x isEqualTo []) && {!(surfaceIsWater _x)}};
+_destination = _destination select {(_x isNotEqualTo []) && {!(surfaceIsWater _x)}};
 
 // check -- no location -- exit
 if (_destination isEqualTo []) exitWith { getPosASL _unit };

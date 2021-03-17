@@ -50,7 +50,7 @@ private _fnc_rushOrders = {
     // Tank -- hide or ready AT
     if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
-            if !(secondaryWeapon _x isEqualTo "") then {
+            if (secondaryWeapon _x isNotEqualTo "") then {
                 _x setUnitPos "MIDDLE";
                 _x selectWeapon (secondaryWeapon _x);
             } else {

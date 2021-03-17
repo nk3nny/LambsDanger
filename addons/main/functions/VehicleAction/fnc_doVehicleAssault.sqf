@@ -40,7 +40,7 @@ if (_buildings isEqualTo [] && {_visibility < 0.5}) then {
 };
 
 // find closest building
-if !(_buildings isEqualTo []) then {
+if (_buildings isNotEqualTo []) then {
     _buildings = (selectRandom _buildings) buildingPos -1;
 };
 
