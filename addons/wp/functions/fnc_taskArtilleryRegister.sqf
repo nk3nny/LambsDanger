@@ -31,7 +31,7 @@ private _artillery = [];
 } count (units _group);
 
 // identify artillery
-private _artillery = _artillery select { getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0 };
+private _artillery = _artillery select { getNumber (configOf _x >> "artilleryScanner") > 0 };
 if (_artillery isEqualTo []) exitWith {false};
 
 // add to faction global

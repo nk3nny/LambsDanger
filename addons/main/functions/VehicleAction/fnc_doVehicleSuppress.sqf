@@ -34,7 +34,7 @@ if (
 ) exitWith {false};
 
 // artillery (no tactical options)
-if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configFile >> "CfgVehicles" >> (typeOf (vehicle _unit)) >> "artilleryScanner") > 0]) exitWith {
+if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configOf (vehicle _unit) >> "artilleryScanner") > 0]) exitWith {
     _vehicle setVariable [QGVAR(isArtillery), true];
     false
 };
@@ -63,7 +63,7 @@ _vehicle doSuppressiveFire _pos;
 if (GVAR(debug_functions)) then {
     [
         "%1 suppression (%2 @ %3m)",
-        side _unit, getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName"),
+        side _unit, getText (configOf _vehicle >> "displayName"),
         round (_unit distance ASLToAGL _pos)
     ] call FUNC(debugLog);
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
