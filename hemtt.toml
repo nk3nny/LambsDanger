@@ -66,7 +66,7 @@ show_output = true
 
 [scripts.version_set_release]
 steps_linux = [
-    "sed -i -r -s 's/\{version\}/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/g' releases/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/@lambs/mod.cpp",
+    "sed -i -r -s 's/\\{version\\}/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/g' releases/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/@lambs/mod.cpp",
 ]
 steps_windows = [
     "powershell -Command foreach ($f in 'releases/{{semver.major}}.{{semver.minor}}.{{semver.patch}}/@lambs/mod.cpp') {(Get-Content $f) -replace '{version}', '{{semver.major}}.{{semver.minor}}.{{semver.patch}}' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
