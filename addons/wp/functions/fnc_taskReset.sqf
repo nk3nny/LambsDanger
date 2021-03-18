@@ -7,7 +7,7 @@
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  *
  * Return Value:
- * none
+ * new group
  *
  * Example:
  * [bob] call lambs_wp_fnc_taskReset;
@@ -34,6 +34,9 @@ _groupNew setFormation (formation _group);
 // remove all current waypoints
 [_group] call CBA_fnc_clearWaypoints;
 _group deleteGroupWhenEmpty true;
+
+// get group settings
+private _reinforce = _group getVariable [QEGVAR(danger,enableGroupReinforce), false];
 
 // remove LAMBS group variables
 _group setVariable [QGVAR(taskAssaultDestination), nil, true];
@@ -76,6 +79,7 @@ _group setVariable [QGVAR(taskAssaultMembers), nil, true];
 
 // reset lambs variable
 _groupNew setVariable [QEGVAR(danger,disableGroupAI), nil];
+_groupNew setVariable [QEGVAR(danger,enableGroupReinforce), _reinforce, true];
 
 if (dynamicSimulationEnabled _group) then {
     [_groupNew, true] remoteExecCall ["enableDynamicSimulation", 2];
