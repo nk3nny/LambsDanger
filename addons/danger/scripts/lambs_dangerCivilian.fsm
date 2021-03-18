@@ -41,7 +41,7 @@ item36[] = {"Order_out_2",2,250,-1420.000000,600.000000,-1320.000000,660.000000,
 item37[] = {"Always",8,218,-1280.000000,600.000000,-1180.000000,660.000000,0.000000,"Always"};
 item38[] = {"Inspect_body",2,250,-1280.000000,240.000000,-1180.000000,300.000000,0.000000,"Inspect body"};
 item39[] = {"Always",8,218,-1175.000000,775.000000,-1050.000000,850.000000,0.000000,"Always"};
-item40[] = {"Higher_priority",4,218,-925.000000,950.000000,-825.000000,1000.000000,1.000000,"Higher priority " \n "danger"};
+item40[] = {"Higher_priority",4,4314,-925.000000,950.000000,-825.000000,1000.000000,1.000000,"Higher priority " \n "danger"};
 item41[] = {"Time_up",4,218,-1150.000000,1075.000000,-1050.000000,1125.000000,0.000000,"Time up"};
 item42[] = {"Clean_up_1",2,250,-925.000000,1100.000000,-825.000000,1150.000000,0.000000,"Clean-up"};
 item43[] = {"",7,210,-1104.000000,996.000000,-1096.000000,1003.999878,0.000000,""};
@@ -181,7 +181,7 @@ link64[] = {56,54};
 link65[] = {57,2};
 link66[] = {58,4};
 globals[] = {0.000000,0,0,0,0,640,480,1,223,6316128,1,-2219.207520,848.372314,1635.689941,-574.367493,1227,884,1};
-window[] = {2,-1,-1,-1,-1,1000,182,803,182,3,1245};
+window[] = {2,-1,-1,-1,-1,1052,234,855,234,3,1245};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -880,7 +880,7 @@ class FSM
                                         priority = 1.000000;
                                         to="Clean_up_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"!(_dangerCauseOld isEqualTo _dangerCause)" \n
+                                        condition=/*%FSM<CONDITION""">*/"_dangerCauseOld isNotEqualTo _dangerCause" \n
                                          "|| {getSuppression _this > 0.9}" \n
                                          "|| {_this distance2D _dangerCausedBy < 3}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
