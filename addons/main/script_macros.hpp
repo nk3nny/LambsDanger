@@ -18,7 +18,7 @@
     _unit \
 }
 
-#define DISABLE_COMPILE_CACHE
+// #define DISABLE_COMPILE_CACHE
 
 #ifdef DISABLE_COMPILE_CACHE
     #undef PREP
