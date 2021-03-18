@@ -8,19 +8,19 @@
  * 1: position of cover <ARRAY>
  *
  * Return Value:
- * _unit
+ * bool
  *
  * Example:
  * [bob] call lambs_main_fnc_doCover;
  *
  * Public: No
 */
-#define SEARCH_FOR_HIDE 4
+#define SEARCH_FOR_HIDE 6
 
 params ["_unit", ["_pos", [], [[]]]];
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH") || {isForcedWalk _unit}) exitWith {_unit};
+if (!(_unit checkAIFeature "PATH")) exitWith {false};
 
 // find cover
 if (_pos isEqualTo []) then {
@@ -33,7 +33,7 @@ if (_pos isEqualTo []) then {
 };
 
 // force anim
-if (_unit distance2D _pos < 0.8) exitWith {_unit};
+if (_unit distance2D _pos < 0.6) exitWith {false};
 private _direction = _unit getRelDir _pos;
 private _anim = call {
     if (_direction > 315) exitWith {["WalkF", "WalkLF"]};
@@ -44,11 +44,12 @@ private _anim = call {
 };
 
 // prevent run in place
-if (((expectedDestination _unit) select 1) isEqualTo "DoNotPlan") then {_unit moveTo _pos;};
+_unit forceSpeed 0;
+_unit moveTo _pos;
+_unit setDestination [_pos, "FORMATION PLANNED", true];
 
 // do anim
 [_unit, _anim, false] call FUNC(doGesture);       // gesture is not forced to allow cover movement to appear smoother - nkenny
-_unit setDestination [_pos, "FORMATION PLANNED", false];
 
 // end
-_unit
+true

@@ -74,7 +74,6 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
 
     // anti-infantry tactics
     _enemies = _enemies select {(vehicle _x) isKindOf "Man"};
-    private _inside = _unit call EFUNC(main,isIndoor);
 
     // Check for artillery ~ NB: support is far quicker now! and only targets infantry
     if (EGVAR(main,Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
@@ -96,6 +95,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     ) exitWith {_plan = [];};
 
     // enemies within X meters of leader and either attacker or unit is inside buildings
+    private _inside = _unit call EFUNC(main,isIndoor);
     private _nearIndoorTarget = _enemies findIf {
         _unit distance2D _x < 25
         && {_inside || {_x call EFUNC(main,isIndoor)}}
@@ -138,8 +138,8 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
     if (_farTarget != -1) then {
         // suppress or flank
-        _plan append [TACTICS_SUPPRESS, TACTICS_SUPPRESS, TACTICS_FLANK];
-        if (_speedMode isEqualTo "FULL") then {_plan pushBack TACTICS_ASSAULT;};
+        _plan append [TACTICS_SUPPRESS, TACTICS_FLANK];
+        if (_speedMode isEqualTo "FULL") exitWith {_plan pushBack TACTICS_ASSAULT;};
         _pos = _unit getHideFrom (_enemies select _farTarget);
     };
 

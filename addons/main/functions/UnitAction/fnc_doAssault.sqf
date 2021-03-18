@@ -24,13 +24,9 @@ if (!(_unit checkAIFeature "PATH")) exitWith {false};
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
-// settings
-private _distance2D = _unit distance2D _target;
-private _rangeBuilding = linearConversion [ 0, 150, _distance2D, 3.5, 22, true];
-
 // Near buildings + sort near positions + add target actual location
-private _buildings = [_target, _range, true, true] call FUNC(findBuildings);
-_buildings = _buildings select { _x distance _target < _rangeBuilding };
+private _buildings = [_target, _range, true, false] call FUNC(findBuildings);
+_buildings = _buildings select { _x distance _target < 4 };
 
 // set destination
 private _pos = if (_buildings isEqualTo []) then {
@@ -40,9 +36,8 @@ private _pos = if (_buildings isEqualTo []) then {
         getPosATL _unit
     };
 
-    // select expected location
-    private _hide = _unit getHideFrom _target;
-    if (_hide isEqualTo [0,0,0]) then {getPosATL _target} else {_hide}
+    // select target location
+    getPosATL _target
 } else {
 
     // updates group memory variable
@@ -52,7 +47,7 @@ private _pos = if (_buildings isEqualTo []) then {
     _group setVariable [QGVAR(groupMemory), _groupMemory];
 
     // add unit position to array
-    _buildings pushBack getPosATL _target;
+    _buildings pushBack (getPosATL _target);
 
     // select building position
     selectRandom _buildings
@@ -64,7 +59,7 @@ _unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", _distance2D < 15];
+_unit setDestination [_pos, "LEADER PLANNED", true];
 
 // debug
 if (GVAR(debug_functions)) then {

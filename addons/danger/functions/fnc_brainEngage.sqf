@@ -65,7 +65,7 @@ if (
 if (
     _type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE]
     && {_distance < 800}
-    && {getSuppression _unit < 0.9}
+    && {RND(getSuppression _unit)}
 ) exitWith {
     _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
     [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, random 1])] call EFUNC(main,doSuppress);

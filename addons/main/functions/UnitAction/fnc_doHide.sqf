@@ -24,7 +24,7 @@ if (
     stopped _unit
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
-    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL"]}
+    || {(currentCommand _unit) in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
 // do nothing when already inside
@@ -42,8 +42,12 @@ if (_buildings isEqualTo []) then {
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", GVAR(debug_functions)];
 
+// stop
+doStop _unit;
+_unit forceSpeed 24;
+
 // Randomly scatter into buildings or hide!
-if ((_buildings isNotEqualTo []) && { RND(0.1) }) then {
+if (RND(0.1) && { _buildings isNotEqualTo [] }) then {
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
     // hide

@@ -49,12 +49,9 @@ if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
 
 // assigned target
 private _assignedTarget = assignedTarget _unit;
-private _canMove = _unit checkAIFeature "PATH";
 if (
     !isNull _assignedTarget
     && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
-    && {_assignedTarget call EFUNC(main,isAlive)}
-    && {(vehicle _assignedTarget) isKindOf "CAManBase"}
     && {(typeOf _assignedTarget) isNotEqualTo "SuppressTarget"}
 ) exitWith {
     [_unit, _assignedTarget] call EFUNC(main,doAssault);
@@ -65,7 +62,7 @@ if (
 private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 
 // sympathetic CQB/suppressive fire
-if (_canMove && {_groupMemory isNotEqualTo []}) exitWith {
+if (_groupMemory isNotEqualTo []) exitWith {
     [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
     _timeout + 2
 };
@@ -73,19 +70,16 @@ if (_canMove && {_groupMemory isNotEqualTo []}) exitWith {
 // stance
 private _stance = stance _unit;
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
-if (_stance isEqualTo "CROUCH" && {getSuppression _unit > 0}) then {_unit setUnitPosWeak "DOWN";};
-
-// check self
-private _indoor = _unit call EFUNC(main,isIndoor);
+if (_stance isEqualTo "CROUCH" && {getSuppression _unit > 0.9}) then {_unit setUnitPosWeak "DOWN";};
 
 // building
-if (_indoor && {RND(EGVAR(main,indoorMove))}) exitWith {
+if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     [_unit, _target] call EFUNC(main,doReposition);
     _timeout + 1
 };
 
 // cover
-if (speed _unit < 1 && {_unit distance2D (formationLeader _unit) < 32}) then {
+if ((speed _unit) isEqualTo 0 && {_unit distance2D (leader _unit) < 40}) then {
     [_unit] call EFUNC(main,doCover);
 };
 
