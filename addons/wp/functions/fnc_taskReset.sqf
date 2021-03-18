@@ -32,9 +32,6 @@ private _units = units _group select {!isPlayer _x};
 // remove all current waypoints
 [_group] call CBA_fnc_clearWaypoints;
 
-// get group settings
-private _reinforce = _group getVariable [QEGVAR(danger,enableGroupReinforce), false];
-
 // remove LAMBS group variables
 _group setVariable [QGVAR(taskAssaultDestination), nil, true];
 _group setVariable [QGVAR(taskAssaultMembers), nil, true];
