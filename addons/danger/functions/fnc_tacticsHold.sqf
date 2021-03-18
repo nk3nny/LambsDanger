@@ -61,6 +61,9 @@ if (count _units > 2) then {
         };
         if (_deadOrSuppressed != -1) then {
 
+            // set group task
+            _group setVariable [QEGVAR(main,currentTactic), "Holding!", EGVAR(main,debug_functions)];
+
             // set behaviour
             _group setBehaviour "COMBAT";
 
