@@ -98,7 +98,7 @@ private _fnc_assault_AI = {
         if (_intersections isNotEqualTo []) then {
             _cursorPos = (_intersections select 0) select 0;
         } else {
-            _cursorPos = player getPos [100, getDir _player]
+            _cursorPos = player getPos [100, getDir player]
         };
     } else {
         _cursorPos = getPos cursorObject;
