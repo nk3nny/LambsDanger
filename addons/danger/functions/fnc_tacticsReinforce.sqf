@@ -25,7 +25,7 @@ if (!(_unit call EFUNC(main,isAlive))) exitWith {false};
 // free garrisons
 private _group = group _unit;
 if (EGVAR(main,Loaded_WP) && {!(_unit checkAIFeature "PATH")}) then {
-    _group = [_group] call EFUNC(wp,taskReset);
+    _group = [_group, true] call EFUNC(wp,taskReset);
 };
 
 // set new time
