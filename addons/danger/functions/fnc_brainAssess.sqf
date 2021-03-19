@@ -20,7 +20,6 @@
 
 /*
     Assess actions
-    7 Scream
     10 Assess
 */
 
@@ -28,21 +27,6 @@ params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
 
 // timeout
 private _timeout = time + 2;
-
-// check screams
-if (_type isEqualTo DANGER_SCREAM) exitWith {
-
-    // communicate danger!
-    [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
-
-    // check danger
-    _unit doWatch _pos;
-    _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
-    _unit setVariable [QEGVAR(main,currentTask), "Heard scream!", EGVAR(main,debug_functions)];
-
-    // exit
-    _timeout - 1
-};
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
@@ -52,7 +36,7 @@ private _assignedTarget = assignedTarget _unit;
 if (
     !isNull _assignedTarget
     && {_unit distance2D _assignedTarget < GVAR(cqbRange)}
-    && {(typeOf _assignedTarget) isNotEqualTo "SuppressTarget"}
+    && {(_unit knowsAbout _assignedTarget) isNotEqualTo 0}
 ) exitWith {
     [_unit, _assignedTarget] call EFUNC(main,doAssault);
     _timeout + 2
@@ -70,7 +54,7 @@ if (_groupMemory isNotEqualTo []) exitWith {
 // stance
 private _stance = stance _unit;
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
-if (_stance isEqualTo "CROUCH" && {getSuppression _unit > 0.9}) then {_unit setUnitPosWeak "DOWN";};
+if (getSuppression _unit > 0.9 && {_stance isEqualTo "CROUCH"}) then {_unit setUnitPosWeak "DOWN";};
 
 // building
 if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {

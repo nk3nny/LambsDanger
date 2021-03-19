@@ -19,10 +19,9 @@ params ["_unit", ["_pos", [0, 0, 0]]];
 
 // check if stopped or busy
 if (
-    !(_unit call FUNC(isAlive))
+    currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
-    || {currentCommand _unit in ["GET IN", "ACTION", "HEAL", "ATTACK"]}
 ) exitWith {false};
 
 // get buildings

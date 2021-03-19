@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 22]];
+params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 18]];
 
 // only leader
 if !((leader _unit) isEqualTo _unit || {_unit call EFUNC(main,isAlive)}) exitWith {false};
@@ -46,7 +46,6 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
-            {_x setUnitPosWeak "AUTO"} foreach units _group;
             private _leader = leader _group;
             if (_leader call FUNC(isLeader)) then {
                 [_leader, _leader findNearestEnemy _leader] call FUNC(tactics);
@@ -54,7 +53,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 8
+    _delay + random 12
 ] call CBA_fnc_waitAndExecute;
 
 // change formation and attack state
