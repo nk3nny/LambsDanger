@@ -23,7 +23,7 @@
     10 Assess
 */
 
-params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]], ["_target", objNull]];
+params ["_unit", "", "", ["_target", objNull]];
 
 // timeout
 private _timeout = time + 2;
