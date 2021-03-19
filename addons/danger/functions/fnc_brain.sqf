@@ -77,7 +77,7 @@ _causeArray params ["_dangerCause", "_dangerPos", "", "_dangerCausedBy"]; // "_d
 // debug variable
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
-// modify return
+// add selected cause to return array
 _return pushBack _causeArray;
 
 // assess actions
