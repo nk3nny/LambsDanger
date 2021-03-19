@@ -29,6 +29,7 @@ if (EGVAR(main,Loaded_WP) && {!(_unit checkAIFeature "PATH")}) then {
 };
 
 // set new time
+_group setVariable [QGVAR(enableGroupReinforce), true, true];
 _group setVariable [QGVAR(enableGroupReinforceTime), time + _delay, true];
 
 // set tasks

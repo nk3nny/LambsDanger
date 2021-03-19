@@ -33,6 +33,8 @@ private _units = units _group select {!isPlayer _x};
 [_group] call CBA_fnc_clearWaypoints;
 
 // remove LAMBS group variables
+_group setVariable [QEGVAR(danger,disableGroupAI), nil];
+_group setVariable [QEGVAR(danger,enableGroupReinforce), nil, true];
 _group setVariable [QGVAR(taskAssaultDestination), nil, true];
 _group setVariable [QGVAR(taskAssaultMembers), nil, true];
 
@@ -84,10 +86,6 @@ _groupNew setFormation (formation _group);
 
 // rejoin group
 _units joinSilent _groupNew;
-
-// reset lambs variable
-_groupNew setVariable [QEGVAR(danger,disableGroupAI), nil];
-_groupNew setVariable [QEGVAR(danger,enableGroupReinforce), _group getVariable [QEGVAR(danger,enableGroupReinforce), false], true];
 
 if (dynamicSimulationEnabled _group) then {
     [_groupNew, true] remoteExecCall ["enableDynamicSimulation", 2];
