@@ -6,6 +6,7 @@
  * Arguments:
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Soft reset where group variable name is not replaced <BOOL>
+ * 2: Reset waypoints in soft reset mode <BOOL>
  *
  * Return Value:
  * new group
@@ -19,7 +20,8 @@
 // init
 params [
     ["_group", grpNull, [grpNull, objNull]],
-    ["_softReset", false, [true]]
+    ["_softReset", false, [true]],
+    ["_resetWaypoints", false, [true]]
 ];
 
 // sort group
@@ -30,7 +32,7 @@ if (_group isEqualType objNull) then { _group = group _group; };
 private _units = units _group select {!isPlayer _x};
 
 // remove all current waypoints
-[_group] call CBA_fnc_clearWaypoints;
+if (_resetWaypoints) then {[_group] call CBA_fnc_clearWaypoints;};
 
 // remove LAMBS group variables
 _group setVariable [QEGVAR(danger,disableGroupAI), nil];
