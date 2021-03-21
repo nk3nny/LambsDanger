@@ -50,7 +50,7 @@
             <English>Enable Dynamic Reinforcement</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
-            <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.</English>
+            <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nWARNING The reinforcement feature may override existing waypoints on groups responding to calls</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
