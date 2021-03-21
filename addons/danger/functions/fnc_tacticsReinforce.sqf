@@ -22,8 +22,14 @@ params ["_unit", ["_target", []], ["_units", []], ["_delay", 300]];
 // exit on dead leader
 if (!(_unit call EFUNC(main,isAlive))) exitWith {false};
 
-// set new time
+// free garrisons
 private _group = group _unit;
+if (EGVAR(main,Loaded_WP) && {!(_unit checkAIFeature "PATH")}) then {
+    _group = [_group, true] call EFUNC(wp,taskReset);
+};
+
+// set new time
+_group setVariable [QGVAR(enableGroupReinforce), true, true];
 _group setVariable [QGVAR(enableGroupReinforceTime), time + _delay, true];
 
 // set tasks
