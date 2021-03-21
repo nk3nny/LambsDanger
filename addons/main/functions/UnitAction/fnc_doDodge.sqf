@@ -30,7 +30,7 @@ _unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 
 // prone override
-if (_still && {_stance isEqualTo "PRONE"} && {!(_unit call FUNC(isIndoor))}) exitWith {
+if (_still && {_stance isEqualTo "PRONE"} && {!(lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 7]])}) exitWith {
     [_unit, ["EvasiveLeft", "EvasiveRight"] select (_dir > 180), true] call FUNC(doGesture);
     _unit setDestination [[_unit getRelPos [DODGE_DISTANCE, -90], _unit getRelPos [DODGE_DISTANCE, 90]] select (_dir > 180), "FORMATION PLANNED", false];
     true
