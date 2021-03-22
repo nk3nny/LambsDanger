@@ -21,10 +21,9 @@ params ["_unit", "_pos", ["_range", 55], ["_buildings", []]];
 
 // stopped -- exit
 if (
-    stopped _unit
+    (currentCommand _unit) in ["GET IN", "ACTION", "HEAL"]
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
-    || {(currentCommand _unit) in ["GET IN", "ACTION", "HEAL"]}
 ) exitWith {false};
 
 // do nothing when already inside
