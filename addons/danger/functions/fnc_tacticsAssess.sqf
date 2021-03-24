@@ -51,7 +51,6 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
 
     // get modes
     private _speedMode = (speedMode _unit) isEqualTo "FULL";
-    private _combatMode = combatMode _unit;
     private _eyePos = eyePos _unit;
 
     // communicate
@@ -64,7 +63,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         && {!(terrainIntersectASL [_eyePos, (eyePos _x) vectorAdd [0, 0, 5]])}
     };
     if (_tankTarget != -1 && {!GVAR(disableAIHideFromTanksAndAircraft)} && {!_speedMode}) exitWith {
-        private _enemyVehicle = (_enemies select _tankTarget);
+        private _enemyVehicle = _enemies select _tankTarget;
         _plan pushBack TACTICS_HIDE;
         _pos = _unit getHideFrom _enemyVehicle;
 
@@ -104,7 +103,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
     if (_nearIndoorTarget != -1) exitWith {
         _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
-        _pos = [_unit getHideFrom (_enemies select _nearIndoorTarget), getPosASL _unit] select _inside;
+        _pos = [_unit getHideFrom (_enemies select _nearIndoorTarget), _eyePos] select _inside;
     };
 
     // inside? stay safe
@@ -115,7 +114,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         !_speedMode
         && {_unit distance2D _x > RANGE_LONG}
         && {_unit knowsAbout _x < 2}
-        && {(getPosASL _x select 2 ) > ((getPosASL _unit select 2) + 15)}
+        && {(getPosASL _x select 2 ) > ((_eyePos select 2) + 15)}
         && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])}
     };
     if (_farHighertarget != -1) exitWith {
@@ -126,7 +125,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     // enemies near and below
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < RANGE_MID
-        && {((getPosASL _x) select 2) < ((getPosASL _unit select 2) - 15)}
+        && {((getPosASL _x) select 2) < ((_eyePos select 2) - 15)}
     };
     if (_farNoCoverTarget != -1) exitWith {
         // trust in default attack routines!
@@ -147,6 +146,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         _pos = _unit getHideFrom (_enemies select _fortifiedTarget);
 
         // combatmode
+        private _combatMode = combatMode _unit;
         if (_combatMode isEqualTo "RED") then {_plan pushBack TACTICS_ASSAULT;};
         if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack TACTICS_SUPPRESS;};
         if (_speedMode) then {_plan pushBack TACTICS_ASSAULT;};

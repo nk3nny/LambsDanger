@@ -110,9 +110,8 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
         _group move _target;
     },
     [_group, _target],
-    2 + random 3
+    5
 ] call CBA_fnc_waitAndExecute;
-// _units doMove _target;  ~ uncommented for a test period before release. We allow overriding WP as Reinforcement feature is already invasive, AND enabled by mission makers - nkenny
 
 // debug
 if (EGVAR(main,debug_functions)) then {
