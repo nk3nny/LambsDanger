@@ -25,21 +25,17 @@ if (_units isEqualTo []) exitWith {};
 {
     private _targetPos = selectRandom _pos;
     // setpos
-    if ((currentCommand _x) isNotEqualTo "MOVE") then {
+    if (RND(0.5) || {(currentCommand _x) isNotEqualTo "MOVE"}) then {
         _x doMove _targetPos;
         _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
-        _x doWatch _targetPos;
+        _x lookAt _targetPos;
     };
 
     // manoeuvre
-    //_x forceSpeed ([2, 4] select (getSuppression _x > 0 || {_x distance _targetPos < 45} || {terrainIntersectASL [eyePos _x, AGLtoASL _targetPos]}));
     _x forceSpeed 4;
-    _x setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x > 0));
+    _x setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
     _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
     _x setVariable [QEGVAR(danger,forceMove), true];
-
-    // brave!
-    _x setSuppression 0;
 } foreach _units;
 
 // recursive cyclic

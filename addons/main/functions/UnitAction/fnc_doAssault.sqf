@@ -26,7 +26,7 @@ _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, false] call FUNC(findBuildings);
-_buildings = _buildings select { _x distance _target < 4 };
+_buildings = _buildings select { _x distance _target < 5 };
 
 // set destination
 private _pos = if (_buildings isEqualTo []) then {
