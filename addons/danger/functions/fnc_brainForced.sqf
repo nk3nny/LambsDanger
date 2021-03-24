@@ -25,18 +25,18 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosASL _unit, _timeo
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
     _unit setVariable [QEGVAR(main,currentTask), "Incapacitated", EGVAR(main,debug_functions)];
-    _timeout + 1
+    _timeout
+};
+
+// forced AI or units in vehicles
+if (_unit getVariable [QGVAR(forceMove), false] || {!isNull objectParent _unit}) exitWith {
+    _timeout
 };
 
 // fleeing
 if (fleeing _unit) exitWith {
     [_unit] call EFUNC(main,doFleeing);
     _timeout
-};
-
-// vehicles are simpler
-if (!isNull objectParent _unit) exitWith {
-    _timeout + 6
 };
 
 // suppression -- high go prone
