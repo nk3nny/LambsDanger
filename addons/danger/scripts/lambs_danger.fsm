@@ -2,7 +2,7 @@
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start_Danger",0,250,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"Start Danger"};
-item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-200.000000,-225.000000,-125.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.5.0"};
+item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-175.000000,-225.000000,-100.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.5.1"};
 item2[] = {"true",8,218,-75.000000,-75.000000,25.000000,-25.000000,0.000000,"true"};
 item3[] = {"Init",2,250,-75.000000,50.000000,25.000000,100.000000,0.000000,"Init"};
 item4[] = {"Vehicle",4,218,-325.000000,150.000000,-225.000000,200.000000,0.000000,"Vehicle"};
@@ -12,7 +12,7 @@ item7[] = {"Evaluate_Vehicle",2,250,-325.000000,275.000000,-225.000000,325.00000
 item8[] = {"timeout",4,218,-550.000000,275.000000,-450.000000,325.000000,0.000000,"timeout"};
 item9[] = {"Reset_vehicle",2,250,-550.000000,50.000000,-450.000000,100.000000,0.000000,"Reset vehicle"};
 item10[] = {"Evaluate_Infantr",2,250,-75.000000,275.000000,25.000000,325.000000,0.000000,"Evaluate" \n "Infantry"};
-item11[] = {"DEFINE_ENUM_BEG",-1,250,150.000000,-200.000000,500.000000,-25.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "  DCEnemyDetected, // the first enemy detected" \n "  DCFire, // fire visible" \n "  DCHit, // vehicle hit" \n "  DCEnemyNear, // enemy very close to me" \n "  DCExplosion, // explosion detected" \n "  DCDeadBodyGroup, // dead soldier from my group found" \n "  DCDeadBody, // other dead soldier found" \n "  DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
+item11[] = {"DEFINE_ENUM_BEG",-1,250,350.000000,-175.000000,700.000000,0.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "  DCEnemyDetected, // the first enemy detected" \n "  DCFire, // fire visible" \n "  DCHit, // vehicle hit" \n "  DCEnemyNear, // enemy very close to me" \n "  DCExplosion, // explosion detected" \n "  DCDeadBodyGroup, // dead soldier from my group found" \n "  DCDeadBody, // other dead soldier found" \n "  DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item12[] = {"Immediate",4,218,-175.000000,425.000000,-75.000000,475.000000,6.000000,"Immediate"};
 item13[] = {"Hide",4,218,0.000000,425.000000,100.000000,475.000000,4.000000,"Hide"};
 item14[] = {"Engage",4,218,175.000000,425.000000,275.000000,475.000000,2.000000,"Engage"};
@@ -24,7 +24,7 @@ item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.0
 item20[] = {"no_queue",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"no queue"};
 item21[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
 item22[] = {"timeout",4,218,-250.000000,750.000000,-150.000000,800.000000,0.000000,"timeout"};
-item23[] = {"Reset_foot",2,4346,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
+item23[] = {"Reset_foot",2,250,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
 item24[] = {"true",8,218,500.000000,925.000000,600.000000,975.000000,0.000000,"true"};
 item25[] = {"Check_queue",2,250,700.000000,925.000000,800.000000,975.000000,0.000000,"Check queue"};
 item26[] = {"true",8,218,700.000000,800.000000,800.000000,850.000000,0.000000,"true"};
@@ -39,6 +39,8 @@ item34[] = {"Leader",4,218,-100.000000,1075.000000,0.000000,1125.000000,4.000000
 item35[] = {"Tactics",2,250,-100.000000,1200.000000,0.000000,1250.000000,0.000000,"Tactics"};
 item36[] = {"",7,210,545.999939,1221.000000,554.000061,1229.000000,0.000000,""};
 item37[] = {"true",8,218,-325.000000,50.000000,-225.000000,100.000000,0.000000,"true"};
+item38[] = {"Exit",4,218,175.000000,-175.000000,275.000000,-125.000000,2.000000,"Exit"};
+item39[] = {"End_Danger_1",1,250,175.000000,-50.000000,275.000000,0.000000,0.000000,"End Danger"};
 version=1;
 class LayoutItems
 {
@@ -63,49 +65,51 @@ class LayoutItems
 	};
 };
 link0[] = {0,2};
-link1[] = {2,3};
-link2[] = {3,4};
-link3[] = {3,5};
-link4[] = {3,6};
-link5[] = {4,7};
-link6[] = {5,10};
-link7[] = {6,18};
-link8[] = {7,8};
-link9[] = {8,9};
-link10[] = {9,28};
-link11[] = {9,37};
-link12[] = {10,12};
-link13[] = {10,13};
-link14[] = {10,14};
-link15[] = {10,30};
-link16[] = {12,15};
-link17[] = {13,16};
-link18[] = {14,17};
-link19[] = {15,22};
-link20[] = {16,21};
-link21[] = {17,21};
-link22[] = {18,32};
-link23[] = {20,19};
-link24[] = {21,23};
-link25[] = {22,23};
-link26[] = {23,24};
-link27[] = {23,34};
-link28[] = {24,25};
-link29[] = {25,20};
-link30[] = {25,26};
-link31[] = {26,27};
-link32[] = {27,3};
-link33[] = {28,29};
-link34[] = {30,31};
-link35[] = {31,22};
-link36[] = {32,33};
-link37[] = {33,24};
-link38[] = {34,35};
-link39[] = {35,36};
-link40[] = {36,24};
-link41[] = {37,3};
-globals[] = {0.000000,0,0,0,0,640,480,1,63,6316128,1,-1280.141357,1675.790405,1553.891968,-485.954590,632,884,1};
-window[] = {2,-1,-1,-1,-1,889,130,1570,130,3,650};
+link1[] = {0,38};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {3,5};
+link5[] = {3,6};
+link6[] = {4,7};
+link7[] = {5,10};
+link8[] = {6,18};
+link9[] = {7,8};
+link10[] = {8,9};
+link11[] = {9,28};
+link12[] = {9,37};
+link13[] = {10,12};
+link14[] = {10,13};
+link15[] = {10,14};
+link16[] = {10,30};
+link17[] = {12,15};
+link18[] = {13,16};
+link19[] = {14,17};
+link20[] = {15,22};
+link21[] = {16,21};
+link22[] = {17,21};
+link23[] = {18,32};
+link24[] = {20,19};
+link25[] = {21,23};
+link26[] = {22,23};
+link27[] = {23,24};
+link28[] = {23,34};
+link29[] = {24,25};
+link30[] = {25,20};
+link31[] = {25,26};
+link32[] = {26,27};
+link33[] = {27,3};
+link34[] = {28,29};
+link35[] = {30,31};
+link36[] = {31,22};
+link37[] = {32,33};
+link38[] = {33,24};
+link39[] = {34,35};
+link40[] = {35,36};
+link41[] = {36,24};
+link42[] = {37,3};
+link43[] = {38,39};
+globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-1259.703003,1279.137085,1513.289917,-624.171753,1050,884,1};
+window[] = {2,-1,-1,-1,-1,785,26,1466,26,3,1068};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -127,6 +131,18 @@ class FSM
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
+                                /*%FSM<LINK "Exit">*/
+                                class Exit
+                                {
+                                        itemno = 38;
+                                        priority = 2.000000;
+                                        to="End_Danger_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isForcedExit" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
                                 /*%FSM<LINK "true">*/
                                 class true
                                 {
@@ -150,7 +166,6 @@ class FSM
                          "//_debugTxt = format [""%1 dangerFSM %2 : %3"", side _this, name _this, _queue];" \n
                          "//diag_log _debugTxt;" \n
                          "//systemchat _debugTxt;" \n
-                         "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -230,7 +245,7 @@ class FSM
                         itemno = 9;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// keep attacking" \n
-                         "if (_dangerCause in [8, 9] && {_dangerCausedBy call lambs_main_fnc_isAlive}) then {" \n
+                         "if (_dangerCause in [8, 9] && {alive _dangerCausedBy}) then {" \n
                          "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _this findNearestEnemy _this];" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -616,12 +631,25 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
+                /*%FSM<STATE "End_Danger_1">*/
+                class End_Danger_1
+                {
+                        name = "End_Danger_1";
+                        itemno = 39;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
         };
         initState="Start_Danger";
         finalStates[] =
         {
                 "End_Danger",
                 "End_Danger_vehic",
+                "End_Danger_1",
         };
 };
 /*%FSM</COMPILE>*/
