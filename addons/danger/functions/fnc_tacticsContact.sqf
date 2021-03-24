@@ -26,16 +26,12 @@ if (isNull _enemy) then {
     _enemy = _unit findNearestEnemy _unit;
 };
 
-// get info
-private _range = linearConversion [0, 150, _unit distance2D _enemy, 8, 30, true];
-private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-
-// update tactics and contact state
+// update contact state
 private _group = group _unit;
-_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
 
 // set group task
+_group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_functions)];
 
 // reset tactics state
@@ -64,35 +60,40 @@ _group setFormDir (_unit getDir _enemy);
 // call event system
 [QGVAR(onContact), [_unit, _group, _enemy]] call EFUNC(main,eventCallback);
 
-// Gesture
-[_unit, "gestureFreeze", true] call EFUNC(main,doGesture);
-
-// Callout
-private _nameSoundConfig = configOf vehicle _enemy >> "nameSound";
-private _callout = if (isText _nameSoundConfig) then { getText _nameSoundConfig } else { "contact" };
-[_unit, ["Combat", "Stealth"] select _stealth, _callout, 100] call EFUNC(main,doCallout);
-
-// gesture + call!
+// gesture + callouts for larger units
+private _stealth = (behaviour _unit) isEqualTo "STEALTH";
 private _units = [_unit] call EFUNC(main,findReadyUnits);
-if (_units isNotEqualTo []) then {
-    // unit
+private _count = count units _unit;
+if (_count > 2) then {
+
+    // gesture
+    [{_this call EFUNC(main,doGesture)}, [_unit, "gestureFreeze", true], 0.3] call CBA_fnc_waitAndExecute;
+
+    // supporting unit
     private _unitCaller = _units select (count _units - 1);
 
     // point
-    [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gesturePoint"], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gesturePoint"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
 
     // contact!
-    [{_this call EFUNC(main,doCallout)}, [_unitCaller, ["Combat", "Stealth"] select _stealth, "contact", 100], random 4] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doCallout)}, [_unitCaller, ["Combat", "Stealth"] select _stealth, "contact"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
 };
 
-// share information
-[{_this call EFUNC(main,doShareInformation)}, [_unit, _enemy, EGVAR(main,radioShout), true], 1 + random 5] call CBA_fnc_waitAndExecute;
+// callout and share information
+[
+    {
+        params ["_unit", "_enemy", "_stealth"];
+        [_unit, _enemy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
+        [_unit, ["Combat", "Stealth"] select _stealth, "contact"] call EFUNC(main,doCallout);
+    }, [_unit, _enemy, _stealth], 1 + random 4
+] call CBA_fnc_waitAndExecute;
 
-// disable Reaction phase for rushing or ambushing groups
-if (_stealth || {(speedMode _unit) isEqualTo "FULL"}) exitWith {true};
-
-// disable Reaction phase for player group
-if (isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}) exitWith {false};
+// disable Reaction phase for rushing or ambushing groups or player groups
+if (
+    _stealth
+    || {(speedMode _unit) isEqualTo "FULL"}
+    || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}}
+) exitWith {true};
 
 // set current task
 //_unit setVariable [QEGVAR(main,currentTarget), _enemy, EGVAR(main,debug_functions)];
@@ -104,16 +105,17 @@ if (!isNull _enemy && {_unit knowsAbout _enemy > 1}) then {_units doWatch _enemy
 
 // immediate action -- leaders near to enemy go aggressive!
 private _deadOrSuppressed = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
-if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange) * 1.8)} && {count _units > random 3}) exitWith {
+if (
+    _count > random 3
+    && {_unit knowsAbout _enemy > 0.1}
+    && {_deadOrSuppressed isEqualTo -1}
+    && {_unit distance2D _enemy < (GVAR(cqbRange) * 1.8)}
+) exitWith {
+    // execute assault
     {
-        private _distanceAssault = RND(0.2) && {_x distance2D _enemy < GVAR(cqbRange)};
-        if (_distanceAssault) then {
-            [_x, _enemy] call EFUNC(main,doAssault);
-            _x doFire (vehicle _enemy);
-        } else {
-            [_x, ATLtoASL ((_unit getHideFrom _enemy) vectorAdd [0, 0, 0.3 + random 1])] call EFUNC(main,doSuppress);
-        };
-    } foreach _units;
+        [_x, _enemy] call EFUNC(main,doAssault);
+        _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
+    } foreach (_units select {currentCommand _x isEqualTo ""});
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
@@ -125,9 +127,14 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
 };
 
 // immediate action -- leaders further away get their subordinates to hide!
-private _buildings = [leader _unit, _range, true, true] call EFUNC(main,findBuildings);
+private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
 {
-    [_x, _enemy, _range * 0.7, _buildings] call EFUNC(main,doHide);
+    // force movement!
+    _x setVariable [QGVAR(forceMove), true];
+    [{_this setVariable [QGVAR(forceMove), nil]}, _x, 2 + random 3] call CBA_fnc_waitAndExecute;
+
+    // hide units
+    [_x, _enemy, 18, _buildings] call EFUNC(main,doHide);
     _x setVariable [QEGVAR(main,currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
 } foreach _units;
 
