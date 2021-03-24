@@ -20,8 +20,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
     QGVAR(debug_drawRectCacheCurator),
     QGVAR(debug_drawRectInUseCurator)
 ];
-
-addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
+GVAR(debug_DrawID) = -1;
 
 [QGVAR(OnCheckBody), {
     [_this select 0, QGVAR(OnCheckBody), _this] call BIS_fnc_callScriptedEventHandler;

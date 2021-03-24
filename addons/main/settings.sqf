@@ -221,6 +221,16 @@ _curCat = LSTRING(Settings_Debug);
 
         GVAR(debug_drawRectCacheCurator) = [];
         GVAR(debug_drawRectInUseCurator) = [];
+        if (GVAR(debug_Drawing)) then {
+            if (GVAR(debug_DrawID) == -1) then {
+                GVAR(debug_DrawID) = addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
+            };
+        } else {
+            if (GVAR(debug_DrawID) != -1) then {
+                removeMissionEventHandler ["Draw3D", GVAR(debug_DrawID)];
+                GVAR(debug_DrawID) = -1;
+            };
+        };
     }
 ] call CBA_fnc_addSetting;
 
