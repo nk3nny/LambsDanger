@@ -16,5 +16,5 @@
 */
 params ["_unit"];
 getSuppression _unit < 0.2
-&& {(leader _unit) isEqualTo _unit || {RND(0.9) && {isFormationLeader _unit || {!alive leader _unit}}}}
+&& {(leader _unit) isEqualTo _unit || {RND(0.95) && {isFormationLeader _unit || {!(alive leader _unit)}}}}
 && {!(group _unit getVariable [QGVAR(isExecutingTactic), false])}
