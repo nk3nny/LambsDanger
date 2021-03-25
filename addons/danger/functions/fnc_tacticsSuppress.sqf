@@ -52,7 +52,7 @@ if (_units isEqualTo []) exitWith {false};
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
-private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
+private _pos = [_target, 20, true, false] call EFUNC(main,findBuildings);
 _pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
 _pos pushBack _target;
 
