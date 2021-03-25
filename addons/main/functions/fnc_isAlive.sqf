@@ -15,5 +15,4 @@
  * Public: No
 */
 alive _this
-&& {!(_this getVariable ["ACE_isUnconscious", false])}
-&& {!((lifeState _this) in ["DEAD", "INCAPACITATED"])}
+&& {lifeState _this) isNotEqualTo "INCAPACITATED"}
