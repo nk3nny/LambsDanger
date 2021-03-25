@@ -27,7 +27,7 @@ if (speed _vehicle > 30 || {(_pos select 2) > 100}) exitWith {false};
 private _eyePos = eyePos _unit;
 _pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
 
-// target oo close or terrain occludes target
+// target is close or terrain occludes target
 if (
     (_eyePos vectorDistance _pos) < GVAR(minSuppressionRange)
     || {terrainIntersectASL [_eyePos, _pos]}
@@ -44,17 +44,17 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Suppress", GVAR(debug_functions)];
 
 // trace
-private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];
+private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1, "GEOM", "VIEW"];
 if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
-
-// reAdjust
-private _distance = (_eyePos vectorDistance _pos) - 4;
-_pos = (_eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance));
 
 // recheck
 if (_eyePos vectorDistance _pos < GVAR(minSuppressionRange)) exitWith {false};
-private _friendlies = [_vehicle, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance) + 4] call FUNC(findNearbyFriendlies);
+private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance) + 5] call FUNC(findNearbyFriendlies);
 if (_friendlies isNotEqualTo []) exitWith {false};
+
+// reAdjust
+private _distance = (_eyePos vectorDistance _pos) - 4;
+_pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
 
 // do it
 _vehicle doSuppressiveFire _pos;
@@ -63,8 +63,9 @@ _vehicle doSuppressiveFire _pos;
 if (GVAR(debug_functions)) then {
     [
         "%1 suppression (%2 @ %3m)",
-        side _unit, getText (configOf _vehicle >> "displayName"),
-        round (_unit distance ASLToAGL _pos)
+        side _unit,
+        getText (configOf _vehicle >> "displayName"),
+        round (_eyePos vectorDistance _pos)
     ] call FUNC(debugLog);
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];

@@ -42,14 +42,6 @@ private _cycle = selectRandom [2, 3, 3, 4];
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
-// clear attacks!
-{
-    if (currentCommand _x isEqualTo "ATTACK") then {
-        _x forgetTarget (assignedTarget _x);
-    };
-    _x setUnitPosWeak "MIDDLE";
-} foreach units _unit;
-
 // find units
 if (_units isEqualTo []) then {
     _units = _unit call EFUNC(main,findReadyUnits);
@@ -57,15 +49,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
-private _vehicles = (units _unit) select {
-    (_unit distance2D _x) < 350
-    && { canFire _x }
-    && { !(isNull objectParent _x) }
-    && { isTouchingGround vehicle _x }
-    && { canFire vehicle _x };
-};
-_vehicles apply { vehicle _x };
-_vehicles arrayIntersect _vehicles;
+private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
 private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);

@@ -28,27 +28,27 @@ if (
 ) exitWith {false};
 
 // check for friendlies
-private _friendlies = [_unit, (ASLToAGL _pos), GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
+private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
 if (_friendlies isNotEqualTo []) exitWith {false};
-
-// adjust pos
-private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1];
-if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // max range pos
 private _distance = (_eyePos vectorDistance _pos) min 280;
-_pos = (_eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance));
+_pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
+
+// adjust pos
+private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, objNull, true, 1, "GEOM", "VIEW"];
+if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // final range check
 if (_eyePos vectorDistance _pos < GVAR(minSuppressionRange)) exitWith {false};
 
 // Callout!
-if (RND(0.4) && {count (units _unit) > 1}) then {
-    [_unit, "Combat", "suppress", 75] call FUNC(doCallout);
+if (RND(0.4)) then {
+    [_unit, "Combat", "suppress"] call FUNC(doCallout);
 };
 
 // do it!
-_unit doWatch (ASLtoAGL _pos);
+_unit doWatch _pos;
 _unit doSuppressiveFire _pos;
 
 // Suppressive fire

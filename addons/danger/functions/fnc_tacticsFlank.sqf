@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 3], ["_overwatch", []], ["_delay", 60]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -42,6 +42,7 @@ private _group = group _unit;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setUnitPos "AUTO";
+                [_x] allowGetIn true;
             } foreach (units _group);
         };
     },
@@ -59,13 +60,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
-private _vehicles = [];
-{
-    private _vehicle = vehicle _x;
-    if (_x != _vehicle && { isTouchingGround _vehicle } && { canFire _vehicle }) then {
-        _vehicles pushBackUnique _vehicle;
-    };
-} foreach ((units _unit) select { (_unit distance2D _x) < 350 && { canFire _x }});
+private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
 private _pos = [_target, 12, true, false] call EFUNC(main,findBuildings);
@@ -73,12 +68,12 @@ _pos pushBack _target;
 
 // find overwatch position
 if (_overwatch isEqualTo []) then {
-    private _distance2D = ((_unit distance2D _target) / 2) min 250;
+    private _distance2D = (_unit distance2D _target) min 250;
     _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2D _unit, _x select 0]};
+    _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
-    _overwatch = _overwatch select {!(surfaceIsWater _x)};
-    _overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));
+    if (_overwatch isEqualTo []) then {_overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
     _overwatch = _overwatch select 0;
 };
 
@@ -98,6 +93,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 
 // ready group
 _group setFormDir (_unit getDir _target);
+_units allowGetIn false;
 _units doMove _overwatch;
 
 // leader smoke ~ deploy concealment to enable movement

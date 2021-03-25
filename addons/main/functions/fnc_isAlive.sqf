@@ -15,4 +15,4 @@
  * Public: No
 */
 alive _this
-&& {lifeState _this) isNotEqualTo "INCAPACITATED"}
+&& {(lifeState _this) isNotEqualTo "INCAPACITATED"}
