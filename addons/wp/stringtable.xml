@@ -173,9 +173,11 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
             <English>Last Waypoint</English>
+            <Polish>Ostatni punkt trasy</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
+            <Polish>Punkt trasy, który grupa przyjmuje po opuszczeniu obozowania</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>

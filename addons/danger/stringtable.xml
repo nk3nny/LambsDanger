@@ -48,9 +48,11 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
+            <Polish>Włącz Dynamiczne Wsparcie</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
             <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nWARNING The reinforcement feature may override existing waypoints on groups responding to calls</English>
+            <Polish>Włącza funkcję Dynamicznego Wsparcia LAMBS. Ta grupa będzie się teraz przemieszczać w kierunku znanych pozycji wroga, które są identyfikowane przez funkcję udostępniania informacji. \nUWAGA Ta funkcja może zastąpić istniejące punkty trasy grup odpowiadających na wezwania.</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
