@@ -37,7 +37,12 @@ _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
 _unit lookAt _pos;
 
 // cover move when explosion
-if (getSuppression _unit < 0.6 && {_type in [DANGER_EXPLOSION, DANGER_FIRE]}) exitWith {
+if (
+    getSuppression _unit < 0.6
+    && {(speed _unit) isEqualTo 0}
+    && {_type in [DANGER_EXPLOSION, DANGER_FIRE]}
+) exitWith {
+    if ((stance _unit) isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
     [_unit] call EFUNC(main,doCover);
     _timeout + 1
 };

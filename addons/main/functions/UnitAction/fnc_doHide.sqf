@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_range", 55], ["_buildings", []]];
+params ["_unit", "_pos", ["_range", 35], ["_buildings", []]];
 
 // stopped -- exit
 if (
@@ -46,42 +46,44 @@ doStop _unit;
 _unit forceSpeed 24;
 
 // Randomly scatter into buildings or hide!
-if (RND(0.1) && { _buildings isNotEqualTo [] }) then {
+if (RND(0.1) && { _buildings isNotEqualTo [] }) exitWith {
+
+    // update variable
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
-    // hide
-    _unit setUnitPosWeak "MIDDLE";
-
     // execute move
+    _unit setUnitPosWeak "MIDDLE";
     _unit doMove (selectRandom _buildings);
+
+    // debug
     if (GVAR(debug_functions)) then {
         ["%1 hide in building (%2 - %3x positions)", side _unit, name _unit, count _buildings] call FUNC(debugLog);
     };
+};
+
+// hide
+_unit setUnitPosWeak "DOWN";
+
+// check for rear-cover
+private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 9, true, true ];
+
+// targetPos
+private _targetPos = if (_cover isEqualTo []) then {
+    _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
 } else {
-    // hide
-    _unit setUnitPosWeak "DOWN";
+    (_cover select 0) getPos [-1.2, _unit getDir (_cover select 0)]
+};
 
-    // check for rear-cover
-    private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 9, true, true ];
+// water means hold
+if (surfaceIsWater _targetPos) then {_targetPos = getPosASL _unit;};
 
-    // targetPos
-    private _targetPos = if (_cover isEqualTo []) then {
-        _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
-    } else {
-        (_cover select 0) getPos [-1.2, _unit getDir (_cover select 0)]
-    };
+// cover move
+//[_unit, _targetPos] call FUNC(doCover);
+_unit doMove _targetPos;
 
-    // water means hold
-    if (surfaceIsWater _targetPos) then {_targetPos = getPosASL _unit;};
-
-    // cover move
-    if (_cover isNotEqualTo []) then {[_unit, _targetPos] call FUNC(doCover);};
-
-    // execute move
-    _unit doMove _targetPos;
-    if (GVAR(debug_functions)) then {
-        ["%1 hide in bush (%2)", side _unit, name _unit] call FUNC(debugLog);
-    };
+// debug
+if (GVAR(debug_functions)) then {
+    ["%1 hide in bush (%2)", side _unit, name _unit] call FUNC(debugLog);
 };
 
 // end
