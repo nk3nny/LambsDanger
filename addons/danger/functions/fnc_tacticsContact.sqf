@@ -109,11 +109,10 @@ if (_deadOrSuppressed isEqualTo -1 && {_unit distance2D _enemy < (GVAR(cqbRange)
         private _distanceAssault = RND(0.2) && {_x distance2D _enemy < GVAR(cqbRange)};
         if (_distanceAssault) then {
             [_x, _enemy] call EFUNC(main,doAssault);
-            _x doFire (vehicle _enemy);
         } else {
             [_x, ATLtoASL ((_unit getHideFrom _enemy) vectorAdd [0, 0, 0.3 + random 1])] call EFUNC(main,doSuppress);
         };
-    } foreach _units;
+    } foreach (_units select {currentCommand _x isEqualTo ""});
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
