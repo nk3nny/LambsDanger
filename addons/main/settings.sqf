@@ -207,7 +207,7 @@ _curCat = LSTRING(Settings_Debug);
     false,
     1,
     {
-        params ["_value"]
+        params ["_value"];
         {
             private _controls = uiNamespace getVariable [_x, []];
             if (_controls isNotEqualTo []) then {
