@@ -3,7 +3,7 @@
 GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
 
 {
-    private _controls = missionNamespace getVariable [_x, []];
+    private _controls = uiNamespace getVariable [_x, []];
     if (_controls isNotEqualTo []) then {
         {
             if !(isNull _x) then {
@@ -11,16 +11,17 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
             };
         } forEach _controls;
     };
-    missionNamespace setVariable [_x, []];
+    uiNamespace setVariable [_x, []];
 } foreach [
     QGVAR(debug_drawRectCacheGame),
-    QGVAR(debug_drawRectInUseGame),
     QGVAR(debug_drawRectCacheEGSpectator),
-    QGVAR(debug_drawRectInUseEGSpectator),
-    QGVAR(debug_drawRectCacheCurator),
-    QGVAR(debug_drawRectInUseCurator)
+    QGVAR(debug_drawRectCacheCurator)
 ];
 GVAR(debug_DrawID) = -1;
+
+GVAR(debug_DrawID) = -1;
+
+GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
 
 [QGVAR(OnCheckBody), {
     [_this select 0, QGVAR(OnCheckBody), _this] call BIS_fnc_callScriptedEventHandler;
