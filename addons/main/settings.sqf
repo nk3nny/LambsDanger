@@ -207,6 +207,7 @@ _curCat = LSTRING(Settings_Debug);
     false,
     1,
     {
+        params ["_value"]
         {
             private _controls = uiNamespace getVariable [_x, []];
             if (_controls isNotEqualTo []) then {
@@ -222,7 +223,7 @@ _curCat = LSTRING(Settings_Debug);
             QGVAR(debug_drawRectCacheEGSpectator),
             QGVAR(debug_drawRectCacheCurator)
         ];
-        if (GVAR(debug_Drawing)) then {
+        if (_value) then {
             if (GVAR(debug_DrawID) == -1) then {
                 GVAR(debug_DrawID) = addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
             };
