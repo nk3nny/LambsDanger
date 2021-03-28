@@ -53,7 +53,7 @@
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
             <German>Das Ausschalten verhindert das autonome Stürmen und Säubern von Gebäuden sowie das verstecken vor Panzern und Flugobjekten.</German>
             <Polish>Wyłącza LAMBS AI dla grupy. \nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
-            <Russian>Отключает LAMBS группу ИИ\ nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
+            <Russian>Отключает LAMBS группу ИИ\nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
@@ -63,7 +63,7 @@
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
             <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nWARNING The reinforcement feature may override existing waypoints on groups responding to calls</English>
             <Polish>Włącza funkcję Dynamicznego Wsparcia LAMBS. Ta grupa będzie się teraz przemieszczać w kierunku znanych pozycji wroga, które są identyfikowane przez funkcję udostępniania informacji. \nUWAGA Ta funkcja może zastąpić istniejące punkty trasy grup odpowiadających na wezwania.</Polish>
-            <Russian>Включить LAMBS функцию динамического подкрепления . Эта группа теперь будет двигаться к известным позициям противника, которые идентифицировались с помощью функцией обмена информацией. \ nПРЕДУПРЕЖДЕНИЕ Функция подкрепления может перезаписать существующие маршрутные точки в группах, отвечающих на вызов.</Russian>
+            <Russian>Включить LAMBS функцию динамического подкрепления . Эта группа теперь будет двигаться к известным позициям противника, которые идентифицировались с помощью функцией обмена информацией. \nПРЕДУПРЕЖДЕНИЕ Функция подкрепления может перезаписать существующие маршрутные точки в группах, отвечающих на вызов.</Russian>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_MainCat">
             <English>Settings</English>
@@ -211,7 +211,7 @@
             <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
             <German>Erweitete danger.fsm Funktionen werden für die Einheit deaktiviert.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
             <Polish>Jednostka posiada wyłączone zaawansowane opcje danger.fsm \nUWAGA zaznaczenie tej opcji doda zależności modów.</Polish>
-            <Russian>Юниту отключены расширенные функции dangerous.fsm. \n\ПРЕДУПРЕЖДЕНИЕ включение этого пункта  добавит зависимость от мода</Russian>
+            <Russian>Юниту отключены расширенные функции dangerous.fsm. \n\nРЕДУПРЕЖДЕНИЕ включение этого пункта  добавит зависимость от мода</Russian>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
             <English>Has Radio</English>
