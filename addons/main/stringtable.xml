@@ -144,43 +144,43 @@
             <English>Debug Draw</English>
             <German>Debug Zeichnen</German>
             <Polish>Debug Draw</Polish>
-            <Russian>Отладка Draw</Russian>
+            <Russian>Оверлей Отладки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
             <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
             <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
-            <Russian>Рисует трехмерный текст поверх единиц с информацией ИИ</Russian>
+            <Russian>Рисует трехмерный текст с информацией ИИ поверх юнитов</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
             <German>Debug Erwartete Ankuftsposition zeichnen</German>
             <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
-            <Russian>Ожидаемое место назначения отладки отрисовки</Russian>
+            <Russian>Отрисовка ожидаемого места назначения</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
             <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
             <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
-            <Russian>Рисует ожидаемые пункты назначения модулей ИИ (требуется отладка)</Russian>
+            <Russian>Рисует ожидаемые места назначения юнитов ИИ (Требуется включенный Оверлей Отладки)</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_ShareInformationCat">
             <English>Settings Share information</English>
             <German>Informationen-Teilen Einstellungen</German>
             <Polish>Ustawienia udostępniania informacji</Polish>
-            <Russian>Настройки Поделиться информацией</Russian>
+            <Russian>Настройки обмена информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing">
             <English>Disable information sharing</English>
             <German>Teilen von Informationen deaktivieren</German>
             <Polish>Wyłącz dzielenie się informacjami</Polish>
-            <Russian>Отключить Поделиться информацией</Russian>
+            <Russian>Отключить обмен информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing_Tooltip">
             <English>Toggle information sharing betweem units</English>
             <German>Schaltet das Teilen von Informationen zwischen Einheiten aus.</German>
             <Polish>Przełącza dzielenie się informacjami pomiędzy jednostkami</Polish>
-            <Russian>Переключить обмен информацией между юнитами</Russian>
+            <Russian>Вкл/Выкл обмен информацией между юнитами</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Shout">
             <English>Shout</English>
@@ -228,7 +228,7 @@
             <English>Base range independent and civilian sides share information</English>
             <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony INDEPENDENT</Polish>
-            <Russian>Независимые и гражданские стороны обмениваются информацией</Russian>
+            <Russian>Расстояние на котором независимая и гражданская стороны делятся информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios">
             <English>Backpack radios</English>
@@ -240,13 +240,13 @@
             <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
             <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
             <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami </Polish>
-            <Russian>Радио рюкзаки</Russian>
+            <Russian>Юниты, оснащенные радио рюкзаками (обычные, TFAR или настроенные переменной) добавляют это значение к базовой дальности обмена информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue">
             <English>Accuracy of shared information</English>
             <German>Genauigkeit der geteilten Informationen</German>
             <Polish>Dokładność udostępnianych informacji</Polish>
-            <Russian>Радио рюкзаки</Russian>
+            <Russian>Точность предоставленной информации</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue_ToolTip">
             <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
@@ -257,7 +257,7 @@
         <Key ID="STR_Lambs_Main_Settings_combatShareRange">
             <English>Range combat mode is shared</English>
             <Polish>Obszar wspólnej walki</Polish>
-            <Russian>Сообщаеться расстояние боевого режима</Russian>
+            <Russian>Расстояние вовлечения в боевой режим</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange_ToolTip">
             <English>Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.</English>
@@ -267,7 +267,7 @@
         <Key ID="STR_Lambs_Main_Settings_SuppressionCat">
             <English>Settings Suppression</English>
             <Polish>Ustawienia ognia zaporowego</Polish>
-            <Russian>Настйрока подавления огнем</Russian>
+            <Russian>Настройка подавления огнем</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup">
             <English>Disable suppression from player group</English>

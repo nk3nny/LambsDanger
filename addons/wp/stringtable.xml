@@ -53,7 +53,7 @@
             <English>Number of rounds in the main salvo</English>
             <German>Anzahl an Schüssen der Hauptsalve.</German>
             <Polish>Liczba pocisków w głównej salwie</Polish>
-            <Russian>Количество снарядов в главным залпе</Russian>
+            <Russian>Количество снарядов в главном залпе</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
             <English>Spread</English>
@@ -77,13 +77,13 @@
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
             <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
             <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt.\nWłączenie tej opcji spowoduje natychmiastowy ostrzał na wyznaczony cel.</Polish>
-            <Russian>Установите этот, чтобы отключить начальные раунды, используемые арт наводничиком  для корректировки снарядов по цели.\nПропуск этого приведет к немедленному попаданию снаряда в цель.</Russian>
+            <Russian>Эта опция отключает начальные снаряды, используемые арт наводчиком для корректировки попадания по цели.\nОтключение этой опции приведет к немедленному попаданию выстрелов в цель.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
             <German>Artillerie-Ziel erstellt für %1</German>
             <Polish>Cel artyleryjski stworzony dla %1</Polish>
-            <Russian>Целия для артиллерии создаються для 1%</Russian>
+            <Russian>Цель для артиллерии создана для %1</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
             <English>Task Artillery Register</English>
@@ -107,7 +107,7 @@
             <English>No Units have been added to Artillery Pool</English>
             <German>Keine Einheiten wurden zum Artillerie-Pool dieser Seite hinzugefügt.</German>
             <Polish>Żadna jednostka nie została dodana do puli artylerii</Polish>
-            <Russian>Не один юнит не был добавлен в артиллерийский пул</Russian>
+            <Russian>Ни один юнит не был добавлен в артиллерийский пул</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
             <English>Task Assault/Retreat</English>
@@ -119,7 +119,7 @@
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
             <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
             <Polish>Zadanie - Szturm/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
-            <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Это заставляет связанный юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
+            <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
             <English>Unit is fleeing</English>
@@ -179,7 +179,7 @@
             <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.&lt;br/&gt;Set area in 3DEN.</English>
             <German>Durch Aufgabe Lager sammeln sich Einheiten um einen Punkt, typischerweise ein Lagerplatz,  herum. Manche Einheiten splittern sich von der Gruppe ab um stationiäe Geschütze zu bemannen, Häuser zu besetzen oder zu patroullieren.</German>
             <Polish>Zadanie - Obóz sprawia, że przydzielone jednostki gromadzą się wokół jednego punktu, zazwyczaj obozu. Niektóre jednostki mogą się oddzielić, żeby obsadzić broń statyczną, garnizonować budynki lub patrolować teren. &lt;br\&gt; Ustaw obszar w 3DEN.</Polish>
-            <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за  стационарное оружие, входит в здания  и патрулировать территорию.</Russian>
+            <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за стационарное оружие, входить в здания и патрулировать территорию.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
@@ -267,7 +267,7 @@
             <English>Task Garrison</English>
             <German>Aufgabe Besetzen</German>
             <Polish>Zadanie - Garnizon</Polish>
-            <Russian>Задача занять позиция в здании</Russian>
+            <Russian>Задача занять позицию в здании</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_DisplayName">
             <English>Teleport units</English>
@@ -349,7 +349,7 @@
             <English>Number of waypoints created</English>
             <German>Anzahl an erstellen Wegpunkten</German>
             <Polish>Liczba punktów trasy </Polish>
-            <Russian>Количество созданный маршрутных точек</Russian>
+            <Russian>Количество созданных маршрутных точек</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
             <English>Dynamic patrol pattern</English>
@@ -397,7 +397,7 @@
             <English>Task Creep</English>
             <German>Aufgabe Schleichen</German>
             <Polish>Zadanie - Zasadzka</Polish>
-            <Russian>Задача ползком.</Russian>
+            <Russian>Задача подкрасться</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -409,7 +409,7 @@
             <English>The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
             <German>Die schleichende Gruppe wird den Gruppenführer als Mittelpunkt für das Suchmuster verwenden. Das Ausschalten sorgt dafür, dass die Einheiten die Modulposition als Mittelpunkt verwenden, dies macht die Gruppe defensiver.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
-            <Russian>Ползучая группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы  использовать вместо этого позицию модуля. Это создает более оборонительную группу.</Russian>
+            <Russian>Подкрадывающаяся группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы использовать вместо этого позицию модуля. Это создает более оборонительную группу.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
@@ -421,7 +421,7 @@
             <English>The creeping group will only target players. Disable to let the group target any hostile unit within range.</English>
             <German>Die schleichende Gruppe visiert nur Spieler an. Durch Ausschalten visiert die Gruppe alle feindlichen Einheiten innerhalb der Reichweite an.</German>
             <Polish>Grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
-            <Russian>Ползучая группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
+            <Russian>Подкрадывающаяся группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -433,7 +433,7 @@
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 15 sekund</Polish>
-            <Russian>Время цикла скрипта в секундах. Можно использовать более высокие числа, чтобы сделать группу ползучей менее точной.\nПо умолчанию 15 секунд</Russian>
+            <Russian>Время цикла скрипта в секундах. Можно использовать более высокие числа, чтобы сделать подкрадывающуюся группу менее точной.\nПо умолчанию 15 секунд</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
             <English>Radius</English>
@@ -445,13 +445,14 @@
             <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Группа ползания на расстояние будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+            <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
             <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
-            <Russian>Задача ползком заставляет отряд попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
+            <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
+
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
@@ -469,7 +470,7 @@
             <English>Use group as center</English>
             <German>Gruppe als Mittelpunkt benutzen</German>
             <Polish>Użyj pozycji grupy jako centrum</Polish>
-            <Russian>Использовать группк как центр</Russian>
+            <Russian>Использовать группу как центр</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
             <English>Group only targets players</English>
@@ -511,7 +512,7 @@
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Группа дистанционной охоты будет искать врагов. \nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+            <Russian>Расстояние на котором группа охоты будет искать врагов. \nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -541,13 +542,13 @@
             <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
             <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
             <Polish>Grupa szturmowa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
-            <Russian>Мчащаяся группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
+            <Russian>Нападающая группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
             <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
             <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
-            <Russian>Мчащаяся группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы юнит использовал вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
+            <Russian>Нападающая группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы юнит использовал вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -571,7 +572,7 @@
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Группа, стремящаяся на расстояние, будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+            <Russian>Расстояние, на котором нападающая группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
             <English>Enable automatic artillery registration</English>
@@ -654,7 +655,7 @@
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
             <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
-            <Russian>"% 1" возможно только в том случае, если группа является локальной.</Russian>
+            <Russian>'%1' возможно только в том случае, если группа является локальной.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_CreateTarget">
             <English>Create Dynamic Target</English>
