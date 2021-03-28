@@ -90,10 +90,12 @@
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove">
             <English>Indoor Move Chance</English>
+            <Polish>Szansa na wejście do środka</Polish>
             <Russian>Шанс движения в помещении</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove_ToolTip">
             <English>Indoor Move Chance</English>
+            <Polish>Szansa na wejście do środka budynku</Polish>
             <Russian>Шанс движения в помещении</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
@@ -264,6 +266,7 @@
         </Key>
         <Key ID="STR_Lambs_Main_Settings_SuppressionCat">
             <English>Settings Suppression</English>
+            <Polish>Ustawienia ognia zaporowego</Polish>
             <Russian>Настйрока подавления огнем</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup">

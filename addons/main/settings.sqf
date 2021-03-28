@@ -207,20 +207,32 @@ _curCat = LSTRING(Settings_Debug);
     false,
     1,
     {
+        params ["_value"];
         {
-            ctrlDelete _x;
-        } count GVAR(debug_drawRectCacheGame) + GVAR(debug_drawRectInUseGame)           // this is only called once
-        + GVAR(debug_drawRectCacheEGSpectator) + GVAR(debug_drawRectInUseEGSpectator)   // when the setting is changed
-        + GVAR(debug_drawRectCacheCurator) + GVAR(debug_drawRectInUseCurator);          // we can use the + operator here
-
-        GVAR(debug_drawRectCacheGame) = [];
-        GVAR(debug_drawRectInUseGame) = [];
-
-        GVAR(debug_drawRectCacheEGSpectator) = [];
-        GVAR(debug_drawRectInUseEGSpectator) = [];
-
-        GVAR(debug_drawRectCacheCurator) = [];
-        GVAR(debug_drawRectInUseCurator) = [];
+            private _controls = uiNamespace getVariable [_x, []];
+            if (_controls isNotEqualTo []) then {
+                {
+                    if !(isNull _x) then {
+                        ctrlDelete _x
+                    };
+                } forEach _controls;
+            };
+            uiNamespace setVariable [_x, []];
+        } foreach [
+            QGVAR(debug_drawRectCacheGame),
+            QGVAR(debug_drawRectCacheEGSpectator),
+            QGVAR(debug_drawRectCacheCurator)
+        ];
+        if (_value) then {
+            if (GVAR(debug_DrawID) == -1) then {
+                GVAR(debug_DrawID) = addMissionEventHandler ["Draw3D", { call FUNC(debugDraw); }];
+            };
+        } else {
+            if (GVAR(debug_DrawID) != -1) then {
+                removeMissionEventHandler ["Draw3D", GVAR(debug_DrawID)];
+                GVAR(debug_DrawID) = -1;
+            };
+        };
     }
 ] call CBA_fnc_addSetting;
 
