@@ -1,7 +1,7 @@
 class ZEN_context_menu_actions {
     class ADDON {
         displayName = CSTRING(Context_Main_DisplayName);
-        condition = QUOTE((_groups isNotEqualTo []) && (_objects isNotEqualTo []));
+        condition = QUOTE((_groups isNotEqualTo []) || (_objects isNotEqualTo []));
         priority = 3;
         class CreateTarget {
             displayName = CSTRING(Context_CreateTarget);
@@ -43,7 +43,7 @@ class ZEN_context_menu_actions {
     class DOUBLES(ADDON,Search) {
         displayName = CSTRING(Context_Search_DisplayName);
         priority = 4;
-        condition = QUOTE((_groups isNotEqualTo []) && (_objects isNotEqualTo []));
+        condition = QUOTE((_groups isNotEqualTo []) || (_objects isNotEqualTo []));
         class TaskCreep {
             displayName = CSTRING(Module_TaskCreep_DisplayName);
             statement = QUOTE([ARR_2(_groups, _objects)] call FUNC(setCreep));
