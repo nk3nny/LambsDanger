@@ -452,7 +452,6 @@
             <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
             <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
-
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
