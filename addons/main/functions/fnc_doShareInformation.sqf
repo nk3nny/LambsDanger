@@ -32,6 +32,14 @@ if (isNull _target) then {
     _target = _unit findNearestEnemy _unit;
 };
 
+// custom handlers
+private _handlersReturn = true;
+{
+    private _handlerResult = [_unit, _target, _range, _override] call _x;
+    if (_handlerResult isEqualTo false) exitWith {_handlersReturn = false};
+} forEach GVAR(shareHandlers);
+if (!_handlersReturn) exitWith {false};
+
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
 
