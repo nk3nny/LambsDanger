@@ -205,7 +205,7 @@
             <English>AI Disabled</English>
             <German>KI ausgeschaltet</German>
             <Polish>AI Wyłączone</Polish>
-            <Russian>Выключить АИ</Russian>
+            <Russian>ИИ выключен</Russian>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
             <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
