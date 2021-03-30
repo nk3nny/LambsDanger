@@ -73,7 +73,7 @@
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions_ToolTip">
             <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
             <German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
-            <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym. \nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
+            <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
             <Russian>Переключает отряд, который быстро уклоняется или меняет стойку в ответ на попадание .\nМоментальные реакции заставляют запускать анимацию. Отключение сделает ИИ более статичным.</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing">
@@ -251,7 +251,7 @@
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue_ToolTip">
             <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
             <German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
-            <Polish>Maksymalna wartość „knowsAbout” dzielona między jednostki. \nUstawienie tej wartości większej niż 1 może spowodować, że odlegli sojusznicy przejdą w tryb zagrożenia.</Polish>
+            <Polish>Maksymalna wartość „knowsAbout” dzielona między jednostki.\nUstawienie tej wartości większej niż 1 może spowodować, że odlegli sojusznicy przejdą w tryb zagrożenia.</Polish>
             <Russian>Максимальное значение "knowsAbout", разделяемое между группами.\nНастройка больше 1 может привести к тому, что  союзники на далеком расстоянии перейдут в режим полной опасности.</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange">

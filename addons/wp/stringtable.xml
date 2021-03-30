@@ -190,7 +190,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
             <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
-            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone. \nObszar dwa razy większy jest używany do patroli.</Polish>
+            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone.\nObszar dwa razy większy jest używany do patroli.</Polish>
             <Russian>Радиус зданий и стационарного оружие которые будут укомплектованы людьми\nДвукртаное значение  этого числа используется для патрулирования.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
@@ -314,7 +314,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
             <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
-            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje. \nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
+            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje.\nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
             <Russian>Условие выхода юнитов из своих гарнизонных позиций.\nВарианты: попадание, стрельба из собственного оружия, звук вражеского огня или все вместе. По умолчанию выбрано случайное.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
@@ -432,7 +432,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 15 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 15 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Можно использовать более высокие числа, чтобы сделать подкрадывающуюся группу менее точной.\nПо умолчанию 15 секунд</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
@@ -444,7 +444,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_ToolTip">
             <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
@@ -498,7 +498,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 70 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 70 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Чем больше число, тем меньше точность группы поиска.\nПо умолчанию 70 секунд</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
@@ -511,7 +511,7 @@
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Расстояние на котором группа охоты будет искать врагов. \nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+            <Russian>Расстояние на котором группа охоты будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -558,7 +558,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne. \nDomyślnie 4 sekund</Polish>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 4 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Более высокие числа могут быть использованы для уменьшения точности rushers.\nПо умолчанию 4 секунды</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
@@ -570,7 +570,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników. \nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние, на котором нападающая группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
@@ -600,7 +600,7 @@
         <Key ID="STR_Lambs_WP_Groups_ToolTip">
             <English>Select which unit script applies to.\nList is sorted by distance</English>
             <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
-            <Polish>Określa na jaką jednostkę ma zadziałać skrypt. \nLista jest sortowana po dystansie.</Polish>
+            <Polish>Określa na jaką jednostkę ma zadziałać skrypt.\nLista jest sortowana po dystansie.</Polish>
             <Russian>Выберите, к какому модулю применяется скрипт.\nЛист сортируется по расстоянию</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Centers_DisplayName">
