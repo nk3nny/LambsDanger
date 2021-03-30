@@ -1,8 +1,8 @@
 /*
  * Author: mjc4wilton
  * Adds a custom handler to be called whenever the AI attempt to share information.
- * Code should return a BOOL where true allows information to be passed and false blocks it.
- * A single false will cause information to not be shared.
+ * Code should return a BOOL where false allows information to be passed and true blocks it.
+ * A single true will cause information to not be shared.
  *
  * Arguments:
  * 0: function <CODE>
