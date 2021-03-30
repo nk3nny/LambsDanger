@@ -33,12 +33,12 @@ if (isNull _target) then {
 };
 
 // custom handlers
-private _handlersReturn = true;
+private _stopShare = false;
 {
-    private _handlerResult = [_unit, _target, _range, _override] call _x;
-    if (!isNil _handlerResult && _handlerResult isEqualTo false) exitWith {_handlersReturn = false};
+    private _callbackResult = [_unit, _target, _range, _override] call _x;
+    if (!(isNil "_callbackResult") && {_callbackResult isEqualTo true}) exitWith {_stopShare = true};
 } forEach GVAR(shareHandlers);
-if (!_handlersReturn) exitWith {false};
+if (_stopShare) exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
