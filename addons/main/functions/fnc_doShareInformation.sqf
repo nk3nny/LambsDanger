@@ -36,7 +36,7 @@ if (isNull _target) then {
 private _handlersReturn = true;
 {
     private _handlerResult = [_unit, _target, _range, _override] call _x;
-    if (_handlerResult isEqualTo false) exitWith {_handlersReturn = false};
+    if (!isNil _handlerResult && _handlerResult isEqualTo false) exitWith {_handlersReturn = false};
 } forEach GVAR(shareHandlers);
 if (!_handlersReturn) exitWith {false};
 
