@@ -187,7 +187,7 @@ private _dir = random 360;
 
     // sort anims
     private _anims = _unarmedAnims;
-    if (primaryWeapon _x isNotEqualTo "") then {_anims append _armedAnims};
+    if ((primaryWeapon _x) isNotEqualTo "") then {_anims append _armedAnims};
 
     // wait for it
     [{

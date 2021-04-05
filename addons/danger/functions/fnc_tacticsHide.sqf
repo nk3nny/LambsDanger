@@ -114,7 +114,7 @@ doStop _units;
 } forEach _units;
 
 // find launcher and armour
-private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
+private _launchers = _units select {(secondaryWeapon _x) isNotEqualTo ""};
 
 // find enemy air/tanks
 private _enemies = _unit targets [true, 600, [], 0, _target];
