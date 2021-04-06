@@ -30,14 +30,12 @@ if (isNil QGVAR(dangerUntil)) then {
 };
 
 // EH handling reinforcement and combat mode
-[
-    QEGVAR(main,OnInformationShared), {
-        params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
+[QEGVAR(main,OnInformationShared), {
+    params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
 
-        _groups = _groups select {local leader _x};
-        {
-            private _leader = leader _x;
-
+    {
+        private _leader = leader _x;
+        if (local _leader) then {
             // reinforce
             if (!isNull _target && { _x getVariable [QGVAR(enableGroupReinforce), false] } && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }) then {
                 [_leader, [getPosASL _unit, (_leader targetKnowledge _target) select 6] select (_leader knowsAbout _target > 1.5)] call FUNC(tacticsReinforce);
@@ -48,7 +46,8 @@ if (isNil QGVAR(dangerUntil)) then {
                 _x setBehaviour "COMBAT";
                 _x setFormDir (_leader getDir _unit);
             };
-        } forEach _groups;
+        };
+    } forEach _groups;
 }] call CBA_fnc_addEventHandler;
 
 ADDON = true;
