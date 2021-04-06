@@ -37,7 +37,7 @@ if (!_retreat && {animationState _unit in ["apanpknlmsprsnonwnondf", "apanpercms
 
 // retreat
 if (_retreat) then {
-    _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
+    _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select ((primaryWeapon _unit) isEqualTo ""));
     _unit enableAI "AUTOTARGET";
     _unit doWatch ObjNull;
 };
