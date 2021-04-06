@@ -62,10 +62,9 @@ _group setFormDir (_unit getDir _enemy);
 
 // gesture + callouts for larger units
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _units = [_unit] call EFUNC(main,findReadyUnits);
-private _count = count units _unit;
+private _units = (units _unit) select {currentCommand _x isEqualTo ""};
+private _count = count _units;
 if (_count > 2) then {
-
     // gesture
     [{_this call EFUNC(main,doGesture)}, [_unit, "gestureFreeze", true], 0.3] call CBA_fnc_waitAndExecute;
 
@@ -115,7 +114,7 @@ if (
     {
         [_x, _enemy] call EFUNC(main,doAssault);
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
-    } foreach (_units select {currentCommand _x isEqualTo ""});
+    } foreach _units;
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
