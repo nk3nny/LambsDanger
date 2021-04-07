@@ -28,7 +28,8 @@ _vehicles = _vehicles select { canFire _x };
     private _posASL = AGLtoASL (selectRandom _pos);
 
     // stance
-    _x setUnitPos (["MIDDLE", "DOWN"] select (getSuppression _x > 0.33));
+    private _suppression = (getSuppression _x) > 0.5;
+    _x setUnitPos (["MIDDLE", "DOWN"] select _suppression);
 
     // suppress
     if (RND(0.65) && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}) then {
@@ -37,7 +38,7 @@ _vehicles = _vehicles select { canFire _x };
         // manoeuvre
         _x forceSpeed 24;
         _x setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
-        _x setVariable [QEGVAR(danger,forceMove), getSuppression _unit < 0.8];
+        _x setVariable [QEGVAR(danger,forceMove), !_suppression];
         //_x doWatch ASLtoAGL _posASL;
         _x doMove _overwatch;
         _x setDestination [_overwatch, "FORMATION PLANNED", false];
