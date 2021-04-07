@@ -28,7 +28,7 @@ _vehicles = _vehicles select { canFire _x };
     private _posASL = AGLtoASL (selectRandom _pos);
 
     // stance
-    _x setUnitPos (["MIDDLE", "DOWN"] select (getSuppression _unit > 0.33));
+    _x setUnitPos (["MIDDLE", "DOWN"] select (getSuppression _x > 0.33));
 
     // suppress
     if (RND(0.65) && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}) then {
