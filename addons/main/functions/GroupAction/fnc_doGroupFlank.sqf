@@ -37,7 +37,7 @@ _vehicles = _vehicles select { canFire _x };
         // manoeuvre
         _x forceSpeed 24;
         _x setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
-        _x setVariable [QEGVAR(danger,forceMove), true];
+        _x setVariable [QEGVAR(danger,forceMove), getSuppression _unit < 0.8];
         //_x doWatch ASLtoAGL _posASL;
         _x doMove _overwatch;
         _x setDestination [_overwatch, "FORMATION PLANNED", false];

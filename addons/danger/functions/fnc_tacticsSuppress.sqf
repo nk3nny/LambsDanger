@@ -22,6 +22,12 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 // find target
 _target = _target call CBA_fnc_getPos;
 
+// adjust pos
+private _vis = lineIntersectsSurfaces [(eyePos _unit) vectorAdd [0, 0, 15], _targetASL vectorAdd [0, 0, 1.2], _unit, objNull, true, 1, "GEOM", "VIEW"];
+if (_vis isNotEqualTo [] && {((_vis select 0) select 0) vectorDistance _targetASL > 120}) exitWith {
+    [_unit, _target] call FUNC(tacticsFlank);
+};
+
 // sort cycles
 private _cycle = selectRandom [2, 3, 3, 4];
 
