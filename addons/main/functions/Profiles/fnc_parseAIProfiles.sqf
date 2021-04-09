@@ -20,7 +20,7 @@
         private _profileName = toLower(configName _x);
         private _profile = GVAR(ProfilesNamespace) getVariable _profileName;
         if (isNil "_profile") then {
-            _profile = [[], true] call CBA_fnc_hashCreate;
+            _profile = createHashMap;
         };
         {
             private _value = false;
@@ -44,7 +44,7 @@
                     _value = getNumber _x;
                 };
             };
-            _profile = [_profile, _tactic, _value] call CBA_fnc_hashSet;
+            _profile set [_tactic, _value];
         } forEach configProperties [_x, "!isClass _x", true];
         GVAR(ProfilesNamespace) setVariable [_profileName, _profile, true];
     } forEach configProperties [_x >> "LAMBS_CfgAIProfiles", "isClass _x", true];

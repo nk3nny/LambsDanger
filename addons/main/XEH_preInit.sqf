@@ -8,7 +8,7 @@ GVAR(ChooseDialogSettingsCache) = false call CBA_fnc_createNamespace;
 GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
 if (isServer && !is3DEN) then {
-    GVAR(ProfilesNamespace) = true call CBA_fnc_createNamespace;;
+    GVAR(ProfilesNamespace) = true call CBA_fnc_createNamespace;
     publicVariable QGVAR(ProfilesNamespace);
     call FUNC(parseAIProfiles);
 };
