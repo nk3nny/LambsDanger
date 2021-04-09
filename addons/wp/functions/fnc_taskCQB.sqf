@@ -44,10 +44,10 @@ params [
 private _fnc_find = {
     params ["_pos", "_radius", "_group", ["_area", [], [[]]]];
     private _building = nearestObjects [_pos, ["house", "strategic", "ruins"], _radius, true];
-    _building = _building select {!((_x buildingPos -1) isEqualTo [])};
-    _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], [0, 0]]) > 0};
+    _building = _building select {(_x buildingPos -1) isNotEqualTo []};
+    _building = _building select {count (_x getVariable [format ["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], [0, 0]]) > 0};
 
-    if !(_area isEqualTo []) then {
+    if (_area isNotEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
         _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     };
@@ -101,23 +101,23 @@ private _fnc_act = {
             _x lookAt _enemy;
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTask), "taskCQB - Rush enemy", EGVAR(main,debug_functions)];
             true
         } count _units;
     };
 
     // clear and check buildings
-    private _buildingPos = _building getVariable [format["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
+    private _buildingPos = _building getVariable [format["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], (_building buildingPos -1) select {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 10]]}];
     {
 
         // this is the pos to clear!
         private _buildingPosSelected = _buildingPos param [0, []];
 
         // the assault
-        if (!(_buildingPos isEqualTo []) && {unitReady _x}) then {
+        if ((_buildingPos isNotEqualTo []) && {unitReady _x}) then {
             _x setUnitPos "UP";
-            [_x, _buildingPosSelected] call EFUNC(danger,assaultSpeed);
+            [_x, _buildingPosSelected] call EFUNC(main,doAssaultSpeed);
             _x doMove (_buildingPosSelected vectorAdd [0.5 - random 1, 0.5 - random 1, 0]);
 
             // debug
@@ -127,8 +127,8 @@ private _fnc_act = {
             };
 
             // task
-            _x setVariable [QEGVAR(danger,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
-            _x setVariable [QEGVAR(danger,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTarget), _buildingPosSelected, EGVAR(main,debug_functions)];
+            _x setVariable [QEGVAR(main,currentTask), "taskCQB - Clearing rooms", EGVAR(main,debug_functions)];
 
             // clean list
             if (_x distance _buildingPosSelected < 30 || { RND(0.5) && {(leader _group isEqualTo _x)}}) then {
@@ -151,7 +151,7 @@ private _fnc_act = {
 
             // Unit is ready and outside -- try suppressive fire
             if (unitReady _x && {!(_x call EFUNC(main,isIndoor))}) then {
-                [_x, getPosASL _building] call EFUNC(danger,doSuppress);
+                [_x, getPosASL _building] call EFUNC(main,doSuppress);
                 _x doFollow leader _x;
             };
         };
@@ -159,7 +159,7 @@ private _fnc_act = {
     } count _units;
 
     // update variable
-    _building setVariable [format["%1_%2", QEGVAR(danger,CQB_cleared), str (side _group)], _buildingPos];
+    _building setVariable [format["%1_%2", QEGVAR(main,CQB_cleared), str (side _group)], _buildingPos];
 };
 
 // functions end ---
@@ -189,7 +189,7 @@ _group allowFleeing 0;
 } count units _group;
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskCQB", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskCQB", EGVAR(main,debug_functions)];
 
 // loop
 waitUntil {

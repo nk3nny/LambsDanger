@@ -70,11 +70,8 @@ switch (_mode) do {
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
                         private _target = _targets select _targetIndex;
-                        if !(local _group) then {
-                            _target = getPos _target;
-                        };
-                        [_group, _target, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
-                        if !(_logic isEqualTo _target) then {
+                        [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
+                        if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
                     }, {

@@ -53,7 +53,7 @@ _weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && {
 // find buildings // remove half outdoor spots // shuffle array
 private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
 _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
-if !(_area isEqualTo []) then {
+if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
@@ -70,7 +70,7 @@ _group setBehaviour "SAFE";
 _group enableAttack false;
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskGarrison", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskGarrison", EGVAR(main,debug_functions)];
 
 // declare units + sort vehicles + tweak count to match house positions
 private _units = units _group;
@@ -105,7 +105,7 @@ if (_patrol) then {
 // man static weapons
 {
     // gun
-    if !(_weapons isEqualTo []) then {
+    if (_weapons isNotEqualTo []) then {
         private _staticWeapon = _weapons deleteAt 0;
         if (_teleport) then { _x moveInGunner _staticWeapon; };
         _x assignAsGunner _staticWeapon;

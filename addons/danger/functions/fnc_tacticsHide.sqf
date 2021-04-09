@@ -34,7 +34,7 @@ private _group = group _unit;
         params [["_group", grpNull], ["_combatMode", "YELLOW"], ["_enableAttack", false], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group setCombatMode _combatMode;
             _group enableAttack _enableAttack;
             _group setFormation _formation;
@@ -54,11 +54,11 @@ _group setFormation "DIAMOND";
 _group setCombatMode "GREEN";
 _group enableAttack false;
 
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Leader Hide", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Leader Hide", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Hiding", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Hiding", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, "gestureCover"] call EFUNC(main,doGesture);
@@ -101,7 +101,7 @@ doStop _units;
     _x setUnitPosWeak "DOWN";
 
     // disperse!
-    if !(_cover isEqualTo []) then {
+    if (_cover isNotEqualTo []) then {
         [
             {
                 params ["_unit", "_pos"];
@@ -109,18 +109,18 @@ doStop _units;
                 _unit setDestination [_pos, "FORMATION PLANNED", true];
             }, [_x, _cover deleteAt 0], random 2
         ] call CBA_fnc_waitAndExecute;
-        _x setVariable [QGVAR(currentTask), "Group Hide!", EGVAR(main,debug_functions)];
+        _x setVariable [QEGVAR(main,currentTask), "Group Hide!", EGVAR(main,debug_functions)];
     };
 } forEach _units;
 
 // find launcher and armour
-private _launchers = _units select {(secondaryWeapon _x) isEqualTo ""};
+private _launchers = _units select {(secondaryWeapon _x) isNotEqualTo ""};
 
 // find enemy air/tanks
 private _enemies = _unit targets [true, 600, [], 0, _target];
 private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
 
-if (_antiTank && { _tankAir != -1 } && { !(_launchers isEqualTo []) }) then {
+if (_antiTank && { _tankAir != -1 } && { _launchers isNotEqualTo [] }) then {
     {
         // launcher units target air/tank
         _x setCombatMode "RED";

@@ -28,7 +28,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 1;
+private _timeout = time + 1.4;
 
 // ACE3
 _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
@@ -38,12 +38,12 @@ _unit lookAt _pos;
 
 // cover move when explosion
 if (getSuppression _unit < 0.6 && {_type in [DANGER_EXPLOSION, DANGER_FIRE]}) exitWith {
-    [_unit] call FUNC(doCover);
+    [_unit] call EFUNC(main,doCover);
     _timeout + 1
 };
 
 // dodge!
-[_unit, _pos] call FUNC(doDodge);
+[_unit, _pos] call EFUNC(main,doDodge);
 
 // end
-_timeout + random 1
+_timeout

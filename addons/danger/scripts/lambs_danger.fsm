@@ -8,10 +8,10 @@ item3[] = {"Init",2,250,-75.000000,50.000000,25.000000,100.000000,0.000000,"Init
 item4[] = {"Vehicle",4,218,-325.000000,150.000000,-225.000000,200.000000,0.000000,"Vehicle"};
 item5[] = {"Foot",4,218,-75.000000,150.000000,25.000000,200.000000,2.000000,"Foot"};
 item6[] = {"Forced",4,218,175.000000,150.000000,275.000000,200.000000,4.000000,"Forced"};
-item7[] = {"Check_self",2,250,-325.000000,275.000000,-225.000000,325.000000,0.000000,"Check self"};
+item7[] = {"Evaluate_Vehicle",2,250,-325.000000,275.000000,-225.000000,325.000000,0.000000,"Evaluate" \n "Vehicle"};
 item8[] = {"timeout",4,218,-550.000000,275.000000,-450.000000,325.000000,0.000000,"timeout"};
 item9[] = {"Reset_vehicle",2,250,-550.000000,50.000000,-450.000000,100.000000,0.000000,"Reset vehicle"};
-item10[] = {"Evaluate",2,250,-75.000000,275.000000,25.000000,325.000000,0.000000,"Evaluate"};
+item10[] = {"Evaluate_Infantr",2,250,-75.000000,275.000000,25.000000,325.000000,0.000000,"Evaluate" \n "Infantry"};
 item11[] = {"DEFINE_ENUM_BEG",-1,250,150.000000,-200.000000,500.000000,-25.000000,0.000000,"DEFINE_ENUM_BEG(DangerCause)" \n "  DCEnemyDetected, // the first enemy detected" \n "  DCFire, // fire visible" \n "  DCHit, // vehicle hit" \n "  DCEnemyNear, // enemy very close to me" \n "  DCExplosion, // explosion detected" \n "  DCDeadBodyGroup, // dead soldier from my group found" \n "  DCDeadBody, // other dead soldier found" \n "  DCScream // hit soldier screaming" \n "DEFINE_ENUM_END(DangerCause)" \n ""};
 item12[] = {"Immediate",4,218,-175.000000,425.000000,-75.000000,475.000000,6.000000,"Immediate"};
 item13[] = {"Hide",4,218,0.000000,425.000000,100.000000,475.000000,4.000000,"Hide"};
@@ -19,12 +19,12 @@ item14[] = {"Engage",4,218,175.000000,425.000000,275.000000,475.000000,2.000000,
 item15[] = {"Roll_dodge",2,250,-175.000000,600.000000,-75.000000,650.000000,0.000000,"Roll/dodge"};
 item16[] = {"Stay_firm",2,250,0.000000,600.000000,100.000000,650.000000,0.000000,"Stay firm"};
 item17[] = {"Attack",2,250,175.000000,600.000000,275.000000,650.000000,0.000000,"Attack"};
-item18[] = {"Check_self_1",2,250,175.000000,275.000000,275.000000,325.000000,0.000000,"Check self"};
+item18[] = {"Check_self",2,250,175.000000,275.000000,275.000000,325.000000,0.000000,"Check self"};
 item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.000000,"End Danger"};
 item20[] = {"no_queue",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"no queue"};
 item21[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
 item22[] = {"timeout",4,218,-250.000000,750.000000,-150.000000,800.000000,0.000000,"timeout"};
-item23[] = {"Reset_foot",2,250,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
+item23[] = {"Reset_foot",2,4346,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
 item24[] = {"true",8,218,500.000000,925.000000,600.000000,975.000000,0.000000,"true"};
 item25[] = {"Check_queue",2,250,700.000000,925.000000,800.000000,975.000000,0.000000,"Check queue"};
 item26[] = {"true",8,218,700.000000,800.000000,800.000000,850.000000,0.000000,"true"};
@@ -32,9 +32,9 @@ item27[] = {"",7,210,746.000000,71.000000,754.000000,79.000000,0.000000,""};
 item28[] = {"no_queue",4,218,-775.000000,50.000000,-675.000000,100.000000,2.000000,"no queue"};
 item29[] = {"End_Danger_vehic",1,250,-775.000000,275.000000,-675.000000,325.000000,0.000000,"End Danger" \n "vehicle"};
 item30[] = {"Assess",4,218,-325.000000,425.000000,-225.000000,475.000000,0.000000,"Assess"};
-item31[] = {"Check_self_2",2,250,-325.000000,600.000000,-225.000000,650.000000,0.000000,"Check self"};
+item31[] = {"Check_self_1",2,250,-325.000000,600.000000,-225.000000,650.000000,0.000000,"Check self"};
 item32[] = {"timeout",4,218,500.000000,275.000000,600.000000,325.000000,0.000000,"timeout"};
-item33[] = {"Check_self_3",2,250,500.000000,600.000000,600.000000,650.000000,0.000000,"Check self"};
+item33[] = {"Check_self_2",2,250,500.000000,600.000000,600.000000,650.000000,0.000000,"Check self"};
 item34[] = {"Leader",4,218,-100.000000,1075.000000,0.000000,1125.000000,4.000000,"Leader"};
 item35[] = {"Tactics",2,250,-100.000000,1200.000000,0.000000,1250.000000,0.000000,"Tactics"};
 item36[] = {"",7,210,545.999939,1221.000000,554.000061,1229.000000,0.000000,""};
@@ -104,8 +104,8 @@ link38[] = {34,35};
 link39[] = {35,36};
 link40[] = {36,24};
 link41[] = {37,3};
-globals[] = {0.000000,0,0,0,0,640,480,1,63,6316128,1,-823.566223,1290.568604,1767.005249,-275.503174,915,884,1};
-window[] = {2,-1,-1,-1,-1,967,208,1648,208,3,933};
+globals[] = {0.000000,0,0,0,0,640,480,1,63,6316128,1,-1280.141357,1675.790405,1553.891968,-485.954590,632,884,1};
+window[] = {2,-1,-1,-1,-1,889,130,1570,130,3,650};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -118,7 +118,12 @@ class FSM
                         name = "Start_Danger";
                         itemno = 0;
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 danger %2 %3s"", side _this, name _this, round time];" \n
-                         "private [""_timeout""];"/*%FSM</STATEINIT""">*/;
+                         "private [""_timeout""];" \n
+                         "" \n
+                         "// add current data to queue for evaluation" \n
+                         "_queue pushBack [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy];" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -144,7 +149,9 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"// init evaluation" \n
                          "//_debugTxt = format [""%1 dangerFSM %2 : %3"", side _this, name _this, _queue];" \n
                          "//diag_log _debugTxt;" \n
-                         "//systemchat _debugTxt;"/*%FSM</STATEINIT""">*/;
+                         "//systemchat _debugTxt;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -153,9 +160,9 @@ class FSM
                                 {
                                         itemno = 6;
                                         priority = 4.000000;
-                                        to="Check_self_1";
+                                        to="Check_self";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_this call lambs_danger_fnc_isForced" \n
+                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isForced" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -165,7 +172,7 @@ class FSM
                                 {
                                         itemno = 5;
                                         priority = 2.000000;
-                                        to="Evaluate";
+                                        to="Evaluate_Infantr";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"isNull objectParent _this"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
@@ -176,7 +183,7 @@ class FSM
                                 {
                                         itemno = 4;
                                         priority = 0.000000;
-                                        to="Check_self";
+                                        to="Evaluate_Vehicle";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
@@ -185,19 +192,20 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Check_self">*/
-                class Check_self
+                /*%FSM<STATE "Evaluate_Vehicle">*/
+                class Evaluate_Vehicle
                 {
-                        name = "Check_self";
+                        name = "Evaluate_Vehicle";
                         itemno = 7;
-                        init = /*%FSM<STATEINIT""">*/"private _return = [_this, _queue] call lambs_danger_fnc_vehicle;" \n
-                         "_return params [""_timeout"", ""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy""];" \n
+                        init = /*%FSM<STATEINIT""">*/"private _evaluation = [_this, _queue] call lambs_danger_fnc_brainVehicle;" \n
+                         "_evaluation params [""_timeout"", ""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy""];" \n
                          "_queue = [];" \n
                          "" \n
                          "// debug setting" \n
                          "if (lambs_main_debug_FSM && {(effectiveCommander (vehicle _this)) isEqualTo _this}) then {" \n
                          "	[""%1 - Vehicle Danger! - %2 (%3 @ %4m)"", side _this, _dangerCause call lambs_main_fnc_debugDangerType, name _this,  round (_this distance _dangerPos)]  call lambs_main_fnc_debugLog;" \n
-                         "};"/*%FSM</STATEINIT""">*/;
+                         "};" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -253,10 +261,10 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Evaluate">*/
-                class Evaluate
+                /*%FSM<STATE "Evaluate_Infantr">*/
+                class Evaluate_Infantr
                 {
-                        name = "Evaluate";
+                        name = "Evaluate_Infantr";
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// evalutating logic" \n
@@ -313,9 +321,9 @@ class FSM
                                 {
                                         itemno = 30;
                                         priority = 0.000000;
-                                        to="Check_self_2";
+                                        to="Check_self_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_assess"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -333,7 +341,7 @@ class FSM
                          "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
                          "" \n
                          "// re-insert" \n
-                         "_queue pushBack [8, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
+                         "_queue pushBack [10, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -405,10 +413,10 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Check_self_1">*/
-                class Check_self_1
+                /*%FSM<STATE "Check_self">*/
+                class Check_self
                 {
-                        name = "Check_self_1";
+                        name = "Check_self";
                         itemno = 18;
                         init = /*%FSM<STATEINIT""">*/"_timeout = _this call lambs_danger_fnc_brainForced;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -419,7 +427,7 @@ class FSM
                                 {
                                         itemno = 32;
                                         priority = 0.000000;
-                                        to="Check_self_3";
+                                        to="Check_self_2";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
@@ -433,7 +441,7 @@ class FSM
                 {
                         name = "End_Danger";
                         itemno = 19;
-                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_danger_currentTask"", nil];" \n
+                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_main_currentTask"", nil];" \n
                          "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -452,7 +460,7 @@ class FSM
                          "};" \n
                          "" \n
                          "// has group memory" \n
-                         "if (_queue isEqualTo [] && {!(((group _this) getVariable [""lambs_danger_groupMemory"", []]) isEqualTo [])}) then {" \n
+                         "if (_queue isEqualTo [] && {((group _this) getVariable [""lambs_main_groupMemory"", []]) isNotEqualTo []} ) then {" \n
                          "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, objNull];" \n
                          "};" \n
                          "" \n
@@ -468,7 +476,7 @@ class FSM
                                         priority = 4.000000;
                                         to="Tactics";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"_this call lambs_danger_fnc_isLeader;" \n
+                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isLeader;" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -533,10 +541,10 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Check_self_2">*/
-                class Check_self_2
+                /*%FSM<STATE "Check_self_1">*/
+                class Check_self_1
                 {
-                        name = "Check_self_2";
+                        name = "Check_self_1";
                         itemno = 31;
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 assess %2"", side _this, name _this];" \n
                          "" \n
@@ -559,10 +567,10 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
-                /*%FSM<STATE "Check_self_3">*/
-                class Check_self_3
+                /*%FSM<STATE "Check_self_2">*/
+                class Check_self_2
                 {
-                        name = "Check_self_3";
+                        name = "Check_self_2";
                         itemno = 33;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset queue" \n

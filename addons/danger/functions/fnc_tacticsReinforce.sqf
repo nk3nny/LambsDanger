@@ -22,17 +22,23 @@ params ["_unit", ["_target", []], ["_units", []], ["_delay", 300]];
 // exit on dead leader
 if (!(_unit call EFUNC(main,isAlive))) exitWith {false};
 
-// set new time
+// free garrisons
 private _group = group _unit;
+if (EGVAR(main,Loaded_WP) && {!(_unit checkAIFeature "PATH")}) then {
+    _group = [_group, true] call EFUNC(wp,taskReset);
+};
+
+// set new time
+_group setVariable [QGVAR(enableGroupReinforce), true, true];
 _group setVariable [QGVAR(enableGroupReinforceTime), time + _delay, true];
 
 // set tasks
 _target = _target call CBA_fnc_getPos;
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Reinforce", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Reinforce", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Reinforcing", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Reinforcing", EGVAR(main,debug_functions)];
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + _delay];
 _group enableAttack false;      // gives better fine control of AI - nkenny
@@ -85,10 +91,10 @@ if (_distance > 500) then {
 if !(GVAR(disableAIDeployStaticWeapons)) then {
     private _intersect = terrainIntersectASL [eyePos _unit, AGLtoASL (_target vectorAdd [0, 0, 10])];
     if (_distance > 400 || {_intersect}) then {
-        _units = [_units] call FUNC(leaderStaticPack);
+        _units = [_units] call EFUNC(main,doGroupStaticPack);
     };
     if (!_intersect) then {
-        _units = [_units, _target] call FUNC(leaderStaticDeploy);
+        _units = [_units, _target] call EFUNC(main,doGroupStaticDeploy);
     };
 };
 

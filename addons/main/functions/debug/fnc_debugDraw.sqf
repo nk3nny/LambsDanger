@@ -17,24 +17,40 @@
 
 if !(GVAR(debug_Drawing)) exitWith {};
 if (is3DEN) exitWith {};
-GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
+
+private _fnc_clearControls = {
+    params ["_variable"];
+    private _delete = false;
+    private _data = uiNamespace getVariable _variable;
+    {
+        if (isNull _x) then {
+            _delete = true;
+        } else {
+            _x ctrlSetFade 1;
+            _x ctrlCommit 0;
+        };
+    } forEach _data;
+    if (_delete) then {
+        uiNamespace setVariable [_variable, _data - [controlNull]];
+    };
+};
+
 private _displayGame = findDisplay 46;
 private _displayEGSpectator = findDisplay 60492;
 private _displayCurator = findDisplay 312;
 
-{
-    _x ctrlSetFade 1;
-    _x ctrlCommit 0;
-} count GVAR(debug_drawRectCacheGame);
+QGVAR(debug_drawRectCacheGame) call _fnc_clearControls;
+QGVAR(debug_drawRectCacheCurator) call _fnc_clearControls;
+QGVAR(debug_drawRectCacheEGSpectator) call _fnc_clearControls;
 
-{
-    _x ctrlSetFade 1;
-    _x ctrlCommit 0;
-} count GVAR(debug_drawRectCacheEGSpectator);
-{
-    _x ctrlSetFade 1;
-    _x ctrlCommit 0;
-} count GVAR(debug_drawRectCacheCurator);
+private _gameCache = uiNamespace getvariable [QGVAR(debug_drawRectCacheGame), []];
+private _gameInUse = [];
+
+private _curatorCache = uiNamespace getvariable [QGVAR(debug_drawRectCacheCurator), []];
+private _curatorInUse = [];
+
+private _spectatorCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheEGSpectator), []];
+private _spectatorInUse = [];
 
 private _fnc_getEyePos = {
     if (_this isEqualType objNull) then {
@@ -47,32 +63,32 @@ private _fnc_getEyePos = {
 private _fnc_getRect = {
     private _control = controlNull;
     if (!isNull _displayCurator) exitWith {
-        if (GVAR(debug_drawRectCacheCurator) isEqualTo []) then {
+        if (_curatorCache isEqualTo []) then {
             _control = _displayCurator ctrlCreate [ "RscStructuredText", -1 ];
             _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
-            _control = GVAR(debug_drawRectCacheCurator) deleteAt 0;
+            _control = _curatorCache deleteAt 0;
         };
-        GVAR(debug_drawRectInUseCurator) pushback _control;
+        _curatorInUse pushback _control;
         _control
     };
     if (!isNull _displayEGSpectator) exitWith {
-        if (GVAR(debug_drawRectCacheEGSpectator) isEqualTo []) then {
+        if (_spectatorCache isEqualTo []) then {
             _control = _displayEGSpectator ctrlCreate [ "RscStructuredText", -1 ];
             _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
         } else {
-            _control = GVAR(debug_drawRectCacheEGSpectator) deleteAt 0;
+            _control = _spectatorCache deleteAt 0;
         };
-        GVAR(debug_drawRectInUseEGSpectator) pushback _control;
+        _spectatorInUse pushback _control;
         _control
     };
-    if (GVAR(debug_drawRectCacheGame) isEqualTo []) then {
+    if (_gameCache isEqualTo []) then {
         _control = _displayGame ctrlCreate [ "RscStructuredText", -1 ];
         _control ctrlSetBackgroundColor [0, 0, 0, 0.05];
     } else {
-        _control = GVAR(debug_drawRectCacheGame) deleteAt 0;
+        _control = _gameCache deleteAt 0;
     };
-    GVAR(debug_drawRectInUseGame) pushback _control;
+    _gameInUse pushback _control;
     _control
 };
 
@@ -90,7 +106,7 @@ private _fnc_debug_drawRect = {
             _str = str _x;
         };
         _text = _text + format [_str, GVAR(debug_TextFactor) * 1, GVAR(debug_TextFactor) * 1.5];
-    } count _textData;
+    } forEach _textData;
 
     _control ctrlSetStructuredText parseText _text;
 
@@ -100,6 +116,7 @@ private _fnc_debug_drawRect = {
     _control ctrlSetPosition [(_pos2D select 0) - _w/2, (_pos2D select 1) - _h, _w, _h];
     _control ctrlSetFade 0;
     _control ctrlCommit 0;
+
 };
 
 {
@@ -113,7 +130,7 @@ private _fnc_debug_drawRect = {
             {
                 private _pos2 = _x call CBA_fnc_getPos;
                 drawLine3D [_headPos, _pos2, [1, 1, 1, 0.5]];
-            } count (units _x);
+            } forEach (units _unit);
             _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
@@ -150,14 +167,14 @@ private _fnc_debug_drawRect = {
 
         _textData append [
             "Behaviour: ", behaviour _unit, "<br/>",
-            "    Current Task: ", _unit getVariable [QEGVAR(danger,currentTask), "None"], "<br/>"
+            "    Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
         ];
         if (_unit == leader _unit) then {
-            private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
+            private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {((side _unit) isNotEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
-                "    Current Tactic: ", group _unit getVariable [QEGVAR(danger,tacticsTask), "None"], "<br/>",
+                "    Current Tactic: ", group _unit getVariable [QGVAR(currentTactic), "None"], "<br/>",
                 "    Known enemies: ", _targetCount, "<br/>",
-                "    Group memory: ", count (group _unit getVariable [QEGVAR(danger,groupMemory), []]), "<br/>"
+                "    Group memory: ", count (group _unit getVariable [QGVAR(groupMemory), []]), "<br/>"
             ];
         };
         _textData append [
@@ -169,32 +186,27 @@ private _fnc_debug_drawRect = {
 
         _textData append _targetKnowledge;
 
-        //private _spotDistance =  round ((_unit skillFinal "spotDistance") *100)/100;
-        //private _spotTime = round ((_unit skillFinal "spotTime") *100)/100;
-        //private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {!((side _unit) isEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
 
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",
             "Morale: ", morale _unit, "<br/>"
-            //"SpotDistance: ", _spotDistance, "<br/>",
-            //"SpotTime: ", _spotTime, "<br/>",
         ];
         [_headPos, _textData] call _fnc_debug_drawRect;
 
         if (GVAR(debug_RenderExpectedDestination)) then {
-            (expectedDestination _x) params ["_pos", "_planingMode", "_forceReplan"];
+            (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
             drawLine3D [_headPos, _pos, [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
     };
-    false;
-} count (allUnits select {!(isPlayer _x)});
+} forEach (allUnits select {!(isPlayer _x)});
 
-GVAR(debug_drawRectCacheGame) = GVAR(debug_drawRectInUseGame);
-GVAR(debug_drawRectInUseGame) = [];
+_gameCache append _gameInUse;
 
-GVAR(debug_drawRectCacheEGSpectator) = GVAR(debug_drawRectInUseEGSpectator);
-GVAR(debug_drawRectInUseEGSpectator) = [];
+_spectatorCache append _spectatorInUse;
 
-GVAR(debug_drawRectCacheCurator) = GVAR(debug_drawRectInUseCurator);
-GVAR(debug_drawRectInUseCurator) = [];
+_curatorCache append _curatorInUse;
+
+uiNamespace setVariable [QGVAR(debug_drawRectCacheGame), _gameCache];
+uiNamespace setVariable [QGVAR(debug_drawRectCacheEGSpectator), _spectatorCache];
+uiNamespace setVariable [QGVAR(debug_drawRectCacheCurator), _curatorCache];

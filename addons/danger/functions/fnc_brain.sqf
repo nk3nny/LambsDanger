@@ -77,42 +77,50 @@ _causeArray params ["_dangerCause", "_dangerPos", "", "_dangerCausedBy"]; // "_d
 // debug variable
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
+// add selected cause to return array
+_return pushBack _causeArray;
+
+// assess actions
+if (_dangerCause isEqualTo DANGER_ASSESS) exitWith {
+    _return set [ACTION_ASSESS, true];
+    _return
+};
+
 // immediate actions
-if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) then {
+if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) exitWith {
     _return set [ACTION_IMMEDIATE, true];
+    _return
+};
+
+// engage actions
+if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) exitWith {
+
+    // gesture + share information
+    if (_dangerCause isEqualTo DANGER_ENEMYNEAR && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
+        [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
+        [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
+        [_unit, _dangerCausedBy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
+    };
+
+    // return
+    _return set [ACTION_ENGAGE, (side _group) isNotEqualTo side (group _dangerCausedBy)];
+    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1 && {(typeOf _dangerCausedBy) isNotEqualTo "SuppressTarget"}];    // hide if target unknown!
+    _return
 };
 
 // hide actions
 private _panic = RND(1 - GVAR(panicChance)) && {getSuppression _unit > 0.9};
-if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY] || {_panic}) then {
-    _return set [ACTION_HIDE, true];
+if (_panic || {_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY, DANGER_SCREAM]}) exitWith {
 
     // panic function
     if (_panic) then {
-        [_unit] call FUNC(doPanic);
+        [_unit] call EFUNC(main,doPanic);
     };
-};
 
-// engage actions   // should check all friendly sides?
-if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) then {
-    _return set [ACTION_ENGAGE, !((side _group) isEqualTo side (group _dangerCausedBy))];
-    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1 && {!(typeOf _dangerCausedBy isEqualTo "SuppressTarget")}];    // hide if target unknown!
+    // return
+    _return set [ACTION_HIDE, true];
+    _return
 };
-
-// assess actions
-if (_dangerCause in [DANGER_ASSESS, DANGER_SCREAM]) then {
-    _return set [ACTION_ASSESS, true];
-};
-
-// gesture + share information
-if (RND(0.75) && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
-    [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
-    [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
-    [_unit, _dangerCausedBy, GVAR(radioShout), true] call FUNC(shareInformation);
-};
-
-// modify return
-_return pushBack _causeArray;
 
 // end
 _return

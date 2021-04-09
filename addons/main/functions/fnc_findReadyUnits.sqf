@@ -35,7 +35,7 @@ _units = _units select {
     && {isNull objectParent _x}
     && {_x checkAIFeature "PATH"}
     && {_x checkAIFeature "MOVE"}
-    && {_x call EFUNC(main,isAlive)}
+    && {_x call FUNC(isAlive)}
     && {!(_x getVariable [QEGVAR(danger,forceMove), false])}
     && {!(currentCommand _x in ["GET IN", "ACTION", "HEAL"])}
 };

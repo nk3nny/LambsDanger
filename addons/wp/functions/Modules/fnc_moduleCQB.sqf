@@ -79,7 +79,7 @@ switch (_mode) do {
                             _target = getPos _target;
                         };
                         [_group, _target, _radius, _cycle, nil, false] remoteExec [QFUNC(taskCQB), leader _group];
-                        if !(_logic isEqualTo _target) then {
+                        if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
                     }, {

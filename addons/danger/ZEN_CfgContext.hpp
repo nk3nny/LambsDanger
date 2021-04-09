@@ -1,7 +1,7 @@
 class ZEN_context_menu_actions {
     class ADDON {
         displayName = CSTRING(Context_Main_displayName);
-        condition = QUOTE(!((_groups isEqualTo []) && (_objects isEqualTo [])));
+        condition = QUOTE((_groups isNotEqualTo []) || (_objects isNotEqualTo []));
         priority = 5;
         class EnableAI {
             displayName = CSTRING(Context_EnableAI);

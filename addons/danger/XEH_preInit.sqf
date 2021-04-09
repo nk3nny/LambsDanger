@@ -29,9 +29,25 @@ if (isNil QGVAR(dangerUntil)) then {
     GVAR(dangerUntil) = 4;
 };
 
-// FSM setting ~ range to search for hide and cover
-if (isNil QGVAR(searchForHide)) then {
-    GVAR(searchForHide) = 4;
-};
+// EH handling reinforcement and combat mode
+[QEGVAR(main,OnInformationShared), {
+    params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
+
+    {
+        private _leader = leader _x;
+        if (local _leader) then {
+            // reinforce
+            if (!isNull _target && { _x getVariable [QGVAR(enableGroupReinforce), false] } && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }) then {
+                [_leader, [getPosASL _unit, (_leader targetKnowledge _target) select 6] select (_leader knowsAbout _target > 1.5)] call FUNC(tacticsReinforce);
+            };
+
+            // set combatMode
+            if !(_leader distance2D _unit > (EGVAR(main,combatShareRange)) && {_leader getVariable [QGVAR(disableAI), false]}) then {
+                _x setBehaviour "COMBAT";
+                _x setFormDir (_leader getDir _unit);
+            };
+        };
+    } forEach _groups;
+}] call CBA_fnc_addEventHandler;
 
 ADDON = true;

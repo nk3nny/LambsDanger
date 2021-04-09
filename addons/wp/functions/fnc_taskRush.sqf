@@ -50,7 +50,7 @@ private _fnc_rushOrders = {
     // Tank -- hide or ready AT
     if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
-            if !(secondaryWeapon _x isEqualTo "") then {
+            if ((secondaryWeapon _x) isNotEqualTo "") then {
                 _x setUnitPos "MIDDLE";
                 _x selectWeapon (secondaryWeapon _x);
             } else {
@@ -87,7 +87,7 @@ _group enableAttack false;
 } count (units _group);
 
 // set group task
-_group setVariable [QEGVAR(danger,tacticsTask), "taskRush", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "taskRush", EGVAR(main,debug_functions)];
 
 // Hunting loop
 waitUntil {

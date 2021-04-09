@@ -24,13 +24,13 @@ _unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosASL _unit, _timeo
 
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
-    _unit setVariable [QGVAR(currentTask), "Incapacitated", EGVAR(main,debug_functions)];
+    _unit setVariable [QEGVAR(main,currentTask), "Incapacitated", EGVAR(main,debug_functions)];
     _timeout + 1
 };
 
 // fleeing
 if (fleeing _unit) exitWith {
-    [_unit] call FUNC(doFleeing);
+    [_unit] call EFUNC(main,doFleeing);
     _timeout
 };
 
@@ -52,13 +52,8 @@ if (getSuppression _unit > 0) then {
 
 // attack speed
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
-
-    // attacking
-    _unit setVariable [QGVAR(currentTask), "Attacking", EGVAR(main,debug_functions)];
-
-    // tactical movement speed
-    [_unit, getAttackTarget _unit] call FUNC(assaultSpeed);
-
+    _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];
+    [_unit, getAttackTarget _unit] call EFUNC(main,doAssaultSpeed);
 };
 
 // end

@@ -28,12 +28,12 @@ private _group = group _unit;
         params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 25
+    _delay
 ] call CBA_fnc_waitAndExecute;
 
 // unit alive and allowed to move
@@ -50,8 +50,8 @@ if (count _units > 2) then {
     if (
         !(GVAR(disableAIAutonomousManoeuvres))
         && {((expectedDestination _unit) select 1) isEqualTo "DoNotPlan"}
-        && {!((speedMode _unit) isEqualTo "FULL")}
-        && {_group getVariable [QGVAR(groupMemory), []] isEqualTo []}
+        && {(speedMode _unit) isNotEqualTo "FULL"}
+        && {_group getVariable [QEGVAR(main,groupMemory), []] isEqualTo []}
     ) then {
         private _deadOrSuppressed = _units findIf {
             getSuppression _x > 0.95
@@ -60,6 +60,9 @@ if (count _units > 2) then {
             || {CBA_missionTime - (_x getVariable ["ace_medical_ai_lastHit", -999999]) < 10}
         };
         if (_deadOrSuppressed != -1) then {
+
+            // set group task
+            _group setVariable [QEGVAR(main,currentTactic), "Holding!", EGVAR(main,debug_functions)];
 
             // set behaviour
             _group setBehaviour "COMBAT";
@@ -72,7 +75,7 @@ if (count _units > 2) then {
 
             // execute hiding
             {
-                [_x, _pos, nil, _buildings] call FUNC(doHide);
+                [_x, _pos, nil, _buildings] call EFUNC(main,doHide);
             } forEach (_units select {isNull objectParent _x});
 
             // debug

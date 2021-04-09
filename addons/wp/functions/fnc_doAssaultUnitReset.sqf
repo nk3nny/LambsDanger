@@ -30,14 +30,14 @@ _unit doFollow leader _unit;
 _unit enableAI "FSM";
 _unit enableAI "COVER";
 _unit enableAI "SUPPRESSION";
+_unit enableAI "TARGET";
 
 // double check retreat
 if (!_retreat && {animationState _unit in ["apanpknlmsprsnonwnondf", "apanpercmsprsnonWnondf"]}) then {_retreat = true};
 
 // retreat
 if (_retreat) then {
-    _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select (primaryWeapon _unit isEqualTo ""));
-    _unit enableAI "TARGET";
+    _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select ((primaryWeapon _unit) isEqualTo ""));
     _unit enableAI "AUTOTARGET";
     _unit doWatch ObjNull;
 };

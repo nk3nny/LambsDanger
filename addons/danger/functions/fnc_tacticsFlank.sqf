@@ -37,7 +37,7 @@ private _group = group _unit;
         params [["_group", grpNull], ["_speedMode", "NORMAL"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group setVariable [QGVAR(tacticsTask), nil];
+            _group setVariable [QEGVAR(main,currentTactic), nil];
             _group setSpeedMode _speedMode;
         };
     },
@@ -79,11 +79,11 @@ if (_overwatch isEqualTo []) then {
 };
 
 // set tasks
-_unit setVariable [QGVAR(currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Tactics Flank", EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,currentTask), "Tactics Flank", EGVAR(main,debug_functions)];
 
 // set group task
-_group setVariable [QGVAR(tacticsTask), "Flanking", EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_functions)];
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
@@ -100,7 +100,7 @@ _units doMove _overwatch;
 [_unit, _overwatch] call EFUNC(main,doSmoke);
 
 // function
-[_cycle, _units, _vehicles, _pos, _overwatch] call FUNC(doGroupFlank);
+[_cycle, _units, _vehicles, _pos, _overwatch] call EFUNC(main,doGroupFlank);
 
 // set speedmode
 _unit setSpeedMode "FULL";

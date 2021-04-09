@@ -6,7 +6,7 @@ DFUNC(ArtilleryScan) = {
     };
     {
         _x call FUNC(taskArtilleryRegister);
-    } foreach (vehicles select { getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "artilleryScanner") > 0 });
+    } foreach (vehicles select { getNumber (configOf _x >> "artilleryScanner") > 0 });
     GVAR(autoArtilleryRunning) = true;
     [{call FUNC(ArtilleryScan);}, [], 120] call CBA_fnc_waitAndExecute;
 };

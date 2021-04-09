@@ -81,7 +81,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 
                     // debug
                     if (EGVAR(main,debug_functions)) then {
-                        private _m = [_target, ["%1 %3 (check round %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(main,dotMarker);
+                        private _m = [_target, ["%1 %3 (check round %2)", getText (configOf _gun >> "displayName"), _i, groupID (group _gun)], "Color4_FD_F", "hd_destroy"] call EFUNC(main,dotMarker);
                         _mlist pushBack _m;
                     };
                     // waituntil
@@ -118,7 +118,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 
             // debug
             if (EGVAR(main,debug_functions)) then {
-                private _m = [_target, ["%1 %3 (main salvo %2)", getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(main,dotMarker);
+                private _m = [_target, ["%1 %3 (main salvo %2)", getText (configOf _gun >> "displayName"), _i, groupID (group _gun)], "colorIndependent", "hd_destroy"] call EFUNC(main,dotMarker);
                 _mlist pushBack _m;
             };
 
@@ -133,11 +133,11 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 
     // debug
     if (EGVAR(main,debug_functions)) then {
-        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configFile >> "CfgVehicles" >> (typeOf _gun) >> "displayName"), _rounds, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
+        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configOf _gun >> "displayName"), _rounds, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
     };
 
     // clean markers!
-    if !(_mlist isEqualTo []) then {
+    if (_mlist isNotEqualTo []) then {
         [
             {
                 {deleteMarker _x; true} count _this
