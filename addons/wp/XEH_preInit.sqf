@@ -39,4 +39,42 @@ if (isServer) then {
     _this spawn FUNC(doArtillery);
 }] call CBA_fnc_addEventhandler;
 
+// Remote Events for Tasks
+[QGVAR(taskAssault), {
+    _this spawn FUNC(taskArtillery);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCamp), {
+    _this call FUNC(taskCamp);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCQB), {
+    _this spawn FUNC(taskCQB);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCreep), {
+    _this spawn FUNC(taskCreep);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskGarrison), {
+    _this call FUNC(taskGarrison);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskHunt), {
+    _this spawn FUNC(taskHunt);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskPatrol), {
+    _this call FUNC(taskPatrol);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskReset), {
+    _this call FUNC(taskReset);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskRush), {
+    _this spawn FUNC(taskRush);
+}] call CBA_fnc_addEventhandler;
+
+
 ADDON = true;
