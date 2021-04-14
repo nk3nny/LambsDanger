@@ -22,6 +22,6 @@
  * Public: No
 */
 
-params [["_code", {true}, [{}]]];
+params [["_code", {false}, [{}]]];
 
 GVAR(shareHandlers) pushBack _code;
