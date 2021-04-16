@@ -47,7 +47,7 @@ switch (_mode) do {
                             _deleteAfterStartup = true;
                             [objNull, format [LLSTRING(SettingIsOnlyForLocalGroups), LLSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
-                        [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
+                        [QGVAR(taskAssault), [_group, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false], leader _group] call CBA_fnc_targetEvent;
 
                         if (_deleteAfterStartup) then {
                             deleteVehicle _logic;
@@ -78,7 +78,7 @@ switch (_mode) do {
                         if !(local _group) then {
                             _target = getPos _target;
                         };
-                        [_group, _target, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _group];
+                        [QGVAR(taskAssault), [_group, _target, _retreat, _threshold, _cycle, false], leader _group] call CBA_fnc_targetEvent;
                         if (_target isNotEqualTo _logic) then {
                             deleteVehicle _logic;
                         };
@@ -100,7 +100,7 @@ switch (_mode) do {
             private _threshold = _logic getVariable [QGVAR(DistanceThreshold), TASK_ASSAULT_DISTANCETHRESHOLD];
             private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_ASSAULT_CYCLETIME];
             {
-                [_x, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false] remoteExec [QFUNC(taskAssault), leader _x];
+                [QGVAR(taskAssault), [_x, [_logic, getPos _logic] select _deleteAfterStartup, _retreat, _threshold, _cycle, false], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             if (_deleteAfterStartup) then {
                 deleteVehicle _logic;

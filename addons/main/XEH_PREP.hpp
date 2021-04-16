@@ -1,3 +1,4 @@
+PREP(addShareInformationHandler);
 PREP(doAnimation);
 PREP(doCallout);
 PREP(doGesture);

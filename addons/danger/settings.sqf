@@ -107,7 +107,7 @@ private _curCat = LSTRING(Settings_GeneralCat);
     "SLIDER",
     [LSTRING(Settings_PanicChance), LSTRING(Settings_PanicChance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [0, 1, 0.1, 0],
+    [0, 1, 0.1, 2, true],
     1
 ] call CBA_fnc_addSetting;
 

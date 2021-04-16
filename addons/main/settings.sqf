@@ -46,7 +46,7 @@ private _curCat = LSTRING(Settings_MainCat);
     "SLIDER",
     [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)], // TODO(nkenny): Add Stringtable Entries!
     [COMPONENT_NAME, _curCat],
-    [0, 1, 0.1, 0],
+    [0, 1, 0.1, 2, true],
     1
 ] call CBA_fnc_addSetting;
 

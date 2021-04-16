@@ -42,7 +42,7 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint"];
                         private _group = _groups select _groupIndex;
-                        [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
+                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -70,7 +70,7 @@ switch (_mode) do {
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
                         private _target = _targets select _targetIndex;
-                        [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _group];
+                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint], leader _group] call CBA_fnc_targetEvent;
                         if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
@@ -92,7 +92,7 @@ switch (_mode) do {
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), TASK_PATROL_MOVEWAYPOINTS];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];
             {
-                [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint] remoteExecCall [QFUNC(taskPatrol), leader _x];
+                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;
         };
