@@ -37,16 +37,23 @@ _group setVariable [QGVAR(contact), time + 600];
 _unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
+// get max data range ~ reduced for forests or cities - nkenny
+private _pos = getPos _unit;
+private _houses = _pos getEnvSoundController "houses";
+private _trees = _pos getEnvSoundController "trees";
+private _forest = _pos getEnvSoundController "forest";
+private _range = (850 * (1 - _houses - _trees - _forest * 0.5)) max 120;
+
 // gather data
 private _unitCount = count units _unit;
-private _enemies = (_unit targets [true, 800]) select {_unit knowsAbout _x > 1};
+private _enemies = (_unit targets [true, _range]) select {_unit knowsAbout _x > 1};
 private _plan = [];
 
 // leader assess EH
 [QGVAR(OnAssess), [_unit, _group, _enemies]] call EFUNC(main,eventCallback);
 
 // sort plans
-private _pos = [];
+_pos = [];
 if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
 
     // get modes

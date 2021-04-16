@@ -32,6 +32,7 @@ private _group = group _unit;
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
+            _group enableIRLasers _isIRLaserOn;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x doFollow leader _x;
@@ -39,7 +40,7 @@ private _group = group _unit;
             } foreach (units _group);
         };
     },
-    [_group, attackEnabled _group],
+    [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit)],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -87,6 +88,7 @@ if (_unit distance2D _target > 15) then {
 
 // ready group
 _group setFormDir (_unit getDir _target);
+_group enableIRLasers true;
 _units doWatch _target;
 
 // execute function

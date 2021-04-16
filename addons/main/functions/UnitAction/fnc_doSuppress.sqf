@@ -27,10 +27,6 @@ if (
     || {isPlayer (leader _unit) && {GVAR(disablePlayerGroupSuppression)}}
 ) exitWith {false};
 
-// check for friendlies
-private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
-if (_friendlies isNotEqualTo []) exitWith {false};
-
 // max range pos
 private _distance = (_eyePos vectorDistance _pos) min 280;
 _pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
@@ -41,6 +37,10 @@ if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // final range check
 if (_eyePos vectorDistance _pos < GVAR(minSuppressionRange)) exitWith {false};
+
+// check for friendlies
+private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
+if (_friendlies isNotEqualTo []) exitWith {false};
 
 // Callout!
 if (RND(0.4)) then {

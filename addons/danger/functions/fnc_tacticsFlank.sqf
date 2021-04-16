@@ -34,11 +34,12 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params [["_group", grpNull], ["_speedMode", "NORMAL"]];
+        params [["_group", grpNull], ["_speedMode", "NORMAL"], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group setSpeedMode _speedMode;
+            _group setFormation _formation;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setUnitPos "AUTO";
@@ -46,7 +47,7 @@ private _group = group _unit;
             } foreach (units _group);
         };
     },
-    [_group, speedMode _unit],
+    [_group, speedMode _unit, formation _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
@@ -91,19 +92,26 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 // leader callout
 [_unit, "combat", "flank", 125] call EFUNC(main,doCallout);
 
+// set speedmode
+_unit setSpeedMode "FULL";
+
+// prevent units from being mounted!
+(units _unit) allowGetIn false;
+
 // ready group
 _group setFormDir (_unit getDir _target);
-_units allowGetIn false;
-_units doMove _overwatch;
+_group setFormation "FILE";
+_units commandMove _overwatch;
+{
+    _x setUnitPos "MIDDLE";
+    _x setVariable [QGVAR(forceMove), true];
+} foreach _units;
 
 // leader smoke ~ deploy concealment to enable movement
 [_unit, _overwatch] call EFUNC(main,doSmoke);
 
 // function
-[_cycle, _units, _vehicles, _pos, _overwatch] call EFUNC(main,doGroupFlank);
-
-// set speedmode
-_unit setSpeedMode "FULL";
+[{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

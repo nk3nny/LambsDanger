@@ -22,12 +22,10 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 // find target
 _target = _target call CBA_fnc_getPos;
 
-// check target distance
+// exit with flank if visible distance is far actual target (within one grid : 71 * 71 meters)
 private _targetASL = ATLtoASL _target;
-
-// adjust pos
-private _vis = lineIntersectsSurfaces [(eyePos _unit) vectorAdd [0, 0, 15], _targetASL vectorAdd [0, 0, 1.2], _unit, objNull, true, 1, "GEOM", "VIEW"];
-if (_vis isNotEqualTo [] && {((_vis select 0) select 0) vectorDistance _targetASL > 120}) exitWith {
+private _vis = lineIntersectsSurfaces [(eyePos _unit) vectorAdd [0, 0, 12], _targetASL vectorAdd [0, 0, 2.5], _unit, objNull, true, 1, "FIRE", "GEOM"];
+if (_vis isNotEqualTo [] && {((_vis select 0) select 0) vectorDistanceSqr _targetASL > 5041}) exitWith {
     [_unit, _target] call FUNC(tacticsFlank);
 };
 
