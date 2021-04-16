@@ -27,7 +27,7 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params ["_group", "_enableAttack"];
+        params [["_group", grpNull], ["_enableAttack", true], ["_isIRLaserOn", false]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
