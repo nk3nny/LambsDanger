@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: mjc4wilton
  * Adds a custom handler to be called whenever the AI attempt to share information.
