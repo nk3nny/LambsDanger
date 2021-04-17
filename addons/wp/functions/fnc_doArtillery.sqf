@@ -151,7 +151,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 if (_markerList isNotEqualTo []) then {
     [
         {
-            {deleteMarker _x; true} count _this
+            {deleteMarker _x;} forEach _this;
         }, _markerList, 60
     ] call CBA_fnc_waitAndExecute;
 };
