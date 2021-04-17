@@ -15,7 +15,7 @@
  * none
  *
  * Example:
- * [side bob, getPos angryJoe, bob] spawn lambs_wp_fnc_taskArtillery;
+ * [side bob, getPos angryJoe, bob] call lambs_wp_fnc_taskArtillery;
  *
  * Public: Yes
 */
