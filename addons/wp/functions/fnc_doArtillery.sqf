@@ -72,7 +72,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
 
     if !(_skipCheckrounds) then {
         // check rounds
-        for "_check" from 1 to (1 + random 2) do {
+        for "_check" from 1 to (round (1 + random 1)) do {
 
             // randomize target location
             private _target = _center getPos [(100 + (random _accuracy * 2)) / _check, _direction + 45 - random 90];
@@ -83,7 +83,10 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
             if (_target inRangeOfArtillery [[_gun], _ammo]) then {
 
                 // check rounds barrage
-                _gun commandArtilleryFire [_target, _ammo, 1 + random 2];
+                for "_i" from 1 to (round (1 + random 1)) do {
+                    _gun commandArtilleryFire [_target, _ammo, 1];
+                    waitUntil {unitReady _gun};
+                };
 
                 // debug
                 if (EGVAR(main,debug_functions)) then {
