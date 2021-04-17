@@ -20,7 +20,7 @@ params ["_unit"];
 private _timeout = time + 2;
 
 // debug variable
-_unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosASL _unit, _timeout, assignedTarget _unit], EGVAR(main,debug_functions)];
+_unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosWorld _unit, _timeout, assignedTarget _unit], EGVAR(main,debug_functions)];
 
 // unconscious or dead
 if !(_unit call EFUNC(main,isAlive)) exitWith {
@@ -39,21 +39,11 @@ if (fleeing _unit) exitWith {
     _timeout
 };
 
-// suppression -- high go prone
-if (getSuppression _unit > 0.9) exitWith {
-    _unit setUnitPosWeak "DOWN";
-    _timeout
-};
-
-// mid -- go crouched
-if (getSuppression _unit > 0) then {
-    _unit setUnitPosWeak "MIDDLE";
-};
-
-// attack speed
+// attack speed and stance
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
     _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];
     [_unit, getAttackTarget _unit] call EFUNC(main,doAssaultSpeed);
+    _unit setUnitPosWeak (["MIDDLE", "PRONE"] select (getSuppression _unit > 0.9));
 };
 
 // end

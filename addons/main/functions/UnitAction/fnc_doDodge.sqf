@@ -66,7 +66,6 @@ private _anim = call {
         [["FastL", "FastLF"], ["TactL", "TactLF"]] select _suppression;
     };
 
-
     // move right
     if (_dir > 250) exitWith {
         [["FastR", "FastRF"], ["TactR", "TactRF"]] select _suppression;
