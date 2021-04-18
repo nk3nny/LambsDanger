@@ -69,7 +69,7 @@ if (_count > 2) then {
     [{_this call EFUNC(main,doGesture)}, [_unit, "gestureFreeze", true], 0.3] call CBA_fnc_waitAndExecute;
 
     // supporting unit
-    private _unitCaller = _units select (count _units - 1);
+    private _unitCaller = _units select (_count - 1);
 
     // point
     [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gesturePoint"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
