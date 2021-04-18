@@ -11,6 +11,7 @@ PREP(findCover);
 PREP(findNearbyFriendlies);
 PREP(findOverwatch);
 PREP(findReadyUnits);
+PREP(findReadyVehicles);
 
 PREP(initModules);
 

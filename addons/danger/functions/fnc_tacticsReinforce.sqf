@@ -50,6 +50,8 @@ _group setBehaviour "AWARE";    // more tractacle speed
         params [["_group", grpNull, [grpNull]]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
+            private _leader = leader _group;
+            if !(isNull objectParent _leader) then {(vehicle _leader) setUnloadInCombat [true, false];};
         };
     },
     _group,
@@ -76,6 +78,7 @@ if (_units isEqualTo []) then {
 private _distance = _unit distance2D _target;
 if (_distance > 500) then {
     _unit setFormation "COLUMN";
+    if !(isNull objectParent _unit) then {(vehicle _unit) setUnloadInCombat [false, false];};
 } else {
     if (_distance > 200) then {
         _unit setFormation selectRandom ["WEDGE", "VEE", "LINE"];
@@ -110,9 +113,8 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
         _group move _target;
     },
     [_group, _target],
-    2 + random 3
+    5
 ] call CBA_fnc_waitAndExecute;
-// _units doMove _target;  ~ uncommented for a test period before release. We allow overriding WP as Reinforcement feature is already invasive, AND enabled by mission makers - nkenny
 
 // debug
 if (EGVAR(main,debug_functions)) then {

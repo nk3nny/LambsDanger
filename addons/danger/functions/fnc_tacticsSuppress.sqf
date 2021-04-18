@@ -22,6 +22,15 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 // find target
 _target = _target call CBA_fnc_getPos;
 
+// exit with flank if visible distance is 71+ meters from actual target
+private _targetASL = ATLtoASL _target;
+private _vis = lineIntersectsSurfaces [(getPosWorld _unit) vectorAdd [0, 0, 3], _targetASL vectorAdd [0, 0, 3], _unit, objNull, true, 3, "FIRE", "GEOM"];
+private _index = _vis findIf {(_x select 2) isKindOf "Building"};
+
+if (_index isNotEqualTo -1 && {((_vis select _index) select 0) vectorDistanceSqr _targetASL > 5041}) exitWith {
+    [_unit, _target] call FUNC(tacticsFlank);
+};
+
 // sort cycles
 private _cycle = selectRandom [2, 3, 3, 4];
 
@@ -42,14 +51,6 @@ private _cycle = selectRandom [2, 3, 3, 4];
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
-// clear attacks!
-{
-    if (currentCommand _x isEqualTo "ATTACK") then {
-        _x forgetTarget (assignedTarget _x);
-    };
-    _x setUnitPosWeak "MIDDLE";
-} foreach units _unit;
-
 // find units
 if (_units isEqualTo []) then {
     _units = _unit call EFUNC(main,findReadyUnits);
@@ -57,18 +58,10 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
-private _vehicles = (units _unit) select {
-    (_unit distance2D _x) < 350
-    && { canFire _x }
-    && { !(isNull objectParent _x) }
-    && { isTouchingGround vehicle _x }
-    && { canFire vehicle _x };
-};
-_vehicles apply { vehicle _x };
-_vehicles arrayIntersect _vehicles;
+private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
-private _pos = [_target, 20, true, true] call EFUNC(main,findBuildings);
+private _pos = [_target, 20, true, false] call EFUNC(main,findBuildings);
 _pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
 _pos pushBack _target;
 

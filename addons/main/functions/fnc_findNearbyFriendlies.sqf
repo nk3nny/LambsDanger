@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: side being checked <OBJECT>
- * 1: Position checked  <ARRAY>
+ * 1: Position checked  <ARRAY>, <OBJECT>
  * 2: radius being checked within <NUMBER>
  *
  * Return Value:
@@ -18,18 +18,11 @@
 */
 params [
     ["_unit", objNull, [objNull]],
-    ["_pos", [0, 0, 0], [[]]],
+    ["_pos", [0, 0, 0], [[], objNull]],
     ["_distance", 5, [0]]
 ];
-if (_distance isEqualTo 0) exitWith {[]};
-private _ignoredSides = (side _unit) call BIS_fnc_enemySides;
-_ignoredSides append [sideUnknown, sideEmpty, sideEnemy, sideLogic, sideFriendly, sideAmbientLife];
-(_pos nearEntities ["CAManBase", _distance*1.5]) select {
-    // Exit if side
-    if ((side _x) in _ignoredSides) then {
-        false
-    } else {
-        private _targetPos = (_unit targetKnowledge _x) select 6; // Dont use Actual position but use AI Estimated position
-        (_x distance2D _targetPos) < _distance
-    };
+private _side = side _unit;
+private _friendSides = [west, east, independent, civilian] select {_x getFriend _side > 0.6};
+(_pos nearEntities ["CAManBase", _distance]) select {
+    (side _x) in _friendSides
 };
