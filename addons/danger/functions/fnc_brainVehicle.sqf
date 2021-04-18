@@ -23,11 +23,11 @@ private _timeout = time + 1;
 // commander
 private _vehicle = vehicle _unit;
 if !((effectiveCommander _vehicle) isEqualTo _unit && {_unit call EFUNC(main,isAlive)}) exitWith {
-    [_timeout, -2, getPosASL _vehicle, time + GVAR(dangerUntil), objNull]
+    [_timeout, -2, getPosWorld _vehicle, time + GVAR(dangerUntil), objNull]
 };
 
 // no queue
-if (_queue isEqualTo []) then {_queue pushBack [10, getPosASL _vehicle, time + GVAR(dangerUntil), _unit findNearestEnemy _unit];};
+if (_queue isEqualTo []) then {_queue pushBack [10, getPosWorld _vehicle, time + GVAR(dangerUntil), assignedTarget _unit];};
 
 // modify priorities ~ consider adding vehicle specific changes!
 private _priorities = _unit call FUNC(brainAdjust);

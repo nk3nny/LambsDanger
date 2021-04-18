@@ -27,7 +27,7 @@
 params ["_unit", ["_type", -1], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 3;
+private _timeout = time + 0.5;
 
 // ACE3
 _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];
@@ -39,7 +39,6 @@ if (
     || {(weapons _unit) isEqualTo []}
     || {needReload _unit > 0.85}
 ) exitWith {
-    _unit forceSpeed 2;
     _timeout
 };
 
@@ -59,7 +58,7 @@ if (
     && {_target call EFUNC(main,isAlive)}
 ) exitWith {
     [_unit, _target] call EFUNC(main,doAssault);
-    _timeout + 2
+    _timeout + 4
 };
 
 // far, try to suppress
@@ -69,8 +68,8 @@ if (
     && {_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE]}
 ) exitWith {
     _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, random 1])] call EFUNC(main,doSuppress);
-    _timeout + 2
+    [_unit, ATLtoASL (_unit getHideFrom _target)] call EFUNC(main,doSuppress);
+    _timeout + 4
 };
 
 // end
