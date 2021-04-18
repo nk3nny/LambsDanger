@@ -57,6 +57,12 @@ private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT,
 private _artillery = _vehicle getVariable [QEGVAR(main,isArtillery), getNumber (configOf _vehicle >> "artilleryScanner") > 0];
 if (_artillery) exitWith {
     _vehicle setVariable [QEGVAR(main,isArtillery), true];
+
+    // enemies within 12-30m may cause crew to disembark!
+    if (_attack && {_dangerCausedBy distanceSqr _vehicle < (144 + random 324)} && {currentCommand _unit isEqualTo ""}) then {
+        (units _unit) orderGetIn false;
+        _unit setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
+    };
     [_timeout] + _causeArray
 };
 
@@ -69,7 +75,7 @@ if (_static) exitWith {
 
     // get out if enemy near
     if ((_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)) then {
-        [_unit] orderGetIn false;
+        (units _unit) orderGetIn false;
         _unit setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
     };
 
