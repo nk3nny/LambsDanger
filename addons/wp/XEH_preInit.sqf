@@ -20,7 +20,8 @@ if (isServer) then {
         private _artillerySelected = _artillery select {
             canFire _x
             && {unitReady _x}
-            && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
+            && {simulationEnabled _x}
+            && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
         };
         _artillerySelected = [_artillerySelected, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
         private _gun = _artillerySelected select 0;
