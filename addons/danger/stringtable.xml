@@ -37,7 +37,7 @@
             <Polish>Jednostka z włączonym radiem ma zwiększony zasięg komunikacji podczas przekazywania informacji\nTen efekt może być również osiągnięty, poprzez wyekwipowanie jednostki w plecak z radiem lub plecak kompatybilny z modem TFAR.</Polish>
             <Russian>Юнит с включенным радио будет иметь усиленную дальностью коммуникации при передачи информации\nЭтого эффекта также можно добиться, оснастив юнита ванильным  рюкзаком с радио  или радио с поддержкой TFAR-мода.</Russian>
         </Key>
-        <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_DisplayName">
+        <Key ID="STR_Lambs_Danger_Module_ConfigureGroupAI_DisplayName">
             <English>Configure Group AI</English>
             <German>Gruppen-KI einstellen</German>
             <Polish>Konfiguruj AI grupy</Polish>

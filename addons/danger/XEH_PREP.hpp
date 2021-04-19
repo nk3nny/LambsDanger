@@ -25,7 +25,7 @@ PREP(tacticsProfiles);
 PREP(tacticsReinforce);
 PREP(tacticsSuppress);
 
-SUBPREP(ZeusModules,moduleDisableGroupAI);
+SUBPREP(ZeusModules,moduleConfigureGroupAI);
 SUBPREP(ZeusModules,moduleDisableAI);
 SUBPREP(ZeusModules,moduleSetRadio);
 

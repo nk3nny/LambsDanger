@@ -53,15 +53,15 @@ class CfgVehicles {
         };
     };
 
-    class GVAR(DisableGroupAI) : Module_F {
-        _generalMacro = QGVAR(DisableGroupAI);
+    class GVAR(ConfigureGroupAI) : Module_F {
+        _generalMacro = QGVAR(ConfigureGroupAI);
         scope = 1;
         scopeCurator = 2;
-        displayName = CSTRING(Module_DisableGroupAI_DisplayName);
+        displayName = CSTRING(Module_ConfigureGroupAI_DisplayName);
         isGlobal = 0;
         category = "Lambs_Danger_Cat";
         icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
-        function = QFUNC(moduleDisableGroupAI);
+        function = QFUNC(moduleConfigureGroupAI);
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
