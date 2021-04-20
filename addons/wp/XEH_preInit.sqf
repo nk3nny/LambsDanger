@@ -42,7 +42,7 @@ if (isServer) then {
 
 // Remote Events for Tasks
 [QGVAR(taskAssault), {
-    _this spawn FUNC(taskArtillery);
+    _this spawn FUNC(taskAssault);
 }] call CBA_fnc_addEventhandler;
 
 [QGVAR(taskCamp), {
