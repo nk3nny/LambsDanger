@@ -23,6 +23,7 @@ if (isServer) then {
             && {simulationEnabled _x}
             && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
         };
+        if (_artillerySelected isEqualTo []) exitWith {};
         _artillerySelected = [_artillerySelected, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
         private _gun = _artillerySelected select 0;
         _artillery deleteAt (_artillery find _gun);
