@@ -32,6 +32,8 @@ SUBPREP(ZeusModules,moduleSetRadio);
 SUBPREP(ZEN,setDisableAI);
 SUBPREP(ZEN,setDisableGroupAI);
 SUBPREP(ZEN,setHasRadio);
+SUBPREP(ZEN,setReinforcement);
 SUBPREP(ZEN,showHasRadio);
+SUBPREP(ZEN,showReinforcement);
 SUBPREP(ZEN,showSetDisableAI);
 SUBPREP(ZEN,showSetDisableGroupAI);

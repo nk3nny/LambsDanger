@@ -237,6 +237,12 @@
             <Polish>Nie posiada radia</Polish>
             <Russian>Не имеет радио</Russian>
         </Key>
+        <Key ID="STR_Lambs_Danger_Context_EnableReinforcement">
+            <English>Enable Reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Context_DisableReinforcement">
+            <English>Disable Reinforcement</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableAI">
             <English>Disable AI</English>
             <German>Deaktiviere KI</German>
