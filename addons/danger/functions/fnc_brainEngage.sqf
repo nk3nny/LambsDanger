@@ -37,7 +37,7 @@ if (
     isNull _target
     || {_unit knowsAbout _target isEqualTo 0}
     || {(weapons _unit) isEqualTo []}
-    || {needReload _unit > 0.85}
+    || {needReload _unit > 0.8}
 ) exitWith {
     _timeout
 };
@@ -61,14 +61,16 @@ if (
     _timeout + 4
 };
 
+// set speed
+_unit forceSpeed ([-1, 1] select (_type isEqualTo DANGER_CANFIRE));
+
 // far, try to suppress
 if (
     _distance < 500
     && {RND(getSuppression _unit)}
     && {_type in [DANGER_ENEMYDETECTED, DANGER_CANFIRE]}
 ) exitWith {
-    _unit forceSpeed ([1, 2] select (_type isEqualTo DANGER_ENEMYDETECTED));
-    [_unit, ATLtoASL (_unit getHideFrom _target)] call EFUNC(main,doSuppress);
+    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.5])] call EFUNC(main,doSuppress);
     _timeout + 4
 };
 
