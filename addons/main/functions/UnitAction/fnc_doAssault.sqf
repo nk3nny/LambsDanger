@@ -54,7 +54,7 @@ private _pos = if (_buildings isEqualTo []) then {
 };
 
 // stance and speed
-_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+//_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];     // TODO : remove lines if no problems are reported within one week of 22.04.21 - nkenny
 [_unit, _pos] call FUNC(doAssaultSpeed);
 
 // execute
