@@ -55,7 +55,7 @@ if (_distance2D < 12) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_m
 // CQB or suppress
 if (RND(0.9) || {_distance2D < 66}) then {
     // movement
-    //_unit setUnitPosWeak (["MIDDLE", "UP"] select (_distance2D > 5));
+    //_unit setUnitPosWeak (["MIDDLE", "UP"] select (_distance2D > 5));      // TODO : remove lines if no problems are reported within one week of 22.04.21 - nkenny
     _unit forceSpeed 4;
 
     // execute CQB move
