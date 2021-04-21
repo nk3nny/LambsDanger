@@ -2,7 +2,7 @@
 class CfgPatches {
     class ADDON {
         name = COMPONENT_NAME;
-        units[] = {QGVAR(SetRadio), QGVAR(DisableAI), QGVAR(DisableGroupAI)};
+        units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"lambs_main"};
@@ -11,7 +11,5 @@ class CfgPatches {
     };
 };
 
-#include "CfgEventHandlers.hpp"
+#include "CfgFSMs.hpp"
 #include "CfgVehicles.hpp"
-#include "Cfg3DEN.hpp"
-#include "ZEN_CfgContext.hpp"
