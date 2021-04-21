@@ -55,20 +55,25 @@ if (_units isEqualTo []) then {
 };
 if (_units isEqualTo []) exitWith {false};
 
-// clear attacks!
-{
-    if ((currentCommand _x) isEqualTo "ATTACK") then {
-        _x forgetTarget (getAttackTarget _x);
-    };
-} foreach _units;
-
 // buildings ~ sorted by height ~ add other cover
 private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
-private _cover = (nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]};
 _buildings = _buildings apply { [_x select 2, _x] };
 _buildings sort false;
 _buildings = _buildings apply { _x select 1 };
-_buildings append _cover;
+
+// get cover
+if (count _buildings < count _units) then {
+    private _cover = (nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]};
+    _buildings append _cover;
+};
+
+// failsafe
+if (_buildings isEqualTo []) exitWith {
+    {_x doFollow leader _x} foreach _units;
+};
+
+// update target ~ better both for debugging and stacking soldiers
+_target = _buildings select 0;
 
 // leader ~ rally animation here
 [_unit, "gestureFollow"] call EFUNC(main,doGesture);
@@ -86,17 +91,9 @@ _group setVariable [QEGVAR(main,currentTactic), "Garrison/Rally", EGVAR(main,deb
 // clear CQB group variable
 _group setVariable [QEGVAR(main,groupMemory), []];
 
-// failsafe
-if (_buildings isEqualTo []) exitWith {
-    {_x doFollow leader _x} foreach _units;
-};
-
-// update target ~ better both for debugging and stacking soldiers
-_target = _buildings select 0;
-
 // make group ready
 doStop _units;
-_units doWatch _target;
+//_units doWatch _target; ~ doing some test runs without doWatch - nkenny
 
 // execute
 {

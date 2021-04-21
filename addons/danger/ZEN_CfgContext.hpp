@@ -34,5 +34,16 @@ class ZEN_context_menu_actions {
             displayName = CSTRING(Context_HasNoRadio);
             args = 0;
         };
+
+        class EnableReinforcement {
+            displayName = CSTRING(Context_EnableReinforcement);
+            statement = QUOTE([ARR_2(_objects,_args)] call FUNC(setReinforcement));
+            condition = QUOTE([ARR_2(_objects,_args)] call FUNC(showReinforcement));
+            args = 1;
+        };
+        class DisableReinforcement: EnableReinforcement {
+            displayName = CSTRING(Context_DisableReinforcement);
+            args = 0;
+        };
     };
 };

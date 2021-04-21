@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
- * Author: nkenny
+ * Author: nkenny, RCA3
  * Unit considers if it is night and therefore necessary to provide light
  *
  * Arguments:
@@ -23,5 +23,4 @@ if (behaviour _unit isEqualTo "STEALTH"
 ) exitWith {false};
 
 // night check
-private _shift = date call BIS_fnc_sunriseSunsetTime;
-(date select 3) < _shift select 0 || {(date select 3) > _shift select 1}
+(getPos _unit) getEnvSoundController "night" isEqualTo 1

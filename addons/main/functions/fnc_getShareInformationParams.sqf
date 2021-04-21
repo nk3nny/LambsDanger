@@ -29,30 +29,25 @@ _range = switch (side _unit) do {
     default { GVAR(radioGuer) };
 };
 
-// tweak by VD ~ uncommented, not sure why it was there in the first place - nkenny
-//_range = _range min viewDistance;
-
 // Sort long range radios
 private _target = _unit;
 
 private _units = units _unit select {
-    _x call FUNC(isAlive)
-    && {_x distance2D _unit < 150}
+    _x distance2D _unit < 150
     && {!isPlayer _x}
+    && {_x call FUNC(isAlive)}
 };
 private _index = _units findIf {
         _x getVariable [QEGVAR(danger,dangerRadio), false]
         || {(!isNull objectParent _x && {_x distance2D _unit < 70})}
-        || {(toLower backpack _x) find "b_radiobag_01_" isEqualTo 0}
+        || {"b_radiobag_01_" in (toLower backpack _x)}
         || {(getNumber (configFile >> "CfgVehicles" >> (backpack _x) >> "tf_hasLRradio")) isEqualTo 1}
 };
-_radio = _index != -1;
+_radio = _index isNotEqualTo -1;
 if (_radio) then {
     _target = _units select _index;
     _range = _range + GVAR(radioBackpack);
 };
-// tweak by height above sea-level
-_range = _range + (linearConversion [-200, 600, (getPosASL _unit) select 2, -400, 1200, true]);
 
 // return unit and range
 [_target, _range, _radio]

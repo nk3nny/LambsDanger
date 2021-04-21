@@ -4,5 +4,5 @@ private _targets = [];
 GET_GROUPS_CONTEXT(_targets);
 
 {
-    [_x] remoteExec [QFUNC(taskRush), leader _x];
+    [QGVAR(taskRush), [_x], leader _x] call CBA_fnc_targetEvent;
 } forEach _targets;

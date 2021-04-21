@@ -27,12 +27,11 @@ _vehicles = _vehicles select { canFire _x };
 {
     // ready
     private _posAGL = selectRandom _pos;
-    _posAGL = _posAGL vectorAdd [0, 0, linearConversion [0, 600, _x distance2D _posAGL, 0.5, 2, true]];
+    _posAGL = _posAGL vectorAdd [0, 0, random 1];
 
     // suppressive fire
     _x forceSpeed 1;
     _x setUnitPosWeak "MIDDLE";
-    _x doWatch _posAGL;
     private _suppress = [_x, AGLtoASL _posAGL] call FUNC(doSuppress);
     _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
 
@@ -40,7 +39,7 @@ _vehicles = _vehicles select { canFire _x };
     if !(_suppress || {(currentCommand _x isEqualTo "Suppress")}) then {
         // move forward
         _x forceSpeed 3;
-        _x doMove (_x getPos [12 + random 6, _x getDir _posAGL]);
+        _x doMove (_x getPos [20 + random 10, _x getDir _posAGL]);
         _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
     };
 } foreach _units;

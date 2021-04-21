@@ -1,3 +1,4 @@
+PREP(addShareInformationHandler);
 PREP(doAnimation);
 PREP(doCallout);
 PREP(doGesture);
@@ -10,6 +11,7 @@ PREP(findCover);
 PREP(findNearbyFriendlies);
 PREP(findOverwatch);
 PREP(findReadyUnits);
+PREP(findReadyVehicles);
 
 PREP(initModules);
 

@@ -121,15 +121,15 @@ private _fnc_debug_drawRect = {
 
 {
     private _unit = _x;
-    private _headPos = _unit call CBA_fnc_getPos;
-    if (((positionCameraToWorld [0, 0, 0]) distance _headPos) <= 1000) then {
+    private _renderPos = getPosVisual _unit;
+    if (((positionCameraToWorld [0, 0, 0]) distance _renderPos) <= 1000) then {
     // if (true) then {
         private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
-                private _pos2 = _x call CBA_fnc_getPos;
-                drawLine3D [_headPos, _pos2, [1, 1, 1, 0.5]];
+                private _pos2 = getPosVisual _x;
+                drawLine3D [_renderPos, _pos2, [1, 1, 1, 0.5]];
             } forEach (units _unit);
             _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
         };
@@ -148,17 +148,17 @@ private _fnc_debug_drawRect = {
                 "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
             ];
 
-            drawLine3D [_headPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
+            drawLine3D [_renderPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
 
-            drawLine3D [_headPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
+            drawLine3D [_renderPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
 
-            drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
+            drawLine3D [_renderPos, getPosVisual _currentTarget, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
             if (_currentTarget isEqualType []) then {
-                drawLine3D [_headPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
+                drawLine3D [_renderPos, _currentTarget call CBA_fnc_getPos, [1, 0, 0, 1]];
                 format ["POS %1", _currentTarget];
             } else {
                 format ["N/A"];
@@ -191,11 +191,11 @@ private _fnc_debug_drawRect = {
             "Supression: ", getSuppression _unit, "<br/>",
             "Morale: ", morale _unit, "<br/>"
         ];
-        [_headPos, _textData] call _fnc_debug_drawRect;
+        [_renderPos, _textData] call _fnc_debug_drawRect;
 
         if (GVAR(debug_RenderExpectedDestination)) then {
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
-            drawLine3D [_headPos, _pos, [0, 0, 1, 0.5]];
+            drawLine3D [_renderPos, _pos, [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
     };

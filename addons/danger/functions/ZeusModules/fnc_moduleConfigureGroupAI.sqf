@@ -14,7 +14,7 @@ if (_activated && local _logic) then {
     };
 
     if (_error isEqualTo "") then {
-        [LSTRING(Module_DisableGroupAI_DisplayName),
+        [LSTRING(Module_ConfigureGroupAI_DisplayName),
             [
                 [LSTRING(Module_DisableGroupAI_SettingName), "BOOLEAN", LSTRING(Module_DisableGroupAI_SettingToolTip), _group getVariable [QGVAR(disableGroupAI), false], ""],
                 [LSTRING(Module_EnableGroupReinforce_SettingName), "BOOLEAN", LSTRING(Module_EnableGroupReinforce_SettingToolTip), _group getVariable [QGVAR(enableGroupReinforce), false], ""]

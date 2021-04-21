@@ -21,25 +21,23 @@
 params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch"];
 
 // update
-_units = _units select { _x call FUNC(isAlive) && { _x distance2D (_pos select 0) > 10 } && { !isPlayer _x } };
+_units = _units select { _x call FUNC(isAlive) && { _x distance2D _overwatch > 12 } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
-{
-    private _posASL = AGLtoASL (selectRandom _pos);
+private _posASL = AGLtoASL (selectRandom _pos);
 
-    // stance
-    _x setUnitPosWeak "MIDDLE";
+{
+    private _suppressed = (getSuppression _x) > 0.5;
+    _x setUnitPos (["MIDDLE", "DOWN"] select _suppressed);
+
+    // move
+    _x doMove _overwatch;
+    _x setDestination [_overwatch, "LEADER PLANNED", true];
+    _x setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
     // suppress
-    if (RND(0.65) && {!(terrainIntersectASL [eyePos _x, _posASL])}) then {
-        _x doWatch ASLtoAGL _posASL;
+    if (RND(0.7) && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}) then {
         [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1]], random 3] call CBA_fnc_waitAndExecute;
-    } else {
-        // manoeuvre
-        _x forceSpeed 4;
-        _x setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
-        _x doMove _overwatch;
-        _x setDestination [_overwatch, "FORMATION PLANNED", false];
     };
 } foreach _units;
 
@@ -55,7 +53,7 @@ if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupFlank)},
         [_cycle - 1, _units, _vehicles, _pos, _overwatch],
-        12 + random 9
+        10 + random 8
     ] call CBA_fnc_waitAndExecute;
 };
 

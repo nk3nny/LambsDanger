@@ -8,6 +8,7 @@ PREP(brainReact);
 PREP(brainVehicle);
 PREP(fsmAllowAnimation);
 PREP(isForced);
+PREP(isForcedExit);
 PREP(isLeader);
 
 PREP(tactics);
@@ -23,13 +24,15 @@ PREP(tacticsHold);
 PREP(tacticsReinforce);
 PREP(tacticsSuppress);
 
-SUBPREP(ZeusModules,moduleDisableGroupAI);
+SUBPREP(ZeusModules,moduleConfigureGroupAI);
 SUBPREP(ZeusModules,moduleDisableAI);
 SUBPREP(ZeusModules,moduleSetRadio);
 
 SUBPREP(ZEN,setDisableAI);
 SUBPREP(ZEN,setDisableGroupAI);
 SUBPREP(ZEN,setHasRadio);
+SUBPREP(ZEN,setReinforcement);
 SUBPREP(ZEN,showHasRadio);
+SUBPREP(ZEN,showReinforcement);
 SUBPREP(ZEN,showSetDisableAI);
 SUBPREP(ZEN,showSetDisableGroupAI);

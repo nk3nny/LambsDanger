@@ -32,6 +32,14 @@ if (isNull _target) then {
     _target = _unit findNearestEnemy _unit;
 };
 
+// custom handlers
+private _stopShare = false;
+{
+    private _callbackResult = [_unit, _target, _range, _override] call _x;
+    if (!(isNil "_callbackResult") && {_callbackResult isEqualTo true}) exitWith {_stopShare = true};
+} forEach GVAR(shareHandlers);
+if (_stopShare) exitWith {false};
+
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
 
@@ -39,22 +47,24 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 ([_unit, _range, _override] call FUNC(getShareInformationParams)) params ["_unit", "_range"];
 
 // find units
+private _group = group _unit;
+private _side = side _group;
 private _groups = allGroups select {
     private _leader = leader _x;
     _leader distance2D _unit < _range
     && {simulationEnabled (vehicle _leader)}
-    && {[side _x, side _unit] call BIS_fnc_sideIsFriendly}
-    && {behaviour _leader != "CARELESS"}
-    && {_x != group _unit}
+    && {((side _x) getFriend _side) > 0.6}
+    && {behaviour _leader isNotEqualTo "CARELESS"}
+    && {_x isNotEqualTo _group}
 };
 
-{
-    // share information
-    if !(isNull _target) then {
-        private _knowsAbout = _unit knowsAbout _target;
-        [_x, [_target, _knowsAbout min GVAR(maxRevealValue)]] remoteExec ["reveal", leader _x];
-    };
-} forEach _groups;
+// share information
+if !(isNull _target) then {
+    private _knowsAbout = (_unit knowsAbout _target) min GVAR(maxRevealValue);
+    {
+        [_x, [_target, _knowsAbout]] remoteExec ["reveal", leader _x];
+    } forEach _groups;
+};
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
 

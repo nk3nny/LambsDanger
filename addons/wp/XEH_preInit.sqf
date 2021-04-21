@@ -20,8 +20,10 @@ if (isServer) then {
         private _artillerySelected = _artillery select {
             canFire _x
             && {unitReady _x}
-            && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] select 0]};
+            && {simulationEnabled _x}
+            && {_pos inRangeOfArtillery [[_x], getArtilleryAmmo [_x] param [0, ""]]};
         };
+        if (_artillerySelected isEqualTo []) exitWith {};
         _artillerySelected = [_artillerySelected, [], { _pos distance _x }, "ASCEND"] call BIS_fnc_sortBy;
         private _gun = _artillerySelected select 0;
         _artillery deleteAt (_artillery find _gun);
@@ -38,5 +40,43 @@ if (isServer) then {
 [QGVAR(FireArtillery), {
     _this spawn FUNC(doArtillery);
 }] call CBA_fnc_addEventhandler;
+
+// Remote Events for Tasks
+[QGVAR(taskAssault), {
+    _this spawn FUNC(taskAssault);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCamp), {
+    _this call FUNC(taskCamp);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCQB), {
+    _this spawn FUNC(taskCQB);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskCreep), {
+    _this spawn FUNC(taskCreep);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskGarrison), {
+    _this call FUNC(taskGarrison);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskHunt), {
+    _this spawn FUNC(taskHunt);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskPatrol), {
+    _this call FUNC(taskPatrol);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskReset), {
+    _this call FUNC(taskReset);
+}] call CBA_fnc_addEventhandler;
+
+[QGVAR(taskRush), {
+    _this spawn FUNC(taskRush);
+}] call CBA_fnc_addEventhandler;
+
 
 ADDON = true;
