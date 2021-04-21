@@ -108,8 +108,8 @@ link40[] = {35,36};
 link41[] = {36,24};
 link42[] = {37,3};
 link43[] = {38,39};
-globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-1292.886841,1169.717163,1478.002930,-595.275330,1050,884,1};
-window[] = {2,-1,-1,-1,-1,993,234,1674,234,3,1068};
+globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-1246.351196,1290.778076,1411.101440,-404.948975,1235,884,1};
+window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,1253};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -286,7 +286,7 @@ class FSM
                          "private _evaluation = [_this, _queue] call lambs_danger_fnc_brain;" \n
                          "" \n
                          "// get variables" \n
-                         "_evaluation params [ [""_immediate"", false], [""_hide"", false], [""_engage"", false], [""_assess"", false], [""_cause"", [-1, getPos _this, time + lambs_danger_dangerUntil, objNull]]];" \n
+                         "_evaluation params [""_immediate"", ""_hide"", ""_engage"", ""_assess"", ""_cause""];" \n
                          "_cause params [""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy""];" \n
                          "" \n
                          "// reset queue" \n
