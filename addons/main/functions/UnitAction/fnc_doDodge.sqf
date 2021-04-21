@@ -58,6 +58,7 @@ if (_stance isEqualTo "CROUCH" && { _suppression }) then {_unit setUnitPosWeak "
 private _anim = call {
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
     if (_still  && { !_nearDistance } && {_dir > 320 || { _dir < 40 }}) exitWith {
+        _unit forceSpeed 0;
         [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select _suppression;
     };
 
@@ -76,12 +77,7 @@ private _anim = call {
 };
 
 // execute dodge
-[_unit, _anim, !_still] call FUNC(doGesture);
-
-// watch distant shots
-if (!_nearDistance) then {
-    _unit doWatch _pos;
-};
+[{_this call FUNC(doGesture);}, [_unit, _anim, !_still]] call CBA_fnc_execNextFrame;
 
 // end
 true
