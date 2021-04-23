@@ -119,11 +119,12 @@ private _fnc_debug_drawRect = {
 
 };
 
+private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
 {
     private _unit = _x;
     private _renderPos = getPosVisual _unit;
     if (((positionCameraToWorld [0, 0, 0]) distance _renderPos) <= 1000) then {
-    // if (true) then {
+        if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
@@ -131,7 +132,8 @@ private _fnc_debug_drawRect = {
                 private _pos2 = getPosVisual _x;
                 drawLine3D [_renderPos, _pos2, [1, 1, 1, 0.5]];
             } forEach (units _unit);
-            _textData pushBack "<t size='%2' color='#ff0000'>Group Leader</t><br/>"
+            private _color = GVAR(debug_sideColorLUT) getOrDefault [(side _unit), _sideUnknownColor]; // TODO: replace with new Syntax for setting default for hashMap!
+            _textData pushBack "<t size='%2' color='" + _color + "'>Group Leader</t><br/>";
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
 
@@ -164,7 +166,6 @@ private _fnc_debug_drawRect = {
                 format ["N/A"];
             }
         };
-
         _textData append [
             "Behaviour: ", behaviour _unit, "<br/>",
             "    Current Task: ", _unit getVariable [QGVAR(currentTask), "None"], "<br/>"
@@ -177,7 +178,10 @@ private _fnc_debug_drawRect = {
                 "    Group memory: ", count (group _unit getVariable [QGVAR(groupMemory), []]), "<br/>"
             ];
         };
+        private _currentCommand = currentCommand _unit;
+        if (_currentCommand == "") then {_currentCommand = "None";};
         _textData append [
+            "Current Command: ", _currentCommand, "<br/>",
             "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
             "    Danger Pos: ", format ["%1m", round (_unit distance _pos)], "<br/>",
             "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
@@ -186,11 +190,16 @@ private _fnc_debug_drawRect = {
 
         _textData append _targetKnowledge;
 
-
         _textData append [
             "Supression: ", getSuppression _unit, "<br/>",
             "Morale: ", morale _unit, "<br/>"
         ];
+        if !(_unit checkAIFeature "PATH") then {
+            _textData append ["<t color='#FFAA00'>PATH disabled</t>", "<br/>"];
+        };
+        if !(_unit checkAIFeature "MOVE") then {
+            _textData append ["<t color='#FFAA00'>MOVE disabled</t>", "<br/>"];
+        };
         [_renderPos, _textData] call _fnc_debug_drawRect;
 
         if (GVAR(debug_RenderExpectedDestination)) then {

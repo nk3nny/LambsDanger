@@ -245,3 +245,13 @@ _curCat = LSTRING(Settings_Debug);
     false,
     1
 ] call CBA_fnc_addSetting;
+
+// Debug Renderer all Units
+[
+    QGVAR(debug_drawAllUnitsInVehicles),
+    "CHECKBOX",
+    [LSTRING(debug_drawAllUnitsInVehicles), LSTRING(debug_drawAllUnitsInVehicles_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
