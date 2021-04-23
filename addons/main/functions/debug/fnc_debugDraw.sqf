@@ -122,14 +122,14 @@ private _fnc_debug_drawRect = {
 private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
 {
     private _unit = _x;
-    private _renderPos = getPosVisual _unit;
-    if (((positionCameraToWorld [0, 0, 0]) distance _renderPos) <= 1000) then {
+    private _renderPos = getPosATLVisual _unit;
+    if (((positionCameraToWorld [0, 0, 0]) distance _renderPos) <= viewDistance) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
         if (_unit == leader _unit) then {
             {
-                private _pos2 = getPosVisual _x;
+                private _pos2 = getPosATLVisual _x;
                 drawLine3D [_renderPos, _pos2, [1, 1, 1, 0.5]];
             } forEach (units _unit);
             private _color = GVAR(debug_sideColorLUT) getOrDefault [(side _unit), _sideUnknownColor]; // TODO: replace with new Syntax for setting default for hashMap!
@@ -140,23 +140,28 @@ private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
             private _knowledge = _unit targetKnowledge _currentTarget;
+            private _knowledgePosition = _knowledge select 6;
+            private _knowledgeAge = _knowledge select 2;
             if (_knowledge select 2 == time && local _unit) then {
-                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledge select 6, GVAR(debug_functions)];
+                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
             };
-            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), [0, 0, 0]];
+            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
             _targetKnowledge append [
                 "<t color='#C7CCC1'>Target Knowledge: <br/>",
-                "    Last Seen: ", _lastSeen, " (", round ((_knowledge select 2) *100)/100, ")<br/>",
-                "    Position Error: ", round ((_knowledge select 5) *100)/100, "</t><br/>"
+                "    Last Seen: ", _lastSeen, " (", _knowledgeAge toFixed 2, ")<br/>",
+                "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
             ];
 
-            drawLine3D [_renderPos, ASLtoAGL(_knowledge select 6), [0, 1, 0, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledge select 6), 1, 1, 0, "Estimated Target Position"];
+            drawLine3D [_renderPos, ASLtoAGL(_knowledgePosition), [0, 1, 0, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledgePosition), 1, 1, 0, "Estimated Target Position"];
 
-            drawLine3D [_renderPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
+            if !(_lastSeen isEqualType "") then {
+                drawLine3D [_renderPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
+                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
+            };
 
-            drawLine3D [_renderPos, getPosVisual _currentTarget, [1, 0, 0, 1]];
+
+            drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
             if (_currentTarget isEqualType []) then {
@@ -180,10 +185,19 @@ private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
         };
         private _currentCommand = currentCommand _unit;
         if (_currentCommand == "") then {_currentCommand = "None";};
+
         _textData append [
             "Current Command: ", _currentCommand, "<br/>",
-            "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>",
-            "    Danger Pos: ", format ["%1m", round (_unit distance _pos)], "<br/>",
+            "<t color='#C7CCC1'>Danger Cause: ", _dangerType call FUNC(debugDangerType), "<br/>"
+        ];
+
+        if (_pos isNotEqualTo [0,0,0]) then {
+            _textData append [
+                "    Danger Pos: ", format ["%1m", round (_unit distance _pos)], "<br/>"
+            ];
+        };
+
+        _textData append [
             "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
             "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
         ];
@@ -204,6 +218,7 @@ private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
 
         if (GVAR(debug_RenderExpectedDestination)) then {
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
+            if (_unit distance _pos > viewDistance) exitWith {};
             drawLine3D [_renderPos, _pos, [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
