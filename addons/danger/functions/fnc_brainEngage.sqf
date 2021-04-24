@@ -37,7 +37,7 @@ if (
     isNull _target
     || {_unit knowsAbout _target isEqualTo 0}
     || {(weapons _unit) isEqualTo []}
-    || {combatMode _unit in ["BLUE", "GREEN"]}
+    || {(combatMode _unit) in ["BLUE", "GREEN"]}
 ) exitWith {
     _timeout
 };
