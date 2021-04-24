@@ -97,8 +97,7 @@ _group setFormation "LINE";
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
-                    _groupMembers = _groupMembers - [_unit];
-                    _group setVariable [QGVAR(taskAssaultMembers), _groupMembers];
+                    _group setVariable [QGVAR(taskAssaultMembers), _groupMembers - [_unit]];
 
                     // handle
                     _handle call CBA_fnc_removePerFrameHandler;
@@ -136,7 +135,7 @@ _group setFormation "LINE";
 
                     // move back
                     if (_dir > 150 && {_dir < 210}) exitWith {
-                        _anim pushBack "TactB"
+                        "TactB"
                     };
 
                     // forward
