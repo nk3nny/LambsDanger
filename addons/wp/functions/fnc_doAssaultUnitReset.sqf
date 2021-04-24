@@ -23,7 +23,7 @@ _unit setVariable [QEGVAR(danger,forceMove), nil];
 // stance
 _unit forceSpeed -1;
 _unit setUnitPos "AUTO";
-_unit doMove (getPosWorld _unit);
+_unit doMove (getPosATL _unit);
 _unit doFollow (leader _unit);
 
 // AI
