@@ -122,21 +122,24 @@ _group setFormation "LINE";
                 if (_retreat) exitWith {};
 
                 // force move
-                private _dir = 360 - (_unit getRelDir _destination);
+                private _anim = call {
+                    // move right
+                    if (_dir > 250 && {_dir < 320}) exitWith {
+                        ["TactR", "TactRF"];
+                    };
 
-                };
+                    // move left
+                    if (_dir < 110 && {_dir > 40}) exitWith {
+                        ["TactL", "TactLF"];
+                    };
 
-                if (_dir < 110 && {_dir > 40}) then {
-                };
+                    // move back
+                    if (_dir > 150 && {_dir < 210}) exitWith {
+                        _anim pushBack "TactB"
+                    };
 
-                // move back
-                if (_dir > 150 && {_dir < 210}) then {
-                    _anim pushBack "TactB";
-                };
-
-                // forward
-                if (_anim isEqualTo []) then {
-                    _anim = ["TactF"];
+                    // forward
+                    "TactF";
                 };
 
                 // execute
