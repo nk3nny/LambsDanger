@@ -122,6 +122,7 @@ _group setFormation "LINE";
                 if (_retreat) exitWith {};
 
                 // force move
+                private _dir = 360 - (_unit getRelDir _destination);
                 private _anim = call {
                     // move right
                     if (_dir > 250 && {_dir < 320}) exitWith {
