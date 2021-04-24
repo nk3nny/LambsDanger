@@ -161,7 +161,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
-        [_unit, _pos] call EFUNC(main,doSmoke);
+        if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _pos] call EFUNC(main,doSmoke);};
     };
 };
 
@@ -208,7 +208,6 @@ switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
         [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if (_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_GARRISON: {
         // garrison
@@ -217,7 +216,6 @@ switch (_plan) do {
     case TACTICS_ASSAULT: {
         // rush ~ assault
         [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if (_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_SUPPRESS: {
         // suppress
