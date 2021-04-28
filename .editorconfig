@@ -22,12 +22,6 @@ insert_final_newline = true
 indent_style = space
 trim_trailing_whitespace = true
 
-[*.json]
-indent_size = 2
-insert_final_newline = true
-indent_style = space
-trim_trailing_whitespace = true
-
 [*.js]
 indent_size = 2
 insert_final_newline = true
@@ -49,6 +43,14 @@ indent_style = unset
 indent_size = unset
 
 [*.fsm]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
+
+[*.json]
 charset = unset
 end_of_line = unset
 insert_final_newline = unset
