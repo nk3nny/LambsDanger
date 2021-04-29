@@ -380,6 +380,16 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_PATROL_MOVEWAYPOINTS);
         };
+        class GVAR(EnableReinforcement): Checkbox {
+            displayName = CSTRING(Module_Task_EnableReinforcement_DisplayName);
+            tooltip = CSTRING(Module_Task_EnableReinforcement_Tooltip);
+            property = QGVAR(enableReinforcement);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_PATROL_ENABLEREINFORCEMENT);
+        };
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {
@@ -504,6 +514,16 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             validate = "number";
             condition = "0";
             typeName = "NUMBER";
+        };
+        class GVAR(EnableReinforcement): Checkbox {
+            displayName = CSTRING(Module_Task_EnableReinforcement_DisplayName);
+            tooltip = CSTRING(Module_Task_EnableReinforcement_Tooltip);
+            property = QGVAR(enableReinforcement);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_HUNT_ENABLEREINFORCEMENT);
         };
         class ModuleDescription: ModuleDescription {};
     };

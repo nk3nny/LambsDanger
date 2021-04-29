@@ -36,13 +36,14 @@ switch (_mode) do {
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
-                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS]
+                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint"];
+                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
                         private _group = _groups select _groupIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -64,13 +65,14 @@ switch (_mode) do {
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply { format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
-                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS]
+                        [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
-                        _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint"];
+                        _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
                         private _target = _targets select _targetIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
                         if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
@@ -90,9 +92,10 @@ switch (_mode) do {
             private _area = _logic getVariable ["objectarea", [TASK_PATROL_SIZE, TASK_PATROL_SIZE, 0, false, -1]];
             private _range = _area select ((_area select 0) < (_area select 1));
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), TASK_PATROL_MOVEWAYPOINTS];
+            private _enableReinforcement = _logic getVariable [QGVAR(EnableReinforcement), TASK_PATROL_ENABLEREINFORCEMENT];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];
             {
-                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint], leader _x] call CBA_fnc_targetEvent;
+                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint, _enableReinforcement], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;
         };

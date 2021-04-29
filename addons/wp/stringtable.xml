@@ -672,5 +672,11 @@
             <Polish>LAMBS Danger Punkty trasy</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
+            <English>Dynamic Reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_ToolTip">
+            <English>The unit will respond to known enemy positions that are identified by allies. NB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
+        </Key>
     </Package>
 </Project>
