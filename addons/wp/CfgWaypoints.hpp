@@ -6,21 +6,21 @@ class CfgWaypoints {
             displayNameDebug = QEGVAR(danger,Attack);
             file = QPATHTOF(scripts\fnc_wpAssault.sqf);
             icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
-            tooltip = "Unit rushes to target position with no regard for safety";
+            tooltip = "Rushes to target position with no regard for safety";
         };
         class EGVAR(danger,Retreat) {
             displayName = "0 TASK FORCED RETREAT";
             displayNameDebug = QEGVAR(danger,Retreat);
             file = QPATHTOF(scripts\fnc_wpRetreat.sqf);
             icon = "\a3\ui_f\data\GUI\Cfg\CommunicationMenu\attack_ca.paa";
-            tooltip = "Unit rushes to target position with no regard for safety";
+            tooltip = "Retreats to target position while ignoring enemies";
         };
         class EGVAR(danger,Garrison) {
             displayName = "1 TASK GARRISON";
             displayNameDebug = QEGVAR(danger,Garrison);
             file = QPATHTOF(scripts\fnc_wpGarrison.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
-            tooltip = "Garrisons units in buildings around waypoint out to WP completion radius (default 50m)";
+            tooltip = "Garrisons in buildings around waypoint out to WP completion radius (default 50m)";
         };
         class EGVAR(danger,Patrol) {
             displayName = "2 TASK PATROL";
@@ -55,7 +55,7 @@ class CfgWaypoints {
             displayNameDebug = QEGVAR(danger,CQB);
             file = QPATHTOF(scripts\fnc_wpCQB.sqf);
             icon = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
-            tooltip = "Clears buildings around the waypoint out to WP completion radius (Default 50m)";
+            tooltip = "Enters and clears buildings within WP completion radius (Default 50m)";
         };
         class EGVAR(danger,Artillery) {
             displayName = "9 REGISTER ARTILLERY";
