@@ -12,7 +12,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskArtillery_Side_DisplayName);
             tooltip = CSTRING(Module_TaskArtillery_Side_Tooltip);
             property = QGVAR(Side);
-            defaultValue = "0";
+            defaultValue = 0;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -24,7 +24,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskArtillery_MainSalvo_DisplayName);
             tooltip = CSTRING(Module_TaskArtillery_MainSalvo_Tooltip);
             property = QGVAR(MainSalvo);
-            defaultValue = QUOTE(TASK_ARTILLERY_ROUNDS);
+            defaultValue = TASK_ARTILLERY_ROUNDS;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -34,7 +34,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskArtillery_Spread_DisplayName);
             tooltip = CSTRING(Module_TaskArtillery_Spread_Tooltip);
             property = QGVAR(Spread);
-            defaultValue = QUOTE(TASK_ARTILLERY_SPREAD);
+            defaultValue = TASK_ARTILLERY_SPREAD;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -48,6 +48,7 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_ARTILLERY_SKIPCHECKROUNDS);
         };
         class ModuleDescription: ModuleDescription {};
     };
@@ -97,6 +98,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QGVAR(TASK_ASSAULT_ISRETREAT);
         };
         class GVAR(DeleteOnStartUp): Checkbox {
             displayName = CSTRING(Module_TaskAssault_DeleteOnStartup_DisplayName);
@@ -106,12 +108,13 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_ASSAULT_DELETEONSTARTUP);
         };
         class GVAR(DistanceThreshold): EditShort {
             displayName = CSTRING(Module_TaskAssault_DistanceThreshold_DisplayName);
             tooltip = CSTRING(Module_TaskAssault_DistanceThreshold_Tooltip);
             property = QGVAR(DistanceThreshold);
-            defaultValue = QUOTE(TASK_ASSAULT_DISTANCETHRESHOLD);
+            defaultValue = TASK_ASSAULT_DISTANCETHRESHOLD;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -121,7 +124,7 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskAssault_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskAssault_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_ASSAULT_CYCLETIME);
+            defaultValue = TASK_ASSAULT_CYCLETIME;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -154,7 +157,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCamp_ExitWP_DisplayName);
             tooltip = CSTRING(Module_TaskCamp_ExitWP_Tooltip);
             property = QGVAR(ExitWP);
-            defaultValue = QUOTE(TASK_CAMP_EXITWP);
+            defaultValue = TASK_CAMP_EXITWP;
             unique = 0;
             condition = "0";
             typeName = "NUMBER";
@@ -186,6 +189,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_GARRISON_TELEPORT);
         };
         class GVAR(Patrol): Checkbox {
             displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
@@ -195,6 +199,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_GARRISON_PATROL);
         };
         class ModuleDescription: ModuleDescription {};
     };
@@ -225,7 +230,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskCQB_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCQB_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_CQB_CYCLETIME);
+            defaultValue = TASK_CQB_CYCLETIME;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -239,6 +244,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_CQB_DELETEONSTARTUP);
         };
         class ModuleDescription: ModuleDescription {};
     };
@@ -268,7 +274,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskGarrison_ExitCondition_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_ExitCondition_Tooltip);
             property = QGVAR(ExitConditions);
-            defaultValue = QUOTE(TASK_GARRISON_EXITCONDITIONS);
+            defaultValue = TASK_GARRISON_EXITCONDITIONS;
             unique = 0;
             condition = "0";
             typeName = "NUMBER";
@@ -308,6 +314,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_GARRISON_SORTBYHEIGHT);
         };
         class GVAR(Teleport): Checkbox {
             displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
@@ -317,6 +324,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_GARRISON_TELEPORT);
         };
         class GVAR(Patrol): Checkbox {
             displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
@@ -326,6 +334,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_GARRISON_PATROL);
         };
         class ModuleDescription: ModuleDescription {};
     };
@@ -355,7 +364,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskPatrol_Waypoints_DisplayName);
             tooltip = CSTRING(Module_TaskPatrol_Waypoints_Tooltip);
             property = QGVAR(WaypointCount);
-            defaultValue = QUOTE(TASK_PATROL_WAYPOINTCOUNT);
+            defaultValue = TASK_PATROL_WAYPOINTCOUNT;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -369,6 +378,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
+            defaultValue = QUOTE(TASK_PATROL_MOVEWAYPOINTS);
         };
         class ModuleDescription: ModuleDescription {};
     };
@@ -391,7 +401,7 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {
-        description = CSTRING(Module_TaskReset_ModuleDescription);          // THIS IS NOT SHOWING UP @JOKO
+        description = CSTRING(Module_TaskReset_ModuleDescription);
     };
 };
 
@@ -419,7 +429,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_CREEP_MOVINGCENTER);
         };
         class GVAR(PlayersOnly): Checkbox {
             displayName = CSTRING(Module_TaskCreep_PlayersOnly_DisplayName);
@@ -429,13 +439,13 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_CREEP_PLAYERSONLY);
         };
         class GVAR(CycleTime): EditShort {
             displayName = CSTRING(Module_TaskCreep_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskCreep_CycleTime_Tooltip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_CREEP_CYCLETIME);
+            defaultValue = TASK_CREEP_CYCLETIME;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -473,7 +483,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_HUNT_MOVINGCENTER);
         };
         class GVAR(PlayersOnly): Checkbox {
             displayName = CSTRING(Module_TaskHunt_PlayersOnly_DisplayName);
@@ -483,13 +493,13 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_HUNT_PLAYERSONLY);
         };
         class GVAR(CycleTime): EditShort {
             displayName = CSTRING(Module_TaskHunt_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskHunt_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_HUNT_CYCLETIME);
+            defaultValue = TASK_HUNT_CYCLETIME;
             unique = 0;
             validate = "number";
             condition = "0";
@@ -527,7 +537,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_RUSH_MOVINGCENTER);
         };
         class GVAR(PlayersOnly): Checkbox {
             displayName = CSTRING(Module_TaskRush_PlayersOnly_DisplayName);
@@ -537,7 +547,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             validate = "none";
             condition = "0";
             typeName = "BOOL";
-            defaultValue = "(true)";
+            defaultValue = QUOTE(TASK_RUSH_PLAYERSONLY);
         };
         class GVAR(CycleTime): EditShort {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
@@ -548,6 +558,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             validate = "number";
             condition = "0";
             typeName = "NUMBER";
+            defaultValue = TASK_RUSH_CYCLETIME;
         };
         class ModuleDescription: ModuleDescription {};
     };
