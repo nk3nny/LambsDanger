@@ -66,7 +66,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
-                        [LSTRING(Module_TaskPatrol_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
