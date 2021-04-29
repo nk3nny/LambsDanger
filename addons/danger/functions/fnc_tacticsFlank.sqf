@@ -108,7 +108,7 @@ _units commandMove _overwatch;
 } foreach _units;
 
 // leader smoke ~ deploy concealment to enable movement
-[_unit, _overwatch] call EFUNC(main,doSmoke);
+if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
 [{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;

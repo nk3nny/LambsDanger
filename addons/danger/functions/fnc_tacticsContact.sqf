@@ -62,7 +62,7 @@ _group setFormDir (_unit getDir _enemy);
 
 // gesture + callouts for larger units
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _units = (units _unit) select {currentCommand _x isEqualTo ""};
+private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"]};
 private _count = count _units;
 if (_count > 2) then {
     // gesture
@@ -108,7 +108,7 @@ if (
     _count > random 3
     && {_unit knowsAbout _enemy > 0.1}
     && {_deadOrSuppressed isEqualTo -1}
-    && {_unit distance2D _enemy < (GVAR(cqbRange) * 1.8)}
+    && {_unit distance2D _enemy < 120}
 ) exitWith {
     // execute assault
     {

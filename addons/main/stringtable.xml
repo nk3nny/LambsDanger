@@ -305,5 +305,11 @@
             <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
             <Russian>Если на этом расстоянии есть союзники, ИИ не будет вести огонь на подавление. Установите 0, чтобы отключить</Russian>
         </Key>
+        <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles">
+            <English>Debug Draw Show banners for vehicle crew</English>
+        </Key>
+        <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles_ToolTip">
+            <English>Draws information banners for all units boarded in vehicles. Default shows only the effective commander.  (Feature requires Debug Draw enabled)</English>
+        </Key>
     </Package>
 </Project>

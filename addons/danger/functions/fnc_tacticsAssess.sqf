@@ -20,6 +20,7 @@
 #define TACTICS_ASSAULT 3
 #define TACTICS_SUPPRESS 4
 #define TACTICS_ATTACK 5
+#define RANGE_NEAR 120
 #define RANGE_MID 220
 #define RANGE_LONG 300
 #define RANGE_THREAT 450
@@ -38,7 +39,7 @@ _unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functio
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_functions)];
 
 // get max data range ~ reduced for forests or cities - nkenny
-private _pos = getPos _unit;
+private _pos = getPosATL _unit;
 private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max 120;
 
 // gather data
@@ -84,7 +85,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     if (EGVAR(main,Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
         private _artilleryTarget = _enemies findIf {
             _unit distance2D _x > RANGE_MID
-            && {([_unit, getPos _x, 100] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
+            && {([_unit, getPos _x, RANGE_NEAR] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
         };
         if (_artilleryTarget != -1) then {
             [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call EFUNC(main,doCallArtillery);   // possibly add delay? ~ nkenny
@@ -102,7 +103,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     // enemies within X meters of leader and either attacker or unit is inside buildings
     private _inside = _unit call EFUNC(main,isIndoor);
     private _nearIndoorTarget = _enemies findIf {
-        _unit distance2D _x < (GVAR(cqbRange) * 1.4)
+        _unit distance2D _x < RANGE_NEAR
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_nearIndoorTarget != -1) exitWith {
@@ -152,7 +153,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         // combatmode
         private _combatMode = combatMode _unit;
         if (_combatMode isEqualTo "RED") then {_plan pushBack TACTICS_ASSAULT;};
-        if (_combatMode in ["YELLOW", "WHITE"]) then {_plan pushBack TACTICS_SUPPRESS;};
+        if (_combatMode isEqualTo "YELLOW") then {_plan pushBack TACTICS_SUPPRESS;};
         if (_speedMode) then {_plan pushBack TACTICS_ASSAULT;};
 
         // visibility / distance / no cover
@@ -161,7 +162,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
-        [_unit, _pos] call EFUNC(main,doSmoke);
+        if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _pos] call EFUNC(main,doSmoke);};
     };
 };
 
@@ -208,7 +209,6 @@ switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
         [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if (_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_GARRISON: {
         // garrison
@@ -217,7 +217,6 @@ switch (_plan) do {
     case TACTICS_ASSAULT: {
         // rush ~ assault
         [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
-        if (_units isNotEqualTo []) then {[_units] call EFUNC(main,doSmoke);};
     };
     case TACTICS_SUPPRESS: {
         // suppress

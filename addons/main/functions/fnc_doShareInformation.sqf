@@ -54,7 +54,8 @@ private _groups = allGroups select {
     _leader distance2D _unit < _range
     && {simulationEnabled (vehicle _leader)}
     && {((side _x) getFriend _side) > 0.6}
-    && {behaviour _leader isNotEqualTo "CARELESS"}
+    && {(behaviour _leader) isNotEqualTo "CARELESS"}
+    && {!isPlayer _leader}
     && {_x isNotEqualTo _group}
 };
 

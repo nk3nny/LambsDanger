@@ -13,7 +13,7 @@ var failedCount = 0;
 const stringtableEntries = [];
 const projectFiles = [];
 
-const regex = /LSTRING\((\w+)\)|ELSTRING\((\w+),(\w+)\)/gm;
+const regex = /(L|C)STRING\((\w+)\)|E(L|C)STRING\((\w+),(\w+)\)/gm;
 const commentRegex = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
 
 function getDirFiles(p, module) {
@@ -62,9 +62,9 @@ function CheckStringtables() {
 
             var strName;
             if (match[1]) {
-                strName = `STR_${PREFIX}_${data.module}_${match[1]}`
-            } else if (match[2] && match[3]) {
-                strName = `STR_${PREFIX}_${match[2]}_${match[3]}`
+                strName = `STR_${PREFIX}_${data.module}_${match[2]}`
+            } else if (match[4] && match[5]) {
+                strName = `STR_${PREFIX}_${match[4]}_${match[5]}`
             }
 
             if (strName && !stringtableEntries.includes(strName.toLowerCase())) {
