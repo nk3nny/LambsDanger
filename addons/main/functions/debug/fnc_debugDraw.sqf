@@ -120,10 +120,12 @@ private _fnc_debug_drawRect = {
 };
 
 private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
+private _viewDistance = viewDistance;
+private _posCam = positionCameraToWorld [0, 0, 0];
 {
     private _unit = _x;
     private _renderPos = getPosATLVisual _unit;
-    if (((positionCameraToWorld [0, 0, 0]) distance _renderPos) <= viewDistance) then {
+    if ((_posCam distance _renderPos) <= viewDistance) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
@@ -140,7 +142,7 @@ private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
             private _knowledge = _unit targetKnowledge _currentTarget;
-            private _knowledgePosition = _knowledge select 6;
+            private _knowledgePosition = ASLtoAGL(_knowledge select 6);
             private _knowledgeAge = _knowledge select 2;
             if (_knowledge select 2 == time && local _unit) then {
                 _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
@@ -152,12 +154,12 @@ private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
                 "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
             ];
 
-            drawLine3D [_renderPos, ASLtoAGL(_knowledgePosition), [0, 1, 0, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_knowledgePosition), 1, 1, 0, "Estimated Target Position"];
+            drawLine3D [_renderPos, _knowledgePosition, [0, 1, 0, 0.5]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _knowledgePosition, 1, 1, 0, "Estimated Target Position"];
 
             if !(_lastSeen isEqualType "") then {
-                drawLine3D [_renderPos, ASLtoAGL(_lastSeen), [0, 0, 1, 0.5]];
-                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], ASLtoAGL(_lastSeen), 1, 1, 0, "Last Seen Position"];
+                drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
+                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
             };
 
 
