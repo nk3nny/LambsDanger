@@ -674,9 +674,11 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
             <English>Dynamic reinforcement</English>
+            <Polish>Dynamiczne wsparcie</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_ToolTip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
+            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty trasy grup odpowiadających na wezwanie.</Polish>
         </Key>
     </Package>
 </Project>

@@ -239,9 +239,11 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Context_EnableReinforcement">
             <English>Enable Reinforcement</English>
+            <Polish>Włącz wsparcie</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableReinforcement">
             <English>Disable Reinforcement</English>
+            <Polish>Wyłącz wsparcie</Polish>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableAI">
             <English>Disable AI</English>
