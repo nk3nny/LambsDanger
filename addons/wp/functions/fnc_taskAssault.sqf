@@ -97,8 +97,7 @@ _group setFormation "LINE";
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
-                    _groupMembers = _groupMembers - [_unit];
-                    _group setVariable [QGVAR(taskAssaultMembers), _groupMembers];
+                    _group setVariable [QGVAR(taskAssaultMembers), _groupMembers - [_unit]];
 
                     // handle
                     _handle call CBA_fnc_removePerFrameHandler;
@@ -118,28 +117,29 @@ _group setFormation "LINE";
                 if ((expectedDestination _unit select 0) isNotEqualTo _destination) then {_unit doMove _destination};
                 _unit forceSpeed ([3, 24] select _retreat);
 
+                // no animation on retreat
+                if (_retreat) exitWith {};
+
                 // force move
                 private _dir = 360 - (_unit getRelDir _destination);
-                private _anim = [];
+                private _anim = call {
+                    // move right
+                    if (_dir > 250 && {_dir < 320}) exitWith {
+                        ["TactR", "TactRF"];
+                    };
 
-                // move right
-                if (_dir > 250 && {_dir < 320}) then {
-                    _anim append ["TactR", "TactRF"];
-                };
+                    // move left
+                    if (_dir < 110 && {_dir > 40}) exitWith {
+                        ["TactL", "TactLF"];
+                    };
 
-                // move left
-                if (_dir < 110 && {_dir > 40}) then {
-                    _anim append ["TactL", "TactLF"];
-                };
+                    // move back
+                    if (_dir > 150 && {_dir < 210}) exitWith {
+                        "TactB"
+                    };
 
-                // move back
-                if (_dir > 150 && {_dir < 210}) then {
-                    _anim pushBack "TactB";
-                };
-
-                // forward
-                if (_anim isEqualTo []) then {
-                    _anim = ["TactF"];
+                    // forward
+                    "TactF";
                 };
 
                 // execute
