@@ -26,6 +26,12 @@ if (
     || {!(_unit checkAIFeature "PATH")}
 ) exitWith {false};
 
+if ((currentCommand _unit) isEqualTo "Suppress") then {
+    private _sphere = createSimpleObject ["Sign_Sphere25cm_F", getPosWorld _unit, true];
+    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    systemchat format ["doDodge.sqf %1 is suppressing!", name _unit];
+};
+
 // dodge
 _unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
@@ -60,6 +66,7 @@ if (_suppression && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 
     // debug information to be removed before release ~ nkenny
     private _sphere = createSimpleObject ["Sign_Arrow_Large_Cyan_F", getPosWorld _unit, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
+    [{deleteVehicle _this}, _sphere, 45] call CBA_fnc_waitAndExecute;
 
     true
 };
@@ -75,6 +82,7 @@ private _anim = call {
 
         // debug information to be removed before release ~ nkenny
         private _sphere = createSimpleObject ["Sign_Arrow_Large_Yellow_F", getPosWorld _unit, true];
+        [{deleteVehicle _this}, _sphere, 45] call CBA_fnc_waitAndExecute;
         systemchat format ["doDodge.sqf %1 is still", name _unit];
 
         [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select _suppression;
@@ -98,12 +106,13 @@ private _anim = call {
 private _sphere = createSimpleObject ["Sign_Arrow_Direction_F", getPosWorld _unit, true];
 _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
 _sphere setDir (_unit getDir _pos);
+[{deleteVehicle _this}, _sphere, 60] call CBA_fnc_waitAndExecute;
 
 // rate of fire ~ theory the AI's shooting fsm interrupts the dodge attempt. Delay shooting to prevent running in place. (failed) ~nkenny
 //_unit setWeaponReloadingTime [_unit, currentMuzzle _unit, 1.5];
 
 // movement check ~ theory adds some pathfinding strenth inside buildings  (partial success) ~ nkenny
-_unit setDestination [getPosWorld _unit, "LEADER PLANNED", false];
+_unit setDestination [getPosATL _unit, "LEADER PLANNED", false];
 
 // execute dodge
 [_unit, _anim, !_still] call FUNC(doGesture);
