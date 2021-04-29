@@ -329,9 +329,9 @@
             <Russian>Динамичный патруль</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_ToolTip">
-            <English>The unit will create a sub-group to patrol the area. NB: The patrol will leave their original group to form a new one.</English>
-            <Polish>Jednostka stworzy podgrupę do patrolowania terenu. Patrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
-            <Russian>Отряд создаст подгруппу для патрулирования местности. NB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
+            <English>The unit will create a sub-group to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
+            <Polish>Jednostka stworzy podgrupę do patrolowania terenu.\nPatrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
+            <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
@@ -671,6 +671,12 @@
             <English>Lamber Danger Search Waypoints</English>
             <Polish>LAMBS Danger Punkty trasy</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
+            <English>Dynamic reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_ToolTip">
+            <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
         </Key>
     </Package>
 </Project>
