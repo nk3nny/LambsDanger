@@ -371,8 +371,8 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             typeName = "BOOL";
         };
         class GVAR(EnableReinforcement): Checkbox {
-            displayName = CSTRING(Module_TaskPatrol_EnableReinforcement_DisplayName);
-            tooltip = CSTRING(Module_TaskPatrol_EnableReinforcement_Tooltip);
+            displayName = CSTRING(Module_Task_EnableReinforcement_DisplayName);
+            tooltip = CSTRING(Module_Task_EnableReinforcement_Tooltip);
             property = QGVAR(enableReinforcement);
             unique = 0;
             validate = "none";
@@ -506,8 +506,8 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             typeName = "NUMBER";
         };
         class GVAR(EnableReinforcement): Checkbox {
-            displayName = CSTRING(Module_TaskHunt_EnableReinforcement_DisplayName);
-            tooltip = CSTRING(Module_TaskHunt_EnableReinforcement_Tooltip);
+            displayName = CSTRING(Module_Task_EnableReinforcement_DisplayName);
+            tooltip = CSTRING(Module_Task_EnableReinforcement_Tooltip);
             property = QGVAR(enableReinforcement);
             unique = 0;
             validate = "none";

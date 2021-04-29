@@ -39,7 +39,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskHunt_CycleTime_DisplayName), "SLIDER", LSTRING(Module_TaskHunt_CycleTime_ToolTip), [1, 300], [1, 0.5], TASK_HUNT_CYCLETIME, 2],
                         [LSTRING(Module_TaskHunt_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_MovingCenter_ToolTip), TASK_HUNT_MOVINGCENTER],
                         [LSTRING(Module_TaskHunt_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_PlayersOnly_ToolTip), TASK_HUNT_PLAYERSONLY],
-                        [LSTRING(Module_TaskHunt_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_EnableReinforcement_ToolTip), TASK_HUNT_ENABLEREINFORCEMENT]
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_HUNT_ENABLEREINFORCEMENT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
