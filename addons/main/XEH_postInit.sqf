@@ -17,9 +17,24 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
     QGVAR(debug_drawRectCacheEGSpectator),
     QGVAR(debug_drawRectCacheCurator)
 ];
-GVAR(debug_DrawID) = -1;
 
 GVAR(debug_DrawID) = -1;
+
+GVAR(debug_sideColorLUT) = createHashMap;
+{
+    _x params ["_name", "_side", "_default"];
+    private _r = profileNamespace getVariable [format ["map_%1_r", _name], _default select 0];
+    private _g = profileNamespace getVariable [format ["map_%1_g", _name], _default select 1];
+    private _b = profileNamespace getVariable [format ["map_%1_b", _name], _default select 2];
+    private _color = [_r, _g, _b] call BIS_fnc_colorRGBToHTML;
+    GVAR(debug_sideColorLUT) set [_side, _color];
+} foreach [
+    ["blufor", west, [0, 0.3, 0.6]],
+    ["opfor", east, [0.5,0,0]],
+    ["independent", independent, [0,0.5,0]],
+    ["civilian", civilian, [0.4,0,0.5]],
+    ["unknown", sideUnknown, [0.7,0.6,0]]
+];
 
 GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1, 0.85, false];
 
