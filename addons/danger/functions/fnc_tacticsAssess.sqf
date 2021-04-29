@@ -119,7 +119,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         !_speedMode
         && {_unit distance2D _x > RANGE_LONG}
         && {_unit knowsAbout _x < 2}
-        && {((getPosWorld _x) select 2) > ((_eyePos select 2) + 15)}
+        && {((getPosASL _x) select 2) > ((_eyePos select 2) + 15)}
         && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])}
     };
     if (_farHighertarget != -1) exitWith {
@@ -130,7 +130,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     // enemies near and below
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < RANGE_MID
-        && {((getPosWorld _x) select 2) < ((_eyePos select 2) - 15)}
+        && {((getPosASL _x) select 2) < ((_eyePos select 2) - 15)}
     };
     if (_farNoCoverTarget != -1) exitWith {
         // trust in default attack routines!
