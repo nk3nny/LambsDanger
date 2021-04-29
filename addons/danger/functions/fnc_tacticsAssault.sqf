@@ -77,13 +77,13 @@ _group enableAttack false;
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // concealment
-if (_unit distance2D _target > 15) then {
+if (_unit distance2D _target > 25) then {
 
     // leader smoke
-    [_unit, _target] call EFUNC(main,doSmoke);
+    if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _target] call EFUNC(main,doSmoke);};
 
     // grenadier smoke
-    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 6] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 3] call CBA_fnc_waitAndExecute;
 };
 
 // ready group
