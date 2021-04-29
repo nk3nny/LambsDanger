@@ -220,7 +220,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         if (GVAR(debug_RenderExpectedDestination)) then {
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
-            if (_unit distance _pos > viewDistance) exitWith {};
+            if (_unit distance _pos > _viewDistance) exitWith {};
             drawLine3D [_renderPos, _pos, [0, 0, 1, 0.5]];
             drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
