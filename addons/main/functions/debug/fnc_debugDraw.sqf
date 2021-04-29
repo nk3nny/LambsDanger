@@ -125,7 +125,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 {
     private _unit = _x;
     private _renderPos = getPosATLVisual _unit;
-    if ((_posCam distance _renderPos) <= viewDistance) then {
+    if ((_posCam distance _renderPos) <= _viewDistance) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
