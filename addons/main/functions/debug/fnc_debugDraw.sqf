@@ -181,8 +181,8 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             private _targetCount = count ((_unit targetsQuery [objNull, sideUnknown, "", [], 0]) select {((side _unit) isNotEqualTo (side (_x select 1))) || ((side (_x select 1)) isEqualTo civilian)});
             _textData append [
                 "    Current Tactic: ", group _unit getVariable [QGVAR(currentTactic), "None"], "<br/>",
-                "    Known enemies: ", _targetCount, "<br/>",
-                "    Group memory: ", count (group _unit getVariable [QGVAR(groupMemory), []]), "<br/>"
+                "    Known Enemies: ", _targetCount, "<br/>",
+                "    Group Memory: ", count (group _unit getVariable [QGVAR(groupMemory), []]), "<br/>"
             ];
         };
         private _currentCommand = currentCommand _unit;
