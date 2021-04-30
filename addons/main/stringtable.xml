@@ -307,9 +307,11 @@
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles">
             <English>Debug Draw Show banners for vehicle crew</English>
+            <Polish>Debug Draw - Pokaż banery dla załogi pojazdu</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles_ToolTip">
             <English>Draws information banners for all units boarded in vehicles. Default shows only the effective commander.  (Feature requires Debug Draw enabled)</English>
+            <Polish>Wyświetla informacje dla wszystkich jednostek na pokładzie pojazdu. Domyślnie pokazuje tylko dla dowódcy. (Funkcja wymaga włączonej opcji Debug Draw)</Polish>
         </Key>
     </Package>
 </Project>
