@@ -288,7 +288,7 @@
             <Russian>Минимальная дистанция для огня на подавление</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance_ToolTip">
-            <English>Within this distance AI will not perform suppression fire</English>
+            <English>If the target or a blocking obstacle is within this distance, the AI will not perform suppression fire</English>
             <German>Unter dieser Distanz führt die KI kein Unterdrückungsfeuer aus.</German>
             <Polish>Poniżej tej odległości AI nie strzela ogniem zaporowym</Polish>
             <Russian>На этом расстоянии ИИ не будет вести огонь на подавление</Russian>
@@ -300,7 +300,7 @@
             <Russian>Минимальная безопасная зона для  огня на подавление</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance_ToolTip">
-            <English>If there are allies within this distance AI will not perform suppression fire. Set to 0 to disable.</English>
+            <English>If there are allies within this distance, AI will not perform suppression fire. Set to 0 to disable.</English>
             <German>Wenn sich befreundete Einheiten innerhalb des Sicherheitsradius befinden für die KI kein Unterdrückungsfeuer durch. Auf 0 setzen um die Funktion zu deaktivieren.</German>
             <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
             <Russian>Если на этом расстоянии есть союзники, ИИ не будет вести огонь на подавление. Установите 0, чтобы отключить</Russian>
