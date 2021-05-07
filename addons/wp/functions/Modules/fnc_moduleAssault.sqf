@@ -4,13 +4,10 @@
  * Forces unit to assault or flee towards target location
  *
  * Arguments:
- * TODO
+ * Arma 3 Module Function Parameters
  *
  * Return Value:
- * TODO
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */
@@ -108,4 +105,3 @@ switch (_mode) do {
         };
     };
 };
-true

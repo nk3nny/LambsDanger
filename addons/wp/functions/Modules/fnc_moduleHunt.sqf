@@ -4,13 +4,10 @@
  * Search pattern. Makes the unit patrol in the direction of hostile players
  *
  * Arguments:
- * TODO
+ * Arma 3 Module Function Parameters
  *
  * Return Value:
- * TODO
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */
@@ -78,4 +75,3 @@ switch (_mode) do {
         };
     };
 };
-true
