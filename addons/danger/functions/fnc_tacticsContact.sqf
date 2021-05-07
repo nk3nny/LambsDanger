@@ -62,7 +62,7 @@ _group setFormDir (_unit getDir _enemy);
 
 // gesture + callouts for larger units
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"]};
+private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"] && {!isPlayer _x}};
 private _count = count _units;
 if (_count > 2) then {
     // gesture
