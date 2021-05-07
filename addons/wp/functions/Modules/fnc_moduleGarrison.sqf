@@ -4,13 +4,10 @@
  * Makes the unit take up defense building positions around target center
  *
  * Arguments:
- * TODO
+ * Arma 3 Module Function Parameters
  *
  * Return Value:
- * TODO
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */
@@ -103,4 +100,3 @@ switch (_mode) do {
         };
     };
 };
-true

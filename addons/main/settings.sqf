@@ -44,7 +44,7 @@ private _curCat = LSTRING(Settings_MainCat);
 [
     QGVAR(indoorMove),
     "SLIDER",
-    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)], // TODO(nkenny): Add Stringtable Entries!
+    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 1, 0.1, 2, true],
     1

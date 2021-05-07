@@ -7,10 +7,7 @@
  * 0: Unit being reset <OBJECT> or <GROUP>
  *
  * Return Value:
- * none
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */
@@ -54,4 +51,3 @@ switch (_mode) do {
         };
     };
 };
-true
