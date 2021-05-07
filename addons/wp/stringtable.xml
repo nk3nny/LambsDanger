@@ -680,5 +680,62 @@
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
             <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty trasy grup odpowiadających na wezwanie.</Polish>
         </Key>
+        <Key ID="STR_Lambs_WP_Waypoints_displayName">
+            <English>Advanced AI [LAMBS]</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
+            <English>TASK ASSAULT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
+            <English>Rushes to target position with no regard for safety</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssualt_Retreat_displayName">
+            <English></English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssualt_Retreat_Tooltip">
+            <English>TASK FORCED RETREAT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
+            <English>Retreats to target position while ignoring enemies</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
+            <English>TASK GARRISON</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
+            <English>TASK PATROL</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
+            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
+            <English>TASK RUSH</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
+            <English>Rushes players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
+            <English>TASK HUNT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
+            <English>Hunts players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
+            <English>TASK CREEP</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
+            <English>Stalks players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
+            <English>TASK CQB</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
+            <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
+            <English>REGISTER ARTILLERY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskArtillery_Tooltip">
+            <English>Registers artillery for dynamic use</English>
+        </Key>
     </Package>
 </Project>
