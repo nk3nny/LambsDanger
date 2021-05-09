@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - master
-  pull_request:
+  pull_request_target:
     
 jobs:
   validate:
@@ -12,6 +12,19 @@ jobs:
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+        rm -r addons
+        rm -r optionals
+        cp -r pullrequest/addons addons
+        cp -r pullrequest/optionals optionals
     - name: Validate SQF
       run: python3 tools/sqf_validator.py
     - name: Validate Config
@@ -32,6 +45,19 @@ jobs:
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+        rm -r addons
+        rm -r optionals
+        cp -r pullrequest/addons addons
+        cp -r pullrequest/optionals optionals
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
@@ -47,8 +73,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+        rm -r addons
+        rm -r optionals
+        cp -r pullrequest/addons addons
+        cp -r pullrequest/optionals optionals
       - name: Build addon with HEMTT
         uses: arma-actions/hemtt@master
         with:
@@ -69,6 +106,19 @@ jobs:
         pip3 install pygithub3
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+        rm -r addons
+        rm -r optionals
+        cp -r pullrequest/addons addons
+        cp -r pullrequest/optionals optionals
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
