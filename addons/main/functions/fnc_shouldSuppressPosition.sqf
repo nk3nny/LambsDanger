@@ -38,19 +38,11 @@ private _fnc_checkIfBlocked = {
         {GVAR(buildingModelCache) getVariable [((getModelInfo _obj) select 1), false]}} // super simple object that has a model of a building
     };
 
-    // true if LIS hit terrain geom or a building which is further away than 71+ (sqr of 5041) meters from target pos
-    _index isNotEqualTo -1 && {
-        isNull ((_vis select _index) select 2) || {(((_vis select _index) select 0) distanceSqr _endPos) < 5041};
-    }
+    _index isNotEqualTo -1
 };
 
 // check from unit pos to end pos
-if ([_unit, _unitASL, _targetASL] call _fnc_checkIfBlocked) exitWith {
-    systemChat format ["%1 %2 Leader: %3 NO", time, side _unit, (leader group _unit) isEqualTo _unit];
-    false };
+if ([_unit, _unitASL, _targetASL] call _fnc_checkIfBlocked) exitWith { false };
 // reverse check
-if ([_unit, _targetASL, _unitASL] call _fnc_checkIfBlocked) exitWith {
-    systemChat format ["%1 %2 Leader: %3 NO, reversed", time, side _unit, (leader group _unit) isEqualTo _unit];
-    false };
-systemChat format ["%1 %2 Leader: %3 Success", time, side _unit, (leader group _unit) isEqualTo _unit];
+if ([_unit, _targetASL, _unitASL] call _fnc_checkIfBlocked) exitWith { false };
 true

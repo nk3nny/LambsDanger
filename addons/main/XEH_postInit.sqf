@@ -10,7 +10,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
         };
         GVAR(buildingModelCache) setVariable [_string, true];
     };
-} forEach (("configName _x isKindof 'building'" configClasses (configFile >> "CfgVehicles")) apply {getText (_x >> "model")});
+} forEach (("private _name = configName _x; _name isKindof 'building' || {_name isKindOf 'Rocks_base_F'}" configClasses (configFile >> "CfgVehicles")) apply {getText (_x >> "model")});
 
 {
     private _controls = uiNamespace getVariable [_x, []];
