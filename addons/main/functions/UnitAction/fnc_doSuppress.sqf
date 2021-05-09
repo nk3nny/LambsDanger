@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params ["_unit", "_pos"];
+params ["_unit", "_pos", ["_checkLOS", false]];
 
 // no primary weapons exit? Player led groups do not auto-suppress
 private _eyePos = eyePos _unit;
@@ -25,6 +25,7 @@ if (
     || {(currentCommand _unit) isEqualTo "Suppress"}
     || {terrainIntersectASL [_eyePos, _pos]}
     || {isPlayer (leader _unit) && {GVAR(disablePlayerGroupSuppression)}}
+    || {_checkLOS && {!([_unit, _pos] call FUNC(shouldSuppressPosition))}}
 ) exitWith {false};
 
 // max range pos
