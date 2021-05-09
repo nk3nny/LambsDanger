@@ -8,7 +8,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
         if (_string select [0,1] isEqualTo "\") then {
             _string = [_string, 1] call CBA_fnc_substr;
         };
-        GVAR(buildingModelCache) setVariable [_string, true];
+        GVAR(blockSuppressionModelCache) setVariable [_string, true];
     };
 } forEach ("private _name = configName _x; _name isKindof 'building' || {_name isKindOf 'Rocks_base_F'}" configClasses (configFile >> "CfgVehicles"));
 
