@@ -20,7 +20,7 @@ params ["_unit", "_target"];
 #define NUM_PROBES 2
 
 if (_target isEqualType objNull) then {
-    _target = ATLtoASL (_target call CBA_fnc_getPos)
+    _target = getPosASL _target;
 };
 private _unitASL = (eyePos _unit) vectorAdd [0, 0, 0.5];
 
