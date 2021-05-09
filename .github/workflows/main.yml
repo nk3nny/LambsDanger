@@ -22,9 +22,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request_target' }}
       run: |
         rm -r addons
-        rm -r optionals
         cp -r pullrequest/addons addons
-        cp -r pullrequest/optionals optionals
     - name: Validate SQF
       run: python3 tools/sqf_validator.py
     - name: Validate Config
@@ -55,9 +53,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request_target' }}
       run: |
         rm -r addons
-        rm -r optionals
         cp -r pullrequest/addons addons
-        cp -r pullrequest/optionals optionals
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
@@ -83,9 +79,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request_target' }}
       run: |
         rm -r addons
-        rm -r optionals
         cp -r pullrequest/addons addons
-        cp -r pullrequest/optionals optionals
       - name: Build addon with HEMTT
         uses: arma-actions/hemtt@master
         with:
@@ -116,9 +110,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request_target' }}
       run: |
         rm -r addons
-        rm -r optionals
         cp -r pullrequest/addons addons
-        cp -r pullrequest/optionals optionals
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
