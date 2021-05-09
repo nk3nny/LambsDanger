@@ -23,7 +23,7 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 _target = _target call CBA_fnc_getPos;
 
 // exit with flank squad leader cannot suppress from here
-if !([_unit, _target] call FUNC(shouldSuppressPosition)) exitWith {
+if !([_unit, ATLToASL _target] call EFUNC(main,shouldSuppressPosition)) exitWith {
     [_unit, _target] call FUNC(tacticsFlank);
 };
 

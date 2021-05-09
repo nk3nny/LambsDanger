@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: _unit <OBJECT>
- * 1: _target <OBJECT> or position <ARRAY>
+ * 1: _target <OBJECT> or position <ARRAY> (ASL position)
  *
  * Return Value:
  * success
@@ -17,32 +17,40 @@
 */
 params ["_unit", "_target"];
 
-private _targetASL = ATLtoASL (_target call CBA_fnc_getPos);
-private _unitASL = getPosASL _unit;
+#define NUM_PROBES 2
 
-private _fnc_CheckIfBlocked = {
-    params ["_startPos", "_endPos"];
+private _targetASL = if (_target isEqualType objNull) then {
+    systemChat (str time + "Run LIS check on unit");
+    ATLtoASL (_target call CBA_fnc_getPos)
+} else {
+    _target
+};
+private _unitASL = (eyePos _unit) vectorAdd [0, 0, 0.5];
 
-    private _vis = lineIntersectsSurfaces [_startPos vectorAdd [0, 0, 2], _endPos vectorAdd [0, 0, 2], _unit, objNull, true, 3, "FIRE", "GEOM"];
-    private _index = _vis findIf {isNull (_x select 2) || {(_x select 2) isKindOf "Building" || {GVAR(buildingModelCache) getVariable [((getModelInfo (_x select 2)) select 1), false]}}};
+private _fnc_checkIfBlocked = {
+    params ["_unit", "_startPos", "_endPos"];
+
+    private _vis = lineIntersectsSurfaces [_startPos, _endPos vectorAdd [0, 0, 2], _unit, objNull, true, NUM_PROBES, "FIRE", "GEOM"];
+    private _index = _vis findIf {
+        private _obj = (_x select 2);
+        isNull _obj || // terrain geom
+        {_obj isKindOf "Building" || // normal object that is a building
+        {GVAR(buildingModelCache) getVariable [((getModelInfo _obj) select 1), false]}} // super simple object that has a model of a building
+    };
 
     // true if LIS hit terrain geom or a building which is further away than 71+ (sqr of 5041) meters from target pos
-    diw_debug = _vis;
-    systemChat "====================";
-    if (_index isNotEqualTo -1) then {
-        systemChat format ["index: %1 | null: %2 | dist: 3", _index, isNull ((_vis select _index) select 2), ((_vis select _index) select 0) vectorDistanceSqr _endPos];
-    } else {
-        systemChat "Nothing in LIS"
-    };
-    systemChat "====================";
     _index isNotEqualTo -1 && {
         isNull ((_vis select _index) select 2) || {(((_vis select _index) select 0) distanceSqr _endPos) < 5041};
     }
 };
 
 // check from unit pos to end pos
-if ([_unitASL, _targetASL] call _fnc_CheckIfBlocked) exitWith { false };
+if ([_unit, _unitASL, _targetASL] call _fnc_checkIfBlocked) exitWith {
+    systemChat format ["%1 %2 Leader: %3 NO", time, side _unit, (leader group _unit) isEqualTo _unit];
+    false };
 // reverse check
-if ([_targetASL, _unitASL] call _fnc_CheckIfBlocked) exitWith { false };
-
+if ([_unit, _targetASL, _unitASL] call _fnc_checkIfBlocked) exitWith {
+    systemChat format ["%1 %2 Leader: %3 NO, reversed", time, side _unit, (leader group _unit) isEqualTo _unit];
+    false };
+systemChat format ["%1 %2 Leader: %3 Success", time, side _unit, (leader group _unit) isEqualTo _unit];
 true
