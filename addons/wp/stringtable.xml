@@ -169,6 +169,9 @@
             <Polish>Czas cyklu skryptu</Polish>
             <Russian>Время цикла скрипта</Russian>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_ErrorNotModuleTarget">
+            <English>Using Task Assault on a Unit without a Dynamic Target is not supported!</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
             <English>Task Camp</English>
             <German>Aufgabe Lager</German>
