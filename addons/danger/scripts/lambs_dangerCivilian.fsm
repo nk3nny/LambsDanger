@@ -180,8 +180,8 @@ link63[] = {54,2};
 link64[] = {55,2};
 link65[] = {56,4};
 link66[] = {57,58};
-globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-2583.531982,785.125488,1782.452026,-771.487427,1166,884,1};
-window[] = {2,-1,-1,-1,-1,1026,208,829,208,3,1184};
+globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-1872.445801,594.427734,1279.814941,-590.437561,1166,884,1};
+window[] = {2,-1,-1,-1,-1,870,52,673,52,3,1184};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -423,8 +423,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Clean_up";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.99" \n
-                                         "|| {fleeing _this}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.99"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -893,8 +892,7 @@ class FSM
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"_dangerCauseOld isNotEqualTo _dangerCause" \n
                                          "|| {getSuppression _this > 0.9}" \n
-                                         "|| {_this distance2D _dangerCausedBy < 3}" \n
-                                         "|| {fleeing _this}"/*%FSM</CONDITION""">*/;
+                                         "|| {_this distance2D _dangerCausedBy < 3}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -919,7 +917,7 @@ class FSM
                         itemno = 50;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// chance to stop + animation " \n
-                         "if (random 1 > 0.6 || {_this distance2D _dangerCausedBy < 10} || {_this distance2D _newPos < 3}) then {" \n
+                         "if (random 1 > 0.6 || {_this distance2D _dangerCausedBy < 10} || {_this distance2D _newPos < 3} || {fleeing _this}) then {" \n
                          "	if (_this call lambs_danger_fnc_fsmAllowAnimation) then { " \n
                          "		_this playMoveNow selectRandom [""ApanPpneMstpSnonWnonDnon_G01"", ""ApanPpneMstpSnonWnonDnon_G02"",""ApanPpneMstpSnonWnonDnon_G03""];" \n
                          "		_this stop true;" \n
