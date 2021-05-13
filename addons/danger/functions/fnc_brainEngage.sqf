@@ -61,6 +61,11 @@ if (
     _timeout + 4
 };
 
+// running are busy and shouldn't suppress
+if ((speed _unit) isEqualTo 0) exitWith {
+    _timeout + 1
+};
+
 // set speed
 _unit forceSpeed ([-1, 1] select (_type isEqualTo DANGER_CANFIRE));
 
