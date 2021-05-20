@@ -11,4 +11,6 @@ GVAR(shareHandlers) = [];
 
 GVAR(blockSuppressionModelCache) = false call CBA_fnc_createNamespace;
 
+GVAR(minObstacleProximity) = 5;
+
 ADDON = true;
