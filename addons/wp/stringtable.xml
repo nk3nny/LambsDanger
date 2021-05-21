@@ -690,16 +690,16 @@
             <English>Rushes to target position with no regard for safety</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
-            <English>TASK FORCED RETREAT</English>
+            <English>TASK RETREAT</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
             <English>Retreats to target position while ignoring enemies</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
-            <English>Retreats to target position while ignoring enemies</English>
+            <English>TASK GARRISON</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
-            <English>TASK GARRISON</English>
+            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
