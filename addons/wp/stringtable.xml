@@ -711,19 +711,19 @@
             <English>TASK RUSH</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
-            <English>Rushes players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+            <English>Rushes players within WP completion radius (Default 1000m)</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
-            <English>Hunts players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+            <English>Hunts players within WP completion radius (Default 1000m)</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
-            <English>Stalks players within WP completion radius (Default 1000m)\nOnly targets players!</English>
+            <English>Stalks players within WP completion radius (Default 1000m)</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
