@@ -73,32 +73,31 @@ _group enableAttack false;
 _group setVariable [QEGVAR(main,currentTactic), "taskGarrison", EGVAR(main,debug_functions)];
 
 // declare units + sort vehicles + tweak count to match house positions
-private _units = units _group;
-_units = _units select {isNull objectParent _x};
+private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
 
 // add sub patrols
 reverse _units;
 if (_patrol) then {
-    private _group2 = createGroup [(side _group), true];
-    [_units deleteAt 0] join _group2;
-    if (count _units > 4)  then { [_units deleteAt 0] join _group2; };
+    private _patrolGroup = createGroup [(side _group), true];
+    [_units deleteAt 0] join _patrolGroup;
+    if (count _units > 4)  then { [_units deleteAt 0] join _patrolGroup; };
 
     // performance
     if (dynamicSimulationEnabled _group) then {
-        [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
+        [_patrolGroup, true] remoteExecCall ["enableDynamicSimulation", 2];
     };
 
     // id
-    _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];
+    _patrolGroup setGroupIDGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _pos, _radius, 4, nil, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _radius, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [1, (_area2 select 1) * 2];
-        [_group2, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
     };
 };
 
@@ -121,7 +120,7 @@ if (count _units > count _houses) then {_units resize (count _houses);};
 private _fnc_addEventHandler = {
     params ["_type"];
     if (_type == -2) then {
-        _type = floor (random 3);
+        _type = floor (random 4);
     };
     // add handlers
     switch (_type) do {
@@ -153,6 +152,14 @@ private _fnc_addEventHandler = {
             }];
         };
         case 3: {
+            _x addEventHandler ["Suppressed", {
+                params ["_unit"];
+                [_unit, "PATH"] remoteExec ["enableAI", _unit];
+                _unit setCombatMode "RED";
+                _unit removeEventHandler ["Suppressed", _thisEventHandler];
+            }];
+        };
+        case 4: {
             // DO NOTHING
         };
     };
@@ -162,6 +169,7 @@ private _fnc_addEventHandler = {
     // prepare
     doStop _x;
     private _house = _houses deleteAt 0;
+
     // move and delay stopping + stance
     if (_teleport) then {
         if (surfaceIsWater _house) then {
@@ -190,18 +198,14 @@ private _fnc_addEventHandler = {
     };
 
     if (_exitCondition == -1) then {
-        for "_i" from 0 to 2 do {
+        for "_i" from 0 to 3 do {
             _i call _fnc_addEventHandler;
         };
     } else {
         _exitCondition call _fnc_addEventHandler;
     };
-    // end
-    true
-} count _units;
 
-// end with patrol
-// disabled!
+} forEach _units;
 
 // waypoint
 _pos set [2, 0]; // Stop Waypoints from Flying
@@ -213,7 +217,6 @@ _wp setWaypointCompletionRadius _radius;
 if (EGVAR(main,debug_functions)) then {
     ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
 };
-
 
 // end
 true

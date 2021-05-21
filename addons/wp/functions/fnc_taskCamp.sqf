@@ -44,9 +44,6 @@ private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}
 if (_pos isEqualTo []) then { _pos = _group; };
 _pos = _pos call CBA_fnc_getPos;
 
-// remove all waypoints
-//[_group] call CBA_fnc_clearWaypoints;
-
 // orders
 _group setBehaviour "SAFE";
 _group setSpeedMode "LIMITED";
@@ -172,18 +169,18 @@ private _dir = random 360;
 {
     _dir = _dir + (360 / count _units) - random (180 / count _units);
     private _range = 1.35 + random 3.3;
-    private _pos2 = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
+    private _campPos = [(_pos select 0) + (sin _dir) * _range, (_pos select 1) + (cos _dir) * _range, 0];
 
     // teleport
     if (_teleport) then {
-        _x setPos _pos2;
         _x setDir (_x getDir _pos);
+        _x setPos _campPos;
     };
 
     // execute move
     doStop _x;
-    _x doMove _pos2;
-    _x setDestination [_pos2, "LEADER DIRECT", false];
+    _x doMove _campPos;
+    _x setDestination [_campPos, "LEADER DIRECT", false];
 
     // sort anims
     private _anims = _unarmedAnims;
@@ -201,28 +198,23 @@ private _dir = random 360;
         _unit disableAI "ANIM";
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);
+        _unit setUnitPos "MIDDLE";
         _unit addEventHandler ["Hit", {
             params ["_unit"];
-            {
-                [_x, "ANIM"] remoteExec ["enableAI", _x];
-                [_x, "PATH"] remoteExec ["enableAI", _x];
-            } foreach units _unit;
-            [_unit, "", 2] call EFUNC(main,doAnimation);
-
+            [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
             _unit removeEventHandler ["Hit", _thisEventHandler];
         }];
         _unit addEventHandler ["FiredNear", {
             params ["_unit"];
-            {
-                [_x, "ANIM"] remoteExec ["enableAI", _x];
-                [_x, "PATH"] remoteExec ["enableAI", _x];
-            } foreach units _unit;
-            [_unit, "", 2] call EFUNC(main,doAnimation);
-
+            [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
             _unit removeEventHandler ["FiredNear", _thisEventHandler];
         }];
-    }, [_x, _pos2, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
-
+        _unit addEventHandler ["Suppressed", {
+            params ["_unit"];
+            [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
+            _unit removeEventHandler ["Suppressed", _thisEventHandler];
+        }];
+    }, [_x, _campPos, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
 } forEach _units;
 
 // waypoint and end state

@@ -300,9 +300,13 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
                     name = CSTRING(FiredNear);
                     value = 2;
                 };
+                class Suppressed {
+                    name = CSTRING(Suppressed);
+                    value = 3;
+                };
                 class None {
                     name = CSTRING(None);
-                    value = 3;
+                    value = 4;
                 };
             };
         };
