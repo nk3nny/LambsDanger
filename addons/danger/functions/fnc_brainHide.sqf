@@ -22,7 +22,6 @@
     5 DeadBodyGroup
     6 DeadBody
     7 Hide
-    - Panic
 */
 
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];

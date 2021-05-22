@@ -27,7 +27,6 @@
         Hide actions
         5 DeadBodyGroup
         6 DeadBody
-        - Panic
 
         Engage actions
         0 Enemy detected
@@ -109,15 +108,7 @@ if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) ex
 };
 
 // hide actions
-private _panic = RND(1 - GVAR(panicChance)) && {getSuppression _unit > 0.9};
-if (_panic || {_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY, DANGER_SCREAM]}) exitWith {
-
-    // panic function
-    if (_panic) then {
-        [_unit] call EFUNC(main,doPanic);
-    };
-
-    // return
+if (_dangerCause in [DANGER_DEADBODYGROUP, DANGER_DEADBODY, DANGER_SCREAM]) exitWith {
     _return set [ACTION_HIDE, true];
     _return
 };

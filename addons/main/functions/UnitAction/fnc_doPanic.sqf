@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Unit acts in panic ~ may be improved in the future using position of danger and re-implementing more actions -nkenny
+ * Unit acts in panic
  *
  * Arguments:
  * 0: unit panicking <OBJECT>
@@ -35,6 +35,77 @@ _unit setVariable [QGVAR(currentTask), "Panic", GVAR(debug_functions)];
 
 // debug
 if (GVAR(debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call FUNC(debugLog);};
+
+// functions
+private _fnc_panicReset = {
+    params ["_unit", "_timeout", ["_animation", false]];
+    [
+        {
+            params ["_unit", "_animation"];
+            _unit setUnitPos "AUTO";
+            _unit setVariable [QEGVAR(danger,forceMove), nil];
+            if (_animation) then {[_unit, "gestureYes"] call FUNC(doGesture);};
+        }, [_unit, _animation], _timeout
+    ] call CBA_fnc_waitAndExecute;
+};
+
+// force AI
+_unit doWatch objNull;
+_unit setVariable [QEGVAR(danger,forceMove), true];
+
+// indoor -- gesture
+if (RND(0.8) || {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 7]]}) exitWith {
+
+    // action
+    _unit forceSpeed 0;
+    _unit setUnitPos selectRandom ["MIDDLE", "MIDDLE", "DOWN"];
+    private _move = call {
+        private _stance = stance _unit;
+        if (_stance isEqualTo "PRONE") exitWith {"AmovPpneMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon"};  // stand up crouch
+        if (_stance isEqualTo "CROUCH") exitWith {"AmovPpneMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon"};  // stand up stand
+        "AmovPercMstpSnonWnonDnon_AmovPpneMstpSnonWnonDnon"
+    };
+    _unit switchMove _move;
+    [{_this playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared", "AmovPercMstpSnonWnonDnon_Scared2"];}, _unit] call CBA_fnc_execNextFrame;  // ~ set civilian animation - nkenny
+
+    // return
+    [_unit, 6 + random 4] call _fnc_panicReset;
+};
+
+// outdoor -- crawl
+if (RND(0.25)) exitWith {
+
+    // action
+    _unit setUnitPos "DOWN";
+    [_unit, ["FastB", "FastLB", "FastRB"], true] call EFUNC(main,doGesture);
+
+    // chance to randomly fire weapon
+    if ((RND(0.4)) && {!(primaryWeapon _unit isEqualTo "")}) then {
+        _unit forceWeaponFire [primaryWeapon _unit, selectRandom (getArray (configFile >> "CfgWeapons" >> (primaryWeapon _unit) >> "modes"))];
+    };
+
+    // chance to randomly wave
+    if (RND(0.4)) then {
+        [_unit, "GestureCover"] call FUNC(doGesture);
+    };
+
+    // return
+    [_unit, 6 + random 6] call _fnc_panicReset;
+};
+
+// outdoor -- hide
+
+// animation
+[_unit, "GestureAgonyCargo"] call FUNC(doGesture);
+
+// action
+[_unit, _unit getPos [-100, getDir _unit], 55] call FUNC(doHide);
+
+// stance
+_unit setUnitPos selectRandom ["MIDDLE", "UP"];
+
+// reset
+[_unit, 8 + random 6, true] call _fnc_panicReset;
 
 // end
 true
