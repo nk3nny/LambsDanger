@@ -5,10 +5,13 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
 {
     private _string = getText (_x >> "model");
     if (_string isNotEqualTo "") then {
-        if (_string select [0,1] isEqualTo "\") then {
+        if ((_string select [0,1]) isEqualTo "\") then {
             _string = [_string, 1] call CBA_fnc_substr;
         };
-        GVAR(blockSuppressionModelCache) setVariable [_string, true];
+        if !(".p3d" in _string) then {
+            _string = _string + ".p3d";
+        };
+        GVAR(blockSuppressionModelCache) setVariable [toLower _string, true];
     };
 } forEach ("private _name = configName _x; _name isKindof 'building' || {_name isKindOf 'Rocks_base_F'}" configClasses (configFile >> "CfgVehicles"));
 
