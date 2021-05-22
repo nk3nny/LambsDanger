@@ -16,15 +16,16 @@
 */
 
 // init
-params ["_unit"];
+params ["_unit", "", "_shooter"];
 if (
-    morale _unit > 0
+    !local _unit
+    || {morale _unit > 0}
     || {getSuppression _unit < 0.97}
-    || {!local _unit}
     || {!isNull objectParent _unit}
     || {_unit getVariable [QEGVAR(danger,forceMove), false]}
-    || {_this getVariable [QEGVAR(danger,disableAI), false]}
+    || {_unit getVariable [QEGVAR(danger,disableAI), false]}
     || {RND(GVAR(panicChance))}
+    || {_unit distanceSqr _shooter < 1225}  // ~ exit if shooter is within 35m
     || {isPlayer _unit || {isPlayer (leader _unit)}}
 ) exitWith {false};
 

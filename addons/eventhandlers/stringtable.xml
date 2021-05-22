@@ -31,13 +31,13 @@
             <Polish>Konfiguruje czas resetowania reakcji na zdarzenie wybuchu.</Polish>
             <Russian>Настраивает время сброса взрывов</Russian>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_PanicChance">
+        <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance">
             <English>Panic Chance</English>
             <German>Panikwahrscheinlichkeit</German>
             <Polish>Szansa na panikę</Polish>
             <Russian>Шанс паники</Russian>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
+        <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance_ToolTip">
             <English>Chance to panic in percentage</English>
             <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
             <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
