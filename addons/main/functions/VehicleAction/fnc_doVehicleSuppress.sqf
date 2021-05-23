@@ -56,6 +56,8 @@ if (_friendlies isNotEqualTo []) exitWith {false};
 private _distance = (_eyePos vectorDistance _pos) - 4;
 _pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
 
+[_vehicle] call FUNC(doSelectHEMunition);
+
 // do it
 _vehicle doSuppressiveFire _pos;
 
