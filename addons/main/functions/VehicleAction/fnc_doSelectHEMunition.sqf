@@ -83,13 +83,8 @@ if ((currentMuzzle _gunner) isNotEqualTo _muzzle) then {
     [{
         params ["_gunner", "_muzzle"];
         _gunner selectWeapon _muzzle;
-        systemChat format ["%1 switching back to muzzle %2", _gunner, _muzzle];
     }, [_gunner, _vehicle getVariable [QGVAR(defaultGunnerMuzzle), ""]], 15] call CBA_fnc_waitAndExecute;
-    systemChat format ["%1 switching to muzzle %2 from %3", _gunner, _muzzle, _vehicle getVariable [QGVAR(defaultGunnerMuzzle), ""]];
-    [{
-        params ["_gunner", "_muzzle"];
-        _gunner selectWeapon _muzzle;
-    }, [_gunner, _muzzle]] call CBA_fnc_execNextFrame;
+    _gunner selectWeapon _muzzle;
 };
 if (_heMag isNotEqualTo "") then {
     if ((_vehicle getVariable [QGVAR(defaultGunnerMagazine), ""]) isEqualTo "") then {
@@ -99,11 +94,9 @@ if (_heMag isNotEqualTo "") then {
     [{
         params ["_vehicle", "_turretPath", "_turret", "_oldMagClass"];
         _vehicle loadMagazine [_turretPath, _turret, _oldMagClass];
-        systemChat format ["%1 loading %2 back into %3 ", gunner _vehicle, _oldMagClass, _turret];
     }, [_vehicle, _turretPath, _turret, _vehicle getVariable [QGVAR(defaultGunnerMagazine), ""]], 15] call CBA_fnc_waitAndExecute;
 
     _vehicle loadMagazine [_turretPath, _turret, _heMag];
-    systemChat format ["%1 loading %2 into %3 ", _gunner, _heMag, _turret];
 };
 
 true
