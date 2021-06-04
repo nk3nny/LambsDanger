@@ -25,7 +25,10 @@ if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 // init
 params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS]];
 
-if (_pos isEqualTo [] || isNull _gun) exitWith {};
+if (isNull _gun) exitWith {};
+if (_pos isEqualTo []) exitWith {
+    [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
+};
 
 if (isNull _caller) then {
     _caller = _gun;
@@ -34,7 +37,10 @@ if (isNull _caller) then {
 [QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(main,eventCallback);
 
 // gun and caller must be alive
-if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {false};
+if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {
+    [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
+    false
+};
 
 // settings
 private _direction = _gun getDir _pos;
@@ -163,7 +169,9 @@ if (_markerList isNotEqualTo []) then {
 sleep _checkRounds;
 
 // re-add to list
-if (!canFire _gun) exitWith {false};
+if (!canFire _gun) exitWith {
+    [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
+    false
+};
 
 // ready up again
-[QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
