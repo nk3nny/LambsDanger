@@ -28,7 +28,7 @@ if (isServer) then {
         private _gun = _artillerySelected select 0;
         _artillery deleteAt (_artillery find _gun);
 
-        GVAR(SideArtilleryHash) = GVAR(SideArtilleryHash) set [_side, _artillery select {!isNull _x}];
+        GVAR(SideArtilleryHash) set [_side, _artillery select {!isNull _x}];
         publicVariable QGVAR(SideArtilleryHash);
         [QGVAR(FireArtillery), [_gun, _pos, _caller, _rounds, _accuracy, _skipCheckrounds], _gun] call CBA_fnc_targetEvent;
     }] call CBA_fnc_addEventhandler;
