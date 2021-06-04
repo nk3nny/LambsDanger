@@ -16,7 +16,7 @@ if (isServer) then {
 
     [QGVAR(RequestArtillery), {
         params [["_side", sideUnknown], ["_pos", [0, 0, 0]], ["_caller", objNull], ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
-        private _artillery = [GVAR(SideArtilleryHash) get _side;
+        private _artillery = GVAR(SideArtilleryHash) get _side;
         private _artillerySelected = _artillery select {
             canFire _x
             && {unitReady _x}
