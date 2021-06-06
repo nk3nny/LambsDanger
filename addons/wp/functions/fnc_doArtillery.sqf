@@ -175,3 +175,4 @@ if (!canFire _gun) exitWith {
 };
 
 // ready up again
+[QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
