@@ -6,7 +6,7 @@ ADDON = false;
 if (isServer) then {
     [QGVAR(RegisterArtillery), {
         {
-            private _artillery = GVAR(SideArtilleryHash) get (side _x);
+            private _artillery = GVAR(SideArtilleryHash) getOrDefault [(side _x), []];
             _artillery pushBackUnique _x;
             GVAR(SideArtilleryHash) set [side _x, _artillery];
         } forEach _this;
@@ -16,7 +16,7 @@ if (isServer) then {
 
     [QGVAR(RequestArtillery), {
         params [["_side", sideUnknown], ["_pos", [0, 0, 0]], ["_caller", objNull], ["_rounds", floor (3 + random 4)], ["_accuracy", 75], ["_skipCheckrounds", false]];
-        private _artillery = GVAR(SideArtilleryHash) get _side;
+        private _artillery = GVAR(SideArtilleryHash) getOrDefault [_side, []];
         private _artillerySelected = _artillery select {
             canFire _x
             && {unitReady _x}
