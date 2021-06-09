@@ -92,6 +92,16 @@ if (_static) exitWith {
 // update information
 if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
 
+if (_attack && {!(isNull _dangerCausedBy)}) then {
+    private _enemyVic = vehicle _dangerCausedBy;
+    if (_enemyVic isKindOf "Tank" || {
+        _enemyVic isKindOf "Wheeled_APC_F"}) then {
+        [_vehicle, ["AP", "TandemHEAT"], true] call EFUNC(main,doSelectWarhead);
+    } else {
+        [_vehicle] call EFUNC(main,doSelectWarhead);
+    };
+};
+
 // vehicle type ~ Armoured vehicle
 private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F"};
 if (_armored && {!isNull _dangerCausedBy}) exitWith {
@@ -147,7 +157,9 @@ if (_car) exitWith {
     private _slow = speed _vehicle < 30;
 
     // look to danger
-    if (!isNull _dangerCausedBy) then {_vehicle doWatch _dangerCausedBy;};
+    if (!isNull _dangerCausedBy) then {
+        _vehicle doWatch _dangerCausedBy;
+    };
 
     // escape
     if (_slow && {_vehicle distance _dangerCausedBy < (15 + random 35)}) then {

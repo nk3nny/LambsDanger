@@ -1,24 +1,24 @@
 #include "script_component.hpp"
 /*
  * Author: diwako
- * Makes main gun of vehicle switch to HE ammo,
- * then switches back to regular ammo after 15 seconds
+ * Makes main gun of vehicle switch to given warhead type ammo
+ * warhead types: AP TandemHEAT HEAT HE
  *
  * Arguments:
  * 0: vehicle suppressing <OBJECT>
+ * 1: warhead types <ARRAY of upper case strings>
  *
  * Return Value:
  * success
  *
  * Example:
- * [vehicle bob] call lambs_main_fnc_doSelectHEMunition;
+ * [vehicle bob, ["HE"]] call lambs_main_fnc_doSelectWarhead;
  *
  * Public: No
 */
-params ["_vehicle"];
+params ["_vehicle", ["_warheadTypes", ["HE", "HEAT"]], ["_switchMuzzle", false]];
 private _gunner = gunner _vehicle;
-
-if (isNull _gunner) exitWith {false};
+if ((_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) > CBA_missionTime || {isNull _gunner}) exitWith {false};
 
 // figure out turret and ammo
 private _turretPath = (assignedVehicleRole _gunner) select 1;
@@ -31,23 +31,23 @@ private _availableMags = _turretMagazines arrayIntersect _vehicleMagazines;
 
 private _turret = "";
 private _muzzle = "";
-private _heMag = "";
+private _foundMag = "";
 
 {
     _turret = _x;
     private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
 
-    // first pass, try to find the "HE" muzzle
-    private _index = _muzzles findIf {_x == "HE"};
-    if (_index > -1 && { // found muzzle named HE
+    // first pass, try to find a muzzle that has the same name
+    private _index = _muzzles findIf {(toUpper _x) in _warheadTypes};
+    if (_index > -1 && { // found muzzle with same name
         // one of the mags that can be loaded into that muzzle is in available mags
-        ((getArray (configFile >> "CfgWeapons" >> _turret >> "he" >> "magazines")) arrayIntersect _availableMags) isNotEqualTo []
+        ((getArray (configFile >> "CfgWeapons" >> _turret >> (_muzzles select _index) >> "magazines")) arrayIntersect _availableMags) isNotEqualTo []
     }) then {
         _muzzle = _muzzles select _index;
         break;
     };
 
-    // second pass no "HE" muzzle not found, see if any ammo loaded has its warheadName values set as "HE"
+    // second pass no named muzzle not found, see if any ammo loaded has its warheadName values set as a value in _warheadTypes
     _index = _muzzles findIf {
         private _magazines = if (_x == "this") then {
             _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> "magazines"))
@@ -59,11 +59,11 @@ private _heMag = "";
         {
             private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
             if (_ammo isEqualTo "") then {continue};
-            if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in ["HE", "HEAT"]) exitWith {
-                _heMag = _x;
+            if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) exitWith {
+                _foundMag = _x;
             };
         } forEach _magazines;
-        _heMag isNotEqualTo ""
+        _foundMag isNotEqualTo ""
     };
     if (_index > -1) then {
         _muzzle = _muzzles select _index;
@@ -76,27 +76,16 @@ if (_muzzle == "this") then {
 };
 
 if (_turret isEqualTo "" || {_muzzle isEqualTo ""}) exitWith {false};
-if ((currentMuzzle _gunner) isNotEqualTo _muzzle) then {
-    if ((_vehicle getVariable [QGVAR(defaultGunnerMuzzle), ""]) isEqualTo "") then {
-        _vehicle setVariable [QGVAR(defaultGunnerMuzzle), currentMuzzle _gunner, true];
-    };
-    [{
-        params ["_gunner", "_muzzle"];
-        _gunner selectWeapon _muzzle;
-    }, [_gunner, _vehicle getVariable [QGVAR(defaultGunnerMuzzle), ""]], 15] call CBA_fnc_waitAndExecute;
+
+// load mag type if exists and is not currently loaded
+if (_foundMag isNotEqualTo "" && {_foundMag isNotEqualTo ((weaponState [_vehicle, _turretPath, _muzzle]) select 3)}) then {
+    _vehicle loadMagazine [_turretPath, _turret, _foundMag];
+};
+
+// switch to muzzle if currently not active
+if (_switchMuzzle && {(currentMuzzle _gunner) isNotEqualTo _muzzle}) then {
     _gunner selectWeapon _muzzle;
 };
-if (_heMag isNotEqualTo "") then {
-    if ((_vehicle getVariable [QGVAR(defaultGunnerMagazine), ""]) isEqualTo "") then {
-        private _oldMagClass = (weaponState [_vehicle, _turretPath, _muzzle]) select 3;
-        _vehicle setVariable [QGVAR(defaultGunnerMagazine), _oldMagClass, true];
-    };
-    [{
-        params ["_vehicle", "_turretPath", "_turret", "_oldMagClass"];
-        _vehicle loadMagazine [_turretPath, _turret, _oldMagClass];
-    }, [_vehicle, _turretPath, _turret, _vehicle getVariable [QGVAR(defaultGunnerMagazine), ""]], 15] call CBA_fnc_waitAndExecute;
 
-    _vehicle loadMagazine [_turretPath, _turret, _heMag];
-};
-
+_vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
 true

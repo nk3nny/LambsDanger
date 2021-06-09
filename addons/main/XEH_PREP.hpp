@@ -49,7 +49,7 @@ SUBPREP(VehicleAction,doVehicleAssault);
 SUBPREP(VehicleAction,doVehicleJink);
 SUBPREP(VehicleAction,doVehicleRotate);
 SUBPREP(VehicleAction,doVehicleSuppress);
-SUBPREP(VehicleAction,doSelectHEMunition);
+SUBPREP(VehicleAction,doSelectWarhead);
 
 SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);

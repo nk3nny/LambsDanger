@@ -17,7 +17,6 @@
 */
 params ["_unit", ["_pos", [0, 0, 0]]];
 
-if ((_unit getVariable [QGVAR(currentTask), ""]) isEqualTo "Vehicle Suppress") exitWith {false};
 private _vehicle = vehicle _unit;
 private _pos = _pos call CBA_fnc_getPos;
 
@@ -41,7 +40,6 @@ if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configOf (vehicle _unit
 };
 
 // set task
-private _previousTarget = _unit getVariable [QGVAR(currentTarget), objNull];
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Suppress", GVAR(debug_functions)];
 
@@ -57,12 +55,6 @@ if (_friendlies isNotEqualTo []) exitWith {false};
 // reAdjust
 private _distance = (_eyePos vectorDistance _pos) - 4;
 _pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
-
-if (_previousTarget isEqualType objNull &&
-    {(vehicle _previousTarget) isKindOf "CAManBase" ||
-    {(vehicle _previousTarget) isKindOf "car"}}) then {
-    [_vehicle] call FUNC(doSelectHEMunition);
-};
 
 // do it
 _vehicle doSuppressiveFire _pos;
