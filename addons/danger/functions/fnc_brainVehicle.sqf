@@ -157,9 +157,7 @@ if (_car) exitWith {
     private _slow = speed _vehicle < 30;
 
     // look to danger
-    if (!isNull _dangerCausedBy) then {
-        _vehicle doWatch _dangerCausedBy;
-    };
+    if (!isNull _dangerCausedBy) then {_vehicle doWatch _dangerCausedBy;};
 
     // escape
     if (_slow && {_vehicle distance _dangerCausedBy < (15 + random 35)}) then {

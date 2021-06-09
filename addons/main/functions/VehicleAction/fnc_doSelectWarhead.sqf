@@ -17,6 +17,8 @@
  * Public: No
 */
 params ["_vehicle", ["_warheadTypes", ["HE", "HEAT"]], ["_switchMuzzle", false]];
+
+if !(GVAR(autonomousMunitionSwitching)) exitWith {false};
 private _gunner = gunner _vehicle;
 if ((_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) > CBA_missionTime || {isNull _gunner}) exitWith {false};
 
