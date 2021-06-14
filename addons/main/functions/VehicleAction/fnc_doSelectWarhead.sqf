@@ -7,6 +7,7 @@
  * Arguments:
  * 0: vehicle suppressing <OBJECT>
  * 1: warhead types <ARRAY of upper case strings>
+ * 3: switch muzzle <BOOLEAN>
  *
  * Return Value:
  * success
@@ -40,17 +41,19 @@ private _foundMag = "";
     private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
 
     // first pass, try to find a muzzle that has the same name
-    private _index = _muzzles findIf {(toUpper _x) in _warheadTypes};
-    if (_index > -1 && { // found muzzle with same name
-        // one of the mags that can be loaded into that muzzle is in available mags
-        ((getArray (configFile >> "CfgWeapons" >> _turret >> (_muzzles select _index) >> "magazines")) arrayIntersect _availableMags) isNotEqualTo []
-    }) then {
-        _muzzle = _muzzles select _index;
-        break;
+    if (_switchMuzzle) then {
+        private _index = _muzzles findIf {(toUpper _x) in _warheadTypes};
+        if (_index > -1 && { // found muzzle with same name
+            // one of the mags that can be loaded into that muzzle is in available mags
+            ((getArray (configFile >> "CfgWeapons" >> _turret >> (_muzzles select _index) >> "magazines")) arrayIntersect _availableMags) isNotEqualTo []
+        }) then {
+            _muzzle = _muzzles select _index;
+            break;
+        };
     };
 
-    // second pass no named muzzle not found, see if any ammo loaded has its warheadName values set as a value in _warheadTypes
-    _index = _muzzles findIf {
+    // second pass no named muzzle found, see if any ammo loaded has its warheadName values set as a value in _warheadTypes
+    private _index = _muzzles findIf {
         private _magazines = if (_x == "this") then {
             _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> "magazines"))
         } else {

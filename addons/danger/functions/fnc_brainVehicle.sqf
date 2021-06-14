@@ -96,7 +96,7 @@ if (_attack && {!(isNull _dangerCausedBy)}) then {
     private _enemyVic = vehicle _dangerCausedBy;
     if (_enemyVic isKindOf "Tank" || {
         _enemyVic isKindOf "Wheeled_APC_F"}) then {
-        [_vehicle, ["AP", "TandemHEAT"], true] call EFUNC(main,doSelectWarhead);
+        [_vehicle, ["AP", "TANDEMHEAT"], true] call EFUNC(main,doSelectWarhead);
     } else {
         [_vehicle] call EFUNC(main,doSelectWarhead);
     };
