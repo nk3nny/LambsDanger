@@ -21,7 +21,7 @@ params ["_vehicle", ["_warheadTypes", ["HE", "HEAT"]], ["_switchMuzzle", false]]
 
 if !(GVAR(autonomousMunitionSwitching)) exitWith {false};
 private _gunner = gunner _vehicle;
-if ((_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) > CBA_missionTime || {isNull _gunner}) exitWith {false};
+if (isNull _gunner) exitWith {false};
 
 // figure out turret and ammo
 private _turretPath = (assignedVehicleRole _gunner) select 1;
@@ -92,5 +92,4 @@ if (_switchMuzzle && {(currentMuzzle _gunner) isNotEqualTo _muzzle}) then {
     _gunner selectWeapon _muzzle;
 };
 
-_vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
 true

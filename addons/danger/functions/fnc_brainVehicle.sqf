@@ -92,7 +92,8 @@ if (_static) exitWith {
 // update information
 if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
 
-if (_attack && {!(isNull _dangerCausedBy)}) then {
+if (_attack && {!(isNull _dangerCausedBy) && {
+    (_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) > CBA_missionTime}}) then {
     private _enemyVic = vehicle _dangerCausedBy;
     if (_enemyVic isKindOf "Tank" || {
         _enemyVic isKindOf "Wheeled_APC_F"}) then {
@@ -100,6 +101,7 @@ if (_attack && {!(isNull _dangerCausedBy)}) then {
     } else {
         [_vehicle] call EFUNC(main,doSelectWarhead);
     };
+    _vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
 };
 
 // vehicle type ~ Armoured vehicle
