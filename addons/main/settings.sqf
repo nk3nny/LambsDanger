@@ -44,7 +44,7 @@ private _curCat = LSTRING(Settings_MainCat);
 [
     QGVAR(indoorMove),
     "SLIDER",
-    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)], // TODO(nkenny): Add Stringtable Entries!
+    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 1, 0.1, 2, true],
     1
@@ -91,7 +91,7 @@ _curCat = LSTRING(Settings_SuppressionCat);
     "SLIDER",
     [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [1, 500, 28, 0],
+    [1, 500, 50, 0],
     1
 ] call CBA_fnc_addSetting;
 
@@ -263,6 +263,16 @@ _curCat = LSTRING(Settings_Debug);
     QGVAR(debug_RenderExpectedDestination),
     "CHECKBOX",
     [LSTRING(Settings_DebugDrawExpDest), LSTRING(Settings_DebugDrawExpDest_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+// Debug Renderer all Units
+[
+    QGVAR(debug_drawAllUnitsInVehicles),
+    "CHECKBOX",
+    [LSTRING(debug_drawAllUnitsInVehicles), LSTRING(debug_drawAllUnitsInVehicles_ToolTip)],
     [COMPONENT_NAME, _curCat],
     false,
     1

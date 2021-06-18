@@ -30,9 +30,9 @@ if (
     || {terrainIntersectASL [eyePos _vehicle, eyePos _target]}
 ) exitWith {false};
 
-// get target position
+// get target position ~ exit if target is unknown  -nkenny
 private _predictedPos = _unit getHideFrom _target;
-if (_predictedPos isEqualTo [0, 0, 0]) then {_predictedPos = _pos;};
+if (_predictedPos isEqualTo [0, 0, 0]) exitWith {false};
 
 // define buildings
 private _visibility = [objNull, "VIEW", _vehicle] checkVisibility [eyePos _vehicle, ATLtoASL (_predictedPos vectorAdd [0, 0, 1 + random 1])];

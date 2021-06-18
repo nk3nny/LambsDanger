@@ -11,7 +11,7 @@
  * success
  *
  * Example:
- * [bob, eyePos angryJoe] call lambs_main_fnc_suppress;
+ * [bob, eyePos angryJoe] call lambs_main_fnc_doSuppress;
  *
  * Public: No
 */
@@ -28,7 +28,7 @@ if (
 ) exitWith {false};
 
 // max range pos
-private _distance = (_eyePos vectorDistance _pos) min 280;
+private _distance = (_eyePos vectorDistance _pos) min 200;
 _pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
 
 // adjust pos
@@ -57,7 +57,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 
 // debug
 if (GVAR(debug_functions)) then {
-    ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round (_eyePos vectorDistance _pos)] call FUNC(debugLog);
+    ["%1 Suppression (%2 @ %3m)", side _unit, name _unit, round _distance] call FUNC(debugLog);
 
     private _sphere = createSimpleObject ["Sign_Sphere100cm_F", _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];

@@ -12,6 +12,7 @@
  * 3: Area the AI Camps in, default [] <ARRAY>
  * 4: Center Position, if no position or Empty Array is given it uses the Group as Center and updates the position every Cycle, default [] <ARRAY>
  * 5: Only Players, default true <BOOL>
+ * 6: enable dynamic reinforcement <BOOL>
  *
  * Return Value:
  * none
@@ -31,7 +32,8 @@ params [
     ["_cycle", TASK_HUNT_CYCLETIME, [0]],
     ["_area", [], [[]]],
     ["_pos", [], [[]]],
-    ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]]
+    ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]],
+    ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]]
 ];
 
 // sort grp
@@ -46,8 +48,10 @@ _group enableAttack false;
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), "taskHunt", EGVAR(main,debug_functions)];
 
-// dynamic reinforcements
-_group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+if (_enableReinforcement) then {
+    // dynamic reinforcements
+    _group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+};
 
 // FUNCTIONS -------------------------------------------------------------
 

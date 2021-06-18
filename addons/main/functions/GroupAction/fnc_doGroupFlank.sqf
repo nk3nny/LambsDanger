@@ -36,7 +36,11 @@ private _posASL = AGLtoASL (selectRandom _pos);
     _x setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
     // suppress
-    if (RND(0.7) && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}) then {
+    if (
+        RND(0.7)
+        && {(leader _x) isNotEqualTo _x}
+        && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
+    ) then {
         [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1]], random 3] call CBA_fnc_waitAndExecute;
     };
 } foreach _units;

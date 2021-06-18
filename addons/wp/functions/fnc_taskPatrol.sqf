@@ -11,6 +11,7 @@
  * 3: Waypoint Count, default 4  <NUMBER>
  * 4: Area the AI Camps in, default [] <ARRAY>
  * 5: Dynamic patrol pattern, default false <BOOL>
+ * 6: enable dynamic reinforcement <BOOL>
  *
  * Return Value:
  * none
@@ -30,7 +31,8 @@ params [
     ["_radius", TASK_PATROL_SIZE, [0]],
     ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
     ["_area", [], [[]]],
-    ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]]
+    ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]],
+    ["_enableReinforcement", TASK_PATROL_ENABLEREINFORCEMENT, [false]]
 ];
 
 // sort grp
@@ -54,8 +56,10 @@ _group enableGunLights "forceOn";
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), "taskPatrol", EGVAR(main,debug_functions)];
 
-// dynamic reinforcements
-_group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+if (_enableReinforcement) then {
+    // dynamic reinforcements
+    _group setVariable [QEGVAR(danger,enableGroupReinforce), true, true];
+};
 
 private _fistWPId = 0;
 
