@@ -20,7 +20,7 @@ params [["_profileName", "", [""]], ["_tacticName", "", [""]], ["_enabled", true
 _profileName = toLower(_profileName);
 private _profile = GVAR(ProfilesNamespace) getVariable _profileName;
 if (isNil "_profile") then {
-    _profile = [[], true] call CBA_fnc_hashCreate;
+    _profile = createHashMap;
 };
 
 _profile = [_profile, toLower(_tacticName), _enabled] call CBA_fnc_hashSet;

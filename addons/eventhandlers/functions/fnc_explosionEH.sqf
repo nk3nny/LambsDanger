@@ -14,7 +14,7 @@ if (
     || {!isNull objectParent _unit}
     || {(stance _unit) isEqualTo "PRONE"}
     || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}
-    || {[_unit, "reactToExplosions"] call EFUNC(main,doesProfileAllow)}
+    || {[_unit, "reactToExplosions"] call EFUNC(main,getProfileValue)}
 ) exitWith {false};
 
 // settings

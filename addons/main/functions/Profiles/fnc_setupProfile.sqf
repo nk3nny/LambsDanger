@@ -20,7 +20,7 @@ private _profileName = toLower _profileName;
 private _profile = +GVAR(ProfilesNamespace) getVariable "default"; // Create a Copy of the default Profile
 
 {
-    _profile = [_profile, toLower(_x select 0), _x select 1] call CBA_fnc_hashSet;
+    _profile set [toLower(_x select 0), _x select 1];
 } forEach _tactics;
 
 GVAR(ProfilesNamespace) setVariable [_profileName, _profile, true];

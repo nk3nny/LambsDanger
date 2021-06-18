@@ -32,12 +32,12 @@ if (isNil "_profileData") then {
 
 // Simple Unit/Group Based Overwrite
 private _overwrite = _target getVariable QGVAR(OverwriteProfile);
-if (!isNil "_overwrite" && { _overwrite isEqualType [] } && { [_overwrite, _tactic] call CBA_fnc_hashHasKey }) then {
+if (!isNil "_overwrite" && { _overwrite isEqualType [] } && { _tactic in _overwrite }) then {
     _profileData = _overwrite;
 };
 
 _tactic = toLower _tactic;
-private _value = [_profileData, _tactic] call CBA_fnc_hashGet;
+private _value = _profileData get _tactic;
 
 if (_value isEqualType {}) then {
     _value = [_target, _tactic] call _value;
