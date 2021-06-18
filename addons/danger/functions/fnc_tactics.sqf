@@ -23,7 +23,6 @@ params [["_unit", objNull, [objNull]], ["_target", objNull, [objNull]]];
 //};
 
 private _group = group _unit;
-
 // check if group AI disabled
 if (_group getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
@@ -32,7 +31,7 @@ private _contactState = _group getVariable [QGVAR(contact), 0];
 if (_contactState < time) exitWith {[_unit, _target] call FUNC(tacticsContact)};
 
 // ai profiles ~ here is where AI profiles will be extrapolated - nkenny
-// if (_unit call FUNC(tacticsProfiles)) exitWith {true};
+// if ([_unit, "something"] call EFUNC(main,doesProfileAllow)) exitWith {true};
 
 // Leader assessment
 if (!isPlayer (leader _unit)) then {_unit call FUNC(tacticsAssess);};

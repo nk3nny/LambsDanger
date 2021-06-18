@@ -13,3 +13,5 @@
 #endif
 
 #include "\z\lambs\addons\main\script_macros.hpp"
+
+#define HASH_NULL [[], true] call CBA_fnc_hashCreate

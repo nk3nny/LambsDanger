@@ -9,4 +9,9 @@ GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
 GVAR(shareHandlers) = [];
 
+if (isServer && !is3DEN) then {
+    GVAR(ProfilesNamespace) = true call CBA_fnc_createNamespace;
+    publicVariable QGVAR(ProfilesNamespace);
+    call FUNC(parseAIProfiles);
+};
 ADDON = true;
