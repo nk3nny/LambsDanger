@@ -118,19 +118,19 @@ _units = _units - [objNull];
 // enter buildings
 if (count _units > count _houses) then {_units resize (count _houses);};
 private _fnc_addEventHandler = {
-    params ["_type"];
+    params ["_unit", "_type"];
     if (_type == 0) exitWith {};
     if (_type == -2) then {
         _type = floor (random 4);
     };
 
     // variables
-    private _ehs = _x getVariable [QGVAR(eventhandlers), []];
+    private _ehs = _unit getVariable [QGVAR(eventhandlers), []];
 
     // add handlers
     switch (_type) do {
         case 1: {
-            private _handle = _x addEventHandler ["Hit", {
+            private _handle = _unit addEventHandler ["Hit", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
@@ -139,7 +139,7 @@ private _fnc_addEventHandler = {
             _ehs pushBack ["Hit", _handle];
         };
         case 2: {
-            private _handle = _x addEventHandler ["Fired", {
+            private _handle = _unit addEventHandler ["Fired", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
@@ -148,7 +148,7 @@ private _fnc_addEventHandler = {
             _ehs pushBack ["Fired", _handle];
         };
         case 3: {
-            private _handle = _x addEventHandler ["FiredNear", {
+            private _handle = _unit addEventHandler ["FiredNear", {
                 params ["_unit", "_shooter", "_distance"];
                 if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
                     [_unit, "PATH"] remoteExec ["enableAI", _unit];
@@ -160,7 +160,7 @@ private _fnc_addEventHandler = {
             _ehs pushBack ["FiredNear", _handle];
         };
         case 4: {
-            private _handle = _x addEventHandler ["Suppressed", {
+            private _handle = _unit addEventHandler ["Suppressed", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
@@ -171,7 +171,7 @@ private _fnc_addEventHandler = {
     };
 
     // set EH
-    _x setVariable [QGVAR(eventhandlers), _ehs];
+    _unit setVariable [QGVAR(eventhandlers), _ehs];
 };
 // spread out
 {
@@ -208,10 +208,10 @@ private _fnc_addEventHandler = {
 
     if (_exitCondition == -1) then {
         for "_i" from 0 to 4 do {
-            _i call _fnc_addEventHandler;
+            [_x, _i] call _fnc_addEventHandler;
         };
     } else {
-        _exitCondition call _fnc_addEventHandler;
+        [_x, _exitCondition] call _fnc_addEventHandler;
     };
 
 } forEach _units;
