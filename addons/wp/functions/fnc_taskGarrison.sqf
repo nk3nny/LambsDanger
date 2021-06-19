@@ -134,7 +134,8 @@ private _fnc_addEventHandler = {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
-                _unit removeEventHandler ["Hit", _thisEventHandler];
+                [_unit, _unit getVariable [GVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+                _unit setVariable [QGVAR(eventhandlers), nil];
             }];
             _ehs pushBack ["Hit", _handle];
         };
@@ -143,7 +144,8 @@ private _fnc_addEventHandler = {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
-                _unit removeEventHandler ["Fired", _thisEventHandler];
+                [_unit, _unit getVariable [GVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+                _unit setVariable [QGVAR(eventhandlers), nil];
             }];
             _ehs pushBack ["Fired", _handle];
         };
@@ -154,7 +156,8 @@ private _fnc_addEventHandler = {
                     [_unit, "PATH"] remoteExec ["enableAI", _unit];
                     _unit doMove (getPosATL _shooter);
                     _unit setCombatMode "RED";
-                    _unit removeEventHandler ["FiredNear", _thisEventHandler];
+                    [_unit, _unit getVariable [GVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+                    _unit setVariable [QGVAR(eventhandlers), nil];
                 };
             }];
             _ehs pushBack ["FiredNear", _handle];
@@ -164,7 +167,8 @@ private _fnc_addEventHandler = {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
-                _unit removeEventHandler ["Suppressed", _thisEventHandler];
+                [_unit, _unit getVariable [GVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+                _unit setVariable [QGVAR(eventhandlers), nil];
             }];
             _ehs pushBack ["Suppressed", _handle];
         };
