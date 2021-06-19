@@ -22,11 +22,17 @@ params ["_vehicle", ["_warheadTypes", ["HE", "HEAT"]], ["_switchMuzzle", false]]
 private _gunner = gunner _vehicle;
 if (isNull _gunner) exitWith {false};
 
+private _assignedRoles = assignedVehicleRole _gunner;
+// is either assigned nothing, driving or a cargo role without turret path
+if ((count _assignedRoles) < 2) exitWith {false};
+
 // figure out turret and ammo
-private _turretPath = (assignedVehicleRole _gunner) select 1;
+private _turretPath = _assignedRoles select 1;
 private _turretMagazines = _vehicle magazinesTurret _turretPath;
 private _vehicleMagazines = magazines [_vehicle, false];
 private _turrets = _vehicle weaponsTurret _turretPath;
+
+if (isNil "_turrets") exitWith {false};
 
 // kick out magazines that do not belong to the gunner turrets
 private _availableMags = _turretMagazines arrayIntersect _vehicleMagazines;
