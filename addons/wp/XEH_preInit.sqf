@@ -78,5 +78,16 @@ if (isServer) then {
     _this spawn FUNC(taskRush);
 }] call CBA_fnc_addEventhandler;
 
+[QGVAR(taskCampReset), {
+    params ["_unit"];
+    {
+        _x enableAI 'ANIM';
+        _x enableAI 'PATH';
+        [_x, _x getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+        _x setVariable [QGVAR(eventhandlers), nil];
+    } foreach (units _unit);
+    [_unit, "", 2] call EFUNC(main,doAnimation);
+    _unit setUnitPos "AUTO";
+}] call CBA_fnc_addEventhandler;
 
 ADDON = true;

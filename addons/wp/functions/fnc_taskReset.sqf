@@ -71,6 +71,10 @@ private _leader = leader _group;
     _x setVariable [QEGVAR(danger,disableAI), nil, true];
     _x setVariable [QEGVAR(danger,forceMove), nil, true];
 
+    // LAMBS eventhandlers
+    [_x, _x getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+    _x setVariable [QGVAR(eventhandlers), nil];
+
     // rejoin
     _x doFollow _leader;
 } count _units;
