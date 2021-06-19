@@ -27,13 +27,13 @@ if (isNull _enemy) then {
 };
 
 // no enemy -- minor pause
-if ((side _unit) isEqualTo (side _enemy)) exitWith {
+private _group = group _unit;
+if ((side _group) isEqualTo (side group _enemy)) exitWith {
     (group _unit) setVariable [QGVAR(contact), time + 10 + random 10];
     false
 };
 
 // update contact state
-private _group = group _unit;
 _group setVariable [QGVAR(contact), time + 600];
 
 // set group task
