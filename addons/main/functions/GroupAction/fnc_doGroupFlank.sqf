@@ -41,7 +41,7 @@ private _posASL = AGLtoASL (selectRandom _pos);
         && {(leader _x) isNotEqualTo _x}
         && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
     ) then {
-        [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1]], random 3] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1], true], random 3] call CBA_fnc_waitAndExecute;
     };
 } foreach _units;
 
