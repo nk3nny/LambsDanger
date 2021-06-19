@@ -1,9 +1,7 @@
 /*
     Header: script_macros_common.hpp
-
     Description:
         A general set of useful macro functions for use by CBA itself or by any module that uses CBA.
-
     Authors:
         Sickboy <sb_at_dev-heaven.net> and Spooner
 */
@@ -14,13 +12,11 @@
    - Simplify (shorten) the amount of characters required for repetitive tasks
    - Provide a solid structure that can be dynamic and easy editable (Which sometimes means we cannot adhere to Aim #1 ;-)
      An example is the path that is built from defines. Some available in this file, others in mods and addons.
-
  Follows  Standard:
    Object variables: PREFIX_COMPONENT
    Main-object variables: PREFIX_main
    Paths: MAINPREFIX\PREFIX\SUBPREFIX\COMPONENT\SCRIPTNAME.sqf
    e.g: x\six\addons\sys_menu\fDate.sqf
-
  Usage:
    define PREFIX and COMPONENT, then include this file
    (Note, you could have a main addon for your mod, define the PREFIX in a macros.hpp,
@@ -28,7 +24,6 @@
    Then in your addons, add a component.hpp, define the COMPONENT,
    and include your mod's script_macros.hpp
    In your scripts you can then include the addon's component.hpp with relative path)
-
  TODO:
    - Try only to use 1 string type " vs '
    - Evaluate double functions, and simplification
@@ -57,30 +52,24 @@
 /* -------------------------------------------
 Macro: VERSION_CONFIG
     Define CBA Versioning System config entries.
-
     VERSION should be a floating-point number (1 separator).
     VERSION_STR is a string representation of the version.
     VERSION_AR is an array representation of the version.
-
     VERSION must always be defined, otherwise it is 0.
     VERSION_STR and VERSION_AR default to VERSION if undefined.
-
 Parameters:
     None
-
 Example:
     (begin example)
         #define VERSION 1.0
         #define VERSION_STR 1.0.1
         #define VERSION_AR 1,0,1
-
         class CfgPatches {
             class MyMod_main {
                 VERSION_CONFIG;
             };
         };
     (end)
-
 Author:
     ?, Jonpas
 ------------------------------------------- */
@@ -107,14 +96,11 @@ Group: Debugging
 /* -------------------------------------------
 Macros: DEBUG_MODE_x
     Managing debugging based on debug level.
-
     According to the *highest* level of debugging that has been defined *before* script_macros_common.hpp is included,
     only the appropriate debugging commands will be functional. With no level explicitely defined, assume DEBUG_MODE_NORMAL.
-
     DEBUG_MODE_FULL - Full debugging output.
     DEBUG_MODE_NORMAL - All debugging except <TRACE_n()> and <LOG()> (Default setting if none specified).
     DEBUG_MODE_MINIMAL - Only <ERROR()> and <ERROR_WITH_TITLE()> enabled.
-
 Examples:
     In order to turn on full debugging for a single file,
     (begin example)
@@ -122,7 +108,6 @@ Examples:
         #define DEBUG_MODE_FULL
         #include "script_component.hpp"
     (end)
-
     In order to force minimal debugging for a single component,
     (begin example)
         // Top of addons\<component>\script_component.hpp
@@ -138,7 +123,6 @@ Examples:
         #endif
         #include "script_macros.hpp"
     (end)
-
     In order to turn on full debugging for a whole addon,
     (begin example)
         // Top of addons\main\script_macros.hpp
@@ -147,7 +131,6 @@ Examples:
         #endif
         #include "\x\cba\addons\main\script_macros_common.hpp"
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -181,23 +164,19 @@ Author:
 /* -------------------------------------------
 Macro: LOG()
     Log a debug message into the RPT log.
-
     Only run if <DEBUG_MODE_FULL> is defined.
-
 Parameters:
     MESSAGE - Message to record <STRING>
-
 Example:
     (begin example)
         LOG("Initiated clog-dancing simulator.");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
 #ifdef DEBUG_MODE_FULL
 
-#define LOG(MESSAGE) LOG_SYS_FILELINENUMBERS('LOG',MESSAGE)
+#define LOG(MESSAGE) LOG_SYS('LOG',MESSAGE)
 #define LOG_1(MESSAGE,ARG1) LOG(FORMAT_1(MESSAGE,ARG1))
 #define LOG_2(MESSAGE,ARG1,ARG2) LOG(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define LOG_3(MESSAGE,ARG1,ARG2,ARG3) LOG(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))
@@ -224,15 +203,12 @@ Author:
 /* -------------------------------------------
 Macro: INFO()
     Record a message without file and line number in the RPT log.
-
 Parameters:
     MESSAGE - Message to record <STRING>
-
 Example:
     (begin example)
         INFO("Mod X is loaded, do Y");
     (end)
-
 Author:
     commy2
 ------------------------------------------- */
@@ -249,23 +225,19 @@ Author:
 /* -------------------------------------------
 Macro: WARNING()
     Record a non-critical error in the RPT log.
-
     Only run if <DEBUG_MODE_NORMAL> or higher is defined.
-
 Parameters:
     MESSAGE - Message to record <STRING>
-
 Example:
     (begin example)
         WARNING("This function has been deprecated. Please don't use it in future!");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
 #ifdef DEBUG_MODE_NORMAL
 
-#define WARNING(MESSAGE) LOG_SYS_FILELINENUMBERS('WARNING',MESSAGE)
+#define WARNING(MESSAGE) LOG_SYS('WARNING',MESSAGE)
 #define WARNING_1(MESSAGE,ARG1) WARNING(FORMAT_1(MESSAGE,ARG1))
 #define WARNING_2(MESSAGE,ARG1,ARG2) WARNING(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define WARNING_3(MESSAGE,ARG1,ARG2,ARG3) WARNING(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))
@@ -292,19 +264,16 @@ Author:
 /* -------------------------------------------
 Macro: ERROR()
     Record a critical error in the RPT log.
-
 Parameters:
     MESSAGE -  Message to record <STRING>
-
 Example:
     (begin example)
         ERROR("value of frog not found in config ...yada...yada...");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
-#define ERROR(MESSAGE) LOG_SYS_FILELINENUMBERS('ERROR',MESSAGE)
+#define ERROR(MESSAGE) LOG_SYS('ERROR',MESSAGE)
 #define ERROR_1(MESSAGE,ARG1) ERROR(FORMAT_1(MESSAGE,ARG1))
 #define ERROR_2(MESSAGE,ARG1,ARG2) ERROR(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define ERROR_3(MESSAGE,ARG1,ARG2,ARG3) ERROR(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))
@@ -317,17 +286,13 @@ Author:
 /* -------------------------------------------
 Macro: ERROR_MSG()
     Record a critical error in the RPT log and display on screen error message.
-
     Newlines (\n) in the MESSAGE will be put on separate lines.
-
 Parameters:
     MESSAGE -  Message to record <STRING>
-
 Example:
     (begin example)
         ERROR_MSG("value of frog not found in config ...yada...yada...");
     (end)
-
 Author:
     commy2
 ------------------------------------------- */
@@ -344,19 +309,15 @@ Author:
 /* -------------------------------------------
 Macro: ERROR_WITH_TITLE()
     Record a critical error in the RPT log.
-
     The title can be specified (in <ERROR()> the heading is always just "ERROR")
     Newlines (\n) in the MESSAGE will be put on separate lines.
-
 Parameters:
     TITLE - Title of error message <STRING>
     MESSAGE -  Body of error message <STRING>
-
 Example:
     (begin example)
         ERROR_WITH_TITLE("Value not found","Value of frog not found in config ...yada...yada...");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -373,16 +334,13 @@ Author:
 /* -------------------------------------------
 Macro: MESSAGE_WITH_TITLE()
     Record a single line in the RPT log.
-
 Parameters:
     TITLE - Title of log message <STRING>
     MESSAGE -  Body of message <STRING>
-
 Example:
     (begin example)
         MESSAGE_WITH_TITLE("Value found","Value of frog found in config <someconfig>");
     (end)
-
 Author:
     Killswitch
 ------------------------------------------- */
@@ -392,11 +350,9 @@ Author:
 Macro: RETDEF()
     If a variable is undefined, return the default value. Otherwise, return the
     variable itself.
-
 Parameters:
     VARIABLE - the variable to check
     DEFAULT_VALUE - the default value to use if variable is undefined
-
 Example:
     (begin example)
         // _var is undefined
@@ -413,16 +369,13 @@ Author:
 Macro: RETNIL()
     If a variable is undefined, return the value nil. Otherwise, return the
     variable itself.
-
 Parameters:
     VARIABLE - the variable to check
-
 Example:
     (begin example)
         // _var is undefined
         hintSilent format ["_var=%1", RETNIL(_var)]; // "_var=any"
     (end example)
-
 Author:
     Alef (see CBA issue #8514)
 ------------------------------------------- */
@@ -431,9 +384,7 @@ Author:
 /* -------------------------------------------
 Macros: TRACE_n()
     Log a message and 1-8 variables to the RPT log.
-
     Only run if <DEBUG_MODE_FULL> is defined.
-
     TRACE_1(MESSAGE,A) - Log 1 variable.
     TRACE_2(MESSAGE,A,B) - Log 2 variables.
     TRACE_3(MESSAGE,A,B,C) - Log 3 variables.
@@ -443,16 +394,13 @@ Macros: TRACE_n()
     TRACE_7(MESSAGE,A,B,C,D,E,F,G) - Log 7 variables.
     TRACE_8(MESSAGE,A,B,C,D,E,F,G,H) - Log 8 variables.
     TRACE_9(MESSAGE,A,B,C,D,E,F,G,H,I) - Log 9 variables.
-
 Parameters:
     MESSAGE -  Message to add to the trace [String]
     A..H - Variable names to log values of [Any]
-
 Example:
     (begin example)
         TRACE_3("After takeoff",_vehicle player,getPos (_vehicle player), getPosASL (_vehicle player));
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -512,8 +460,8 @@ Group: General
 
 // *************************************
 // Internal Functions
-#define DOUBLES(var1,var2) ##var1##_##var2
-#define TRIPLES(var1,var2,var3) ##var1##_##var2##_##var3
+#define DOUBLES(var1,var2) var1##_##var2
+#define TRIPLES(var1,var2,var3) var1##_##var2##_##var3
 #define QUOTE(var1) #var1
 
 #ifdef MODULAR
@@ -532,20 +480,16 @@ Group: General
 
 /* -------------------------------------------
 Macro: INC()
-
 Description:
     Increase a number by one.
-
 Parameters:
     VAR - Variable to increment [Number]
-
 Example:
     (begin example)
     _counter = 0;
     INC(_counter);
     // _counter => 1
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -553,20 +497,16 @@ Author:
 
 /* -------------------------------------------
 Macro: DEC()
-
 Description:
     Decrease a number by one.
-
 Parameters:
     VAR - Variable to decrement [Number]
-
 Example:
     (begin example)
     _counter = 99;
     DEC(_counter);
     // _counter => 98
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -574,14 +514,11 @@ Author:
 
 /* -------------------------------------------
 Macro: ADD()
-
 Description:
     Add a value to a variable. Variable and value should be both Numbers or both Strings.
-
 Parameters:
     VAR - Variable to add to [Number or String]
     VALUE - Value to add [Number or String]
-
 Examples:
     (begin example)
         _counter = 2;
@@ -594,7 +531,6 @@ Examples:
         ADD(_str,"Fred");
         // _str => "hello Fred"
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
@@ -602,14 +538,11 @@ Author:
 
 /* -------------------------------------------
 Macro: SUB()
-
 Description:
     Subtract a value from a number variable. VAR and VALUE should both be Numbers.
-
 Parameters:
     VAR - Variable to subtract from [Number]
     VALUE - Value to subtract [Number]
-
 Examples:
     (begin example)
         _numChickens = 2;
@@ -621,24 +554,19 @@ Examples:
 
 /* -------------------------------------------
 Macro: REM()
-
 Description:
     Remove an element from an array each time it occurs.
-
     This recreates the entire array, so use BIS_fnc_removeIndex if modification of the original array is required
     or if only one of the elements that matches ELEMENT needs to be removed.
-
 Parameters:
     ARRAY - Array to modify [Array]
     ELEMENT - Element to remove [Any]
-
 Examples:
     (begin example)
         _array = [1, 2, 3, 4, 3, 8];
         REM(_array,3);
         // _array = [1, 2, 4, 8];
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -646,21 +574,17 @@ Author:
 
 /* -------------------------------------------
 Macro: PUSH()
-
 Description:
     Appends a single value onto the end of an ARRAY. Change is made to the ARRAY itself, not creating a new array.
-
 Parameters:
     ARRAY - Array to push element onto [Array]
     ELEMENT - Element to push [Any]
-
 Examples:
     (begin example)
         _fish = ["blue", "green", "smelly"];
         PUSH(_fish,"monkey-flavoured");
         // _fish => ["blue", "green", "smelly", "monkey-flavoured"]
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -743,14 +667,11 @@ Author:
 
 /* -------------------------------------------
 Macro: ISNILS()
-
 Description:
     Sets a variable with a value, but only if it is undefined.
-
 Parameters:
     VARIABLE - Variable to set [Any, not nil]
     DEFAULT_VALUE - Value to set VARIABLE to if it is undefined [Any, not nil]
-
 Examples:
     (begin example)
         // _fish is undefined
@@ -763,33 +684,32 @@ Examples:
         ISNILS(_fish,0);
         // _fish => 12
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
-#define ISNILS(VARIABLE,DEFAULT_VALUE) if (isNil #VARIABLE) then { ##VARIABLE = ##DEFAULT_VALUE }
+#define ISNILS(VARIABLE,DEFAULT_VALUE) if (isNil #VARIABLE) then { VARIABLE = DEFAULT_VALUE }
 #define ISNILS2(var1,var2,var3,var4) ISNILS(TRIPLES(var1,var2,var3),var4)
 #define ISNILS3(var1,var2,var3) ISNILS(DOUBLES(var1,var2),var3)
 #define ISNIL(var1,var2) ISNILS2(PREFIX,COMPONENT,var1,var2)
 #define ISNILMAIN(var1,var2) ISNILS3(PREFIX,var1,var2)
 
-#define CREATELOGICS(var1,var2) ##var1##_##var2## = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit ["LOGIC", [0, 0, 0], [], 0, "NONE"]
-#define CREATELOGICLOCALS(var1,var2) ##var1##_##var2## = "LOGIC" createVehicleLocal [0, 0, 0]
-#define CREATELOGICGLOBALS(var1,var2) ##var1##_##var2## = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit ["LOGIC", [0, 0, 0], [], 0, "NONE"]; publicVariable QUOTE(DOUBLES(var1,var2))
-#define CREATELOGICGLOBALTESTS(var1,var2) ##var1##_##var2## = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit [QUOTE(DOUBLES(ADDON,logic)), [0, 0, 0], [], 0, "NONE"]
+#define CREATELOGICS(var1,var2) var1##_##var2 = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit ["LOGIC", [0, 0, 0], [], 0, "NONE"]
+#define CREATELOGICLOCALS(var1,var2) var1##_##var2 = "LOGIC" createVehicleLocal [0, 0, 0]
+#define CREATELOGICGLOBALS(var1,var2) var1##_##var2 = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit ["LOGIC", [0, 0, 0], [], 0, "NONE"]; publicVariable QUOTE(DOUBLES(var1,var2))
+#define CREATELOGICGLOBALTESTS(var1,var2) var1##_##var2 = ([sideLogic] call CBA_fnc_getSharedGroup) createUnit [QUOTE(DOUBLES(ADDON,logic)), [0, 0, 0], [], 0, "NONE"]
 
-#define GETVARS(var1,var2,var3) (##var1##_##var2 getVariable #var3)
+#define GETVARS(var1,var2,var3) (var1##_##var2 getVariable #var3)
 #define GETVARMAINS(var1,var2) GETVARS(var1,MAINLOGIC,var2)
 
 #ifndef PATHTO_SYS
-    #define PATHTO_SYS(var1,var2,var3) \MAINPREFIX\##var1\SUBPREFIX\##var2\##var3.sqf
+    #define PATHTO_SYS(var1,var2,var3) \MAINPREFIX\var1\SUBPREFIX\var2\var3.sqf
 #endif
 #ifndef PATHTOF_SYS
-    #define PATHTOF_SYS(var1,var2,var3) \MAINPREFIX\##var1\SUBPREFIX\##var2\##var3
+    #define PATHTOF_SYS(var1,var2,var3) \MAINPREFIX\var1\SUBPREFIX\var2\var3
 #endif
 
 #ifndef PATHTOF2_SYS
-    #define PATHTOF2_SYS(var1,var2,var3) MAINPREFIX\##var1\SUBPREFIX\##var2\##var3
+    #define PATHTOF2_SYS(var1,var2,var3) MAINPREFIX\var1\SUBPREFIX\var2\var3
 #endif
 
 #define PATHTO_R(var1) PATHTOF2_SYS(PREFIX,COMPONENT_C,var1)
@@ -815,22 +735,22 @@ Author:
 #define COMPILE_FILE_SYS(var1,var2,var3) COMPILE_FILE2_SYS('PATHTO_SYS(var1,var2,var3)')
 #define COMPILE_FILE_CFG_SYS(var1,var2,var3) COMPILE_FILE2_CFG_SYS('PATHTO_SYS(var1,var2,var3)')
 
-#define SETVARS(var1,var2) ##var1##_##var2 setVariable
+#define SETVARS(var1,var2) var1##_##var2 setVariable
 #define SETVARMAINS(var1) SETVARS(var1,MAINLOGIC)
-#define GVARMAINS(var1,var2) ##var1##_##var2##
+#define GVARMAINS(var1,var2) var1##_##var2
 #define CFGSETTINGSS(var1,var2) configFile >> "CfgSettings" >> #var1 >> #var2
-//#define SETGVARS(var1,var2,var3) ##var1##_##var2##_##var3 =
-//#define SETGVARMAINS(var1,var2) ##var1##_##var2 =
+//#define SETGVARS(var1,var2,var3) var1##_##var2##_##var3 =
+//#define SETGVARMAINS(var1,var2) var1##_##var2 =
 
 // Compile-Once, JIT: On first use.
-// #define PREPMAIN_SYS(var1,var2,var3) ##var1##_fnc_##var3 = { ##var1##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3)); if (isNil "_this") then { call ##var1##_fnc_##var3 } else { _this call ##var1##_fnc_##var3 } }
-// #define PREP_SYS(var1,var2,var3) ##var1##_##var2##_fnc_##var3 = { ##var1##_##var2##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3)); if (isNil "_this") then { call ##var1##_##var2##_fnc_##var3 } else { _this call ##var1##_##var2##_fnc_##var3 } }
-// #define PREP_SYS2(var1,var2,var3,var4) ##var1##_##var2##_fnc_##var4 = { ##var1##_##var2##_fnc_##var4 = COMPILE_FILE_SYS(var1,var3,DOUBLES(fnc,var4)); if (isNil "_this") then { call ##var1##_##var2##_fnc_##var4 } else { _this call ##var1##_##var2##_fnc_##var4 } }
+// #define PREPMAIN_SYS(var1,var2,var3) var1##_fnc_##var3 = { var1##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3)); if (isNil "_this") then { call var1##_fnc_##var3 } else { _this call var1##_fnc_##var3 } }
+// #define PREP_SYS(var1,var2,var3) var1##_##var2##_fnc_##var3 = { var1##_##var2##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3)); if (isNil "_this") then { call var1##_##var2##_fnc_##var3 } else { _this call var1##_##var2##_fnc_##var3 } }
+// #define PREP_SYS2(var1,var2,var3,var4) var1##_##var2##_fnc_##var4 = { var1##_##var2##_fnc_##var4 = COMPILE_FILE_SYS(var1,var3,DOUBLES(fnc,var4)); if (isNil "_this") then { call var1##_##var2##_fnc_##var4 } else { _this call var1##_##var2##_fnc_##var4 } }
 
 // Compile-Once, at Macro. As opposed to Compile-Once, on first use.
-#define PREPMAIN_SYS(var1,var2,var3) ##var1##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3))
-#define PREP_SYS(var1,var2,var3) ##var1##_##var2##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3))
-#define PREP_SYS2(var1,var2,var3,var4) ##var1##_##var2##_fnc_##var4 = COMPILE_FILE_SYS(var1,var3,DOUBLES(fnc,var4))
+#define PREPMAIN_SYS(var1,var2,var3) var1##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3))
+#define PREP_SYS(var1,var2,var3) var1##_##var2##_fnc_##var3 = COMPILE_FILE_SYS(var1,var2,DOUBLES(fnc,var3))
+#define PREP_SYS2(var1,var2,var3,var4) var1##_##var2##_fnc_##var4 = COMPILE_FILE_SYS(var1,var3,DOUBLES(fnc,var4))
 
 #define LSTR(var1) TRIPLES(ADDON,STR,var1)
 
@@ -854,6 +774,8 @@ Author:
 #define COMPILE_FILE2(var1) COMPILE_FILE2_SYS('var1')
 #define COMPILE_FILE2_CFG(var1) COMPILE_FILE2_CFG_SYS('var1')
 
+#define COMPILE_SCRIPT(var1) compileScript ['PATHTO_SYS(PREFIX,COMPONENT_F,var1)']
+
 
 #define VERSIONING_SYS(var1) class CfgSettings \
 { \
@@ -873,16 +795,13 @@ Author:
 /* -------------------------------------------
 Macro: GVAR()
     Get full variable identifier for a global variable owned by this component.
-
 Parameters:
     VARIABLE - Partial name of global variable owned by this component [Any].
-
 Example:
     (begin example)
         GVAR(frog) = 12;
         // In SPON_FrogDancing component, equivalent to SPON_FrogDancing_frog = 12
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
@@ -896,16 +815,13 @@ Author:
 /* -------------------------------------------
 Macro: GVARMAIN()
     Get full variable identifier for a global variable owned by this addon.
-
 Parameters:
     VARIABLE - Partial name of global variable owned by this addon [Any].
-
 Example:
     (begin example)
         GVARMAIN(frog) = 12;
         // In SPON_FrogDancing component, equivalent to SPON_frog = 12
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
@@ -922,38 +838,29 @@ Author:
 #define GETVAR(var1) GETVARS(PREFIX,COMPONENT,var1)
 #define SETVAR SETVARS(PREFIX,COMPONENT)
 #define SETVARMAIN SETVARMAINS(PREFIX)
-#define IFCOUNT(var1,var2,var3) if (count ##var1 > ##var2) then { ##var3 = ##var1 select ##var2 };
+#define IFCOUNT(var1,var2,var3) if (count var1 > var2) then { var3 = var1 select var2 };
 
 /* -------------------------------------------
 Macro: PREP()
-
 Description:
     Defines a function.
-
     Full file path:
         '\MAINPREFIX\PREFIX\SUBPREFIX\COMPONENT\fnc_<FNC>.sqf'
-
     Resulting function name:
         'PREFIX_COMPONENT_<FNC>'
-
     The PREP macro should be placed in a script run by a XEH preStart and XEH preInit event.
-
     The PREP macro allows for CBA function caching, which drastically speeds up load times.
     Beware though that function caching is enabled by default and as such to disable it, you need to
     #define DISABLE_COMPILE_CACHE above your #include "script_components.hpp" include!
-
     The function will be defined in ui and mission namespace. It can not be overwritten without
     a mission restart.
-
 Parameters:
     FUNCTION NAME - Name of the function, unquoted <STRING>
-
 Examples:
     (begin example)
         PREP(banana);
         call FUNC(banana);
     (end)
-
 Author:
     dixon13
  ------------------------------------------- */
@@ -969,18 +876,14 @@ Author:
 
 /* -------------------------------------------
 Macro: PATHTO_FNC()
-
 Description:
     Defines a function inside CfgFunctions.
-
     Full file path in addons:
         '\MAINPREFIX\PREFIX\SUBPREFIX\COMPONENT\fnc_<FNC>.sqf'
     Define 'RECOMPILE' to enable recompiling.
     Define 'SKIP_FUNCTION_HEADER' to skip adding function header.
-
 Parameters:
     FUNCTION NAME - Name of the function, unquoted <STRING>
-
 Examples:
     (begin example)
         // file name: fnc_addPerFrameHandler.sqf
@@ -993,7 +896,6 @@ Examples:
         };
         // -> CBA_fnc_addPerFrameHandler
     (end)
-
 Author:
     dixon13, commy2
  ------------------------------------------- */
@@ -1045,10 +947,8 @@ Author:
 /* -------------------------------------------
 Macros: ARG_#()
     Select from list of array arguments
-
 Parameters:
     VARIABLE(1-8) - elements for the list
-
 Author:
     Rommel
 ------------------------------------------- */
@@ -1065,10 +965,8 @@ Author:
 Macros: ARR_#()
     Create list from arguments. Useful for working around , in macro parameters.
     1-8 arguments possible.
-
 Parameters:
     VARIABLE(1-8) - elements for the list
-
 Author:
     Nou
 ------------------------------------------- */
@@ -1085,11 +983,9 @@ Author:
 Macros: FORMAT_#(STR, ARG1)
     Format - Useful for working around , in macro parameters.
     1-8 arguments possible.
-
 Parameters:
     STRING - string used by format
     VARIABLE(1-8) - elements for usage in format
-
 Author:
     Nou & Sickboy
 ------------------------------------------- */
@@ -1109,7 +1005,6 @@ Author:
 /* -------------------------------------------
 Macros: IS_x()
     Checking the data types of variables.
-
     IS_ARRAY() - Array
     IS_BOOL() - Boolean
     IS_BOOLEAN() - UI display handle(synonym for <IS_BOOL()>)
@@ -1128,10 +1023,8 @@ Macros: IS_x()
     IS_SIDE() - Game side.
     IS_STRING() - World object.
     IS_TEXT() - Structured text.
-
 Parameters:
     VARIABLE - Variable to check if it is of a particular type [Any, not nil]
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1162,15 +1055,12 @@ Author:
 Macro: SCRIPT()
     Sets name of script (relies on PREFIX and COMPONENT values being #defined).
     Define 'SKIP_SCRIPT_NAME' to skip adding scriptName.
-
 Parameters:
     NAME - Name of script [Indentifier]
-
 Example:
     (begin example)
         SCRIPT(eradicateMuppets);
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1183,12 +1073,9 @@ Author:
 /* -------------------------------------------
 Macros: EXPLODE_n()
     DEPRECATED - Use param/params commands added in Arma 3 1.48
-
     Splitting an ARRAY into a number of variables (A, B, C, etc).
-
     Note that this NOT does make the created variables private.
     _PVT variants do.
-
     EXPLODE_1(ARRAY,A,B) - Split a 1-element array into separate variable.
     EXPLODE_2(ARRAY,A,B) - Split a 2-element array into separate variables.
     EXPLODE_3(ARRAY,A,B,C) - Split a 3-element array into separate variables.
@@ -1198,17 +1085,14 @@ Macros: EXPLODE_n()
     EXPLODE_7(ARRAY,A,B,C,D,E,F,G) - Split a 7-element array into separate variables.
     EXPLODE_8(ARRAY,A,B,C,D,E,F,G,H) - Split a 8-element array into separate variables.
     EXPLODE_9(ARRAY,A,B,C,D,E,F,G,H,I) - Split a 9-element array into separate variables.
-
 Parameters:
     ARRAY - Array to read from [Array]
     A..H - Names of variables to set from array [Identifier]
-
 Example:
     (begin example)
         _array = ["fred", 156.8, 120.9];
         EXPLODE_3(_array,_name,_height,_weight);
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1251,10 +1135,8 @@ Author:
 /* -------------------------------------------
 Macro: xSTRING()
     Get full string identifier from a stringtable owned by this component.
-
 Parameters:
     VARIABLE - Partial name of global variable owned by this component [Any].
-
 Example:
     ADDON is CBA_Balls.
     (begin example)
@@ -1263,7 +1145,6 @@ Example:
         // Config String (note the $)
         CSTRING(Example); // $STR_CBA_Balls_Example;
     (end)
-
 Author:
     Jonpas
 ------------------------------------------- */
@@ -1286,11 +1167,8 @@ Group: Managing Function Parameters
 /* -------------------------------------------
 Macros: PARAMS_n()
     DEPRECATED - Use param/params commands added in Arma 3 1.48
-
     Setting variables based on parameters passed to a function.
-
     Each parameter is defines as private and set to the appropriate value from _this.
-
     PARAMS_1(A) - Get 1 parameter from the _this array (or _this if it's not an array).
     PARAMS_2(A,B) - Get 2 parameters from the _this array.
     PARAMS_3(A,B,C) - Get 3 parameters from the _this array.
@@ -1299,10 +1177,8 @@ Macros: PARAMS_n()
     PARAMS_6(A,B,C,D,E,F) - Get 6 parameters from the _this array.
     PARAMS_7(A,B,C,D,E,F,G) - Get 7 parameters from the _this array.
     PARAMS_8(A,B,C,D,E,F,G,H) - Get 8 parameters from the _this array.
-
 Parameters:
     A..H - Name of variable to read from _this [Identifier]
-
 Example:
     A function called like this:
     (begin example)
@@ -1315,7 +1191,6 @@ Example:
             // Rest of function follows...
         };
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1332,15 +1207,12 @@ Author:
 /* -------------------------------------------
 Macro: DEFAULT_PARAM()
     DEPRECATED - Use param/params commands added in Arma 3 1.48
-
     Getting a default function parameter. This may be used together with <PARAMS_n()> to have a mix of required and
     optional parameters.
-
 Parameters:
     INDEX - Index of parameter in _this [Integer, 0+]
     NAME - Name of the variable to set [Identifier]
     DEF_VALUE - Default value to use in case the array is too short or the value at INDEX is nil [Any]
-
 Example:
     A function called with optional parameters:
     (begin example)
@@ -1358,7 +1230,6 @@ Example:
             // Rest of function follows...
         };
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1371,15 +1242,11 @@ Author:
 /* -------------------------------------------
 Macro: KEY_PARAM()
     Get value from key in _this list, return default when key is not included in list.
-
 Parameters:
     KEY - Key name [String]
     NAME - Name of the variable to set [Identifier]
     DEF_VALUE - Default value to use in case key not found [ANY]
-
 Example:
-
-
 Author:
     Muzzleflash
 ------------------------------------------- */
@@ -1397,16 +1264,13 @@ Group: Assertions
 /* -------------------------------------------
 Macro: ASSERT_TRUE()
     Asserts that a CONDITION is true. When an assertion fails, an error is raised with the given MESSAGE.
-
 Parameters:
     CONDITION - Condition to assert as true [Boolean]
     MESSSAGE - Message to display if (A OPERATOR B) is false [String]
-
 Example:
     (begin example)
         ASSERT_TRUE(_frogIsDead,"The frog is alive");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1419,16 +1283,13 @@ Author:
 /* -------------------------------------------
 Macro: ASSERT_FALSE()
     Asserts that a CONDITION is false. When an assertion fails, an error is raised with the given MESSAGE.
-
 Parameters:
     CONDITION - Condition to assert as false [Boolean]
     MESSSAGE - Message to display if (A OPERATOR B) is true [String]
-
 Example:
     (begin example)
         ASSERT_FALSE(_frogIsDead,"The frog died");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1441,18 +1302,15 @@ Author:
 /* -------------------------------------------
 Macro: ASSERT_OP()
     Asserts that (A OPERATOR B) is true. When an assertion fails, an error is raised with the given MESSAGE.
-
 Parameters:
     A - First value [Any]
     OPERATOR - Binary operator to use [Operator]
     B - Second value [Any]
     MESSSAGE - Message to display if (A OPERATOR B)  is false. [String]
-
 Example:
     (begin example)
         ASSERT_OP(_fish,>,5,"Too few fish!");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1465,17 +1323,14 @@ Author:
 /* -------------------------------------------
 Macro: ASSERT_DEFINED()
     Asserts that a VARIABLE is defined. When an assertion fails, an error is raised with the given MESSAGE..
-
 Parameters:
     VARIABLE - Variable to test if defined [String or Function].
     MESSAGE - Message to display if variable is undefined [String].
-
 Examples:
     (begin example)
         ASSERT_DEFINED("_anUndefinedVar","Too few fish!");
         ASSERT_DEFINED({ obj getVariable "anUndefinedVar" },"Too many fish!");
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1495,16 +1350,13 @@ Group: Unit tests
 Macro: TEST_TRUE()
     Tests that a CONDITION is true.
     If the condition is not true, an error is raised with the given MESSAGE.
-
 Parameters:
     CONDITION - Condition to assert as true [Boolean]
     MESSSAGE - Message to display if (A OPERATOR B) is false [String]
-
 Example:
     (begin example)
         TEST_TRUE(_frogIsDead,"The frog is alive");
     (end)
-
 Author:
     Killswitch
 ------------------------------------------- */
@@ -1522,16 +1374,13 @@ Author:
 Macro: TEST_FALSE()
     Tests that a CONDITION is false.
     If the condition is not false, an error is raised with the given MESSAGE.
-
 Parameters:
     CONDITION - Condition to test as false [Boolean]
     MESSSAGE - Message to display if (A OPERATOR B) is true [String]
-
 Example:
     (begin example)
         TEST_FALSE(_frogIsDead,"The frog died");
     (end)
-
 Author:
     Killswitch
 ------------------------------------------- */
@@ -1549,18 +1398,15 @@ Author:
 Macro: TEST_OP()
     Tests that (A OPERATOR B) is true.
     If the test fails, an error is raised with the given MESSAGE.
-
 Parameters:
     A - First value [Any]
     OPERATOR - Binary operator to use [Operator]
     B - Second value [Any]
     MESSSAGE - Message to display if (A OPERATOR B)  is false. [String]
-
 Example:
     (begin example)
         TEST_OP(_fish,>,5,"Too few fish!");
     (end)
-
 Author:
     Killswitch
 ------------------------------------------- */
@@ -1578,18 +1424,15 @@ Author:
 Macro: TEST_DEFINED_AND_OP()
     Tests that A and B are defined and (A OPERATOR B) is true.
     If the test fails, an error is raised with the given MESSAGE.
-
 Parameters:
     A - First value [Any]
     OPERATOR - Binary operator to use [Operator]
     B - Second value [Any]
     MESSSAGE - Message to display [String]
-
 Example:
     (begin example)
         TEST_OP(_fish,>,5,"Too few fish!");
     (end)
-
 Author:
     Killswitch, PabstMirror
 ------------------------------------------- */
@@ -1610,17 +1453,14 @@ Author:
 /* -------------------------------------------
 Macro: TEST_DEFINED()
     Tests that a VARIABLE is defined.
-
 Parameters:
     VARIABLE - Variable to test if defined [String or Function].
     MESSAGE - Message to display if variable is undefined [String].
-
 Examples:
     (begin example)
         TEST_DEFINED("_anUndefinedVar","Too few fish!");
         TEST_DEFINED({ obj getVariable "anUndefinedVar" },"Too many fish!");
     (end)
-
 Author:
     Killswitch
 ------------------------------------------- */
@@ -1641,22 +1481,17 @@ Group: Managing Deprecation
 /* -------------------------------------------
 Macro: DEPRECATE_SYS()
     Allow deprecation of a function that has been renamed.
-
     Replaces an old OLD_FUNCTION (which will have PREFIX_ prepended) with a NEW_FUNCTION
     (PREFIX_ prepended) with the intention that the old function will be disabled in the future.
-
     Shows a warning in RPT each time the deprecated function is used, but runs the new function.
-
 Parameters:
     OLD_FUNCTION - Full name of old function [Identifier for function that does not exist any more]
     NEW_FUNCTION - Full name of new function [Function]
-
 Example:
     (begin example)
         // After renaming CBA_fnc_frog as CBA_fnc_fish
         DEPRECATE_SYS(CBA_fnc_frog,CBA_fnc_fish);
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
@@ -1669,22 +1504,17 @@ Author:
 /* -------------------------------------------
 Macro: DEPRECATE()
     Allow deprecation of a function, in the current component, that has been renamed.
-
     Replaces an OLD_FUNCTION (which will have PREFIX_ prepended) with a NEW_FUNCTION
     (PREFIX_ prepended) with the intention that the old function will be disabled in the future.
-
     Shows a warning in RPT each time the deprecated function is used, but runs the new function.
-
 Parameters:
     OLD_FUNCTION - Name of old function, assuming PREFIX [Identifier for function that does not exist any more]
     NEW_FUNCTION - Name of new function, assuming PREFIX [Function]
-
 Example:
     (begin example)
         // After renaming CBA_fnc_frog as CBA_fnc_fish
         DEPRECATE(fnc_frog,fnc_fish);
     (end)
-
 Author:
     Sickboy
 ------------------------------------------- */
@@ -1694,22 +1524,17 @@ Author:
 /* -------------------------------------------
 Macro: OBSOLETE_SYS()
     Replace a function that has become obsolete.
-
     Replace an obsolete OLD_FUNCTION with a simple COMMAND_FUNCTION, with the intention that anyone
     using the function should replace it with the simple command, since the function will be disabled in the future.
-
     Shows a warning in RPT each time the deprecated function is used, and runs the command function.
-
 Parameters:
     OLD_FUNCTION - Full name of old function [Identifier for function that does not exist any more]
     COMMAND_CODE - Code to replace the old function [Function]
-
 Example:
     (begin example)
         // In Arma2, currentWeapon command made the CBA_fMyWeapon function obsolete:
         OBSOLETE_SYS(CBA_fMyWeapon,{ currentWeapon player });
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1722,23 +1547,18 @@ Author:
 /* -------------------------------------------
 Macro: OBSOLETE()
     Replace a function, in the current component, that has become obsolete.
-
     Replace an obsolete OLD_FUNCTION (which will have PREFIX_ prepended) with a simple
     COMMAND_CODE, with the intention that anyone using the function should replace it with the simple
     command.
-
     Shows a warning in RPT each time the deprecated function is used.
-
 Parameters:
     OLD_FUNCTION - Name of old function, assuming PREFIX [Identifier for function that does not exist any more]
     COMMAND_CODE - Code to replace the old function [Function]
-
 Example:
     (begin example)
         // In Arma2, currentWeapon command made the CBA_fMyWeapon function obsolete:
         OBSOLETE(fMyWeapon,{ currentWeapon player });
     (end)
-
 Author:
     Spooner
 ------------------------------------------- */
@@ -1771,18 +1591,14 @@ Author:
 /* -------------------------------------------
 Macro: IS_ADMIN
     Check if the local machine is an admin in the multiplayer environment.
-
     Reports 'true' for logged and voted in admins.
-
 Parameters:
     None
-
 Example:
     (begin example)
         // print "true" if player is admin
         systemChat str IS_ADMIN;
     (end)
-
 Author:
     commy2
 ------------------------------------------- */
@@ -1792,18 +1608,14 @@ Author:
 /* -------------------------------------------
 Macro: IS_ADMIN_LOGGED
     Check if the local machine is a logged in admin in the multiplayer environment.
-
     Reports 'false' if the player was voted to be the admin.
-
 Parameters:
     None
-
 Example:
     (begin example)
         // print "true" if player is admin and entered in the server password
         systemChat str IS_ADMIN_LOGGED;
     (end)
-
 Author:
     commy2
 ------------------------------------------- */
@@ -1812,33 +1624,16 @@ Author:
 
 /* -------------------------------------------
 Macro: FILE_EXISTS
-    Check if a file exists on machines with interface
-
-    Reports "false" if the file does not exist and throws an error in RPT.
-
+    Check if a file exists
+    Reports "false" if the file does not exist.
 Parameters:
     FILE - Path to the file
-
 Example:
     (begin example)
         // print "true" if file exists
         systemChat str FILE_EXISTS("\A3\ui_f\data\igui\cfg\cursors\weapon_ca.paa");
     (end)
-
 Author:
     commy2
 ------------------------------------------- */
-#define FILE_EXISTS(FILE) (call {\
-    private _return = false;\
-    isNil {\
-        private _control = (uiNamespace getVariable ["RscDisplayMain", displayNull]) ctrlCreate ["RscHTML", -1];\
-        if (isNull _control) then {\
-            _return = loadFile (FILE) != "";\
-        } else {\
-            _control htmlLoad (FILE);\
-            _return = ctrlHTMLLoaded _control;\
-            ctrlDelete _control;\
-        };\
-    };\
-    _return\
-})
+#define FILE_EXISTS(FILE) (fileExists (FILE))

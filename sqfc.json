@@ -1,0 +1,7 @@
+{
+  "inputDirs": ["P:/z/lambs/addons"],
+  "includePaths": ["P:/"],
+  "excludeList": ["settings.sqf"],
+  "outputDir": "P:/",
+  "workerThreads": 0
+}
