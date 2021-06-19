@@ -92,6 +92,18 @@ if (_static) exitWith {
 // update information
 if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
 
+if (_attack && {!EGVAR(main,disableAutonomousMunitionSwitching) && {!(isNull _dangerCausedBy) && {
+    (_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) < CBA_missionTime}}}) then {
+    _vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
+    private _enemyVic = vehicle _dangerCausedBy;
+    if (_enemyVic isKindOf "Tank" || {
+        _enemyVic isKindOf "Wheeled_APC_F"}) then {
+        [_vehicle, ["AP", "TANDEMHEAT"], true] call EFUNC(main,doSelectWarhead);
+    } else {
+        [_vehicle] call EFUNC(main,doSelectWarhead);
+    };
+};
+
 // vehicle type ~ Armoured vehicle
 private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F"};
 if (_armored && {!isNull _dangerCausedBy}) exitWith {
