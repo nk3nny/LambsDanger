@@ -1,17 +1,17 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Plays an immediate reaction unit getting hit (Internal to FSM)
+ * Plays an immediate reaction unit getting hit (internal to FSM)
  *
  * Arguments:
  * 0: unit hit <OBJECT>
- * 1: position of dange <ARRAY>
+ * 1: position of danger <ARRAY> or <OBJECT>
  *
  * Return Value:
  * bool
  *
  * Example:
- * [bob] call lambs_main_fnc_doDodge;
+ * [bob, angryJoe] call lambs_main_fnc_doDodge;
  *
  * Public: No
 */
@@ -25,12 +25,6 @@ if (
     || {!(_unit checkAIFeature "MOVE")}
     || {!(_unit checkAIFeature "PATH")}
 ) exitWith {false};
-
-if ((currentCommand _unit) isEqualTo "Suppress") then {
-    private _sphere = createSimpleObject ["Sign_Sphere25cm_F", getPosWorld _unit, true];
-    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    systemchat format ["doDodge.sqf %1 is suppressing!", name _unit];
-};
 
 // dodge
 _unit setVariable [QGVAR(currentTask), "Dodge!", GVAR(debug_functions)];
@@ -60,31 +54,11 @@ private _suppression = _nearDistance && {getSuppression _unit > 0.1};
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
 if (_stance isEqualTo "CROUCH" && { _suppression }) then {_unit setUnitPosWeak "DOWN";};
 
-// experimental exit condition to prevent dodging through walls!
-if (_suppression && {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 7]]}) exitWith {
-
-    // debug information to be removed before release ~ nkenny
-    private _sphere = createSimpleObject ["Sign_Arrow_Large_Cyan_F", getPosWorld _unit, true];
-    _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-    [{deleteVehicle _this}, _sphere, 45] call CBA_fnc_waitAndExecute;
-
-    true
-};
-
 // chose anim
 private _anim = call {
 
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
     if (_still  && { !_nearDistance } && {_dir > 320 || { _dir < 40 }}) exitWith {
-
-        // experimental value (failed) ~ nkenny
-        //_unit forceSpeed 0;
-
-        // debug information to be removed before release ~ nkenny
-        private _sphere = createSimpleObject ["Sign_Arrow_Large_Yellow_F", getPosWorld _unit, true];
-        [{deleteVehicle _this}, _sphere, 45] call CBA_fnc_waitAndExecute;
-        systemchat format ["doDodge.sqf %1 is still", name _unit];
-
         [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select _suppression;
     };
 
@@ -102,21 +76,8 @@ private _anim = call {
     ["FastF", "TactF"] select _suppression;
 };
 
-// debug information to be removed before release ~ nkenny
-private _sphere = createSimpleObject ["Sign_Arrow_Direction_F", getPosWorld _unit, true];
-_sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
-_sphere setDir (_unit getDir _pos);
-[{deleteVehicle _this}, _sphere, 60] call CBA_fnc_waitAndExecute;
-
-// rate of fire ~ theory the AI's shooting fsm interrupts the dodge attempt. Delay shooting to prevent running in place. (failed) ~nkenny
-//_unit setWeaponReloadingTime [_unit, currentMuzzle _unit, 1.5];
-
-// movement check ~ theory adds some pathfinding strenth inside buildings  (partial success) ~ nkenny
-_unit setDestination [getPosATL _unit, "LEADER PLANNED", false];
-
 // execute dodge
-[_unit, _anim, !_still] call FUNC(doGesture);
-//[{_this call FUNC(doGesture);}, [_unit, _anim, !_still]] call CBA_fnc_execNextFrame;
+[_unit, _anim, true] call FUNC(doGesture);
 
 // end
 true
