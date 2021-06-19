@@ -125,7 +125,7 @@ private _fnc_addEventHandler = {
     };
 
     // variables
-    private _ehs = _unit getVariable [QGVAR(eventhandlers), []];
+    private _ehs = _x getVariable [QGVAR(eventhandlers), []];
 
     // add handlers
     switch (_type) do {
@@ -171,7 +171,7 @@ private _fnc_addEventHandler = {
     };
 
     // set EH
-    _unit setVariable [QGVAR(eventhandlers), _ehs];
+    _x setVariable [QGVAR(eventhandlers), _ehs];
 };
 // spread out
 {
@@ -207,7 +207,7 @@ private _fnc_addEventHandler = {
     };
 
     if (_exitCondition == -1) then {
-        for "_i" from 0 to 3 do {
+        for "_i" from 0 to 4 do {
             _i call _fnc_addEventHandler;
         };
     } else {
