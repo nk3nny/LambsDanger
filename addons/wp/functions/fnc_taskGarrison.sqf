@@ -119,12 +119,13 @@ _units = _units - [objNull];
 if (count _units > count _houses) then {_units resize (count _houses);};
 private _fnc_addEventHandler = {
     params ["_type"];
+    if (_type == 0) exitWith {};
     if (_type == -2) then {
         _type = floor (random 4);
     };
     // add handlers
     switch (_type) do {
-        case 0: {
+        case 1: {
             _x addEventHandler ["Hit", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
@@ -132,7 +133,7 @@ private _fnc_addEventHandler = {
                 _unit removeEventHandler ["Hit", _thisEventHandler];
             }];
         };
-        case 1: {
+        case 2: {
             _x addEventHandler ["Fired", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
@@ -140,7 +141,7 @@ private _fnc_addEventHandler = {
                 _unit removeEventHandler ["Fired", _thisEventHandler];
             }];
         };
-        case 2: {
+        case 3: {
             _x addEventHandler ["FiredNear", {
                 params ["_unit", "_shooter", "_distance"];
                 if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
@@ -151,16 +152,13 @@ private _fnc_addEventHandler = {
                 };
             }];
         };
-        case 3: {
+        case 4: {
             _x addEventHandler ["Suppressed", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Suppressed", _thisEventHandler];
             }];
-        };
-        case 4: {
-            // DO NOTHING
         };
     };
 };
