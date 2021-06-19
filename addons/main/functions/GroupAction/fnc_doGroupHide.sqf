@@ -5,9 +5,9 @@
  *
  * Arguments:
  * 0: units list <ARRAY>
- * 2: danger position <ARRAY> or <OBJECT>
- * 3: list of buildings <ARRAY>
- * 4: reason for hiding (used in debugging) <STRING>
+ * 1: danger position <ARRAY> or <OBJECT>
+ * 2: list of buildings <ARRAY>
+ * 3: reason for hiding (used in debugging) <STRING>
  *
  * Return Value:
  * bool

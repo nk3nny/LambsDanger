@@ -29,7 +29,7 @@ if (isNull _enemy) then {
 // no enemy -- minor pause
 private _group = group _unit;
 if ((side _group) isEqualTo (side group _enemy)) exitWith {
-    (group _unit) setVariable [QGVAR(contact), time + 10 + random 10];
+    _group setVariable [QGVAR(contact), time + 10 + random 10];
     false
 };
 
