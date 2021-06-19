@@ -20,7 +20,7 @@ params [
     ["_pos", [], [[]]]
 ];
 
-private _artillery = _side in GVAR(SideArtilleryHash);
+private _artillery = GVAR(SideArtilleryHash) getOrDefault [_side, []];
 if (_pos isNotEqualTo []) then {
     _artillery = _artillery select {
         canFire _x
