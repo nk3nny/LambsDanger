@@ -4,6 +4,7 @@ PREP(doCallout);
 PREP(doGesture);
 PREP(doShareInformation);
 PREP(getShareInformationParams);
+PREP(shouldSuppressPosition);
 
 PREP(eventCallback);
 PREP(findBuildings);
