@@ -25,6 +25,7 @@ PREP(parseData);
 
 SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
+SUBPREP(GroupAction,doGroupHide);
 SUBPREP(GroupAction,doGroupSuppress);
 SUBPREP(GroupAction,doGroupStaticDeploy);
 SUBPREP(GroupAction,doGroupStaticFind);
