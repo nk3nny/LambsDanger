@@ -7,7 +7,7 @@
  * Arguments:
  * 0: vehicle suppressing <OBJECT>
  * 1: warhead types <ARRAY of upper case strings>
- * 3: switch muzzle <BOOLEAN>
+ * 2: switch muzzle <BOOLEAN>
  *
  * Return Value:
  * success
@@ -19,7 +19,6 @@
 */
 params ["_vehicle", ["_warheadTypes", ["HE", "HEAT"]], ["_switchMuzzle", false]];
 
-if !(GVAR(autonomousMunitionSwitching)) exitWith {false};
 private _gunner = gunner _vehicle;
 if (isNull _gunner) exitWith {false};
 

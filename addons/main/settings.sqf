@@ -52,11 +52,11 @@ private _curCat = LSTRING(Settings_MainCat);
 
 // Toggles AI vehicle autonomous munition switching
 [
-    QGVAR(autonomousMunitionSwitching),
+    QGVAR(disableAutonomousMunitionSwitching),
     "CHECKBOX",
-    [LSTRING(Settings_autonomousMunitionSwitching), LSTRING(Settings_autonomousMunitionSwitching_Tooltip)],
+    [LSTRING(Settings_disableAutonomousMunitionSwitching), LSTRING(Settings_disableAutonomousMunitionSwitching_Tooltip)],
     [COMPONENT_NAME, _curCat],
-    true,
+    false,
     0
 ] call CBA_fnc_addSetting;
 

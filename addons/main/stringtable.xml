@@ -98,11 +98,11 @@
             <Polish>Szansa na wejście do środka budynku</Polish>
             <Russian>Шанс движения в помещении</Russian>
         </Key>
-        <Key ID="STR_Lambs_Main_Settings_autonomousMunitionSwitching">
-            <English>Vehicle autonomous munition switching</English>
+        <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching">
+            <English>Disable vehicle autonomous munition switching</English>
         </Key>
-        <Key ID="STR_Lambs_Main_Settings_autonomousMunitionSwitching_Tooltip">
-            <English>When enabled allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones</English>
+        <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching_Tooltip">
+            <English>When unchecked allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones</English>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
