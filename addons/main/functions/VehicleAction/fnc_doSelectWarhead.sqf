@@ -35,12 +35,12 @@ private _turret = "";
 private _muzzle = "";
 private _foundMag = "";
 
-{
-    _turret = _x;
-    private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
+if (_switchMuzzle) then {
+    {
+        _turret = _x;
+        private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
 
-    // first pass, try to find a muzzle that has the same name
-    if (_switchMuzzle) then {
+        // first pass, try to find a muzzle that has the same name
         private _index = _muzzles findIf {(toUpper _x) in _warheadTypes};
         if (_index > -1 && { // found muzzle with same name
             // one of the mags that can be loaded into that muzzle is in available mags
@@ -49,31 +49,37 @@ private _foundMag = "";
             _muzzle = _muzzles select _index;
             break;
         };
-    };
+    } forEach _turrets;
+};
 
-    // second pass no named muzzle found, see if any ammo loaded has its warheadName values set as a value in _warheadTypes
-    private _index = _muzzles findIf {
-        private _magazines = if (_x == "this") then {
-            _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> "magazines"))
-        } else {
-            _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> _x >> "magazines"))
-        };
-        reverse _magazines; // reverse as vanilla arma sorts munition as such: ap, heat, he, other
-                            // heat is also regarded as "HE", we want the actual HE munition first
-        {
-            private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
-            if (_ammo isEqualTo "") then {continue};
-            if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) exitWith {
-                _foundMag = _x;
+if (_muzzle isEqualTo "") then {
+    {
+        _turret = _x;
+        private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
+        // second pass no named muzzle found, see if any ammo loaded has its warheadName values set as a value in _warheadTypes
+        private _index = _muzzles findIf {
+            private _magazines = if (_x == "this") then {
+                _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> "magazines"))
+            } else {
+                _availableMags arrayIntersect getArray ((configFile >> "CfgWeapons" >> _turret >> _x >> "magazines"))
             };
-        } forEach _magazines;
-        _foundMag isNotEqualTo ""
-    };
-    if (_index > -1) then {
-        _muzzle = _muzzles select _index;
-        break;
-    };
-} forEach _turrets;
+            reverse _magazines; // reverse as vanilla arma sorts munition as such: ap, heat, he, other
+                                // heat is also regarded as "HE", we want the actual HE munition first
+            {
+                private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
+                if (_ammo isEqualTo "") then {continue};
+                if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) exitWith {
+                    _foundMag = _x;
+                };
+            } forEach _magazines;
+            _foundMag isNotEqualTo ""
+        };
+        if (_index > -1) then {
+            _muzzle = _muzzles select _index;
+            break;
+        };
+    } forEach _turrets;
+};
 
 if (_muzzle == "this") then {
     _muzzle = _turret;
