@@ -199,21 +199,19 @@ private _dir = random 360;
         _unit disableAI "PATH";
         _unit setDir (_unit getDir _center);
         _unit setUnitPos "MIDDLE";
-        _unit addEventHandler ["Hit", {
+        private _handleHit = _unit addEventHandler ["Hit", {
             params ["_unit"];
             [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
-            _unit removeEventHandler ["Hit", _thisEventHandler];
         }];
-        _unit addEventHandler ["FiredNear", {
+        private _handleFiredNear = _unit addEventHandler ["FiredNear", {
             params ["_unit"];
             [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
-            _unit removeEventHandler ["FiredNear", _thisEventHandler];
         }];
-        _unit addEventHandler ["Suppressed", {
+        private _handleSuppressed = _unit addEventHandler ["Suppressed", {
             params ["_unit"];
             [QGVAR(taskCampReset), _unit, _unit] call CBA_fnc_targetEvent;
-            _unit removeEventHandler ["Suppressed", _thisEventHandler];
         }];
+        _unit setVariable [QGVAR(eventhandlers), [["Hit", _handleHit], ["FiredNear", _handleFiredNear], ["Suppressed", _handleSuppressed]]];
     }, [_x, _campPos, _pos, selectRandom _anims]] call CBA_fnc_waitUntilAndExecute;
 } forEach _units;
 

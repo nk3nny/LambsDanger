@@ -22,6 +22,8 @@ PREP(isNight);
 PREP(showDialog);
 PREP(parseData);
 
+PREP(removeEventhandlers);
+
 SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
 SUBPREP(GroupAction,doGroupSuppress);

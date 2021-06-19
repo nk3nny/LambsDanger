@@ -123,26 +123,32 @@ private _fnc_addEventHandler = {
     if (_type == -2) then {
         _type = floor (random 4);
     };
+
+    // variables
+    private _ehs = _unit getVariable [QGVAR(eventhandlers), []];
+
     // add handlers
     switch (_type) do {
         case 1: {
-            _x addEventHandler ["Hit", {
+            private _handle = _x addEventHandler ["Hit", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Hit", _thisEventHandler];
             }];
+            _ehs pushBack ["Hit", _handle];
         };
         case 2: {
-            _x addEventHandler ["Fired", {
+            private _handle = _x addEventHandler ["Fired", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Fired", _thisEventHandler];
             }];
+            _ehs pushBack ["Fired", _handle];
         };
         case 3: {
-            _x addEventHandler ["FiredNear", {
+            private _handle = _x addEventHandler ["FiredNear", {
                 params ["_unit", "_shooter", "_distance"];
                 if (side _unit != side _shooter && {_distance < (10 + random 10)}) then {
                     [_unit, "PATH"] remoteExec ["enableAI", _unit];
@@ -151,16 +157,21 @@ private _fnc_addEventHandler = {
                     _unit removeEventHandler ["FiredNear", _thisEventHandler];
                 };
             }];
+            _ehs pushBack ["FiredNear", _handle];
         };
         case 4: {
-            _x addEventHandler ["Suppressed", {
+            private _handle = _x addEventHandler ["Suppressed", {
                 params ["_unit"];
                 [_unit, "PATH"] remoteExec ["enableAI", _unit];
                 _unit setCombatMode "RED";
                 _unit removeEventHandler ["Suppressed", _thisEventHandler];
             }];
+            _ehs pushBack ["Suppressed", _handle];
         };
     };
+
+    // set EH
+    _unit setVariable [QGVAR(eventhandlers), _ehs];
 };
 // spread out
 {
