@@ -672,7 +672,6 @@
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
             <English>Only if Units have UGL Flares</English>
         </Key>
-
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
             <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
