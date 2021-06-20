@@ -48,7 +48,7 @@ private _fnc_flare = {
     switch (_doUGL) do {
         case true;
         case 1: {
-            private _units = units leader;
+            private _units = units _leader;
             private _unitsPostUGL = [_units] call EFUNC(main, doUGL);
             if (_units isEqualTo _unitsPostUGL) then {
                 private _flare = "F_20mm_Red" createVehicle (_leader ModelToWorld [0, 0, 200]);
