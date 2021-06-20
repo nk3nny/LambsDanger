@@ -52,7 +52,7 @@ jobs:
       - name: Build addon with HEMTT
         uses: jokoho48/hemtt-action@master
         with:
-          command: 'build --release'
+          command: 'pack --release'
       - uses: actions/upload-artifact@master
         with:
           name: '@LambsDanger'
