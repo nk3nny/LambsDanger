@@ -516,6 +516,12 @@
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние на котором группа охоты будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_DisplayName">
+            <English>Use Flare</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_Tooltip">
+            <English>Should the Units use Flare on Contact.</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
             <German>Aufgabe Hetzen</German>
@@ -657,6 +663,16 @@
         <Key ID="STR_Lambs_WP_Suppressed">
             <English>Suppressed</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Enabled">
+            <English>Enabled</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Disabled">
+            <English>Disabled</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_OnlyIfUGL">
+            <English>Only if Units have UGL Flares</English>
+        </Key>
+
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
             <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
