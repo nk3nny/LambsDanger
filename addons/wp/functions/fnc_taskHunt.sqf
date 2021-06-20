@@ -35,7 +35,8 @@ params [
     ["_area", [], [[]]],
     ["_pos", [], [[]]],
     ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]],
-    ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]]
+    ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]],
+    ["_doUGL", TASK_HUNT_TRYUGLFLARE, 1, [1, true]]
 ];
 
 // functions ---
@@ -43,8 +44,20 @@ params [
 // shoot flare
 private _fnc_flare = {
     params ["_leader"];
-    private _shootflare = "F_20mm_Red" createvehicle (_leader ModelToWorld [0, 0, 200]);
-    _shootflare setVelocity [0, 0, -10];
+    switch (_doUGL) do {
+        case true;
+        case 1: {
+            private _units = units leader;
+            private _unitsPostUGL = [_units] call EFUNC(main, doUGL);
+            if (_units isEqualTo _unitsPostUGL) then {
+                private _shootflare = "F_20mm_Red" createvehicle (_leader ModelToWorld [0, 0, 200]);
+                _shootflare setVelocity [0, 0, -10];
+            };
+        };
+        case 2: {
+            [group _leader] call EFUNC(main,doUGL);
+        };
+    };
 };
 
 // functions end ---

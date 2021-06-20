@@ -529,6 +529,30 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_HUNT_ENABLEREINFORCEMENT);
         };
+        class GVAR(doUGL): Combo {
+            displayName = CSTRING(Module_TaskHunt_TryUGLFlare_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_TryUGLFlare_Tooltip);
+            property = QGVAR(doUGL);
+            defaultValue = TASK_HUNT_TRYUGLFLARE;
+            unique = 0;
+            condition = "0";
+            typeName = "NUMBER";
+            expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class Disabled {
+                    name = CSTRING(Disabled);
+                    value = 0;
+                };
+                class Enabled {
+                    name = CSTRING(Enabled);
+                    value = 1;
+                };
+                class OnlyIfUGL {
+                    name = CSTRING(OnlyIfUGL);
+                    value = 2;
+                };
+            };
+        };
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {
