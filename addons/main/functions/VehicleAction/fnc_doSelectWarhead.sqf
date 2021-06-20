@@ -74,8 +74,9 @@ if (_muzzle isEqualTo "") then {
             {
                 private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
                 if (_ammo isEqualTo "") then {continue};
-                if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) exitWith {
+                if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) then {
                     _foundMag = _x;
+                    break;
                 };
             } forEach _magazines;
             _foundMag isNotEqualTo ""
