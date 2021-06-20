@@ -37,7 +37,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskHunt_MovingCenter_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_MovingCenter_ToolTip), TASK_HUNT_MOVINGCENTER],
                         [LSTRING(Module_TaskHunt_PlayersOnly_DisplayName), "BOOLEAN", LSTRING(Module_TaskHunt_PlayersOnly_ToolTip), TASK_HUNT_PLAYERSONLY],
                         [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_HUNT_ENABLEREINFORCEMENT],
-                        [LSTRING(Module_TaskHunt_TryUGLFlare_DisplayName), "DROPDOWN", LSTRING(Module_TaskHunt_TryUGLFlare_Tooltip), [LSTRING(Disabled), LSTRING(Enabled), LSTRING(OnlyUGL)], TASK_HUNT_TRYUGLFLARE]
+                        [LSTRING(Module_TaskHunt_TryUGLFlare_DisplayName), "DROPDOWN", LSTRING(Module_TaskHunt_TryUGLFlare_Tooltip), [LSTRING(Disabled), LSTRING(Enabled), LSTRING(OnlyIfUGL)], TASK_HUNT_TRYUGLFLARE]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
