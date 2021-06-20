@@ -1,6 +1,6 @@
 class CfgVehicles {
     class Land;
     class Man : Land {
-        sensitivity = 6;
+        sensitivity = LAMBS_RANGE_SENSITIVITY_MAN;
     };
 };
