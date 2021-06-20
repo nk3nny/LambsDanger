@@ -577,7 +577,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             displayName = CSTRING(Module_TaskRush_CycleTime_DisplayName);
             tooltip = CSTRING(Module_TaskRush_CycleTime_ToolTip);
             property = QGVAR(CycleTime);
-            defaultValue = QUOTE(TASK_RUSH_CYCLETIME);
             unique = 0;
             validate = "number";
             condition = "0";
