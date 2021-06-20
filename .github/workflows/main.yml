@@ -50,9 +50,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Build addon with HEMTT
-        uses: arma-actions/hemtt@master
+        uses: jokoho48/hemtt-action@master
         with:
-          command: 'build --release'
+          command: 'pack --release'
       - uses: actions/upload-artifact@master
         with:
           name: '@LambsDanger'
