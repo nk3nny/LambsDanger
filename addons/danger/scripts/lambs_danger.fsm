@@ -212,7 +212,7 @@ class FSM
                 {
                         name = "Evaluate_Vehicle";
                         itemno = 7;
-                        init = /*%FSM<STATEINIT""">*/"private _evaluation = [_this, _queue] call lambs_danger_fnc_brainVehicle;" \n
+                        init = /*%FSM<STATEINIT""">*/"private _evaluation = [lambs_danger_fnc_brainVehicle, [_this, _queue]] call CBA_fnc_directCall;" \n
                          "_evaluation params [""_timeout"", ""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy""];" \n
                          "_queue = [];" \n
                          "" \n
@@ -283,7 +283,7 @@ class FSM
                         itemno = 10;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// evalutating logic" \n
-                         "private _evaluation = [_this, _queue] call lambs_danger_fnc_brain;" \n
+                         "private _evaluation = [lambs_danger_fnc_brain, [_this, _queue]] call CBA_fnc_directCall;" \n
                          "" \n
                          "// get variables" \n
                          "_evaluation params [""_immediate"", ""_hide"", ""_engage"", ""_assess"", ""_cause""];" \n
@@ -353,7 +353,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 immediate %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
+                         "_timeout = [lambs_danger_fnc_brainForced, [_this, _dangerCause, _dangerPos]] call CBA_fnc_directCall;" \n
                          "" \n
                          "// re-insert" \n
                          "_queue pushBack [10, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
@@ -382,7 +382,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 hide %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainHide;"/*%FSM</STATEINIT""">*/;
+                         "_timeout = [lambs_danger_fnc_brainHide, [_this, _dangerCause, _dangerPos]] call CBA_fnc_directCall;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -409,7 +409,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 engage %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerCausedBy] call lambs_danger_fnc_brainEngage;"/*%FSM</STATEINIT""">*/;
+                         "_timeout = [lambs_danger_fnc_brainEngage, [_this, _dangerCause, _dangerCausedBy]] call CBA_fnc_directCall;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -433,7 +433,7 @@ class FSM
                 {
                         name = "Check_self";
                         itemno = 18;
-                        init = /*%FSM<STATEINIT""">*/"_timeout = _this call lambs_danger_fnc_brainForced;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"_timeout = [lambs_danger_fnc_brainForced, _this] call CBA_fnc_directCall;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -564,7 +564,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 assess %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos, _dangerCausedby] call lambs_danger_fnc_brainAssess;"/*%FSM</STATEINIT""">*/;
+                         "_timeout = [lambs_danger_fnc_brainAssess, [_this, _dangerCause, _dangerPos, _dangerCausedby]] call CBA_fnc_directCall;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -612,7 +612,7 @@ class FSM
                 {
                         name = "Tactics";
                         itemno = 35;
-                        init = /*%FSM<STATEINIT""">*/"[_this, _dangerCausedBy] call lambs_danger_fnc_tactics;" \n
+                        init = /*%FSM<STATEINIT""">*/"[lambs_danger_fnc_tactics, [_this, _dangerCausedBy]] call CBA_fnc_directCall;" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
