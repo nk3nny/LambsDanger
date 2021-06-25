@@ -80,7 +80,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: '@LambsDanger'
-        path: 'releases/@LambsDanger*.zip'
+          path: 'releases/@LambsDanger*.zip'
 
   stringtables:
     runs-on: ubuntu-latest
@@ -101,7 +101,7 @@ jobs:
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
-      if: github.repository == 'nk3nny/LambsDanger' && github.ref	== 'refs/heads/master' && ! contains(github.event.head_commit.message, '[ci skip]')
+      if: github.repository == 'nk3nny/LambsDanger' && github.ref == 'refs/heads/master' && ! contains(github.event.head_commit.message, '[ci skip]')
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: python3 tools/stringtableDeploy.py
