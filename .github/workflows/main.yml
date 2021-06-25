@@ -4,14 +4,25 @@ on:
   push:
     branches:
     - master
-  pull_request:
-    
+  pull_request_target:
+
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+          rm -r addons
+          cp -r pullrequest/addons addons
     - name: Validate SQF
       run: python3 tools/sqf_validator.py
     - name: Validate Config
@@ -32,47 +43,72 @@ jobs:
     steps:
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+          rm -r addons
+          cp -r pullrequest/addons addons
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
     - uses: actions/upload-artifact@master
       with:
-       name: 'sqfLint Log'
-       path: 'sqf.log'
+        name: 'sqfLint Log'
+        path: 'sqf.log'
     - name: Validate SQFLinter Logs
       run: python3 tools/sqf_linter_LogChecker.py
-
 
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
-      - name: Build addon with HEMTT
-        uses: arma-actions/hemtt@master
-        with:
-          command: 'build --release'
-      - uses: actions/upload-artifact@master
-        with:
-          name: '@LambsDanger'
-          path: 'releases/@LambsDanger*.zip'
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+          rm -r addons
+          cp -r pullrequest/addons addons
+    - name: Build addon with HEMTT
+      uses: jokoh48/hemtt-action@master
+      with:
+        command: 'build --release'
+    - uses: actions/upload-artifact@master
+      with:
+        name: '@LambsDanger'
+        path: 'releases/@LambsDanger*.zip'
 
   stringtables:
     runs-on: ubuntu-latest
     steps:
     - name: Install Python packages
-      run: |
-        pip3 install wheel
-        pip3 install setuptools
-        pip3 install pygithub
-        pip3 install pygithub3
+      run: pip3 install wheel setuptools pygithub pygithub3
     - name: Checkout the source code
       uses: actions/checkout@master
+    - name: Checkout pull request
+      uses: actions/checkout@v2
+      if: ${{ github.event_name == 'pull_request_target' }}
+      with:
+        path: pullrequest
+        ref: 'refs/pull/${{ github.event.number }}/merge'
+    - name: Replace addons with pull request addons
+      if: ${{ github.event_name == 'pull_request_target' }}
+      run: |
+          rm -r addons
+          cp -r pullrequest/addons addons
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
-      if: github.repository == 'nk3nny/LambsDanger' && github.ref	== 'refs/heads/master' && ! contains(github.event.head_commit.message, '[ci skip]')
+      if: github.repository == 'nk3nny/LambsDanger' && github.ref == 'refs/heads/master' && ! contains(github.event.head_commit.message, '[ci skip]')
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: python3 tools/stringtableDeploy.py
