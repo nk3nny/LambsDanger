@@ -5,5 +5,5 @@ GET_GROUPS_CONTEXT(_targets);
 
 {
     private _leader = leader _x;
-    [QFUNC(taskPatrol), [_x, getPos _leader], _leader] call CBA_fnc_targetEvent;
+    [QGVAR(taskPatrol), [_x, getPos _leader], _leader] call CBA_fnc_targetEvent;
 } forEach _targets;
