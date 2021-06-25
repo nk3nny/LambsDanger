@@ -68,7 +68,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
     - name: Checkout pull request
       uses: actions/checkout@v2
       if: ${{ github.event_name == 'pull_request_target' }}
