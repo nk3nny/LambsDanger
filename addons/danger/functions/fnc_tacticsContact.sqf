@@ -26,8 +26,14 @@ if (isNull _enemy) then {
     _enemy = _unit findNearestEnemy _unit;
 };
 
-// update contact state
+// no enemy -- minor pause
 private _group = group _unit;
+if ((side _group) isEqualTo (side group _enemy)) exitWith {
+    _group setVariable [QGVAR(contact), time + 10 + random 10];
+    false
+};
+
+// update contact state
 _group setVariable [QGVAR(contact), time + 600];
 
 // set group task
@@ -125,17 +131,11 @@ if (
     };
 };
 
-// immediate action -- leaders further away get their subordinates to hide!
+// get buildings
 private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
-{
-    // force movement!
-    _x setVariable [QGVAR(forceMove), true];
-    [{_this setVariable [QGVAR(forceMove), nil]}, _x, 2 + random 3] call CBA_fnc_waitAndExecute;
 
-    // hide units
-    [_x, _enemy, 18, _buildings] call EFUNC(main,doHide);
-    _x setVariable [QEGVAR(main,currentTask), "Hide (contact)", EGVAR(main,debug_functions)];
-} foreach _units;
+// immediate action -- leaders further away get their subordinates to hide!
+[_units, _enemy, _buildings, "contact"] call EFUNC(main,doGroupHide);
 
 // debug
 if (EGVAR(main,debug_functions)) then {

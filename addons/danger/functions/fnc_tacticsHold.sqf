@@ -68,15 +68,13 @@ if (count _units > 2) then {
             _group setBehaviour "COMBAT";
 
             // get buildings and dangerPos
-            private _buildings = [_unit, nil, true, true] call EFUNC(main,findBuildings);
+            private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
 
             // gesture wildly!
             [_unit, "gestureCeaseFire"] call EFUNC(main,doGesture);
 
             // execute hiding
-            {
-                [_x, _pos, nil, _buildings] call EFUNC(main,doHide);
-            } forEach (_units select {isNull objectParent _x});
+            [_units, _pos, _buildings, "holding"] call EFUNC(main,doGroupHide);
 
             // debug
             if (EGVAR(main,debug_functions)) then {

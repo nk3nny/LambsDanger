@@ -76,7 +76,7 @@ if (RND(0.9) || {_distance2D < 66}) then {
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([2, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5]] call FUNC(doSuppress);
+    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5], true] call FUNC(doSuppress);
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Suppress (sympathetic)", GVAR(debug_functions)];
 };

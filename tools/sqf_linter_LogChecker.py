@@ -1,7 +1,7 @@
 import sys
 import os
 
-defaultFalsePositives = 16
+defaultFalsePositives = 18
 def main():
     f = open("sqf.log", "r")
     log = f.readlines()

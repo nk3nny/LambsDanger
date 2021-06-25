@@ -42,7 +42,7 @@ switch (_mode) do {
                         _args params ["_group", "_logic"];
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly", "_enableReinforcement"];
                         private _args = [[_group, _range, _cycle, nil, getPos _logic, _playerOnly, _enableReinforcement], [_group, _range, _cycle, nil, nil, _playerOnly, _enableReinforcement]] select _movingCenter;
-                        [GVAR(taskHunt), _args, leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskHunt), _args, leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
