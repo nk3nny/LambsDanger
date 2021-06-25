@@ -73,14 +73,14 @@ jobs:
     - name: Replace addons with pull request addons
       if: ${{ github.event_name == 'pull_request_target' }}
       run: rm -r addons && cp -r pullrequest/addons addons
-      - name: Build addon with HEMTT
-        uses: jokoh48/hemtt-action@master
-        with:
-          command: 'build --release'
-      - uses: actions/upload-artifact@master
-        with:
-          name: '@LambsDanger'
-          path: 'releases/@LambsDanger*.zip'
+    - name: Build addon with HEMTT
+      uses: jokoh48/hemtt-action@master
+      with:
+        command: 'build --release'
+    - uses: actions/upload-artifact@master
+      with:
+        name: '@LambsDanger'
+        path: 'releases/@LambsDanger*.zip'
 
   stringtables:
     runs-on: ubuntu-latest
