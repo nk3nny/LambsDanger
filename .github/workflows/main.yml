@@ -60,7 +60,6 @@ jobs:
     - name: Validate SQFLinter Logs
       run: python3 tools/sqf_linter_LogChecker.py
 
-
   build:
     runs-on: ubuntu-latest
     steps:
