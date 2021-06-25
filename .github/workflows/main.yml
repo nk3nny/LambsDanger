@@ -20,9 +20,7 @@ jobs:
         ref: 'refs/pull/${{ github.event.number }}/merge'
     - name: Replace addons with pull request addons
       if: ${{ github.event_name == 'pull_request_target' }}
-      run: |
-        rm -r addons
-        cp -r pullrequest/addons addons
+      run: rm -r addons && cp -r pullrequest/addons addons
     - name: Validate SQF
       run: python3 tools/sqf_validator.py
     - name: Validate Config
@@ -51,9 +49,7 @@ jobs:
         ref: 'refs/pull/${{ github.event.number }}/merge'
     - name: Replace addons with pull request addons
       if: ${{ github.event_name == 'pull_request_target' }}
-      run: |
-        rm -r addons
-        cp -r pullrequest/addons addons
+      run: rm -r addons && cp -r pullrequest/addons addons
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
@@ -76,9 +72,7 @@ jobs:
         ref: 'refs/pull/${{ github.event.number }}/merge'
     - name: Replace addons with pull request addons
       if: ${{ github.event_name == 'pull_request_target' }}
-      run: |
-        rm -r addons
-        cp -r pullrequest/addons addons
+      run: rm -r addons && cp -r pullrequest/addons addons
       - name: Build addon with HEMTT
         uses: jokoh48/hemtt-action@master
         with:
@@ -92,11 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install Python packages
-      run: |
-        pip3 install wheel
-        pip3 install setuptools
-        pip3 install pygithub
-        pip3 install pygithub3
+      run: pip3 install wheel setuptools pygithub pygithub3
     - name: Checkout the source code
       uses: actions/checkout@master
     - name: Checkout pull request
@@ -107,9 +97,7 @@ jobs:
         ref: 'refs/pull/${{ github.event.number }}/merge'
     - name: Replace addons with pull request addons
       if: ${{ github.event_name == 'pull_request_target' }}
-      run: |
-        rm -r addons
-        cp -r pullrequest/addons addons
+      run: rm -r addons && cp -r pullrequest/addons addons
     - name: Validate Stringtables
       run: python3 tools/stringtable_validator.py
     - name: Update Translation issue
