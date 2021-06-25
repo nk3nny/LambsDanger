@@ -80,7 +80,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: '@LambsDanger'
-          path: 'releases/@LambsDanger*.zip'
+        path: 'releases/@LambsDanger*.zip'
 
   stringtables:
     runs-on: ubuntu-latest
