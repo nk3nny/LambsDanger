@@ -81,7 +81,7 @@ jobs:
         rm -r addons
         cp -r pullrequest/addons addons
       - name: Build addon with HEMTT
-        uses: arma-actions/hemtt@master
+        uses: jokoh48/hemtt-action@master
         with:
           command: 'build --release'
       - uses: actions/upload-artifact@master
