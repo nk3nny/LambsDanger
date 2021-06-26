@@ -13,6 +13,7 @@
  * 4: Center Position, if no position or Empty Array is given it uses the Group as Center and updates the position every Cycle, default [] <ARRAY>
  * 5: Only Players, default true <BOOL>
  * 6: enable dynamic reinforcement <BOOL>
+ * 7: Enable Flare <BOOL> or <NUMBER> where 0 disabled, 1 enabled (if Units cant fire it them self a flare is created via createVehicle), 2 Only if Units can Fire UGL them self
  *
  * Return Value:
  * none
@@ -35,7 +36,8 @@ params [
     ["_area", [], [[]]],
     ["_pos", [], [[]]],
     ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]],
-    ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]]
+    ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]],
+    ["_doUGL", TASK_HUNT_TRYUGLFLARE, 1, [1, true]]
 ];
 
 // functions ---
@@ -43,8 +45,20 @@ params [
 // shoot flare
 private _fnc_flare = {
     params ["_leader"];
-    private _shootflare = "F_20mm_Red" createvehicle (_leader ModelToWorld [0, 0, 200]);
-    _shootflare setVelocity [0, 0, -10];
+    switch (_doUGL) do {
+        case true;
+        case 1: {
+            private _units = units _leader;
+            private _unitsPostUGL = [_units] call EFUNC(main, doUGL);
+            if (_units isEqualTo _unitsPostUGL) then {
+                private _flare = "F_20mm_Red" createVehicle (_leader ModelToWorld [0, 0, 200]);
+                _flare setVelocity [0, 0, -10];
+            };
+        };
+        case 2: {
+            [group _leader] call EFUNC(main,doUGL);
+        };
+    };
 };
 
 // functions end ---
