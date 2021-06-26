@@ -670,7 +670,7 @@
             <English>Disabled</English>
         </Key>
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
-            <English>Only if Units have UGL Flares</English>
+            <English>Only when units are equipped with an UGL and flares</English>
         </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
