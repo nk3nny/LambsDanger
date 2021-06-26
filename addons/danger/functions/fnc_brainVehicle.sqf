@@ -95,13 +95,16 @@ if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShar
 if (_attack && {!EGVAR(main,disableAutonomousMunitionSwitching) && {!(isNull _dangerCausedBy) && {
     (_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) < CBA_missionTime}}}) then {
     _vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
-    private _enemyVic = vehicle _dangerCausedBy;
-    if (_enemyVic isKindOf "Tank" || {
-        _enemyVic isKindOf "Wheeled_APC_F"}) then {
-        [_vehicle, ["AP", "TANDEMHEAT"], true] call EFUNC(main,doSelectWarhead);
-    } else {
-        [_vehicle] call EFUNC(main,doSelectWarhead);
-    };
+    [{
+        params ["_vehicle", "_dangerCausedBy"];
+        private _enemyVic = vehicle _dangerCausedBy;
+        if (_enemyVic isKindOf "Tank" || {
+            _enemyVic isKindOf "Wheeled_APC_F"}) then {
+            [_vehicle, ["AP", "TANDEMHEAT"], true] call EFUNC(main,doSelectWarhead);
+        } else {
+            [_vehicle] call EFUNC(main,doSelectWarhead);
+        };
+    }, [_vehicle, _dangerCausedBy]] call CBA_fnc_directCall;
 };
 
 // vehicle type ~ Armoured vehicle
