@@ -35,18 +35,18 @@ private _predictedPos = _unit getHideFrom _target;
 if (_predictedPos isEqualTo [0, 0, 0]) exitWith {false};
 
 // define buildings
-private _visibility = [objNull, "VIEW", _vehicle] checkVisibility [eyePos _vehicle, ATLtoASL (_predictedPos vectorAdd [0, 0, 1 + random 1])];
+private _visibility = [objNull, "VIEW", _vehicle] checkVisibility [eyePos _vehicle, ATLtoASL (_predictedPos vectorAdd [0, 0, 1.5])];
 if (_buildings isEqualTo [] && {_visibility < 0.5}) then {
     _buildings = [_target, 12, false, false] call FUNC(findBuildings);
 };
 
-// find closest building
+// get building positions
 if (_buildings isNotEqualTo []) then {
     _buildings = (selectRandom _buildings) buildingPos -1;
 };
 
 // add predicted location -- just to ensure shots fired!
-_buildings pushBack _predictedPos;
+if (_buildings isEqualTo []) then {_buildings pushBack _predictedPos;};
 
 // pos
 _pos = selectRandom _buildings;
@@ -84,7 +84,7 @@ if (_cannon) then {
 // debug
 if (GVAR(debug_functions)) then {
     [
-        "%1 Vehicle assault building (%2 @ %3 buildingPos %4 %5)",
+        "%1 Vehicle assault building (%2 @ %3 positions%4%5)",
         side _unit,
         getText (configOf _vehicle >> "displayName"),
         count _buildings,

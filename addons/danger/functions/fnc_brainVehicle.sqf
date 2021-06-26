@@ -69,6 +69,11 @@ if (_artillery) exitWith {
 // variable
 _vehicle setVariable [QEGVAR(main,isArtillery), false];
 
+// vehicle type ~ Air
+if (_vehicle isKindOf "Air") exitWith {
+    [_timeout + 2 + random 2] + _causeArray
+};
+
 // vehicle type ~ Static weapon
 private _static = _vehicle isKindOf "StaticWeapon";
 if (_static) exitWith {
@@ -90,8 +95,9 @@ if (_static) exitWith {
 };
 
 // update information
-if (_attack && {RND(0.6)}) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
+if (_cause isEqualTo DANGER_ENEMYNEAR) then {[_unit, _dangerCausedBy] call EFUNC(main,doShareInformation);};
 
+// select turret ammunition
 if (_attack && {!EGVAR(main,disableAutonomousMunitionSwitching) && {!(isNull _dangerCausedBy) && {
     (_vehicle getVariable [QGVAR(warheadSwitchTimeout), -1]) < CBA_missionTime}}}) then {
     _vehicle setVariable [QGVAR(warheadSwitchTimeout), CBA_missionTime + 15];
@@ -112,7 +118,7 @@ private _armored = _vehicle isKindOf "Tank" || {_vehicle isKindOf "Wheeled_APC_F
 if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
     // delay + info
-    private _delay = 2 + random 2;
+    private _delay = 2 + random 3;
 
     // vehicle jink
     private _oldDamage = _vehicle getVariable [QGVAR(vehicleDamage), 0];
@@ -125,7 +131,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
     // tank assault
     if (_attack && {speed _vehicle < 20}) then {
-        // rotate + suppression (internal to vehicle rotate)
+        // rotate
         [_vehicle, _dangerCausedBy] call EFUNC(main,doVehicleRotate);
 
         // assault
