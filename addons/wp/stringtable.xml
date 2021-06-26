@@ -663,12 +663,6 @@
         <Key ID="STR_Lambs_WP_Suppressed">
             <English>Suppressed</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Enabled">
-            <English>Enabled</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Disabled">
-            <English>Disabled</English>
-        </Key>
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
             <English>Only when units are equipped with an UGL and flares</English>
         </Key>
