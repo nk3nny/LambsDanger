@@ -16,6 +16,4 @@
  * Public: No
 */
 
-[{
-    _this call CBA_fnc_localEvent;
-}, _this] call CBA_fnc_directCall;
+_this call CBA_fnc_localEvent;
