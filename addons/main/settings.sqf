@@ -93,6 +93,16 @@ _curCat = LSTRING(Settings_SuppressionCat);
     1
 ] call CBA_fnc_addSetting;
 
+// Suppression min Obstacle Proximity Distance
+[
+    QGVAR(minObstacleProximity),
+    "SLIDER",
+    [LSTRING(Settings_minObstacleProximity), LSTRING(Settings_minObstacleProximity_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 20, 5, 2],
+    1
+] call CBA_fnc_addSetting;
+
 // share information categories
 _curCat = LSTRING(Settings_ShareInformationCat);
 
