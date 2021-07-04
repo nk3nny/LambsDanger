@@ -22,3 +22,11 @@ class Extended_Explosion_Eventhandlers {
         };
     };
 };
+
+class Extended_Suppressed_Eventhandlers {
+    class CAManBase {
+        class LAMBS_CAManBase_suppressed {
+            Suppressed = QUOTE(_this call FUNC(suppressedEH));
+        };
+    };
+};

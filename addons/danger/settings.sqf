@@ -100,17 +100,6 @@ private _curCat = LSTRING(Settings_GeneralCat);
     1
 ] call CBA_fnc_addSetting;
 
-
-// Chance of panic expressed as percentage
-[
-    QGVAR(panicChance),
-    "SLIDER",
-    [LSTRING(Settings_PanicChance), LSTRING(Settings_PanicChance_ToolTip)],
-    [COMPONENT_NAME, _curCat],
-    [0, 1, 0.1, 2, true],
-    1
-] call CBA_fnc_addSetting;
-
 /*
 TEMPORARILY DISABLED FOR VERSION 2.5 RELEASE
 WAITING BETTER OR OTHER SOLUTION
