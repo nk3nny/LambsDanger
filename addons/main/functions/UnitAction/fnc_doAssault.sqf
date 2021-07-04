@@ -37,7 +37,7 @@ private _pos = if (_buildings isEqualTo []) then {
     };
 
     // select target location
-    getPosATL _target
+    _unit getHideFrom _target
 } else {
 
     // updates group memory variable
@@ -58,7 +58,7 @@ private _pos = if (_buildings isEqualTo []) then {
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", true];
+_unit setDestination [_pos, "LEADER PLANNED", false];
 
 // debug
 if (GVAR(debug_functions)) then {
