@@ -55,7 +55,6 @@ if (_distance2D < 12) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_m
 // CQB or suppress
 if (RND(0.9) || {_distance2D < 66}) then {
     // movement
-    //_unit setUnitPosWeak (["MIDDLE", "UP"] select (_distance2D > 5));      // TODO : remove lines if no problems are reported within one week of 22.04.21 - nkenny
     _unit forceSpeed 4;
 
     // execute CQB move
@@ -77,7 +76,7 @@ if (RND(0.9) || {_distance2D < 66}) then {
     // execute suppression
     _unit setUnitPosWeak "MIDDLE";
     _unit forceSpeed ([2, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5]] call FUNC(doSuppress);
+    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5], true] call FUNC(doSuppress);
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Suppress (sympathetic)", GVAR(debug_functions)];
 };

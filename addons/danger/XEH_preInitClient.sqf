@@ -65,7 +65,7 @@ private _fnc_suppress_AI = {
                 [
                     {
                         _this remoteExec [QEFUNC(main,doSuppress), _this select 0];
-                    }, [_x, _firePos], random 1.5
+                    }, [_x, _firePos, true], random 1.5
                 ] call CBA_fnc_waitAndExecute;
         };
     } foreach _units;

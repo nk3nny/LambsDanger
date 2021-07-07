@@ -1,4 +1,4 @@
-private _curCat = ELSTRING(Danger,Settings_MainCat);
+private _curCat = ELSTRING(main,Settings_MainCat);
 // Enable automatic artillery registration
 DFUNC(ArtilleryScan) = {
     if (!GVAR(autoAddArtillery)) exitWith {

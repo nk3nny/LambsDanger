@@ -17,7 +17,7 @@ class CfgVehicles {
         };
     };
     class GVAR(BaseModule): Module_F {
-        author = "LAMBS Dev Team";
+        author = ECSTRING(main,Team);
         _generalMacro = QGVAR(BaseModule);
         scope = 0;
         scopeCurator = 0;

@@ -44,10 +44,20 @@ private _curCat = LSTRING(Settings_MainCat);
 [
     QGVAR(indoorMove),
     "SLIDER",
-    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)], // TODO(nkenny): Add Stringtable Entries!
+    [LSTRING(Settings_IndoorMove), LSTRING(Settings_IndoorMove_ToolTip)],
     [COMPONENT_NAME, _curCat],
     [0, 1, 0.1, 2, true],
     1
+] call CBA_fnc_addSetting;
+
+// Toggles AI vehicle autonomous munition switching
+[
+    QGVAR(disableAutonomousMunitionSwitching),
+    "CHECKBOX",
+    [LSTRING(Settings_disableAutonomousMunitionSwitching), LSTRING(Settings_disableAutonomousMunitionSwitching_Tooltip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    0
 ] call CBA_fnc_addSetting;
 
 // debug
@@ -69,7 +79,7 @@ _curCat = LSTRING(Settings_SuppressionCat);
     "SLIDER",
     [LSTRING(Settings_MinSuppressDistance), LSTRING(Settings_MinSuppressDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [1, 500, 28, 0],
+    [1, 500, 50, 0],
     1
 ] call CBA_fnc_addSetting;
 

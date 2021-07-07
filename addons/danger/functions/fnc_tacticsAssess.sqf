@@ -108,7 +108,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
     if (_nearIndoorTarget != -1) exitWith {
         _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
-        _pos = [_unit getHideFrom (_enemies select _nearIndoorTarget), _eyePos] select _inside;
+        _pos = getPosATL (_enemies select _nearIndoorTarget);
     };
 
     // inside? stay safe

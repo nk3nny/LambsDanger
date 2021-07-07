@@ -69,7 +69,7 @@ _pos pushBack _target;
 
 // find overwatch position
 if (_overwatch isEqualTo []) then {
-    private _distance2D = (_unit distance2D _target) min 250;
+    private _distance2D = ((_unit distance2D _target) * 0.66) min 250;
     _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2D _unit, _x select 0]};
     _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
     _overwatch sort true;

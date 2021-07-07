@@ -4,13 +4,10 @@
  * Forces unit to assault or flee towards target location
  *
  * Arguments:
- * TODO
+ * Arma 3 Module Function Parameters
  *
  * Return Value:
- * TODO
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */
@@ -62,6 +59,10 @@ switch (_mode) do {
                 ] call EFUNC(main,showDialog);
             } else {
                 GVAR(ModuleTargets) = GVAR(ModuleTargets) - [objNull];
+                if (GVAR(ModuleTargets) isEqualTo []) exitWith {
+                    deleteVehicle _logic;
+                    [objNull, LLSTRING(Module_TaskAssault_ErrorNotModuleTarget)] call BIS_fnc_showCuratorFeedbackMessage;
+                };
                 private _targets = GVAR(ModuleTargets);
                 _targets = [_targets, [], {_logic distance _x }, "ASCEND"] call BIS_fnc_sortBy;
                 [LSTRING(Module_TaskAssault_DisplayName),
@@ -108,4 +109,3 @@ switch (_mode) do {
         };
     };
 };
-true

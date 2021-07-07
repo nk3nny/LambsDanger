@@ -288,21 +288,25 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
                     name = CSTRING(All);
                     value = -1;
                 };
+                class None {
+                    name = CSTRING(None);
+                    value = 0;
+                };
                 class Hit {
                     name = CSTRING(Hit);
-                    value = 0;
+                    value = 1;
                 };
                 class Fired {
                     name = CSTRING(Fired);
-                    value = 1;
+                    value = 2;
                 };
                 class FiredNear {
                     name = CSTRING(FiredNear);
-                    value = 2;
-                };
-                class None {
-                    name = CSTRING(None);
                     value = 3;
+                };
+                class Suppressed {
+                    name = CSTRING(Suppressed);
+                    value = 4;
                 };
             };
         };
@@ -524,6 +528,30 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_HUNT_ENABLEREINFORCEMENT);
+        };
+        class GVAR(doUGL): Combo {
+            displayName = CSTRING(Module_TaskHunt_TryUGLFlare_DisplayName);
+            tooltip = CSTRING(Module_TaskHunt_TryUGLFlare_Tooltip);
+            property = QGVAR(doUGL);
+            defaultValue = TASK_HUNT_TRYUGLFLARE;
+            unique = 0;
+            condition = "0";
+            typeName = "NUMBER";
+            expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class Disabled {
+                    name = "$str_disabled";
+                    value = 0;
+                };
+                class Enabled {
+                    name = "$str_enabled";
+                    value = 1;
+                };
+                class OnlyIfUGL {
+                    name = CSTRING(OnlyIfUGL);
+                    value = 2;
+                };
+            };
         };
         class ModuleDescription: ModuleDescription {};
     };

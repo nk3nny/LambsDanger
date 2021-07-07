@@ -4,13 +4,10 @@
  * Sets a dynamic target which can be connected to other scripts
  *
  * Arguments:
- * TODO
+ * Arma 3 Module Function Parameters
  *
  * Return Value:
- * TODO
- *
- * Example:
- * TODO
+ * NONE
  *
  * Public: No
 */

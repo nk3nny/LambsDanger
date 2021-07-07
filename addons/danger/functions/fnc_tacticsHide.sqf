@@ -93,25 +93,9 @@ if (_cover isEqualTo []) then {
 
 // unit commands
 _units doWatch objNull;
-doStop _units;
 
-// disperse and hide unit
-{
-    // ready
-    _x setUnitPosWeak "DOWN";
-
-    // disperse!
-    if (_cover isNotEqualTo []) then {
-        [
-            {
-                params ["_unit", "_pos"];
-                _unit moveTo _pos;
-                _unit setDestination [_pos, "FORMATION PLANNED", true];
-            }, [_x, _cover deleteAt 0], random 2
-        ] call CBA_fnc_waitAndExecute;
-        _x setVariable [QEGVAR(main,currentTask), "Group Hide!", EGVAR(main,debug_functions)];
-    };
-} forEach _units;
+// disperse and hide unit ~ notice that cover is added as building positions nkenny
+[_units, _target, _cover] call EFUNC(main,doGroupHide);
 
 // find launcher and armour
 private _launchers = _units select {(secondaryWeapon _x) isNotEqualTo ""};
