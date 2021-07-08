@@ -683,13 +683,13 @@
             <Russian>Создать динамическую цель</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
-            <English>Lamber Danger Waypoints</English>
-            <Polish>Lamber Danger Waypoints</Polish>
+            <English>LAMBS Danger Waypoints</English>
+            <Polish>LAMBS Danger Waypoints</Polish>
             <Russian>Маршрутные точки LAMBS Danger</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
-            <English>Lamber Danger Search Waypoints</English>
-            <Polish>Lamber Danger Search Waypoints</Polish>
+            <English>LAMBS Danger Search Waypoints</English>
+            <Polish>LAMBS Danger Search Waypoints</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
@@ -698,7 +698,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_Tooltip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
-            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigaycjne grup odpowiadających na wezwanie.</Polish>
+            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoints_displayName">
             <English>Advanced AI [LAMBS]</English>
@@ -726,7 +726,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
-            <Polish>Garnizonuje w budynkach w obszarze punktu nawigacyjnego</Polish>
+            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
@@ -734,7 +734,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
             <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
-            <Polish>Losowy patrol w obszarze punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
+            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
             <English>TASK RUSH</English>
@@ -742,7 +742,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
             <English>Rushes players within WP completion radius (Default 1000m)</English>
-            <Polish>Pędzi do graczy w obszarze punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
@@ -750,7 +750,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
             <English>Hunts players within WP completion radius (Default 1000m)</English>
-            <Polish>Poluje na graczy w obszarze punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
@@ -758,7 +758,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)</English>
-            <Polish>Śledzi graczy w obszarze punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
@@ -766,7 +766,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
-            <Polish>Wchodzi i czyści budynki w zasięgu obszaru nawigacyjnego (Domyślnie 50m)</Polish>
+            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
@@ -774,7 +774,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use</English>
-            <Polish>Rejestruje artylerię dla dynamicznego użytku</Polish>
+            <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
         </Key>
     </Package>
 </Project>
