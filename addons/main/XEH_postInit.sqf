@@ -1,7 +1,5 @@
 #include "script_component.hpp"
 
-GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
-
 {
     private _string = getText (_x >> "model");
     if (_string isNotEqualTo "") then {
@@ -11,7 +9,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
         if !(".p3d" in _string) then {
             _string = _string + ".p3d";
         };
-        GVAR(blockSuppressionModelCache) setVariable [toLower _string, true];
+        GVAR(blockSuppressionModelCache) set [toLower _string, true];
     };
 } forEach ("private _name = configName _x; _name isKindof 'building' || {_name isKindOf 'Rocks_base_F'}" configClasses (configFile >> "CfgVehicles"));
 

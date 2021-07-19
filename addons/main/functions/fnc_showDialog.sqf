@@ -120,7 +120,7 @@ private _fnc_AddTextField = {
         _tooltip = localize _tooltip;
     };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    _default = GVAR(ChooseDialogSettingsCache) getOrDefault [_cacheName, _default];
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -142,7 +142,7 @@ private _fnc_AddBoolean = {
         _tooltip = localize _tooltip;
     };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    _default = GVAR(ChooseDialogSettingsCache) getOrDefault [_cacheName, _default];
 
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
@@ -162,7 +162,7 @@ private _fnc_AddDropDown = {
         _tooltip = localize _tooltip;
     };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    _default = GVAR(ChooseDialogSettingsCache) getOrDefault [_cacheName, _default];
 
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
     [_text, _tooltip] call _fnc_CreateLabel;
@@ -198,7 +198,7 @@ private _fnc_AddSlider = {
         _tooltip = localize _tooltip;
     };
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    _default = GVAR(ChooseDialogSettingsCache) getOrDefault [_cacheName, _default];
 
     // if no Default is Given we use the middle of the Range input
     if (isNil "_default") then {
@@ -280,7 +280,7 @@ private _fnc_AddSideSelector = {
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    private _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    private _default = GVAR(ChooseDialogSettingsCache) getOrDefault [_cacheName, _default];
 
     [_text, _tooltip] call _fnc_CreateLabel;
 

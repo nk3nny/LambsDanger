@@ -62,8 +62,8 @@ switch (toLower(_callout)) do {
     };
 };
 
-private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
-private _cachedSounds = GVAR(CalloutCacheNamespace) getVariable _cacheName;
+private _cacheName = [_speaker, _behavior, _callout];
+private _cachedSounds = GVAR(CalloutCacheNamespace) get _cacheName;
 
 if (isNil "_cachedSounds") then {
     private _protocolConfig = configFile >> (getText (configFile >> "CfgVoice" >> _speaker >> "protocol")) >> "Words";
@@ -93,7 +93,7 @@ if (isNil "_cachedSounds") then {
         _cachedSounds = _cachedSounds - [objNull];
     };
 
-    GVAR(CalloutCacheNamespace) setVariable [_cacheName, _cachedSounds];
+    GVAR(CalloutCacheNamespace) set [_cacheName, _cachedSounds];
 };
 
 // no sounds found

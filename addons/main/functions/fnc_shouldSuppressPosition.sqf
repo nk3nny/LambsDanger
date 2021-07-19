@@ -37,7 +37,7 @@ private _fnc_checkIfBlocked = {
     private _index = _vis findIf {
         private _obj = (_x select 2);
         isNull _obj || // terrain geom
-        {GVAR(blockSuppressionModelCache) getVariable [((getModelInfo _obj) select 1), false]} // object that has a model that blocks suppression
+        {GVAR(blockSuppressionModelCache) getOrDefault [((getModelInfo _obj) select 1), false]} // object that has a model that blocks suppression
     };
 
     if (_index isEqualTo -1) exitWith {

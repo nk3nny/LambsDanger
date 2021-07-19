@@ -18,42 +18,43 @@ params ["_element"];
 private _data = [];
 {
     _x params ["_ctrl", "_type"];
-    private "_d";
-    switch (_type) do {
+    private _value = switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {
-            _d = cbChecked _ctrl;
+            cbChecked _ctrl;
         };
         case ("NUMBER"): {
-            _d = parseNumber (ctrlText _ctrl);
+            parseNumber (ctrlText _ctrl);
         };
         case ("SLIDER"): {
-            _d = [parseNumber (ctrlText _ctrl), _ctrl] call (_ctrl getVariable [QFUNC(RoundValue), {_this select 0}]);
+            [parseNumber (ctrlText _ctrl), _ctrl] call (_ctrl getVariable [QFUNC(RoundValue), {_this select 0}]);
         };
         case ("INT");
         case ("INTEGER"): {
-            _d = round (parseNumber (ctrlText _ctrl));
+            round (parseNumber (ctrlText _ctrl));
         };
         case ("LIST");
         case ("LISTBOX");
         case ("DROPDOWN"): {
-            _d = lbCurSel _ctrl;
+            lbCurSel _ctrl;
         };
         case ("TEXT");
         case ("EDIT"): {
-            _d = ctrlText _ctrl;
+            ctrlText _ctrl;
         };
         case ("SIDE"): {
-            _d = _ctrl getVariable [QGVAR(SelectedSide), sideUnknown];
+            _ctrl getVariable [QGVAR(SelectedSide), sideUnknown];
         };
         default {
-            _d = ctrlText _ctrl;
-            hint format ["%1 type unknown %2", _type, _x];
+            private _str = format ["%1 type unknown %2", _type, _x];
+            hint _str;
+            diag_log _str;
+            ctrlText _ctrl;
         };
     };
-    private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];
-    GVAR(ChooseDialogSettingsCache) setVariable [_cacheName, _d];
-    _data pushback _d;
+    private _cacheName = _ctrl getOrDefault [QGVAR(CacheName), ""];
+    GVAR(ChooseDialogSettingsCache) set [_cacheName, _value];
+    _data pushback _value;
 } forEach (_element getVariable [QGVAR(ControlData), []]);
 
 _data;
