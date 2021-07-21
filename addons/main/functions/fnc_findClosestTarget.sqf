@@ -11,7 +11,7 @@
  * boolean
  *
  * Example:
- * [group bob, 500] call lambs_wp_fnc_findClosestTarget;
+ * [group bob, 500] call lambs_main_fnc_findClosestTarget;
  *
  * Public: No
 */

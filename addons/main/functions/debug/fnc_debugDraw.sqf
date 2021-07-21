@@ -216,6 +216,9 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         if !(_unit checkAIFeature "MOVE") then {
             _textData append ["<t color='#FFAA00'>MOVE disabled</t>", "<br/>"];
         };
+        if (_unit getVariable [QEGVAR(danger,forceMove), false]) then {
+            _textData append ["<t color='#ff4000'>Forced AI</t>", "<br/>"];
+        };
         [_renderPos, _textData] call _fnc_debug_drawRect;
 
         if (GVAR(debug_RenderExpectedDestination)) then {

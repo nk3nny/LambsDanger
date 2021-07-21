@@ -4,6 +4,7 @@ PREP(doCallout);
 PREP(doGesture);
 PREP(doShareInformation);
 PREP(getShareInformationParams);
+PREP(shouldSuppressPosition);
 
 PREP(eventCallback);
 PREP(findBuildings);
@@ -12,6 +13,7 @@ PREP(findNearbyFriendlies);
 PREP(findOverwatch);
 PREP(findReadyUnits);
 PREP(findReadyVehicles);
+PREP(findClosestTarget);
 
 PREP(initModules);
 
@@ -22,8 +24,11 @@ PREP(isNight);
 PREP(showDialog);
 PREP(parseData);
 
+PREP(removeEventhandlers);
+
 SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
+SUBPREP(GroupAction,doGroupHide);
 SUBPREP(GroupAction,doGroupSuppress);
 SUBPREP(GroupAction,doGroupStaticDeploy);
 SUBPREP(GroupAction,doGroupStaticFind);
@@ -49,6 +54,7 @@ SUBPREP(VehicleAction,doVehicleAssault);
 SUBPREP(VehicleAction,doVehicleJink);
 SUBPREP(VehicleAction,doVehicleRotate);
 SUBPREP(VehicleAction,doVehicleSuppress);
+SUBPREP(VehicleAction,doSelectWarhead);
 
 SUBPREP(debug,debugDangerType);
 SUBPREP(debug,debugDraw);

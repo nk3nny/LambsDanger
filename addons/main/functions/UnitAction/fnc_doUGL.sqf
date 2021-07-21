@@ -25,13 +25,12 @@ params [
 if (_units isEqualType objNull) then {_units = [_units];};
 if (_units isEqualType grpNull) then {_units = units _units;};
 
-// local
-_units = _units select {local _x && {!isPlayer _x}};
-
 // find grenade launcher
 private _flare = "";
 private _muzzle = "";
 private _unit = _units findIf {
+
+    if (!(local _x) || {isPlayer _x}) exitWith {false};
 
     private _weapon = primaryWeapon _x;
 
