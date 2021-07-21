@@ -40,10 +40,6 @@ _unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
 
 // within acceptble limits -- suppress instead
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    private _enemy = _unit findNearestEnemy _target;
-    if (!isNull _enemy && {_unit distance2D _enemy < 600}) then {
-        [_unit, _unit getHideFrom _enemy] call FUNC(doVehicleSuppress);
-    };
     true
 };
 
