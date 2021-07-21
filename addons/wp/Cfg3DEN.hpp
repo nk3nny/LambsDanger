@@ -37,7 +37,7 @@ class Cfg3DEN {
                         control = "Checkbox";
                         displayName = CSTRING(3DEN_Attributes_RegisterArtillery_DisplayName);
                         tooltip = CSTRING(3DEN_Attributes_RegisterArtillery_ToolTip);
-                        expression = "if (_value) then {_this spawn {waitUntil {!isNil 'lambs_danger_Loaded_WP'};if (lambs_danger_Loaded_WP) then {[gunner _this] call lambs_wp_fnc_taskArtilleryRegister;};};};";
+                        expression = "if (_value) then {_this spawn {waitUntil {!(isNil 'lambs_wp_fnc_taskArtilleryRegister')};[gunner _this] call lambs_wp_fnc_taskArtilleryRegister;};};";
                         typeName = "BOOL";
                         condition = "objectVehicle";
                         defaultValue = "(false)";
