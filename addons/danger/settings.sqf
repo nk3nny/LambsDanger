@@ -1,4 +1,4 @@
-private _curCat = LSTRING(Settings_MainCat);
+private _curCat = ELSTRING(main,Settings_MainCat);
 // Toggle advanced danger.fsm features on player group
 [
     QGVAR(disableAIPlayerGroup),

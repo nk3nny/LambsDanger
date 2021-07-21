@@ -10,7 +10,7 @@ const PREFIX = "Lambs";
 
 var running = 0;
 var failedCount = 0;
-const stringtableEntries = [];
+const stringtableEntries = {};
 const projectFiles = [];
 
 const regex = /(L|C)STRING\((\w+)\)|E(L|C)STRING\((\w+),(\w+)\)/gm;
@@ -40,7 +40,7 @@ function getDirFiles(p, module) {
             running++;
             xml.parseString(xmlData, function (err, result) {
                 for (const entry of result.Project.Package[0].Key) {
-                    stringtableEntries.push(entry.$.ID.toLowerCase());
+                    stringtableEntries[entry.$.ID.toLowerCase()] = false;
                 }
                 running--;
             });
@@ -66,12 +66,21 @@ function CheckStringtables() {
             } else if (match[4] && match[5]) {
                 strName = `STR_${PREFIX}_${match[4]}_${match[5]}`
             }
+            if (!strName) continue;
 
-            if (strName && !stringtableEntries.includes(strName.toLowerCase())) {
-                console.log(`Stringtable Entry ${strName} does not exist in ${data.path}`);
-                failedCount++;
+            strName = strName.toLowerCase();
+            if (stringtableEntries.hasOwnProperty(strName)) {
+                stringtableEntries[strName] = true;
+            } else {
+              console.log(`Stringtable Entry ${strName} does not exist in ${data.path}`);
+              failedCount++;
             }
         }
+    }
+    for (var stringtableEntry in stringtableEntries) {
+      if (stringtableEntries.hasOwnProperty(stringtableEntry) && !stringtableEntries[stringtableEntry]) {
+        console.log(`Stringtable Entry ${stringtableEntry} is Unused!`);
+      }
     }
 }
 
