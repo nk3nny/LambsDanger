@@ -706,7 +706,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
             <English>TASK ASSAULT</English>
-            <Polish>Zadanie - Atak</Polish>
+            <Polish>ZADANIE ATAK</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
             <English>Rushes to target position with no regard for safety</English>
@@ -714,7 +714,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
-            <Polish>Zadanie - Odwrót</Polish>
+            <Polish>ZADANIE ODWRÓT</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
             <English>Retreats to target position while ignoring enemies</English>
@@ -722,7 +722,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
             <English>TASK GARRISON</English>
-            <Polish>Zadanie - Garnizon</Polish>
+            <Polish>ZADANIE GARNIZON</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
@@ -730,7 +730,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
-            <Polish>Zadanie - Patrol</Polish>
+            <Polish>ZADANIE PATROL</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
             <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
@@ -738,7 +738,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
             <English>TASK RUSH</English>
-            <Polish>Zadanie - Szturm</Polish>
+            <Polish>ZADANIE SZTURM</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
             <English>Rushes players within WP completion radius (Default 1000m)</English>
@@ -746,7 +746,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
-            <Polish>Zadanie - Polowanie</Polish>
+            <Polish>ZADANIE POLOWANIE</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
             <English>Hunts players within WP completion radius (Default 1000m)</English>
@@ -754,7 +754,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
-            <Polish>Zadanie - Zasadzka</Polish>
+            <Polish>ZADANIE ZASADZKA</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)</English>
@@ -762,7 +762,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
-            <Polish>Zadanie - CQB</Polish>
+            <Polish>ZADANIE CQB</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
@@ -770,7 +770,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
-            <Polish>Rejestracja artylerii</Polish>
+            <Polish>REJESTRACJA ARTYLERII</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use</English>
