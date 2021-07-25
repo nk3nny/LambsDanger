@@ -376,7 +376,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_Tooltip">
             <English>Max distance between waypoints</English>
             <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
-            <Polish>Maksymalny zasięg pomiędzy punktami nawigacyjnymi</Polish>
+            <Polish>Maksymalny dystans pomiędzy punktami nawigacyjnymi</Polish>
             <Russian>Максимальное расстояние между маршрутными точками</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
