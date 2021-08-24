@@ -16,3 +16,5 @@ sqf/*
 tools/stringtableChecker/node_modules
 
 .vscode/
+
+*.sqfc
