@@ -112,13 +112,13 @@
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
             <English>Task Assault/Retreat</English>
             <German>Aufgabe Angriff/Rückzug</German>
-            <Polish>Zadanie - Szturm/Odwrót</Polish>
+            <Polish>Zadanie - Atak/Odwrót</Polish>
             <Russian>Задача Нападение/Отступление</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
             <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
-            <Polish>Zadanie - Szturm/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
+            <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
             <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
@@ -171,6 +171,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ErrorNotModuleTarget">
             <English>Using Task Assault on a Unit without a Dynamic Target is not supported!</English>
+            <Polish>Używanie zadania Atak na jednostce bez Dynamicznego celu nie jest wspierane!</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
             <English>Task Camp</English>
@@ -210,12 +211,12 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
             <English>Last Waypoint</English>
-            <Polish>Ostatni punkt trasy</Polish>
+            <Polish>Ostatni punkt nawigacyjny</Polish>
             <Russian>Последняя маршрутная точка</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
-            <Polish>Punkt trasy, który grupa przyjmuje po opuszczeniu obozowania</Polish>
+            <Polish>Punkt nawigacyjny, który grupa przyjmuje po opuszczeniu obozowania</Polish>
             <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
@@ -345,13 +346,13 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName">
             <English>Waypoints</English>
             <German>Wegpunkte</German>
-            <Polish>Punkty trasy</Polish>
+            <Polish>Punkty nawigacyjne</Polish>
             <Russian>Маршрутные точки</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_Tooltip">
             <English>Number of waypoints created</English>
             <German>Anzahl an erstellen Wegpunkten</German>
-            <Polish>Liczba punktów trasy </Polish>
+            <Polish>Liczba punktów nawigacyjnych</Polish>
             <Russian>Количество созданных маршрутных точек</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
@@ -363,7 +364,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_Tooltip">
             <English>The unit will generate a new patrol pattern once one patrol cycle is complete</English>
             <German>Die Einheiten erstellen ein neues Patroullienmuster, sobald das Alte abgeschlossen wurde.</German>
-            <Polish>Jednostka stworzy nowy wzór punktów trasy do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
+            <Polish>Jednostka stworzy nowy wzór punktów nawigacyjnych do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
             <Russian>Устройство сгенерирует новую схему патрулирования после завершения одного цикла патрулирования.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName">
@@ -375,7 +376,7 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_Tooltip">
             <English>Max distance between waypoints</English>
             <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
-            <Polish>Maksymalny zasięg pomiędzy punktami trasy</Polish>
+            <Polish>Maksymalny dystans pomiędzy punktami nawigacyjnymi</Polish>
             <Russian>Максимальное расстояние между маршрутными точками</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
@@ -518,9 +519,11 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_DisplayName">
             <English>Use Flare</English>
+            <Polish>Użyj flar</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_Tooltip">
             <English>Sets how units use flares when hunting for enemies.</English>
+            <Polish>Określa jak jednostki używają flar kiedy polują na graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -662,9 +665,11 @@
         </Key>
         <Key ID="STR_Lambs_WP_Suppressed">
             <English>Suppressed</English>
+            <Polish>Przytłoczenie ogniem</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
             <English>Only when units are equipped with an UGL and flares</English>
+            <Polish>Tylko wtedy, gdy jednostki są wyposażone w granatniki i flary</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
@@ -678,13 +683,13 @@
             <Russian>Создать динамическую цель</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
-            <English>Lamber Danger Waypoints</English>
-            <Polish>LAMBS Danger Punkty trasy</Polish>
+            <English>LAMBS Danger Waypoints</English>
+            <Polish>LAMBS Danger Waypoints</Polish>
             <Russian>Маршрутные точки LAMBS Danger</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
-            <English>Lamber Danger Search Waypoints</English>
-            <Polish>LAMBS Danger Punkty trasy</Polish>
+            <English>LAMBS Danger Search Waypoints</English>
+            <Polish>LAMBS Danger Search Waypoints</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
@@ -693,64 +698,83 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_Tooltip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
-            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty trasy grup odpowiadających na wezwanie.</Polish>
+            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoints_displayName">
             <English>Advanced AI [LAMBS]</English>
+            <Polish>Advanced AI [LAMBS]</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
             <English>TASK ASSAULT</English>
+            <Polish>ZADANIE ATAK</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
             <English>Rushes to target position with no regard for safety</English>
+            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
+            <Polish>ZADANIE ODWRÓT</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
             <English>Retreats to target position while ignoring enemies</English>
+            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
             <English>TASK GARRISON</English>
+            <Polish>ZADANIE GARNIZON</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
+            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
+            <Polish>ZADANIE PATROL</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
             <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
+            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
             <English>TASK RUSH</English>
+            <Polish>ZADANIE SZTURM</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
             <English>Rushes players within WP completion radius (Default 1000m)</English>
+            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
+            <Polish>ZADANIE POLOWANIE</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
             <English>Hunts players within WP completion radius (Default 1000m)</English>
+            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
+            <Polish>ZADANIE ZASADZKA</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)</English>
+            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
+            <Polish>ZADANIE CQB</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
+            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
+            <Polish>REJESTRACJA ARTYLERII</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use</English>
+            <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
         </Key>
     </Package>
 </Project>
