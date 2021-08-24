@@ -21,7 +21,6 @@ PREP(tacticsFlank);
 PREP(tacticsGarrison);
 PREP(tacticsHide);
 PREP(tacticsHold);
-PREP(tacticsProfiles);
 PREP(tacticsReinforce);
 PREP(tacticsSuppress);
 

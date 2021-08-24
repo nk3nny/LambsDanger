@@ -11,4 +11,11 @@ GVAR(shareHandlers) = [];
 
 GVAR(blockSuppressionModelCache) = false call CBA_fnc_createNamespace;
 
+GVAR(minObstacleProximity) = 5;
+
+if (isServer && !is3DEN) then {
+    GVAR(ProfilesNamespace) = true call CBA_fnc_createNamespace;
+    publicVariable QGVAR(ProfilesNamespace);
+    call FUNC(parseAIProfiles);
+};
 ADDON = true;

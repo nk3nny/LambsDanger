@@ -60,6 +60,28 @@ private _curCat = LSTRING(Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+private _profiles = [getMissionConfigValue [QGVAR(AIProfiles), HASH_NULL] call CBA_fnc_hashKeys, "Scenario" get3DENMissionAttribute QGVAR(AIProfiles)] select is3DEN;
+
+if (isNil "_profiles" || {_profiles isEqualType []}) then {
+    _profiles = [];
+};
+
+{
+    {
+        _profiles pushBackUnique toLower(configName _x);
+    } forEach configProperties [_x >> "LAMBS_CfgAIProfiles", "isClass _x", true];
+} forEach [configFile, missionConfigFile];
+
+// Default AI Profiles
+[
+    QGVAR(defaultAIProfile),
+    "LIST",
+    [LSTRING(Settings_DefaultAIProfile), LSTRING(Settings_DefaultAIProfile_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [_profiles, _profiles, _profiles find "default"],
+    0
+] call CBA_fnc_addSetting;
+
 // debug
 _curCat = LSTRING(Settings_SuppressionCat);
 

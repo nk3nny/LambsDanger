@@ -15,9 +15,12 @@
  *
  * Public: No
 */
-params ["", ["_priorties", GVAR(fsmPriorities)]];
 
-// this function may have use in the future - nkenny
+params ["_unit", ["_priorties", GVAR(fsmPriorities)]];
 
+private _modifiedPriorties = _unit getVariable QGVAR(Priorities);
+if (!isNil "_modifiedPriorties" && { _modifiedPriorties isEqualType [] } && { count GVAR(fsmPriorities) == count _modifiedPriorties}) then {
+    _priorties = _modifiedPriorties;
+};
 // end
 _priorties

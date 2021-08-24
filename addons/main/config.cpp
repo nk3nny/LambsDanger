@@ -10,8 +10,10 @@ class CfgPatches {
         VERSION_CONFIG;
     };
 };
+#include "CfgDisplay3DEN.hpp"
 #include "CfgFactionClasses.hpp"
 #include "CfgEventHandlers.hpp"
+#include "CfgAIProfile.hpp"
 
 class GVAR(Display) {
     idd = -1;
