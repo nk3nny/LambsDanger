@@ -9,4 +9,6 @@ GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
 GVAR(shareHandlers) = [];
 
+GVAR(blockSuppressionModelCache) = false call CBA_fnc_createNamespace;
+
 ADDON = true;

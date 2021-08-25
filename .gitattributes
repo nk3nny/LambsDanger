@@ -3,3 +3,10 @@
 *.cpp text eol=crlf
 *.paa binary
 *.fsm text eol=crlf
+*.json text eol=crlf
+*.js text eol=crlf
+*.py text eol=crlf
+*.md text eol=crlf
+*.toml text eol=crlf
+*.txt text eol=crlf
+*.xml text eol=crlf

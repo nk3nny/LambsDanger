@@ -75,10 +75,9 @@ private _targetPos = if (_cover isEqualTo []) then {
 };
 
 // water means hold
-if (surfaceIsWater _targetPos) then {_targetPos = getPosASL _unit;};
+if (surfaceIsWater _targetPos) then {_targetPos = getPosATL _unit;};
 
 // cover move
-//[_unit, _targetPos] call FUNC(doCover);
 _unit doMove _targetPos;
 
 // debug

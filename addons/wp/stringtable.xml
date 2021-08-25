@@ -7,7 +7,7 @@
             <Polish>Zarejestruj jako artyleria LAMBS</Polish>
             <Russian>Зарегистрировать как артиллерия LAMBS</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_ToolTip">
+        <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_Tooltip">
             <English>Vehicle will be automatically registered as available artillery for dynamic strikes</English>
             <German>Das Fahrzeug wird automatisch als verfügbare Artillerie für dynamische Angriffe registriert.</German>
             <Polish>Pojazd będzie automatycznie zarejestrowany jako dostępna artyleria do dynamicznych ataków</Polish>
@@ -112,13 +112,13 @@
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
             <English>Task Assault/Retreat</English>
             <German>Aufgabe Angriff/Rückzug</German>
-            <Polish>Zadanie - Szturm/Odwrót</Polish>
+            <Polish>Zadanie - Atak/Odwrót</Polish>
             <Russian>Задача Нападение/Отступление</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
             <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
-            <Polish>Zadanie - Szturm/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
+            <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
             <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
@@ -171,6 +171,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ErrorNotModuleTarget">
             <English>Using Task Assault on a Unit without a Dynamic Target is not supported!</English>
+            <Polish>Używanie zadania Atak na jednostce bez Dynamicznego celu nie jest wspierane!</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
             <English>Task Camp</English>
@@ -190,7 +191,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_Tooltip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
             <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
             <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone.\nObszar dwa razy większy jest używany do patroli.</Polish>
@@ -202,7 +203,7 @@
             <Polish>Teleportuj jednostki</Polish>
             <Russian>Телепортация юнита</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_Tooltip">
             <English>Teleport units instantly to position</English>
             <German>Teleportiert Einheiten sofort zur Position</German>
             <Polish>Teleportuj jednostki od razu na pozycje</Polish>
@@ -210,12 +211,12 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
             <English>Last Waypoint</English>
-            <Polish>Ostatni punkt trasy</Polish>
+            <Polish>Ostatni punkt nawigacyjny</Polish>
             <Russian>Последняя маршрутная точка</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
-            <Polish>Punkt trasy, który grupa przyjmuje po opuszczeniu obozowania</Polish>
+            <Polish>Punkt nawigacyjny, który grupa przyjmuje po opuszczeniu obozowania</Polish>
             <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
@@ -254,7 +255,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_Tooltip">
             <English>Max distance houses will be searched</English>
             <German>Maximale Distanz in der Häuser durchsucht werden.</German>
             <Polish>Promień w którym zostaną sprawdzone budynki</Polish>
@@ -278,7 +279,7 @@
             <Polish>Teleportuj jednostki</Polish>
             <Russian>Телепортировать юнита</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_Tooltip">
             <English>Teleport units instantly to position</English>
             <German>Teleportiert Einheiten sofort zur Position</German>
             <Polish>Teleportuj jednostki od razu na pozycje</Polish>
@@ -290,7 +291,7 @@
             <Polish>Sortuj pozycje względem wysokości</Polish>
             <Russian>Сортировать позиции по высоте</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_Tooltip">
             <English>Sort building positions by height. Units will prefer positions on higher in buildings</English>
             <German>Gebäudepositionen nach Höhe sortieren. Einheiten bevorzugen höhergelegene Position in Gebäuden.</German>
             <Polish>Sortuj pozycje względem wysokości. Jednostki będą preferować pozycje położone wyżej</Polish>
@@ -302,7 +303,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_Tooltip">
             <English>Distance buildings are occupied</English>
             <German>Distanz in der Gebäude besetzt werden.</German>
             <Polish>Dystans na którym budynku będą garnizonowane</Polish>
@@ -314,7 +315,7 @@
             <Polish>Trigger zakończenia</Polish>
             <Russian>Выйти из триггера</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_Tooltip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
             <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
             <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje.\nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
@@ -331,7 +332,7 @@
             <Polish>Patrol dynamiczny</Polish>
             <Russian>Динамичный патруль</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_Tooltip">
             <English>The unit will create a sub-group to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
             <Polish>Jednostka stworzy podgrupę do patrolowania terenu.\nPatrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
             <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
@@ -345,13 +346,13 @@
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName">
             <English>Waypoints</English>
             <German>Wegpunkte</German>
-            <Polish>Punkty trasy</Polish>
+            <Polish>Punkty nawigacyjne</Polish>
             <Russian>Маршрутные точки</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_Tooltip">
             <English>Number of waypoints created</English>
             <German>Anzahl an erstellen Wegpunkten</German>
-            <Polish>Liczba punktów trasy </Polish>
+            <Polish>Liczba punktów nawigacyjnych</Polish>
             <Russian>Количество созданных маршрутных точек</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
@@ -360,10 +361,10 @@
             <Polish>Dynamiczny wzór patrolu</Polish>
             <Russian>Паттерн динамического патруля</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_Tooltip">
             <English>The unit will generate a new patrol pattern once one patrol cycle is complete</English>
             <German>Die Einheiten erstellen ein neues Patroullienmuster, sobald das Alte abgeschlossen wurde.</German>
-            <Polish>Jednostka stworzy nowy wzór punktów trasy do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
+            <Polish>Jednostka stworzy nowy wzór punktów nawigacyjnych do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
             <Russian>Устройство сгенерирует новую схему патрулирования после завершения одного цикла патрулирования.</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName">
@@ -372,10 +373,10 @@
             <Polish>Zasięg</Polish>
             <Russian>Расстояние</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_Tooltip">
             <English>Max distance between waypoints</English>
             <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
-            <Polish>Maksymalny zasięg pomiędzy punktami trasy</Polish>
+            <Polish>Maksymalny dystans pomiędzy punktami nawigacyjnymi</Polish>
             <Russian>Максимальное расстояние между маршрутными точками</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
@@ -408,7 +409,7 @@
             <Polish>Użyj pozycji grupy jako centrum</Polish>
             <Russian>Взять группу в качестве центра</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_Tooltip">
             <English>The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
             <German>Die schleichende Gruppe wird den Gruppenführer als Mittelpunkt für das Suchmuster verwenden. Das Ausschalten sorgt dafür, dass die Einheiten die Modulposition als Mittelpunkt verwenden, dies macht die Gruppe defensiver.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
@@ -420,7 +421,7 @@
             <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
             <Russian>Группа нацелена только на игроков</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_Tooltip">
             <English>The creeping group will only target players. Disable to let the group target any hostile unit within range.</English>
             <German>Die schleichende Gruppe visiert nur Spieler an. Durch Ausschalten visiert die Gruppe alle feindlichen Einheiten innerhalb der Reichweite an.</German>
             <Polish>Grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
@@ -432,7 +433,7 @@
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
             <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 15 sekund</Polish>
@@ -444,7 +445,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_Tooltip">
             <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
@@ -480,13 +481,13 @@
             <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
             <Russian>Группа нацелена только на игроков</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_Tooltip">
             <English>The hunting group will only target players. Disable to let the group target any hostile unit within range.</English>
             <German>Die jagende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
             <Polish>Polująca grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
             <Russian>Группа охоты будет нацелена только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_Tooltip">
             <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
             <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
@@ -498,7 +499,7 @@
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 70 sekund</Polish>
@@ -510,11 +511,19 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_Tooltip">
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние на котором группа охоты будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_DisplayName">
+            <English>Use Flare</English>
+            <Polish>Użyj flar</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_Tooltip">
+            <English>Sets how units use flares when hunting for enemies.</English>
+            <Polish>Określa jak jednostki używają flar kiedy polują na graczy.</Polish>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -540,13 +549,13 @@
             <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
             <Russian>Группа нацелена только на игроков</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_Tooltip">
             <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
             <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
             <Polish>Grupa szturmowa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
             <Russian>Нападающая группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_Tooltip">
             <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
             <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
@@ -558,7 +567,7 @@
             <Polish>Interwał skryptu</Polish>
             <Russian>Пропустить интервал</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
             <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 4 sekund</Polish>
@@ -570,7 +579,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_Tooltip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
             <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
@@ -582,7 +591,7 @@
             <Polish>Włącz automatyczną rejestrację artylerii</Polish>
             <Russian>Включить автоматическую регистрацию артиллерии</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_ToolTip">
+        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_Tooltip">
             <English>Automatically adds artillery already present in the mission to Side</English>
             <German>Fügt Artillerie die in der Mission vorhanden ist automatisch zur Seite hinzu.</German>
             <Polish>Automatycznie dodaje artylerię postawioną w misji do puli strony</Polish>
@@ -600,7 +609,7 @@
             <Polish>Grupy</Polish>
             <Russian>Группы</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Groups_ToolTip">
+        <Key ID="STR_Lambs_WP_Groups_Tooltip">
             <English>Select which unit script applies to.\nList is sorted by distance</English>
             <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
             <Polish>Określa na jaką jednostkę ma zadziałać skrypt.\nLista jest sortowana po dystansie.</Polish>
@@ -612,7 +621,7 @@
             <Polish>Centrum</Polish>
             <Russian>Центр</Russian>
         </Key>
-        <Key ID="STR_Lambs_WP_Centers_ToolTip">
+        <Key ID="STR_Lambs_WP_Centers_Tooltip">
             <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
             <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
             <Polish>Ustawia centrum dla wykonywanego skryptu. Moduł może być Dynamicznym Celem LAMBS wybranym z listy lub własną pozycją</Polish>
@@ -654,6 +663,14 @@
             <Polish>Trafienie</Polish>
             <Russian>Ранение</Russian>
         </Key>
+        <Key ID="STR_Lambs_WP_Suppressed">
+            <English>Suppressed</English>
+            <Polish>Przytłoczenie ogniem</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_OnlyIfUGL">
+            <English>Only when units are equipped with an UGL and flares</English>
+            <Polish>Tylko wtedy, gdy jednostki są wyposażone w granatniki i flary</Polish>
+        </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
             <English>'%1' is only Posible if the Group is local</English>
             <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
@@ -666,22 +683,98 @@
             <Russian>Создать динамическую цель</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
-            <English>Lamber Danger Waypoints</English>
-            <Polish>LAMBS Danger Punkty trasy</Polish>
+            <English>LAMBS Danger Waypoints</English>
+            <Polish>LAMBS Danger Waypoints</Polish>
             <Russian>Маршрутные точки LAMBS Danger</Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
-            <English>Lamber Danger Search Waypoints</English>
-            <Polish>LAMBS Danger Punkty trasy</Polish>
+            <English>LAMBS Danger Search Waypoints</English>
+            <Polish>LAMBS Danger Search Waypoints</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
             <English>Dynamic reinforcement</English>
             <Polish>Dynamiczne posiłki</Polish>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_ToolTip">
+        <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_Tooltip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
-            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty trasy grup odpowiadających na wezwanie.</Polish>
+            <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoints_displayName">
+            <English>Advanced AI [LAMBS]</English>
+            <Polish>Advanced AI [LAMBS]</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
+            <English>TASK ASSAULT</English>
+            <Polish>ZADANIE ATAK</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
+            <English>Rushes to target position with no regard for safety</English>
+            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
+            <English>TASK RETREAT</English>
+            <Polish>ZADANIE ODWRÓT</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
+            <English>Retreats to target position while ignoring enemies</English>
+            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
+            <English>TASK GARRISON</English>
+            <Polish>ZADANIE GARNIZON</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
+            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
+            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
+            <English>TASK PATROL</English>
+            <Polish>ZADANIE PATROL</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
+            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
+            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
+            <English>TASK RUSH</English>
+            <Polish>ZADANIE SZTURM</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
+            <English>Rushes players within WP completion radius (Default 1000m)</English>
+            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
+            <English>TASK HUNT</English>
+            <Polish>ZADANIE POLOWANIE</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
+            <English>Hunts players within WP completion radius (Default 1000m)</English>
+            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
+            <English>TASK CREEP</English>
+            <Polish>ZADANIE ZASADZKA</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
+            <English>Stalks players within WP completion radius (Default 1000m)</English>
+            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
+            <English>TASK CQB</English>
+            <Polish>ZADANIE CQB</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
+            <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
+            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
+            <English>REGISTER ARTILLERY</English>
+            <Polish>REJESTRACJA ARTYLERII</Polish>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
+            <English>Registers artillery for dynamic use</English>
+            <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
         </Key>
     </Package>
 </Project>

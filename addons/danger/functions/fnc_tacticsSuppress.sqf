@@ -22,12 +22,8 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 // find target
 _target = _target call CBA_fnc_getPos;
 
-// exit with flank if visible distance is 71+ meters from actual target
-private _targetASL = ATLtoASL _target;
-private _vis = lineIntersectsSurfaces [(getPosWorld _unit) vectorAdd [0, 0, 3], _targetASL vectorAdd [0, 0, 3], _unit, objNull, true, 3, "FIRE", "GEOM"];
-private _index = _vis findIf {(_x select 2) isKindOf "Building"};
-
-if (_index isNotEqualTo -1 && {((_vis select _index) select 0) vectorDistanceSqr _targetASL > 5041}) exitWith {
+// exit with flank squad leader cannot suppress from here
+if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 2.5]] call EFUNC(main,shouldSuppressPosition)) exitWith {
     [_unit, _target] call FUNC(tacticsFlank);
 };
 

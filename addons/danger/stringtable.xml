@@ -65,12 +65,6 @@
             <Polish>Włącza funkcję Dynamicznych Posiłków LAMBS. Ta grupa będzie się teraz przemieszczać w kierunku znanych pozycji wroga, które są identyfikowane przez funkcję udostępniania informacji.\nUWAGA Ta funkcja może zastąpić istniejące punkty trasy grup odpowiadających na wezwania.</Polish>
             <Russian>Включить LAMBS функцию динамического подкрепления . Эта группа теперь будет двигаться к известным позициям противника, которые идентифицировались с помощью функцией обмена информацией.\nПРЕДУПРЕЖДЕНИЕ Функция подкрепления может перезаписать существующие маршрутные точки в группах, отвечающих на вызов.</Russian>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_MainCat">
-            <English>Settings</English>
-            <German>Einstellungen</German>
-            <Polish>Ustawienia</Polish>
-            <Russian>Настройки</Russian>
-        </Key>
         <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
             <English>General</English>
             <German>Allgemein</German>
@@ -182,6 +176,18 @@
             <German>Legt die Angriffsreichweite fest.</German>
             <Polish>Określa zasięg ataku</Polish>
             <Russian>Дальность, на которой юниты считают себя атакующими</Russian>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance">
+            <English>Panic Chance</English>
+            <German>Panikwahrscheinlichkeit</German>
+            <Polish>Szansa na panikę</Polish>
+            <Russian>Шанс паники</Russian>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
+            <English>Chance to panic in percentage</English>
+            <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
+            <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
+            <Russian>Шанс паники в процентах</Russian>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
