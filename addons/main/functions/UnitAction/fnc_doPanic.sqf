@@ -36,19 +36,6 @@ _unit setVariable [QGVAR(currentTask), "Panic", GVAR(debug_functions)];
 // debug
 if (GVAR(debug_functions)) then {format ["%1 panic! (%2)", side _unit, name _unit] call FUNC(debugLog);};
 
-// functions
-private _fnc_panicReset = {
-    params ["_unit", "_timeout", ["_animation", false]];
-    [
-        {
-            params ["_unit", "_animation"];
-            _unit setUnitPos "AUTO";
-            _unit setVariable [QEGVAR(danger,forceMove), nil];
-            if (_animation) then {[_unit, "gestureYes"] call FUNC(doGesture);};
-        }, [_unit, _animation], _timeout
-    ] call CBA_fnc_waitAndExecute;
-};
-
 // force AI
 _unit doWatch objNull;
 _unit setVariable [QEGVAR(danger,forceMove), true];
@@ -69,7 +56,7 @@ if (RND(0.8) || {lineIntersects [eyePos _unit, (eyePos _unit) vectorAdd [0, 0, 7
     [{_this playMoveNow selectRandom ["AmovPercMstpSnonWnonDnon_Scared", "AmovPercMstpSnonWnonDnon_Scared2"];}, _unit] call CBA_fnc_execNextFrame;  // ~ set civilian animation - nkenny
 
     // return
-    [_unit, 6 + random 4] call _fnc_panicReset;
+    [_unit, 6 + random 4] call FUNC(doPanicReset);
 };
 
 // outdoor -- crawl
@@ -90,7 +77,7 @@ if (RND(0.25)) exitWith {
     };
 
     // return
-    [_unit, 6 + random 6] call _fnc_panicReset;
+    [_unit, 6 + random 6] call FUNC(doPanicReset);
 };
 
 // outdoor -- hide
@@ -105,7 +92,7 @@ if (RND(0.25)) exitWith {
 _unit setUnitPos selectRandom ["MIDDLE", "UP"];
 
 // reset
-[_unit, 8 + random 6, true] call _fnc_panicReset;
+[_unit, 8 + random 6, true] call FUNC(doPanicReset);
 
 // end
 true
