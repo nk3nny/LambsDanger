@@ -32,10 +32,5 @@ if (
 // doPanic
 _unit call EFUNC(main,doPanic);
 
-// debug informaiton to be removed before release -- nkenny
-systemchat "PANIC INITATED!";
-[_unit, format ["PANIC - %2 | %1", getSuppression _unit, morale _unit]] call lambs_main_fnc_dotMarker;
-// debug information!!!
-
 // end
 true
