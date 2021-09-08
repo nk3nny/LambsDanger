@@ -83,7 +83,7 @@ if (_unit distance2D _target > 25) then {
     if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _target] call EFUNC(main,doSmoke);};
 
     // grenadier smoke
-    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 3] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doUGL)}, [+_units, _target, "shotSmokeX"], 3] call CBA_fnc_waitAndExecute;
 };
 
 // ready group
