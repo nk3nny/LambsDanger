@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "G:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start_Danger",0,250,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"Start Danger"};
@@ -40,7 +40,7 @@ item35[] = {"Tactics",2,250,-100.000000,1200.000000,0.000000,1250.000000,0.00000
 item36[] = {"",7,210,545.999939,1221.000000,554.000061,1229.000000,0.000000,""};
 item37[] = {"true",8,218,-325.000000,50.000000,-225.000000,100.000000,0.000000,"true"};
 item38[] = {"Exit",4,218,175.000000,-175.000000,275.000000,-125.000000,2.000000,"Exit"};
-item39[] = {"End_Danger_1",1,250,175.000000,-50.000000,275.000000,0.000000,0.000000,"End Danger"};
+item39[] = {"End_Danger_1",1,4346,175.000000,-50.000000,275.000000,0.000000,0.000000,"End Danger"};
 version=1;
 class LayoutItems
 {
@@ -108,8 +108,8 @@ link40[] = {35,36};
 link41[] = {36,24};
 link42[] = {37,3};
 link43[] = {38,39};
-globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-1246.351196,1290.778076,1411.101440,-404.948975,1235,884,1};
-window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,1253};
+globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-746.217712,664.259399,724.029358,-285.575317,1235,884,1};
+window[] = {2,-1,-1,-1,-1,993,234,1674,234,3,1253};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -138,7 +138,7 @@ class FSM
                                         priority = 2.000000;
                                         to="End_Danger_1";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isForcedExit" \n
+                                        condition=/*%FSM<CONDITION""">*/"[_this, _queue] call lambs_danger_fnc_isForcedExit" \n
                                          ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -636,7 +636,7 @@ class FSM
                 {
                         name = "End_Danger_1";
                         itemno = 39;
-                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"_queue = [];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {

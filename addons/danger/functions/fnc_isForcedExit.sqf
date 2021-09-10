@@ -14,7 +14,19 @@
  *
  * Public: No
 */
-fleeing _this
-|| {_this getVariable [QGVAR(disableAI), false]}
-|| {(behaviour _this) isEqualTo "CARELESS"}
-|| {!(_this checkAIFeature "MOVE")}
+params ["_unit", ["_queue", []]];
+fleeing _unit
+|| {_unit getVariable [QGVAR(disableAI), false]}
+|| {(behaviour _unit) isEqualTo "CARELESS"}
+|| {!(_unit checkAIFeature "MOVE")}
+|| {
+    private _ret = true;
+    {
+        _x params ["", "", "", ["_causedBy", objNull]];
+        if !([side group _unit, side group _causedBy] call BIS_fnc_sideIsFriendly) then {
+            _ret = false;
+            break;
+        };
+    } forEach _queue;
+    _ret
+}
