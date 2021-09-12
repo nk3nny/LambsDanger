@@ -6,7 +6,10 @@ DFUNC(ArtilleryScan) = {
     };
     {
         _x call FUNC(taskArtilleryRegister);
-    } foreach (vehicles select { getNumber (configOf _x >> "artilleryScanner") > 0 });
+    } foreach (vehicles select {
+        getNumber (configOf _x >> "artilleryScanner") > 0
+        && {!(_x getVariable [QGVAR(autoAddArtilleryBlocked), false])}
+    });
     GVAR(autoArtilleryRunning) = true;
     [{call FUNC(ArtilleryScan);}, [], 120] call CBA_fnc_waitAndExecute;
 };
