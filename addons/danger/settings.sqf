@@ -62,8 +62,6 @@ private _curCat = ELSTRING(main,Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-/*
-APPARENTLY UNUSED?
 
 // Toggles units self-use of smoke grenades for cover
 [
@@ -74,7 +72,6 @@ APPARENTLY UNUSED?
     false,
     0
 ] call CBA_fnc_addSetting;
-*/
 
 
 // Toggles units self-use of flares for illumation
