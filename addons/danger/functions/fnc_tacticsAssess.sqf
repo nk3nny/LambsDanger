@@ -162,7 +162,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
-        if (!QGVAR(disableAutonomousSmokeGrenades) && (getSuppression _unit) isNotEqualTo 0) then {[_unit, _pos] call EFUNC(main,doSmoke);};
+        if (!GVAR(disableAutonomousSmokeGrenades) && (getSuppression _unit) isNotEqualTo 0) then {[_unit, _pos] call EFUNC(main,doSmoke);};
     };
 };
 
