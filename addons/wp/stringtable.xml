@@ -87,7 +87,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
-            <Czech>AAAAAAAA</Czech>
+            <Czech>Zakšrtněte pro vypnutí náměrných střel, které používá návodčí pro korekci střel na cíl.\Přeskočení bude znamenat to, že palba okamžitě zasáhne cíl</Czech>
             <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
             <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt.\nWłączenie tej opcji spowoduje natychmiastowy ostrzał na wyznaczony cel.</Polish>
             <Russian>Эта опция отключает начальные снаряды, используемые арт наводчиком для корректировки попадания по цели.\nОтключение этой опции приведет к немедленному попаданию выстрелов в цель.</Russian>
@@ -575,7 +575,7 @@
             <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
             <Russian>Группа поиска будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы устройство использовало вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
-        </Key>aaaaaaaaaaaaaaaaaaaaaaa
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
