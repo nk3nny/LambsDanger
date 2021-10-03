@@ -3,29 +3,32 @@
     <Package name="Main">
         <Key ID="STR_Lambs_Main_NoUnitSelected">
             <English>No Unit Selected</English>
+            <Czech>Žádná jednotka vybrána</Czech>
             <German>Keine Einheit ausgewählt</German>
             <Polish>Nie wybrano jednostki</Polish>
             <Russian>Юнит не выбран</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
+            <Czech>Hráči nejsou validní selekce</Czech>
             <German>Spieler sind keine gültige Auswahl</German>
             <Polish>Gracze nie pasują do wybranej czynności</Polish>
             <Russian>Игроки не могут быть выбраны</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
+            <Czech>Žádná skupina nebyla vybrána</Czech>
             <German>Keine Gruppe ausgewählt</German>
             <Polish>Nie wybrano żadnej grupy</Polish>
             <Russian>Группы не выбраны</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
+            <Czech>LAMBS Danger Dev Tým</Czech>
             <German>LAMBS Danger Entwicklerteam</German>
             <Polish>LAMBS Danger Dev Team</Polish>
             <Portuguese>LAMBS Danger Dev Team</Portuguese>
             <Russian>Разработчики мода LAMBS Danger</Russian>
-            <Czech>LAMBS Danger Dev Team</Czech>
             <Spanish>LAMBS Danger Dev Team</Spanish>
             <Italian>LAMBS Danger Dev Team</Italian>
             <French>LAMBS Danger Dev Team</French>
@@ -36,296 +39,348 @@
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MainCat">
             <English>Settings</English>
+            <Czech>Nastavení</Czech>
             <German>Einstellungen</German>
             <Polish>Ustawienia</Polish>
             <Russian>Настройки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
+            <Czech>Vypne gesta rukou jednotek</Czech>
             <German>Handzeichen deaktivieren</German>
             <Polish>Wyłącz używanie przez AI gestów ręką</Polish>
             <Russian>Отключить жесты руками</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoevures</English>
+            <Czech>Přepne gesta rukou jednotek a ruční signály při reagování na nebezpečí nebo spouštění plánovaných manévrů</Czech>
             <German>Deaktiviert Handzeichen von Einheiten beim Reagieren auf Gefahr oder das durchführen von Manövern.</German>
             <Polish>Wyłącza używanie gestów ręką podczas reagowania na niebezpieczeństwo lub podczas wykonywania manewrów</Polish>
             <Russian>Переключает жесты отряда и сигналы руками при реагировании на опасность или выполнении запланированных маневров</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
+            <Czech>Vypne zvolávání jednotek</Czech>
             <German>Rufe ausschalten</German>
             <Polish>Wyłącz okrzyki</Polish>
             <Russian>Выключить выкрики юнитов</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
+            <Czech>Přepne extra zvolání jednotek na základě situace </Czech>
             <German>Deaktiviert zusätzliche Rufe von Einheiten basierend auf der Sitation.</German>
             <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
             <Russian>Переключает дополнительные обозначения единиц в зависимости от ситуации</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions">
             <English>Disable unit dodging</English>
+            <Czech>Vypne uhýbání jednotek</Czech>
             <German>Sofortige KI-Aktionen ausschalten</German>
             <Polish>Wyłącz natychmiastowe reakcje jednostki</Polish>
             <Russian>Отключить уклонение отряда</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions_ToolTip">
             <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
+            <Czech>Přepne rychlé uhýbání jednotek nebo jejich měnění postojů jako reakci na zásah.\nOkamžité reakce přinutí spustit animaci. Bypnutí způsobí statičtější UI</Czech>
             <German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
             <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
             <Russian>Переключает отряд, который быстро уклоняется или меняет стойку в ответ на попадание .\nМоментальные реакции заставляют запускать анимацию. Отключение сделает ИИ более статичным.</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing">
             <English>Disable enhanced unit fleeing</English>
+            <Czech>Vypne vylepšené prchání jednotek</Czech>
             <German>Verbessertes Fliehen ausschalten</German>
             <Polish>Wyłącz ulepszoną ucieczkę</Polish>
             <Russian>Отключить усиленное бегство юнита</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing_ToolTip">
             <English>Toggles enhanced fleeing function for units.</English>
+            <Czech>Přepne vylepšenou funkci prchání jednotek</Czech>
             <German>Schaltet das verbesserte Fliehen für Einheiten aus.</German>
             <Polish>Przełącza funkcję ulepszonej ucieczki dla jednostek AI</Polish>
             <Russian>Включает улучшенную функцию бегства для юнитов</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove">
             <English>Indoor Move Chance</English>
+            <Czech>Šance na vnitřní pohyb</Czech>
             <Polish>Szansa na wejście do środka</Polish>
             <Russian>Шанс движения в помещении</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove_ToolTip">
             <English>Indoor Move Chance</English>
+            <Czech>Šance na vnitřní pohyb</Czech>
             <Polish>Szansa na wejście do środka budynku</Polish>
             <Russian>Шанс движения в помещении</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching">
             <English>Disable vehicle autonomous munition switching</English>
+            <Czech>Vypne samostatné měnění munice pro vozidla</Czech>
             <Polish>Wyłącz autonomiczną zmianę pocisków dla pojazdów</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching_Tooltip">
             <English>When unchecked allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones</English>
+            <Czech>Pokud není zaškrtnuto, umožní vozidlům samostatně měnit typ munice na základně momentálního cíle. Např. Protipancéřové proti obrněným cílům, Vysoce explozivní proti lehkým</Czech>
             <Polish>Kiedy opcja nie jest zaznaczona, pozwala pojazdowi samemu wybrać amunicję pasującą do rodzaju przeciwnika. Np. AP przeciwko celom opancerzonym, HE przeciwko celom nieopancerzonym</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
+            <Czech>Ladění</Czech>
             <German>Debug</German>
             <Polish>Debug</Polish>
             <Russian>Функции отладки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
+            <Czech>Ladění FSM</Czech>
             <German>Debug FSM</German>
             <Polish>Debug FSM</Polish>
             <Russian>Функции отладки FSM</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
+            <Czech>Zobrazí zprávy ladění FSM</Czech>
             <German>Zeigt FSM Debug-Meldungen</German>
             <Polish>Pokazuje komunikaty debugowania FSM</Polish>
             <Russian>Показывает отладочные сообщения FSM</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
+            <Czech>Ladění funkcí</Czech>
             <German>Debug Funktionen</German>
             <Polish>Funkcje Debug</Polish>
             <Russian>Функции отладки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
+            <Czech>Zobrazí zprávy ladění funkcí</Czech>
             <German>Zeigt Debug-Meldungen für Funktionen</German>
             <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
             <Russian>Показывает сообщения отладки функций</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
+            <Czech>Ladění Civilistů</Czech>
             <German>Debug Zivilisten</German>
             <Polish>Debug Civ</Polish>
             <Russian>Отладка Civ</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
+            <Czech>Zobrazí FSM ladící zprávy pro civilisty</Czech>
             <German>Zeigt FSM Debug-Meldungen für Zivilisten</German>
             <Polish>Pokazuje komunikaty debugowania FSM dla cywilów</Polish>
             <Russian>Показывает отладочные сообщения FSM для гражданских</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
+            <Czech>Ladění vykreslování</Czech>
             <German>Debug Zeichnen</German>
             <Polish>Debug Draw</Polish>
             <Russian>Оверлей Отладки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
+            <Czech>Vykrelsí 3D Text nad jednotkami s UI informacemi</Czech>
             <German>Zeichnet 3D-Text über Einheiten mit KI-Informationen</German>
             <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
             <Russian>Рисует трехмерный текст с информацией ИИ поверх юнитов</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
+            <Czech>Ladění vykreslování předvídaných destinací</Czech>
             <German>Debug Erwartete Ankuftsposition zeichnen</German>
             <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
             <Russian>Отрисовка ожидаемого места назначения</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
+            <Czech>Vykreslí předvídané destinace UI jednotek /Vyžaduje Ladění vykreslování)</Czech>
             <German>Zeichnet die erwartete Ankunftsposition für KI-Einheiten (Benötigt Debug Zeichnen)</German>
             <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
             <Russian>Рисует ожидаемые места назначения юнитов ИИ (Требуется включенный Оверлей Отладки)</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_ShareInformationCat">
             <English>Settings Share information</English>
+            <Czech>Nastavení sdílení informací</Czech>
             <German>Informationen-Teilen Einstellungen</German>
             <Polish>Ustawienia udostępniania informacji</Polish>
             <Russian>Настройки обмена информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing">
             <English>Disable information sharing</English>
+            <Czech>Vypnout sdílení informací</Czech>
             <German>Teilen von Informationen deaktivieren</German>
             <Polish>Wyłącz dzielenie się informacjami</Polish>
             <Russian>Отключить обмен информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing_Tooltip">
             <English>Toggle information sharing betweem units</English>
+            <Czech>Přepnout sdílení informací mezi jednotkami</Czech>
             <German>Schaltet das Teilen von Informationen zwischen Einheiten aus.</German>
             <Polish>Przełącza dzielenie się informacjami pomiędzy jednostkami</Polish>
             <Russian>Вкл/Выкл обмен информацией между юнитами</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Shout">
             <English>Shout</English>
+            <Czech>Výkřik</Czech>
             <German>Rufen</German>
             <Polish>Krzyk</Polish>
             <Russian>Крики</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Shout_ToolTip">
             <English>Range AI units share information without radios</English>
+            <Czech>Vzdálenost na kterou UI jednotky sdílí informace bez rádií</Czech>
             <German>Die Distanz über die KI Einheiten ohne Radius informationen teilen.</German>
             <Polish>Dystans na którym AI może komunikować się bez pomocy radia</Polish>
             <Russian>Дальность на которой ИИ обмениваются информацией без радио</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseWest">
             <English>Base West</English>
+            <Czech>Základní Západ</Czech>
             <German>Basis Westen</German>
             <Polish>Podstawa WEST</Polish>
             <Russian>Base West</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseWest_ToolTip">
             <English>Base range side WEST share information</English>
+            <Czech>Základní vzdálenost strany ZÁPAD pro sdílení informací</Czech>
             <German>Basisreichweite über die westliche Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenie się informacjami dla strony WEST</Polish>
             <Russian>Расстояние WEST на котором оно делиться информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseEast">
             <English>Base East</English>
+            <Czech>Základní Východ</Czech>
             <German>Basis Osten</German>
             <Polish>Podstawa EAST</Polish>
             <Russian>Base East</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseEast_ToolTip">
             <English>Base range side EAST share information</English>
+            <Czech>Základní vzdálenost strany VÝCHOD pro sdílení informací</Czech>
             <German>Basisreichweite über die östliche Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony EAST</Polish>
             <Russian>Расстояние EAST на котором оно делиться информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseIndependent">
             <English>Base Independent</English>
+            <Czech>Základní nezávislí</Czech>
             <German>Basis Unabhängige</German>
             <Polish>Podstawa INDEPENDENT</Polish>
             <Russian>Base Independent</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseIndependent_ToolTip">
             <English>Base range independent and civilian sides share information</English>
+            <Czech>Základní vzdálenost nezávislých a civilních stran pro sdílení informací</Czech>
             <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony INDEPENDENT</Polish>
             <Russian>Расстояние на котором независимая и гражданская стороны делятся информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios">
             <English>Backpack radios</English>
+            <Czech>Rádio batohy</Czech>
             <German>Rucksackradios</German>
             <Polish>Plecak z radiem długim</Polish>
             <Russian>Радио рюкзаки</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios_ToolTip">
             <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
+            <Czech>Jednotky vybavené rádio batohem(Vanilla, TFAR nebo nastavenou hodnotou) přidat tuto hodnotu do základu sdíleních informací v dosahu</Czech>
             <German>Reichweite die die zu Einheiten hinzugefügt wird die Radiorucksäcke besitzten. (Vanilla, TFAR, oder jene die durch Variablen konfiguriert wurden)</German>
             <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami </Polish>
             <Russian>Юниты, оснащенные радио рюкзаками (обычные, TFAR или настроенные переменной) добавляют это значение к базовой дальности обмена информацией</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue">
             <English>Accuracy of shared information</English>
+            <Czech>Přesnost sdílených informací</Czech>
             <German>Genauigkeit der geteilten Informationen</German>
             <Polish>Dokładność udostępnianych informacji</Polish>
             <Russian>Точность предоставленной информации</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue_ToolTip">
             <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
+            <Czech>Maximální 'knowsAbout' hodnota sdílení mezi skupinami.\nNastavení vyšší než 1 může způsobit vzdálenějším spojencům přechod do módu plného nebezpečí.</Czech>
             <German>Maximaler 'knowsAbout' Wert der zwischen Einheiten geteilt wird.\nDas Setzten dieses Wertes größer 1 kann dazu führen, dass entfernte Verbündete in den Gefahrenmodus wechseln.</German>
             <Polish>Maksymalna wartość „knowsAbout” dzielona między jednostki.\nUstawienie tej wartości większej niż 1 może spowodować, że odlegli sojusznicy przejdą w tryb zagrożenia.</Polish>
             <Russian>Максимальное значение "knowsAbout", разделяемое между группами.\nНастройка больше 1 может привести к тому, что  союзники на далеком расстоянии перейдут в режим полной опасности.</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange">
             <English>Range combat mode is shared</English>
+            <Czech>Boj na vzdálenost je sdílen</Czech>
             <Polish>Obszar wspólnej walki</Polish>
             <Russian>Расстояние вовлечения в боевой режим</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange_ToolTip">
             <English>Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.</English>
+            <Czech>Spojenecké skupiny v rámci dosahu se nastaví do bojového chování. Jednotky v bojovém módu chování budou vyhledávat krytí a maskování a přesměrují se na nejbližší známou hrozbu.</Czech>
             <Polish>Obszar na którym sojusznicze jednostki dołączą do walki. Jednostki w trybie walki będą szukały osłony i kierowały się w stronę najbliższego znanego zagrożenia.</Polish>
             <Russian>Дружественные группы в пределах досягаемости будут настроены на боевое поведение. Юниты в боевом режиме будут искать укрытие и  и поворачиваются к ближайшей известной угрозе.</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_SuppressionCat">
             <English>Settings Suppression</English>
+            <Czech>Nastavení potlačovací palby</Czech>
             <Polish>Ustawienia ognia zaporowego</Polish>
             <Russian>Настройка подавления огнем</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup">
             <English>Disable suppression from player group</English>
+            <Czech>Vypne potlačovací palbu pro hráčskou skupinu</Czech>
             <German>Unterdrückungsfeuer für Spielergruppe deaktivieren</German>
             <Polish>Wyłącz ogień zaporowy dla grupy gracza</Polish>
             <Russian>Отключить подавление огнем  для группы игрока</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup_ToolTip">
             <English>Toggle autonomous suppression for units in player group</English>
+            <Czech>Přepne samostatnou potlačovací palbu pro jednotky v hráčské skupině</Czech>
             <German>Autonomes Unterdrückungsfeuer für Einheiten der Spielergruppe umschalten</German>
             <Polish>Przełącza autonomiczny ogień zaporowy dla jednostek w grupie gracza</Polish>
             <Russian>Включить автономное подавление для юнитов в группе игрока</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance">
             <English>Minimum distance for Suppression Fire</English>
+            <Czech>Minimální vzdálenost pro potlačovací palbu</Czech>
             <German>Minimale Distanz für Unterdrückungsfeuer</German>
             <Polish>Minimalny dystans dla ognia zaporowego</Polish>
             <Russian>Минимальная дистанция для огня на подавление</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance_ToolTip">
             <English>If the target or a blocking obstacle is within this distance, the AI will not perform suppression fire</English>
+            <Czech>Pokud je cíl nebo blokující překážka v této vzdálenosti, UI neprovede potlačovací palbu</Czech>
             <German>Unter dieser Distanz führt die KI kein Unterdrückungsfeuer aus.</German>
             <Polish>Poniżej tej odległości AI nie strzela ogniem zaporowym</Polish>
             <Russian>На этом расстоянии ИИ не будет вести огонь на подавление</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance">
             <English>Minimum safe zone for Suppression Fire</English>
+            <Czech>Minimální bezpečná vzdálenost pro potlačovací palbu</Czech>
             <German>Minimaler Sicherheitsbereich für Unterdrückungsfeuer</German>
             <Polish>Minimalny obszar bezpieczeństwa dla ognia zaporowego</Polish>
             <Russian>Минимальная безопасная зона для  огня на подавление</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance_ToolTip">
             <English>If there are allies within this distance, AI will not perform suppression fire. Set to 0 to disable.</English>
+            <Czech>Pokud jsou v této vzdálenosti spojenci, UI neprovede potlačovací palbu. Nastavte na 0 pro vypnutí.</Czech>
             <German>Wenn sich befreundete Einheiten innerhalb des Sicherheitsradius befinden für die KI kein Unterdrückungsfeuer durch. Auf 0 setzen um die Funktion zu deaktivieren.</German>
             <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
             <Russian>Если на этом расстоянии есть союзники, ИИ не будет вести огонь на подавление. Установите 0, чтобы отключить</Russian>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles">
             <English>Debug Draw Show banners for vehicle crew</English>
+            <Czech>Ladění vykreslování bannerů pro osádku vozidel</Czech>
             <Polish>Debug Draw - Pokaż banery dla załogi pojazdu</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles_ToolTip">
             <English>Draws information banners for all units boarded in vehicles. Default shows only the effective commander. (Feature requires Debug Draw enabled)</English>
+            <Czech>Vykreslí informační bannery pro všechny jednotky ve vozidlech. Výchozí nastavení zobrazuje pouze velitele. (Funkce vyžaduje povolenou funkci Ladění Vykreslování)</Czech>
             <Polish>Wyświetla informacje dla wszystkich jednostek na pokładzie pojazdu. Domyślnie pokazuje tylko dla dowódcy. (Funkcja wymaga włączonej opcji Debug Draw)</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity">
             <English>Min Obstacle Proximity Distance</English>
+            <Czech>Minimální vzdálenost od překážky</Czech>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity_ToolTip">
             <English>Minimum Obstacle Proximity Distance for Suppressivefire</English>
+            <Czech>Minimální vzdálenost od překážky pro potlačovací palbu</Czech>
         </Key>
     </Package>
 </Project>
