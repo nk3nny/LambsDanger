@@ -114,7 +114,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
             <English>Toggle Reaction phase on units in player group</English>
             <Czech>Přepíná reakční stav jednotek ve skupině hráčů</Czech>
-            <German>Přepíná ktionsphase für Spielergruppe ausschalten</German>
+            <German>Reaktionsphase für Spielergruppe ausschalten</German>
             <Polish>Przełącza fazę reakcji dla jednostek w grupie gracza</Polish>
             <Russian>Переключить фазу реакции для юнитов в группе игрока</Russian>
         </Key>
