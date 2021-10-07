@@ -20,13 +20,9 @@ fleeing _unit
 || {(behaviour _unit) isEqualTo "CARELESS"}
 || {!(_unit checkAIFeature "MOVE")}
 || {
-    private _ret = true;
-    {
+    private _unitSide = side group _unit;
+    (_queue findIf {
         _x params ["", "", "", ["_causedBy", objNull]];
-        if !([side group _unit, side group _causedBy] call BIS_fnc_sideIsFriendly) then {
-            _ret = false;
-            break;
-        };
-    } forEach _queue;
-    _ret
+        !([_unitSide, side group _causedBy] call BIS_fnc_sideIsFriendly)
+    }) isEqualTo -1
 }
