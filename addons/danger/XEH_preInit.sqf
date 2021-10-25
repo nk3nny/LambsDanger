@@ -47,7 +47,7 @@ if (isNil QGVAR(dangerUntil)) then {
                 _x setFormDir (_leader getDir _unit);
             };
         };
-    } forEach (_groups select {(side _group) isEqualTo (side _unit)});
+    } forEach (_groups select {(side _x) isEqualTo (side _unit)});
 }] call CBA_fnc_addEventHandler;
 
 ADDON = true;
