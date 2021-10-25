@@ -45,7 +45,6 @@ private _group = group _unit;
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // set speed and enableAttack
-_group setBehaviour "COMBAT";
 _group setFormation "FILE";
 _group enableAttack false;
 
