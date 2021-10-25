@@ -40,7 +40,7 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_
 
 // get max data range ~ reduced for forests or cities - nkenny
 private _pos = getPosATL _unit;
-private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max RANGE_NEAR;
+private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max 120;
 
 // gather data
 private _unitCount = count units _unit;
