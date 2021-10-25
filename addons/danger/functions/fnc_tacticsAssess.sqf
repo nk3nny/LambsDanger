@@ -40,7 +40,7 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_
 
 // get max data range ~ reduced for forests or cities - nkenny
 private _pos = getPosATL _unit;
-private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max 120;
+private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max RANGE_NEAR;
 
 // gather data
 private _unitCount = count units _unit;
@@ -147,14 +147,17 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     if (_fortifiedTarget != -1) exitWith {
 
         // basic plan
-        _plan append [TACTICS_FLANK, TACTICS_FLANK];
+        _plan append [TACTICS_FLANK, TACTICS_FLANK, TACTICS_SUPPRESS];
         _pos = _unit getHideFrom (_enemies select _fortifiedTarget);
 
         // combatmode
         private _combatMode = combatMode _unit;
         if (_combatMode isEqualTo "RED") then {_plan pushBack TACTICS_ASSAULT;};
         if (_combatMode isEqualTo "YELLOW") then {_plan pushBack TACTICS_SUPPRESS;};
-        if (_speedMode) then {_plan pushBack TACTICS_ASSAULT;};
+        if (_speedMode) then {
+            _plan = _plan - [TACTICS_SUPPRESS];
+            _plan pushBack TACTICS_ASSAULT;
+        };
 
         // visibility / distance / no cover
         if !(terrainIntersectASL [_eyePos, eyePos (_enemies select _fortifiedTarget)]) then {_plan pushBack TACTICS_SUPPRESS;};
@@ -220,7 +223,7 @@ switch (_plan) do {
     };
     case TACTICS_SUPPRESS: {
         // suppress
-        [{_this call FUNC(tacticsSuppress)}, [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsSuppress)}, [_unit, _pos], 4 + random 4] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ATTACK: {
         // group attacks as one

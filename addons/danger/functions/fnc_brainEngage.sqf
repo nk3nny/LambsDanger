@@ -68,7 +68,7 @@ _unit forceSpeed ([-1, 1] select (_type isEqualTo DANGER_CANFIRE));
 if (
     _distance < 500
     && {RND(getSuppression _unit)}
-    && {_type isEqualTo DANGER_CANFIRE || {RND(0.5) && {_type isEqualTo DANGER_ENEMYDETECTED}}}
+    && {_type isEqualTo DANGER_CANFIRE || {RND(0.6) && {_type isEqualTo DANGER_ENEMYDETECTED}}}
 ) exitWith {
     [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.8]), true] call EFUNC(main,doSuppress);
     _timeout + 4
