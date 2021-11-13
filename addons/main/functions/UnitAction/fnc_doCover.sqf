@@ -44,7 +44,6 @@ private _anim = call {
 };
 
 // prevent run in place
-_unit forceSpeed 0;
 _unit moveTo _pos;
 _unit setDestination [_pos, "FORMATION PLANNED", true];
 
