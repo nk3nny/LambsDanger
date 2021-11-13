@@ -12,3 +12,4 @@ Feel free to add yourself to this when creating a pull request.
 - dedmen
 - mjc4wilton
 - R3voA3
+- YetheSamartaka
