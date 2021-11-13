@@ -42,12 +42,12 @@ if (isNil QGVAR(dangerUntil)) then {
             };
 
             // set combatMode
-            if !(_leader distance2D _unit > (EGVAR(main,combatShareRange)) && {_leader getVariable [QGVAR(disableAI), false]}) then {
-                _x setBehaviour "COMBAT";
+            if (_leader distance2D _unit < (EGVAR(main,combatShareRange)) && {!(_leader getVariable [QGVAR(disableAI), false])} && {(behaviour _leader) isNotEqualTo "COMBAT"}) then {
+                [units _x, _target, [_leader, 40, true, true] call EFUNC(main,findBuildings), "information"] call EFUNC(main,doGroupHide);
                 _x setFormDir (_leader getDir _unit);
             };
         };
-    } forEach _groups;
+    } forEach (_groups select {(side _x) isEqualTo (side _unit)});
 }] call CBA_fnc_addEventHandler;
 
 ADDON = true;

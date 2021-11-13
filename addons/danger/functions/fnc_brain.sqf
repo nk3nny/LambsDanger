@@ -88,7 +88,7 @@ if (_dangerCause isEqualTo DANGER_ASSESS) exitWith {
 
 // immediate actions
 if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) exitWith {
-    _return set [ACTION_IMMEDIATE, true];
+    _return set [ACTION_IMMEDIATE, (side _group) isNotEqualTo side (group _dangerCausedBy)];
     _return
 };
 

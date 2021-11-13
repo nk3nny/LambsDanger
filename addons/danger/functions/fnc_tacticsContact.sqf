@@ -105,7 +105,6 @@ if (
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
 
 // set combat behaviour and focus team
-if ((behaviour _unit) isEqualTo "AWARE" && {!isPlayer (leader _group)}) then {_unit setBehaviour "COMBAT";};
 if (!isNull _enemy && {_unit knowsAbout _enemy > 1}) then {_units doWatch _enemy;};
 
 // immediate action -- leaders near to enemy go aggressive!
