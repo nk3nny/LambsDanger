@@ -77,7 +77,7 @@ _group enableAttack false;
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // concealment
-if (_unit distance2D _target > 25) then {
+if (!GVAR(disableAutonomousSmokeGrenades) && {_unit distance2D _target > 25}) then {
 
     // leader smoke
     if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _target] call EFUNC(main,doSmoke);};
