@@ -13,3 +13,4 @@ Feel free to add yourself to this when creating a pull request.
 - mjc4wilton
 - R3voA3
 - YetheSamartaka
+- Nilia
