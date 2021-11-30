@@ -201,6 +201,7 @@
             <English>Using Task Assault on a Unit without a Dynamic Target is not supported!</English>
             <Czech>Použití Úkolu útok na jednotku bez dynamického cíle není podporováno!</Czech>
             <Polish>Używanie zadania Atak na jednostce bez Dynamicznego celu nie jest wspierane!</Polish>
+            <German>Die Verwendung der Aufgabe Angriff auf einer Einheit ohne dynamisches Ziel wird nicht unterstützt!</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
             <English>Task Camp</English>
@@ -249,12 +250,14 @@
             <Czech>Poslední bod trasy</Czech>
             <Polish>Ostatni punkt nawigacyjny</Polish>
             <Russian>Последняя маршрутная точка</Russian>
+            <German>Letzter Wegpunkt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
             <Czech>Trasový bod který jednotka převezme poté co opustí stav táboření</Czech>
             <Polish>Punkt nawigacyjny, który grupa przyjmuje po opuszczeniu obozowania</Polish>
             <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
+            <German>Der Wegpunkt, den die Gruppe nach dem Verlassen des Lagerzustands annimmt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
@@ -387,12 +390,14 @@
             <Czech>Dynamická hlídka</Czech>
             <Polish>Patrol dynamiczny</Polish>
             <Russian>Динамичный патруль</Russian>
+            <German>Dynamische Patrouille</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_Tooltip">
-            <English>The unit will create a sub-group to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
+            <English>The unit will create a subgroup to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
             <Czech>Jednotka si vytvoří podskupinu určenou k hlídání oblasti.\nNB: Hlídka opustí svoji původní skupinu a založí novou.</Czech>
             <Polish>Jednostka stworzy podgrupę do patrolowania terenu.\nPatrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
             <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
+            <German>Die Einheit erstellt eine Untergruppe, um das Gebiet zu patrouillieren.\nNB: Die Patrouille wird ihre ursprüngliche Gruppe verlassen, um eine neue zu bilden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
@@ -608,11 +613,13 @@
             <English>Use Flare</English>
             <Czech>Použít Světlici</Czech>
             <Polish>Użyj flar</Polish>
+            <German>Flare verwenden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_Tooltip">
             <English>Sets how units use flares when hunting for enemies.</English>
             <Czech>Nastavuje jak budou jednotky používat světlice při lovu nepřátel</Czech>
             <Polish>Określa jak jednostki używają flar kiedy polują na graczy.</Polish>
+            <German>Legt fest, wie Einheiten bei der Jagd nach Feinden Leuchtraketen verwenden.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
             <English>Task Rush</English>
@@ -779,17 +786,20 @@
             <English>Suppressed</English>
             <Czech>Potlačen</Czech>
             <Polish>Przytłoczenie ogniem</Polish>
+            <German>Unterdrückt</German>
         </Key>
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
             <English>Only when units are equipped with an UGL and flares</English>
             <Czech>Pokud jsou jednotky vybaveni podhlavňovými granátomety a světlicemi</Czech>
             <Polish>Tylko wtedy, gdy jednostki są wyposażone w granatniki i flary</Polish>
+            <German>Nur wenn Einheiten mit einem UGL und Flares ausgestattet sind</German>
         </Key>
         <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
-            <English>'%1' is only Posible if the Group is local</English>
+            <English>'%1' is only Possible if the Group is local</English>
             <Czech>'%1' je možná pouze pokud je skupina místní</Czech>
             <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
             <Russian>'%1' возможно только в том случае, если группа является локальной.</Russian>
+            <German>'%1' ist nur möglich, wenn die Gruppe lokal ist</German>
         </Key>
         <Key ID="STR_Lambs_WP_Context_CreateTarget">
             <English>Create Dynamic Target</English>
@@ -803,117 +813,140 @@
             <Czech>LAMBS Danger body</Czech>
             <Polish>LAMBS Danger Waypoints</Polish>
             <Russian>Маршрутные точки LAMBS Danger</Russian>
+            <German>LAMBS Danger Wegpunkte</German>
         </Key>
         <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
             <English>LAMBS Danger Search Waypoints</English>
             <Czech>LAMBS Danger body hledání</Czech>
             <Polish>LAMBS Danger Search Waypoints</Polish>
             <Russian>Поисковые точки LAMBS Danger </Russian>
+            <German>LAMBS Danger suchen Wegpunkt</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
             <English>Dynamic reinforcement</English>
             <Czech>Dynamické posily</Czech>
             <Polish>Dynamiczne posiłki</Polish>
+            <German>Dynamische Verstärkung</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_Tooltip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
             <Czech>Jednotka bude reagovat na známé pozice nepřátel, které jsou identifikovány spojenci.\nNB: Funkce posil přepíše existující body na trase u skupin reagujících na volání.</Czech>
             <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
+            <German>Die Einheit reagiert auf bekannte feindliche Positionen, die von Verbündeten identifiziert wurden.\nNB: Die Verstärkungsfunktion überschreibt vorhandene Wegpunkte von Gruppen, die auf Funk reagieren.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoints_displayName">
             <English>Advanced AI [LAMBS]</English>
             <Czech>Pokročilé UI[LAMBS]</Czech>
             <Polish>Advanced AI [LAMBS]</Polish>
+            <German>Erweiterte KI [LAMBS]</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
             <English>TASK ASSAULT</English>
             <Czech>ÚKOL ÚTOK</Czech>
             <Polish>ZADANIE ATAK</Polish>
+            <German>AUFGABE ANGRIFF</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
             <English>Rushes to target position with no regard for safety</English>
             <Czech>Naběhne na cílovou pozici bez ohledu na nebezpečí</Czech>
             <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie</Polish>
+            <German>Stürmt ohne Rücksicht auf die Sicherheit zur Zielposition</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
             <Czech>ÚKOL ÚSTUP</Czech>
             <Polish>ZADANIE ODWRÓT</Polish>
+            <German>AUFGABE RÜCKZUG</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
             <English>Retreats to target position while ignoring enemies</English>
             <Czech>Stáhne se na cílovou pozici a během toho bude ignorovat nepřátele</Czech>
             <Polish>Wycofuje się na pozycję docelową, ignorując wrogów</Polish>
+            <German>Zieht sich zur Zielposition zurück, während Feinde ignoriert werden</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
             <English>TASK GARRISON</English>
             <Czech>ÚKOL UMÍSTIT POSÁDKU</Czech>
             <Polish>ZADANIE GARNIZON</Polish>
+            <German>AUFGABE GARNISON</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
             <Czech>Umístí posádku do budov v okolí bodu oblasti dokončení (Výchozí 50m)</Czech>
             <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
+            <German>Garnisonen in Gebäuden in der Nähe von Wegpunkten bis zum WP-Abschlussradius (Standard 50m)</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
             <Czech>ÚKOL HLÍDKA</Czech>
             <Polish>ZADANIE PATROL</Polish>
+            <German>AUFGABE PATROUILLE</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
             <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
             <Czech>Náhodná patrola v rámci bodu oblasti dokončení (Výchozí 200m)\nNB odstraní veškeré existující body skupiny</Czech>
             <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
+            <German>Zufällige Patrouille innerhalb des WP-Abschlussradius (Standard 200m)\nNB wird alle vorhandenen Wegpunkte der Gruppe entfernen</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
             <English>TASK RUSH</English>
             <Czech>ÚKOL NÁBĚH</Czech>
             <Polish>ZADANIE SZTURM</Polish>
+            <German>AUFGABE HETZEN</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
             <English>Rushes players within WP completion radius (Default 1000m)</English>
             <Czech>Naběhne na hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
             <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <German>Hetzt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
             <Czech>ÚKOL LOVIT</Czech>
             <Polish>ZADANIE POLOWANIE</Polish>
+            <German>AUFGABE JAGEN</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
             <English>Hunts players within WP completion radius (Default 1000m)</English>
             <Czech>Loví hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
             <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
             <Czech>ÚKOL PLÍŽIT SE</Czech>
             <Polish>ZADANIE ZASADZKA</Polish>
+            <German>AUFGABE SCHLEICHEN</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)</English>
             <Czech>Pronásleduje hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
             <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
             <Czech>ÚKOL CQB</Czech>
             <Polish>ZADANIE CQB</Polish>
+            <German>AUFGABE CQB</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
             <Czech>Vstoupí a vyčistí budovy v rámci bodu oblasti dokončení (Výchozí 50m)</Czech>
             <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
+            <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
             <Czech>ZAREGISTROVAT DĚLOSTŘELECTVO</Czech>
             <Polish>REJESTRACJA ARTYLERII</Polish>
+            <German>ARTILLERIE REGISTRIEREN</German>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use</English>
             <Czech>Zaregistruje dělostřelectvo pro dynamické užití</Czech>
             <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
+            <German>Registriert Artillerie für den dynamischen Einsatz</German>
         </Key>
     </Package>
 </Project>
