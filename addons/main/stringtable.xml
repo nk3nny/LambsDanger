@@ -33,7 +33,7 @@
             <Portuguese>LAMBS Danger Dev Team</Portuguese>
             <Russian>Разработчики мода LAMBS Danger</Russian>
             <Spanish>LAMBS Danger Dev Team</Spanish>
-            <Italian>Team di sviluppo LAMBS Danger </Italian>
+            <Italian>Team di sviluppo LAMBS Danger</Italian>
             <French>LAMBS Danger Dev Team</French>
             <Korean>LAMBS Danger Dev Team</Korean>
             <Japanese>LAMBS Danger Dev Team</Japanese>
@@ -125,7 +125,7 @@
             <Czech>Šance na vnitřní pohyb</Czech>
             <Polish>Szansa na wejście do środka budynku</Polish>
             <Russian>Шанс движения в помещении</Russian>
-            <German>Die Chance, dass eine Einheit in ein Gebäude bewegt</German>
+            <German>Die Chance, dass eine Einheit sich in ein Gebäude bewegt</German>
             <Italian>La possibilità che un'unità si sposti in un edificio</Italian>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching">
