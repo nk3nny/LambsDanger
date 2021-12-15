@@ -62,8 +62,10 @@ private _leader = leader _group;
 
     // reset animations
     _x enableAI "ANIM";
-    [_x, "" , 2] call EFUNC(main,doAnimation);
-    _x playMove (["AmovPercMstpSlowWrflDnon","AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
+    if (isNull objectParent _x && {_x call EFUNC(main,isAlive)}) then {
+        [_x, "" , 2] call EFUNC(main,doAnimation);
+        _x playMove (["AmovPercMstpSlowWrflDnon", "AmovPercMstpSnonWnonDnon"] select ((primaryWeapon _x) isEqualTo ""));
+    };
 
     // LAMBS variables
     _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
