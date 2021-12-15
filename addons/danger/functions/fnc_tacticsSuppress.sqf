@@ -23,7 +23,7 @@ params ["_unit", "_target", ["_units", []], ["_delay", 17]];
 _target = _target call CBA_fnc_getPos;
 
 // exit with flank squad leader cannot suppress from here
-if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 2.5]] call EFUNC(main,shouldSuppressPosition)) exitWith {
+if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 5]] call EFUNC(main,shouldSuppressPosition)) exitWith {
     [_unit, _target] call FUNC(tacticsFlank);
 };
 
@@ -65,8 +65,9 @@ _pos pushBack _target;
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
-private _group = group _unit;
 // set group task
+private _group = group _unit;
+_group enableAttack false;
 _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_functions)];
 
 // gesture
