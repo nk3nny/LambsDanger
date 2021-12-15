@@ -20,22 +20,26 @@ params ["_cycle", "_units", "_pos"];
 
 // update
 _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x}};
-if (_units isEqualTo []) exitWith {};
+if (_units isEqualTo [] || {_pos isEqualTo []}) exitWith {false};
 
+private _targetPos = _pos deleteAt 0;
 {
-    private _targetPos = selectRandom _pos;
-    // setpos
-    if (RND(0.5) || {(currentCommand _x) isNotEqualTo "MOVE"}) then {
-        _x doMove _targetPos;
-        _x setDestination [_targetPos, "FORMATION PLANNED", false]; // added to reduce cover bounding - nkenny
-        _x lookAt _targetPos;
-    };
-
     // manoeuvre
-    _x forceSpeed 4;
+    _x forceSpeed 3;
     _x setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
     _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
     _x setVariable [QEGVAR(danger,forceMove), true];
+
+    // check enemy
+    private _enemy = _unit findNearestEnemy _unit;
+    if (_unit distance2D _enemy < 12) then {_targetPos = getPosATL _enemy;};
+
+    // setpos
+    if (RND(0.75) || {(currentCommand _x) isNotEqualTo "MOVE"}) then {
+        _x lookAt _targetPos;
+        _x doMove _targetPos;
+        _x setDestination [_targetPos, "LEADER PLANNED", false]; // added to reduce cover bounding - nkenny
+    };
 } foreach _units;
 
 // recursive cyclic
@@ -43,7 +47,7 @@ if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupAssault)},
         [_cycle - 1, _units, _pos],
-        5
+        8
     ] call CBA_fnc_waitAndExecute;
 };
 
