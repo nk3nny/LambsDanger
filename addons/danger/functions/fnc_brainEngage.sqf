@@ -29,13 +29,11 @@ params ["_unit", ["_type", -1], ["_target", objNull]];
 // timeout
 private _timeout = time + 0.5;
 
-// ACE3
-_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];
-
 // check
 if (
     isNull _target
     || {_unit knowsAbout _target isEqualTo 0}
+    || {(speed _target) > 20}
     || {(weapons _unit) isEqualTo []}
     || {(combatMode _unit) in ["BLUE", "GREEN"]}
 ) exitWith {
@@ -57,19 +55,18 @@ if (
     && {(vehicle _target) isKindOf "CAManBase"}
     && {_target call EFUNC(main,isAlive)}
 ) exitWith {
+    _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
     [_unit, _target] call EFUNC(main,doAssault);
-    _timeout + 4
+    _timeout + 1.5
 };
-
-// set speed
-_unit forceSpeed ([-1, 1] select (_type isEqualTo DANGER_CANFIRE));
 
 // far, try to suppress
 if (
     _distance < 500
     && {RND(getSuppression _unit)}
-    && {_type isEqualTo DANGER_CANFIRE || {RND(0.6) && {_type isEqualTo DANGER_ENEMYDETECTED}}}
+    && {_type isEqualTo DANGER_CANFIRE || {RND(0.4) && {_type isEqualTo DANGER_ENEMYDETECTED}}}
 ) exitWith {
+    _unit forceSpeed 0;
     [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.8]), true] call EFUNC(main,doSuppress);
     _timeout + 4
 };
