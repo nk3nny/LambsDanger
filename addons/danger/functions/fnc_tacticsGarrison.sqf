@@ -18,7 +18,7 @@
  * Public: No
 */
 #define COVER_DISTANCE 25
-#define BUILDING_DISTANCE 25
+#define BUILDING_DISTANCE 42
 
 params ["_unit", "_target", ["_units", []], ["_delay", 180]];
 
@@ -54,17 +54,11 @@ if (_units isEqualTo []) then {
 };
 if (_units isEqualTo []) exitWith {false};
 
-// buildings ~ sorted by height ~ add other cover
+// buildings ~ sorted by distance
 private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
-_buildings = _buildings apply { [_x select 2, _x] };
-_buildings sort false;
+_buildings = _buildings apply { [_unit distance _x, _x] };
+_buildings sort true;
 _buildings = _buildings apply { _x select 1 };
-
-// get cover
-if (count _buildings < count _units) then {
-    private _cover = (nearestTerrainObjects [_target, ["BUSH", "TREE", "HIDE", "WALL", "FENCE"], COVER_DISTANCE, false, true]) apply {_x getPos [1.5, random 360]};
-    _buildings append _cover;
-};
 
 // failsafe
 if (_buildings isEqualTo []) exitWith {
@@ -87,12 +81,9 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Garrison", EGVAR(main,debu
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), "Garrison/Rally", EGVAR(main,debug_functions)];
 
-// clear CQB group variable
-_group setVariable [QEGVAR(main,groupMemory), []];
-
 // make group ready
 doStop _units;
-//_units doWatch _target; ~ doing some test runs without doWatch - nkenny
+_units doWatch _target;
 
 // execute
 {
@@ -101,11 +92,14 @@ doStop _units;
         {
             params ["_unit", "_pos"];
             _unit moveTo _pos;
-            _unit setDestination [_pos, "FORMATION PLANNED", true];
-        }, [_x, _pos], random 2
+            _unit setDestination [_pos, "LEADER PLANNED", true];
+        }, [_x, _pos], 0.5 + random 2
     ] call CBA_fnc_waitAndExecute;
     _x setVariable [QEGVAR(main,currentTask), "Group Garrison", EGVAR(main,debug_functions)];
 } forEach _units;
+
+// declare leftover positions in memory!
+_group setVariable [QEGVAR(main,groupMemory), _buildings];
 
 // debug
 if (EGVAR(main,debug_functions)) then {
