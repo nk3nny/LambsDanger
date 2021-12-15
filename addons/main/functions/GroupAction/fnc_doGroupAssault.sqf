@@ -31,8 +31,8 @@ private _targetPos = _pos deleteAt 0;
     _x setVariable [QEGVAR(danger,forceMove), true];
 
     // check enemy
-    private _enemy = _unit findNearestEnemy _unit;
-    if (_unit distance2D _enemy < 12) then {_targetPos = getPosATL _enemy;};
+    private _enemy = _x findNearestEnemy _x;
+    if (_x distance2D _enemy < 12) then {_targetPos = getPosATL _enemy;};
 
     // setpos
     if (RND(0.75) || {(currentCommand _x) isNotEqualTo "MOVE"}) then {
