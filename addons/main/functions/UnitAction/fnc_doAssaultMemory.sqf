@@ -40,8 +40,7 @@ _groupMemory sort true;
 _groupMemory = _groupMemory apply {_x select 1};
 
 // check for enemy get position
-private _enemy = _unit findNearestEnemy _unit;
-private _pos = [_groupMemory select 0, _enemy] select (_unit distance2D _enemy < 12);
+private _pos = [_groupMemory select 0, _unit findNearestEnemy _unit] select (_unit distance2D (_unit findNearestEnemy _unit) < 12);
 private _distance2D = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
