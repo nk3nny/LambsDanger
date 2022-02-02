@@ -26,7 +26,7 @@ _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
 // Near buildings + sort near positions + add target actual location
 private _buildings = [_target, _range, true, false] call FUNC(findBuildings);
-_buildings = _buildings select { _x distance _target < 5 };
+_buildings = _buildings select { _x distance _target < 7 };
 
 // set destination
 private _pos = if (_buildings isEqualTo []) then {
@@ -41,24 +41,28 @@ private _pos = if (_buildings isEqualTo []) then {
 } else {
 
     // updates group memory variable
-    private _group = group _unit;
-    private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
-    _groupMemory pushBackUnique selectRandom _buildings;
-    _group setVariable [QGVAR(groupMemory), _groupMemory];
+    if (_unit distance2D _target < 40) then {
+        private _group = group _unit;
+        private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
+        if (_groupMemory isEqualTo []) then {
+            _group setVariable [QGVAR(groupMemory), _buildings];
+        };
+    };
 
     // add unit position to array
     _buildings pushBack (getPosATL _target);
 
     // select building position
-    selectRandom _buildings
+    (selectRandom _buildings) vectorAdd [-1 + random 2, -1 + random 2, 0]
 };
 
 // stance and speed
 [_unit, _pos] call FUNC(doAssaultSpeed);
+_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.8));
 
 // execute
 _unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", true];
+_unit setDestination [_pos, "LEADER PLANNED", false];
 
 // debug
 if (GVAR(debug_functions)) then {
