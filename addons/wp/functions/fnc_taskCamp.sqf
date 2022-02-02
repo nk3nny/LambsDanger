@@ -223,7 +223,7 @@ _wp setWaypointStatements ["true", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
-            [_x, '', 2] call lambs_main_fnc_doAnimation;
+            if (isNull objectParent _x) then {[_x, '', 2] call lambs_main_fnc_doAnimation;};
         } foreach thisList;
     };"
 ];
