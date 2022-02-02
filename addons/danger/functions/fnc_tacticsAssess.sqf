@@ -56,7 +56,7 @@ _pos = [];
 if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
 
     // sort nearest enemies
-    _enemies = _enemies apply {[_x distance2D _unit, _x]};
+    _enemies = _enemies apply {[_x distanceSqr _unit, _x]};
     _enemies sort true;
     _enemies = _enemies apply {_x select 1};
 
