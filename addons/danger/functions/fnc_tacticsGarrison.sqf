@@ -104,7 +104,7 @@ _group setVariable [QEGVAR(main,groupMemory), _buildings];
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS GARRISON %2 (%3m) (%4 units)", side _unit, groupId _group, round (_unit distance2D _target), count _units] call EFUNC(main,debugLog);
-    private _m = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
+    private _m = [_target, "tactics garrison", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
     [{deleteMarker _this}, _m, _delay + 30] call CBA_fnc_waitAndExecute;
 };

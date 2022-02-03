@@ -100,7 +100,7 @@ _units doWatch _target;
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
-    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
+    private _m = [_unit, "tactics assault", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_join"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _target);
