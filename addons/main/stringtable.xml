@@ -8,6 +8,7 @@
             <Polish>Nie wybrano jednostki</Polish>
             <Russian>Юнит не выбран</Russian>
             <Italian>Nessuna unità selezionata</Italian>
+            <Chinesesimp>未选择单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_PlayerNotValid">
             <English>Players are not a Valid Selections</English>
@@ -16,6 +17,7 @@
             <Polish>Gracze nie pasują do wybranej czynności</Polish>
             <Russian>Игроки не могут быть выбраны</Russian>
             <Italian>I giocatori non sono selezioni valide</Italian>
+            <Chinesesimp>玩家未能有效选择</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_NoGroupSelected">
             <English>No Group Selected</English>
@@ -24,6 +26,7 @@
             <Polish>Nie wybrano żadnej grupy</Polish>
             <Russian>Группы не выбраны</Russian>
             <Italian>Nessun gruppo selezionato</Italian>
+            <Chinesesimp>未选择任何小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Team">
             <English>LAMBS Danger Dev Team</English>
@@ -47,6 +50,7 @@
             <Polish>Ustawienia</Polish>
             <Russian>Настройки</Russian>
             <Italian>Impostazioni</Italian>
+            <Chinesesimp>设置</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures">
             <English>Disable unit hand gestures</English>
@@ -55,6 +59,7 @@
             <Polish>Wyłącz używanie przez AI gestów ręką</Polish>
             <Russian>Отключить жесты руками</Russian>
             <Italian>Disabilita i gesti delle mani dell'unità</Italian>
+            <Chinesesimp>禁用单位示意动作</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableHandGestures_Tooltip">
             <English>Toggles unit gestures and hand signals when reacting to danger or executing planned manoeuvres</English>
@@ -63,6 +68,7 @@
             <Polish>Wyłącza używanie gestów ręką podczas reagowania na niebezpieczeństwo lub podczas wykonywania manewrów</Polish>
             <Russian>Переключает жесты отряда и сигналы руками при реагировании на опасность или выполнении запланированных маневров</Russian>
             <Italian>Attivare/disattivare i gesti dell'unità e i segnali manuali quando si reagisce a un pericolo o si eseguono manovre pianificate</Italian>
+             <Chinesesimp>在对危险做出反应或执行计划的机动时切换单位示意动作和手势</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
@@ -71,6 +77,7 @@
             <Polish>Wyłącz okrzyki</Polish>
             <Russian>Выключить выкрики юнитов</Russian>
             <Italian>Disattiva callout unità</Italian>
+            <Chinesesimp>禁用单位标注</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
@@ -79,6 +86,7 @@
             <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
             <Russian>Переключает дополнительные обозначения единиц в зависимости от ситуации</Russian>
             <Italian>Attiva e disattiva i richiami di unità extra in base alle situazioni</Italian>
+             <Chinesesimp>根据情况切换额外的单位标注</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions">
             <English>Disable unit dodging</English>
@@ -87,6 +95,7 @@
             <Polish>Wyłącz natychmiastowe reakcje jednostki</Polish>
             <Russian>Отключить уклонение отряда</Russian>
             <Italian>Disabilita la schivata delle unità</Italian>
+            <Chinesesimp>禁用单位躲避</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions_ToolTip">
             <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
@@ -95,6 +104,7 @@
             <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
             <Russian>Переключает отряд, который быстро уклоняется или меняет стойку в ответ на попадание .\nМоментальные реакции заставляют запускать анимацию. Отключение сделает ИИ более статичным.</Russian>
             <Italian>Consente all'unità di schivare rapidamente o cambiare posizione in risposta a un colpo.\nLe reazioni immediate forzano l'esecuzione di un'animazione. La disattivazione renderà l'IA più statica</Italian>
+            <Chinesesimp>切换单位快速躲避或改变姿态以回应被击中.\n立即反应使动画运行.禁用将产生更多停滞状态的AI</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing">
             <English>Disable enhanced unit fleeing</English>
@@ -103,6 +113,7 @@
             <Polish>Wyłącz ulepszoną ucieczkę</Polish>
             <Russian>Отключить усиленное бегство юнита</Russian>
             <Italian>Disabilita la fuga dell'unità potenziata</Italian>
+            <Chinesesimp>禁止增强单位逃跑</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing_ToolTip">
             <English>Toggles enhanced fleeing function for units.</English>
@@ -111,6 +122,7 @@
             <Polish>Przełącza funkcję ulepszonej ucieczki dla jednostek AI</Polish>
             <Russian>Включает улучшенную функцию бегства для юнитов</Russian>
             <Italian>Attiva/disattiva la funzione di fuga avanzata per le unità.</Italian>
+            <Chinesesimp>切换增强的单位逃跑功能.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove">
             <English>Indoor Move Chance</English>
@@ -119,6 +131,7 @@
             <Russian>Шанс движения в помещении</Russian>
             <German>In Gebäude Bewegungschance</German>
             <Italian>Possibilità di spostamento al coperto</Italian>
+            <Chinesesimp>室内移动的可能性</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove_ToolTip">
             <English>Indoor Move Chance</English>
@@ -127,6 +140,7 @@
             <Russian>Шанс движения в помещении</Russian>
             <German>Die Chance, dass eine Einheit sich in ein Gebäude bewegt</German>
             <Italian>La possibilità che un'unità si sposti in un edificio</Italian>
+             <Chinesesimp>室内移动的可能性</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching">
             <English>Disable vehicle autonomous munition switching</English>
@@ -134,6 +148,7 @@
             <Polish>Wyłącz autonomiczną zmianę pocisków dla pojazdów</Polish>
             <German>Deaktiviert das autonome Munition Wechseln des Fahrzeugs</German>
             <Italian>Disabilita la commutazione autonoma delle munizioni del veicolo</Italian>
+            <Chinesesimp>禁止车辆自动切换弹药</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching_Tooltip">
             <English>When unchecked allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones</English>
@@ -141,6 +156,7 @@
             <Polish>Kiedy opcja nie jest zaznaczona, pozwala pojazdowi samemu wybrać amunicję pasującą do rodzaju przeciwnika. Np. AP przeciwko celom opancerzonym, HE przeciwko celom nieopancerzonym</Polish>
             <German>Wenn diese Option deaktiviert ist, kann das Fahrzeug autonom den Munitionstyp zugunsten des aktuellen Ziels wechseln. Z.B. AP gegen gepanzerte Ziele, HE gegen ungepanzerte</German>
             <Italian>Quando non è selezionato, consente al veicolo di cambiare autonomamente il tipo di munizione in favore del bersaglio attuale. Ad esempio, AP contro bersagli corazzati, HE contro quelli non corazzati</Italian>
+            <Chinesesimp>未选中时允许车辆自动切换弹药类型以对抗当前目标.例如，AP 对抗装甲目标，HE 对抗无装甲目标</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
@@ -149,6 +165,7 @@
             <Polish>Debug</Polish>
             <Russian>Функции отладки</Russian>
             <Italian>Debug</Italian>
+            <Chinesesimp>调试</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
@@ -157,6 +174,7 @@
             <Polish>Debug FSM</Polish>
             <Russian>Функции отладки FSM</Russian>
             <Italian>Debug FSM</Italian>
+            <Chinesesimp>调试FSM</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
@@ -165,6 +183,7 @@
             <Polish>Pokazuje komunikaty debugowania FSM</Polish>
             <Russian>Показывает отладочные сообщения FSM</Russian>
             <Italian>Mostra i messaggi di debug FSM</Italian>
+            <Chinesesimp>显示FSM调试信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
@@ -173,6 +192,7 @@
             <Polish>Funkcje Debug</Polish>
             <Russian>Функции отладки</Russian>
             <Italian>Funzioni di debug</Italian>
+             <Chinesesimp>调试功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
@@ -181,6 +201,7 @@
             <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
             <Russian>Показывает сообщения отладки функций</Russian>
             <Italian>Mostra i messaggi di debug della funzione</Italian>
+             <Chinesesimp>显示调试函数信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
@@ -189,6 +210,7 @@
             <Polish>Debug Civ</Polish>
             <Russian>Отладка Civ</Russian>
             <Italian>Debug Civile</Italian>
+             <Chinesesimp>调试平民</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
@@ -197,6 +219,7 @@
             <Polish>Pokazuje komunikaty debugowania FSM dla cywilów</Polish>
             <Russian>Показывает отладочные сообщения FSM для гражданских</Russian>
             <Italian>Mostra i messaggi di debug FSM per i civili</Italian>
+            <Chinesesimp>显示针对平民的FSM调试消息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
@@ -205,6 +228,7 @@
             <Polish>Debug Draw</Polish>
             <Russian>Оверлей Отладки</Russian>
             <Italian>Debug Disegna</Italian>
+            <Chinesesimp>调试绘图</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
@@ -213,6 +237,7 @@
             <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
             <Russian>Рисует трехмерный текст с информацией ИИ поверх юнитов</Russian>
             <Italian>Disegna testo 3D su unità con informazioni IA</Italian>
+            <Chinesesimp>使用 AI 信息在单位上绘制 3d 文本</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
@@ -221,6 +246,7 @@
             <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
             <Russian>Отрисовка ожидаемого места назначения</Russian>
             <Italian>Debug disegna Destinazione prevista</Italian>
+            <Chinesesimp>调试绘制预期目标</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
@@ -229,6 +255,7 @@
             <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
             <Russian>Рисует ожидаемые места назначения юнитов ИИ (Требуется включенный Оверлей Отладки)</Russian>
             <Italian>Disegna le destinazioni previste delle unità IA (richiede il disegno di debug)</Italian>
+            <Chinesesimp>绘制AI单元的预期目标(需要调试绘制)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_ShareInformationCat">
             <English>Settings Share information</English>
@@ -237,6 +264,7 @@
             <Polish>Ustawienia udostępniania informacji</Polish>
             <Russian>Настройки обмена информацией</Russian>
             <Italian>Impostazioni Condividi informazioni</Italian>
+            <Chinesesimp>设置共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing">
             <English>Disable information sharing</English>
@@ -245,6 +273,7 @@
             <Polish>Wyłącz dzielenie się informacjami</Polish>
             <Russian>Отключить обмен информацией</Russian>
             <Italian>Disabilita la condivisione delle informazioni</Italian>
+            <Chinesesimp>共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing_Tooltip">
             <English>Toggle information sharing between units</English>
@@ -253,6 +282,7 @@
             <Polish>Przełącza dzielenie się informacjami pomiędzy jednostkami</Polish>
             <Russian>Вкл/Выкл обмен информацией между юнитами</Russian>
             <Italian>Attiva/disattiva la condivisione delle informazioni tra le unità</Italian>
+            <Chinesesimp>切换单位之间的信息共享</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Shout">
             <English>Shout</English>
@@ -261,6 +291,7 @@
             <Polish>Krzyk</Polish>
             <Russian>Крики</Russian>
             <Italian>Urlo</Italian>
+            <Chinesesimp>呼叫</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Shout_ToolTip">
             <English>Range AI units share information without radios</English>
@@ -269,6 +300,7 @@
             <Polish>Dystans na którym AI może komunikować się bez pomocy radia</Polish>
             <Russian>Дальность на которой ИИ обмениваются информацией без радио</Russian>
             <Italian>Le unità IA di portata condividono le informazioni senza radio</Italian>
+            <Chinesesimp>在范围内的 AI 单位无需无线电即可共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseWest">
             <English>Base West</English>
@@ -277,6 +309,7 @@
             <Polish>Podstawa WEST</Polish>
             <Russian>Base West</Russian>
             <Italian>Base Ovest</Italian>
+            <Chinesesimp>基于西方</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseWest_ToolTip">
             <English>Base range side WEST share information</English>
@@ -285,6 +318,7 @@
             <Polish>Podstawowy zasięg dzielenie się informacjami dla strony WEST</Polish>
             <Russian>Расстояние WEST на котором оно делиться информацией</Russian>
             <Italian>Informazioni di condivisione lato gamma base OVEST</Italian>
+            <Chinesesimp>基于范围内的蓝军共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseEast">
             <English>Base East</English>
@@ -293,6 +327,7 @@
             <Polish>Podstawa EAST</Polish>
             <Russian>Base East</Russian>
             <Italian>Base Est</Italian>
+            <Chinesesimp>基于东方</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseEast_ToolTip">
             <English>Base range side EAST share information</English>
@@ -301,6 +336,7 @@
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony EAST</Polish>
             <Russian>Расстояние EAST на котором оно делиться информацией</Russian>
             <Italian>Informazioni di condivisione lato intervallo di base EST</Italian>
+            <Chinesesimp>基于范围内的红军共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseIndependent">
             <English>Base Independent</English>
@@ -308,7 +344,7 @@
             <German>Basis Unabhängige</German>
             <Polish>Podstawa INDEPENDENT</Polish>
             <Russian>Base Independent</Russian>
-            <Italian>Indipendente dalla base</Italian>
+            <Chinesesimp>基于独立者</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseIndependent_ToolTip">
             <English>Base range independent and civilian sides share information</English>
@@ -316,7 +352,7 @@
             <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony INDEPENDENT</Polish>
             <Russian>Расстояние на котором независимая и гражданская стороны делятся информацией</Russian>
-            <Italian>Le parti indipendenti e civili del raggio di base condividono le informazioni</Italian>
+            <Chinesesimp>基于范围内绿军和平民间共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios">
             <English>Backpack radios</English>
@@ -325,6 +361,7 @@
             <Polish>Plecak z radiem długim</Polish>
             <Russian>Радио рюкзаки</Russian>
             <Italian>Radio da zaino</Italian>
+            <Chinesesimp>无线电背包</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios_ToolTip">
             <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
@@ -333,6 +370,7 @@
             <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami </Polish>
             <Russian>Юниты, оснащенные радио рюкзаками (обычные, TFAR или настроенные переменной) добавляют это значение к базовой дальности обмена информацией</Russian>
             <Italian>Le unità dotate di radio a zaino (vanilla, TFAR o configurate da variabile) aggiungono questo valore all'intervallo di condivisione delle informazioni di base</Italian>
+            <Chinesesimp>配备背包中的无线电(原版、TFAR 或由变量配置)的单位将此值添加到基础信息共享范围</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue">
             <English>Accuracy of shared information</English>
@@ -341,6 +379,7 @@
             <Polish>Dokładność udostępnianych informacji</Polish>
             <Russian>Точность предоставленной информации</Russian>
             <Italian>Accuratezza delle informazioni condivise</Italian>
+            <Chinesesimp>共享信息的准确性</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_maxRevealValue_ToolTip">
             <English>Maximum 'knowsAbout' value shared between groups.\nSetting greater than 1 may cause distant allies to go into full danger mode.</English>
@@ -349,6 +388,7 @@
             <Polish>Maksymalna wartość „knowsAbout” dzielona między jednostki.\nUstawienie tej wartości większej niż 1 może spowodować, że odlegli sojusznicy przejdą w tryb zagrożenia.</Polish>
             <Russian>Максимальное значение "knowsAbout", разделяемое между группами.\nНастройка больше 1 может привести к тому, что  союзники на далеком расстоянии перейдут в режим полной опасности.</Russian>
             <Italian>Valore massimo 'knowsAbout' condiviso tra i gruppi.\nL'impostazione maggiore di 1 può far sì che gli alleati distanti entrino in modalità di pericolo completo.</Italian>
+            <Chinesesimp>组之间共享的最大“knowsAbout”.\n设置大于 1 可能会导致远处的盟友进入完全危险模式.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange">
             <English>Range combat mode is shared</English>
@@ -357,6 +397,7 @@
             <Russian>Расстояние вовлечения в боевой режим</Russian>
             <German>Der Reichweitenkampfmodus wird geteilt</German>
             <Italian>La modalità di combattimento a distanza è condivisa</Italian>
+            <Chinesesimp>作战模式共享范围</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_combatShareRange_ToolTip">
             <English>Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.</English>
@@ -365,6 +406,7 @@
             <Russian>Дружественные группы в пределах досягаемости будут настроены на боевое поведение. Юниты в боевом режиме будут искать укрытие и  и поворачиваются к ближайшей известной угрозе.</Russian>
             <German>Verbündete Gruppen in Reichweite wechseln in den Kampfmodus. Einheiten im Kampfmodus suchen Deckung, Verstecken und wenden sich der nächsten bekannten Bedrohung zu.</German>
             <Italian>I gruppi amici nel raggio d'azione saranno impostati per combattere il comportamento. Le unità in modalità combattimento cercheranno copertura e occultamento e si rivolgeranno alla minaccia nota più vicina.</Italian>
+            <Chinesesimp>射程内的友好团体将被设置为战斗行为.在战斗模式下，单位将寻找掩护和隐藏，并转向最近的已知威胁.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_SuppressionCat">
             <English>Settings Suppression</English>
@@ -373,6 +415,7 @@
             <Russian>Настройка подавления огнем</Russian>
             <German>Einstellungen Unterdrückung</German>
             <Italian>Soppressione impostazioni</Italian>
+            <Chinesesimp>设置火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup">
             <English>Disable suppression from player group</English>
@@ -381,6 +424,7 @@
             <Polish>Wyłącz ogień zaporowy dla grupy gracza</Polish>
             <Russian>Отключить подавление огнем  для группы игрока</Russian>
             <Italian>Disabilita la soppressione dal gruppo di giocatori</Italian>
+            <Chinesesimp>禁止小组火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableSuppressionPlayerGroup_ToolTip">
             <English>Toggle autonomous suppression for units in player group</English>
@@ -389,6 +433,7 @@
             <Polish>Przełącza autonomiczny ogień zaporowy dla jednostek w grupie gracza</Polish>
             <Russian>Включить автономное подавление для юнитов в группе игрока</Russian>
             <Italian>Attiva/disattiva la soppressione autonoma per le unità nel gruppo di giocatori</Italian>
+            <Chinesesimp>为玩家组中的单位切换动态火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance">
             <English>Minimum distance for Suppression Fire</English>
@@ -397,6 +442,7 @@
             <Polish>Minimalny dystans dla ognia zaporowego</Polish>
             <Russian>Минимальная дистанция для огня на подавление</Russian>
             <Italian>Distanza minima per fuoco di soppressione</Italian>
+            <Chinesesimp>火力压制最小距离</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance_ToolTip">
             <English>If the target or a blocking obstacle is within this distance, the AI will not perform suppression fire</English>
@@ -405,6 +451,7 @@
             <Polish>Poniżej tej odległości AI nie strzela ogniem zaporowym</Polish>
             <Russian>На этом расстоянии ИИ не будет вести огонь на подавление</Russian>
             <Italian>Se il bersaglio o un ostacolo si trova entro questa distanza, l'IA non eseguirà il fuoco di soppressione</Italian>
+            <Chinesesimp>如果目标或障碍物在此距离内，AI 将不会执行火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance">
             <English>Minimum safe zone for Suppression Fire</English>
@@ -413,6 +460,7 @@
             <Polish>Minimalny obszar bezpieczeństwa dla ognia zaporowego</Polish>
             <Russian>Минимальная безопасная зона для  огня на подавление</Russian>
             <Italian>Zona di sicurezza minima per fuoco di soppressione</Italian>
+            <Chinesesimp>火力压制最小安全区</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance_ToolTip">
             <English>If there are allies within this distance, AI will not perform suppression fire. Set to 0 to disable.</English>
@@ -421,6 +469,7 @@
             <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
             <Russian>Если на этом расстоянии есть союзники, ИИ не будет вести огонь на подавление. Установите 0, чтобы отключить</Russian>
             <Italian>Se ci sono alleati entro questa distanza, l'IA non eseguirà il fuoco di soppressione. Impostare su 0 per disabilitare.</Italian>
+            <Chinesesimp>如果在这段距离内有盟友，AI将不会执行火力压制.设置为0可禁用.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles">
             <English>Debug Draw Show banners for vehicle crew</English>
@@ -428,6 +477,7 @@
             <Polish>Debug Draw - Pokaż banery dla załogi pojazdu</Polish>
             <German>Debug Zeichnen - Banner für die Fahrzeugbesatzung anzeigen</German>
             <Italian>Debug disegna Mostra banner per l'equipaggio del veicolo</Italian>
+            <Chinesesimp>为车辆工作人员调试绘制显示标语</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles_ToolTip">
             <English>Draws information banners for all units boarded in vehicles. Default shows only the effective commander. (Feature requires Debug Draw enabled)</English>
@@ -435,18 +485,21 @@
             <Polish>Wyświetla informacje dla wszystkich jednostek na pokładzie pojazdu. Domyślnie pokazuje tylko dla dowódcy. (Funkcja wymaga włączonej opcji Debug Draw)</Polish>
             <German>Zeichnet Informationsbanner für alle in Fahrzeugen sitzenden Einheiten. Standard zeigt nur den effektiven Kommandanten an. (Funktion erfordert aktiviertes Debug Zeichnen)</German>
             <Italian>Disegna banner informativi per tutte le unità imbarcate sui veicoli. L'impostazione predefinita mostra solo il comandante effettivo. (La funzione richiede l'attivazione di Debug Draw)</Italian>
+            <Chinesesimp>为上车的所有单位绘制信息标语.默认值仅显示有效的指挥官.(功能需要启用调试绘图）</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity">
             <English>Min Obstacle Proximity Distance</English>
             <Czech>Minimální vzdálenost od překážky</Czech>
             <German>Mindestabstand zu Hindernissen</German>
             <Italian>Distanza minima di prossimità dell'ostacolo</Italian>
+            <Chinesesimp>靠近障碍物的最小距离</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity_ToolTip">
             <English>Minimum Obstacle Proximity Distance for Suppressive Fire</English>
             <Czech>Minimální vzdálenost od překážky pro potlačovací palbu</Czech>
             <German>Mindestabstand zu Hindernissen für Unterdrückungsfeuer</German>
             <Italian>Distanza minima di prossimità dell'ostacolo per il fuoco di soppressione</Italian>
+            <Chinesesimp>火力压制的靠近障碍物的最小距离</Chinesesimp>
         </Key>
     </Package>
 </Project>
