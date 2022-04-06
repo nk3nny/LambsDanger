@@ -8,6 +8,7 @@
             <Polish>Wyłącz AI dla jednostek</Polish>
             <Russian>Отключить ИИ юнитов</Russian>
             <Italian>Disattiva IA dell'unità</Italian>
+            <Chinesesimp>禁用AI单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingName">
             <English>Disable LAMBS unit AI</English>
@@ -16,6 +17,7 @@
             <Polish>Wyłącz LAMBS AI dla jednostek</Polish>
             <Russian>Отключить LAMBS юнит ИИ</Russian>
             <Italian>Spegnere il LAMBS IA dell'unità</Italian>
+            <Chinesesimp>禁用LAMBS的AI单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingToolTip">
             <English>Toggle advanced danger.fsm features on this unit</English>
@@ -24,6 +26,7 @@
             <Polish>Przełącza zaawansowane opcje danger.fsm na tej jednostce</Polish>
             <Russian>Переключить дополнительные настройки danger.fsm для этого юнита</Russian>
             <Italian>Attiva/disattiva le funzionalità avanzate di danger.fsm su questa unità</Italian>
+            <Chinesesimp>在danger.fsm这个单位上切换高级功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_SetRadio_DisplayName">
             <English>Configure Long-range Radio</English>
@@ -32,6 +35,7 @@
             <Polish>Konfiguruj długie radio</Polish>
             <Russian>Настроить радио для дальних переговоров</Russian>
             <Italian>Configura la radio a lungo raggio</Italian>
+            <Chinesesimp>配置远程无线电</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingName">
             <English>Toggle boosted communication range on unit</English>
@@ -40,6 +44,7 @@
             <Polish>Przełącza zwiększony zasięg komunikacji dla tej jednostki</Polish>
             <Russian>Переключить усиленную дальность коммуникации для юнита</Russian>
             <Italian>Attiva/disattiva il raggio di comunicazione potenziato sull'unità</Italian>
+            <Chinesesimp>切换增强通信范围的单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingToolTip">
             <English>Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.</English>
@@ -48,6 +53,7 @@
             <Polish>Jednostka z włączonym radiem ma zwiększony zasięg komunikacji podczas przekazywania informacji\nTen efekt może być również osiągnięty, poprzez wyekwipowanie jednostki w plecak z radiem lub plecak kompatybilny z modem TFAR.</Polish>
             <Russian>Юнит с включенным радио будет иметь усиленную дальностью коммуникации при передачи информации\nЭтого эффекта также можно добиться, оснастив юнита ванильным  рюкзаком с радио  или радио с поддержкой TFAR-мода.</Russian>
             <Italian>L'unità con la radio attivata ha aumentato il raggio di comunicazione durante la condivisione delle informazioni\nQuesto effetto si ottiene anche dotando l'unità di uno zaino radio Vanilla o di una radio abilitata per TFAR.</Italian>
+            <Chinesesimp>共享信息时切换了无线电的装置提高了通信范围\n这种效果也可以通过为装置配备普通无线电背包或TFAR mod启用的无线电来实现</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_ConfigureGroupAI_DisplayName">
             <English>Configure Group AI</English>
@@ -56,6 +62,7 @@
             <Polish>Konfiguruj AI grupy</Polish>
             <Russian>Настроить группу ИИ</Russian>
             <Italian>Configura IA di gruppo</Italian>
+            <Chinesesimp>配置AI小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingName">
             <English>Disable LAMBS group AI</English>
@@ -64,6 +71,7 @@
             <Polish>Wyłącz LAMBS AI dla grupy</Polish>
             <Russian>Отключить LAMBS группу ИИ</Russian>
             <Italian>Disabilita LAMBS gruppo AI</Italian>
+            <Chinesesimp>禁止LAMBS AI小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
@@ -72,6 +80,7 @@
             <Polish>Wyłącza LAMBS AI dla grupy.\nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
             <Russian>Отключает LAMBS группу ИИ\nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
             <Italian>Disabilita l'IA del gruppo LAMBS\nLa disabilitazione di questa funzione impedisce assalti e sgomberi autonomi di edifici, oltre a nascondersi da aerei e carri armati</Italian>
+            <Chinesesimp>禁用LAMBS 小组 AI\n禁用此功能可防止自动建筑攻击和清除，以及躲避飞机和坦克</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
@@ -80,6 +89,7 @@
             <Russian>Включить динамическое подкрепление</Russian>
             <German>Aktiviere Dynamische Verstärkung</German>
             <Italian>Abilita rinforzo dinamico</Italian>
+            <Chinesesimp>启用动态支援</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
             <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nWARNING The reinforcement feature may override existing waypoints on groups responding to calls</English>
@@ -88,6 +98,7 @@
             <Russian>Включить LAMBS функцию динамического подкрепления . Эта группа теперь будет двигаться к известным позициям противника, которые идентифицировались с помощью функцией обмена информацией.\nПРЕДУПРЕЖДЕНИЕ Функция подкрепления может перезаписать существующие маршрутные точки в группах, отвечающих на вызов.</Russian>
             <German>Aktiviert die dynamische Verstärkungsfunktion von LAMBS. Diese Gruppe bewegt sich jetzt zu bekannten feindlichen Positionen, die durch die Funktion zum Teilen von Informationen identifiziert werden.\nWARNUNG Die Verstärkungsfunktion kann vorhandene Wegpunkte bei Gruppen, die auf Funksprüche reagieren, überschreiben</German>
             <Italian>Abilita la funzione di rinforzo dinamico LAMBS. Questo gruppo ora si sposterà verso posizioni nemiche note identificate dalla funzione di condivisione delle informazioni.\nATTENZIONE La funzione di rinforzo potrebbe ignorare i waypoint esistenti sui gruppi che rispondono alle chiamate</Italian>
+            <Chinesesimp>启用LAMBS动态支援功能.该小组现在将向共享信息功能识别的已知敌方阵地移动.\n支援功能可能会覆盖响应呼叫的小组现有的路径点</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
             <English>General</English>
@@ -96,6 +107,7 @@
             <Polish>Główne</Polish>
             <Russian>Главное</Russian>
             <Italian>In genere</Italian>
+            <Chinesesimp>常规的</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormationsCat">
             <English>Settings CQB Formations</English>
@@ -104,6 +116,7 @@
             <Polish>Ustawienia formacji CQB</Polish>
             <Russian>Настроить формацию ближнего боя CQB</Russian>
             <Italian>Impostazioni CQB Formazioni</Italian>
+            <Chinesesimp>设置CQB信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
             <English>Disable danger.fsm for player group</English>
@@ -112,6 +125,7 @@
             <Polish>Wyłącz danger.fsm dla grupy gracza</Polish>
             <Russian>Отключить danger.fsm для группы игрока</Russian>
             <Italian>Disabilitare danger.fsm per il gruppo di giocatori</Italian>
+            <Chinesesimp>禁止玩家所在小组使用danger.fsm</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
             <English>Toggle advanced danger.fsm features on player group</English>
@@ -120,6 +134,7 @@
             <Polish>Przełącz zaawansowane opcje danger.fsm na grupie gracza</Polish>
             <Russian>Переключить особый danger.fsm для группы игрока </Russian>
             <Italian>Attiva/disattiva le funzionalità avanzate di danger.fsm nel gruppo di giocatori</Italian>
+            <Chinesesimp>为玩家所在小组切换高级danger.fsm功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
@@ -128,6 +143,7 @@
             <Polish>Wyłącz stan reakcji dla grupy gracza</Polish>
             <Russian>Отключить состояние реакции для группы игрока</Russian>
             <Italian>Disabilita lo stato di reazione sul gruppo di giocatori</Italian>
+            <Chinesesimp>禁用玩家所在小组的反应状态</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
             <English>Toggle Reaction phase on units in player group</English>
@@ -136,6 +152,7 @@
             <Polish>Przełącza fazę reakcji dla jednostek w grupie gracza</Polish>
             <Russian>Переключить фазу реакции для юнитов в группе игрока</Russian>
             <Italian>Attiva/disattiva la fase di reazione sulle unità nel gruppo di giocatori</Italian>
+            <Chinesesimp>切换玩家所在小组中单位的反应阶段</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
             <English>Disable autonomous group manoeuvres</English>
@@ -144,6 +161,7 @@
             <Polish>Wyłącz autonomiczne manewry grupowe</Polish>
             <Russian>Выключить автономные маевры группы</Russian>
             <Italian>Disabilita le manovre di gruppo autonome</Italian>
+            <Chinesesimp>禁止小组自动操作</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
             <English>Toggles group manoeuvre phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoeuvre orders to flank and suppress buildings.</English>
@@ -152,6 +170,7 @@
             <Polish>Przełącza fazę manewru grupowego zainicjowaną przez dowódcę oddziału AI. Wyłączenie tej opcji uniemożliwi liderowi grupy AI wydawaniu nowych rozkazów do flankowania i ostrzeliwania budynków.</Polish>
             <Russian>Переключает фазу группового маневра, инициированную командиром отряда ИИ. Отключение этого  не позволит лидеру группы ИИ добавлять приказы о маневрах для обхода и подавления огнем зданий.</Russian>
             <Italian>Attiva/disattiva la fase di manovra di gruppo avviata dal caposquadra AI. Disabilitarlo impedirà al leader del gruppo AI di aggiungere ordini di manovra per fiancheggiare e sopprimere gli edifici.</Italian>
+            <Chinesesimp>切换由 AI 班长发起的小组操作阶段.禁用此功能将阻止 AI 组长添加机动命令来到侧翼和压制建筑物.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
             <English>Disable units hiding</English>
@@ -160,6 +179,7 @@
             <Polish>Wyłącz ukrywanie jednostek</Polish>
             <Russian>Выключить прятание юнитов от огня за укрытия</Russian>
             <Italian>Disabilita le unità nascoste</Italian>
+            <Chinesesimp>禁用单位隐藏</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
             <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
@@ -168,6 +188,7 @@
             <Polish>Przełącza ruch maskujący przez AI dla jednostek, które nie mają możliwości uszkodzenia czołgów lub pojazdów latających. Wyłączenie tej opcji sprawi, że grupy będą bardziej responsywne</Polish>
             <Russian>Переключает действие укрытия ИИ для юнитов, не оборудованных для поражения танков и самолетов. Отключение этого параметра сделает группы более отзывчивыми</Russian>
             <Italian>Attiva/disattiva la mossa di occultamento dell'IA per le unità non equipaggiate per danneggiare carri armati e aerei. La disabilitazione di questa impostazione renderà i gruppi più reattivi</Italian>
+            <Chinesesimp>切换AI对未配备坦克和飞机的单位的隐藏动作.禁用此设置将使小组反应更激烈</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment">
             <English>Disable units deploying static weapons</English>
@@ -176,6 +197,7 @@
             <Russian>Отключить развертывани ИИ стационарных орудий</Russian>
             <German>Deaktiviert die Fähigkeit von Einheiten, statische Waffen zu bauen</German>
             <Italian>Disabilita le unità che schierano armi statiche</Italian>
+            <Chinesesimp>禁用单位部署静态武器</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment_ToolTip">
             <English>Toggles AI group ability to dynamically deploy static/backpack weapons</English>
@@ -184,6 +206,7 @@
             <Russian>Переключает способность группы ИИ динамически развертывать стационарное/ранцевое оружие</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, statische Waffen dynamisch einzusetzen</German>
             <Italian>Attiva/disattiva la capacità del gruppo IA di schierare dinamicamente armi statiche/zaino</Italian>
+            <Chinesesimp>切换 AI 小组自动部署静态/背包武器的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding">
             <English>Disable units manning static weapons</English>
@@ -192,6 +215,7 @@
             <Russian>Отключить использование ИИ свободных стационарных орудий</Russian>
             <German>Deaktiviert, dass KI statische Waffen bemannt</German>
             <Italian>Disabilita le unità che gestiscono armi statiche</Italian>
+            <Chinesesimp>禁用配备静态武器的单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding_ToolTip">
             <English>Toggles AI group ability to dynamically find and man vacant static turrets</English>
@@ -200,6 +224,7 @@
             <Russian>Переключает способность группы ИИ динамически находить и занимать свободные стационарное установки.</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, freie statische Geschütztürme dynamisch zu finden und zu besetzen</German>
             <Italian>Attiva/disattiva l'abilità del gruppo IA di trovare dinamicamente e manovrare torrette statiche libere</Italian>
+            <Chinesesimp>切换AI小组自动发现和操作闲置静态炮塔的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades">
             <English>Disable autonomous smoke usage</English>
@@ -208,6 +233,7 @@
             <Russian>Отключить автономное использование дыма</Russian>
             <German>Deaktivieren Sie den autonomen Einsatz von Rauchgranaten</German>
             <Italian>Disabilita l'uso autonomo del fumo</Italian>
+            <Chinesesimp>禁用自动使用烟雾弹</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades_ToolTip">
             <English>Toggles AI group ability to autonomously use smoke to cover group manoeuvres</English>
@@ -216,6 +242,7 @@
             <Russian>Переключает способность группы ИИ автономно использовать дым для прикрытия групповых маневров</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, autonom Rauchgranaten zu verwenden, um Gruppenmanöver zu verbergen</German>
             <Italian>Attiva/disattiva la capacità del gruppo IA di utilizzare autonomamente il fumo per coprire le manovre di gruppo</Italian>
+            <Chinesesimp>切换 AI 小组自动使用烟雾弹掩护小组的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
             <English>Disable units using flares for illumination </English>
@@ -224,6 +251,7 @@
             <Russian>Отключить способность ИИ использовать осветительные ракеты для освещения</Russian>
             <German>Deaktiviert die autonome Verwendung von Flares durch die KI</German>
             <Italian>Disabilita le unità che utilizzano i bagliori per l'illuminazione</Italian>
+            <Chinesesimp>禁用单位使用照明弹进行照明</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares_ToolTip">
             <English>Toggles AI group ability to autonomously use flares for illumination at night time unless NVGs are available or unit is in stealth mode</English>
@@ -232,6 +260,7 @@
             <Russian>Переключает способность группы ИИ автономно использовать осветительные ракеты для освещения в ночное время, если не доступны ПНВ или юнит находится в скрытом режиме.</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, autonom Flares zur nächtlichen Beleuchtung zu verwenden, es sei denn, NVGs sind verfügbar oder die Einheit befindet sich im Schleichen-Modus</German>
             <Italian>Attiva o disattiva la capacità del gruppo IA di utilizzare autonomamente i bagliori per l'illuminazione di notte, a meno che non siano disponibili NVG o che l'unità sia in modalità invisibile</Italian>
+            <Chinesesimp>切换 AI 组在夜间自主使用照明弹进行照明的功能除非 NVG 可用或单位处于隐身模式</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
@@ -240,6 +269,7 @@
             <Polish>Zasięg CQB</Polish>
             <Russian>Дальность режима ближнего боя CQB</Russian>
             <Italian>Gamma CQB</Italian>
+            <Chinesesimp>CQB范围</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange_ToolTip">
             <English>Range at which units consider themselves in assault range</English>
@@ -248,6 +278,7 @@
             <Polish>Określa zasięg ataku</Polish>
             <Russian>Дальность, на которой юниты считают себя атакующими</Russian>
             <Italian>Raggio al quale le unità si considerano nel raggio d'assalto</Italian>
+            <Chinesesimp>单位认为自己处于攻击范围内的范围</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>
@@ -256,6 +287,7 @@
             <Polish>Szansa na panikę</Polish>
             <Russian>Шанс паники</Russian>
             <Italian>Possibilità di panico</Italian>
+            <Chinesesimp>引起恐慌的概率</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
             <English>Chance to panic in percentage</English>
@@ -264,6 +296,7 @@
             <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
             <Russian>Шанс паники в процентах</Russian>
             <Italian>Possibilità di panico in percentuale</Italian>
+            <Chinesesimp>引起恐慌的百分比几率</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBFormation">
             <English>Units set to CQB formations will methodically clear buildings when an enemy is encountered</English>
@@ -272,6 +305,7 @@
             <Polish>Jednostki umieszczone w formacjach CQB będą metodycznie "czyścić" domy, jeśli wróg zostanie napotkany.</Polish>
             <Russian>Юниты, настроенные на формацию CQB, будут методично очищать здания при столкновении с врагом.</Russian>
             <Italian>Le unità impostate su formazioni CQB elimineranno metodicamente gli edifici quando viene incontrato un nemico</Italian>
+            <Chinesesimp>当遇到敌人时被设置成CQB编队的部队将有条不紊地清除建筑物</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
             <English>AI Disabled</English>
@@ -280,6 +314,7 @@
             <Polish>AI Wyłączone</Polish>
             <Russian>ИИ выключен</Russian>
             <Italian>IA disabilitata</Italian>
+            <Chinesesimp>禁止使用AI</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
             <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
@@ -288,6 +323,7 @@
             <Polish>Jednostka posiada wyłączone zaawansowane opcje danger.fsm\n\nUWAGA zaznaczenie tej opcji doda zależności modów.</Polish>
             <Russian>Юниту отключены расширенные функции dangerous.fsm.\n\nРЕДУПРЕЖДЕНИЕ включение этого пункта  добавит зависимость от мода</Russian>
             <Italian>L'unità ha funzioni avanzate di Danger.fsm disabilitate\n\nATTENZIONE controllando questo si aggiungerà dipendenza mod</Italian>
+            <Chinesesimp>禁用单位所拥有的高级danger.fsm功能\n\n警告选中此选项将添加mod依赖项</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
             <English>Has Radio</English>
@@ -296,6 +332,7 @@
             <Polish>Posiada radio</Polish>
             <Russian>Имеет радио</Russian>
             <Italian>Ha la radio</Italian>
+            <Chinesesimp>拥有无线电</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_ToolTip">
             <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
@@ -304,6 +341,7 @@
             <Polish>Jednostka widziana jest jako posiadająca radio długie w plecaku w celu dzielenia się informacji\n\nUWAGA zaznaczenie tej opcji doda zależności modów.  </Polish>
             <Russian>Устройство считается переносчиком радиостанции для обмена информацией\n\nПРЕДУПРЕЖДЕНИЕ, включение этого пункта  добавит зависимость от мода</Russian>
             <Italian>L'unità conta come trasportare la radio nello zaino per la condivisione delle informazioni\n\nATTENZIONE controllando questo si aggiungerà la dipendenza dalla mod</Italian>
+            <Chinesesimp>数以为计的单位将携带背包中的无线电以共享信息\n\n警告检查此项将增加mod依赖性</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_HasRadio">
             <English>Has Radio</English>
@@ -312,6 +350,7 @@
             <Polish>Posiada radio</Polish>
             <Russian>Имеет радио</Russian>
             <Italian>Ha la radio</Italian>
+            <Chinesesimp>拥有无线电</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_HasNoRadio">
             <English>Has no Radio</English>
@@ -320,6 +359,7 @@
             <Polish>Nie posiada radia</Polish>
             <Russian>Не имеет радио</Russian>
             <Italian>Non ha la radio</Italian>
+            <Chinesesimp>没有无线电</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_EnableReinforcement">
             <English>Enable Reinforcement</English>
@@ -327,6 +367,7 @@
             <Polish>Włącz posiłki</Polish>
             <German>Aktiviere Verstärkung</German>
             <Italian>Abilita rinforzo</Italian>
+            <Chinesesimp>启用支援</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableReinforcement">
             <English>Disable Reinforcement</English>
@@ -334,6 +375,7 @@
             <Polish>Wyłącz posiłki</Polish>
             <German>Deaktiviere Verstärkung</German>
             <Italian>Disattiva rinforzo</Italian>
+            <Chinesesimp>禁止支援</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableAI">
             <English>Disable AI</English>
@@ -342,6 +384,7 @@
             <Polish>Wyłącz AI</Polish>
             <Russian>Отключить ИИ</Russian>
             <Italian>Disabilita IA</Italian>
+            <Chinesesimp>禁止使用AI</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_EnableAI">
             <English>Enable AI</English>
@@ -350,6 +393,7 @@
             <Polish>Włącz AI</Polish>
             <Russian>Включить ИИ</Russian>
             <Italian>Abilita IA</Italian>
+            <Chinesesimp>启用AI</Chinesesimp>  
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableGroupAI">
             <English>Disable Group AI</English>
@@ -358,6 +402,7 @@
             <Polish>Wyłącz AI dla grupy</Polish>
             <Russian>Отключить ИИ группы</Russian>
             <Italian>Disabilita IA di gruppo</Italian>
+            <Chinesesimp>禁止使用AI小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_EnableGroupAI">
             <English>Enable Group AI</English>
@@ -366,6 +411,7 @@
             <Polish>Włącz AI dla grupy</Polish>
             <Russian>Включить ИИ группы</Russian>
             <Italian>Abilita IA di gruppo</Italian>
+            <Chinesesimp>启用AI小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_Main_DisplayName">
             <English>Lamber Danger FSM</English>
@@ -374,6 +420,7 @@
             <Russian>LAMBS Danger FSM</Russian>
             <German>LAMBS Danger FSM</German>
             <Italian>Lamber Danger FSM</Italian>
+            <Chinesesimp>Lambs Danger FSM</Chinesesimp>
         </Key>
     </Package>
 </Project>
