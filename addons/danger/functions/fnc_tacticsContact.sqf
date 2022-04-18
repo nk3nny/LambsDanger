@@ -47,14 +47,14 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
-            //_group enableAttack _enableAttack;
+            _group enableAttack _enableAttack;
             private _leader = leader _group;
             if (_leader call FUNC(isLeader)) then {
                 [_leader, _leader findNearestEnemy _leader] call FUNC(tactics);
             };
         };
     },
-    [_group, attackEnabled _group],
+    [_group, false],
     _delay + random 12
 ] call CBA_fnc_waitAndExecute;
 
