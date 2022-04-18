@@ -52,7 +52,7 @@ private _pos = call {
         _getHide
     };
 
-   // updates group memory variable
+    // updates group memory variable
     if (_unit distance2D _target < 40) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
