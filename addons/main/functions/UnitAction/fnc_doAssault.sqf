@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 20]];
+params ["_unit", ["_target", objNull], ["_range", 15], ["_doMove", false]];
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {false};
@@ -24,23 +24,35 @@ if (!(_unit checkAIFeature "PATH")) exitWith {false};
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
-// Near buildings + sort near positions + add target actual location
-private _buildings = [_target, _range, true, false] call FUNC(findBuildings);
-_buildings = _buildings select { _x distance _target < 7 };
+// get the hide
+private _getHide = _unit getHideFrom _target;
 
-// set destination
-private _pos = if (_buildings isEqualTo []) then {
-    // unit is indoor and happy
-    if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
-        _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
-        getPosATL _unit
+// check visibility
+private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isNotEqualTo 0;
+private _buildings = [];
+private _pos = call {
+
+    // can see target!
+    if (_vis) exitWith {getPosATL _target};
+
+    // near buildings
+    private _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
+    private _distanceSqr = _unit distanceSqr _getHide;
+    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distance _unit > 1.5}};
+
+    // target outdoors
+    if (_buildings isEqualTo []) exitWith {
+
+        if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
+            _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
+            getPosATL _unit
+        };
+
+        // select target location
+        _getHide
     };
 
-    // select target location
-    getPosATL _target
-} else {
-
-    // updates group memory variable
+   // updates group memory variable
     if (_unit distance2D _target < 40) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
@@ -49,20 +61,20 @@ private _pos = if (_buildings isEqualTo []) then {
         };
     };
 
-    // add unit position to array
-    _buildings pushBack (getPosATL _target);
-
     // select building position
-    (selectRandom _buildings) vectorAdd [-1 + random 2, -1 + random 2, 0]
+    _doMove = true;
+    _getHide = selectRandom _buildings;
+    _getHide
 };
 
 // stance and speed
 [_unit, _pos] call FUNC(doAssaultSpeed);
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.8));
+_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.7 || {_unit distance2D _pos < 1}));
+_unit doWatch (AGLToASL _getHide);
 
 // execute
-_unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", false];
+_unit setDestination [_pos, "LEADER PLANNED", true];
+if (_doMove) then {_unit doMove _pos;};
 
 // debug
 if (GVAR(debug_functions)) then {

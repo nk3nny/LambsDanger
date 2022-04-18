@@ -39,7 +39,7 @@ if (_destination != -1) then {
 };
 
 // toggle stance
-_unit setUnitPosWeak selectRandom ["UP", "UP", "MIDDLE"];
+_unit setUnitPosWeak selectRandom ["UP", "MIDDLE"];
 
 // end
 _unit

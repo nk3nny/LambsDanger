@@ -26,7 +26,7 @@
 params ["_unit", "", "", ["_target", objNull]];
 
 // timeout
-private _timeout = time + 2;
+private _timeout = time + 4;
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
@@ -37,14 +37,18 @@ private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 // sympathetic CQB/suppressive fire
 if (_groupMemory isNotEqualTo []) exitWith {
     [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
-    _timeout + 3
+    _timeout
 };
 
 // building
 if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
     [_unit, _target] call EFUNC(main,doReposition);
-    _timeout + 2
+    _timeout - 1
 };
+
+// reset look
+_unit setUnitPosWeak "MIDDLE";
+_unit doWatch objNull;
 
 // end
 _timeout
