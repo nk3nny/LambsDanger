@@ -27,12 +27,14 @@ private _group = group _unit;
 // reset tactics
 [
     {
-        params [["_group", grpNull], ["_enableAttack", true], ["_isIRLaserOn", false]];
+        params [["_group", grpNull], ["_enableAttack", true], ["_isIRLaserOn", false], ["_speedMode", "NORMAL"], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
             _group enableIRLasers _isIRLaserOn;
+            _group setSpeedMode _speedMode;
+            _group setFormation _formation;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x doFollow leader _x;
@@ -40,12 +42,17 @@ private _group = group _unit;
             } foreach (units _group);
         };
     },
-    [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit)],
+    [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit), speedMode _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
+
+// set speed and enableAttack
+_group setSpeedMode "FULL";
+_group setFormation "DIAMOND";
+_group enableAttack false;
 
 // find units
 if (_units isEqualTo []) then {
@@ -54,10 +61,10 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-private _buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, 22, true, true] call EFUNC(main,findBuildings);
 _buildings append ((_unit targets [true, 12, [], 0, _target]) apply {getPosATL _x});
-_buildings = _buildings apply { [_x select 2, _x] };
-_buildings sort false;
+_buildings = _buildings apply { [_unit distanceSqr _x, _x] };
+_buildings sort true;
 _buildings = _buildings apply { _x select 1 };
 _buildings pushBack _target;
 
@@ -70,7 +77,6 @@ _group setVariable [QEGVAR(main,currentTactic), "Assaulting", EGVAR(main,debug_f
 
 // updates CQB group variable
 _group setVariable [QEGVAR(main,groupMemory), _buildings];
-_group enableAttack false;
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
@@ -80,7 +86,7 @@ _group enableAttack false;
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // concealment
-if (!GVAR(disableAutonomousSmokeGrenades) && {_unit distance2D _target > 25}) then {
+if (!GVAR(disableAutonomousSmokeGrenades)) then {
 
     // leader smoke
     [_unit, _target] call EFUNC(main,doSmoke);
@@ -92,7 +98,11 @@ if (!GVAR(disableAutonomousSmokeGrenades) && {_unit distance2D _target > 25}) th
 // ready group
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
-_units doWatch _target;
+_units doFollow _unit;
+_units doWatch objNull;
+
+// declare leftover positions in memory!
+_group setVariable [QEGVAR(main,groupMemory), _buildings];
 
 // execute function
 [_cycle, _units, _buildings] call EFUNC(main,doGroupAssault);

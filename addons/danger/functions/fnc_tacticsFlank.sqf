@@ -101,14 +101,16 @@ _unit setSpeedMode "FULL";
 // ready group
 _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
-_units commandMove _overwatch;
 {
     _x setUnitPos "MIDDLE";
     _x setVariable [QGVAR(forceMove), true];
 } foreach _units;
 
+// move
+_units commandMove _overwatch;
+
 // leader smoke ~ deploy concealment to enable movement
-if (!GVAR(disableAutonomousSmoke) && {(getSuppression _unit) isNotEqualTo 0}) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
+if (!GVAR(disableAutonomousSmoke)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
 [{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
