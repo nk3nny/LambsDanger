@@ -68,7 +68,7 @@
             <Polish>Wyłącza używanie gestów ręką podczas reagowania na niebezpieczeństwo lub podczas wykonywania manewrów</Polish>
             <Russian>Переключает жесты отряда и сигналы руками при реагировании на опасность или выполнении запланированных маневров</Russian>
             <Italian>Attivare/disattivare i gesti dell'unità e i segnali manuali quando si reagisce a un pericolo o si eseguono manovre pianificate</Italian>
-             <Chinesesimp>在对危险做出反应或执行计划的机动时切换单位示意动作和手势</Chinesesimp>
+            <Chinesesimp>在对危险做出反应或执行计划的机动时切换单位示意动作和手势</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts">
             <English>Disable unit callouts</English>
@@ -86,7 +86,7 @@
             <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
             <Russian>Переключает дополнительные обозначения единиц в зависимости от ситуации</Russian>
             <Italian>Attiva e disattiva i richiami di unità extra in base alle situazioni</Italian>
-             <Chinesesimp>根据情况切换额外的单位标注</Chinesesimp>
+            <Chinesesimp>根据情况切换额外的单位标注</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions">
             <English>Disable unit dodging</English>
@@ -140,7 +140,7 @@
             <Russian>Шанс движения в помещении</Russian>
             <German>Die Chance, dass eine Einheit sich in ein Gebäude bewegt</German>
             <Italian>La possibilità che un'unità si sposti in un edificio</Italian>
-             <Chinesesimp>室内移动的可能性</Chinesesimp>
+            <Chinesesimp>室内移动的可能性</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching">
             <English>Disable vehicle autonomous munition switching</English>
@@ -192,7 +192,7 @@
             <Polish>Funkcje Debug</Polish>
             <Russian>Функции отладки</Russian>
             <Italian>Funzioni di debug</Italian>
-             <Chinesesimp>调试功能</Chinesesimp>
+            <Chinesesimp>调试功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
@@ -201,7 +201,7 @@
             <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
             <Russian>Показывает сообщения отладки функций</Russian>
             <Italian>Mostra i messaggi di debug della funzione</Italian>
-             <Chinesesimp>显示调试函数信息</Chinesesimp>
+            <Chinesesimp>显示调试函数信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
@@ -210,7 +210,7 @@
             <Polish>Debug Civ</Polish>
             <Russian>Отладка Civ</Russian>
             <Italian>Debug Civile</Italian>
-             <Chinesesimp>调试平民</Chinesesimp>
+            <Chinesesimp>调试平民</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv_ToolTip">
             <English>Shows FSM debug messages for civilians</English>
@@ -344,6 +344,7 @@
             <German>Basis Unabhängige</German>
             <Polish>Podstawa INDEPENDENT</Polish>
             <Russian>Base Independent</Russian>
+            <Italian>Indipendente dalla base</Italian>
             <Chinesesimp>基于独立者</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BaseIndependent_ToolTip">
@@ -352,6 +353,7 @@
             <German>Basisreichweite über die unabhängige und civile Einheiten Informationen teilen</German>
             <Polish>Podstawowy zasięg dzielenia się informacjami dla strony INDEPENDENT</Polish>
             <Russian>Расстояние на котором независимая и гражданская стороны делятся информацией</Russian>
+            <Italian>Le parti indipendenti e civili del raggio di base condividono le informazioni</Italian>
             <Chinesesimp>基于范围内绿军和平民间共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_BackpackRadios">
