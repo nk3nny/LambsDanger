@@ -393,7 +393,7 @@
             <Polish>Włącz AI</Polish>
             <Russian>Включить ИИ</Russian>
             <Italian>Abilita IA</Italian>
-            <Chinesesimp>启用AI</Chinesesimp>  
+            <Chinesesimp>启用 AI</Chinesesimp>  
         </Key>
         <Key ID="STR_Lambs_Danger_Context_DisableGroupAI">
             <English>Disable Group AI</English>
