@@ -27,7 +27,7 @@ if (canSuspend) exitWith { [FUNC(taskPatrol), _this] call CBA_fnc_directCall; };
 // init
 params [
     ["_group", grpNull, [grpNull, objNull]],
-    ["_pos",[], [[]]],
+    ["_pos",[]],
     ["_radius", TASK_PATROL_SIZE, [0]],
     ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
     ["_area", [], [[]]],
