@@ -682,8 +682,8 @@
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
             <Italian>Il gruppo che si sposta a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
-            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下 该模块只针对敌方玩家</Chinesesimp>            
-        </Key>        
+            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下 该模块只针对敌方玩家</Chinesesimp>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
             <Czech>Úkol plížení způsobí, že se daná jednotka zkusí připlížit k nepřátelům v rámci oblasti nastavené pomocí 3DEN atributů. Skupina bude využívat krytů a bude se snažit držet nízky profil aby zůstala neodhalená.&lt;br/&gt;&lt;br/&gt;V základu vyhledávací moduly cílí pouze na nepřátelské hráče</Czech>
