@@ -189,7 +189,6 @@
             <Russian>Юнит в бегстве</Russian>
             <Italian>L'unità sta fuggendo</Italian>
             <Chinesesimp>逃跑单位</Chinesesimp
-            
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
             <English>Enable this to make the unit retreat and ignore enemies</English>
@@ -683,8 +682,8 @@
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
             <Italian>Il gruppo che si sposta a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
-            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下，该模块只针对敌方玩家</Chinesesimp>            
-        </Key>
+            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下 该模块只针对敌方玩家</Chinesesimp>            
+        </Key>        
         <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
             <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
             <Czech>Úkol plížení způsobí, že se daná jednotka zkusí připlížit k nepřátelům v rámci oblasti nastavené pomocí 3DEN atributů. Skupina bude využívat krytů a bude se snažit držet nízky profil aby zůstala neodhalená.&lt;br/&gt;&lt;br/&gt;V základu vyhledávací moduly cílí pouze na nepřátelské hráče</Czech>
@@ -816,7 +815,7 @@
             <Polish>Zadanie - Szturm sprawia, że jednostki agresywnie szturmują naprzeciw wrogom. Jednostki będą poruszać się bardzo agresywnie, często ignorując osłonę i ogień zaporowy.&lt;br/&gt;&lt;br/&gt;Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom. Wyłącz FSM dla jednostek, dla prawdziwie przerażających przeciwników.</Polish>
             <Russian>Задача Нападение  заставляет отряд попытаться агрессивно бежать к врагам в пределах области, установленной атрибутами 3DEN. Отряд будет двигаться чрезвычайно агрессивно, часто игнорируя укрытие и подавление.&lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков. Отключает юнит FSM для поистине устрашающего врага</Russian>
             <Italian>Task Rush fa sì che l'unità tenti di correre in modo aggressivo verso i nemici all'interno dell'area impostata dagli attributi 3DEN. L'unità si muoverà in modo estremamente aggressivo, spesso ignorando la copertura e la soppressione.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili. Disabilita l'unità FSM per un nemico davvero terrificante.</Italian>
-             <Chinesesimp>使单位尝试向 3DEN 属性设置的区域内的敌人发起攻击. 该单位将极其激进地移动，通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家. 为真正可怕的敌人禁用单位 FSM.</Chinesesimp>
+            <Chinesesimp>使单位尝试向 3DEN 属性设置的区域内的敌人发起攻击. 该单位将极其激进地移动，通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家. 为真正可怕的敌人禁用单位 FSM.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -1218,7 +1217,6 @@
             <German>ARTILLERIE REGISTRIEREN</German>
             <Italian>REGISTRAZIONE ARTIGLIERIA</Italian>
             <Chinesesimp>火炮指示</Chinesesimp>
-            
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use</English>
