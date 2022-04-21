@@ -188,7 +188,7 @@
             <Polish>Jednostka ucieka</Polish>
             <Russian>Юнит в бегстве</Russian>
             <Italian>L'unità sta fuggendo</Italian>
-            <Chinesesimp>逃跑单位</Chinesesimp
+            <Chinesesimp>逃跑单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
             <English>Enable this to make the unit retreat and ignore enemies</English>
