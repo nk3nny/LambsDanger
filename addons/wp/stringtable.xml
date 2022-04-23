@@ -215,7 +215,7 @@
             <Polish>Usuwa moduł podczas uruchamiania.\nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
             <Russian>Удаляет модуль при запуске.\nЕсли этот флажок не установлен, можно перемещать модуль для динамического изменения места назначения.</Russian>
             <Italian>Elimina il modulo all'avvio.\nSe non selezionato è possibile spostare il modulo per cambiare destinazione dinamicamente</Italian>
-            <Chinesesimp>启动时删除模块.\n如果未选中，则可以移动模块以动态更改目的</Chinesesimp>
+            <Chinesesimp>启动时删除模块.\n如果未选中,则可以移动模块以动态更改目的</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
@@ -233,7 +233,7 @@
             <Polish>Jednostki na tym obszarze będą powracały do swojego normalnego zachowania</Polish>
             <Russian>Юниты в пределах этого количества метров вернутся к обычному поведению</Russian>
             <Italian>Le unità entro questo numero di metri torneranno al comportamento normale</Italian>
-            <Chinesesimp>在这个英尺范围内的单位将恢复常规行为</Chinesesimp>
+            <Chinesesimp>在这个公里范围内的单位将恢复常规行为</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -286,7 +286,7 @@
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
             <Italian>Raggio</Italian>
-            <Chinesesimp>建筑和静态武器半径范围内驻守并配备/n两倍于该数字的人员用于巡逻</Chinesesimp>
+            <Chinesesimp>半径</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_Tooltip">
             <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
@@ -295,7 +295,7 @@
             <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone.\nObszar dwa razy większy jest używany do patroli.</Polish>
             <Russian>Радиус зданий и стационарного оружие которые будут укомплектованы людьми\nДвукртаное значение  этого числа используется для патрулирования.</Russian>
             <Italian>Gli edifici del raggio e le armi statiche sono presidiati e presidiati\nIl doppio di questo numero viene utilizzato per le pattuglie</Italian>
-            <Chinesesimp>传送单位</Chinesesimp>
+            <Chinesesimp>建筑和静态武器半径范围内驻守并配备/n两倍于该数字的人员用于巡逻</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
             <English>Teleport units</English>
@@ -304,7 +304,7 @@
             <Polish>Teleportuj jednostki</Polish>
             <Russian>Телепортация юнита</Russian>
             <Italian>Unità di teletrasporto</Italian>
-            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
+            <Chinesesimp>传送单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_Tooltip">
             <English>Teleport units instantly to position</English>
@@ -313,7 +313,7 @@
             <Polish>Teleportuj jednostki od razu na pozycje</Polish>
             <Russian>Телепортировать юнитов к позиции мгновенно</Russian>
             <Italian>Teletrasporta le unità istantaneamente in posizione</Italian>
-            <Chinesesimp>上一个路径点</Chinesesimp>
+            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
             <English>Last Waypoint</English>
@@ -322,7 +322,7 @@
             <Russian>Последняя маршрутная точка</Russian>
             <German>Letzter Wegpunkt</German>
             <Italian>Ultimo waypoint</Italian>
-            <Chinesesimp>小组离开驻扎状态后采用的路径点</Chinesesimp>
+            <Chinesesimp>上一个路径点</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
             <English>The waypoint the group adopts after leaving the camped state</English>
@@ -331,7 +331,7 @@
             <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
             <German>Der Wegpunkt, den die Gruppe nach dem Verlassen des Lagerzustands annimmt</German>
             <Italian>Il waypoint che il gruppo adotta dopo aver lasciato lo stato di accampamento</Italian>
-            <Chinesesimp>CQB任务</Chinesesimp>
+            <Chinesesimp>小组离开驻扎状态后采用的路径点</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
             <English>Task CQB</English>
@@ -340,7 +340,7 @@
             <Polish>Zadanie - CQB</Polish>
             <Russian>Задача CQB</Russian>
             <Italian>Compito CQB</Italian>
-            <Chinesesimp>脚本间隔</Chinesesimp>
+            <Chinesesimp>CQB任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -349,7 +349,7 @@
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта.</Russian>
             <Italian>Intervallo di script</Italian>
-            <Chinesesimp>脚本的周期时间以秒为单位.数字越高搜索建筑的时候就越仔细.\ n默认21秒</Chinesesimp>
+            <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds</English>
@@ -358,7 +358,7 @@
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie.\nDomyślnie 21 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Чем больше число, тем больше юниты обыскивают здания.\nПо умолчанию 21 секунда.</Russian>
             <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti fanno sì che le unità cerchino più attentamente gli edifici.\nPredefinito 21 secondi</Italian>
-            <Chinesesimp>删除动态中心</Chinesesimp>
+            <Chinesesimp>脚本的周期时间以秒为单位.数字越高搜索建筑的时候就越仔细.\ n默认21秒</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_DisplayName">
             <English>Remove Dynamic center</English>
@@ -367,7 +367,7 @@
             <Polish>Usuń dynamiczne centrum</Polish>
             <Russian>Удалить динамический центр</Russian>
             <Italian>Rimuovi il centro dinamico</Italian>
-            <Chinesesimp>在存在动态中心的情况下，可以移动建筑物搜索模式的中心点</Chinesesimp>
+            <Chinesesimp>移除动态中心</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_Tooltip">
             <English>With the dynamic center present, it is possible to move the center point of the building search pattern</English>
@@ -502,7 +502,7 @@
             <Russian>Динамичный патруль</Russian>
             <German>Dynamische Patrouille</German>
             <Italian>Pattugliamento dinamico</Italian>
-            <Chinesesimp>动态控制</Chinesesimp>
+            <Chinesesimp>动态巡逻</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_Tooltip">
             <English>The unit will create a subgroup to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
@@ -1072,7 +1072,7 @@
             <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
             <German>Die Einheit reagiert auf bekannte feindliche Positionen, die von Verbündeten identifiziert wurden.\nNB: Die Verstärkungsfunktion überschreibt vorhandene Wegpunkte von Gruppen, die auf Funk reagieren.</German>
             <Italian>L'unità risponderà alle posizioni nemiche note identificate dagli alleati.\nNB: la funzione di rinforzo sovrascriverà i waypoint esistenti sui gruppi che rispondono alle chiamate.</Italian>
-            <Chinesesimp>该单位将对盟友识别的已知敌人位置做出响应.\nNB：支援功能将覆盖响应呼叫的组的现有路径点.</Chinesesimp>
+            <Chinesesimp>该单位将对盟友识别的已知敌人位置做出响应.\nNB:支援功能将覆盖响应呼叫的组的现有路径点.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoints_displayName">
             <English>Advanced AI [LAMBS]</English>
@@ -1176,7 +1176,7 @@
             <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
             <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
             <Italian>Caccia i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Chinesesimp>匍匐任务</Chinesesimp>
+            <Chinesesimp>在WP完成半径内追捕玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
             <English>TASK CREEP</English>
@@ -1184,7 +1184,7 @@
             <Polish>ZADANIE ZASADZKA</Polish>
             <German>AUFGABE SCHLEICHEN</German>
             <Italian>COMPITO STRISCIAMENTO</Italian>
-            <Chinesesimp>在WP完成半径内爬向玩家(默认1000m)</Chinesesimp>
+            <Chinesesimp>匍匐任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)</English>
@@ -1192,7 +1192,7 @@
             <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
             <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
             <Italian>Insegue i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Chinesesimp>CQB任务</Chinesesimp>
+            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
@@ -1200,7 +1200,7 @@
             <Polish>ZADANIE CQB</Polish>
             <German>AUFGABE CQB</German>
             <Italian>COMPITO CQB</Italian>
-            <Chinesesimp>CQB任务</Chinesesimp>
+            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
@@ -1208,7 +1208,7 @@
             <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
             <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)</German>
             <Italian>Entra e libera gli edifici entro il raggio di completamento del WP (predefinito 50 m)</Italian>
-            <Chinesesimp>进入和清除WP整个半径内的建筑物(默认50m)</Chinesesimp>
+            <Chinesesimp>CQB任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
