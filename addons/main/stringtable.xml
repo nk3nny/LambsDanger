@@ -156,7 +156,7 @@
             <Polish>Kiedy opcja nie jest zaznaczona, pozwala pojazdowi samemu wybrać amunicję pasującą do rodzaju przeciwnika. Np. AP przeciwko celom opancerzonym, HE przeciwko celom nieopancerzonym</Polish>
             <German>Wenn diese Option deaktiviert ist, kann das Fahrzeug autonom den Munitionstyp zugunsten des aktuellen Ziels wechseln. Z.B. AP gegen gepanzerte Ziele, HE gegen ungepanzerte</German>
             <Italian>Quando non è selezionato, consente al veicolo di cambiare autonomamente il tipo di munizione in favore del bersaglio attuale. Ad esempio, AP contro bersagli corazzati, HE contro quelli non corazzati</Italian>
-            <Chinesesimp>未选中时允许车辆自动切换弹药类型以对抗当前目标.例如，AP 对抗装甲目标，HE 对抗无装甲目标</Chinesesimp>
+            <Chinesesimp>未选中时允许车辆自动切换弹药类型以对抗当前目标.例如,AP 对抗装甲目标,HE 对抗无装甲目标</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_Debug">
             <English>Debug</English>
@@ -273,7 +273,7 @@
             <Polish>Wyłącz dzielenie się informacjami</Polish>
             <Russian>Отключить обмен информацией</Russian>
             <Italian>Disabilita la condivisione delle informazioni</Italian>
-            <Chinesesimp>共享信息</Chinesesimp>
+            <Chinesesimp>禁止共享信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableInformationSharing_Tooltip">
             <English>Toggle information sharing between units</English>
@@ -453,7 +453,7 @@
             <Polish>Poniżej tej odległości AI nie strzela ogniem zaporowym</Polish>
             <Russian>На этом расстоянии ИИ не будет вести огонь на подавление</Russian>
             <Italian>Se il bersaglio o un ostacolo si trova entro questa distanza, l'IA non eseguirà il fuoco di soppressione</Italian>
-            <Chinesesimp>如果目标或障碍物在此距离内，AI 将不会执行火力压制</Chinesesimp>
+            <Chinesesimp>如果目标或障碍物在此距离内,AI 将不会执行火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minFriendlySuppressionDistance">
             <English>Minimum safe zone for Suppression Fire</English>
@@ -471,7 +471,7 @@
             <Polish>Jeśli w tym obszarze znajdują się sojusznicy, AI nie rozpocznie ognia zaporowego. Ustaw 0 żeby wyłączyć.</Polish>
             <Russian>Если на этом расстоянии есть союзники, ИИ не будет вести огонь на подавление. Установите 0, чтобы отключить</Russian>
             <Italian>Se ci sono alleati entro questa distanza, l'IA non eseguirà il fuoco di soppressione. Impostare su 0 per disabilitare.</Italian>
-            <Chinesesimp>如果在这段距离内有盟友，AI将不会执行火力压制.设置为0可禁用.</Chinesesimp>
+            <Chinesesimp>如果在这段距离内有盟友,AI将不会执行火力压制.设置为0可禁用.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles">
             <English>Debug Draw Show banners for vehicle crew</English>
