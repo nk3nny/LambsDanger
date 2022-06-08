@@ -121,7 +121,7 @@ if (_antiTank && { _tankAir != -1 } && { _launchers isNotEqualTo [] }) then {
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS HIDE %2 (cover %3)%4", side _unit, groupId _group, count _cover, ["", " (anti tank/air)"] select _antiTank] call EFUNC(main,debugLog);
-    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
+    private _m = [_unit, "tactics hide", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
     _m setMarkerDirLocal ((_unit getDir _target) - 90);
     [{{deleteMarker _x;true} count _this;}, [_m], _delay + 30] call CBA_fnc_waitAndExecute;
