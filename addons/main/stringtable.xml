@@ -441,12 +441,14 @@
             <Czech>Minimální vzdálenost od překážky</Czech>
             <German>Mindestabstand zu Hindernissen</German>
             <Italian>Distanza minima di prossimità dell'ostacolo</Italian>
+            <Polish>Min. odległość od przeszkody</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity_ToolTip">
             <English>Minimum Obstacle Proximity Distance for Suppressive Fire</English>
             <Czech>Minimální vzdálenost od překážky pro potlačovací palbu</Czech>
             <German>Mindestabstand zu Hindernissen für Unterdrückungsfeuer</German>
             <Italian>Distanza minima di prossimità dell'ostacolo per il fuoco di soppressione</Italian>
+            <Polish>Minimalna odległość od przeszkody dla ognia zaporowego</Polish>
         </Key>
     </Package>
 </Project>
