@@ -101,14 +101,16 @@ _unit setSpeedMode "FULL";
 // ready group
 _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
-_units commandMove _overwatch;
 {
     _x setUnitPos "MIDDLE";
     _x setVariable [QGVAR(forceMove), true];
 } foreach _units;
 
+// move
+_units commandMove _overwatch;
+
 // leader smoke ~ deploy concealment to enable movement
-if (!GVAR(disableAutonomousSmoke) && {(getSuppression _unit) isNotEqualTo 0}) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
+if (!GVAR(disableAutonomousSmoke)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
 [{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
@@ -116,7 +118,7 @@ if (!GVAR(disableAutonomousSmoke) && {(getSuppression _unit) isNotEqualTo 0}) th
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _pos, count _vehicles] call EFUNC(main,debugLog);
-    private _m = [_unit, "", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
+    private _m = [_unit, "tactics flank", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_overwatch, "", _unit call EFUNC(main,debugMarkerColor), "hd_objective"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _overwatch);

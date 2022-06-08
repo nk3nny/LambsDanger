@@ -54,5 +54,8 @@ if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's law
     (group _unit) addVehicle _weapons;
 };
 
+// reinsert leader
+_units pushBack _unit;
+
 // return
 _units

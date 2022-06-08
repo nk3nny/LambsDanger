@@ -56,7 +56,7 @@ if (_units isEqualTo []) exitWith {false};
 
 // buildings ~ sorted by distance
 private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
-_buildings = _buildings apply { [_unit distance _x, _x] };
+_buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
 
@@ -83,7 +83,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Garrison/Rally", EGVAR(main,deb
 
 // make group ready
 doStop _units;
-_units doWatch _target;
+_units doWatch objNull;
 
 // execute
 {
@@ -104,7 +104,7 @@ _group setVariable [QEGVAR(main,groupMemory), _buildings];
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS GARRISON %2 (%3m) (%4 units)", side _unit, groupId _group, round (_unit distance2D _target), count _units] call EFUNC(main,debugLog);
-    private _m = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
+    private _m = [_target, "tactics garrison", _unit call EFUNC(main,debugMarkerColor), "hd_flag"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
     [{deleteMarker _this}, _m, _delay + 30] call CBA_fnc_waitAndExecute;
 };

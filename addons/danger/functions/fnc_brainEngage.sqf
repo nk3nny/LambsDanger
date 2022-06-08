@@ -12,7 +12,7 @@
  * number, timeout
  *
  * Example:
- * [bob, 0, angryBob, 100] call lambs_danger_fnc_brainEngage;
+ * [bob, 0, angryBob] call lambs_danger_fnc_brainEngage;
  *
  * Public: No
 */
@@ -37,37 +37,51 @@ if (
     || {(weapons _unit) isEqualTo []}
     || {(combatMode _unit) in ["BLUE", "GREEN"]}
 ) exitWith {
-    _timeout
+    _timeout + 1
 };
 
-// look at target
-if ((_unit knowsAbout _target) isEqualTo 4) then {
-    _unit lookAt _target;
-};
-
-// distance
+// distance + group memory
 private _distance = _unit distance2D _target;
+private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
+
+// sympathetic CQB
+if (
+    _unit checkAIFeature "PATH"
+    && {_groupMemory isNotEqualTo []}
+    && {_distance > (_unit distance2D (_groupMemory param [0, [0, 0, 0]]))}
+) exitWith {
+    [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
+    _timeout + 2.5
+};
 
 // near, go for CQB
 if (
     _distance < GVAR(cqbRange)
     && {_unit checkAIFeature "PATH"}
     && {(vehicle _target) isKindOf "CAManBase"}
-    && {_target call EFUNC(main,isAlive)}
+    // && {_target call EFUNC(main,isAlive)}
 ) exitWith {
     _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
     [_unit, _target] call EFUNC(main,doAssault);
-    _timeout + 1.5
+    _timeout + 1.4
 };
 
 // far, try to suppress
 if (
     _distance < 500
+    && {unitReady _unit}
+    && {speed _unit < 5}
     && {RND(getSuppression _unit)}
-    && {_type isEqualTo DANGER_CANFIRE || {RND(0.4) && {_type isEqualTo DANGER_ENEMYDETECTED}}}
+    && {_type isEqualTo DANGER_CANFIRE}
 ) exitWith {
+    private _posASL = ATLtoASL (_unit getHideFrom _target);
+    if (((ASLtoAGL _posASL) select 2) > 6) exitWith {
+        _timeout + 3
+    };
     _unit forceSpeed 0;
-    [_unit, ATLtoASL ((_unit getHideFrom _target) vectorAdd [0, 0, 0.8]), true] call EFUNC(main,doSuppress);
+    _unit setUnitPosWeak "MIDDLE";
+    _unit suppressFor 4;
+    [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 4
 };
 

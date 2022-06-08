@@ -24,7 +24,7 @@ item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.0
 item20[] = {"no_queue",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"no queue"};
 item21[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
 item22[] = {"timeout",4,218,-250.000000,750.000000,-150.000000,800.000000,0.000000,"timeout"};
-item23[] = {"Reset_foot",2,250,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
+item23[] = {"Reset_foot",2,4346,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
 item24[] = {"true",8,218,500.000000,925.000000,600.000000,975.000000,0.000000,"true"};
 item25[] = {"Check_queue",2,250,700.000000,925.000000,800.000000,975.000000,0.000000,"Check queue"};
 item26[] = {"true",8,218,700.000000,800.000000,800.000000,850.000000,0.000000,"true"};
@@ -108,8 +108,8 @@ link40[] = {35,36};
 link41[] = {36,24};
 link42[] = {37,3};
 link43[] = {38,39};
-globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-1246.351196,1290.778076,1411.101440,-404.948975,1235,884,1};
-window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,1253};
+globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-813.988464,339.648987,1448.965088,355.912964,933,884,1};
+window[] = {2,-1,-1,-1,-1,915,156,1596,156,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -356,7 +356,7 @@ class FSM
                          "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
                          "" \n
                          "// re-insert" \n
-                         "_queue pushBack [10, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
+                         "_queue pushBack [8, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -470,7 +470,7 @@ class FSM
                         name = "Reset_foot";
                         itemno = 23;
                         init = /*%FSM<STATEINIT""">*/"// has living cqb target" \n
-                         "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 20}) then {" \n
+                         "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 35}) then {" \n
                          "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n

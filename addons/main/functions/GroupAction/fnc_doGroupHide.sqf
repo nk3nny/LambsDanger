@@ -26,7 +26,7 @@ if (_units isEqualTo []) exitWith {false};
 {
     // force movement!
     _x setVariable [QEGVAR(danger,forceMove), true];
-    [{_this setVariable [QEGVAR(danger,forceMove), nil]}, _x, 5 + random 11] call CBA_fnc_waitAndExecute;
+    [{_this setVariable [QEGVAR(danger,forceMove), nil]}, _x, 20 + random 40] call CBA_fnc_waitAndExecute;
 
     // hide units
     [

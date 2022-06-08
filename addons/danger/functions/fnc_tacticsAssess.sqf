@@ -84,6 +84,18 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         [_unit, behaviour _unit, _callout] call EFUNC(main,doCallout);
     };
 
+    // soft vehicle response
+    private _hasAT = ((units _unit) findIf {(secondaryWeapon _x) isNotEqualTo ""}) isNotEqualTo -1;
+    private _vehicleTarget = _enemies findIf {
+        _hasAT
+        && {_unit distance2D _x < RANGE_NEAR}
+        && {(vehicle _x) isKindOf "LandVehicle"}
+    };
+    if (_vehicleTarget != -1 && {!_speedMode}) exitWith {
+        _plan append [TACTICS_ATTACK, TACTICS_ASSAULT, TACTICS_ASSAULT];
+        _pos = _unit getHideFrom (_enemies select _vehicleTarget);
+    };
+
     // anti-infantry tactics
     _enemies = _enemies select {isNull objectParent _x};
 
@@ -114,7 +126,15 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
     if (_nearIndoorTarget != -1) exitWith {
         _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
-        _pos = getPosATL (_enemies select _nearIndoorTarget);
+        _pos = _unit getHideFrom (_enemies select _nearIndoorTarget);
+    };
+
+    // unit has HOLD waypoint
+    private _currentWP = (waypoints _group) select ((currentWaypoint _group) min ((count waypoints _group) - 1));
+    private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
+    if (_holdWP) exitWith {
+        _plan append [TACTICS_GARRISON, TACTICS_HIDE];
+        _pos = waypointPosition _currentWP;
     };
 
     // inside? stay safe
@@ -137,6 +157,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < RANGE_MID
         && {((getPosASL _x) select 2) < ((_eyePos select 2) - 15)}
+        && {!(_x call EFUNC(main,isIndoor))}
     };
     if (_farNoCoverTarget != -1) exitWith {
         // trust in default attack routines!
@@ -171,7 +192,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
-        if (!GVAR(disableAutonomousSmokeGrenades) && {(getSuppression _unit) isNotEqualTo 0}) then {[_unit, _pos] call EFUNC(main,doSmoke);};
+        if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _pos] call EFUNC(main,doSmoke);};
     };
 };
 
@@ -202,7 +223,12 @@ if (_plan isEqualTo [] || {_pos isEqualTo []}) exitWith {
 _unit setFormDir (_unit getDir _pos);
 
 // binoculars if appropriate!
-if (RND(0.2) && {(_unit distance2D _pos > RANGE_MID) && {(binocular _unit) isNotEqualTo ""}}) then {
+if (
+    RND(0.2)
+    && {(_unit distance2D _pos > RANGE_MID)
+    && {(binocular _unit) isNotEqualTo ""}}
+    && {!(_unit call EFUNC(main,isIndoor))}
+) then {
     _unit selectWeapon (binocular _unit);
     _unit doWatch _pos;
 };
@@ -225,7 +251,7 @@ switch (_plan) do {
     };
     case TACTICS_ASSAULT: {
         // rush ~ assault
-        [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAssault)}, [_unit, _pos], 6 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_SUPPRESS: {
         // suppress

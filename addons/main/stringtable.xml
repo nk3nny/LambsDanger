@@ -495,6 +495,7 @@
             <German>Mindestabstand zu Hindernissen</German>
             <Italian>Distanza minima di prossimità dell'ostacolo</Italian>
             <Chinesesimp>靠近障碍物的最小距离</Chinesesimp>
+            <Polish>Min. odległość od przeszkody</Polish>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity_ToolTip">
             <English>Minimum Obstacle Proximity Distance for Suppressive Fire</English>
@@ -502,6 +503,7 @@
             <German>Mindestabstand zu Hindernissen für Unterdrückungsfeuer</German>
             <Italian>Distanza minima di prossimità dell'ostacolo per il fuoco di soppressione</Italian>
             <Chinesesimp>火力压制的靠近障碍物的最小距离</Chinesesimp>
+            <Polish>Minimalna odległość od przeszkody dla ognia zaporowego</Polish>
         </Key>
     </Package>
 </Project>
