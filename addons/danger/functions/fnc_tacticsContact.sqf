@@ -43,11 +43,11 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
 // reset tactics state
 [
     {
-        params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];
+        params [["_group", grpNull, [grpNull]]/*, ["_enableAttack", false]*/];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
-            _group enableAttack _enableAttack;
+            //_group enableAttack _enableAttack;
             private _leader = leader _group;
             if (_leader call FUNC(isLeader)) then {
                 [_leader, _leader findNearestEnemy _leader] call FUNC(tactics);
@@ -95,7 +95,7 @@ if (_count > 2) then {
 
 // disable Reaction phase for rushing or ambushing groups or player groups
 if (
-    _stealth
+    (behaviour _unit) isNotEqualTo "COMBAT"
     || {(speedMode _unit) isEqualTo "FULL"}
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}}
 ) exitWith {true};
@@ -104,20 +104,54 @@ if (
 //_unit setVariable [QEGVAR(main,currentTarget), _enemy, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
 
-// set combat behaviour and focus team
-if (!isNull _enemy && {_unit knowsAbout _enemy > 1}) then {_units doWatch _enemy;};
+// check suppression status
+private _aggressiveResponse = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
+_aggressiveResponse = _count > random 3 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
+
+// immediate action -- leaders call suppression
+if (
+    RND(getSuppression _unit)
+    && {_aggressiveResponse}
+) exitWith {
+
+    // get position
+    private _posASL = ATLtoASL (_unit getHideFrom _enemy);
+    if (((ASLtoAGL _posASL) select 2) > 6) exitWith {};
+
+    // execute suppression
+    {
+        _x setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
+        [_x, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
+        _x suppressFor 5;
+        _x setVariable [QEGVAR(main,currentTask), "Suppress (contact)", EGVAR(main,debug_functions)];
+    } foreach _units;
+
+    // group variable
+    _group setVariable [QEGVAR(main,currentTactic), "Contact! (suppress)", EGVAR(main,debug_functions)];
+
+    // debug
+    if (EGVAR(main,debug_functions)) then {
+        ["%1 TACTICS SUPPRESSION CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+    };
+};
+
+// get buildings
+private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
+
+// set buildings in group memory
+private _distanceSqr = _unit distanceSqr _enemy;
+_buildings = _buildings select {_x distanceSqr _enemy < _distanceSqr};
+_group setVariable [QEGVAR(main,groupMemory), _buildings, false];
 
 // immediate action -- leaders near to enemy go aggressive!
-private _deadOrSuppressed = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
 if (
-    _count > random 3
-    && {_unit knowsAbout _enemy > 0.1}
-    && {_deadOrSuppressed isEqualTo -1}
+    _aggressiveResponse
     && {_unit distance2D _enemy < GVAR(cqbRange)}
+    && {_buildings isNotEqualTo []}
 ) exitWith {
     // execute assault
     {
-        [_x, _enemy] call EFUNC(main,doAssault);
+        [_x, _buildings] call EFUNC(main,doAssaultMemory);
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
     } foreach _units;
 
@@ -129,9 +163,6 @@ if (
         ["%1 TACTICS AGGRESSIVE CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
     };
 };
-
-// get buildings
-private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
 
 // immediate action -- leaders further away get their subordinates to hide!
 [_units, _enemy, _buildings, "contact"] call EFUNC(main,doGroupHide);

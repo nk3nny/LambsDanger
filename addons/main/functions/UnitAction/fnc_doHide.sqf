@@ -42,7 +42,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", GVAR(debug_functions)];
 
 // stop
-doStop _unit;
+//doStop _unit;
 _unit forceSpeed 24;
 
 // Randomly scatter into buildings or hide!
