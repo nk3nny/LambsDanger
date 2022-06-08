@@ -41,7 +41,7 @@
             <Russian>Настраивает время сброса взрывов</Russian>
             <Italian>Configura il tempo di ripristino delle esplosioni.</Italian>
         </Key>
-              <Key ID="STR_Lambs_Danger_Settings_PanicChance">
+              <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance">
             <English>Panic Chance</English>
             <Czech>Šance paniky</Czech>
             <German>Panikwahrscheinlichkeit</German>
@@ -49,7 +49,7 @@
             <Russian>Шанс паники</Russian>
             <Italian>Possibilità di panico</Italian>
         </Key>
-        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
+        <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance_ToolTip">
             <English>Chance to panic in percentage</English>
             <Czech>Šance na zpanikaření v procentech</Czech>
             <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
