@@ -45,6 +45,7 @@ SUBPREP(UnitAction,doDodge);
 SUBPREP(UnitAction,doFleeing);
 SUBPREP(UnitAction,doHide);
 SUBPREP(UnitAction,doPanic);
+SUBPREP(UnitAction,doPanicReset);
 SUBPREP(UnitAction,doReposition);
 SUBPREP(UnitAction,doSmoke);
 SUBPREP(UnitAction,doSuppress);

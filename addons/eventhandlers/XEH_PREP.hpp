@@ -1,1 +1,2 @@
 PREP(explosionEH);
+PREP(suppressedEH);
