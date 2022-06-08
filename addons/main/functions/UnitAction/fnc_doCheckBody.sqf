@@ -31,7 +31,7 @@ private _body = allDeadMen select _bodies;
 // execute
 _unit setUnitPosWeak "MIDDLE";
 _unit doMove (getPosATL _body);
-_unit lookAt _body;
+_unit doWatch _body;
 _unit setVariable [QEGVAR(danger,forceMove), true];
 [
     {

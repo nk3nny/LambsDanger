@@ -33,16 +33,13 @@ private _timeout = time + 1.4;
 // ACE3
 _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
 
-// check it
-_unit lookAt _pos;
-
 // cover move when explosion
 if (
     getSuppression _unit < 0.6
     && {(speed _unit) isEqualTo 0}
     && {_type in [DANGER_EXPLOSION, DANGER_FIRE]}
 ) exitWith {
-    if ((stance _unit) isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
+    _unit setUnitPosWeak "DOWN";
     [_unit] call EFUNC(main,doCover);
     _timeout + 1
 };

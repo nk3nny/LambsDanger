@@ -21,7 +21,7 @@
     Hide actions
     5 DeadBodyGroup
     6 DeadBody
-    7 Hide
+    7 Scream
     - Panic
 */
 
@@ -37,7 +37,7 @@ if (_type isEqualTo DANGER_SCREAM) exitWith {
     [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
     // check danger
-    _unit lookAt _pos;
+    _unit doWatch _pos;
     _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QEGVAR(main,currentTask), "Heard scream!", EGVAR(main,debug_functions)];
 
@@ -69,18 +69,13 @@ if (RND(0.05) && {_indoor} && {RND(EGVAR(main,indoorMove))}) exitWith {
 
 // check bodies ~ enemy group!
 if (_type isEqualTo DANGER_DEADBODY) exitWith {
-    private _group = group _unit;
-    private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
 
     // communicate danger!
     [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
 
     // gesture
+    _unit doWatch _pos;
     [_unit, "gestureGoB"] call EFUNC(main,doGesture);
-
-    // add body to move routine
-    _groupMemory pushBack _pos;
-    _group setVariable [QEGVAR(main,groupMemory), _groupMemory, false];
 
     _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QEGVAR(main,currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];
@@ -91,7 +86,6 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
 
 // drop down into cover
 _unit setUnitPosWeak "DOWN";
-//[_unit, "WalkB", false] call EFUNC(main,doGesture);     May result in soldier phasing into walls - nkenny
 
 // end
 _timeout
