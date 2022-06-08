@@ -119,10 +119,11 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
     // delay + info
     private _delay = 2 + random 3;
+    private _validTarget = (side _unit) isNotEqualTo (side _dangerCausedBy);
 
     // vehicle jink
     private _oldDamage = _vehicle getVariable [QGVAR(vehicleDamage), 0];
-    if (_vehicle distance _dangerCausedBy < (12 + random 15) || {damage _vehicle > _oldDamage}) exitWith {
+    if (_validTarget && {_vehicle distance _dangerCausedBy < (12 + random 15) || {damage _vehicle > _oldDamage}}) exitWith {
         _vehicle setVariable [QGVAR(vehicleDamage), damage _vehicle];
         _vehicle doWatch _dangerCausedBy;
         [_unit] call EFUNC(main,doVehicleJink);
@@ -146,7 +147,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
     // foot infantry support
     private _units = [_unit] call EFUNC(main,findReadyUnits);
-    if !(_units isEqualTo [] && {_unit knowsAbout _dangerCausedBy < 2}) then {
+    if (_validTarget && {_units isNotEqualTo []} && {_unit knowsAbout _dangerCausedBy > 2}) then {
         {
             _x setUnitPosWeak "MIDDLE";
             _x doWatch _dangerCausedBy;
