@@ -56,7 +56,7 @@ if (_units isEqualTo []) exitWith {false};
 
 // buildings ~ sorted by distance
 private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
-_buildings = _buildings apply { [_unit distance _x, _x] };
+_buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
 
@@ -83,7 +83,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Garrison/Rally", EGVAR(main,deb
 
 // make group ready
 doStop _units;
-_units doWatch _target;
+_units doWatch objNull;
 
 // execute
 {
