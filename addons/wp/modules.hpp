@@ -540,11 +540,11 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
                 class Disabled {
-                    name = "$str_disabled";
+                    name = "$STR_disabled";
                     value = 0;
                 };
                 class Enabled {
-                    name = "$str_enabled";
+                    name = "$STR_enabled";
                     value = 1;
                 };
                 class OnlyIfUGL {

@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 15], ["_delay", 80]];
+params ["_unit", "_target", ["_units", []], ["_cycle", 11], ["_delay", 90]];
 
 // find target
 _target = _target call CBA_fnc_getPos;
@@ -55,7 +55,10 @@ if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
 private _buildings = [_target, 8, true, false] call EFUNC(main,findBuildings);
-_buildings append ((_unit targets [true, 10, [], 0, _target]) apply {_unit getHideFrom _x});
+_buildings append ((_unit targets [true, 12, [], 0, _target]) apply {getPosATL _x});
+_buildings = _buildings apply { [_x select 2, _x] };
+_buildings sort false;
+_buildings = _buildings apply { _x select 1 };
 _buildings pushBack _target;
 
 // set tasks
@@ -77,10 +80,10 @@ _group enableAttack false;
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
 
 // concealment
-if (_unit distance2D _target > 25) then {
+if (!GVAR(disableAutonomousSmokeGrenades) && {_unit distance2D _target > 25}) then {
 
     // leader smoke
-    if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _target] call EFUNC(main,doSmoke);};
+    [_unit, _target] call EFUNC(main,doSmoke);
 
     // grenadier smoke
     [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 3] call CBA_fnc_waitAndExecute;

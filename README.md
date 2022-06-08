@@ -1,7 +1,7 @@
 # LAMBS Danger FSM
 <p align="center">
     <a href="https://github.com/nk3nny/LambsDanger/releases/latest">
-        <img src="https://img.shields.io/badge/Version-2.5.1-blue.svg?style=flat-square" alt="Lambs Danger Version">
+        <img src="https://img.shields.io/badge/Version-2.5.3-blue.svg?style=flat-square" alt="Lambs Danger Version">
     </a>
     <a href="https://github.com/nk3nny/LambsDanger/issues">
         <img src="https://img.shields.io/github/issues-raw/nk3nny/LambsDanger.svg?style=flat-square&label=Issues" alt="Lambs Danger Issues">

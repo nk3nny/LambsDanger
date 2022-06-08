@@ -3,45 +3,59 @@
     <Package name="Eventhandlers">
         <Key ID="STR_Lambs_Eventhandlers_Settings_Cat">
             <English>Explosion</English>
+            <Czech>Exploze</Czech>
             <German>Explosion</German>
             <Polish>Wybuch</Polish>
             <Russian>Взрыв</Russian>
+            <Italian>Esplosione</Italian>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_DisplayName">
             <English>Enable Explosion Eventhandler</English>
+            <Czech>Povolit Eventhandler explozí</Czech>
             <German>Explosionsereignis-Handler aktivieren</German>
             <Polish>Włącz obsługę zdarzeń wybuchu</Polish>
             <Russian>Включить обработчик событий взрыва</Russian>
+            <Italian>Abilita Explosion Eventhandler</Italian>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_ToolTip">
             <English>Toggle AI Reactions to nearby explosions</English>
+            <Czech>Přepnout reakce UI na blízké exploze</Czech>
             <German>KI-Reaktionen auf umliegende Explosionen umschalten</German>
             <Polish>Przełącza reakcję AI na pobliskie wybuchy</Polish>
             <Russian>Переключить реакцию ИИ на ближайшие взрывы</Russian>
+            <Italian>Attiva/disattiva le reazioni dell'IA alle esplosioni vicine</Italian>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
             <English>Explosion Eventhandler reset time</English>
+            <Czech>Čas restartu Eventhandleru explozí</Czech>
             <German>Explosionsereignis-Handler Reset-Timer</German>
             <Polish>Czas resetowania reakcji na zdarzenie wybuchu</Polish>
             <Russian>Время сброса обработчика событий взрыва</Russian>
+            <Italian>Tempo di ripristino dell'Eventhandler di esplosione</Italian>
         </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_ToolTip">
             <English>Configures explosions reset time.</English>
+            <Czech>Konfiguruje čas restartu explozí</Czech>
             <German>Legt den Reset-Timer für den Explosionsereignis-Handler fest.</German>
             <Polish>Konfiguruje czas resetowania reakcji na zdarzenie wybuchu.</Polish>
             <Russian>Настраивает время сброса взрывов</Russian>
+            <Italian>Configura il tempo di ripristino delle esplosioni.</Italian>
         </Key>
-        <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance">
+              <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>
+            <Czech>Šance paniky</Czech>
             <German>Panikwahrscheinlichkeit</German>
             <Polish>Szansa na panikę</Polish>
             <Russian>Шанс паники</Russian>
+            <Italian>Possibilità di panico</Italian>
         </Key>
-        <Key ID="STR_Lambs_Eventhandlers_Settings_PanicChance_ToolTip">
+        <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
             <English>Chance to panic in percentage</English>
+            <Czech>Šance na zpanikaření v procentech</Czech>
             <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
             <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
             <Russian>Шанс паники в процентах</Russian>
+            <Italian>Possibilità di panico in percentuale</Italian>
         </Key>
     </Package>
 </Project>

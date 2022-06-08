@@ -27,39 +27,37 @@ if (_groupMemory isEqualTo []) then {
 };
 
 // exit or sort it!
-_groupMemory = _groupMemory select {(leader _unit) distance _x < 200 && {_unit distance _x > 1.5}};
+_groupMemory = _groupMemory select {(leader _unit) distance _x < 150 && {_unit distance _x > 2}};
 if (_groupMemory isEqualTo []) exitWith {
-    _group setVariable [QGVAR(groupMemory), _groupMemory, false];
+    _group setVariable [QGVAR(groupMemory), [], false];
     _unit doFollow (leader _unit);
     false
 };
 
-// leader sorts positions from nearest to furthest
-if ((leader _unit) isEqualTo _unit) then {
-    _groupMemory = _groupMemory apply {[_x distance2D _unit, _x]};
-    _groupMemory sort true;
-    _groupMemory = _groupMemory apply {_x select 1};
-};
+// sort positions from nearest to furthest
+_groupMemory = _groupMemory apply {[_x distance _unit, _x]};
+_groupMemory sort true;
+_groupMemory = _groupMemory apply {_x select 1};
 
-// check
-private _pos = _groupMemory select 0;
+// check for enemy get position
+private _pos = [_groupMemory select 0, _unit findNearestEnemy _unit] select (_unit distance2D (_unit findNearestEnemy _unit) < 12);
 private _distance2D = _unit distance2D _pos;
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // look at
-_unit lookAt _pos;
+_unit doWatch _pos;
 
 // ACE3 ~ allows unit to clear buildings with aggression - nkenny
-if (_distance2D < 12) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];};
+if (_distance2D < 7) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];};
 
-// CQB or suppress
+// CQB
 if (RND(0.9) || {_distance2D < 66}) then {
     // movement
-    _unit forceSpeed 4;
+    _unit setUnitPosWeak "UP";
 
     // execute CQB move
     _unit doMove _pos;
-    _unit setDestination [_pos, "LEADER PLANNED", _distance2D < 15];
+    _unit setDestination [_pos, "LEADER PLANNED", false];
 
     // variables
     _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
@@ -73,16 +71,12 @@ if (RND(0.9) || {_distance2D < 66}) then {
         [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;
     };
 } else {
-    // execute suppression
+    // reset
     _unit setUnitPosWeak "MIDDLE";
-    _unit forceSpeed ([2, -1] select (getSuppression _unit > 0.8));
-    [_unit, (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, random 1.5], true] call FUNC(doSuppress);
-    _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
-    _unit setVariable [QGVAR(currentTask), "Suppress (sympathetic)", GVAR(debug_functions)];
 };
 
 // update variable
-if (RND(0.95) || {_distance2D < 4}) then {_groupMemory deleteAt 0;};
+if (RND(0.9) || {_distance2D < 4}) then {_groupMemory deleteAt 0;};
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
 // end

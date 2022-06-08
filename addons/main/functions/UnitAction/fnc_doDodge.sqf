@@ -48,32 +48,30 @@ if (RND(0.8)) then {
 
 // settings
 private _nearDistance = (_unit distance2D _pos) < NEAR_DISTANCE;
-private _suppression = _nearDistance && {getSuppression _unit > 0.1};
 
 // drop stance
 if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
-if (_stance isEqualTo "CROUCH" && { _suppression }) then {_unit setUnitPosWeak "DOWN";};
 
 // chose anim
 private _anim = call {
 
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
     if (_still  && { !_nearDistance } && {_dir > 320 || { _dir < 40 }}) exitWith {
-        [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select _suppression;
+        [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select (getSuppression _unit > 0.7);
     };
 
     // move left
     if ( _dir < 80) exitWith {
-        [["FastL", "FastLF"], ["TactL", "TactLF"]] select _suppression;
+        [["FastL", "FastLF"], ["TactL", "TactLF"]] select _nearDistance;
     };
 
     // move right
     if (_dir > 250) exitWith {
-        [["FastR", "FastRF"], ["TactR", "TactRF"]] select _suppression;
+        [["FastR", "FastRF"], ["TactR", "TactRF"]] select _nearDistance;
     };
 
     // default
-    ["FastF", "TactF"] select _suppression;
+    ["FastF", "TactF"] select _nearDistance;
 };
 
 // execute dodge

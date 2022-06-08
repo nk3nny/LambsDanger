@@ -37,11 +37,10 @@ params [
     ["_pos", [], [[]]],
     ["_onlyPlayers", TASK_HUNT_PLAYERSONLY, [false]],
     ["_enableReinforcement", TASK_HUNT_ENABLEREINFORCEMENT, [false]],
-    ["_doUGL", TASK_HUNT_TRYUGLFLARE, 1, [1, true]]
+    ["_doUGL", TASK_HUNT_TRYUGLFLARE, [1, true]]
 ];
 
 // functions ---
-
 // shoot flare
 private _fnc_flare = {
     params ["_leader"];

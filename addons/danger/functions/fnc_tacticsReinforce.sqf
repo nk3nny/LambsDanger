@@ -84,7 +84,6 @@ if (_distance > 500) then {
         _unit setFormation selectRandom ["WEDGE", "VEE", "LINE"];
     };
     if (_distance < GVAR(cqbRange)) then {
-        _unit setBehaviour "COMBAT";
         _unit setFormation "FILE";
         [_unit, _target] call FUNC(tacticsAssault);
     };

@@ -42,7 +42,10 @@ if (fleeing _unit) exitWith {
 // attack speed and stance
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
     private _attackTarget = getAttackTarget _unit;
-    if ((typeOf _attackTarget) isEqualTo "SuppressTarget") exitWith {deleteVehicle _attackTarget;};
+    if ((typeOf _attackTarget) isEqualTo "SuppressTarget") exitWith {
+        deleteVehicle _attackTarget;
+        _unit doWatch objNull;
+    };
     [_unit, _attackTarget] call EFUNC(main,doAssaultSpeed);
     _unit setUnitPosWeak (["MIDDLE", "PRONE"] select (getSuppression _unit > 0.9));
     _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];

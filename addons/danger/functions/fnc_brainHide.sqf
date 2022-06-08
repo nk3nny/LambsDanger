@@ -90,7 +90,7 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
 
 // drop down into cover
 _unit setUnitPosWeak "DOWN";
-[_unit, "WalkB", false] call EFUNC(main,doGesture);
+//[_unit, "WalkB", false] call EFUNC(main,doGesture);     May result in soldier phasing into walls - nkenny
 
 // end
 _timeout

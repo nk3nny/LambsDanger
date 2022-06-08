@@ -49,7 +49,6 @@ private _group = group _unit;
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // hold-fire combat mode
-_unit setBehaviour "COMBAT";
 _group setFormation "DIAMOND";
 _group setCombatMode "GREEN";
 _group enableAttack false;

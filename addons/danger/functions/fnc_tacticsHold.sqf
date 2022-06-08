@@ -64,9 +64,6 @@ if (count _units > 2) then {
             // set group task
             _group setVariable [QEGVAR(main,currentTactic), "Holding!", EGVAR(main,debug_functions)];
 
-            // set behaviour
-            _group setBehaviour "COMBAT";
-
             // get buildings and dangerPos
             private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
 

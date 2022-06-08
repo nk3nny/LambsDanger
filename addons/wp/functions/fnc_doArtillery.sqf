@@ -42,6 +42,9 @@ if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {
     false
 };
 
+// turn gun
+_gun doWatch _pos;
+
 // settings
 private _direction = _gun getDir _pos;
 private _center = _pos getPos [_accuracy * 0.33, -_direction];
@@ -57,24 +60,24 @@ private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
 private _time = _gun getArtilleryETA [_center, _ammo];
 
 // delay ~ no delay if skipping checkRounds nkenny
-private _mainStrike = [linearConversion [100, 2000, (_gun distance2D _pos), 30, 90, true], 0] select _skipCheckrounds;
+private _mainStrike = [linearConversion [100, 2000, _gun distance2D _pos, 30, 90, true], 0] select _skipCheckrounds;
 private _checkRounds = _time + random 35;
-
-// delay for main strike
-sleep _mainStrike;
 
 // debug marker list
 private _markerList = [];
 
-// initate attack ~ gun and caller must be alive
-if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
+// caller marker
+if (EGVAR(main,debug_functions)) then {
+    private _markerCaller = [_caller, ["Spotter (%1M)", round (_caller distance2D _center)], "Color5_FD_F", "mil_arrow"] call EFUNC(main,dotMarker);
+    _markerCaller setMarkerDir (_caller getDir _center);
+    _markerList pushBack _markerCaller;
+};
 
-    // caller marker
-    if (EGVAR(main,debug_functions)) then {
-        private _markerCaller = [_caller, ["Spotter (%1M)", round (_caller distance2D _center)], "Color5_FD_F", "mil_arrow"] call EFUNC(main,dotMarker);
-        _markerCaller setMarkerDir (_caller getDir _center);
-        _markerList pushBack _markerCaller;
-    };
+// delay for main strike
+sleep _mainStrike;
+
+// initate attack ~ gun and caller must be alive
+if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
     if !(_skipCheckrounds) then {
         // check rounds
@@ -118,6 +121,7 @@ if (canFire _gun && {_caller call EFUNC(main,isAlive)}) then {
     if (EGVAR(main,debug_functions)) then {
         (_markerList select 0) setMarkerPos (getPos _caller);
         (_markerList select 0) setMarkerDir (_caller getDir _center);
+        (_markerList select 0) setMarkerText format ["Spotter (%1M)", round (_caller distance2D _center)];
     };
 
     // main barrage
@@ -167,12 +171,6 @@ if (_markerList isNotEqualTo []) then {
 
 // delay
 sleep _checkRounds;
-
-// re-add to list
-if (!canFire _gun) exitWith {
-    [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
-    false
-};
 
 // ready up again
 [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;

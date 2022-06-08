@@ -33,6 +33,7 @@ private _group = group _unit;
 // set variable
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
+_group enableAttack false;
 
 // set current task
 _unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
@@ -53,6 +54,11 @@ private _plan = [];
 // sort plans
 _pos = [];
 if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
+
+    // sort nearest enemies
+    _enemies = _enemies apply {[_x distanceSqr _unit, _x]};
+    _enemies sort true;
+    _enemies = _enemies apply {_x select 1};
 
     // get modes
     private _speedMode = (speedMode _unit) isEqualTo "FULL";
@@ -154,7 +160,10 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         private _combatMode = combatMode _unit;
         if (_combatMode isEqualTo "RED") then {_plan pushBack TACTICS_ASSAULT;};
         if (_combatMode isEqualTo "YELLOW") then {_plan pushBack TACTICS_SUPPRESS;};
-        if (_speedMode) then {_plan pushBack TACTICS_ASSAULT;};
+        if (_speedMode) then {
+            _plan = _plan - [TACTICS_SUPPRESS];
+            _plan pushBack TACTICS_ASSAULT;
+        };
 
         // visibility / distance / no cover
         if !(terrainIntersectASL [_eyePos, eyePos (_enemies select _fortifiedTarget)]) then {_plan pushBack TACTICS_SUPPRESS;};
@@ -162,7 +171,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
         if ((nearestTerrainObjects [ _unit, ["BUSH", "TREE", "HOUSE", "HIDE"], 4, false, true ]) isEqualTo []) then {_plan pushBack TACTICS_FLANK;};
 
         // conceal movement
-        if ((getSuppression _unit) isNotEqualTo 0) then {[_unit, _pos] call EFUNC(main,doSmoke);};
+        if (!GVAR(disableAutonomousSmokeGrenades) && {(getSuppression _unit) isNotEqualTo 0}) then {[_unit, _pos] call EFUNC(main,doSmoke);};
     };
 };
 
@@ -208,10 +217,10 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_unit, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsFlank)}, [_unit, _pos, _units], 22 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_GARRISON: {
-        // garrison
+        // garrison ~ nb units not carried here - nkenny
         [{_this call FUNC(tacticsGarrison)}, [_unit, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ASSAULT: {
@@ -220,15 +229,15 @@ switch (_plan) do {
     };
     case TACTICS_SUPPRESS: {
         // suppress
-        [{_this call FUNC(tacticsSuppress)}, [_unit, _pos], 6 + random 4] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsSuppress)}, [_unit, _pos, _units], 4 + random 4] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ATTACK: {
         // group attacks as one
-        [{_this call FUNC(tacticsAttack)}, [_unit, _pos], random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAttack)}, [_unit, _pos, _units], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
-        [{_this call FUNC(tacticsHide)}, [_unit, _pos, true], random 3] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsHide)}, [_unit, _pos, true], 1 + random 3] call CBA_fnc_waitAndExecute;
     };
 };
 

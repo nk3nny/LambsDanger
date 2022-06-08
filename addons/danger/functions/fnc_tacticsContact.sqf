@@ -105,7 +105,6 @@ if (
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
 
 // set combat behaviour and focus team
-if ((behaviour _unit) isEqualTo "AWARE" && {!isPlayer (leader _group)}) then {_unit setBehaviour "COMBAT";};
 if (!isNull _enemy && {_unit knowsAbout _enemy > 1}) then {_units doWatch _enemy;};
 
 // immediate action -- leaders near to enemy go aggressive!
@@ -114,7 +113,7 @@ if (
     _count > random 3
     && {_unit knowsAbout _enemy > 0.1}
     && {_deadOrSuppressed isEqualTo -1}
-    && {_unit distance2D _enemy < 120}
+    && {_unit distance2D _enemy < GVAR(cqbRange)}
 ) exitWith {
     // execute assault
     {
@@ -132,7 +131,7 @@ if (
 };
 
 // get buildings
-private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
+private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
 
 // immediate action -- leaders further away get their subordinates to hide!
 [_units, _enemy, _buildings, "contact"] call EFUNC(main,doGroupHide);
