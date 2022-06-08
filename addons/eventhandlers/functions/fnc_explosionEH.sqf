@@ -1,7 +1,19 @@
 #include "script_component.hpp"
-// Immediate reaction on explosion
-// version 1.5
-// by nkenny
+/*
+ * Author: nkenny
+ * Immediate reaction on explosion
+ *
+ * Arguments:
+ * 0: unit that reacts <OBJECT>
+ *
+ * Return Value:
+ * bool
+ *
+ * Example:
+ * [bob] call lambs_eventhandlers_fnc_explosionEH;
+ *
+ * Public: No
+*/
 
 // init
 params ["_unit"];
@@ -52,8 +64,8 @@ if (_dir < 30 && { RND(0.2) }) exitWith {
 // update pos
 _pos = (_unit getPos [ 3, _pos getDir _unit ]);
 
-// Execute move
-_unit doMove _pos;
+// execute move
+_unit setDestination [_pos, "FORMATION PLANNED", false];
 _unit doWatch _pos;
 
 // all others ~ go straight down
