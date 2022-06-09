@@ -130,8 +130,13 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
 
     // unit has HOLD waypoint
-    private _currentWP = (waypoints _group) select ((currentWaypoint _group) min ((count waypoints _group) - 1));
-    private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
+    private _waypoints = waypoints _group;
+    private _holdWP = false
+    private _currentWP = "";
+    if (_waypoints isNotEqualTo []) then {
+        _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
+        _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
+    };
     if (_holdWP) exitWith {
         _plan append [TACTICS_GARRISON, TACTICS_HIDE];
         _pos = waypointPosition _currentWP;
