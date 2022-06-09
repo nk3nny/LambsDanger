@@ -131,7 +131,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
 
     // unit has HOLD waypoint
     private _waypoints = waypoints _group;
-    private _holdWP = false
+    private _holdWP = false;
     private _currentWP = "";
     if (_waypoints isNotEqualTo []) then {
         _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
