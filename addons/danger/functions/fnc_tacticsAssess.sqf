@@ -54,6 +54,7 @@ private _plan = [];
 // sort plans
 _pos = [];
 if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
+    scopeName "conditionScope";
 
     // sort nearest enemies
     _enemies = _enemies apply {[_x distanceSqr _unit, _x]};
@@ -130,11 +131,15 @@ if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
     };
 
     // unit has HOLD waypoint
-    private _currentWP = (waypoints _group) select ((currentWaypoint _group) min ((count waypoints _group) - 1));
-    private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
-    if (_holdWP) exitWith {
-        _plan append [TACTICS_GARRISON, TACTICS_HIDE];
-        _pos = waypointPosition _currentWP;
+    private _waypoints = waypoints _group;
+    if (_waypoints isNotEqualTo []) then {
+        private _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
+        private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
+        if (_holdWP) exitWith {
+            _plan append [TACTICS_GARRISON, TACTICS_HIDE];
+            _pos = waypointPosition _currentWP;
+            breakOut "conditionScope";
+        };
     };
 
     // inside? stay safe
