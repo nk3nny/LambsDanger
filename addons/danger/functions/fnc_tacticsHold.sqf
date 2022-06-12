@@ -44,7 +44,7 @@ private _units = units _unit;
 if (count _units > 2) then {
 
     // callout
-    [_unit, "combat", selectRandom ["KeepFocused ", "StayAlert"], 100] call EFUNC(main,doCallout);
+    [_unit, "combat", selectRandom ["KeepFocused", "StayAlert"], 100] call EFUNC(main,doCallout);
 
     // has taken casualties and no real orders: hide
     if (
