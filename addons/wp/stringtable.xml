@@ -170,7 +170,7 @@
             <Polish>Zadanie - Atak/Odwrót</Polish>
             <Russian>Задача Нападение/Отступление</Russian>
             <Italian>Compito Assalto/Ritirata</Italian>
-            <Chinesesimp突袭/撤退任务</Chinesesimp>
+            <Chinesesimp>突袭/撤退任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
