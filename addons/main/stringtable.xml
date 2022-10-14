@@ -174,7 +174,7 @@
             <Polish>Debug FSM</Polish>
             <Russian>Функции отладки FSM</Russian>
             <Italian>Debug FSM</Italian>
-            <Chinesesimp>DebugFSM</Chinesesimp>
+            <Chinesesimp>Debug FSM</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
