@@ -80,7 +80,7 @@
             <Polish>Wyłącza LAMBS AI dla grupy.\nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
             <Russian>Отключает LAMBS группу ИИ\nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
             <Italian>Disabilita l'IA del gruppo LAMBS\nLa disabilitazione di questa funzione impedisce assalti e sgomberi autonomi di edifici, oltre a nascondersi da aerei e carri armati</Italian>
-            <Chinesesimp>禁用LAMBS 小组 AI\n禁用此功能可防止自动建筑攻击和清除,以及躲避飞机和坦克</Chinesesimp>
+            <Chinesesimp>禁用LAMBS 小组 AI\n禁用此功能可防止自动攻击和清除建筑,以及躲避飞机和坦克</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
@@ -233,7 +233,7 @@
             <Russian>Отключить автономное использование дыма</Russian>
             <German>Deaktivieren Sie den autonomen Einsatz von Rauchgranaten</German>
             <Italian>Disabilita l'uso autonomo del fumo</Italian>
-            <Chinesesimp>禁用自动使用烟雾弹</Chinesesimp>
+            <Chinesesimp>禁止自动使用烟雾弹</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades_ToolTip">
             <English>Toggles AI group ability to autonomously use smoke to cover group manoeuvres</English>
