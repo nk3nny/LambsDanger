@@ -1,3 +1,4 @@
+[project]
 name = "LAMBS Danger"
 prefix = "lambs"
 author = "LAMBS Dev Team"
@@ -30,6 +31,9 @@ releasebuild = [
     "!version_set_release",
     "@zip @LambsDanger_{{semver.major}}_{{semver.minor}}_{{semver.patch}}"
 ]
+
+[hemtt.signing]
+authority = "LambsDanger"
 
 [header_exts]
 version = "{{version}}_{{git \"id 8\"}}"
