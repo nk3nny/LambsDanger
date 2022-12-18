@@ -24,7 +24,7 @@ item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.0
 item20[] = {"no_queue",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"no queue"};
 item21[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
 item22[] = {"timeout",4,218,-250.000000,750.000000,-150.000000,800.000000,0.000000,"timeout"};
-item23[] = {"Reset_foot",2,4346,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
+item23[] = {"Reset_foot",2,250,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
 item24[] = {"true",8,218,500.000000,925.000000,600.000000,975.000000,0.000000,"true"};
 item25[] = {"Check_queue",2,250,700.000000,925.000000,800.000000,975.000000,0.000000,"Check queue"};
 item26[] = {"true",8,218,700.000000,800.000000,800.000000,850.000000,0.000000,"true"};
@@ -41,6 +41,8 @@ item36[] = {"",7,210,545.999939,1221.000000,554.000061,1229.000000,0.000000,""};
 item37[] = {"true",8,218,-325.000000,50.000000,-225.000000,100.000000,0.000000,"true"};
 item38[] = {"Exit",4,218,175.000000,-175.000000,275.000000,-125.000000,2.000000,"Exit"};
 item39[] = {"End_Danger_1",1,250,175.000000,-50.000000,275.000000,0.000000,0.000000,"End Danger"};
+item40[] = {"End_Forced",1,250,1025.000000,925.000000,1125.000000,975.000000,0.000000,"End Forced"};
+item41[] = {"no_queue_and_for",4,218,850.000000,925.000000,950.000000,975.000000,4.000000,"no queue" \n "and forced"};
 version=1;
 class LayoutItems
 {
@@ -96,20 +98,22 @@ link28[] = {23,34};
 link29[] = {24,25};
 link30[] = {25,20};
 link31[] = {25,26};
-link32[] = {26,27};
-link33[] = {27,3};
-link34[] = {28,29};
-link35[] = {30,31};
-link36[] = {31,22};
-link37[] = {32,33};
-link38[] = {33,24};
-link39[] = {34,35};
-link40[] = {35,36};
-link41[] = {36,24};
-link42[] = {37,3};
-link43[] = {38,39};
-globals[] = {0.000000,0,0,0,0,640,480,1,65,6316128,1,-813.988464,339.648987,1448.965088,355.912964,933,884,1};
-window[] = {2,-1,-1,-1,-1,915,156,1596,156,3,951};
+link32[] = {25,41};
+link33[] = {26,27};
+link34[] = {27,3};
+link35[] = {28,29};
+link36[] = {30,31};
+link37[] = {31,22};
+link38[] = {32,33};
+link39[] = {33,24};
+link40[] = {34,35};
+link41[] = {35,36};
+link42[] = {36,24};
+link43[] = {37,3};
+link44[] = {38,39};
+link45[] = {41,40};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-898.935181,1438.235229,1700.996338,-513.428955,933,884,1};
+window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -246,7 +250,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// keep attacking" \n
                          "if (_dangerCause in [8, 9] && {_dangerCausedBy call lambs_main_fnc_isAlive}) then {" \n
-                         "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _this findNearestEnemy _this];" \n
+                         "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -457,7 +461,8 @@ class FSM
                         name = "End_Danger";
                         itemno = 19;
                         init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_main_currentTask"", nil];" \n
-                         "_this forceSpeed -1;"/*%FSM</STATEINIT""">*/;
+                         "_this forceSpeed -1;" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -471,12 +476,7 @@ class FSM
                         itemno = 23;
                         init = /*%FSM<STATEINIT""">*/"// has living cqb target" \n
                          "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 35}) then {" \n
-                         "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
-                         "};" \n
-                         "" \n
-                         "// has group memory" \n
-                         "if (_queue isEqualTo [] && {((group _this) getVariable [""lambs_main_groupMemory"", []]) isNotEqualTo []} ) then {" \n
-                         "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, objNull];" \n
+                         "    _queue pushBack [0, getPos _dangerCausedBy, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n
                          "//_text = format [""%1 : %2 :  %3"", name _this, _dangerCause call lambs_main_fnc_debugDangerType,_queue apply{[(_x select 0) call lambs_main_fnc_debugDangerType]}];" \n
@@ -515,10 +515,27 @@ class FSM
                 {
                         name = "Check_queue";
                         itemno = 25;
-                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "// has group memory" \n
+                         "if (_queue isEqualTo [] && {((group _this) getVariable [""lambs_main_groupMemory"", []]) isNotEqualTo []} ) then {" \n
+                         "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
+                         "};" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
+                                /*%FSM<LINK "no_queue_and_for">*/
+                                class no_queue_and_for
+                                {
+                                        itemno = 41;
+                                        priority = 4.000000;
+                                        to="End_Forced";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isForced && {_queue isEqualTo []}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
                                 /*%FSM<LINK "no_queue">*/
                                 class no_queue
                                 {
@@ -643,6 +660,18 @@ class FSM
                         };
                 };
                 /*%FSM</STATE>*/
+                /*%FSM<STATE "End_Forced">*/
+                class End_Forced
+                {
+                        name = "End_Forced";
+                        itemno = 40;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
         };
         initState="Start_Danger";
         finalStates[] =
@@ -650,6 +679,7 @@ class FSM
                 "End_Danger",
                 "End_Danger_vehic",
                 "End_Danger_1",
+                "End_Forced",
         };
 };
 /*%FSM</COMPILE>*/

@@ -91,8 +91,9 @@ _units doWatch objNull;
     [
         {
             params ["_unit", "_pos"];
-            _unit moveTo _pos;
+            //_unit moveTo _pos;
             _unit setDestination [_pos, "LEADER PLANNED", true];
+            _unit doMove _pos;
         }, [_x, _pos], 0.5 + random 2
     ] call CBA_fnc_waitAndExecute;
     _x setVariable [QEGVAR(main,currentTask), "Group Garrison", EGVAR(main,debug_functions)];

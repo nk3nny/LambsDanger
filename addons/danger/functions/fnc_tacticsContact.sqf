@@ -106,7 +106,7 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug
 
 // check suppression status
 private _aggressiveResponse = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
-_aggressiveResponse = _count > random 3 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
+_aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
 
 // immediate action -- leaders call suppression
 if (
@@ -132,6 +132,9 @@ if (
     // debug
     if (EGVAR(main,debug_functions)) then {
         ["%1 TACTICS SUPPRESSION CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+        private _m = [_unit, "suppression contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.8, 0.8];
+        [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
     };
 };
 
@@ -161,6 +164,9 @@ if (
     // debug
     if (EGVAR(main,debug_functions)) then {
         ["%1 TACTICS AGGRESSIVE CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+        private _m = [_unit, "aggressive contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.8, 0.8];
+        [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
     };
 };
 
@@ -170,6 +176,9 @@ if (
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+    private _m = [_unit, "contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+    _m setMarkerSizeLocal [0.8, 0.8];
+    [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
 };
 
 // end

@@ -48,7 +48,7 @@ if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
 
 // reset look
 _unit setUnitPosWeak "MIDDLE";
-_unit doWatch objNull;
+//_unit doWatch objNull;
 
 // end
 _timeout
