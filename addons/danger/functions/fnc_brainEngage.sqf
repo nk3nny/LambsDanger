@@ -42,7 +42,6 @@ if (
 
 // distance + group memory
 private _distance = _unit distance2D _target;
-private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 
 // near, go for CQB
 if (
