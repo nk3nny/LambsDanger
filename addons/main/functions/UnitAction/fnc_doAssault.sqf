@@ -38,7 +38,7 @@ private _pos = call {
     // near buildings
     private _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
     private _distanceSqr = _unit distanceSqr _getHide;
-    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distance _unit > 1.5}};
+    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distanceSqr _unit > 2.25}};
 
     // target outdoors
     if (_buildings isEqualTo []) exitWith {

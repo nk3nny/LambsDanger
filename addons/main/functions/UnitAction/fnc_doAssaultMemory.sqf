@@ -37,11 +37,10 @@ if (_groupMemory isEqualTo []) exitWith {
 private _nearestEnemy = _unit findNearestEnemy _unit;
 private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isNotEqualTo 0;
 if (
-    (_vis || {_unit distance2D _nearestEnemy < 15})
-    && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}
-    && {(vehicle _nearestEnemy) isKindOf "CAManBase"}
+    (vehicle _nearestEnemy) isKindOf "CAManBase"
+    && {_vis || {_unit distance2D _nearestEnemy < 12 && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
 ) exitWith {
-    [_unit, _nearestEnemy, 6, false] call FUNC(doAssault);
+    [_unit, _nearestEnemy, 8, false] call FUNC(doAssault);
     _unit setUnitPosWeak "MIDDLE";
 };
 
@@ -69,16 +68,12 @@ _unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.7 || {_u
 if (_distance2D < 7) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];};
 
 // execute move
-_unit setDestination [_pos, "LEADER PLANNED", true];
 _unit doMove _pos;
+_unit setDestination [_pos, "LEADER PLANNED", _unit distance2D _pos < 18];
 
 // update variable
-if (
-    RND(0.95)
-    || {_distance2D < 4 && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _pos) vectorAdd [0, 0, 0.5]] isEqualTo 1}}
-) then {
-    _groupMemory deleteAt 0;
-};d
+if (RND(0.95)) then {_groupMemory deleteAt 0;};
+_groupMemory = _groupMemory select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0};
 
 // variables
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];

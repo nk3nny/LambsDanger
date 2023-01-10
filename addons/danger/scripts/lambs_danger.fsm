@@ -112,8 +112,8 @@ link42[] = {36,24};
 link43[] = {37,3};
 link44[] = {38,39};
 link45[] = {41,40};
-globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-898.935181,1438.235229,1700.996338,-513.428955,933,884,1};
-window[] = {2,-1,-1,-1,-1,863,104,1544,104,3,951};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1206.155884,1607.168823,1969.556274,-696.016479,933,884,1};
+window[] = {2,-1,-1,-1,-1,941,182,1622,182,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -360,7 +360,7 @@ class FSM
                          "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
                          "" \n
                          "// re-insert" \n
-                         "_queue pushBack [8, _dangerPos, _dangerUntil + 3, _this findNearestEnemy _this];"/*%FSM</STATEINIT""">*/;
+                         "_queue pushBack [8, _dangerPos, _dangerUntil + 3, _dangerCausedBy];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {

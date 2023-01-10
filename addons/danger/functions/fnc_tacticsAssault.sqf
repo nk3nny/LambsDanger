@@ -54,7 +54,7 @@ if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 _group enableAttack false;
 _group setSpeedMode "FULL";
 _group setFormation "LINE";
-_group setCombatMode "RED";
+_group setCombatMode "YELLOW";
 
 // find units
 if (_units isEqualTo []) then {

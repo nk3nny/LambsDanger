@@ -44,16 +44,6 @@ if (
 private _distance = _unit distance2D _target;
 private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 
-// sympathetic CQB
-if (
-    _unit checkAIFeature "PATH"
-    && {_groupMemory isNotEqualTo []}
-    && {_distance > (_unit distance2D (_groupMemory param [0, [0, 0, 0]]))}
-) exitWith {
-    [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
-    _timeout + 2.5
-};
-
 // near, go for CQB
 if (
     _distance < GVAR(cqbRange)

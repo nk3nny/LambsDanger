@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 18]];
+params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 12]];
 
 // only leader
 if !((leader _unit) isEqualTo _unit || {_unit call EFUNC(main,isAlive)}) exitWith {false};
@@ -55,7 +55,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 12
+    _delay + random 18
 ] call CBA_fnc_waitAndExecute;
 
 // change formation and attack state
@@ -112,6 +112,7 @@ _aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_
 if (
     RND(getSuppression _unit)
     && {_aggressiveResponse}
+    && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.5)}
 ) exitWith {
 
     // get position

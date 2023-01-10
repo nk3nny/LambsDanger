@@ -175,7 +175,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     if (_fortifiedTarget != -1) exitWith {
 
         // basic plan
-        _plan append [TACTICS_FLANK, TACTICS_FLANK];
+        _plan append [TACTICS_FLANK, TACTICS_FLANK, TACTICS_SUPPRESS];
         _pos = _unit getHideFrom (_enemies select _fortifiedTarget);
 
         // combatmode

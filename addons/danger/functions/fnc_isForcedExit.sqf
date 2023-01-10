@@ -14,7 +14,6 @@
  *
  * Public: No
 */
-fleeing _this
-|| {_this getVariable [QGVAR(disableAI), false]}
+_this getVariable [QGVAR(disableAI), false]
 || {(behaviour _this) isEqualTo "CARELESS"}
 || {!(_this checkAIFeature "MOVE")}
