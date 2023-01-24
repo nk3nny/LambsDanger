@@ -64,8 +64,7 @@ private _pos = call {
 
     // select building position
     // _doMove = true; ~ uncommented by nkenny. Retrying moveTo scheme. *sigh*
-    _getHide = selectRandom _buildings;
-    _getHide
+    _buildings select 0
 };
 
 // stance and speed
