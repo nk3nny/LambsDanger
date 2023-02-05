@@ -162,6 +162,11 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                     drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
                     drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
                 };
+            } else {
+                _targetKnowledge pushBack [
+                    "<t color'#FFAA00'>RemoteSensors Disabled<br/>",
+                    "<t color'#FFAA00'>and Unit Not Local<br/>"
+                ];
             };
             drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
@@ -217,7 +222,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             _textData append ["<t color='#FFAA00'>MOVE disabled</t>", "<br/>"];
         };
         if (_unit getVariable [QEGVAR(danger,forceMove), false]) then {
-            _textData append ["<t color='#ff4000'>Forced AI</t>", "<br/>"];
+            _textData append ["<t color='#FF4000'>Forced AI</t>", "<br/>"];
         };
         if (fleeing _unit) then {
             _textData append ["<t color='#FFC0CB'>Fleeing</t>", "<br/>"];
