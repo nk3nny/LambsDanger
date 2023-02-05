@@ -141,28 +141,28 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
-            private _knowledge = _unit targetKnowledge _currentTarget;
-            private _knowledgePosition = ASLtoAGL(_knowledge select 6);
-            private _knowledgeAge = _knowledge select 2;
-            if (_knowledge select 2 == time && local _unit) then {
-                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
+            if (!getRemoteSensorsDisabled || local _unit) then {
+                private _knowledge = _unit targetKnowledge _currentTarget;
+                private _knowledgePosition = ASLtoAGL(_knowledge select 6);
+                private _knowledgeAge = _knowledge select 2;
+                if (_knowledge select 2 == time && local _unit) then {
+                    _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
+                };
+                private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
+                _targetKnowledge append [
+                    "<t color='#C7CCC1'>Target Knowledge: <br/>",
+                    "    Last Seen: ", _lastSeen, " (", _knowledgeAge toFixed 2, ")<br/>",
+                    "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
+                ];
+
+                drawLine3D [_renderPos, _knowledgePosition, [0, 1, 0, 0.5]];
+                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _knowledgePosition, 1, 1, 0, "Estimated Target Position"];
+
+                if !(_lastSeen isEqualType "") then {
+                    drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
+                    drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
+                };
             };
-            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
-            _targetKnowledge append [
-                "<t color='#C7CCC1'>Target Knowledge: <br/>",
-                "    Last Seen: ", _lastSeen, " (", _knowledgeAge toFixed 2, ")<br/>",
-                "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
-            ];
-
-            drawLine3D [_renderPos, _knowledgePosition, [0, 1, 0, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _knowledgePosition, 1, 1, 0, "Estimated Target Position"];
-
-            if !(_lastSeen isEqualType "") then {
-                drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
-                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
-            };
-
-
             drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
