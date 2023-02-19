@@ -141,11 +141,12 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
-            if (!getRemoteSensorsDisabled || local _unit) then {
+            private _unitIsLocal = local _unit;
+            if (_unitIsLocal || !getRemoteSensorsDisabled) then {
                 private _knowledge = _unit targetKnowledge _currentTarget;
                 private _knowledgePosition = ASLtoAGL(_knowledge select 6);
                 private _knowledgeAge = _knowledge select 2;
-                if (_knowledge select 2 == time && local _unit) then {
+                if (_knowledge select 2 == time && _unitIsLocal) then {
                     _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
                 };
                 private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
