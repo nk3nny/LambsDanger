@@ -19,7 +19,7 @@ jobs:
     - name: Check for BOM
       uses: arma-actions/bom-check@master
     - name: .editorconfig Checker
-      uses: editorconfig-checker/action-editorconfig-checker@v1.0.0
+      uses: jokoho48/action-editorconfig-checker@main
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.2
     - name: Run Stringtable Checker
@@ -41,7 +41,6 @@ jobs:
        path: 'sqf.log'
     - name: Validate SQFLinter Logs
       run: python3 tools/sqf_linter_LogChecker.py
-
 
   build:
     runs-on: ubuntu-latest
