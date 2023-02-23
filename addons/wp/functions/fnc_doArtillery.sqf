@@ -50,7 +50,6 @@ _gun doWatch _pos;
 private _direction = _gun getDir _pos;
 private _center = _pos getPos [_accuracy * 0.33, -_direction];
 private _offset = 0;
-private _salvo = 1;
 
 // heavier artillery fires more rounds, more accurately
 if !((vehicle _gun) isKindOf "StaticMortar") then {
