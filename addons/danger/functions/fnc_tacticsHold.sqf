@@ -15,14 +15,21 @@
  *
  * Public: No
 */
-params ["_unit", ["_delay", 45]];
+params ["_group", ["_delay", 45]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // known enemy
 private _enemy = _unit findNearestEnemy _unit;
 private _pos = if (isNull _enemy) then {_unit getPos [300, getDir _unit]} else {_unit getHideFrom _enemy};
 
 // reset tactics
-private _group = group _unit;
 [
     {
         params [["_group", grpNull, [grpNull]], ["_enableAttack", false]];

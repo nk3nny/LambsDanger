@@ -22,10 +22,17 @@
 
 params ["_unit", "_target", ["_units", []], ["_delay", 180]];
 
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
+
 // sort target
 _target = _target call CBA_fnc_getPos;
 
-private _group = group _unit;
 // reset tactics
 [
     {
@@ -40,9 +47,6 @@ private _group = group _unit;
     [_group, attackEnabled _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
-
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // set speed and enableAttack
 _group setFormation "FILE";

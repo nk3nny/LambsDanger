@@ -4,7 +4,7 @@
  * Leader calls for all group members to attack a single unit!
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group <GROUP>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 3: delay until unit is ready again <NUMBER>
  *
@@ -16,7 +16,15 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_units", []], ["_delay", 60]];
+params ["_group", ["_target", objNull], ["_units", []], ["_delay", 60]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // position
 if (_target isEqualType []) then {
@@ -27,7 +35,6 @@ if (_target isEqualType []) then {
 if (isNull _target) exitWith {false};
 
 // update tactics and contact state
-private _group = group _unit;
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QEGVAR(main,currentTactic), "Attacking", EGVAR(main,debug_functions)];
 
