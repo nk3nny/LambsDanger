@@ -116,7 +116,7 @@
             <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt.\nWłączenie tej opcji spowoduje natychmiastowy ostrzał na wyznaczony cel.</Polish>
             <Russian>Эта опция отключает начальные снаряды, используемые арт наводчиком для корректировки попадания по цели.\nОтключение этой опции приведет к немедленному попаданию выстрелов в цель.</Russian>
             <Italian>Seleziona questo per disabilitare i colpi iniziali utilizzati dal controller di fuoco per regolare i colpi sul bersaglio.\nSaltare questo farà sì che la raffica colpisca immediatamente il bersaglio</Italian>
-            <Chinesesimp>检查此选项可禁用火力控制器用于调整目标轮次的初始回合.\n跳过此选项将使火力网立即击中目标</Chinesesimp>
+            <Chinesesimp>检查此选项可禁用火力指挥者用于调整目标轮次的初始回合.\n跳过此选项将使火炮立即击中目标</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
@@ -143,7 +143,7 @@
             <Polish>Dodaje jednostki do puli dostępnej artylerii dla danej strony</Polish>
             <Russian>Зарегистрировать юнита на этой стороне артиллерийского пула</Russian>
             <Italian>Registrate le unità nel pool di artiglieria di quella parte.</Italian>
-            <Chinesesimp>指示单位到一方的部队.</Chinesesimp>
+            <Chinesesimp>指示单位到该方的炮池.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_UnitAdded">
             <English>Units have been added to Artillery Pool</English>
@@ -152,7 +152,7 @@
             <Polish>Jednostki zostały dodane do puli artylerii</Polish>
             <Russian>Юнит добавлен в  артиллерийский пул</Russian>
             <Italian>Le unità sono state aggiunte alla riserva di artiglieria</Italian>
-            <Chinesesimp>单位被添加到火炮部队</Chinesesimp>
+            <Chinesesimp>单位被添加到炮池</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded">
             <English>No Units have been added to Artillery Pool</English>
@@ -161,7 +161,7 @@
             <Polish>Żadna jednostka nie została dodana do puli artylerii</Polish>
             <Russian>Ни один юнит не был добавлен в артиллерийский пул</Russian>
             <Italian>Nessuna unità è stata aggiunta alla riserva di artiglieria</Italian>
-            <Chinesesimp>没有单位被添加到火炮部队</Chinesesimp>
+            <Chinesesimp>没有单位被添加到炮池</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
             <English>Task Assault/Retreat</English>
@@ -170,7 +170,7 @@
             <Polish>Zadanie - Atak/Odwrót</Polish>
             <Russian>Задача Нападение/Отступление</Russian>
             <Italian>Compito Assalto/Ritirata</Italian>
-            <Chinesesimp>撤退/突袭任务</Chinesesimp>
+            <Chinesesimp>突袭/撤退任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
@@ -179,7 +179,7 @@
             <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
             <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
             <Italian>Task Assalto/Ritirata è un modulo multiuso. Fa sì che le unità collegate si precipitino o si ritirino alla follia verso la destinazione del modulo. Il modulo può essere spostato per modificare dinamicamente la destinazione finale.</Italian>
-            <Chinesesimp>突击/撤退任务是一个多用途模块.它使连接单位冲向或疯狂地向模块目的地撤退.可以移动模块来动态更改最终目标.</Chinesesimp>
+            <Chinesesimp>突击/撤退任务是一个多用途模块.它使与之相连的单位奔向或疯狂地向模块目的地撤退.可以移动模块来动态更改最终目的地.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
             <English>Unit is fleeing</English>
@@ -188,7 +188,7 @@
             <Polish>Jednostka ucieka</Polish>
             <Russian>Юнит в бегстве</Russian>
             <Italian>L'unità sta fuggendo</Italian>
-            <Chinesesimp>逃跑单位</Chinesesimp>
+            <Chinesesimp>撤退的单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
             <English>Enable this to make the unit retreat and ignore enemies</English>
@@ -215,7 +215,7 @@
             <Polish>Usuwa moduł podczas uruchamiania.\nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
             <Russian>Удаляет модуль при запуске.\nЕсли этот флажок не установлен, можно перемещать модуль для динамического изменения места назначения.</Russian>
             <Italian>Elimina il modulo all'avvio.\nSe non selezionato è possibile spostare il modulo per cambiare destinazione dinamicamente</Italian>
-            <Chinesesimp>启动时删除模块.\n如果未选中,则可以移动模块以动态更改目的</Chinesesimp>
+            <Chinesesimp>启动时删除模块.\n如果未选中,则可以动态的移动模块以更改目的地</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
@@ -277,7 +277,7 @@
             <Polish>Zadanie - Obóz sprawia, że przydzielone jednostki gromadzą się wokół jednego punktu, zazwyczaj obozu. Niektóre jednostki mogą się oddzielić, żeby obsadzić broń statyczną, garnizonować budynki lub patrolować teren. &lt;br\&gt; Ustaw obszar w 3DEN.</Polish>
             <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за стационарное оружие, входить в здания и патрулировать территорию.</Russian>
             <Italian>Compito magazzino fa sembrare che l'unità si raccolga intorno a un singolo punto, in genere un campeggio. Alcune unità si sposteranno per utilizzare armi statiche, presidiare edifici e pattugliare l'area.&lt;br/&gt;Imposta l'area in 3DEN.</Italian>
-            <Chinesesimp>任务营地使单位看起来聚集在一个点周围，通常是一个露营地。 一些单位会撤离以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在 3DEN 中设置区域.</Chinesesimp>
+            <Chinesesimp>营地任务使单位看起来聚集在一个点周围，通常是一个露营地。 一些单位会离开以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在 3DEN 中设置区域.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
@@ -412,7 +412,7 @@
             <Polish>Zadanie - Garnizon</Polish>
             <Russian>Задача занять позицию в здании</Russian>
             <Italian>Compito Guarnigione</Italian>
-            <Chinesesimp>部队任务</Chinesesimp>
+            <Chinesesimp>驻防任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_DisplayName">
             <English>Teleport units</English>
@@ -475,7 +475,7 @@
             <Polish>Trigger zakończenia</Polish>
             <Russian>Выйти из триггера</Russian>
             <Italian>Esci dal grilletto</Italian>
-            <Chinesesimp>离开触发器</Chinesesimp>
+            <Chinesesimp>离开起因</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_Tooltip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
@@ -484,7 +484,7 @@
             <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje.\nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
             <Russian>Условие выхода юнитов из своих гарнизонных позиций.\nВарианты: попадание, стрельба из собственного оружия, звук вражеского огня или все вместе. По умолчанию выбрано случайное.</Russian>
             <Italian>La condizione per le unità di lasciare la loro posizione di guarnigione.\nLe opzioni vengono colpite, sparare con la propria arma, sentire il fuoco nemico o tutte. L'impostazione predefinita è casuale.</Italian>
-            <Chinesesimp>单位离开驻防地的条件.\n选项是被击中，用自己的武器射击，听到敌人开火或者开火全部. 默认是随机的.</Chinesesimp>
+            <Chinesesimp>单位离开驻防地的条件.\n选项是被击中,射向自己的武器,听到部分枪声或者敌方全部开火. 默认是随机的.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
             <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
@@ -493,7 +493,7 @@
             <Polish>Zadanie - Garnizon pozwala jednostkom znajdującym się na obszarze określonym przez moduł, zajmować pozycje w domach i obsadzać broń stacjonarną.</Polish>
             <Russian>Задача занятие позиций заставляет юниты занимать позиции в зданиях и управлять доступными турелями и статическим оружием в пределах области, определяемой атрибутами 3DEN</Russian>
             <Italian>Compito Guarnigione fa sì che l'unità prenda posizione negli edifici e metta a disposizione torrette e armi statiche all'interno di un'area definita dagli attributi 3DEN.</Italian>
-            <Chinesesimp>任务驻军使该单位占据建筑物中的位置并在由 3DEN 属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
+            <Chinesesimp>驻军任务使该单位占据建筑物中的位置并在由 3DEN 属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_DisplayName">
             <English>Dynamic patrol</English>
@@ -691,7 +691,7 @@
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
             <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
             <Italian>Task Creep fa sì che l'unità tenti di tendere un'imboscata ai nemici all'interno dell'area impostata dagli attributi 3DEN. Il gruppo utilizzerà la copertura disponibile e manterrà una posizione bassa per rimanere nascosto.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>任务小组变使单位尝试在 3DEN 属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
+            <Chinesesimp>匍匐小组变使单位尝试在 3DEN 属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
@@ -709,7 +709,7 @@
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu uniknięcia wykrycia. Domyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Задача охота заставляет отряд патрулировать область в пределах области, установленной атрибутами 3DEN. Группа будет случайно двигаться в поисковой схеме, постепенно приближаясь к цели. Юниты будут включать фонарики, если они доступны. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
             <Italian>Task Hunt fa in modo che l'unità pattuglia l'area all'interno dell'area impostata dagli attributi 3DEN. Il gruppo si sposterà casualmente in uno schema di ricerca avvicinandosi gradualmente al bersaglio. L'unità abiliterà le torce, se disponibili.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>任务搜寻使单位在 3DEN 属性设置的区域内巡逻. 该小组将以搜索模式随意移动逐渐接近目标。.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家.</Chinesesimp>
+            <Chinesesimp>搜寻任务使单位在 3DEN 属性设置的区域内巡逻. 该小组将以搜索模式随意移动逐渐接近目标。.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -815,7 +815,7 @@
             <Polish>Zadanie - Szturm sprawia, że jednostki agresywnie szturmują naprzeciw wrogom. Jednostki będą poruszać się bardzo agresywnie, często ignorując osłonę i ogień zaporowy.&lt;br/&gt;&lt;br/&gt;Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom. Wyłącz FSM dla jednostek, dla prawdziwie przerażających przeciwników.</Polish>
             <Russian>Задача Нападение  заставляет отряд попытаться агрессивно бежать к врагам в пределах области, установленной атрибутами 3DEN. Отряд будет двигаться чрезвычайно агрессивно, часто игнорируя укрытие и подавление.&lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков. Отключает юнит FSM для поистине устрашающего врага</Russian>
             <Italian>Task Rush fa sì che l'unità tenti di correre in modo aggressivo verso i nemici all'interno dell'area impostata dagli attributi 3DEN. L'unità si muoverà in modo estremamente aggressivo, spesso ignorando la copertura e la soppressione.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili. Disabilita l'unità FSM per un nemico davvero terrificante.</Italian>
-            <Chinesesimp>使单位尝试向 3DEN 属性设置的区域内的敌人发起攻击. 该单位将极其激进地移动，通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家. 为真正可怕的敌人禁用单位 FSM.</Chinesesimp>
+            <Chinesesimp>使单位尝试向 3DEN 属性设置的区域内的敌人发起攻击. 该单位将极其激进地移动，通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家.禁用FSM单位以获得真正可怕的敌人.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -1120,7 +1120,7 @@
             <Polish>ZADANIE GARNIZON</Polish>
             <German>AUFGABE GARNISON</German>
             <Italian>COMPITO GUARRISONE</Italian>
-            <Chinesesimp>路径点周围建筑物的驻守至WP完成半径(默认50m)</Chinesesimp>
+            <Chinesesimp>驻防任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>

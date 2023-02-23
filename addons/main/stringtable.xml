@@ -95,7 +95,7 @@
             <Polish>Wyłącz natychmiastowe reakcje jednostki</Polish>
             <Russian>Отключить уклонение отряда</Russian>
             <Italian>Disabilita la schivata delle unità</Italian>
-            <Chinesesimp>禁用单位躲避</Chinesesimp>
+            <Chinesesimp>禁用单位闪避</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableImmediateActions_ToolTip">
             <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
@@ -104,7 +104,7 @@
             <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
             <Russian>Переключает отряд, который быстро уклоняется или меняет стойку в ответ на попадание .\nМоментальные реакции заставляют запускать анимацию. Отключение сделает ИИ более статичным.</Russian>
             <Italian>Consente all'unità di schivare rapidamente o cambiare posizione in risposta a un colpo.\nLe reazioni immediate forzano l'esecuzione di un'animazione. La disattivazione renderà l'IA più statica</Italian>
-            <Chinesesimp>切换单位快速躲避或改变姿态以回应被击中.\n立即反应使动画运行.禁用将产生更多停滞状态的AI</Chinesesimp>
+            <Chinesesimp>切换单位快速躲避或改变姿态以回应被击中.\n立即反应使动画运行.禁用将产生更多静态的AI</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing">
             <English>Disable enhanced unit fleeing</English>
@@ -113,7 +113,7 @@
             <Polish>Wyłącz ulepszoną ucieczkę</Polish>
             <Russian>Отключить усиленное бегство юнита</Russian>
             <Italian>Disabilita la fuga dell'unità potenziata</Italian>
-            <Chinesesimp>禁止增强单位逃跑</Chinesesimp>
+            <Chinesesimp>禁用增强型单位撤退</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableEnhancedFleeing_ToolTip">
             <English>Toggles enhanced fleeing function for units.</English>
@@ -122,7 +122,7 @@
             <Polish>Przełącza funkcję ulepszonej ucieczki dla jednostek AI</Polish>
             <Russian>Включает улучшенную функцию бегства для юнитов</Russian>
             <Italian>Attiva/disattiva la funzione di fuga avanzata per le unità.</Italian>
-            <Chinesesimp>切换增强的单位逃跑功能.</Chinesesimp>
+            <Chinesesimp>切换增强型单位撤退功能.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_IndoorMove">
             <English>Indoor Move Chance</English>
@@ -148,7 +148,7 @@
             <Polish>Wyłącz autonomiczną zmianę pocisków dla pojazdów</Polish>
             <German>Deaktiviert das autonome Munition Wechseln des Fahrzeugs</German>
             <Italian>Disabilita la commutazione autonoma delle munizioni del veicolo</Italian>
-            <Chinesesimp>禁止车辆自动切换弹药</Chinesesimp>
+            <Chinesesimp>禁止载具自动切换弹药</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_disableAutonomousMunitionSwitching_Tooltip">
             <English>When unchecked allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones</English>
@@ -165,7 +165,7 @@
             <Polish>Debug</Polish>
             <Russian>Функции отладки</Russian>
             <Italian>Debug</Italian>
-            <Chinesesimp>调试</Chinesesimp>
+            <Chinesesimp>Debug</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM">
             <English>Debug FSM</English>
@@ -174,7 +174,7 @@
             <Polish>Debug FSM</Polish>
             <Russian>Функции отладки FSM</Russian>
             <Italian>Debug FSM</Italian>
-            <Chinesesimp>调试FSM</Chinesesimp>
+            <Chinesesimp>Debug FSM</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFSM_ToolTip">
             <English>Shows FSM debug messages</English>
@@ -183,7 +183,7 @@
             <Polish>Pokazuje komunikaty debugowania FSM</Polish>
             <Russian>Показывает отладочные сообщения FSM</Russian>
             <Italian>Mostra i messaggi di debug FSM</Italian>
-            <Chinesesimp>显示FSM调试信息</Chinesesimp>
+            <Chinesesimp>显示FSM Debug信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions">
             <English>Debug Functions</English>
@@ -192,7 +192,7 @@
             <Polish>Funkcje Debug</Polish>
             <Russian>Функции отладки</Russian>
             <Italian>Funzioni di debug</Italian>
-            <Chinesesimp>调试功能</Chinesesimp>
+            <Chinesesimp>Debug功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugFunctions_ToolTip">
             <English>Shows Function debug messages</English>
@@ -201,7 +201,7 @@
             <Polish>Pokazuje komunikaty debugowania dla funkcji</Polish>
             <Russian>Показывает сообщения отладки функций</Russian>
             <Italian>Mostra i messaggi di debug della funzione</Italian>
-            <Chinesesimp>显示调试函数信息</Chinesesimp>
+            <Chinesesimp>显示Debug函数信息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugCiv">
             <English>Debug Civ</English>
@@ -219,7 +219,7 @@
             <Polish>Pokazuje komunikaty debugowania FSM dla cywilów</Polish>
             <Russian>Показывает отладочные сообщения FSM для гражданских</Russian>
             <Italian>Mostra i messaggi di debug FSM per i civili</Italian>
-            <Chinesesimp>显示针对平民的FSM调试消息</Chinesesimp>
+            <Chinesesimp>显示针对平民的FSM的Debug消息</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw">
             <English>Debug Draw</English>
@@ -228,7 +228,7 @@
             <Polish>Debug Draw</Polish>
             <Russian>Оверлей Отладки</Russian>
             <Italian>Debug Disegna</Italian>
-            <Chinesesimp>调试绘图</Chinesesimp>
+            <Chinesesimp>Debug Draw</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDraw_ToolTip">
             <English>Draws 3d Text over Units with AI Informations</English>
@@ -237,7 +237,7 @@
             <Polish>Wyświetla tekst 3D nad jednostkami AI z informacjami</Polish>
             <Russian>Рисует трехмерный текст с информацией ИИ поверх юнитов</Russian>
             <Italian>Disegna testo 3D su unità con informazioni IA</Italian>
-            <Chinesesimp>使用 AI 信息在单位上绘制 3d 文本</Chinesesimp>
+            <Chinesesimp>使用 AI 信息在单位上Draw 3d 文本</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest">
             <English>Debug Draw Expected Destination</English>
@@ -246,7 +246,7 @@
             <Polish>Debug Draw Oczekiwane miejsce docelowe</Polish>
             <Russian>Отрисовка ожидаемого места назначения</Russian>
             <Italian>Debug disegna Destinazione prevista</Italian>
-            <Chinesesimp>调试绘制预期目标</Chinesesimp>
+            <Chinesesimp>Debug Draw预期目的地</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DebugDrawExpDest_ToolTip">
             <English>Draws Expected Destinations of AI Units (Requires Debug Draw)</English>
@@ -255,7 +255,7 @@
             <Polish>Wyświetla oczekiwane miejsce docelowe dla jednostek AI (Wymaga włączenia Debug Draw)</Polish>
             <Russian>Рисует ожидаемые места назначения юнитов ИИ (Требуется включенный Оверлей Отладки)</Russian>
             <Italian>Disegna le destinazioni previste delle unità IA (richiede il disegno di debug)</Italian>
-            <Chinesesimp>绘制AI单元的预期目标(需要调试绘制)</Chinesesimp>
+            <Chinesesimp>绘制AI单元的预期目的地(需要Debug Draw)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_ShareInformationCat">
             <English>Settings Share information</English>
@@ -435,7 +435,7 @@
             <Polish>Przełącza autonomiczny ogień zaporowy dla jednostek w grupie gracza</Polish>
             <Russian>Включить автономное подавление для юнитов в группе игрока</Russian>
             <Italian>Attiva/disattiva la soppressione autonoma per le unità nel gruppo di giocatori</Italian>
-            <Chinesesimp>为玩家组中的单位切换动态火力压制</Chinesesimp>
+            <Chinesesimp>为玩家组中的单位切换自动火力压制</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_MinSuppressDistance">
             <English>Minimum distance for Suppression Fire</English>
@@ -479,7 +479,7 @@
             <Polish>Debug Draw - Pokaż banery dla załogi pojazdu</Polish>
             <German>Debug Zeichnen - Banner für die Fahrzeugbesatzung anzeigen</German>
             <Italian>Debug disegna Mostra banner per l'equipaggio del veicolo</Italian>
-            <Chinesesimp>为车辆工作人员调试绘制显示标语</Chinesesimp>
+            <Chinesesimp>为载具工作人员的Debug Draw显示标语</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_debug_drawAllUnitsInVehicles_ToolTip">
             <English>Draws information banners for all units boarded in vehicles. Default shows only the effective commander. (Feature requires Debug Draw enabled)</English>
@@ -487,7 +487,7 @@
             <Polish>Wyświetla informacje dla wszystkich jednostek na pokładzie pojazdu. Domyślnie pokazuje tylko dla dowódcy. (Funkcja wymaga włączonej opcji Debug Draw)</Polish>
             <German>Zeichnet Informationsbanner für alle in Fahrzeugen sitzenden Einheiten. Standard zeigt nur den effektiven Kommandanten an. (Funktion erfordert aktiviertes Debug Zeichnen)</German>
             <Italian>Disegna banner informativi per tutte le unità imbarcate sui veicoli. L'impostazione predefinita mostra solo il comandante effettivo. (La funzione richiede l'attivazione di Debug Draw)</Italian>
-            <Chinesesimp>为上车的所有单位绘制信息标语.默认值仅显示有效的指挥官.(功能需要启用调试绘图）</Chinesesimp>
+            <Chinesesimp>为载具内的所有单位绘制信息标语.默认值仅显示有效的指挥官.(功能需要启用Debug Draw）</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Main_Settings_minObstacleProximity">
             <English>Min Obstacle Proximity Distance</English>
@@ -502,7 +502,7 @@
             <Czech>Minimální vzdálenost od překážky pro potlačovací palbu</Czech>
             <German>Mindestabstand zu Hindernissen für Unterdrückungsfeuer</German>
             <Italian>Distanza minima di prossimità dell'ostacolo per il fuoco di soppressione</Italian>
-            <Chinesesimp>火力压制的靠近障碍物的最小距离</Chinesesimp>
+            <Chinesesimp>火力压制的最小障碍物接近距离</Chinesesimp>
             <Polish>Minimalna odległość od przeszkody dla ognia zaporowego</Polish>
         </Key>
     </Package>
