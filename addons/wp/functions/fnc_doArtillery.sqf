@@ -72,7 +72,7 @@ if (_isMLRS isEqualTo -1) then {
     // get the callout for what this vehicle shoots!
     private _turretPath = _assignedRoles select 1;
     private _turret = (_gun weaponsTurret _turretPath) select 0;
-    _nameSound = getText (configFile >> "CfgWeapons" >> _turret >> "nameSound");
+    private _nameSound = getText (configFile >> "CfgWeapons" >> _turret >> "nameSound");
     if (_nameSound isEqualTo "rockets") exitWith {
         _gun setVariable [QEGVAR(main,isArtilleryMRLS), 1];
         _isMLRS = 1;
