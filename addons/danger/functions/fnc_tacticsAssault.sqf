@@ -18,16 +18,23 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 16], ["_delay", 70]];
+params ["_group", "_target", ["_units", []], ["_cycle", 16], ["_delay", 70]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
-private _group = group _unit;
 
 // reset tactics
 [
     {
-        params [["_group", grpNull], ["_enableAttack", true], ["_isIRLaserOn", false], ["_speedMode", "NORMAL"], ["_formation", "WEDGE"], ["_combatMode", "YELLOW"]];
+        params [["_group", grpNull], ["_enableAttack", true], ["_isIRLaserOn", false], ["_speedMode", "NORMAL"], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
@@ -45,18 +52,15 @@ private _group = group _unit;
             } foreach (units _group);
         };
     },
-    [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit), speedMode _group, formation _group, combatMode _group],
+    [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit), speedMode _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
 
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // set speed and enableAttack
 _group enableAttack false;
 _group setSpeedMode "FULL";
 _group setFormation "LINE";
-_group setCombatMode "YELLOW";
 
 // find units
 if (_units isEqualTo []) then {
