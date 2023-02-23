@@ -16,6 +16,7 @@ if (isServer) then {
     publicVariable QGVAR(versionLoadedOnServer);
 } else {
     0 spawn {
+        waitUntil {time > 0};
         if (!isNil QGVAR(versionLoadedOnServer) && GVAR(versionLoadedOnServer) isEqualTo QUOTE(VERSION_STR)) exitWith {};
         "LAMBS DANGER VERSION MISMATCH ERROR!!!!" hintC parseText format [
             "Lambs Danger Version mismatch Error.<br/>Client Version: %1<br/>Server Version: %2",
