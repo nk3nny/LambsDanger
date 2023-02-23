@@ -39,7 +39,7 @@ private _targetPos = _pos select 0;
 
     // manoeuvre
     _unit forceSpeed 3;
-    _unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
+    _unit setUnitPos (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
     _unit setVariable [QGVAR(currentTask), format ["Group Assault (%1c - %2p)", _cycle, count _pos], GVAR(debug_functions)];
     _unit setVariable [QEGVAR(danger,forceMove), true];
 

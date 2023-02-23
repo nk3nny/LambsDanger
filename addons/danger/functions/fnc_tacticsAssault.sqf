@@ -39,6 +39,7 @@ private _group = group _unit;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
+                _x setUnitPos "AUTO";
                 _x doFollow leader _x;
                 _x forceSpeed -1;
             } foreach (units _group);

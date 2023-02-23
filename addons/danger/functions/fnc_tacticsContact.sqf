@@ -110,6 +110,7 @@ _aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_
 
 // immediate action -- leaders call suppression
 if (
+    false &&
     RND(getSuppression _unit)
     && {_aggressiveResponse}
     && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.5)}
@@ -153,11 +154,15 @@ if (
     && {_unit distance2D _enemy < GVAR(cqbRange)}
     && {_buildings isNotEqualTo []}
 ) exitWith {
-    // execute assault
+    // execute assault ~ forced
     {
         [_x, _buildings] call EFUNC(main,doAssaultMemory);
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
-    } foreach _units;
+
+        // forced movement
+        _x setVariable [QGVAR(forceMove), true];
+        [{_this setVariable [QGVAR(forceMove), nil]}, _x, 5 + random 4] call CBA_fnc_waitAndExecute;
+    } foreach _units select {getSuppression _x < 0.5};
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
