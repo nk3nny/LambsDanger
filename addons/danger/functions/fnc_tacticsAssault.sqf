@@ -42,7 +42,6 @@ _target = _target call CBA_fnc_getPos;
             _group enableIRLasers _isIRLaserOn;
             _group setSpeedMode _speedMode;
             _group setFormation _formation;
-            _group setCombatMode _combatMode;
             {
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
