@@ -4,7 +4,7 @@
  * Leader calls for group to disperse into cover a special mode with optional anti-armour tactics
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: ready anti-tank weapons <BOOL>
  * 3: predefined pieces of cover <ARRAY>
@@ -22,13 +22,20 @@
 #define COVER_DISTANCE 15
 #define BUILDING_DISTANCE 25
 
-params ["_unit", "_target", ["_antiTank", false], ["_cover", []], ["_delay", 240]];
+params ["_group", "_target", ["_antiTank", false], ["_cover", []], ["_delay", 240]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
 
 // reset tactics
-private _group = group _unit;
 [
     {
         params [["_group", grpNull], ["_combatMode", "YELLOW"], ["_enableAttack", false], ["_formation", "WEDGE"]];
@@ -44,9 +51,6 @@ private _group = group _unit;
     [_group, combatMode _group, attackEnabled _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
-
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // hold-fire combat mode
 _group setFormation "DIAMOND";

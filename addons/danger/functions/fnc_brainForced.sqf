@@ -30,7 +30,7 @@ if !(_unit call EFUNC(main,isAlive)) exitWith {
 
 // forced AI or units in vehicles
 if (_unit getVariable [QGVAR(forceMove), false] || {!isNull objectParent _unit}) exitWith {
-    _timeout
+    _timeout + 1.5
 };
 
 // fleeing

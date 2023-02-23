@@ -23,50 +23,58 @@ _units = _units select {_x call FUNC(isAlive) && {!isPlayer _x} && {!fleeing _x}
 if (_units isEqualTo [] || {_pos isEqualTo []}) exitWith {
     // early reset
     {
-        _x setVariable [QGVAR(forceMove), nil];
-        _x doFollow leader _x;
+        _x setVariable [QEGVAR(danger,forceMove), nil];
+        _x doFollow (leader _x);
         _x forceSpeed -1;
     } foreach _units;
     false
 };
 
+// get targetPos
 private _targetPos = _pos select 0;
 
 {
+    // get unit
+    private _unit = _x;
+
     // manoeuvre
-    _x forceSpeed 3;
-    _x setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
-    _x setVariable [QGVAR(currentTask), "Group Assault", GVAR(debug_functions)];
-    _x setVariable [QEGVAR(danger,forceMove), true];
+    _unit forceSpeed 3;
+    _unit setUnitPos (["UP", "MIDDLE"] select (getSuppression _x isNotEqualTo 0));
+    _unit setVariable [QGVAR(currentTask), format ["Group Assault (%1c - %2p)", _cycle, count _pos], GVAR(debug_functions)];
+    _unit setVariable [QEGVAR(danger,forceMove), true];
 
     // check enemy
-    private _enemy = _x findNearestEnemy _x;
+    /*
+    private _enemy = _unit findNearestEnemy _unit;
     if (
-        _x distance2D _enemy < 12
+        _unit distance2D _enemy < 12
         && {(vehicle _enemy) isKindOf "CAManBase"}
         && {_enemy call FUNC(isAlive)}
     ) then {
         _targetPos = getPosATL _enemy;
-        _x setDestination [_targetPos, "LEADER PLANNED", false]; // added to reduce cover bounding - nkenny
+        _unit forceSpeed 2;
     };
+    */
 
     // set movement
-    if (RND(0.75) || {(currentCommand _x) isNotEqualTo "MOVE"}) then {
-        _x doWatch objNull;
-        _x doMove (_targetPos vectorAdd [-1 + random 2, -1 + random 2, 0.1]);
+    if (((expectedDestination _unit) select 0) distance2D _targetPos > 1) then {
+        _unit doMove _targetPos;
     };
+
+    // remove positions
+    _pos = _pos select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0};
 } foreach _units;
 
 // remove  positions
-private _unit = _units select 0;
-_pos = _pos select {_unit distance _x > 5 || {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 1]] isEqualTo 0}};
+_pos = _pos select {(_units select 0) distance _x > 3};
+if (RND(0.95)) then {_pos deleteAt 0;};
 
 // recursive cyclic
 if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupAssault)},
         [_cycle - 1, _units, _pos],
-        3
+        4
     ] call CBA_fnc_waitAndExecute;
 };
 
