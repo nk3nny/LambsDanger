@@ -110,7 +110,6 @@ _aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_
 
 // immediate action -- leaders call suppression
 if (
-    false &&
     RND(getSuppression _unit)
     && {_aggressiveResponse}
     && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.5)}
