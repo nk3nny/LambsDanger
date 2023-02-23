@@ -22,7 +22,7 @@ params ["_unit"];
 // check disabled
 if (
     _unit getVariable [QEGVAR(danger,disableAI), false]
-    //|| {!(_unit checkAIFeature "PATH")}
+    || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
     || {GVAR(disableAIFleeing)}
     || {currentCommand _unit in ["GET IN", "ACTION", "REARM", "HEAL"]}
@@ -62,9 +62,6 @@ private _distance2D = _unit distance2D _enemy;
 private _pos = (expectedDestination _unit) select 0;
 private _eyePos = eyePos _unit;
 private _suppression = getSuppression _unit;
-
-// allow fleeing
-_unit enableAI "PATH";
 
 // on foot and seen by enemy
 private _onFootAndSeen = _distance2D < 75 || {_suppression > 0.9} || {([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0};
