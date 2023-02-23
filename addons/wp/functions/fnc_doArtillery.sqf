@@ -10,6 +10,7 @@
  * 3: Rounds fired, default 3 - 7 <NUMBER>
  * 4: Dispersion accuracy, default 100 <NUMBER>
  * 5: Skip check rounds and skip shooting delay, default false <BOOL>
+ * 6: How many rounds per salvo, default 1 <NUMBER>.
  *
  * Return Value:
  * none
@@ -23,7 +24,7 @@
 if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 
 // init
-params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS]];
+params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS], ["_salvo", 1]];
 
 if (isNull _gun) exitWith {};
 if (_pos isEqualTo []) exitWith {
@@ -49,11 +50,50 @@ _gun doWatch _pos;
 private _direction = _gun getDir _pos;
 private _center = _pos getPos [_accuracy * 0.33, -_direction];
 private _offset = 0;
+private _salvo = 1;
 
 // heavier artillery fires more rounds, more accurately
 if !((vehicle _gun) isKindOf "StaticMortar") then {
     _rounds = _rounds * 2;
     _accuracy = _accuracy * 0.5;
+};
+
+// MRLS weapons fire entire magazine, but with less accuracy
+private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), -1];
+if (_isMLRS isEqualTo -1) then {
+    private _gunner = gunner _gun;
+    private _assignedRoles = assignedVehicleRole _gunner;
+
+    // gunner doesn't have a proper turret!
+    if ((count _assignedRoles) < 2) exitWith {
+        _gun setVariable [QEGVAR(main,isArtilleryMRLS), 0];
+    };
+
+    // get the callout for what this vehicle shoots!
+    private _turretPath = _assignedRoles select 1;
+    private _turret = (_gun weaponsTurret _turretPath) select 0;
+    _nameSound = getText (configFile >> "CfgWeapons" >> _turret >> "nameSound");
+    if (_nameSound isEqualTo "rockets") exitWith {
+        _gun setVariable [QEGVAR(main,isArtilleryMRLS), 1];
+        _isMLRS = 1;
+    };
+    _gun setVariable [QEGVAR(main,isArtilleryMRLS), 0];
+};
+if (_isMLRS isEqualTo 1) then {
+    _skipCheckrounds = true;
+    _salvo = (gunner _gun) Ammo (currentMuzzle (gunner _gun));
+    if ((_salvo mod 2) isEqualTo 0) then {
+        if (_salvo > 20) then {
+            _rounds = floor (_salvo * 0.25);
+            _salvo = 4;
+        } else {
+            _rounds = floor (_salvo * 0.5);
+            _salvo = 2;
+        };
+    } else {
+        _rounds = 1;
+    };
+    _accuracy = _accuracy * 3;
 };
 
 private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
@@ -137,7 +177,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
         if (_target inRangeOfArtillery [[_gun], _ammo]) then {
 
             // fire round
-            _gun commandArtilleryFire [_target, _ammo, 1];
+            _gun commandArtilleryFire [_target, _ammo, _salvo];
 
             // debug
             if (EGVAR(main,debug_functions)) then {
@@ -156,7 +196,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
     // debug
     if (EGVAR(main,debug_functions)) then {
-        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configOf _gun >> "displayName"), _rounds, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
+        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configOf _gun >> "displayName"), _rounds * _salvo, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
     };
 };
 
