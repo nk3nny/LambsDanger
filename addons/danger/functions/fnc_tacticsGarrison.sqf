@@ -4,7 +4,7 @@
  * Group garrisons buildings near enemies!
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group target <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: delay until unit is ready again <NUMBER>
@@ -20,7 +20,7 @@
 #define COVER_DISTANCE 25
 #define BUILDING_DISTANCE 42
 
-params ["_unit", "_target", ["_units", []], ["_delay", 180]];
+params ["_group", "_target", ["_units", []], ["_delay", 180]];
 
 // group is missing
 if (isNull _group) exitWith {false};

@@ -4,7 +4,7 @@
  * Leader calls for group to disperse into cover a special mode with optional anti-armour tactics
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: ready anti-tank weapons <BOOL>
  * 3: predefined pieces of cover <ARRAY>

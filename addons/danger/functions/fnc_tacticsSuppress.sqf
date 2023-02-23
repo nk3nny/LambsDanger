@@ -4,7 +4,7 @@
  * Leader calls for extended suppressive fire towards buildings or location
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: delay until group is ready <NUMBER>
@@ -17,14 +17,22 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_delay", 17]];
+params ["_group", "_target", ["_units", []], ["_delay", 17]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
 
 // exit with flank squad leader cannot suppress from here
 if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 5]] call EFUNC(main,shouldSuppressPosition)) exitWith {
-    [_unit, _target] call FUNC(tacticsFlank);
+    [_group, _target] call FUNC(tacticsFlank);
 };
 
 // sort cycles

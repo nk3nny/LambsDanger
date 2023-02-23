@@ -4,7 +4,7 @@
  * Leader has no orders and waits for the situation to develop. If under fire, the group will take cover.
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: delay until unit is ready again <NUMBER>
  *
  * Return Value:

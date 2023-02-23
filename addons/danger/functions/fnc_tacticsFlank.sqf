@@ -4,7 +4,7 @@
  * Group conducts probing flanking manoeuvre
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group target <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: how many assault cycles <NUMBER>

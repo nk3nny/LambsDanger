@@ -4,7 +4,7 @@
  * Leader calls for all group members to attack a single unit!
  *
  * Arguments:
- * 0: group <GROUP>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 3: delay until unit is ready again <NUMBER>
  *

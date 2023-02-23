@@ -4,7 +4,7 @@
  * Leader calls for extended aggressive assault towards buildings or location
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: how many assault cycles <NUMBER>
@@ -54,7 +54,6 @@ _target = _target call CBA_fnc_getPos;
     [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit), speedMode _group, formation _group],
     _delay
 ] call CBA_fnc_waitAndExecute;
-
 
 // set speed and enableAttack
 _group enableAttack false;
