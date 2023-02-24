@@ -228,13 +228,16 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         if (fleeing _unit) then {
             _textData append ["<t color='#FFC0CB'>Fleeing</t>", "<br/>"];
         };
+        if (isHidden _unit) then {
+            _textData append ["<t color='#1e18d9'>Hidden</t>", "<br/>"];
+        };
         [_renderPos, _textData] call _fnc_debug_drawRect;
 
         if (GVAR(debug_RenderExpectedDestination)) then {
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
             if (_unit distance _pos > _viewDistance) exitWith {};
             drawLine3D [_renderPos, _pos, [0, 0, 1, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["%1m: %2%3", floor (_unit distance _pos), _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
         };
     };
 } forEach (allUnits select {!(isPlayer _x)});
