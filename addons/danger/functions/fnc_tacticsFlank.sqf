@@ -15,7 +15,7 @@
  * Bool
  *
  * Example:
- * [bob, angryBob] call lambs_danger__fnc_tacticsFlank;
+ * [bob, angryBob] call lambs_danger_fnc_tacticsFlank;
  *
  * Public: No
 */
@@ -100,21 +100,18 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 _unit setSpeedMode "FULL";
 
 // prevent units from being mounted!
-(units _unit) allowGetIn false;
+((units _unit) select {((assignedVehicleRole _x) select 0) isEqualTo "cargo"}) allowGetIn false;
 
 // ready group
 _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
 {
-    _x setUnitPos "MIDDLE";
+    _x setUnitPos "DOWN";
     _x setVariable [QGVAR(forceMove), true];
 } foreach _units;
 
-// move
-_units commandMove _overwatch;
-
 // leader smoke ~ deploy concealment to enable movement
-if (!GVAR(disableAutonomousSmoke)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
+if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
 [{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
