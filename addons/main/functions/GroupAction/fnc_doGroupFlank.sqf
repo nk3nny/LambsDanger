@@ -21,7 +21,7 @@
 params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch"];
 
 // update
-_units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } };
+_units = _units select { _x call FUNC(isAlive) && { _x distance2D _overwatch > 12 } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
 private _posASL = AGLtoASL (selectRandom _pos);
@@ -31,7 +31,7 @@ private _posASL = AGLtoASL (selectRandom _pos);
     _x setUnitPos (["MIDDLE", "DOWN"] select _suppressed);
 
     // move
-    _x doMove (_overwatch vectorAdd [-2 + random 4, -2 + random 4, 0]);
+    _x doMove _overwatch;
     _x setDestination [_overwatch, "LEADER PLANNED", true];
     _x setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
