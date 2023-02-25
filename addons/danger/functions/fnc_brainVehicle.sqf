@@ -150,11 +150,11 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
     _cargo append ((fullCrew [_vehicle, "turret"]) apply {_x select 0});
     if (
-            _validTarget
-            && {_cargo isNotEqualTo []}
-            && {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 3]]) || {_distance < 300}}
-            && {_unit knowsAbout _dangerCausedBy > 1}
-        ) then {
+        _validTarget
+        && {_cargo isNotEqualTo []}
+        && {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 3]]) || {_distance < 300}}
+        && {_unit knowsAbout _dangerCausedBy > 1}
+    ) then {
 
         // define enemy direction
         _group setFormDir (_vehicle getDir _dangerCausedBy);
