@@ -184,7 +184,7 @@ if (_car) exitWith {
     private _slow = speed _vehicle < 30;
 
     // look to danger
-    if (!isNull _dangerCausedBy && {_vehicle knowsAbout _dangerCausedBy > 2}) then {_vehicle doWatch ATLtoASL (_vehicle getHideFrom _dangerCausedBy);};
+    if (!isNull _dangerCausedBy && {_vehicle knowsAbout _dangerCausedBy > 3}) then {_vehicle doWatch ATLtoASL (_vehicle getHideFrom _dangerCausedBy);};
 
     // escape
     if (_slow && {_vehicle distance _dangerCausedBy < (15 + random 35)}) then {
