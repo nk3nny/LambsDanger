@@ -24,9 +24,19 @@ _units = _units select { _x call FUNC(isAlive) && { isNull objectParent _x } && 
 if (_units isEqualTo []) exitWith {false};
 
 {
+    private _unit = _x;
+
     // force movement!
-    _x setVariable [QEGVAR(danger,forceMove), true];
-    [{_this setVariable [QEGVAR(danger,forceMove), nil]}, _x, 20 + random 40] call CBA_fnc_waitAndExecute;
+    if (getSuppression _unit > 0.4 || {_unit distance2D _pos > 25}) then {_unit setUnitPos selectRandom ["MIDDLE", "DOWN", "DOWN"];};
+    _unit setVariable [QEGVAR(danger,forceMove), true];
+    [
+        {
+            _this setVariable [QEGVAR(danger,forceMove), nil];
+            _this setUnitPos "AUTO";
+        },
+        _unit,
+        20 + random 40
+    ] call CBA_fnc_waitAndExecute;
 
     // hide units
     [
@@ -37,7 +47,7 @@ if (_units isEqualTo []) exitWith {false};
                 (_arguments select 0) setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
             };
         },
-        [[_x, _pos, nil, _buildings], _action],
+        [[_unit, _pos, nil, _buildings], _action],
         1 + random 2
     ] call CBA_fnc_waitAndExecute;
 } foreach _units;
