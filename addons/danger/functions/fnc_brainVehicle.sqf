@@ -120,12 +120,12 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     // delay + info
     private _delay = 2 + random 3;
     private _validTarget = (side _unit) isNotEqualTo (side _dangerCausedBy);
+    private _distance = _vehicle distance _dangerCausedBy;
 
     // vehicle jink
     private _oldDamage = _vehicle getVariable [QGVAR(vehicleDamage), 0];
-    if (_validTarget && {_vehicle distance _dangerCausedBy < (12 + random 15) || {damage _vehicle > _oldDamage}}) exitWith {
+    if (_validTarget && {_distance < (12 + random 15) || {damage _vehicle > _oldDamage}}) exitWith {
         _vehicle setVariable [QGVAR(vehicleDamage), damage _vehicle];
-        _vehicle doWatch _dangerCausedBy;
         [_unit] call EFUNC(main,doVehicleJink);
         [_timeout + _delay] + _causeArray
     };
@@ -136,24 +136,39 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
         [_vehicle, _dangerCausedBy] call EFUNC(main,doVehicleRotate);
 
         // assault
-        if (_vehicle distance2D _dangerCausedBy < 750 && {_dangerCausedBy isKindOf "Man"}) then {
+        if (_distance < 750 && {_dangerCausedBy isKindOf "Man"}) then {
             [
                 {_this call EFUNC(main,doVehicleAssault)},
                 [_unit, _dangerPos, _dangerCausedBy],
-                _delay - 2
+                _delay - 1
             ] call CBA_fnc_waitAndExecute;
         };
     };
 
-    // foot infantry support
-    private _units = [_unit] call EFUNC(main,findReadyUnits);
-    if (_validTarget && {_units isNotEqualTo []} && {_unit knowsAbout _dangerCausedBy > 2}) then {
-        {
-            _x setUnitPosWeak "MIDDLE";
-            _x doWatch _dangerCausedBy;
-            _x doTarget _dangerCausedBy;
-            _x doFire _dangerCausedBy;
-        } foreach _units;
+    // foot infantry support ~ unload
+    private _group = group _vehicle;
+    private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
+    _cargo append ((fullCrew [_vehicle, "turret"]) apply {_x select 0});
+    if (
+        _validTarget
+        && {_cargo isNotEqualTo []}
+        && {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 3]]) || {_distance < 300}}
+        && {_unit knowsAbout _dangerCausedBy > 1}
+    ) then {
+
+        // define enemy direction
+        _group setFormDir (_vehicle getDir _dangerCausedBy);
+
+        // delayed unload
+        [
+            {
+                params [["_cargo", []], ["_side", EAST], ["_vehicle", objNull]];
+                _cargo orderGetIn false;
+                if (EGVAR(main,debug_functions)) then {["%1 %2 unloading %3 carried troops", _side, getText (configOf _vehicle >> "displayName"), count _cargo] call EFUNC(main,debugLog);};
+            },
+            [_cargo, side _group, _vehicle],
+            _delay * 2
+        ] call CBA_fnc_waitAndExecute;
     };
 
     // timeout
@@ -169,7 +184,7 @@ if (_car) exitWith {
     private _slow = speed _vehicle < 30;
 
     // look to danger
-    if (!isNull _dangerCausedBy) then {_vehicle doWatch _dangerCausedBy;};
+    if (!isNull _dangerCausedBy && {_vehicle knowsAbout _dangerCausedBy > 3}) then {_vehicle doWatch ATLtoASL (_vehicle getHideFrom _dangerCausedBy);};
 
     // escape
     if (_slow && {_vehicle distance _dangerCausedBy < (15 + random 35)}) then {
