@@ -53,7 +53,7 @@ private _plan = [];
 
 // sort plans
 _pos = [];
-if !(_enemies isEqualTo [] || {_unitCount < random 3}) then {
+if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     scopeName "conditionScope";
 
     // sort nearest enemies
