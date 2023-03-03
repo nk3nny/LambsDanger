@@ -61,8 +61,8 @@ private _weapons = nearestObjects [_pos, ["Landvehicle"], _range, true];
 _weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
-    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
-    _buildings = _buildings select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
+    _weapons = _weapons select {(POSITIONAGL(_x)) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
+    _buildings = _buildings select {(POSITIONAGL(_x)) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 
 // STAGE 1 - PATROL --------------------------
@@ -117,7 +117,7 @@ reverse _units;
             },
             {
                 params ["_unit", "_target"];
-                if (surfaceIsWater (getPos _unit) || (_unit distance _target > 2)) exitWith { _unit doFollow (leader _unit); };
+                if (surfaceIsWater (getPosASL _unit) || (_unit distance _target > 2)) exitWith { _unit doFollow (leader _unit); };
                 doStop _unit;
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             },
@@ -192,7 +192,7 @@ private _dir = random 360;
         unitReady _unit
     }, {
         params ["_unit", "_target", "_center", "_anim"];
-        if (surfaceIsWater (getPos _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        if (surfaceIsWater (getPosASL _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
         [_unit, _anim, 2] call EFUNC(main,doAnimation);
 
         _unit disableAI "ANIM";
@@ -229,7 +229,7 @@ _wp setWaypointStatements ["true", "
 ];
 
 // followup orders - just stay put or move into buildings!
-private _wp2 = _group addWaypoint [[_pos, getPos selectRandom _buildings] select (count _buildings > 4), _range / 4];
+private _wp2 = _group addWaypoint [[_pos, POSITIONAGL((selectRandom _buildings))] select (count _buildings > 4), _range / 4];
 
 // set exitWP
 if (_exitWP == -1) then {

@@ -23,4 +23,4 @@ if (behaviour _unit isEqualTo "STEALTH"
 ) exitWith {false};
 
 // night check
-(getPos _unit) getEnvSoundController "night" isEqualTo 1
+(POSITIONAGL(_unit)) getEnvSoundController "night" isEqualTo 1

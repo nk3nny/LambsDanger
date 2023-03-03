@@ -41,7 +41,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly"];
-                        private _args = [[_group, _range, _cycle, nil, getPos _logic, _playerOnly], [_group, _range, _cycle, nil, nil, _playerOnly]] select _movingCenter;
+                        private _args = [[_group, _range, _cycle, nil, POSITIONAGL(_logic), _playerOnly], [_group, _range, _cycle, nil, nil, _playerOnly]] select _movingCenter;
                         [QGVAR(taskRush), _args, leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
@@ -66,7 +66,7 @@ switch (_mode) do {
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_RUSH_MOVINGCENTER];
             private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), TASK_RUSH_PLAYERSONLY];
             {
-                private _args = [[_x, _range, _cycle, _area, getPos _logic, _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
+                private _args = [[_x, _range, _cycle, _area, POSITIONAGL(_logic), _playerOnly], [_x, _range, _cycle, _area, nil, _playerOnly]] select _movingCenter;
                 [QGVAR(taskRush), _args, leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;

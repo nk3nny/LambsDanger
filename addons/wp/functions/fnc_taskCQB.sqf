@@ -49,7 +49,7 @@ private _fnc_find = {
 
     if (_area isNotEqualTo []) then {
         _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
-        _building = _building select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
+        _building = _building select { (POSITIONAGL(_x)) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     };
 
     if (_building isEqualTo []) exitWith { objNull };
@@ -62,7 +62,7 @@ private _fnc_find = {
 // check for enemies
 private _fnc_enemy = {
     params ["_building", "_group"];
-    private _pos = [ getPos _building, getPos leader _group] select isNull _building;
+    private _pos = [ POSITIONAGL(_building), POSITIONAGL((leader _group))] select isNull _building;
     private _enemy = (leader _group) findNearestEnemy _pos;
     if (isNull _enemy || {_pos distance2D _enemy < 25}) exitWith { _enemy };
     objNull
@@ -136,7 +136,7 @@ private _fnc_act = {
             } else {
                 // teleport debug (unit sometimes gets stuck due to Arma buildings )
                 if (RND(0.6) && {_x call EFUNC(main,isIndoor)} && {_x distance _buildingPosSelected > 45} && {!([_x, 50] call CBA_fnc_nearPlayer)}) then {
-                    _x setVehiclePosition [getPos _x, [], 3.5];
+                    _x setVehiclePosition [POSITIONAGL(_x), [], 3.5];
                 };
 
                 // distance to building is too far?

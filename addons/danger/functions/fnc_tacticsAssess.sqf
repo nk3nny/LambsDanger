@@ -104,7 +104,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     if (EGVAR(main,Loaded_WP) && {[side _unit] call EFUNC(WP,sideHasArtillery)}) then {
         private _artilleryTarget = _enemies findIf {
             _unit distance2D _x > RANGE_MID
-            && {([_unit, getPos _x, RANGE_NEAR] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
+            && {([_unit, POSITIONAGL(_x), RANGE_NEAR] call EFUNC(main,findNearbyFriendlies)) isEqualTo []}
         };
         if (_artilleryTarget != -1) then {
             [_unit, _unit getHideFrom (_enemies select _artilleryTarget)] call EFUNC(main,doCallArtillery);   // possibly add delay? ~ nkenny

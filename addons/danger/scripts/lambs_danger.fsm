@@ -476,7 +476,7 @@ class FSM
                         itemno = 23;
                         init = /*%FSM<STATEINIT""">*/"// has living cqb target" \n
                          "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 35}) then {" \n
-                         "    _queue pushBack [0, getPos _dangerCausedBy, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
+                         "    _queue pushBack [0, ASLtoAGL (getPosASL _dangerCausedBy), time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n
                          "//_text = format [""%1 : %2 :  %3"", name _this, _dangerCause call lambs_main_fnc_debugDangerType,_queue apply{[(_x select 0) call lambs_main_fnc_debugDangerType]}];" \n
@@ -518,7 +518,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// has group memory" \n
                          "if (_queue isEqualTo [] && {((group _this) getVariable [""lambs_main_groupMemory"", []]) isNotEqualTo []} ) then {" \n
-                         "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
+                         "    _queue pushBack [10, ASLtoAGL (getPosASL _this), time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;

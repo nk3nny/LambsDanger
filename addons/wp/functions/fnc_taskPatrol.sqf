@@ -67,7 +67,7 @@ if (isNil QFUNC(TaskPatrol_WaypointStatement)) then {
     DFUNC(TaskPatrol_WaypointStatement) = {
         private _group = group this;
         private _radius = _group getVariable [QGVAR(TaskPatrol_Radius), 200];
-        private _pos = _group getVariable [QGVAR(TaskPatrol_Position), getPos (leader _group)];
+        private _pos = _group getVariable [QGVAR(TaskPatrol_Position), POSITIONAGL((leader _group))];
         private _area = _group getVariable [QGVAR(TaskPatrol_Area), []];;
 
         {

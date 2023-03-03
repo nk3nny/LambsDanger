@@ -119,7 +119,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
     // caller marker
     if (EGVAR(main,debug_functions)) then {
-        (_markerList select 0) setMarkerPos (getPos _caller);
+        (_markerList select 0) setMarkerPos (POSITIONAGL(_caller));
         (_markerList select 0) setMarkerDir (_caller getDir _center);
         (_markerList select 0) setMarkerText format ["Spotter (%1M)", round (_caller distance2D _center)];
     };

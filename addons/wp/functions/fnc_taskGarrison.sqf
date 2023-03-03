@@ -56,7 +56,7 @@ _houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _
 if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
     _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
-    _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
+    _weapons = _weapons select {(POSITIONAGL(_x)) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
 [_houses, true] call CBA_fnc_Shuffle;
 
@@ -203,7 +203,7 @@ private _fnc_addEventHandler = {
                 unitReady _unit
             }, {
                 params ["_unit", "_target"];
-                if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
+                if (surfaceIsWater (getPosASL _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
                 _unit disableAI "PATH";
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             }, [_x, _house]
