@@ -18,6 +18,8 @@
     _unit \
 }
 
+#define POSITIONAGL(object) ASLtoAGL (getPosASL object)
+
 // #define DISABLE_COMPILE_CACHE
 
 #ifdef DISABLE_COMPILE_CACHE
