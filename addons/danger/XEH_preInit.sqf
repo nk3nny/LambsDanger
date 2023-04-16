@@ -10,13 +10,13 @@ GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 // FSM priorities ~ this could be made into CBA settings. But I kinda want to explore it a little first - nkenny
 if (isNil QGVAR(fsmPriorities)) then {
     GVAR(fsmPriorities) = [
-        3,      // DCEnemyDetected
+        2,      // DCEnemyDetected
         1,      // DCFire
         9,      // DCHit
         4,      // DCEnemyNear
         3,      // DCExplosion
         6,      // DCDeadBodyGroup
-        2,      // DCDeadBody
+        3,      // DCDeadBody
         5,      // DCScream
         8,      // DCCanFire
         7,      // DCBulletClose
