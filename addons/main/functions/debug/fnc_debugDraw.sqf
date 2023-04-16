@@ -206,8 +206,8 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         };
 
         _textData append [
-            "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
-            "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
+            "    Danger Timeout: ", format ["%1s", [(_time - time) toFixed 2, 0] select ((_time - time) < 0)], "</t><br/>",
+            "Current Target: ", format ["%1 (%2 visiblity)", _name, ([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) toFixed 1], "<br/>"
         ];
 
         _textData append _targetKnowledge;
@@ -230,6 +230,9 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         };
         if (isHidden _unit) then {
             _textData append ["<t color='#1e18d9'>Hidden</t>", "<br/>"];
+        };
+        if !(unitReady _unit) then {
+            _textData append ["<t color='#FFA500'>Busy</t>", "<br/>"];
         };
         [_renderPos, _textData] call _fnc_debug_drawRect;
 
