@@ -55,6 +55,11 @@ if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
 // chose anim
 private _anim = call {
 
+    // drop down
+    if !(_nearDistance || {_still}) exitWith {
+        ["Down"]
+    };
+
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
     if (_still  && { !_nearDistance } && {_dir > 320 || { _dir < 40 }}) exitWith {
         [["FastB", "FastLB", "FastRB"], ["TactB", "TactLB","TactRB"]] select (getSuppression _unit > 0.7);
