@@ -59,7 +59,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
 ] call CBA_fnc_waitAndExecute;
 
 // change formation and attack state
-_group enableAttack false;
+if (isNull objectParent _unit) then {_group enableAttack false;};
 _group setFormation (_group getVariable [QGVAR(dangerFormation), formation _unit]);
 _group setFormDir (_unit getDir _enemy);
 
@@ -68,7 +68,7 @@ _group setFormDir (_unit getDir _enemy);
 
 // gesture + callouts for larger units
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"] && {!isPlayer _x}};
+private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"] && {!isPlayer _x} && {isNull objectParent _x} && {_x checkAIFeature "MOVE"} && {_x checkAIFeature "PATH"}};
 private _count = count _units;
 if (_count > 2) then {
     // gesture
@@ -124,6 +124,17 @@ if (
         _x setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
         [_x, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
         _x suppressFor 5;
+        [
+            {
+                params ["_unit", "_posASL"];
+                if (_unit call EFUNC(main,isAlive)) then {
+                    [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
+                    _unit setVariable [QEGVAR(main,currentTask), "Suppress (contact)", EGVAR(main,debug_functions)];
+                };
+            },
+            [_x, _posASL],
+            5
+        ] call CBA_fnc_waitAndExecute;
         _x setVariable [QEGVAR(main,currentTask), "Suppress (contact)", EGVAR(main,debug_functions)];
     } foreach _units;
 
@@ -155,13 +166,24 @@ if (
 ) exitWith {
     // execute assault ~ forced
     {
-        [_x, _buildings] call EFUNC(main,doAssaultMemory);
+        //[_x, _buildings] call EFUNC(main,doAssaultMemory);
+        _x setUnitPos "MIDDLE";
+        _x forceSpeed 3;
+        //_x doMove selectRandom _buildings;
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
 
         // forced movement
         _x setVariable [QGVAR(forceMove), true];
-        [{_this setVariable [QGVAR(forceMove), nil]}, _x, 5 + random 4] call CBA_fnc_waitAndExecute;
-    } foreach _units select {getSuppression _x < 0.5};
+        [
+            {
+                _this setVariable [QGVAR(forceMove), nil];
+                _this setUnitPos "AUTO";
+            },
+            _x,
+            5 + random 6
+        ] call CBA_fnc_waitAndExecute;
+    } foreach _units;
+    _units doMove (_unit getHideFrom _enemy);
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
