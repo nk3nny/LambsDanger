@@ -59,7 +59,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // buildings ~ sorted by distance
-private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, BUILDING_DISTANCE, true, false, true] call EFUNC(main,findBuildings);
 _buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
