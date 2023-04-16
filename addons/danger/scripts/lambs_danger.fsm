@@ -2,7 +2,7 @@
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start_Danger",0,250,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"Start Danger"};
-item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-175.000000,-225.000000,-100.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.5.1"};
+item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-175.000000,-225.000000,-100.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.5.4"};
 item2[] = {"true",8,218,-75.000000,-75.000000,25.000000,-25.000000,0.000000,"true"};
 item3[] = {"Init",2,250,-75.000000,50.000000,25.000000,100.000000,0.000000,"Init"};
 item4[] = {"Vehicle",4,218,-325.000000,150.000000,-225.000000,200.000000,0.000000,"Vehicle"};
@@ -22,8 +22,8 @@ item17[] = {"Attack",2,250,175.000000,600.000000,275.000000,650.000000,0.000000,
 item18[] = {"Check_self",2,250,175.000000,275.000000,275.000000,325.000000,0.000000,"Check self"};
 item19[] = {"End_Danger",1,250,700.000000,1200.000000,800.000000,1250.000000,0.000000,"End Danger"};
 item20[] = {"no_queue",4,218,700.000000,1075.000000,800.000000,1125.000000,2.000000,"no queue"};
-item21[] = {"timeout",4,218,100.000000,750.000000,200.000000,800.000000,0.000000,"timeout"};
-item22[] = {"timeout",4,218,-250.000000,750.000000,-150.000000,800.000000,0.000000,"timeout"};
+item21[] = {"timeout",4,218,175.000000,750.000000,275.000000,800.000000,0.000000,"timeout"};
+item22[] = {"timeout",4,218,-175.000000,750.000000,-75.000000,800.000000,0.000000,"timeout"};
 item23[] = {"Reset_foot",2,250,-375.000000,925.000000,275.000000,975.000000,0.000000,"Reset foot"};
 item24[] = {"true",8,218,500.000000,925.000000,600.000000,975.000000,0.000000,"true"};
 item25[] = {"Check_queue",2,250,700.000000,925.000000,800.000000,975.000000,0.000000,"Check queue"};
@@ -87,7 +87,7 @@ link17[] = {12,15};
 link18[] = {13,16};
 link19[] = {14,17};
 link20[] = {15,22};
-link21[] = {16,21};
+link21[] = {16,22};
 link22[] = {17,21};
 link23[] = {18,32};
 link24[] = {20,19};
@@ -112,8 +112,8 @@ link42[] = {36,24};
 link43[] = {37,3};
 link44[] = {38,39};
 link45[] = {41,40};
-globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1206.155884,1607.168823,1969.556274,-696.016479,933,884,1};
-window[] = {2,-1,-1,-1,-1,941,182,1622,182,3,951};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-916.740479,1280.692139,1530.359497,-551.666748,933,884,1};
+window[] = {2,-1,-1,-1,-1,967,208,1648,208,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -393,12 +393,11 @@ class FSM
                                 /*%FSM<LINK "timeout">*/
                                 class timeout
                                 {
-                                        itemno = 21;
+                                        itemno = 22;
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timeout" \n
-                                         ""/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -425,7 +424,7 @@ class FSM
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"time > _timeout" \n
-                                         ""/*%FSM</CONDITION""">*/;
+                                         "|| {count _queue >3}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -476,7 +475,7 @@ class FSM
                         itemno = 23;
                         init = /*%FSM<STATEINIT""">*/"// has living cqb target" \n
                          "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 35}) then {" \n
-                         "    _queue pushBack [0, getPos _dangerCausedBy, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
+                         "    _queue pushBack [0, ASLtoAGL (getPosASL _dangerCausedBy), time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n
                          "//_text = format [""%1 : %2 :  %3"", name _this, _dangerCause call lambs_main_fnc_debugDangerType,_queue apply{[(_x select 0) call lambs_main_fnc_debugDangerType]}];" \n
@@ -518,7 +517,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// has group memory" \n
                          "if (_queue isEqualTo [] && {((group _this) getVariable [""lambs_main_groupMemory"", []]) isNotEqualTo []} ) then {" \n
-                         "    _queue pushBack [10, getPos _this, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
+                         "    _queue pushBack [10, ASLtoAGL (getPosASL _this), time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
