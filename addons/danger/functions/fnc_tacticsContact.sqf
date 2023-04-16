@@ -123,11 +123,10 @@ if (
     {
         _x setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
         [_x, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
-        _x suppressFor 5;
+        _x suppressFor 7;
         [
             {
                 params ["_unit", "_posASL"];
-                systemchat format ["%1 suppress follow-up with %2", name _unit, currentCommand _unit];
                 if (_unit call EFUNC(main,isAlive) && {!(currentCommand _unit isEqualTo "Suppress")}) then {
                     [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
                 };
