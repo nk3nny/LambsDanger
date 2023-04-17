@@ -3,14 +3,6 @@ prefix = "lambs"
 author = "LAMBS Dev Team"
 mainprefix = "z"
 
-key_name = "{{prefix}}_danger_{{version}}"
-authority = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
-releasebuild = [
-    "@zip @LambsDanger_{{HEMTT_PROJECT_VERSION_MAJOR}}_{{HEMTT_PROJECT_VERSION_MINOR}}_{{HEMTT_PROJECT_VERSION_PATCH}}"
-]
-
-# include = ["./include"]
-
 [version]
 major = 2
 minor = 6

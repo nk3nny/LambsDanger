@@ -45,17 +45,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Build addon with HEMTT
-        uses: arma-actions/hemtt@master
-        with:
-          command: 'build --release'
-      - uses: actions/upload-artifact@master
+      - name: Setup HEMTT
+        uses: arma-actions/hemtt@v1
+      - name: Run HEMTT build
+        run: hemtt release
+      - name: Upload Release
+        uses: actions/upload-artifact@v2
         with:
           name: '@LambsDanger'
-          path: 'releases/@LambsDanger*.zip'
+          path: 'release/lambs-2*.zip'
 
   stringtables:
     runs-on: ubuntu-latest
