@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup HEMTT
+        uses: arma-actions/hemtt@v1  
+      - name: Run HEMTT build
+        run: hemtt release
+      - run: |
+        version="${{ github.event.release.tag_name }}"
+        versionE="${version//[.]/_}"
+        mv releases/lambs-latest.zip "@LambsDanger_${versionE}.zip"
+      - name: Update Release with Files
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true # Set this to false if you want to prevent updating existing releases
+          name: ${{ github.event.release.name }}
+          draft: ${{ github.event.release.unpublished }}
+          prerelease: ${{ github.event.release.prerelease }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./@LambsDanger_*.zip"
+          tag: ${{ github.event.release.tag_name }}
+          body: ${{ github.event.release.body }}
