@@ -10,3 +10,5 @@
 *.toml text eol=crlf
 *.txt text eol=crlf
 *.xml text eol=crlf
+*.rhai text eol=crlf
+*.inc text eol=crlf
