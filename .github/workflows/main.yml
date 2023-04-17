@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: '@LambsDanger'
-          path: 'releases/lambs-latest.zip'
+          path: '.hemttout/release/*'
 
   stringtables:
     runs-on: ubuntu-latest
