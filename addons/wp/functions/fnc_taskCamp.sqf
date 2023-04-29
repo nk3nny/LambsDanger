@@ -108,7 +108,7 @@ reverse _units;
     if ((_buildings isNotEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
-        if (_teleport) then { _x setPos _buildingPos; };
+        if (_teleport) then { SETPOSITIONAGL(_x, _buildingPos); }; // buildingPos returns positionAGL
         _x doMove _buildingPos;
         [
             {
@@ -174,7 +174,7 @@ private _dir = random 360;
     // teleport
     if (_teleport) then {
         _x setDir (_x getDir _pos);
-        _x setPos _campPos;
+        SETPOSITIONAGL(_x, _campPos);
     };
 
     // execute move

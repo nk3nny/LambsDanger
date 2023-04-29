@@ -188,7 +188,7 @@ private _fnc_addEventHandler = {
         if (surfaceIsWater _house) then {
             _x doFollow (leader _x);
         } else {
-            _x setPos _house;
+            SETPOSITIONAGL(_x, _house);
             _x disableAI "PATH";
             _x setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
         };
