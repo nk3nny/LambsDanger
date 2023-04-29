@@ -19,6 +19,7 @@
 }
 
 #define POSITIONAGL(object) ASLtoAGL (getPosASL object)
+#define SETPOSITIONAGL(object,position) object setPosASL (AGLtoASL position) 
 
 // #define DISABLE_COMPILE_CACHE
 
