@@ -22,11 +22,11 @@ params ["_unit", ["_pos", []], ["_radius", 8]];
 if (_pos isEqualTo []) then {_pos = getPosASL _unit;};
 
 // find body + rearm
-private _bodies = allDeadMen findIf { (_x distance2D _pos) < _radius };
-if (_bodies isEqualTo -1) exitWith {false};
+private _weaponHolders = allDeadMen findIf { (_x distance2D _pos) < _radius };
+if (_weaponHolders isEqualTo -1) exitWith {false};
 
 // body
-private _body = allDeadMen select _bodies;
+private _body = allDeadMen select _weaponHolders;
 
 // execute
 _unit setUnitPosWeak "MIDDLE";
@@ -37,7 +37,7 @@ _unit setVariable [QEGVAR(danger,forceMove), true];
     {
         // condition
         params ["_unit", "_body"];
-        (_unit distance _body < 0.7) || {!(_unit call FUNC(isAlive))}
+        (_unit distance _body < 0.8) || {!(_unit call FUNC(isAlive))}
     },
     {
         // on near body
@@ -45,6 +45,26 @@ _unit setVariable [QEGVAR(danger,forceMove), true];
         if (_unit call FUNC(isAlive)) then {
             [QGVAR(OnCheckBody), [_unit, group _unit, _body]] call FUNC(eventCallback);
             _unit action ["rearm", _body];
+
+            // get backpack
+            if ((backpack _unit) isEqualTo "" && {backpack _body isNotEqualTo ""}) then {
+                private _items = backpackItems _body;
+                private _backpack = backpack _body;
+                removeBackpack _body;
+                _unit addBackpack _backpack;
+                {_unit addItemToBackpack _x} forEach _items;
+            };
+
+            // get launchers
+            if (secondaryWeapon _unit isEqualTo "") then {
+                private _weaponHolders = _body nearSupplies 3;
+                private _weapons = _weaponHolders apply {getWeaponCargo _x};
+                private _index = _weapons findIf {getNumber (configFile >> "CfgWeapons" >> ((_x select 0) select 0) >> "Type") isEqualTo 4};
+                if (_index isNotEqualTo -1) then {
+                    _unit action ["TakeWeapon", _weaponHolders select _index, ((_weapons select _index) select 0) select 0];
+                };
+            };
+
             _unit doFollow leader _unit;
             _unit setVariable [QEGVAR(danger,forceMove), nil];
         };
