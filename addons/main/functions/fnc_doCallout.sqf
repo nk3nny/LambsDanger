@@ -82,9 +82,6 @@ if (isNil "_cachedSounds") then {
             if (_sound select [0, 1] != "\") then {
                 _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
             };
-            if (_sound select [0, 1] == "\") then {
-                _sound = _sound select [1];
-            };
         };
         _cachedSounds set [_forEachIndex, _sound];
     } forEach _cachedSounds;
