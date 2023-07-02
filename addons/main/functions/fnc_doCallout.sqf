@@ -104,7 +104,7 @@ if (_cachedSounds isEqualTo []) exitWith {
 };
 
 private _sound = selectRandom _cachedSounds;
-playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pitch _unit, _distance];
+playSound3D [_sound, _unit, isNull (objectParent _unit), eyePos _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
     _this remoteExecCall ["setRandomLip", 0];
