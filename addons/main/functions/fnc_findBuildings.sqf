@@ -37,10 +37,8 @@ private _housePos = [];
     _housePos append (_house buildingPos -1);
     if (_findDoors) then {
         {
-            if ("door" in toLower (_x)) then {
-                _housePos pushBack (_house modelToWorld (_house selectionPosition _x));
-            };
-        } forEach (selectionNames _house);
+            _housePos pushBack (_house modelToWorld (_house selectionPosition _x));
+        } forEach ((_house selectionNames "viewgeometry") select {"door" in _x});
     };
 } forEach _houses;
 
