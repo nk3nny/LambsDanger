@@ -16,20 +16,22 @@
 */
 
 // init
-params ["_unit"];
+params [["_unit", objNull], ["_damage", 0], ["_source", objNull]];
 
 // Standing or recent explosions ignored
 if (
     !GVAR(ExplosionEventHandlerEnabled)
+    || isNull _unit
     || !(local _unit)
     || isPlayer _unit
     || {!isNull objectParent _unit}
     || {(stance _unit) isEqualTo "PRONE"}
     || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}
+    || {!(_unit call EFUNC(main,isAlive))} // Check alive status - just in case stance doesn't handle it
 ) exitWith {false};
 
 // settings
-private _pos = _unit getPos [4, random 360];
+private _pos = [_source, _unit getPos [4, random 360]] select (isNull _source);
 private _dir = 360 - (_unit getRelDir _pos);
 _unit setVariable [QGVAR(explosionReactionTime), time + GVAR(ExplosionReactionTime)];
 
