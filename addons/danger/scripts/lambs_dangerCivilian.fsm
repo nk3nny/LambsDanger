@@ -180,8 +180,8 @@ link63[] = {54,2};
 link64[] = {55,2};
 link65[] = {56,4};
 link66[] = {57,58};
-globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-1872.445801,594.427734,1279.814941,-590.437561,1166,884,1};
-window[] = {2,-1,-1,-1,-1,870,52,673,52,3,1184};
+globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-2186.302002,694.953857,1624.167236,-560.249878,1166,884,1};
+window[] = {2,-1,-1,-1,-1,922,104,725,104,3,1184};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -394,12 +394,15 @@ class FSM
                          "}; " \n
                          "" \n
                          "// animation" \n
-                         "if (_this call lambs_danger_fnc_fsmAllowAnimation) then {" \n
+                         "if (false) then {" \n
                          "	_this playMoveNow selectRandom [""ApanPknlMsprSnonWnonDf"", ""ApanPercMsprSnonWnonDf"", ""ApanPpneMsprSnonWnonDf"", ""ApanPpneMrunSnonWnonDf""];" \n
                          "}; " \n
                          "" \n
                          "// execute hide" \n
-                         "[_this,  _dangerPos] call lambs_main_fnc_doHide; " \n
+                         "[_this,  _dangerPos, 10] call lambs_main_fnc_doHide; " \n
+                         "" \n
+                         "// time dodge" \n
+                         "private _timeDodge = time + 2;" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -423,8 +426,8 @@ class FSM
                                         priority = 0.000000;
                                         to="Clean_up";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.99"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _timeDodge && getSuppression _this > 0.99"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"[_this] call lambs_main_fnc_doFleeing;"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };

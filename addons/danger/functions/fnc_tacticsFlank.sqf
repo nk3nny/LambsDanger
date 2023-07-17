@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
+params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 120]];
 
 // group is missing
 if (isNull _group) exitWith {false};

@@ -159,6 +159,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     };
 
     // enemies near and below
+    /*
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < RANGE_MID
         && {((getPosASL _x) select 2) < ((_eyePos select 2) - 15)}
@@ -169,6 +170,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         _plan pushBack TACTICS_ATTACK;
         _pos = _enemies select _farNoCoverTarget;
     };
+    */
 
     // enemy at inside buildings or fortified or far
     private _fortifiedTarget = _enemies findIf {
