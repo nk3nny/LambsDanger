@@ -35,7 +35,7 @@ if (_groupMemory isEqualTo []) exitWith {
 
 // check for enemy get position
 private _nearestEnemy = _unit findNearestEnemy _unit;
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isNotEqualTo 0;
+private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] > 0.01;
 if (
     (vehicle _nearestEnemy) isKindOf "CAManBase"
     && {_vis || {_unit distance2D _nearestEnemy < 12 && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
@@ -73,7 +73,7 @@ _unit setDestination [_pos, "LEADER PLANNED", _unit distance2D _pos < 18];
 
 // update variable
 if (RND(0.95)) then {_groupMemory deleteAt 0;};
-_groupMemory = _groupMemory select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0};
+_groupMemory = _groupMemory select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] < 0.01};
 
 // variables
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];

@@ -28,7 +28,7 @@ _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 private _getHide = _unit getHideFrom _target;
 
 // check visibility
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isNotEqualTo 0;
+private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] > 0.01;
 private _buildings = [];
 private _pos = call {
 
