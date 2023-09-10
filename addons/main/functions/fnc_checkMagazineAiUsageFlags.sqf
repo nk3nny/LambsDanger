@@ -17,14 +17,14 @@
 */
 
 if (isNil QGVAR(aiUsageFlagCache)) then {
-	GVAR(aiUsageFlagCache) = createHashMap;
+    GVAR(aiUsageFlagCache) = createHashMap;
 };
 
 params [["_magazine", ""], ["_flags", 0]];
 
 private _hasFlags = GVAR(aiUsageFlagCache) get _magazine;
 if (!isNil "_hasFlags") exitWith {
-	_hasFlags
+    _hasFlags
 };
 
 // find smoke shell
