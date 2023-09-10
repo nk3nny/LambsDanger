@@ -38,7 +38,7 @@ if (_magazines isEqualTo []) exitWith {false};
 
 // find smoke shell
 private _smokeshell = _magazines findIf {
-    _x call FUNC(checkMagazineAiUsageFlags);
+    [_x, _type] call FUNC(checkMagazineAiUsageFlags);
 };
 
 // select smoke
