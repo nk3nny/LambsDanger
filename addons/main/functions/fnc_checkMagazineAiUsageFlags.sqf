@@ -30,7 +30,7 @@ if (!isNil "_hasFlags") exitWith {
 // find smoke shell
 private _ammo = getText (configfile >> "CfgMagazines" >> _magazine >> "Ammo");
 private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
-_hasFlags = [_aiAmmoUsage, _type] call BIS_fnc_bitflagsCheck;
+_hasFlags = [_aiAmmoUsage, _flags] call BIS_fnc_bitflagsCheck;
 
 GVAR(aiUsageFlagCache) set [_magazine, _hasFlags];
 
