@@ -38,9 +38,7 @@ if (_magazines isEqualTo []) exitWith {false};
 
 // find smoke shell
 private _smokeshell = _magazines findIf {
-    private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
-    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
-    _aiAmmoUsage isEqualTo _type
+    _x call lambs_main_fnc_checkMagazineAiUsageFlags;
 };
 
 // select smoke
