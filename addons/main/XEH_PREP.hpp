@@ -1,3 +1,4 @@
+
 PREP(addShareInformationHandler);
 PREP(doAnimation);
 PREP(doCallout);
@@ -25,6 +26,7 @@ PREP(showDialog);
 PREP(parseData);
 
 PREP(removeEventhandlers);
+PREP(getCompatibleThrowMuzzle);
 
 SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
