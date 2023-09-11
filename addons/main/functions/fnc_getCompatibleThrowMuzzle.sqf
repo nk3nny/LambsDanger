@@ -26,19 +26,17 @@ if (!isNil "_muzzle") exitWith {
     _muzzle;
 };
 
-private _muzzleList = GVAR(cachedThrowingWeapons);
-
-private _muzzleIdx = _muzzleList findIf {
-    private _compatible = GVAR(cachedThrowingWeaponsHash) get configName _x;
-    if (isNil "_compatible") then {
-        _compatible = getArray (_x >> "magazines");
-        GVAR(cachedThrowingWeaponsHash) set [configName _x, _compatible];
-    };
+private _muzzleIdx = GVAR(cachedThrowingWeapons) findIf {
+    private _compatible = getArray (_x >> "magazines");
     _magazine in _compatible
 };
 
-if (_muzzleIdx == -1) exitWith {
-    ""
+if (_muzzleIdx == -1) then {    
+    _muzzle = "";
+} else {
+    _muzzle = GVAR(cachedThrowingWeapons) select _muzzleIdx;
 };
 
-_muzzleList select _muzzleIdx
+GVAR(cachedThrowingWeaponsHash) set [_magazine, _muzzle];
+
+_muzzle
