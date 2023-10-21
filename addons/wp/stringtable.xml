@@ -74,7 +74,7 @@
             <Chinesesimp>主炮齐射</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
-            <English>Number of rounds in the main salvo</English>
+            <English>Number of rounds in the main salvo. MLRS artillery ignore this value.</English>
             <Czech>Počet střel v hlavní salvě</Czech>
             <German>Anzahl an Schüssen der Hauptsalve.</German>
             <Polish>Liczba pocisków w głównej salwie</Polish>

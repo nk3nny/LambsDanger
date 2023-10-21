@@ -10,7 +10,6 @@
  * 3: Rounds fired, default 3 - 7 <NUMBER>
  * 4: Dispersion accuracy, default 100 <NUMBER>
  * 5: Skip check rounds and skip shooting delay, default false <BOOL>
- * 6: How many rounds per salvo, default 1 <NUMBER>.
  *
  * Return Value:
  * none
@@ -24,7 +23,7 @@
 if !(canSuspend) exitWith { _this spawn FUNC(doArtillery); };
 
 // init
-params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS], ["_salvo", 1]];
+params [["_gun", objNull], ["_pos", []], ["_caller", objNull], ["_rounds", TASK_ARTILLERY_ROUNDS], ["_accuracy", TASK_ARTILLERY_SPREAD], ["_skipCheckrounds", TASK_ARTILLERY_SKIPCHECKROUNDS]];
 
 if (isNull _gun) exitWith {};
 if (_pos isEqualTo []) exitWith {
@@ -46,10 +45,14 @@ if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {
 // turn gun
 _gun doWatch _pos;
 
+// set group task
+(group _gun) setVariable [QEGVAR(main,currentTactic), "taskArtillery", EGVAR(main,debug_functions)];
+
 // settings
 private _direction = _gun getDir _pos;
 private _center = _pos getPos [_accuracy * 0.33, -_direction];
 private _offset = 0;
+private _salvo = 1;
 
 // heavier artillery fires more rounds, more accurately
 if !((vehicle _gun) isKindOf "StaticMortar") then {
@@ -57,7 +60,7 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
     _accuracy = _accuracy * 0.5;
 };
 
-// MRLS weapons fire entire magazine, but with less accuracy
+// MRLS weapons fire almost entire magazine, but with less accuracy
 private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), -1];
 if (_isMLRS isEqualTo -1) then {
     private _gunner = gunner _gun;
@@ -81,18 +84,17 @@ if (_isMLRS isEqualTo -1) then {
 if (_isMLRS isEqualTo 1) then {
     _skipCheckrounds = true;
     _salvo = (gunner _gun) Ammo (currentMuzzle (gunner _gun));
-    if ((_salvo mod 2) isEqualTo 0) then {
-        if (_salvo > 20) then {
-            _rounds = floor (_salvo * 0.25);
-            _salvo = 4;
-        } else {
-            _rounds = floor (_salvo * 0.5);
-            _salvo = 2;
-        };
-    } else {
-        _rounds = 1;
+    _rounds = 1;
+    if ((_salvo mod 6) isEqualTo 0) then {
+        _rounds = floor (_salvo * 0.334);
+        _salvo = 3;
     };
-    _accuracy = _accuracy * 3;
+    if ((_salvo mod 10) isEqualTo 0) then {
+        if (_salvo > 20) then {_salvo = 20;};
+        _rounds = floor (_salvo * 0.2);
+        _salvo = 5;
+    };
+    _accuracy = _accuracy * 1.5;
 };
 
 private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
@@ -185,7 +187,9 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
             };
 
             // waituntil
+            if (_isMLRS isEqualTo 1) then {sleep 1.3;};
             waitUntil {unitReady _gun};
+
         } else {
             if (EGVAR(main,debug_functions)) then {
                 ["Error Target position is not reachable with artillery"] call EFUNC(main,debugLog);
@@ -210,6 +214,9 @@ if (_markerList isNotEqualTo []) then {
 
 // delay
 sleep _checkRounds;
+
+// set group task
+(group _gun) setVariable [QEGVAR(main,currentTactic), nil, EGVAR(main,debug_functions)];
 
 // ready up again
 [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
