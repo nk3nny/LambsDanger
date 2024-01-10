@@ -16,7 +16,7 @@
 */
 
 // init
-params [["_unit", objNull], ["_damage", 0], ["_source", objNull]];
+params [["_unit", objNull], "", ["_source", objNull]];
 
 // Standing or recent explosions ignored
 if (
