@@ -33,15 +33,15 @@ private _timeout = time + 1.4;
 // ACE3
 _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
 
-// cover move when explosion
+// Move to cover if it's relatively safe
 if (
-    getSuppression _unit < 0.6
+    getSuppression _unit < 0.4
+    && {RND(0.67)} // Add some randomness so they aren't taking cover all the time
     && {(speed _unit) isEqualTo 0}
-    && {_type in [DANGER_EXPLOSION, DANGER_FIRE]}
+    && {!(_unit call EFUNC(main,isIndoor))} // Don't try anything indoors
 ) exitWith {
-    _unit setUnitPosWeak "DOWN";
-    [_unit] call EFUNC(main,doCover);
-    _timeout + 1
+    [_unit, _pos] call EFUNC(main,doCover);
+    _timeout + 2
 };
 
 // dodge!
