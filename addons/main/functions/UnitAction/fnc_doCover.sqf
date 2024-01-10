@@ -45,8 +45,12 @@ private _pos = if (_coverPositions isEqualTo []) then {
     _cover getPos [2, _dangerPos getDir _cover]
 };
 
-// force anim
+// Sanity checks to try prevent constant moving between cover positions -
+// and units wandering away from the formation
 if (_unit distance2D _pos < 0.6) exitWith {false};
+if (_pos distance2D (leader _unit) > 20) exitWith {false};
+
+// Force anim
 private _direction = _unit getRelDir _pos;
 private _anim = call {
     if (_direction > 315) exitWith {["FastF", "FastLF"]};
