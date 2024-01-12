@@ -101,8 +101,8 @@ _units doWatch objNull;
 [_units, _target, _cover] call EFUNC(main,doGroupHide);
 
 // find launcher units
-private _launchersAT = ([_group, false, true, false, true] call EFUNC(main,getLauncherUnits)) isNotEqualTo [];
-private _launchersAA = ([_group, false, false, true, false] call EFUNC(main,getLauncherUnits)) isNotEqualTo [];
+private _launchersAT = [_group, false, true, false, true] call EFUNC(main,getLauncherUnits);
+private _launchersAA = [_group, false, false, true, false] call EFUNC(main,getLauncherUnits);
 
 // find enemy vehicles
 private _enemies = _unit targets [true, 600, [], 0, _target];
