@@ -41,7 +41,7 @@ private _suitableUnits = [];
     if ((secondaryWeapon _x) isEqualTo "") then {continue};
     private _currentUnit = _x;
 
-    private _unitsMagazines = (magazines _x) + (secondaryWeaponMagazine _x);
+    private _unitsMagazines = (magazines _currentUnit) + (secondaryWeaponMagazine _currentUnit);
     {
         private _mainAmmo = getText (configFile >> "cfgMagazines" >> _x >> "ammo");
         private _mainAmmoFlags = getText (configFile >> "cfgAmmo" >> _mainAmmo >> "aiAmmoUsageFlags");
