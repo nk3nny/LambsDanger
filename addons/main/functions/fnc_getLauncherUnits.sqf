@@ -30,7 +30,10 @@
 
 params [
     ["_group", grpNull, [grpNull]],
-    ["_checkSubmunition", false, [false]]
+    ["_checkSubmunition", false, [false]],
+    ["_offensiveVeh", true, [true]],
+    ["_offensiveAir", true, [true]],
+    ["_offensiveArmor", true, [true]]
 ];
 
 private _suitableUnits = [];
@@ -44,9 +47,9 @@ private _suitableUnits = [];
         private _mainAmmoFlags = getText (configFile >> "cfgAmmo" >> _mainAmmo >> "aiAmmoUsageFlags");
 
         if (
-            LIGHT_VEHICLE in _mainAmmoFlags
-            || AIR_VEHICLE in _mainAmmoFlags
-            || HEAVY_VEHICLE in _mainAmmoFlags
+            (_offensiveVeh && (LIGHT_VEHICLE in _mainAmmoFlags))
+            || {_offensiveAir && (AIR_VEHICLE in _mainAmmoFlags)}
+            || {_offensiveArmor && (HEAVY_VEHICLE in _mainAmmoFlags)}
         ) exitWith {_suitableUnits pushBackUnique _currentUnit};
 
         // Optionally go through submunitions. More info in header.
@@ -57,9 +60,9 @@ private _suitableUnits = [];
         private _submunitionFlags = getText (configFile >> "cfgAmmo" >> _submunition >> "aiAmmoUsageFlags");
 
         if (
-            LIGHT_VEHICLE in _submunitionFlags
-            || AIR_VEHICLE in _submunitionFlags
-            || HEAVY_VEHICLE in _submunitionFlags
+            (_offensiveVeh && (LIGHT_VEHICLE in _submunitionFlags))
+            || {_offensiveAir && (AIR_VEHICLE in _submunitionFlags)}
+            || {_offensiveArmor && (HEAVY_VEHICLE in _submunitionFlags)}
         ) exitWith {_suitableUnits pushBackUnique _currentUnit};
     } forEachReversed _unitsMagazines;
     // We iterate back to front for performance, because _unitsMagazines is structured -
