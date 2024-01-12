@@ -101,13 +101,13 @@ _units doWatch objNull;
 [_units, _target, _cover] call EFUNC(main,doGroupHide);
 
 // find launcher and armour
-private _launchers = _units select {(secondaryWeapon _x) isNotEqualTo ""};
+private _hasAT = ([_group, false] call EFUNC(main,getLauncherUnits)) isNotEqualTo [];
 
 // find enemy air/tanks
 private _enemies = _unit targets [true, 600, [], 0, _target];
 private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
 
-if (_antiTank && { _tankAir != -1 } && { _launchers isNotEqualTo [] }) then {
+if (_antiTank && { _tankAir != -1 } && { _hasAT }) then {
     {
         // launcher units target air/tank
         _x setCombatMode "RED";
