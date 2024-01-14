@@ -74,7 +74,7 @@ GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1,
 /*
     Moved Event Wrappers
     Moved in v2.5.0
-    Removed with v2.6.0???
+    Removed with v2.7.0???
 */
 [QGVAR(OnCheckBody), {
     [_this select 0, QEGVAR(danger,OnCheckBody), _this] call BIS_fnc_callScriptedEventHandler;

@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 18]];
+params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]], ["_delay", 12]];
 
 // only leader
 if !((leader _unit) isEqualTo _unit || {_unit call EFUNC(main,isAlive)}) exitWith {false};
@@ -55,7 +55,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Contact!", EGVAR(main,debug_fun
         };
     },
     [_group, attackEnabled _group],
-    _delay + random 12
+    _delay + random 18
 ] call CBA_fnc_waitAndExecute;
 
 // change formation and attack state
@@ -106,12 +106,13 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug
 
 // check suppression status
 private _aggressiveResponse = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
-_aggressiveResponse = _count > random 3 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
+_aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
 
 // immediate action -- leaders call suppression
 if (
     RND(getSuppression _unit)
     && {_aggressiveResponse}
+    && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.5)}
 ) exitWith {
 
     // get position
@@ -132,6 +133,9 @@ if (
     // debug
     if (EGVAR(main,debug_functions)) then {
         ["%1 TACTICS SUPPRESSION CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+        private _m = [_unit, "suppression contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.8, 0.8];
+        [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
     };
 };
 
@@ -149,11 +153,15 @@ if (
     && {_unit distance2D _enemy < GVAR(cqbRange)}
     && {_buildings isNotEqualTo []}
 ) exitWith {
-    // execute assault
+    // execute assault ~ forced
     {
         [_x, _buildings] call EFUNC(main,doAssaultMemory);
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
-    } foreach _units;
+
+        // forced movement
+        _x setVariable [QGVAR(forceMove), true];
+        [{_this setVariable [QGVAR(forceMove), nil]}, _x, 5 + random 4] call CBA_fnc_waitAndExecute;
+    } foreach _units select {getSuppression _x < 0.5};
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (aggressive)", EGVAR(main,debug_functions)];
@@ -161,6 +169,9 @@ if (
     // debug
     if (EGVAR(main,debug_functions)) then {
         ["%1 TACTICS AGGRESSIVE CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+        private _m = [_unit, "aggressive contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.8, 0.8];
+        [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
     };
 };
 
@@ -170,6 +181,9 @@ if (
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+    private _m = [_unit, "contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+    _m setMarkerSizeLocal [0.8, 0.8];
+    [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
 };
 
 // end

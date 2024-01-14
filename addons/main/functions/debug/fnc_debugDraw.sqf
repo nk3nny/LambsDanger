@@ -141,28 +141,34 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         private _targetKnowledge = [];
         private _name = if (_currentTarget isEqualType objNull && {!isNull _currentTarget}) then {
-            private _knowledge = _unit targetKnowledge _currentTarget;
-            private _knowledgePosition = ASLtoAGL(_knowledge select 6);
-            private _knowledgeAge = _knowledge select 2;
-            if (_knowledge select 2 == time && local _unit) then {
-                _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
+            private _unitIsLocal = local _unit;
+            if (_unitIsLocal || !getRemoteSensorsDisabled) then {
+                private _knowledge = _unit targetKnowledge _currentTarget;
+                private _knowledgePosition = ASLtoAGL(_knowledge select 6);
+                private _knowledgeAge = _knowledge select 2;
+                if (_knowledgeAge == time && _unitIsLocal) then {
+                    _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];
+                };
+                private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
+                _targetKnowledge append [
+                    "<t color='#C7CCC1'>Target Knowledge: <br/>",
+                    "    Last Seen: ", _lastSeen, " (", _knowledgeAge toFixed 2, ")<br/>",
+                    "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
+                ];
+
+                drawLine3D [_renderPos, _knowledgePosition, [0, 1, 0, 0.5]];
+                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _knowledgePosition, 1, 1, 0, "Estimated Target Position"];
+
+                if !(_lastSeen isEqualType "") then {
+                    drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
+                    drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
+                };
+            } else {
+                _targetKnowledge pushBack [
+                    "<t color'#FFAA00'>RemoteSensors Disabled<br/>",
+                    "<t color'#FFAA00'>and Unit Not Local<br/>"
+                ];
             };
-            private _lastSeen = _unit getVariable [QGVAR(debug_LastSeenPos), _knowledgePosition];
-            _targetKnowledge append [
-                "<t color='#C7CCC1'>Target Knowledge: <br/>",
-                "    Last Seen: ", _lastSeen, " (", _knowledgeAge toFixed 2, ")<br/>",
-                "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
-            ];
-
-            drawLine3D [_renderPos, _knowledgePosition, [0, 1, 0, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _knowledgePosition, 1, 1, 0, "Estimated Target Position"];
-
-            if !(_lastSeen isEqualType "") then {
-                drawLine3D [_renderPos, _lastSeen, [0, 0, 1, 0.5]];
-                drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _lastSeen, 1, 1, 0, "Last Seen Position"];
-            };
-
-
             drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];
             [name _currentTarget, "None"] select (isNull _currentTarget);
         } else {
@@ -200,8 +206,8 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         };
 
         _textData append [
-            "    Danger Timeout: ", format ["%1s", [round (_time - time), 0] select ((_time - time) < 0)], "</t><br/>",
-            "Current Target: ", format ["%1 (%2 visiblity)", _name, [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]], "<br/>"
+            "    Danger Timeout: ", format ["%1s", [(_time - time) toFixed 2, 0] select ((_time - time) < 0)], "</t><br/>",
+            "Current Target: ", format ["%1 (%2 visiblity)", _name, ([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) toFixed 1], "<br/>"
         ];
 
         _textData append _targetKnowledge;
@@ -217,10 +223,16 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             _textData append ["<t color='#FFAA00'>MOVE disabled</t>", "<br/>"];
         };
         if (_unit getVariable [QEGVAR(danger,forceMove), false]) then {
-            _textData append ["<t color='#ff4000'>Forced AI</t>", "<br/>"];
+            _textData append ["<t color='#FF4000'>Forced AI</t>", "<br/>"];
         };
         if (fleeing _unit) then {
             _textData append ["<t color='#FFC0CB'>Fleeing</t>", "<br/>"];
+        };
+        if (isHidden _unit) then {
+            _textData append ["<t color='#1e18d9'>Hidden</t>", "<br/>"];
+        };
+        if !(unitReady _unit) then {
+            _textData append ["<t color='#FFA500'>Busy</t>", "<br/>"];
         };
         [_renderPos, _textData] call _fnc_debug_drawRect;
 
@@ -228,7 +240,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
             if (_unit distance _pos > _viewDistance) exitWith {};
             drawLine3D [_renderPos, _pos, [0, 0, 1, 0.5]];
-            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["Move: %1%2", _planingMode, if (_forceReplan) then {" (ForceReplan)"} else {""}]];
+            drawIcon3D ["a3\ui_f\data\Map\Markers\System\dummy_ca.paa", [1, 1, 1, 1], _pos, 1, 1, 0, format ["%1m: %2%3", floor (_unit distance _pos), _planingMode, ["", " (ForceReplan)"] select _forceReplan]];
         };
     };
 } forEach (allUnits select {!(isPlayer _x)});

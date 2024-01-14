@@ -26,7 +26,7 @@
 params ["_unit", "", "", ["_target", objNull]];
 
 // timeout
-private _timeout = time + 4;
+private _timeout = time + 3;
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
@@ -48,7 +48,7 @@ if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
 
 // reset look
 _unit setUnitPosWeak "MIDDLE";
-_unit doWatch objNull;
+//_unit doWatch objNull;
 
 // end
 _timeout

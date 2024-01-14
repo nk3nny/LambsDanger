@@ -1,7 +1,7 @@
 /*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"LAMBS_DANGER___v2",-1,250,-1225.000000,-425.000000,-875.000000,-175.000000,0.000000,"LAMBS DANGER - v2.5.0  ~ civilian fsm" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "8 - DCCanFire // can fire weapon ~nkenny" \n "9 - DCBulletClose // bullet whizzes by head - nkenny"};
+item0[] = {"LAMBS_DANGER___v2",-1,250,-1225.000000,-425.000000,-875.000000,-175.000000,0.000000,"LAMBS DANGER - v2.6.0  ~ civilian fsm" \n "0 - DCEnemyDetected, // the first enemy detected" \n "1 - DCFire, // fire visible" \n "2 - DCHit, // vehicle hit" \n "3 - DCEnemyNear, // enemy very close to me" \n "4 - DCExplosion, // explosion detected" \n "5 - DCDeadBodyGroup, // dead soldier from my group found" \n "6 - DCDeadBody, // other dead soldier found" \n "7 - DCScream // hit soldier screaming" \n "8 - DCCanFire // can fire weapon ~nkenny" \n "9 - DCBulletClose // bullet whizzes by head - nkenny"};
 item1[] = {"Init",0,250,-850.000000,-425.000000,-700.000000,-350.000000,0.000000,"Init"};
 item2[] = {"End",1,250,150.000000,600.000000,250.000000,650.000000,0.000000,"End"};
 item3[] = {"Causes__4__7__9",4,218,-840.000000,-60.000000,-700.000000,0.000000,2.000000,"Causes:" \n "4, 7, 9"};

@@ -4,7 +4,7 @@
  * Group conducts probing flanking manoeuvre
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group target <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: how many assault cycles <NUMBER>
@@ -15,22 +15,29 @@
  * Bool
  *
  * Example:
- * [bob, angryBob] call lambs_danger__fnc_tacticsFlank;
+ * [bob, angryBob] call lambs_danger_fnc_tacticsFlank;
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
+params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
 
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
-    [_unit, _target] call FUNC(tacticsAssault);
+    [_group, _target] call FUNC(tacticsAssault);
     false
 };
 
-private _group = group _unit;
 // reset tactics
 [
     {
@@ -50,9 +57,6 @@ private _group = group _unit;
     [_group, speedMode _unit, formation _unit],
     _delay
 ] call CBA_fnc_waitAndExecute;
-
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
 
 // find units
 if (_units isEqualTo []) then {
@@ -96,21 +100,18 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 _unit setSpeedMode "FULL";
 
 // prevent units from being mounted!
-(units _unit) allowGetIn false;
+((units _unit) select {((assignedVehicleRole _x) select 0) isEqualTo "cargo"}) allowGetIn false;
 
 // ready group
 _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
 {
-    _x setUnitPos "MIDDLE";
+    _x setUnitPos "DOWN";
     _x setVariable [QGVAR(forceMove), true];
 } foreach _units;
 
-// move
-_units commandMove _overwatch;
-
 // leader smoke ~ deploy concealment to enable movement
-if (!GVAR(disableAutonomousSmoke)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
+if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
 [{_this call EFUNC(main,doGroupFlank)}, [_cycle, _units, _vehicles, _pos, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;

@@ -4,7 +4,7 @@
  * Group garrisons buildings near enemies!
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group target <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: delay until unit is ready again <NUMBER>
@@ -20,12 +20,19 @@
 #define COVER_DISTANCE 25
 #define BUILDING_DISTANCE 42
 
-params ["_unit", "_target", ["_units", []], ["_delay", 180]];
+params ["_group", "_target", ["_units", []], ["_delay", 180]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // sort target
 _target = _target call CBA_fnc_getPos;
 
-private _group = group _unit;
 // reset tactics
 [
     {
@@ -41,9 +48,6 @@ private _group = group _unit;
     _delay
 ] call CBA_fnc_waitAndExecute;
 
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
-
 // set speed and enableAttack
 _group setFormation "FILE";
 _group enableAttack false;
@@ -55,7 +59,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // buildings ~ sorted by distance
-private _buildings = [_target, BUILDING_DISTANCE, true, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, BUILDING_DISTANCE, true, false, true] call EFUNC(main,findBuildings);
 _buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
@@ -91,8 +95,9 @@ _units doWatch objNull;
     [
         {
             params ["_unit", "_pos"];
-            _unit moveTo _pos;
+            //_unit moveTo _pos;
             _unit setDestination [_pos, "LEADER PLANNED", true];
+            _unit doMove _pos;
         }, [_x, _pos], 0.5 + random 2
     ] call CBA_fnc_waitAndExecute;
     _x setVariable [QEGVAR(main,currentTask), "Group Garrison", EGVAR(main,debug_functions)];

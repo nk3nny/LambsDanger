@@ -4,7 +4,7 @@
  * Leader calls for extended aggressive assault towards buildings or location
  *
  * Arguments:
- * 0: group leader <OBJECT>
+ * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: how many assault cycles <NUMBER>
@@ -18,11 +18,18 @@
  *
  * Public: No
 */
-params ["_unit", "_target", ["_units", []], ["_cycle", 11], ["_delay", 90]];
+params ["_group", "_target", ["_units", []], ["_cycle", 16], ["_delay", 70]];
+
+// group is missing
+if (isNull _group) exitWith {false};
+
+// get leader
+if (_group isEqualType objNull) then {_group = group _group;};
+if ((units _group) isEqualTo []) exitWith {false};
+private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
-private _group = group _unit;
 
 // reset tactics
 [
@@ -37,6 +44,8 @@ private _group = group _unit;
             _group setFormation _formation;
             {
                 _x setVariable [QGVAR(forceMove), nil];
+                _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
+                _x setUnitPos "AUTO";
                 _x doFollow leader _x;
                 _x forceSpeed -1;
             } foreach (units _group);
@@ -46,13 +55,10 @@ private _group = group _unit;
     _delay
 ] call CBA_fnc_waitAndExecute;
 
-// alive unit
-if !(_unit call EFUNC(main,isAlive)) exitWith {false};
-
 // set speed and enableAttack
-_group setSpeedMode "FULL";
-_group setFormation "DIAMOND";
 _group enableAttack false;
+_group setSpeedMode "FULL";
+_group setFormation "LINE";
 
 // find units
 if (_units isEqualTo []) then {
@@ -61,12 +67,20 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-private _buildings = [_target, 22, true, true] call EFUNC(main,findBuildings);
-_buildings append ((_unit targets [true, 12, [], 0, _target]) apply {getPosATL _x});
+private _buildings = [_target, 28, false, false] call EFUNC(main,findBuildings);
 _buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
-_buildings pushBack _target;
+private _housePos = [];
+{
+    _housePos append (_x buildingPos -1);
+} foreach _buildings;
+
+// add building positions to group memory
+_group setVariable [QEGVAR(main,groupMemory), _housePos];
+
+// add base position
+_housePos pushBack _target;
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
@@ -74,9 +88,6 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Assault", EGVAR(main,debug
 
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), "Assaulting", EGVAR(main,debug_functions)];
-
-// updates CQB group variable
-_group setVariable [QEGVAR(main,groupMemory), _buildings];
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
@@ -98,18 +109,19 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
 // ready group
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
-_units doFollow _unit;
 _units doWatch objNull;
 
-// declare leftover positions in memory!
-_group setVariable [QEGVAR(main,groupMemory), _buildings];
+// check for reload
+{
+    reload _x;
+} foreach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
 
 // execute function
-[_cycle, _units, _buildings] call EFUNC(main,doGroupAssault);
+[_cycle, _units, _housePos] call EFUNC(main,doGroupAssault);
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
+    ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 buildings)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics assault", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_join"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];

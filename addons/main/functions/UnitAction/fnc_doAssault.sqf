@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 15], ["_doMove", false]];
+params ["_unit", ["_target", objNull], ["_range", 12], ["_doMove", false]];
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {false};
@@ -38,13 +38,14 @@ private _pos = call {
     // near buildings
     private _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
     private _distanceSqr = _unit distanceSqr _getHide;
-    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distance _unit > 1.5}};
+    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distanceSqr _unit > 2.25}};
 
     // target outdoors
     if (_buildings isEqualTo []) exitWith {
 
         if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
             _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
+            _unit setUnitPosWeak "MIDDLE";
             getPosATL _unit
         };
 
@@ -53,7 +54,7 @@ private _pos = call {
     };
 
     // updates group memory variable
-    if (_unit distance2D _target < 40) then {
+    if (_unit distance2D _target < 40 && {count (units _unit) > random 4}) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
         if (_groupMemory isEqualTo []) then {
@@ -62,18 +63,17 @@ private _pos = call {
     };
 
     // select building position
-    _doMove = true;
-    _getHide = selectRandom _buildings;
-    _getHide
+    // _doMove = true; ~ uncommented by nkenny. Retrying moveTo scheme. *sigh*
+    _buildings select 0
 };
 
 // stance and speed
 [_unit, _pos] call FUNC(doAssaultSpeed);
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.7 || {_unit distance2D _pos < 1}));
-_unit doWatch (AGLToASL _getHide);
+_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.6 || {_unit distance2D _pos < 2}));
 
 // execute
-_unit setDestination [_pos, "LEADER PLANNED", true];
+_unit setDestination [_pos, "LEADER PLANNED", false];
+_unit moveTo _pos;
 if (_doMove) then {_unit doMove _pos;};
 
 // debug

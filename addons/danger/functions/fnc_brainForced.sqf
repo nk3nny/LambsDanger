@@ -28,15 +28,20 @@ if !(_unit call EFUNC(main,isAlive)) exitWith {
     _timeout
 };
 
-// forced AI or units in vehicles
-if (_unit getVariable [QGVAR(forceMove), false] || {!isNull objectParent _unit}) exitWith {
-    _timeout
+// forced AI
+if (_unit getVariable [QGVAR(forceMove), false]) exitWith {
+    _timeout + 1
 };
 
 // fleeing
 if (fleeing _unit) exitWith {
     [_unit] call EFUNC(main,doFleeing);
     _timeout
+};
+
+// units in vehicles
+if (!isNull objectParent _unit) exitWith {
+    _timeout + 1.5
 };
 
 // attack speed and stance

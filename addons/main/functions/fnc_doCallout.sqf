@@ -58,7 +58,7 @@ switch (toLower(_callout)) do {
         _callout = selectRandom ["HealthSomebodyHelpMe", "HealthNeedHelp", "HealthWounded", "HealthMedic", "CombatGenericE"];
     };
     case ("flank"): {
-        _callout = selectRandom ["OnYourFeet", "Advance", "FlankLeft ", "FlankRight"];
+        _callout = selectRandom ["OnYourFeet", "Advance", "FlankLeft", "FlankRight"];
     };
 };
 
