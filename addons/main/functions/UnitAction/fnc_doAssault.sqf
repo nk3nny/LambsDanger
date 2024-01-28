@@ -53,6 +53,7 @@ private _pos = call {
         };
 
         // select target location
+        _doMove = true;
         _getHide
     };
 
