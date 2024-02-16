@@ -26,8 +26,8 @@ for (const annotation of ci_annotations) {
         case 'warning':
             core.warning(recommendation, data);
             break;
-        case 'info':
-            core.info(recommendation, data);
+        case 'notice':
+            core.notice(recommendation, data);
             break;
         default:
             core.warning(recommendation, data);
