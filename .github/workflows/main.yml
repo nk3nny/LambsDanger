@@ -19,7 +19,7 @@ jobs:
     - name: Check for BOM
       uses: arma-actions/bom-check@master
     - name: .editorconfig Checker
-      uses: jokoho48/action-editorconfig-checker@main
+      uses: editorconfig-checker/action-editorconfig-checker@v2
     - name: Setup Node.js environment
       uses: actions/setup-node@v4.0.2
     - name: Run Stringtable Checker
@@ -35,7 +35,7 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v4.3.1
       with:
        name: 'sqfLint Log'
        path: 'sqf.log'
