@@ -12,7 +12,7 @@ for (const annotation of ci_annotations) {
         file: file,
         startLine: parseInt(start_line),
         endLine: parseInt(end_line),
-        title: message,
+        title: recommendation,
     };
     if (start_line === end_line) {
         data.startColumn = start_column;
@@ -20,16 +20,16 @@ for (const annotation of ci_annotations) {
     }
     switch (type) {
         case 'error':
-            core.error(recommendation, data);
+            core.error(message, data);
             break;
         case 'warning':
-            core.warning(recommendation, data);
+        core.warning(message, data);
             break;
         case 'notice':
-            core.notice(recommendation, data);
+        core.notice(message, data);
             break;
         default:
-            core.warning(recommendation, data);
+        core.warning(message, data);
             break;
     }
 }
