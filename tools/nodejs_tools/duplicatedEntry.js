@@ -5,6 +5,7 @@ const fs = require('fs');
 const EOL = require('os').EOL;
 const path = require('path');
 const xml = require("xml2js");
+const core = require('@actions/core');
 
 const PREFIX = "Lambs";
 
@@ -36,14 +37,14 @@ function getDirFiles(p, module) {
                 projectFiles.push(data);
             if (!file.endsWith(".xml")) continue;
             filePath = path.join(p, file);
-            var xmlData = fs.readFileSync(filePath).toString();
+            var xmlData = fs.readFileSync(filePath, { encoding: 'utf8', flag: 'r' });
             running++;
             xml.parseString(xmlData, function (err, result) {
                 if (result.Project.Package[0].Key) {
-                    ParseString(result.Project.Package[0].Key);
+                    ParseString(result.Project.Package[0].Key, filePath, xmlData);
                 } else if (result.Project.Package[0].Container) {
                     for (const entry of result.Project.Package[0].Container) {
-                        ParseString(entry.Key);
+                        ParseString(entry.Key, filePath, xmlData);
                     }
                 }
                 running--;
@@ -52,14 +53,21 @@ function getDirFiles(p, module) {
     }
 }
 
-function ParseString(Keys) {
+function ParseString(Keys, file, data) {
     for (const entry of Keys) {
         for (const key in entry) {
-            if (key != "$" && entry.hasOwnProperty(key)) {
+            if (key != "$" && Object.hasOwnProperty.call(entry, key)) {
                 const element = entry[key][0];
                 const index = stringtableEntries.indexOf(element);
                 if (index != -1 && !stringtableIDs.includes(entry.$.ID)) {
                     const log = `${entry.$.ID} is a Duplicated string ${stringtableIDs[index]} : ${key}`;
+
+                    var start_line = data.split("\n").findIndex(x => x.includes(key));
+                    core.warning(log, {
+                        file: file,
+                        startLine: start_line,
+                    })
+
                     fs.appendFileSync("duplicated.log", log + EOL);
                     console.log(log);
                     failedCount++;
