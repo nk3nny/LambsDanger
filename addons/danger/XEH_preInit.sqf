@@ -5,7 +5,7 @@ ADDON = false;
 // mod check
 GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
-#include "settings.sqf"
+#include "settings.inc.sqf"
 
 // FSM priorities ~ this could be made into CBA settings. But I kinda want to explore it a little first - nkenny
 if (isNil QGVAR(fsmPriorities)) then {

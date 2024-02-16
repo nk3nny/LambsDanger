@@ -13,7 +13,7 @@ lint.bat
 
 sqf/*
 
-tools/stringtableChecker/node_modules
+tools/nodejs_tools/node_modules
 
 .vscode/
 

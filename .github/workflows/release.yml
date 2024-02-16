@@ -11,9 +11,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
       - name: Setup HEMTT
-        uses: arma-actions/hemtt@v1  
+        uses: arma-actions/hemtt@main
       - name: Run HEMTT build
         run: hemtt release
       - run: |
@@ -21,7 +21,7 @@ jobs:
           mv releases/lambs-latest.zip "@LambsDanger_${version//[.]/_}.zip"
       - name: Update Release with Files
         id: create_version_release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true # Set this to false if you want to prevent updating existing releases
           name: ${{ github.event.release.name }}

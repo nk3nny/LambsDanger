@@ -5,8 +5,6 @@ const fs = require('fs');
 const EOL = require('os').EOL;
 const path = require('path');
 const xml = require("xml2js");
-const { Console } = require('console');
-const { fail } = require('assert');
 
 const PREFIX = "Lambs";
 
@@ -75,7 +73,7 @@ function ParseString(Keys) {
 
 getDirFiles("addons", "");
 
-while (running != 0) {}
+while (running != 0) { }
 if (failedCount == 0) {
     console.log("No Duplicated Entrys found");
 } else {

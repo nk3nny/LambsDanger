@@ -4,10 +4,7 @@ author = "LAMBS Dev Team"
 mainprefix = "z"
 
 [version]
-major = 2
-minor = 6
-patch = 1
-build = 0
+path = "addons/main/script_version.hpp"
 git_hash = 0
 
 [files]
@@ -19,11 +16,22 @@ include = [
     "readme.md"
 ]
 
-[asc]
-enabled = true
-
 [hemtt.signing]
 authority = "LambsDanger"
 
 [hemtt.release]
 folder = "lambs_danger"
+
+[hemtt.launch.default]
+workshop = [
+    "450814997", # CBA_A3's Workshop ID
+]
+
+parameters = [
+    "-skipIntro",           # These parameters are passed to the Arma 3 executable
+    "-noSplash",            # They do not need to be added to your list
+    "-showScriptErrors",    # You can add additional parameters here
+    "-debug",
+    "-world=empty",
+    "-filePatching",
+]

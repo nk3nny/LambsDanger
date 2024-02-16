@@ -52,7 +52,7 @@ function getDirFiles(p, module) {
 };
 
 function getFunctions(file, module) {
-    let content = fs.readFileSync(file).toString();
+    let content = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
     content = content.replace(commentRegex, '');
 
     let match;

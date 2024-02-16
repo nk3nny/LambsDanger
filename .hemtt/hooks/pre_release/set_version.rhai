@@ -5,7 +5,7 @@ let version = HEMTT_DIRECTORY
         .open_file()
         .read();
 // Replace the placeholder version with the actual version
-version.replace("{version}", HEMTT_PROJECT_VERSION);
+version.replace("{version}", HEMTT.project().version().to_string_short());
 // Write the new contents to the build output
 // create_file will overwrite the file if it exists
 HEMTT_OUTPUT
