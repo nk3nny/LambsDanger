@@ -16,7 +16,7 @@
         <img src="https://img.shields.io/discord/681656029758488619?color=%237289da&label=Discord&logo=discord&style=flat-square" alt="Lambs Danger Discord">
     </a>
     <a href="https://github.com/nk3nny/LambsDanger/actions?query=workflow%3AArma">
-        <img src="https://img.shields.io/github/workflow/status/nk3nny/LambsDanger/Arma/main.yml?branch=master?logo=github&style=flat-square" alt="Lambs Danger Build Status">
+        <img src="https://img.shields.io/github/workflow/status/nk3nny/LambsDanger/Arma/main.yml?branch=masterlogo=github&style=flat-square" alt="Lambs Danger Build Status">
     </a>
 </p>
 
