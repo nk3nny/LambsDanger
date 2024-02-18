@@ -50,7 +50,7 @@ _unit setVariable [QEGVAR(danger,forceMove), true];
             if ((backpack _unit) isEqualTo "" && {backpack _body isNotEqualTo ""}) then {
                 private _items = backpackItems _body;
                 private _backpack = backpack _body;
-                removeBackpack _body;
+                removeBackpackGlobal _body;
                 _unit addBackpack _backpack;
                 {_unit addItemToBackpack _x} forEach _items;
             };
