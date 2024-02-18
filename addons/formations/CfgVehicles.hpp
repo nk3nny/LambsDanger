@@ -6,7 +6,9 @@ class CfgVehicles {
     };
     class Land;
     class Man : Land {
-        crouchProbabilityCombat = 0.7;  // default: 0.4  ~ frankly not sure these have any effect...
+        crouchProbabilityCombat = 0; // 0.4;
+        crouchProbabilityEngage = 0; // 0.75;
+        crouchProbabilityHiding = 0; // 0.8;
         formationTime = 3; // default: 5
         formationX = 4.2; // default: 5
         brakeDistance = 1.5; // default: 5

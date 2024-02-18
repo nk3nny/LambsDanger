@@ -28,12 +28,15 @@ _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 private _getHide = _unit getHideFrom _target;
 
 // check visibility
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isNotEqualTo 0;
+private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1;
 private _buildings = [];
 private _pos = call {
 
     // can see target!
-    if (_vis) exitWith {getPosATL _target};
+    if (_vis) exitWith {
+        _unit lookAt (aimPos _target);
+        getPosATL _target
+    };
 
     // near buildings
     private _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
@@ -50,6 +53,7 @@ private _pos = call {
         };
 
         // select target location
+        _doMove = true;
         _getHide
     };
 

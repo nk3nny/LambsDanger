@@ -1,5 +1,5 @@
 #include "script_component.hpp"
-#include "\a3\ui_f\hpp\definedikcodes.inc"
+#include "\a3\ui_f\hpp\defineDIKCodes.inc"
 /*
  * Author: joko // Jonas
  * Parses Data from UI Elements from Show Dialog
@@ -157,7 +157,7 @@ private _fnc_AddBoolean = {
 };
 
 private _fnc_AddDropDown = {
-    params ["_text", "", ["_tooltip", ""], ["_values", [], []], ["_default", 0, [0]]];
+    params ["_text", "", ["_tooltip", ""], ["_values", [], [[]]], ["_default", 0, [0]]];
     if (isLocalized _tooltip) then {
         _tooltip = localize _tooltip;
     };

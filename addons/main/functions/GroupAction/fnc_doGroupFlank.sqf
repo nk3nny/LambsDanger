@@ -21,7 +21,7 @@
 params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch"];
 
 // update
-_units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } };
+_units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } && {_x distance2D _overwatch > 5}};
 _vehicles = _vehicles select { canFire _x };
 
 private _posASL = AGLtoASL (selectRandom _pos);
@@ -37,7 +37,7 @@ private _posASL = AGLtoASL (selectRandom _pos);
 
     // suppress
     if (
-        RND(0.7)
+        RND(0.6)
         && {(leader _x) isNotEqualTo _x}
         && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
     ) then {
@@ -46,11 +46,15 @@ private _posASL = AGLtoASL (selectRandom _pos);
 } foreach _units;
 
 // vehicles
-{
-    private _posAGL = selectRandom _pos;
-    _x doWatch _posAGL;
-    [_x, _posAGL] call FUNC(doVehicleSuppress);
-} foreach _vehicles;
+if (_cycle isEqualTo 1) then {
+    {
+        private _posAGL = selectRandom _pos;
+        _x doWatch _posAGL;
+        [_x, _posAGL] call FUNC(doVehicleSuppress);
+    } foreach _vehicles;
+} else {
+    _vehicles doMove _overwatch;
+};
 
 // recursive cyclic
 if !(_cycle <= 1 || {_units isEqualTo []}) then {

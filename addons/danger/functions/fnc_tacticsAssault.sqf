@@ -80,7 +80,7 @@ private _housePos = [];
 _group setVariable [QEGVAR(main,groupMemory), _housePos];
 
 // add base position
-_housePos pushBack _target;
+if (_housePos isEqualTo []) then {_housePos pushBack _target;};
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
@@ -103,7 +103,7 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
     [_unit, _target] call EFUNC(main,doSmoke);
 
     // grenadier smoke
-    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmokeX"], 3] call CBA_fnc_waitAndExecute;
+    [{_this call EFUNC(main,doUGL)}, [_units, _target, "shotSmoke"], 3] call CBA_fnc_waitAndExecute;
 };
 
 // ready group
@@ -117,7 +117,7 @@ _units doWatch objNull;
 } foreach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
 
 // execute function
-[_cycle, _units, _housePos] call EFUNC(main,doGroupAssault);
+[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units, _housePos], 2 + random 3] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

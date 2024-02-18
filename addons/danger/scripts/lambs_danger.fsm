@@ -531,7 +531,7 @@ class FSM
                                         priority = 4.000000;
                                         to="End_Forced";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"call lambs_danger_fnc_isForced && {_queue isEqualTo []}"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_queue isEqualTo [] && {call lambs_danger_fnc_isForced}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/

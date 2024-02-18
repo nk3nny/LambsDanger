@@ -82,9 +82,6 @@ if (isNil "_cachedSounds") then {
             if (_sound select [0, 1] != "\") then {
                 _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
             };
-            if (_sound select [0, 1] == "\") then {
-                _sound = _sound select [1];
-            };
         };
         _cachedSounds set [_forEachIndex, _sound];
     } forEach _cachedSounds;
@@ -107,7 +104,7 @@ if (_cachedSounds isEqualTo []) exitWith {
 };
 
 private _sound = selectRandom _cachedSounds;
-playSound3D [_sound, _unit, isNull (objectParent _unit), getPosASL _unit, 5, pitch _unit, _distance];
+playSound3D [_sound, _unit, isNull (objectParent _unit), eyePos _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
     _this remoteExecCall ["setRandomLip", 0];
