@@ -20,7 +20,7 @@
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
     ["_pos", [], [[]]],
-    ["_type", 6, [0]]
+    ["_type", 4, [0]]
 ];
 
 // single unit
@@ -38,9 +38,7 @@ if (_magazines isEqualTo []) exitWith {false};
 
 // find smoke shell
 private _smokeshell = _magazines findIf {
-    private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
-    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
-    _aiAmmoUsage isEqualTo _type
+    [_x, _type] call FUNC(checkMagazineAiUsageFlags);
 };
 
 // select smoke
