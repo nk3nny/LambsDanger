@@ -74,8 +74,10 @@ if (isNil "_cachedSounds") then {
     _cachedSounds = getArray (_protocolConfig >> _callout);
     private _deleted = false;
     {
-        private _sound = _x;
-        if (_sound == "") then {
+        private _sound = toLowerANSI _x; // playSound3D is case-insensitive
+
+        // File extension must exist for playSound3D to work
+        if (_sound == "" || !(".ogg" in _sound || ".wss" in _sound || ".wav" in _sound)) then {
             _sound = objNull;
             _deleted = true;
         } else {
@@ -83,6 +85,7 @@ if (isNil "_cachedSounds") then {
                 _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
             };
         };
+
         _cachedSounds set [_forEachIndex, _sound];
     } forEach _cachedSounds;
 
@@ -103,17 +106,7 @@ if (_cachedSounds isEqualTo []) exitWith {
     };
 };
 
-// Not a valid file to play, extension must be included
 private _sound = selectRandom _cachedSounds;
-if !(".ogg" in _sound || ".wss" in _sound || ".wav" in _sound) exitWith {
-    if (GVAR(debug_functions)) then {
-        private _str = "WARNING: Callout file path %1 for callout %2 for speaker %3 is not valid!";
-        private _arr = [_str, _sound, _callout, _speaker];
-        _arr call FUNC(debugLog);
-        _arr call BIS_fnc_error;
-    };
-};
-
 playSound3D [_sound, _unit, isNull (objectParent _unit), eyePos _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
