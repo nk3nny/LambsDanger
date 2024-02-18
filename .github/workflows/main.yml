@@ -19,7 +19,7 @@ jobs:
     - name: Check for BOM
       uses: arma-actions/bom-check@master
     - name: .editorconfig Checker
-      uses: editorconfig-checker/action-editorconfig-checker@v2
+      uses: editorconfig-checker/action-editorconfig-checker@master
     - name: Setup Node.js environment
       uses: actions/setup-node@v4
     - name: Run Stringtable Checker
