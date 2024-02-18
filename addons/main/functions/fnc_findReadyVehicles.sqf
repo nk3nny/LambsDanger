@@ -25,6 +25,7 @@ private _vehicles = (units _unit) select {
     (_unit distance2D _x) < _range
     && { !(isNull objectParent _x) }
     && { canFire vehicle _x }
+    && { (magazines vehicle _x) isNotEqualTo [] }
     && { isTouchingGround vehicle _x }
 };
 
