@@ -75,7 +75,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
             <English>Number of rounds in the main salvo. MLRS artillery ignore this value.</English>
-            <German>Anzahl an Schüssen der Hauptsalve.</German>
+            <German>Anzahl an Schüssen der Hauptsalve. MLRS-Artillerie ignoriert diesen Wert.</German>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
             <English>Spread</English>
