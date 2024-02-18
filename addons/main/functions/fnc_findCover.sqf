@@ -99,11 +99,7 @@ if (GVAR(debug_functions) && {(_ret isNotEqualTo [])}) then {
         private _add = if ((_x select 1) isEqualTo "UP") then {
             2
         } else {
-            if ((_x select 1) isEqualTo "MIDDLE") then {
-                1
-            } else {
-                0.2
-            };
+            [0.2, 1] select (_x select 1 isEqualTo "MIDDLE");
         };
         "Sign_Arrow_Large_Blue_F" createVehicleLocal ((_x select 0) vectorAdd [0, 0, _add]);
     } forEach _ret;
