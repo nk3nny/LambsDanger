@@ -27,7 +27,7 @@ if (_groupMemory isEqualTo []) then {
 };
 
 // exit or sort it!
-_groupMemory = _groupMemory select {(leader _unit) distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
+_groupMemory = _groupMemory select {_unit distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
 if (_groupMemory isEqualTo []) exitWith {
     _group setVariable [QGVAR(groupMemory), [], false];
     false

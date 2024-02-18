@@ -144,7 +144,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     // foot infantry support ~ unload
     private _group = group _vehicle;
     private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
-    _cargo append ((fullCrew [_vehicle, "turret"]) apply {_x select 0});
+    _cargo append ((fullCrew [_vehicle, "turret"] select {_x select 4}) apply {_x select 0});
     if (
         _validTarget
         && {_cargo isNotEqualTo []}
