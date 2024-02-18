@@ -27,7 +27,7 @@ if (_groupMemory isEqualTo []) then {
 };
 
 // exit or sort it!
-_groupMemory = _groupMemory select {(leader _unit) distance2D _x < 150 && {_unit distance _x > 1.5}};
+_groupMemory = _groupMemory select {(leader _unit) distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
 if (_groupMemory isEqualTo []) exitWith {
     _group setVariable [QGVAR(groupMemory), [], false];
     false
@@ -35,23 +35,27 @@ if (_groupMemory isEqualTo []) exitWith {
 
 // check for enemy get position
 private _nearestEnemy = _unit findNearestEnemy _unit;
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isNotEqualTo 0;
 if (
-    (vehicle _nearestEnemy) isKindOf "CAManBase"
-    && {_vis || {_unit distance2D _nearestEnemy < 12 && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
+    (_unit distanceSqr _nearestEnemy < 5041)
+    && {(vehicle _nearestEnemy) isKindOf "CAManBase"}
+    && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isEqualTo 1 || {_unit distanceSqr _nearestEnemy < 64 && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
 ) exitWith {
-    [_unit, _nearestEnemy, 8, false] call FUNC(doAssault);
-    _unit setUnitPosWeak "MIDDLE";
+    [_unit, _nearestEnemy, 12, true] call FUNC(doAssault);
 };
 
 // sort positions from nearest to furthest prioritising positions on the same floor
-_groupMemory = _groupMemory apply {[(round (getposATL _unit select 2)) isEqualTo (round (_x select 2)), _x distanceSqr _unit, _x]};
+private _unitATL2 = round (getPosATL _unit select 2);
+_groupMemory = _groupMemory apply {[_unitATL2 isEqualTo (round (_x select 2)), _x distanceSqr _unit, _x]};
 _groupMemory sort true;
 _groupMemory = _groupMemory apply {_x select 2};
 
 // get distance
 private _pos = _groupMemory select 0;
 private _distance2D = _unit distance2D _pos;
+private _indoor = _unit call FUNC(isIndoor);
+if (_distance2D > 20 && {!_indoor}) then {
+    _pos = _unit getPos [20, _unit getDir _pos];
+};
 if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
 
 // variables
@@ -59,7 +63,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault (sympathetic)", GVAR(debug_functions)];
 
 // set stance
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.7 || {_unit call FUNC(isIndoor)}));
+_unit setUnitPosWeak (["UP", "MIDDLE"] select (_indoor || {_distance2D > 8} || {(getSuppression _unit) isNotEqualTo 0}));
 
 // set speed
 [_unit, _pos] call FUNC(doAssaultSpeed);
@@ -69,11 +73,11 @@ if (_distance2D < 7) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_mi
 
 // execute move
 _unit doMove _pos;
-_unit setDestination [_pos, "LEADER PLANNED", _unit distance2D _pos < 18];
+_unit setDestination [_pos, "LEADER PLANNED", _indoor];
 
 // update variable
 if (RND(0.95)) then {_groupMemory deleteAt 0;};
-_groupMemory = _groupMemory select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0};
+_groupMemory = _groupMemory select {_unit distanceSqr _x < 25 && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0}};
 
 // variables
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];

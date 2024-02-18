@@ -126,7 +126,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_nearIndoorTarget != -1) exitWith {
-        _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
+        _plan append [TACTICS_ASSAULT, TACTICS_ASSAULT];
         _pos = _unit getHideFrom (_enemies select _nearIndoorTarget);
     };
 
@@ -136,7 +136,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         private _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
         private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
         if (_holdWP) exitWith {
-            _plan append [TACTICS_GARRISON, TACTICS_HIDE];
+            _plan append [TACTICS_HIDE, TACTICS_HIDE];
             _pos = waypointPosition _currentWP;
             breakOut "conditionScope";
         };
