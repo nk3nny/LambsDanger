@@ -103,7 +103,17 @@ if (_cachedSounds isEqualTo []) exitWith {
     };
 };
 
+// Not a valid file to play, extension must be included
 private _sound = selectRandom _cachedSounds;
+if !(".ogg" in _sound || ".wss" in _sound || ".wav" in _sound) exitWith {
+    if (GVAR(debug_functions)) then {
+        private _str = "WARNING: Callout file path %1 for callout %2 for speaker %3 is not valid!";
+        private _arr = [_str, _sound, _callout, _speaker];
+        _arr call FUNC(debugLog);
+        _arr call BIS_fnc_error;
+    };
+};
+
 playSound3D [_sound, _unit, isNull (objectParent _unit), eyePos _unit, 5, pitch _unit, _distance];
 [_unit, true] remoteExecCall ["setRandomLip", 0];
 [{
