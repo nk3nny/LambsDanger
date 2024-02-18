@@ -39,9 +39,21 @@ _vehicles = _vehicles select { canFire _x };
     if !(_suppress || {(currentCommand _x isEqualTo "Suppress")}) then {
         // move forward
         _x forceSpeed 3;
-        _x doMove (_x getPos [20 + random 10, _x getDir _posAGL]);
+        _x doMove (_x getPos [20, _x getDir _posAGL]);
         _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
     };
+
+    // follow-up fire
+    [
+        {
+            params ["_unit", "_posASL"];
+            if (_unit call FUNC(isAlive) && {!(currentCommand _unit isEqualTo "Suppress")}) then {
+                [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
+            };
+        },
+        [_x, AGLtoASL _posAGL],
+        5
+    ] call CBA_fnc_waitAndExecute;
 } foreach _units;
 
 // vehicles

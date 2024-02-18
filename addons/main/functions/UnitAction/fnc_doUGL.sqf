@@ -48,7 +48,7 @@ private _unit = _units findIf {
                 private _index = _findFlares findIf {
                     private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
                     private _flareSimulation = getText (configfile >> "CfgAmmo" >> _ammo >> "simulation");
-                    _flareSimulation isEqualTo _type
+                    (_flareSimulation find _type) isNotEqualTo -1
                 };
 
                 if (_index == -1) exitWith {false};

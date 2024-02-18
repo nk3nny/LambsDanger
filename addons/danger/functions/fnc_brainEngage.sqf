@@ -55,6 +55,9 @@ if (
     _timeout + 1.4
 };
 
+// set low stance
+_unit setUnitPosWeak "MIDDLE";
+
 // far, try to suppress
 if (
     _distance < 500
@@ -64,11 +67,12 @@ if (
     && {_type isEqualTo DANGER_CANFIRE}
 ) exitWith {
     private _posASL = ATLtoASL (_unit getHideFrom _target);
-    if (((ASLtoAGL _posASL) select 2) > 6) exitWith {
-        _timeout + 3
+    if (((ASLtoAGL _posASL) select 2) > 6) then {
+        _posASL = ASLtoAGL _posASL;
+        _posASL set [2, 0.5];
+        _posASL = AGLToASL _posASL
     };
     _unit forceSpeed 0;
-    _unit setUnitPosWeak "MIDDLE";
     _unit suppressFor 4;
     [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 4

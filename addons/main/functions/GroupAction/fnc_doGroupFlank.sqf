@@ -46,11 +46,15 @@ private _posASL = AGLtoASL (selectRandom _pos);
 } foreach _units;
 
 // vehicles
-{
-    private _posAGL = selectRandom _pos;
-    _x doWatch _posAGL;
-    [_x, _posAGL] call FUNC(doVehicleSuppress);
-} foreach _vehicles;
+if (_cycle isEqualTo 1) then {
+    {
+        private _posAGL = selectRandom _pos;
+        _x doWatch _posAGL;
+        [_x, _posAGL] call FUNC(doVehicleSuppress);
+    } foreach _vehicles;
+} else {
+    _vehicles doMove _overwatch;
+};
 
 // recursive cyclic
 if !(_cycle <= 1 || {_units isEqualTo []}) then {
