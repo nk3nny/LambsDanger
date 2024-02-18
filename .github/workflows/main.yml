@@ -50,12 +50,16 @@ jobs:
           fetch-depth: 1
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
+      - name: Setup Node tools
+        run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../
       - name: Setup HEMTT
         uses: arma-actions/hemtt@v1
+      - name: Set Build Version
+        run: node tools/nodejs_tools/gitversionsetter.js
       - name: Run HEMTT build
         run: hemtt release
       - name: Check Hemtt Annotactions
-        run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../ && node tools/nodejs_tools/hemttchecker.js
+        run: node tools/nodejs_tools/hemttchecker.js
       - name: Upload Release
         uses: actions/upload-artifact@v4
         with:

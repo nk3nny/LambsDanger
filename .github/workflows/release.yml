@@ -14,6 +14,12 @@ jobs:
       - uses: actions/checkout@master
       - name: Setup HEMTT
         uses: arma-actions/hemtt@main
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+      - name: Setup Node tools
+        run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../
+      - name: Set Build Version
+        run: node tools/nodejs_tools/gitversionsetter.js
       - name: Run HEMTT build
         run: hemtt release
       - run: |
