@@ -79,7 +79,6 @@ _unit setDestination [_pos, "LEADER PLANNED", _indoor];
 if (RND(0.95)) then {_groupMemory deleteAt 0;};
 _groupMemory = _groupMemory select {_unit distanceSqr _x < 25 && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0}};
 
-
 // variables
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
