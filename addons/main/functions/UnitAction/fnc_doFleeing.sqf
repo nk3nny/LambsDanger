@@ -39,12 +39,13 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 [QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
 
 // Abandon vehicles in need!
+private _vehicle = vehicle _unit;
 if (
     RND(0.5)
     && {!_onFoot}
-    && {canUnloadInCombat (vehicle _unit)}
-    && {(speed (vehicle _unit)) < 3}
-    && {isTouchingGround vehicle _unit}
+    && {canUnloadInCombat _vehicle || {_vehicle isKindOf "StaticWeapon"}}
+    && {(speed _vehicle) < 3}
+    && {isTouchingGround _vehicle}
 ) exitWith {
     [_unit] orderGetIn false;
     _unit setSuppression 1;  // prevents instant laser aim - nkenny

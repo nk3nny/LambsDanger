@@ -33,7 +33,7 @@ private _group = group _unit;
 // set variable
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
-_group enableAttack false;
+if (isNull objectParent _unit) then {_group enableAttack false;};
 
 // set current task
 _unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];

@@ -46,13 +46,17 @@ if (_buildings isNotEqualTo []) then {
 };
 
 // add predicted location -- just to ensure shots fired!
-if (_buildings isEqualTo []) then {_buildings pushBack _predictedPos;};
+if (_buildings isEqualTo []) then {
+    _predictedPos = ASLtoAGL (ATLtoASL _predictedPos);
+    if ((_predictedPos select 2) > 6) then {_predictedPos set [2, 0.5]};
+    _buildings pushBack _predictedPos;
+};
 
 // pos
 _pos = selectRandom _buildings;
 
 // look at position
-_vehicle doWatch _pos;
+_vehicle doWatch (AGLtoASL _pos);
 
 // suppression
 private _suppression = [_unit, _pos] call FUNC(doVehicleSuppress);
