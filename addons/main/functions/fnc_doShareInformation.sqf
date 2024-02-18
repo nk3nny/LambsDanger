@@ -64,7 +64,7 @@ if !(isNull _target) then {
     private _knowsAbout = (_unit knowsAbout _target) min GVAR(maxRevealValue);
     {
         [_x, [_target, _knowsAbout]] remoteExec ["reveal", leader _x];
-    } forEach _groups;
+    } forEach (_groups select {_unit distance2D (leader _x) < GVAR(combatShareRange)});
 };
 
 [QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
@@ -81,17 +81,20 @@ if (
 // debug
 if (EGVAR(main,debug_functions)) then {
     // debug message
-    ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min 1, count _groups, round _range] call FUNC(debugLog);
+    ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min GVAR(maxRevealValue), count _groups, round _range] call FUNC(debugLog);
 
     // debug marker
-    private _zm = [_unit, [_range,_range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
-    private _markers = [_zm];
+    private _zm = [_unit, [_range, _range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
+    private _zmm = [_unit, [_range min GVAR(combatShareRange), _range min GVAR(combatShareRange)], _unit call FUNC(debugMarkerColor), "SolidBorder"] call FUNC(zoneMarker);
+    _zmm setMarkerAlphaLocal 0.3;
+    private _markers = [_zm, _zmm];
 
     // enemy units
     {
         private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
+        _m setMarkerTextLocal str (_unit knowsAbout _x);
         _markers pushBack _m;
     } foreach ((units _target) select {_unit knowsAbout _x > 0});
 

@@ -50,6 +50,7 @@ private _targetPos = _pos select 0;
     };
     // set movement
     if (((expectedDestination _unit) select 0) distanceSqr _assaultPos > 1) then {
+
         _unit doMove _assaultPos;
         _unit setDestination [_assaultPos, "LEADER PLANNED", true];
     };

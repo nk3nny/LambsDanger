@@ -65,19 +65,20 @@ if (RND(0.1) && { _buildings isNotEqualTo [] }) exitWith {
 _unit setUnitPosWeak "DOWN";
 
 // check for rear-cover
-private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 9, true, true ];
+private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 15, true, true ];
 
 // targetPos
 private _targetPos = if (_cover isEqualTo []) then {
     _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
 } else {
-    (_cover select 0) getPos [-1.2, _unit getDir (_cover select 0)]
+    (_cover select 0) getPos [-0.6, _unit getDir (_cover select 0)]
 };
 
 // water means hold
 if (surfaceIsWater _targetPos) then {_targetPos = getPosATL _unit;};
 
 // cover move
+doStop _unit;
 _unit doMove _targetPos;
 
 // debug

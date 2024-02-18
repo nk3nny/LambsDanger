@@ -19,13 +19,13 @@ jobs:
     - name: Check for BOM
       uses: arma-actions/bom-check@master
     - name: .editorconfig Checker
-      uses: jokoho48/action-editorconfig-checker@main
+      uses: editorconfig-checker/action-editorconfig-checker@v2
     - name: Setup Node.js environment
-      uses: actions/setup-node@v2.1.2
+      uses: actions/setup-node@v4
     - name: Run Stringtable Checker
-      run: cd tools/stringtableChecker && npm i &> /dev/null && cd ../../ && node tools/stringtableChecker/stringTableChecker.js
+      run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../ && node tools/nodejs_tools/stringTableChecker.js
     - name: Check Functions
-      run: node tools/prepchecker.js
+      run: node tools/nodejs_tools/prepchecker.js
 
   lint:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v4
       with:
        name: 'sqfLint Log'
        path: 'sqf.log'
@@ -48,14 +48,19 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 1
-      - name: Build addon with HEMTT
-        uses: arma-actions/hemtt@master
-        with:
-          command: 'build --release'
-      - uses: actions/upload-artifact@master
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+      - name: Setup HEMTT
+        uses: arma-actions/hemtt@v1
+      - name: Run HEMTT build
+        run: hemtt release
+      - name: Check Hemtt Annotactions
+        run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../ && node tools/nodejs_tools/hemttchecker.js
+      - name: Upload Release
+        uses: actions/upload-artifact@v4
         with:
           name: '@LambsDanger'
-          path: 'releases/@LambsDanger*.zip'
+          path: '.hemttout/release/*'
 
   stringtables:
     runs-on: ubuntu-latest

@@ -29,8 +29,8 @@ class CfgFSMs {
                     function = "nothing";
                     parameters[] = {};
                     thresholds[] = {};
-                }
-            }
+                };
+            };
         };
     };
 };

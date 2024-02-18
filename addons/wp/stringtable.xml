@@ -17,7 +17,7 @@
             <Polish>Pojazd będzie automatycznie zarejestrowany jako dostępna artyleria do dynamicznych ataków</Polish>
             <Russian>Машина будет автоматически зарегистрирована как доступная артиллерия для динамических ударов.</Russian>
             <Italian>Il veicolo verrà automaticamente registrato come artiglieria disponibile per attacchi dinamici</Italian>
-            <Chinesesimp>车辆将自动指示为可用于动态打击的火炮</Chinesesimp>
+            <Chinesesimp>载具将为具有动态击打的火炮提供自动指示</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Target_DisplayName">
             <English>Dynamic Target</English>
@@ -44,7 +44,7 @@
             <Polish>Ta pozycja będzie ostrzelana przez pierwszą dostępną artylerię po danej stronie. Artyleria musi być zarejestrowana dla strony i być w zasięgu.</Polish>
             <Russian>Это место нацелено на первую доступную артиллерийскую установку с юнитом данной стороны. Юнит Артиллерии должен зарегистрирован за сторону и находиться в пределах досягаемости залпа</Russian>
             <Italian>Questa posizione è presa di mira dalla prima unità di artiglieria disponibile di un dato lato. L'unità di artiglieria deve essere registrata a lato ed essere a distanza di tiro</Italian>
-            <Chinesesimp>该位置是给定一方的第一个可用炮兵部队的目标.炮兵部队必须在一方指示并在打击距离内</Chinesesimp>
+            <Chinesesimp>该位置是给定一方的第一个可用炮兵部队的目标.炮兵部队必须在一方指示并在击打距离内</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
             <English>Side</English>
@@ -89,7 +89,7 @@
             <Polish>Rozrzut</Polish>
             <Russian>Разброс</Russian>
             <Italian>Propagazione</Italian>
-            <Chinesesimp>扩散</Chinesesimp>
+            <Chinesesimp>散布</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
             <English>Default dispersion of the main salvo</English>
@@ -277,7 +277,7 @@
             <Polish>Zadanie - Obóz sprawia, że przydzielone jednostki gromadzą się wokół jednego punktu, zazwyczaj obozu. Niektóre jednostki mogą się oddzielić, żeby obsadzić broń statyczną, garnizonować budynki lub patrolować teren. &lt;br\&gt; Ustaw obszar w 3DEN.</Polish>
             <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за стационарное оружие, входить в здания и патрулировать территорию.</Russian>
             <Italian>Compito magazzino fa sembrare che l'unità si raccolga intorno a un singolo punto, in genere un campeggio. Alcune unità si sposteranno per utilizzare armi statiche, presidiare edifici e pattugliare l'area.&lt;br/&gt;Imposta l'area in 3DEN.</Italian>
-            <Chinesesimp>营地任务使单位看起来聚集在一个点周围，通常是一个露营地。 一些单位会离开以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在 3DEN 中设置区域.</Chinesesimp>
+            <Chinesesimp>营地任务使单位看起来聚集在一个点周围,通常是一个露营地.一些单位会离开以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在3DEN中设置区域.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
@@ -376,7 +376,7 @@
             <Polish>Gdy dynamiczne centrum jest widoczne, jest możliwe, żeby poruszać centralnym punktem przeszukiwania budynku.</Polish>
             <Russian>При наличии динамического центра можно перемещать центральную точку шаблона поиска здания.</Russian>
             <Italian>Con il centro dinamico presente, è possibile spostare il punto centrale del pattern di ricerca dell'edificio</Italian>
-            <Chinesesimp>在存在动态中心的情况下，可以移动建筑物搜索模式的中心点</Chinesesimp>
+            <Chinesesimp>在存在动态中心的情况下,可以移动建筑物搜索模式的中心点</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_DisplayName">
             <English>Radius</English>
@@ -403,7 +403,7 @@
             <Polish>Zadanie - CQB pozwala jednostkom przeszukiwać budynki w okolicy. Ustaw zasięg modułu w 3DEN, żeby konfigurować obszar przeszukiwania. Moduł można przesunąć, żeby dynamicznie zmieniać przeszukiwany obszar. &lt;br\&gt; &lt;br\&gt; Moduł działa najlepiej na małym obszarze. Wskazane jest użycie wielu modułów o małym obszarze działania i połączenie ich w jedną trasę.</Polish>
             <Russian>Задача CQB заставляет юнит обыскивать постройки в данной области. Установите размер модуля в 3DEN, чтобы настроить область поиска. Модуль можно перемещать, чтобы динамически перемещать область поиска. &lt;br\&gt; &lt;br\&gt; В целом модуль лучше всего работает с меньшим AOE. Лучше связать несколько модулей или путевых точек вместе, чем иметь один массив. Группы одной стороны поделятся информацией, какие здания были зачищены, а какие еще требуют поиска.</Russian>
             <Italian>Il compito CQB fa sì che l'unità cerchi gli edifici con l'area. Imposta la dimensione del modulo in 3DEN per configurare l'area di ricerca. Il modulo può essere spostato per spostare dinamicamente l'area di ricerca.&lt;br/&gt;&lt;br/&gt;In generale il modulo funziona meglio con un AOE più piccolo. Meglio mettere insieme più moduli o waypoint piuttosto che averne uno enorme. I gruppi dello stesso lato condivideranno quali edifici sono stati sgomberati e quali devono ancora essere perquisiti.</Italian>
-            <Chinesesimp>指派任务 CQB 使单位搜索该区域的建筑物. 在 3DEN 中设置模块大小以配置搜索区域. 可以移动模块以动态移动搜索区域.&lt;br/&gt;&lt;br/&gt;通常，该模块在较小的 AOE 下效果最佳.将多个模块或路径点串在一起比一个庞大的模块或航路点更好.同一方的小组将共享哪些建筑物已被清除哪些仍需要搜索.</Chinesesimp>
+            <Chinesesimp>指派任务CQB使单位搜索该区域的建筑物. 在3DEN中设置模块大小以配置搜索区域. 可以移动模块以动态移动搜索区域.&lt;br/&gt;&lt;br/&gt;通常,该模块在较小的AOE下效果最佳.将多个模块或路径点串在一起比一个庞大的模块或航路点更好.同一方的小组将共享哪些建筑物已被清除哪些仍需要搜索.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
             <English>Task Garrison</English>
@@ -475,7 +475,7 @@
             <Polish>Trigger zakończenia</Polish>
             <Russian>Выйти из триггера</Russian>
             <Italian>Esci dal grilletto</Italian>
-            <Chinesesimp>离开起因</Chinesesimp>
+            <Chinesesimp>离开的诱因</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_Tooltip">
             <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
@@ -493,7 +493,7 @@
             <Polish>Zadanie - Garnizon pozwala jednostkom znajdującym się na obszarze określonym przez moduł, zajmować pozycje w domach i obsadzać broń stacjonarną.</Polish>
             <Russian>Задача занятие позиций заставляет юниты занимать позиции в зданиях и управлять доступными турелями и статическим оружием в пределах области, определяемой атрибутами 3DEN</Russian>
             <Italian>Compito Guarnigione fa sì che l'unità prenda posizione negli edifici e metta a disposizione torrette e armi statiche all'interno di un'area definita dagli attributi 3DEN.</Italian>
-            <Chinesesimp>驻军任务使该单位占据建筑物中的位置并在由 3DEN 属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
+            <Chinesesimp>驻军任务使该单位占据建筑物中的位置并在由3DEN属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_DisplayName">
             <English>Dynamic patrol</English>
@@ -511,7 +511,7 @@
             <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
             <German>Die Einheit erstellt eine Untergruppe, um das Gebiet zu patrouillieren.\nNB: Die Patrouille wird ihre ursprüngliche Gruppe verlassen, um eine neue zu bilden.</German>
             <Italian>L'unità creerà un sottogruppo per pattugliare l'area.\nNB: La pattuglia lascerà il gruppo originale per formarne uno nuovo.</Italian>
-            <Chinesesimp>该部队将成立一个小组在该地区巡逻.\nNB：巡逻队将离开原来的小组，组建一个新的小组.</Chinesesimp>
+            <Chinesesimp>该部队将成立一个小组在该地区巡逻.\nNB:巡逻队将离开原来的小组,组建一个新的小组.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
             <English>Task Patrol</English>
@@ -583,7 +583,7 @@
             <Polish>Zadanie - Patrol pozwala jednostkom na patrolowanie obszaru.</Polish>
             <Russian>Задача патруль выполняет патрулирование юнита в пределах области, заданной атрибутами 3DEN.</Russian>
             <Italian>Task Patrol effettua il pattugliamento dell'unità all'interno dell'area impostata dagli attributi 3DEN.</Italian>
-            <Chinesesimp>任务巡逻使单位在 3DEN 属性设置的区域内巡逻.</Chinesesimp>
+            <Chinesesimp>任务巡逻使单位在3DEN属性设置的区域内巡逻.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
             <English>Task Reset</English>
@@ -601,7 +601,7 @@
             <Polish>Resetuje wszystkie skrypty LAMBS działające na jednostce.</Polish>
             <Russian>Этот модуль сбрасывает все пользовательские скрипты LAMBS, запущенные на устройстве.</Russian>
             <Italian>Questo modulo ripristina tutti gli script LAMBS personalizzati in esecuzione sull'unità</Italian>
-            <Chinesesimp>此模块重置单位上运行的所有自定义 LAMBS 脚本</Chinesesimp>
+            <Chinesesimp>此模块重置单位上运行的所有自定义LAMBS脚本</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
             <English>Task Creep</English>
@@ -691,7 +691,7 @@
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
             <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
             <Italian>Task Creep fa sì che l'unità tenti di tendere un'imboscata ai nemici all'interno dell'area impostata dagli attributi 3DEN. Il gruppo utilizzerà la copertura disponibile e manterrà una posizione bassa per rimanere nascosto.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>匍匐小组变使单位尝试在 3DEN 属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
+            <Chinesesimp>匍匐小组变使单位尝试在3DEN属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
             <English>Task Hunt</English>
@@ -709,7 +709,7 @@
             <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu uniknięcia wykrycia. Domyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Задача охота заставляет отряд патрулировать область в пределах области, установленной атрибутами 3DEN. Группа будет случайно двигаться в поисковой схеме, постепенно приближаясь к цели. Юниты будут включать фонарики, если они доступны. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
             <Italian>Task Hunt fa in modo che l'unità pattuglia l'area all'interno dell'area impostata dagli attributi 3DEN. Il gruppo si sposterà casualmente in uno schema di ricerca avvicinandosi gradualmente al bersaglio. L'unità abiliterà le torce, se disponibili.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>搜寻任务使单位在 3DEN 属性设置的区域内巡逻. 该小组将以搜索模式随意移动逐渐接近目标。.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家.</Chinesesimp>
+            <Chinesesimp>搜寻任务使单位在3DEN属性设置的区域内巡逻.该小组将以搜索模式随意移动逐渐接近目标.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -745,7 +745,7 @@
             <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
             <Russian>Группа поиска будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы устройство использовало вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
             <Italian>Il gruppo di caccia utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
-            <Chinesesimp>搜寻组将使用组长作为搜索模式的中心. 禁用让单位使用模块位置. 这创造了一个更具防御性的群体</Chinesesimp>
+            <Chinesesimp>搜寻组将使用组长作为搜索模式的中心.禁用让单位使用模块位置.这创造了一个更具防御性的群体</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
             <English>Script interval</English>
@@ -815,7 +815,7 @@
             <Polish>Zadanie - Szturm sprawia, że jednostki agresywnie szturmują naprzeciw wrogom. Jednostki będą poruszać się bardzo agresywnie, często ignorując osłonę i ogień zaporowy.&lt;br/&gt;&lt;br/&gt;Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom. Wyłącz FSM dla jednostek, dla prawdziwie przerażających przeciwników.</Polish>
             <Russian>Задача Нападение  заставляет отряд попытаться агрессивно бежать к врагам в пределах области, установленной атрибутами 3DEN. Отряд будет двигаться чрезвычайно агрессивно, часто игнорируя укрытие и подавление.&lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков. Отключает юнит FSM для поистине устрашающего врага</Russian>
             <Italian>Task Rush fa sì che l'unità tenti di correre in modo aggressivo verso i nemici all'interno dell'area impostata dagli attributi 3DEN. L'unità si muoverà in modo estremamente aggressivo, spesso ignorando la copertura e la soppressione.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili. Disabilita l'unità FSM per un nemico davvero terrificante.</Italian>
-            <Chinesesimp>使单位尝试向 3DEN 属性设置的区域内的敌人发起攻击. 该单位将极其激进地移动，通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下，搜索模块仅针对敌对玩家.禁用FSM单位以获得真正可怕的敌人.</Chinesesimp>
+            <Chinesesimp>使单位尝试向3DEN属性设置的区域内的敌人发起攻击.该单位将极其激进地移动,通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.禁用FSM单位以获得真正可怕的敌人.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
             <English>Use group as center</English>
@@ -950,7 +950,7 @@
             <Polish>Ustawia centrum dla wykonywanego skryptu. Moduł może być Dynamicznym Celem LAMBS wybranym z listy lub własną pozycją</Polish>
             <Russian>Устанавливает центр выполнения скрипта. Это может быть собственная или динамическая цель LAMBS, выбранная из списка.</Russian>
             <Italian>Imposta il centro per l'esecuzione dello script. Questo può essere se stesso o un target dinamico LAMBS selezionato dall'elenco</Italian>
-            <Chinesesimp>设置脚本执行的中心. 这可以是自己或从列表中选择的 LAMBS 动态目标</Chinesesimp>
+            <Chinesesimp>设置脚本执行的中心.这可以是自己或从列表中选择的LAMBS动态目标</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_None">
             <English>None</English>
@@ -1224,7 +1224,7 @@
             <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
             <German>Registriert Artillerie für den dynamischen Einsatz</German>
             <Italian>Registri artiglieria per uso dinamico</Italian>
-            <Chinesesimp>指示火炮以供动态使用</Chinesesimp>
+            <Chinesesimp>动态使用方面的火炮指示</Chinesesimp>
         </Key>
     </Package>
 </Project>
