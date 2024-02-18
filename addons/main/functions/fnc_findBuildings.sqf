@@ -27,7 +27,7 @@ params [
 
 // houses
 private _houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];
-_houses = _houses select {((_x buildingPos -1) isNotEqualTo [])};
+_houses = _houses select {((_x buildingPos -1) isNotEqualTo []) && {(alive _x) && !(isObjectHidden _x)}};
 
 // find house positions
 if (!_useHousePos) exitWith {_houses}; // return if not use House Pos
