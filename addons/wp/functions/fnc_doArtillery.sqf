@@ -61,27 +61,8 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
 };
 
 // MRLS weapons fire almost entire magazine, but with less accuracy
-private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), -1];
-if (_isMLRS isEqualTo -1) then {
-    private _gunner = gunner _gun;
-    private _assignedRoles = assignedVehicleRole _gunner;
-
-    // gunner doesn't have a proper turret!
-    if ((count _assignedRoles) < 2) exitWith {
-        _gun setVariable [QEGVAR(main,isArtilleryMRLS), 0];
-    };
-
-    // get the callout for what this vehicle shoots!
-    private _turretPath = _assignedRoles select 1;
-    private _turret = (_gun weaponsTurret _turretPath) select 0;
-    private _nameSound = getText (configFile >> "CfgWeapons" >> _turret >> "nameSound");
-    if (_nameSound isEqualTo "rockets") exitWith {
-        _gun setVariable [QEGVAR(main,isArtilleryMRLS), 1];
-        _isMLRS = 1;
-    };
-    _gun setVariable [QEGVAR(main,isArtilleryMRLS), 0];
-};
-if (_isMLRS isEqualTo 1) then {
+private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), false];
+if (_isMLRS) then {
     _skipCheckrounds = true;
     _salvo = (gunner _gun) Ammo (currentMuzzle (gunner _gun));
     _rounds = 1;
@@ -187,7 +168,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
             };
 
             // waituntil
-            if (_isMLRS isEqualTo 1) then {sleep 1.3;};
+            if (_isMLRS) then {sleep 1.3;};
             waitUntil {unitReady _gun};
 
         } else {

@@ -34,6 +34,27 @@ private _artillery = [];
 private _artillery = _artillery select { getNumber (configOf _x >> "artilleryScanner") > 0 };
 if (_artillery isEqualTo []) exitWith {false};
 
+// check for MLRS
+{
+    private _gunner = gunner _x;
+    private _assignedRoles = assignedVehicleRole _gunner;
+
+    // gunner doesn't have a proper turret!
+    if ((count _assignedRoles) < 2) then {
+        _gun setVariable [QEGVAR(main,isArtilleryMRLS), false];
+    } else {
+        // get the callout for what this vehicle shoots!
+        private _turretPath = _assignedRoles select 1;
+        private _turret = (_gun weaponsTurret _turretPath) select 0;
+        private _nameSound = getText (configFile >> "CfgWeapons" >> _turret >> "nameSound");
+        if (_nameSound isEqualTo "rockets") then {
+            _gun setVariable [QEGVAR(main,isArtilleryMRLS), true];
+        } else {
+            _gun setVariable [QEGVAR(main,isArtilleryMRLS), false];
+        };
+    };
+} forEach _artillery;
+
 // add to faction global
 [QGVAR(RegisterArtillery), _artillery] call CBA_fnc_serverEvent;
 
