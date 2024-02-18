@@ -29,7 +29,12 @@ params ["_unit", "", "", ["_target", objNull]];
 private _timeout = time + 3;
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {_timeout};
+if (
+    !(_unit checkAIFeature "PATH")
+    || {((behaviour _unit)) isEqualTo "STEALTH"}
+    || {(currentCommand _unit) isEqualTo "STOP"}
+    || {(combatMode _unit) in ["BLUE", "GREEN"]}
+) exitWith {_timeout};
 
 // group memory
 private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];

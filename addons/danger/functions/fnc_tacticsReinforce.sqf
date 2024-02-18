@@ -74,6 +74,13 @@ if (_units isEqualTo []) then {
 // has artillery? ~ if so fire in support?
 // is aircraft or tank? Different movement waypoint?
 
+// clear HOLD waypointss
+private _waypoints = waypoints _group;
+private _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
+if ((waypointType _currentWP) isEqualTo "HOLD") then {
+    [_group] call CBA_fnc_clearWaypoints;
+};
+
 // formation changes ~ allowed here as Reinforcing units have full autonomy - nkenny
 private _distance = _unit distance2D _target;
 if (_distance > 500) then {

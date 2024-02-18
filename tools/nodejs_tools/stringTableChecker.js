@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const xml = require("xml2js");
-const { Console } = require('console');
+const core = require('@actions/core');
+
 
 const PREFIX = "Lambs";
 
@@ -73,6 +74,11 @@ function CheckStringtables() {
                 stringtableEntries[strName] = true;
             } else {
               console.log(`Stringtable Entry ${strName} does not exist in ${data.path}`);
+              core.notice(`Stringtable Entry ${strName} does not exist`, {
+                title: "Missing Stringtable Entry",
+                file: data.path,
+              });
+
               failedCount++;
             }
         }
@@ -80,6 +86,9 @@ function CheckStringtables() {
     for (var stringtableEntry in stringtableEntries) {
       if (stringtableEntries.hasOwnProperty(stringtableEntry) && !stringtableEntries[stringtableEntry]) {
         console.log(`Stringtable Entry ${stringtableEntry} is Unused!`);
+        core.notice(`Stringtable Entry ${stringtableEntry} is Unused!`, {
+          title: "Unused Stringtable Entry",
+        });
       }
     }
 }

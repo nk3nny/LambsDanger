@@ -20,7 +20,7 @@
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
     ["_pos", [], [[]]],
-    ["_type", 6, [0]]
+    ["_type", 4, [0]]
 ];
 
 // single unit
@@ -38,27 +38,18 @@ if (_magazines isEqualTo []) exitWith {false};
 
 // find smoke shell
 private _smokeshell = _magazines findIf {
-    private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
-    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
-    _aiAmmoUsage isEqualTo _type
+    [_x, _type] call FUNC(checkMagazineAiUsageFlags);
 };
 
 // select smoke
 if (_smokeshell == -1) exitWith {false};
 _smokeshell = (_magazines select _smokeshell);
 
-// get muzzle -- This is where Joko could do some fancy caching ~ nkenny
-private _muzzleList = "true" configClasses (configFile >> "cfgWeapons" >> "throw");
-
-private _muzzle = _muzzleList findIf {
-
-    private _compatible = getArray (configFile >> "cfgWeapons" >> "throw" >> configName _x >> "magazines");
-    _smokeshell in _compatible
-};
+// get muzzle
+private _muzzle = _smokeshell call FUNC(getCompatibleThrowMuzzle);
 
 // select muzzle
-if (_muzzle == -1) exitWith {false};
-_muzzle = configName (_muzzleList select _muzzle);
+if (_muzzle isEqualTo "") exitWith {false};
 
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // turn towards target

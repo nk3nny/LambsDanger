@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
+params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 120]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -108,7 +108,7 @@ _group setFormation "FILE";
 {
     _x setUnitPos "DOWN";
     _x setVariable [QGVAR(forceMove), true];
-} foreach _units;
+} foreach (_units select {isNull objectParent _x});
 
 // leader smoke ~ deploy concealment to enable movement
 if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
