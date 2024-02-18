@@ -68,7 +68,7 @@ if (_artillery) exitWith {
 
     // enemies within 12-30m may cause crew to disembark!
     if (_attack && {_dangerCausedBy distance _vehicle < (12 + random 18)} && {currentCommand _unit isEqualTo ""}) then {
-        private _vehicleCrew = (crew _vehicle);
+        private _vehicleCrew = crew _vehicle;
         _vehicleCrew orderGetIn false;
         {
             _x setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
