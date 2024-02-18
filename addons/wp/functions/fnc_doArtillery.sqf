@@ -45,15 +45,37 @@ if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {
 // turn gun
 _gun doWatch _pos;
 
+// set group task
+(group _gun) setVariable [QEGVAR(main,currentTactic), "taskArtillery", EGVAR(main,debug_functions)];
+
 // settings
 private _direction = _gun getDir _pos;
 private _center = _pos getPos [_accuracy * 0.33, -_direction];
 private _offset = 0;
+private _salvo = 1;
 
 // heavier artillery fires more rounds, more accurately
 if !((vehicle _gun) isKindOf "StaticMortar") then {
     _rounds = _rounds * 2;
     _accuracy = _accuracy * 0.5;
+};
+
+// MRLS weapons fire almost entire magazine, but with less accuracy
+private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), false];
+if (_isMLRS) then {
+    _skipCheckrounds = true;
+    _salvo = (gunner _gun) Ammo (currentMuzzle (gunner _gun));
+    _rounds = 1;
+    if ((_salvo mod 6) isEqualTo 0) then {
+        _rounds = floor (_salvo * 0.334);
+        _salvo = 3;
+    };
+    if ((_salvo mod 10) isEqualTo 0) then {
+        if (_salvo > 20) then {_salvo = 20;};
+        _rounds = floor (_salvo * 0.2);
+        _salvo = 5;
+    };
+    _accuracy = _accuracy * 1.5;
 };
 
 private _ammo = (getArtilleryAmmo [_gun]) param [0, ""];
@@ -137,7 +159,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
         if (_target inRangeOfArtillery [[_gun], _ammo]) then {
 
             // fire round
-            _gun commandArtilleryFire [_target, _ammo, 1];
+            _gun commandArtilleryFire [_target, _ammo, _salvo];
 
             // debug
             if (EGVAR(main,debug_functions)) then {
@@ -146,7 +168,9 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
             };
 
             // waituntil
+            if (_isMLRS) then {sleep 1.3;};
             waitUntil {unitReady _gun};
+
         } else {
             if (EGVAR(main,debug_functions)) then {
                 ["Error Target position is not reachable with artillery"] call EFUNC(main,debugLog);
@@ -156,7 +180,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
     // debug
     if (EGVAR(main,debug_functions)) then {
-        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configOf _gun >> "displayName"), _rounds, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
+        ["%1 Artillery strike complete: %2 fired %3 shots at %4m", side _gun, getText (configOf _gun >> "displayName"), _rounds * _salvo, round (_gun distance2D _pos)] call EFUNC(main,debugLog);
     };
 };
 
@@ -171,6 +195,9 @@ if (_markerList isNotEqualTo []) then {
 
 // delay
 sleep _checkRounds;
+
+// set group task
+(group _gun) setVariable [QEGVAR(main,currentTactic), nil, EGVAR(main,debug_functions)];
 
 // ready up again
 [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
