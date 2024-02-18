@@ -20,7 +20,7 @@
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
     ["_pos", [], [[]]],
-    ["_type", 6, [0]]
+    ["_type", 4, [0]]
 ];
 
 // single unit
