@@ -21,7 +21,7 @@ jobs:
           mv releases/lambs-latest.zip "@LambsDanger_${version//[.]/_}.zip"
       - name: Update Release with Files
         id: create_version_release
-        uses: ncipollo/release-action@v1.14.0
+        uses: ncipollo/release-action@v1
         with:
           allowUpdates: true # Set this to false if you want to prevent updating existing releases
           name: ${{ github.event.release.name }}
