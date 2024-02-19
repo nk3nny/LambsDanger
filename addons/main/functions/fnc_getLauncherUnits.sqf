@@ -24,9 +24,9 @@
  * Public: Yes
 */
 
-#define LIGHT_VEHICLE "128"
-#define AIR_VEHICLE "256"
-#define HEAVY_VEHICLE "512"
+#define LIGHT_VEHICLE 128
+#define AIR_VEHICLE 256
+#define HEAVY_VEHICLE 512
 
 params [
     ["_group", grpNull, [grpNull]],
@@ -43,26 +43,25 @@ private _suitableUnits = [];
 
     private _unitsMagazines = (magazines _currentUnit) + (secondaryWeaponMagazine _currentUnit);
     {
-        private _mainAmmo = getText (configFile >> "cfgMagazines" >> _x >> "ammo");
-        private _mainAmmoFlags = getText (configFile >> "cfgAmmo" >> _mainAmmo >> "aiAmmoUsageFlags");
-
         if (
-            (_offensiveVeh && (LIGHT_VEHICLE in _mainAmmoFlags))
-            || {_offensiveAir && (AIR_VEHICLE in _mainAmmoFlags)}
-            || {_offensiveArmor && (HEAVY_VEHICLE in _mainAmmoFlags)}
+            (_offensiveVeh && ([_x, LIGHT_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags))
+            || {_offensiveAir && ([_x, AIR_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags)}
+            || {_offensiveArmor && ([_x, HEAVY_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags)}
         ) exitWith {_suitableUnits pushBackUnique _currentUnit};
 
         // Optionally go through submunitions. More info in header.
         if !(_checkSubmunition) then {continue}; // Invert & continue to reduce indentation
 
+        // Can't use checkMagazineAiUsageFlags for submunitions
+        private _mainAmmo = getText (configFile >> "cfgMagazines" >> _x >> "ammo");
         private _submunition = getText (configFile >> "cfgAmmo" >> _mainAmmo >> "submunitionAmmo");
         if (_submunition isEqualTo "") then {continue};
         private _submunitionFlags = getText (configFile >> "cfgAmmo" >> _submunition >> "aiAmmoUsageFlags");
 
         if (
-            (_offensiveVeh && (LIGHT_VEHICLE in _submunitionFlags))
-            || {_offensiveAir && (AIR_VEHICLE in _submunitionFlags)}
-            || {_offensiveArmor && (HEAVY_VEHICLE in _submunitionFlags)}
+            (_offensiveVeh && (QUOTE(LIGHT_VEHICLE) in _submunitionFlags))
+            || {_offensiveAir && (QUOTE(AIR_VEHICLE) in _submunitionFlags)}
+            || {_offensiveArmor && (QUOTE(HEAVY_VEHICLE) in _submunitionFlags)}
         ) exitWith {_suitableUnits pushBackUnique _currentUnit};
     } forEachReversed _unitsMagazines;
     // We iterate back to front for performance, because _unitsMagazines is structured -
