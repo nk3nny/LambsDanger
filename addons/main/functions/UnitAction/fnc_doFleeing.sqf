@@ -66,7 +66,7 @@ private _eyePos = eyePos _unit;
 private _suppression = getSuppression _unit;
 
 // on foot and seen by enemy
-private _onFootAndSeen = _distance2D < 75 || {_suppression > 0.9} || {([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0};
+private _onFootAndSeen = _distance2D < 75 || {_suppression > 0.9} || {([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0.01};
 if (_onFootAndSeen) then {
 
     // variable
@@ -118,7 +118,7 @@ if (GVAR(debug_functions)) then {
         [format ["Enemy @ %1", round _distance2D], format ["Destination @ %1", round (_unit distance2D _pos)]] select (isNull _enemy),
         ["", "- suppressed "] select (_suppression > 0),
         ["", "- inside "] select (lineIntersects [_eyePos, _eyePos vectorAdd [0, 0, 10], _unit]),
-        ["", "- spotted "] select (([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0)
+        ["", "- spotted "] select (([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0.01)
     ] call FUNC(debugLog);
 };
 
