@@ -31,10 +31,10 @@ private _muzzleIdx = GVAR(cachedThrowingWeapons) findIf {
     _magazine in _compatible
 };
 
-if (_muzzleIdx == -1) then {    
+if (_muzzleIdx == -1) then {
     _muzzle = "";
 } else {
-    _muzzle = GVAR(cachedThrowingWeapons) select _muzzleIdx;
+    _muzzle = configName (GVAR(cachedThrowingWeapons) select _muzzleIdx);
 };
 
 GVAR(cachedThrowingWeaponsHash) set [_magazine, _muzzle];
