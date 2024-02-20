@@ -58,7 +58,7 @@ if (_dangerPos isNotEqualTo [0, 0, 1.8]) then {
         _buildingPos = [_obj, 5] call CBA_fnc_buildingPositions;
         if (_buildingPos isEqualTo []) then {
             (boundingBox _obj) params ["_boundA", "_boundB"];
-            _pos = (getPos _obj) vectorAdd (selectRandom [_boundA, _boundB]);
+            _pos = (POSITIONAGL(_obj)) vectorAdd (selectRandom [_boundA, _boundB]);
             // there is no building pos, so this is either vegetation or some building without building pos
             // set height to 0 otherwise the pos will be right above the object
             _pos set [2, 0.1];

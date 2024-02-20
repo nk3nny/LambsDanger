@@ -41,7 +41,7 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport", "_patrol"];
                         private _group = _groups select _groupIndex;
-                        [QGVAR(taskGarrison), [_group, getPos _logic, _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskGarrison), [_group, POSITIONAGL(_logic), _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -71,7 +71,7 @@ switch (_mode) do {
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_exitCondition", "_sortByHeight", "_teleport", "_patrol"];
                         private _target = _targets select _targetIndex;
-                        [QGVAR(taskGarrison), [_group, getPos _target, _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskGarrison), [_group, POSITIONAGL(_target), _range, nil, _teleport, _sortByHeight, _exitCondition - 2, _patrol], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -93,7 +93,7 @@ switch (_mode) do {
             private _exitCondition = _logic getVariable [QGVAR(ExitConditions), TASK_GARRISON_EXITCONDITIONS];
             private _patrol = _logic getVariable [QGVAR(Patrol), TASK_GARRISON_PATROL];
             {
-                [QGVAR(taskGarrison), [_x, getPos _logic, _range, _area, _teleport, _sortByHeight, _exitCondition, _patrol], leader _x] call CBA_fnc_targetEvent;
+                [QGVAR(taskGarrison), [_x, POSITIONAGL(_logic), _range, _area, _teleport, _sortByHeight, _exitCondition, _patrol], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
 
             deleteVehicle _logic;

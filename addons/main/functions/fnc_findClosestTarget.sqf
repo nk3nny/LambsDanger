@@ -40,7 +40,7 @@ _units = _units select {
 };
 if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
-    _units = _units select { (getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
+    _units = _units select { (POSITIONAGL(_x)) inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
 };
 if (_units isEqualTo []) exitWith { objNull };
 

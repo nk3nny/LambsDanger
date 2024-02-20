@@ -44,7 +44,7 @@ switch (_mode) do {
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly", "_enableReinforcement", "_doUGL"];
                         private _args = [_group, _range, _cycle, nil, nil, _playerOnly, _enableReinforcement, _doUGL];
                         if !(_movingCenter) then {
-                            _args set [4, getPos _logic];
+                            _args set [4, POSITIONAGL(_logic)];
                         };
                         [QGVAR(taskHunt), _args, leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
@@ -75,7 +75,7 @@ switch (_mode) do {
             {
                 private _args = [_x, _range, _cycle, _area, nil, _playerOnly, _enableReinforcement, _doUGL];
                 if !(_movingCenter) then {
-                    _args set [4, getPos _logic];
+                    _args set [4, POSITIONAGL(_logic)];
                 };
                 [QGVAR(taskHunt), _args, leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;

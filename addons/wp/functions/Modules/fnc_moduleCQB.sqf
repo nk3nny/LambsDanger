@@ -43,7 +43,7 @@ switch (_mode) do {
                             _deleteAfterStartup = true;
                             [objNull, format [LLSTRING(SettingIsOnlyForLocalGroups), LLSTRING(Module_TaskCQB_DeleteOnStartUp_DisplayName)]] call BIS_fnc_showCuratorFeedbackMessage;
                         };
-                        [QGVAR(taskCQB), [_group, [_logic, getPos _logic] select _deleteAfterStartup, _radius, _cycle, nil, false], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskCQB), [_group, [_logic, POSITIONAGL(_logic)] select _deleteAfterStartup, _radius, _cycle, nil, false], leader _group] call CBA_fnc_targetEvent;
                         if (_deleteAfterStartup) then {
                             deleteVehicle _logic;
                         };
@@ -73,7 +73,7 @@ switch (_mode) do {
                         _data params ["_targetIndex", "_radius", "_cycle"];
                         private _target = _targets select _targetIndex;
                         if !(local _group) then {
-                            _target = getPos _target;
+                            _target = POSITIONAGL(_target);
                         };
                         [QGVAR(taskCQB), [_group, _target, _radius, _cycle, nil, false], leader _group] call CBA_fnc_targetEvent;
                         if (_logic isNotEqualTo _target) then {
@@ -100,7 +100,7 @@ switch (_mode) do {
             {
                 private _target = _logic;
                 if !(local _x) then {
-                    _target = getPos _target;
+                    _target = POSITIONAGL(_target);
                 };
                 [QGVAR(taskCQB), [_x, _target, _radius, _cycle, _area, false], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;

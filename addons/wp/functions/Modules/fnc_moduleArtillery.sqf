@@ -27,7 +27,7 @@ switch (_mode) do {
             }, {
                 params ["_side", "_salvo", "_spread", "_skipCheckround", "_pos"];
                 [_side, _pos, objNull, _salvo, _spread, _skipCheckround] call FUNC(taskArtillery);
-            }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
+            }, [_side, _salvo, _spread, _skipCheckround, POSITIONAGL(_logic)]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
             [LSTRING(Module_TaskArtillery_DisplayName),

@@ -5,5 +5,5 @@ GET_GROUPS_CONTEXT(_targets);
 
 {
     private _leader = leader _x;
-    [QGVAR(taskGarrison), [_x, getPos _leader], _leader] call CBA_fnc_targetEvent;
+    [QGVAR(taskGarrison), [_x, POSITIONAGL(_leader)], _leader] call CBA_fnc_targetEvent;
 } forEach _targets;

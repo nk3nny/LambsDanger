@@ -41,7 +41,7 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_exitWP", "_teleport", "_patrol"];
                         private _group = _groups select _groupIndex;
-                        [QGVAR(taskCamp), [_group, getPos _logic, _range, nil, _teleport, _patrol, _exitWP - 1], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskCamp), [_group, POSITIONAGL(_logic), _range, nil, _teleport, _patrol, _exitWP - 1], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -69,7 +69,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
                         _data params ["_targetIndex", "_range", "_exitWP", "_teleport", "_patrol"];
-                        [QGVAR(taskCamp), [_group, getPos (_targets select _targetIndex), _range, nil, _teleport, _patrol, _exitWP - 1], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskCamp), [_group, POSITIONAGL((_targets select _targetIndex)), _range, nil, _teleport, _patrol, _exitWP - 1], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -90,7 +90,7 @@ switch (_mode) do {
             private _patrol = _logic getVariable [QGVAR(Patrol), TASK_CAMP_PATROL];
             private _exitWP = _logic getVariable [QGVAR(exitWP), TASK_CAMP_EXITWP];
             {
-                [QGVAR(taskCamp), [_x, getPos _logic, _range, _area, _teleport, _patrol, _exitWP - 1], leader _x] call CBA_fnc_targetEvent;
+                [QGVAR(taskCamp), [_x, POSITIONAGL(_logic), _range, _area, _teleport, _patrol, _exitWP - 1], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;
         };

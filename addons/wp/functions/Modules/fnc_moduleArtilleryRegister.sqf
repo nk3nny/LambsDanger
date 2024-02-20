@@ -44,7 +44,7 @@ switch (_mode) do {
                 private _area = _logic getVariable ["objectarea", [10, 10, 0, false, -1]];
                 _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
 
-                _groups = allGroups select { (leader _x) inArea [(getPos _logic), _a, _b, _angle, _isRectangle, _c] };
+                _groups = allGroups select { (leader _x) inArea [(POSITIONAGL(_logic)), _a, _b, _angle, _isRectangle, _c] };
             };
             _groups = _groups arrayIntersect _groups;
             {

@@ -40,7 +40,7 @@ switch (_mode) do {
                         _args params ["_groups", "_logic"];
                         _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
                         private _group = _groups select _groupIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, POSITIONAGL(_logic), _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -69,7 +69,7 @@ switch (_mode) do {
                         _args params ["_targets", "_logic", "_group"];
                         _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
                         private _target = _targets select _targetIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, POSITIONAGL(_target), _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
                         if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
@@ -92,7 +92,7 @@ switch (_mode) do {
             private _enableReinforcement = _logic getVariable [QGVAR(EnableReinforcement), TASK_PATROL_ENABLEREINFORCEMENT];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];
             {
-                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint, _enableReinforcement], leader _x] call CBA_fnc_targetEvent;
+                [QGVAR(taskPatrol), [_x, POSITIONAGL(_logic), _range, _waypointCount, _area, _moveWaypoint, _enableReinforcement], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;
         };
