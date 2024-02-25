@@ -20,18 +20,11 @@ if (isNil QGVAR(aiUsageFlagCache)) then {
     GVAR(aiUsageFlagCache) = createHashMap;
 };
 
-params [["_magazine", ""], ["_flags", 0]];
+params [["_magazine", "", [""]], ["_flags", 0, [0]]];
 
-private _hasFlags = GVAR(aiUsageFlagCache) get _magazine;
-if (!isNil "_hasFlags") exitWith {
-    _hasFlags
-};
-
-// find smoke shell
-private _ammo = getText (configfile >> "CfgMagazines" >> _magazine >> "Ammo");
-private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
-_hasFlags = [_aiAmmoUsage, _flags] call BIS_fnc_bitflagsCheck;
-
-GVAR(aiUsageFlagCache) set [_magazine, _hasFlags];
-
-_hasFlags;
+GVAR(aiUsageFlagCache) getOrDefaultCall [_magazine + str _flags,{
+    // find smoke shell
+    private _ammo = getText (configfile >> "CfgMagazines" >> _magazine >> "Ammo");
+    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
+    [_aiAmmoUsage, _flags] call BIS_fnc_bitflagsCheck;
+}, true];
