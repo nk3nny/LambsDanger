@@ -43,11 +43,14 @@ private _suitableUnits = [];
 
     private _unitsMagazines = (magazines _currentUnit) + (secondaryWeaponMagazine _currentUnit);
     {
-        if (
-            (_offensiveVeh && ([_x, LIGHT_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags))
-            || {_offensiveAir && ([_x, AIR_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags)}
-            || {_offensiveArmor && ([_x, HEAVY_VEHICLE] call lambs_main_fnc_checkMagazineAiUsageFlags)}
-        ) exitWith {_suitableUnits pushBackUnique _currentUnit};
+        private _flags = 0;
+        if (_offensiveVeh) then {_flags = _flags + LIGHT_VEHICLE};
+        if (_offensiveArmor) then {_flags = _flags + HEAVY_VEHICLE};
+        if (_offensiveAir) then {_flags = _flags + AIR_VEHICLE};
+
+        if ([_x, _flags] call FUNC(checkMagazineAiUsageFlags)) exitWith {
+            _suitableUnits pushBackUnique _currentUnit
+        };
 
         // Optionally go through submunitions. More info in header.
         if !(_checkSubmunition) then {continue}; // Invert & continue to reduce indentation
