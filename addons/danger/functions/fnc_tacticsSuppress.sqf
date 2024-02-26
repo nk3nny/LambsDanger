@@ -29,6 +29,9 @@ private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
+if ((_target select 2) > 6) then {
+    _target set [2, 0.5];
+};
 
 // exit with flank squad leader cannot suppress from here
 if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 5]] call EFUNC(main,shouldSuppressPosition)) exitWith {
