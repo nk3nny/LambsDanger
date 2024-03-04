@@ -37,6 +37,7 @@ private _targetPos = _pos select 0;
     // get unit
     private _unit = _x;
     private _assaultPos = _targetPos;
+    if (((_forEachIndex mod 4) isEqualTo 0) && {count _pos > 1}) then {_assaultPos = _pos select 1};
 
     // manoeuvre
     _unit forceSpeed 3;
@@ -56,7 +57,7 @@ private _targetPos = _pos select 0;
     };
 
     // remove positions
-    _pos = _pos select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0};
+    _pos = _pos select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] < 0.01};
 } foreach _units;
 
 // remove  positions
