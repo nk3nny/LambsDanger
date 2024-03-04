@@ -52,6 +52,12 @@ _groupMemory = _groupMemory apply {_x select 2};
 // get distance
 private _pos = _groupMemory select 0;
 private _distance2D = _unit distance2D _pos;
+
+// check for nearby enemy
+if (_unit distance2D _nearestEnemy < _distance2D) exitWith {
+    [_unit, _nearestEnemy, 12, true] call FUNC(doAssault);
+};
+
 private _indoor = _unit call FUNC(isIndoor);
 if (_distance2D > 20 && {!_indoor}) then {
     _pos = _unit getPos [20, _unit getDir _pos];
@@ -77,7 +83,7 @@ _unit setDestination [_pos, "LEADER PLANNED", _indoor];
 
 // update variable
 if (RND(0.95)) then {_groupMemory deleteAt 0;};
-_groupMemory = _groupMemory select {_unit distanceSqr _x < 25 && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0}};
+_groupMemory = _groupMemory select {_unit distanceSqr _x > 25 && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] isEqualTo 0}};
 
 // variables
 _group setVariable [QGVAR(groupMemory), _groupMemory, false];
