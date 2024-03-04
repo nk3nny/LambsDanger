@@ -76,16 +76,20 @@ private _waitForMove = 5;
 private _assignedVehicles = assignedVehicles _group;
 
 // check waypoints -- if none add new?
+
 // commander vehicles? ~ future versions with setting ~ nkenny
-private _vehicles = nearestObjects [_unit, ["Landvehicle"], 75];
-private _side = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> "side");
-_vehicles = _vehicles select {alive _x && canMove _x && simulationEnabled _x && {(crew _x) isEqualTo []} && { !isObjectHidden _x } && { locked _x != 2 } && {(getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "side")) isEqualTo _side}};
-if (_vehicles isNotEqualTo []) then {
-    {
-        _group addVehicle _x;
-        _waitForMove = _waitForMove + 2;
-    } forEach _vehicles;
+if (_assignedVehicles isEqualTo []) then {
+    private _vehicles = nearestObjects [_unit, ["Landvehicle"], 75];
+    private _side = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> "side");
+    _vehicles = _vehicles select {alive _x && canMove _x && simulationEnabled _x && {(crew _x) isEqualTo []} && { !isObjectHidden _x } && { locked _x != 2 } && {(getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "side")) isEqualTo _side}};
+    if (_vehicles isNotEqualTo []) then {
+        {
+            _group addVehicle _x;
+            _waitForMove = _waitForMove + 2;
+        } forEach _vehicles;
+    };
 };
+
 
 // check for unregistered static weapons
 private _guns = _units select {(vehicle _x) isKindOf "StaticWeapon"};
