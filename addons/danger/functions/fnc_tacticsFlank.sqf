@@ -31,6 +31,9 @@ private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
+if ((_target select 2) > 6) then {
+    _target set [2, 0.5];
+};
 
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(cqbRange)) exitWith {

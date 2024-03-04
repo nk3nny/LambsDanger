@@ -30,6 +30,9 @@ private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
+if ((_target select 2) > 6) then {
+    _target set [2, 0.5];
+};
 
 // reset tactics
 [
@@ -117,7 +120,7 @@ _units doWatch objNull;
 } foreach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
 
 // execute function
-[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units, _housePos], 2 + random 3] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units + [_unit], _housePos], 2 + random 3] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
