@@ -154,6 +154,13 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
         && {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 2]]) || {_distance < 200}}
     ) exitWith {
 
+        // use smoke if available
+        private _time = _vehicle getVariable [QEGVAR(main,smokescreenTime), 0];
+        if (RND(0.6) && {_time < time}) then {
+            (commander _vehicle) forceWeaponFire ["SmokeLauncher", "SmokeLauncher"];
+            _vehicle setVariable [QEGVAR(main,smokescreenTime), time + 30 + random 20];
+        };
+
         // define enemy direction
         _group setFormDir (_vehicle getDir _dangerCausedBy);
         _cargo doMove _dangerPos;
@@ -203,7 +210,7 @@ if (_car) exitWith {
     private _slow = speed _vehicle < 30;
 
     // escape ~ if enemy within 15-50 meters or explosions are nearby!
-    if (_slow && {_cause isEqualTo DANGER_EXPLOSION || {_vehicle distanceSqr _dangerCausedBy < (225 + random 1225)}}) exitWith {
+    if (_slow && {(side _dangerCausedBy) isNotEqualTo (side _unit)} && {_cause isEqualTo DANGER_EXPLOSION || {_vehicle distanceSqr _dangerCausedBy < (225 + random 1225)}}) exitWith {
         [_unit] call EFUNC(main,doVehicleJink);
         [_timeout + 3] + _causeArray
     };
