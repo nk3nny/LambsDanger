@@ -36,6 +36,11 @@ params [
     ["_offensiveArmor", true, [true]]
 ];
 
+private _flags = 0;
+if (_offensiveVeh) then {_flags = _flags + LIGHT_VEHICLE};
+if (_offensiveArmor) then {_flags = _flags + HEAVY_VEHICLE};
+if (_offensiveAir) then {_flags = _flags + AIR_VEHICLE};
+
 private _suitableUnits = [];
 {
     if ((secondaryWeapon _x) isEqualTo "") then {continue};
@@ -43,11 +48,6 @@ private _suitableUnits = [];
 
     private _unitsMagazines = (magazines _currentUnit) + (secondaryWeaponMagazine _currentUnit);
     {
-        private _flags = 0;
-        if (_offensiveVeh) then {_flags = _flags + LIGHT_VEHICLE};
-        if (_offensiveArmor) then {_flags = _flags + HEAVY_VEHICLE};
-        if (_offensiveAir) then {_flags = _flags + AIR_VEHICLE};
-
         if ([_x, _flags] call FUNC(checkMagazineAiUsageFlags)) exitWith {
             _suitableUnits pushBackUnique _currentUnit
         };
