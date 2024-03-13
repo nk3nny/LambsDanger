@@ -118,7 +118,7 @@ if (_antiTank && { _tankAir != -1 } && { _launchersAT isNotEqualTo [] || (_launc
         // extra impetuous to select launcher
         _x selectWeapon (secondaryWeapon _x);
         _x setUnitPosWeak "MIDDLE";
-    } forEach ([_launchersAA, _launchersAT] select (_targetVehicle isKindOf "Tank"));
+    } forEach ([_launchersAT, _launchersAA] select (_targetVehicle isKindOf "Air"));
 
     // extra aggression from unit
     _unit doFire _targetVehicle;
