@@ -77,13 +77,13 @@ if (isNil "_cachedSounds") then {
         private _sound = toLowerANSI _x; // playSound3D is case-insensitive
 
         // File extension must exist for playSound3D to work
-        if (_sound == "" || !(".ogg" in _sound || ".wss" in _sound || ".wav" in _sound)) then {
-            _sound = objNull;
-            _deleted = true;
-        } else {
+        if (_sound regexMatch ".+?\.(?:ogg|wss|wav|mp3)$/io") then {
             if (_sound select [0, 1] != "\") then {
                 _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
             };
+        } else {
+            _sound = objNull;
+            _deleted = true;
         };
 
         _cachedSounds set [_forEachIndex, _sound];
