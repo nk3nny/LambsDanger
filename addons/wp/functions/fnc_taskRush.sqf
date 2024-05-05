@@ -48,9 +48,10 @@ private _fnc_rushOrders = {
     };
 
     // Tank -- hide or ready AT
+    private _launcherUnits = [_group, false] call EFUNC(main,getLauncherUnits);
     if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
-            if ((secondaryWeapon _x) isNotEqualTo "") then {
+            if (_x in _launcherUnits) then {
                 _x setUnitPos "MIDDLE";
                 _x selectWeapon (secondaryWeapon _x);
             } else {
