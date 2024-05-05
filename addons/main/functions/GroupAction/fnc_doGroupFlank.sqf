@@ -18,13 +18,11 @@
  *
  * Public: No
 */
-params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch"];
+params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", ["_teamAlpha", 0]];
 
 // update
 _units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } && {_x distance2D _overwatch > 5}};
 _vehicles = _vehicles select { canFire _x };
-
-private _posASL = AGLtoASL (selectRandom _pos);
 
 {
     private _suppressed = (getSuppression _x) > 0.5;
@@ -36,23 +34,29 @@ private _posASL = AGLtoASL (selectRandom _pos);
     _x setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
     // suppress
+    private _posASL = AGLtoASL (selectRandom _pos);
     if (
-        RND(0.6)
-        && {(leader _x) isNotEqualTo _x}
+        (_forEachIndex % 2) isEqualTo _teamAlpha
         && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
     ) then {
-        [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1], true], random 3] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1], true], 1 + random 3] call CBA_fnc_waitAndExecute;
     };
 } foreach _units;
 
+// reset alpha status
+_teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
+
 // vehicles
-if (_cycle isEqualTo 1) then {
+if ((_cycle % 2) isEqualTo 0) then {
     {
         private _posAGL = selectRandom _pos;
         _x doWatch _posAGL;
         [_x, _posAGL] call FUNC(doVehicleSuppress);
     } foreach _vehicles;
 } else {
+    // check for roads
+    private _roads = _overwatch nearRoads 50;
+    if (_roads isNotEqualTo []) exitWith {_vehicles doMove (ASLtoAGL (getPosASL (selectRandom _roads)));};
     _vehicles doMove _overwatch;
 };
 
@@ -60,7 +64,7 @@ if (_cycle isEqualTo 1) then {
 if !(_cycle <= 1 || {_units isEqualTo []}) then {
     [
         {_this call FUNC(doGroupFlank)},
-        [_cycle - 1, _units, _vehicles, _pos, _overwatch],
+        [_cycle - 1, _units, _vehicles, _pos, _overwatch, _teamAlpha],
         10 + random 8
     ] call CBA_fnc_waitAndExecute;
 };

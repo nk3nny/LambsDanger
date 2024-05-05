@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 16], ["_delay", 70]];
+params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 70]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -84,6 +84,18 @@ _group setVariable [QEGVAR(main,groupMemory), _housePos];
 
 // add base position
 if (_housePos isEqualTo []) then {_housePos pushBack _target;};
+
+// find vehicles
+private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
+private _overwatch = [ASLtoAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
+if (_overwatch isNotEqualTo []) then {
+    {
+        private _roads = _overwatch nearRoads 30;
+        if (_roads isNotEqualTo []) then {_overwatch = ASLtoAGL (getPosASL (selectRandom _roads))};
+        _x doMove _overwatch;
+        _x doWatch (selectRandom _housePos);
+    } forEach _vehicles;
+};
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];

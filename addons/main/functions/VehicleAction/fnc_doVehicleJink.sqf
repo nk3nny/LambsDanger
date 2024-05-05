@@ -58,8 +58,16 @@ _destination = _destination select {(_x isNotEqualTo []) && {!(surfaceIsWater _x
 if (_destination isEqualTo []) exitWith { getPosASL _unit };
 _destination = selectRandom _destination;
 
+// check for roads
+private _roads = _destination nearRoads (_range * 0.5);
+if (_roads isNotEqualTo []) then {_destination = ASLtoAGL (getPosASL (selectRandom _roads));};
+
 // make tanks pop smoke when moving
-// _vehicle forceweaponfire ["SmokeLauncher", "SmokeLauncher"];     <-- not working! Will revist at a later date - nkenny
+private _time = _vehicle getVariable [QGVAR(smokescreenTime), 0];
+if (RND(0.4) && {_time < time}) then {
+    (commander _vehicle) forceWeaponFire ["SmokeLauncher", "SmokeLauncher"];
+    _vehicle setVariable [QGVAR(smokescreenTime), time + 30 + random 20];
+};
 
 // execute
 _vehicle doMove _destination;
