@@ -116,8 +116,9 @@ if (
 ) exitWith {
 
     // get position
-    private _posASL = ATLtoASL (_unit getHideFrom _enemy);
-    if (((ASLtoAGL _posASL) select 2) > 6) exitWith {};
+    private _posASL = _unit getHideFrom _enemy;
+    if (((ASLtoAGL _posASL) select 2) > 6) then {_posASL set [2, 0.5];};
+    _posASL = ATLToASL _posASL;
 
     // execute suppression
     {
