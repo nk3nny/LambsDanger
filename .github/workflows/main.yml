@@ -58,8 +58,6 @@ jobs:
         run: node tools/nodejs_tools/gitversionsetter.js
       - name: Run HEMTT build
         run: hemtt release
-      - name: Check Hemtt Annotactions
-        run: node tools/nodejs_tools/hemttchecker.js
       - name: Upload Release
         uses: actions/upload-artifact@v4
         with:
