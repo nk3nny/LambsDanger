@@ -102,7 +102,7 @@ if ((_group getVariable [QEGVAR(main,staticWeaponList), []]) isEqualTo []) then 
 private _weaponHolders = allDeadMen findIf { (_x distance2D _unit) < 35 };
 if (_weaponHolders isNotEqualTo -1) then {
     {
-        [{_this call FUNC(main,doCheckBody);}, [_x, _x getPos [20, random 360], 35], random 2] call CBA_fnc_waitAndExecute;
+        [{_this call EFUNC(main,doCheckBody);}, [_x, _x getPos [20, random 360], 35], random 2] call CBA_fnc_waitAndExecute;
         _waitForMove = _waitForMove + 2;
     } forEach _units;
 };
