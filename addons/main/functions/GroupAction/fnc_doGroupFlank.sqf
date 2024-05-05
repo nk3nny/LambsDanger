@@ -56,7 +56,7 @@ if ((_cycle mod 2) isEqualTo 0) then {
 } else {
     // check for roads
     private _roads = _overwatch nearRoads 50;
-    if (_roads isNotEqualTo []) exitWith {_vehicles doMove (POSITIONAGL(selectRandom _roads));};
+    if (_roads isNotEqualTo []) exitWith {_vehicles doMove (ASLtoAGL (getPosASL (selectRandom _roads)));};
     _vehicles doMove _overwatch;
 };
 
