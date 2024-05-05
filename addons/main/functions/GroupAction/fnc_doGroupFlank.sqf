@@ -36,7 +36,7 @@ _vehicles = _vehicles select { canFire _x };
     // suppress
     private _posASL = AGLtoASL (selectRandom _pos);
     if (
-        (_forEachIndex mod 2) isEqualTo _teamAlpha
+        (_forEachIndex % 2) isEqualTo _teamAlpha
         && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
     ) then {
         [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1], true], 1 + random 3] call CBA_fnc_waitAndExecute;
@@ -44,10 +44,10 @@ _vehicles = _vehicles select { canFire _x };
 } foreach _units;
 
 // reset alpha status
-_teamAlpha = [0, 1] select (_teamAlpha isEqualTo 0);
+_teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
 
 // vehicles
-if ((_cycle mod 2) isEqualTo 0) then {
+if ((_cycle % 2) isEqualTo 0) then {
     {
         private _posAGL = selectRandom _pos;
         _x doWatch _posAGL;
