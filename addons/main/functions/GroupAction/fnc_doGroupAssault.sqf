@@ -37,7 +37,7 @@ private _targetPos = _pos select 0;
     // get unit
     private _unit = _x;
     private _assaultPos = _targetPos;
-    if (((_forEachIndex mod 4) isEqualTo 0) && {count _pos > 1}) then {_assaultPos = _pos select 1};
+    if (((_forEachIndex % 4) isEqualTo 0) && {count _pos > 1}) then {_assaultPos = _pos select 1};
 
     // manoeuvre
     _unit forceSpeed 3;
