@@ -81,7 +81,7 @@ if (_overwatch isEqualTo []) then {
     _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
-    if (_overwatch isEqualTo []) then {_overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
+    if (_overwatch isEqualTo []) then {_overwatch pushBack ([POSITIONAGL(_unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
     _overwatch = _overwatch select 0;
 };
 

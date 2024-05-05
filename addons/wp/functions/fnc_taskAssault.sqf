@@ -90,7 +90,7 @@ _group setFormation "LINE";
             {
                 params ["_args", "_handle"];
                 _args params ["_unit", "_group", "_retreat", "_threshold"];
-                private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
+                private _destination = (_group getVariable [QGVAR(taskAssaultDestination), POSITIONAGL(_unit)]) call CBA_fnc_getPos;
 
                 // exit
                 if (!(_unit call EFUNC(main,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
