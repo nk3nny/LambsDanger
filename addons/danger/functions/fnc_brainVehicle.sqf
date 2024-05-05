@@ -67,9 +67,12 @@ if (_artillery) exitWith {
     _vehicle setVariable [QEGVAR(main,isArtillery), true];
 
     // enemies within 12-30m may cause crew to disembark!
-    if (_attack && {_dangerCausedBy distanceSqr _vehicle < (144 + random 324)} && {currentCommand _unit isEqualTo ""}) then {
-        (units _unit) orderGetIn false;
-        _unit setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
+    if (_attack && {_dangerCausedBy distance _vehicle < (12 + random 18)} && {currentCommand _unit isEqualTo ""}) then {
+        private _vehicleCrew = crew _vehicle;
+        _vehicleCrew orderGetIn false;
+        {
+            _x setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
+        } forEach _vehicleCrew; // There may be more than one unit in vehicle
     };
     [_timeout] + _causeArray
 };
@@ -83,19 +86,21 @@ if (_vehicle isKindOf "Air") exitWith {
 };
 
 // vehicle type ~ Static weapon
-private _static = _vehicle isKindOf "StaticWeapon";
-if (_static) exitWith {
+if (_vehicle isKindOf "StaticWeapon") exitWith {
 
     // get out if enemy near OR out of ammunition
-    if ((count (magazines _vehicle)) isEqualTo 0 || {(_vehicle findNearestEnemy _vehicle) distance _vehicle < (6 + random 15)}) then {
-        (units _unit) orderGetIn false;
-        _unit setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
-    };
-
-    // suppression
-    if (_attack) then {
-        [_unit, _dangerPos] call EFUNC(main,doVehicleSuppress);
-        [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
+    if ((count (magazines _vehicle)) isEqualTo 0 || {(_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)}) then {
+        private _vehicleCrew = (crew _vehicle);
+        _vehicleCrew orderGetIn false;
+        {
+            _x setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
+        } forEach _vehicleCrew; // There may be more than one unit in vehicle
+    } else {
+        // suppression
+        if (_attack) then {
+            [_unit, _dangerPos] call EFUNC(main,doVehicleSuppress);
+            [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos], 3] call CBA_fnc_waitAndExecute;
+        };
     };
 
     // end
