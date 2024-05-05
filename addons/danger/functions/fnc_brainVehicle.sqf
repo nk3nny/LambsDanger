@@ -67,7 +67,12 @@ if (_artillery) exitWith {
     _vehicle setVariable [QEGVAR(main,isArtillery), true];
 
     // enemies within 12-30m may cause crew to disembark!
-    if (_attack && {_dangerCausedBy distance _vehicle < (12 + random 18)} && {currentCommand _unit isEqualTo ""}) then {
+    if (
+        _attack
+        && {_dangerCausedBy distance _vehicle < (12 + random 18)}
+        && {currentCommand _unit isEqualTo ""}
+        && {!(_vehicle isKindOf "Tank" && {count (allTurrets [_vehicle, false]) > 1})}
+    ) then {
         private _vehicleCrew = crew _vehicle;
         _vehicleCrew orderGetIn false;
         {
