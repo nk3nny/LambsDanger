@@ -84,11 +84,11 @@ if (_housePos isEqualTo []) then {_housePos pushBack _target;};
 
 // find vehicles
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
-private _overwatch = [POSITIONAGL(_unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
+private _overwatch = [ASLtoAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
 if (_overwatch isNotEqualTo []) then {
     {
         private _roads = _overwatch nearRoads 30;
-        if (_roads isNotEqualTo []) then {_overwatch = POSITIONAGL(selectRandom _roads);};
+        if (_roads isNotEqualTo []) then {_overwatch = ASLtoAGL (getPosASL (selectRandom _roads))};
         _x doMove _overwatch;
         _x doWatch (selectRandom _housePos);
     } forEach _vehicles;
