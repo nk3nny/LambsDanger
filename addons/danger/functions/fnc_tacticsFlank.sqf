@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 120]];
+params ["_group", "_target", ["_units", []], ["_cycle", 5], ["_overwatch", []], ["_delay", 120]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -77,11 +77,11 @@ _pos pushBack _target;
 // find overwatch position
 if (_overwatch isEqualTo []) then {
     private _distance2D = ((_unit distance2D _target) * 0.66) min 250;
-    _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2D _unit, _x select 0]};
+    _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * (forest + trees + houses)) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 20 , 4] apply {[(_x select 0) distance2D _unit, _x select 0]};
     _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
-    if (_overwatch isEqualTo []) then {_overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
+    if (_overwatch isEqualTo []) then {_overwatch pushBack ([ASLtoAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
     _overwatch = _overwatch select 0;
 };
 
