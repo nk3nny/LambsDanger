@@ -19,7 +19,7 @@ private _curCat = ELSTRING(main,Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
-// Toggles group manoevure phase initiated by AI squad leader
+// Toggles group manoeuvre phase initiated by AI squad leader
 [
     QGVAR(disableAIAutonomousManoeuvres),
     "CHECKBOX",
@@ -84,6 +84,15 @@ private _curCat = ELSTRING(main,Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Toggles units killing ACE3 incapacitated enemies
+[
+    QGVAR(disableIncapacitatedKills),
+    "CHECKBOX",
+    [LSTRING(Settings_DisableIncapacitatedKills), LSTRING(Settings_DisableIncapacitatedKills_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
 
 private _curCat = LSTRING(Settings_GeneralCat);
 
