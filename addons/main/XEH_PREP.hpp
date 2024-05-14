@@ -1,4 +1,6 @@
+
 PREP(addShareInformationHandler);
+PREP(checkMagazineAiUsageFlags);
 PREP(doAnimation);
 PREP(doCallout);
 PREP(doGesture);
@@ -26,6 +28,7 @@ PREP(showDialog);
 PREP(parseData);
 
 PREP(removeEventhandlers);
+PREP(getCompatibleThrowMuzzle);
 
 SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);

@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-#define SEARCH_FOR_HIDE 4
+#define SEARCH_FOR_HIDE 6
 #define SEARCH_FOR_BUILDING 8
 
 params ["_unit"];
@@ -39,12 +39,14 @@ _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 [QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
 
 // Abandon vehicles in need!
+private _vehicle = vehicle _unit;
 if (
     RND(0.5)
     && {!_onFoot}
-    && {canUnloadInCombat (vehicle _unit)}
-    && {(speed (vehicle _unit)) < 3}
-    && {isTouchingGround vehicle _unit}
+    && {morale _unit < 0}
+    && {canUnloadInCombat _vehicle || {_vehicle isKindOf "StaticWeapon"}}
+    && {(speed _vehicle) < 3}
+    && {isTouchingGround _vehicle}
 ) exitWith {
     [_unit] orderGetIn false;
     _unit setSuppression 1;  // prevents instant laser aim - nkenny
@@ -64,7 +66,7 @@ private _eyePos = eyePos _unit;
 private _suppression = getSuppression _unit;
 
 // on foot and seen by enemy
-private _onFootAndSeen = _distance2D < 75 || {_suppression > 0.9} || {([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0};
+private _onFootAndSeen = _distance2D < 75 || {_suppression > 0.9} || {([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0.01};
 if (_onFootAndSeen) then {
 
     // variable
@@ -80,7 +82,7 @@ if (_onFootAndSeen) then {
     };
 
     // calm and inside or under cover!
-    if ((_suppression < 0.2) && {lineIntersects [_eyePos, _eyePos vectorAdd [0, 0, 10], _unit] || {_distance2D < random 5}}) exitWith {
+    if ((_suppression < 0.2) && {lineIntersects [_eyePos, _eyePos vectorAdd [0, 0, 10], _unit] || {_distance2D < 15}}) exitWith {
         _unit setUnitPos "DOWN";// ~ this forces unit stance which may override mission maker. The effect is good however - nkenny
         doStop _unit;
     };
@@ -94,12 +96,13 @@ if (_onFootAndSeen) then {
 
     // find buildings to hide
     private _buildings = [_unit, SEARCH_FOR_BUILDING, true, true] call FUNC(findBuildings);
-    if ((_buildings isNotEqualTo []) && {_distance2D > random 5}) then {
+    _buildings append (_cover apply {getPos _x});
+    if ((_buildings isNotEqualTo []) && {_distance2D > 5}) then {
         _unit doMove selectRandom _buildings;
     };
 
 } else {
-    // follow self! ~ bugfix which prevents untis from getting stuck in fleeing loop inside fsm. - nkenny
+    // follow self! ~ bugfix which prevents units from getting stuck in fleeing loop inside fsm. - nkenny
     _unit doFollow (leader _unit);
 
     // reset
@@ -115,7 +118,7 @@ if (GVAR(debug_functions)) then {
         [format ["Enemy @ %1", round _distance2D], format ["Destination @ %1", round (_unit distance2D _pos)]] select (isNull _enemy),
         ["", "- suppressed "] select (_suppression > 0),
         ["", "- inside "] select (lineIntersects [_eyePos, _eyePos vectorAdd [0, 0, 10], _unit]),
-        ["", "- spotted "] select (([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0)
+        ["", "- spotted "] select (([objNull, "VIEW", objNull] checkVisibility [_eyePos, eyePos _enemy]) > 0.01)
     ] call FUNC(debugLog);
 };
 

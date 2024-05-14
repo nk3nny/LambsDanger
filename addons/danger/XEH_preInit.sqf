@@ -5,7 +5,7 @@ ADDON = false;
 // mod check
 GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
 
-#include "settings.sqf"
+#include "settings.inc.sqf"
 
 // FSM priorities ~ this could be made into CBA settings. But I kinda want to explore it a little first - nkenny
 if (isNil QGVAR(fsmPriorities)) then {
@@ -32,18 +32,24 @@ if (isNil QGVAR(dangerUntil)) then {
 // EH handling reinforcement and combat mode
 [QEGVAR(main,OnInformationShared), {
     params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
-
     {
         private _leader = leader _x;
         if (local _leader) then {
             // reinforce
-            if (!isNull _target && { _x getVariable [QGVAR(enableGroupReinforce), false] } && { (_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }) then {
+            if (
+                !isNull _target
+                && {_x getVariable [QGVAR(enableGroupReinforce), false]}
+                && {(_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }
+            ) then {
                 [_leader, [getPosASL _unit, (_leader targetKnowledge _target) select 6] select (_leader knowsAbout _target > 1.5)] call FUNC(tacticsReinforce);
             };
 
-            // set combatMode
-            if (_leader distance2D _unit < (EGVAR(main,combatShareRange)) && {!(_leader getVariable [QGVAR(disableAI), false])} && {(behaviour _leader) isNotEqualTo "COMBAT"}) then {
-                [units _x, _target, [_leader, 40, true, true] call EFUNC(main,findBuildings), "information"] call EFUNC(main,doGroupHide);
+            // reorientate group
+            if (
+                !(_leader getVariable [QGVAR(disableAI), false])
+                && {(behaviour _leader) isNotEqualTo "COMBAT"}
+            ) then {
+                //[units _x, _target, [_leader, 40, true, true] call EFUNC(main,findBuildings), "information"] call EFUNC(main,doGroupHide);
                 _x setFormDir (_leader getDir _unit);
             };
         };

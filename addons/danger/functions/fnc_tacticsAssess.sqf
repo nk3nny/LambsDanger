@@ -33,7 +33,7 @@ private _group = group _unit;
 // set variable
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QGVAR(contact), time + 600];
-_group enableAttack false;
+if (isNull objectParent _unit) then {_group enableAttack false;};
 
 // set current task
 _unit setVariable [QEGVAR(main,currentTarget), objNull, EGVAR(main,debug_functions)];
@@ -126,7 +126,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         && {_inside || {_x call EFUNC(main,isIndoor)}}
     };
     if (_nearIndoorTarget != -1) exitWith {
-        _plan append [TACTICS_GARRISON, TACTICS_ASSAULT, TACTICS_ASSAULT];
+        _plan append [TACTICS_ASSAULT, TACTICS_ASSAULT];
         _pos = _unit getHideFrom (_enemies select _nearIndoorTarget);
     };
 
@@ -136,7 +136,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         private _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
         private _holdWP = ((waypointType _currentWP) isEqualTo "HOLD") && {(waypointPosition _currentWP) distance2D _unit < RANGE_MID};
         if (_holdWP) exitWith {
-            _plan append [TACTICS_GARRISON, TACTICS_HIDE];
+            _plan append [TACTICS_HIDE, TACTICS_HIDE];
             _pos = waypointPosition _currentWP;
             breakOut "conditionScope";
         };
@@ -159,6 +159,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     };
 
     // enemies near and below
+    /*
     private _farNoCoverTarget = _enemies findIf {
         _unit distance2D _x < RANGE_MID
         && {((getPosASL _x) select 2) < ((_eyePos select 2) - 15)}
@@ -169,6 +170,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         _plan pushBack TACTICS_ATTACK;
         _pos = _enemies select _farNoCoverTarget;
     };
+    */
 
     // enemy at inside buildings or fortified or far
     private _fortifiedTarget = _enemies findIf {

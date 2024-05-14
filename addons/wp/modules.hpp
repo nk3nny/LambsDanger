@@ -606,7 +606,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             validate = "number";
             condition = "0";
             typeName = "NUMBER";
-            defaultValue = TASK_RUSH_CYCLETIME;
         };
         class ModuleDescription: ModuleDescription {};
     };

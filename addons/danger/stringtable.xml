@@ -80,7 +80,7 @@
             <Polish>Wyłącza LAMBS AI dla grupy.\nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
             <Russian>Отключает LAMBS группу ИИ\nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
             <Italian>Disabilita l'IA del gruppo LAMBS\nLa disabilitazione di questa funzione impedisce assalti e sgomberi autonomi di edifici, oltre a nascondersi da aerei e carri armati</Italian>
-            <Chinesesimp>禁用LAMBS 小组 AI\n禁用此功能可防止自动攻击和清除建筑,以及躲避飞机和坦克</Chinesesimp>
+            <Chinesesimp>禁用LAMBS小组AI\n禁用此功能可防止自动攻击和清除建筑,以及躲避飞机和坦克</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
@@ -170,7 +170,7 @@
             <Polish>Przełącza fazę manewru grupowego zainicjowaną przez dowódcę oddziału AI. Wyłączenie tej opcji uniemożliwi liderowi grupy AI wydawaniu nowych rozkazów do flankowania i ostrzeliwania budynków.</Polish>
             <Russian>Переключает фазу группового маневра, инициированную командиром отряда ИИ. Отключение этого  не позволит лидеру группы ИИ добавлять приказы о маневрах для обхода и подавления огнем зданий.</Russian>
             <Italian>Attiva/disattiva la fase di manovra di gruppo avviata dal caposquadra AI. Disabilitarlo impedirà al leader del gruppo AI di aggiungere ordini di manovra per fiancheggiare e sopprimere gli edifici.</Italian>
-            <Chinesesimp>切换由 AI 班长发起的小组操作阶段.禁用此功能将阻止 AI 组长添加机动命令来到侧翼和压制建筑物.</Chinesesimp>
+            <Chinesesimp>切换由AI组长发起的小组操作阶段.禁用此功能将阻止AI组长添加机动命令来到侧翼和压制建筑物.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
             <English>Disable units hiding</English>
@@ -206,7 +206,7 @@
             <Russian>Переключает способность группы ИИ динамически развертывать стационарное/ранцевое оружие</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, statische Waffen dynamisch einzusetzen</German>
             <Italian>Attiva/disattiva la capacità del gruppo IA di schierare dinamicamente armi statiche/zaino</Italian>
-            <Chinesesimp>切换 AI 小组自动部署静态/背包武器的功能</Chinesesimp>
+            <Chinesesimp>切换AI小组自动部署静态/背包武器的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding">
             <English>Disable units manning static weapons</English>
@@ -242,7 +242,7 @@
             <Russian>Переключает способность группы ИИ автономно использовать дым для прикрытия групповых маневров</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, autonom Rauchgranaten zu verwenden, um Gruppenmanöver zu verbergen</German>
             <Italian>Attiva/disattiva la capacità del gruppo IA di utilizzare autonomamente il fumo per coprire le manovre di gruppo</Italian>
-            <Chinesesimp>切换 AI 小组自动使用烟雾弹掩护小组的功能</Chinesesimp>
+            <Chinesesimp>切换AI小组自动使用烟雾弹掩护小组的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
             <English>Disable units using flares for illumination </English>
@@ -260,7 +260,7 @@
             <Russian>Переключает способность группы ИИ автономно использовать осветительные ракеты для освещения в ночное время, если не доступны ПНВ или юнит находится в скрытом режиме.</Russian>
             <German>Schaltet die Fähigkeit der KI-Gruppe um, autonom Flares zur nächtlichen Beleuchtung zu verwenden, es sei denn, NVGs sind verfügbar oder die Einheit befindet sich im Schleichen-Modus</German>
             <Italian>Attiva o disattiva la capacità del gruppo IA di utilizzare autonomamente i bagliori per l'illuminazione di notte, a meno che non siano disponibili NVG o che l'unità sia in modalità invisibile</Italian>
-            <Chinesesimp>切换 AI 组在夜间自主使用照明弹进行照明的功能除非 NVG 可用或单位处于隐身模式</Chinesesimp>
+            <Chinesesimp>切换AI组在夜间自主使用照明弹进行照明的功能除非NVG可用或单位处于隐身模式</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>

@@ -23,24 +23,25 @@
 params ["_unit", ["_target", []], ["_threshold", 18]];
 
 if (_target isEqualTo []) then {
-    _target = getPosATL (_unit findNearestEnemy _unit);
+    _target = _unit getHideFrom (_unit findNearestEnemy _unit);
 };
+if (_target isEqualTo [0, 0, 0] || {_unit distanceSqr _target < 2}) exitWith {false};
 
 // cannot move or moving
-if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {true};
+if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {false};
 
-// CQB tweak -- look instead
-if (_unit distance _target < 75) exitWith {
-    (vehicle _unit) doWatch _target;
-    true
+// CQB tweak -- target within 75m - look instead
+if (_unit distanceSqr _target < 5625) exitWith {
+    (vehicle _unit) doWatch (ATLtoASL _target);
+    false
 };
 
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
 
-// within acceptble limits -- suppress instead
+// within acceptble limits
 if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
-    true
+    false
 };
 
 // settings

@@ -71,5 +71,5 @@ end_of_line = lf
 [addons/main/LICENSE]
 end_of_line = lf
 
-[.github/workflows/main.yml]
+[.github/workflows/*.yml]
 end_of_line = lf

@@ -4,6 +4,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const core = require('@actions/core');
 
 const PREFIX = "Lambs";
 
@@ -52,7 +53,7 @@ function getDirFiles(p, module) {
 };
 
 function getFunctions(file, module) {
-    let content = fs.readFileSync(file).toString();
+    let content = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
     content = content.replace(commentRegex, '');
 
     let match;
@@ -85,6 +86,7 @@ function CheckFunctions() {
         }
 
         let content = fs.readFileSync(data.path).toString();
+        const lines = content.split("\n")
         content = content.replace(commentRegex, '');
         let match;
         while ((match = funcPrep.exec(content)) !== null) {
@@ -101,6 +103,17 @@ function CheckFunctions() {
             if (fncName) {
                 if (!prepedFunctions.includes(fncName.toLowerCase())) {
                     console.log(`Use of not Existing Functions: ${fncName} in ${data.path}`)
+                    var key;
+                    if (match[1]) {
+                        key = `FUNC(${match[1]})`;
+                    } else if (match[2] && match[3]) {
+                        key = `EFUNC(${match[2]},${match[3]})`;
+                    }
+                    var line = lines.findIndex(x => x.includes(key))
+                    core.error(`Use of not Existing Functions: ${fncName}`, {
+                        file: data.path,
+                        startLine: line
+                    });
                     failedCount++;
                 }
             }

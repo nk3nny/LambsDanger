@@ -15,7 +15,7 @@ item10[] = {"Reset",2,250,-700.000000,1400.000000,-600.000000,1450.000000,0.0000
 item11[] = {"Hide_vs__run",2,250,-540.000000,40.000000,-440.000000,100.000000,0.000000,"Hide vs. run"};
 item12[] = {"Vehicle",4,218,-920.000000,360.000000,-820.000000,420.000000,1.000000,"Vehicle"};
 item13[] = {"Man",8,218,-700.000000,350.000000,-600.000000,400.000000,0.000000,"Man"};
-item14[] = {"Man",2,250,-680.000000,600.000000,-580.000000,660.000000,0.000000,"Man"};
+item14[] = {"Man",2,4346,-680.000000,600.000000,-580.000000,660.000000,0.000000,"Man"};
 item15[] = {"Order_out",2,250,-940.000000,600.000000,-840.000000,660.000000,0.000000,"Order out"};
 item16[] = {"Always",8,218,-800.000000,600.000000,-700.000000,660.000000,0.000000,"Always"};
 item17[] = {"Select_danger",2,250,-820.000000,-160.000000,-720.000000,-100.000000,0.000000,"Select danger"};
@@ -180,8 +180,8 @@ link63[] = {54,2};
 link64[] = {55,2};
 link65[] = {56,4};
 link66[] = {57,58};
-globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-1872.445801,594.427734,1279.814941,-590.437561,1166,884,1};
-window[] = {2,-1,-1,-1,-1,870,52,673,52,3,1184};
+globals[] = {0.000000,0,0,0,0,640,480,1,225,6316128,1,-1487.644531,43.572693,1070.380371,-90.508331,1166,884,1};
+window[] = {2,-1,-1,-1,-1,1026,208,829,208,3,1184};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -393,13 +393,11 @@ class FSM
                          "	_this setUnitPos selectRandom [""DOWN"",""DOWN"",""MIDDLE""];" \n
                          "}; " \n
                          "" \n
-                         "// animation" \n
-                         "if (_this call lambs_danger_fnc_fsmAllowAnimation) then {" \n
-                         "	_this playMoveNow selectRandom [""ApanPknlMsprSnonWnonDf"", ""ApanPercMsprSnonWnonDf"", ""ApanPpneMsprSnonWnonDf"", ""ApanPpneMrunSnonWnonDf""];" \n
-                         "}; " \n
-                         "" \n
                          "// execute hide" \n
-                         "[_this,  _dangerPos] call lambs_main_fnc_doHide; " \n
+                         "[_this,  _dangerPos, 10] call lambs_main_fnc_doHide; " \n
+                         "" \n
+                         "// time dodge" \n
+                         "private _timeDodge = time + 2;" \n
                          "" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -423,8 +421,8 @@ class FSM
                                         priority = 0.000000;
                                         to="Clean_up";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"getSuppression _this > 0.99"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _timeDodge && getSuppression _this > 0.99"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"[_this] call lambs_main_fnc_doFleeing;"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };

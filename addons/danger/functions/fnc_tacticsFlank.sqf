@@ -19,7 +19,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 4], ["_overwatch", []], ["_delay", 100]];
+params ["_group", "_target", ["_units", []], ["_cycle", 5], ["_overwatch", []], ["_delay", 120]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -31,6 +31,9 @@ private _unit = leader _group;
 
 // find target
 _target = _target call CBA_fnc_getPos;
+if ((_target select 2) > 6) then {
+    _target set [2, 0.5];
+};
 
 // check CQB ~ exit if in close combat other functions will do the work - nkenny
 if (_unit distance2D _target < GVAR(cqbRange)) exitWith {
@@ -74,11 +77,11 @@ _pos pushBack _target;
 // find overwatch position
 if (_overwatch isEqualTo []) then {
     private _distance2D = ((_unit distance2D _target) * 0.66) min 250;
-    _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * forest + trees + houses) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 100 , 3] apply {[(_x select 0) distance2D _unit, _x select 0]};
+    _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * (forest + trees + houses)) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 20 , 4] apply {[(_x select 0) distance2D _unit, _x select 0]};
     _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
     _overwatch sort true;
     _overwatch = _overwatch apply {_x select 1};
-    if (_overwatch isEqualTo []) then {_overwatch pushBack ([getPos _unit, _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
+    if (_overwatch isEqualTo []) then {_overwatch pushBack ([ASLtoAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
     _overwatch = _overwatch select 0;
 };
 
@@ -108,7 +111,7 @@ _group setFormation "FILE";
 {
     _x setUnitPos "DOWN";
     _x setVariable [QGVAR(forceMove), true];
-} foreach _units;
+} foreach (_units select {isNull objectParent _x});
 
 // leader smoke ~ deploy concealment to enable movement
 if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};

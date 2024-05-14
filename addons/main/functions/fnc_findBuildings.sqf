@@ -27,7 +27,7 @@ params [
 
 // houses
 private _houses = nearestObjects [_unit, ["House", "Strategic", "Ruins"], _range, true];
-_houses = _houses select {((_x buildingPos -1) isNotEqualTo [])};
+_houses = _houses select {((_x buildingPos -1) isNotEqualTo []) && {(alive _x) && !(isObjectHidden _x)}};
 
 // find house positions
 if (!_useHousePos) exitWith {_houses}; // return if not use House Pos
@@ -37,10 +37,10 @@ private _housePos = [];
     _housePos append (_house buildingPos -1);
     if (_findDoors) then {
         {
-            if ("door" in toLower (_x)) then {
+            if ("door" in _x) then {
                 _housePos pushBack (_house modelToWorld (_house selectionPosition _x));
             };
-        } forEach (selectionNames _house);
+        } forEach (_house selectionNames "viewgeometry");
     };
 } forEach _houses;
 
