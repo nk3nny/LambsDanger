@@ -48,7 +48,7 @@ private _fnc_rushOrders = {
     };
 
     // Tank -- hide or ready AT
-    private _launcherUnits = [_group, false] call EFUNC(main,getLauncherUnits);
+    private _launcherUnits = [_group] call EFUNC(main,getLauncherUnits);
     if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
         {
             if (_x in _launcherUnits) then {

@@ -13,7 +13,8 @@
  *
  * Arguments:
  * 0: Group to search in <GROUP>
- * 1: Check through submunitions <BOOLEAN>
+ * 1: Flags to check Against <NUMBER>
+ * 2: Check through submunitions <BOOLEAN>
  *
  * Return Value:
  * Array - units with launchers
@@ -24,22 +25,11 @@
  * Public: Yes
 */
 
-#define LIGHT_VEHICLE 128
-#define AIR_VEHICLE 256
-#define HEAVY_VEHICLE 512
-
 params [
     ["_group", grpNull, [grpNull]],
-    ["_checkSubmunition", false, [false]],
-    ["_offensiveVeh", true, [true]],
-    ["_offensiveAir", true, [true]],
-    ["_offensiveArmor", true, [true]]
+    ["_flags", 896, [0]], // 896 == AI_AMMO_USAGE_FLAG_VEHICLE + AI_AMMO_USAGE_FLAG_AIR + AI_AMMO_USAGE_FLAG_ARMOUR
+    ["_checkSubmunition", false, [false]]
 ];
-
-private _flags = 0;
-if (_offensiveVeh) then {_flags = _flags + LIGHT_VEHICLE};
-if (_offensiveArmor) then {_flags = _flags + HEAVY_VEHICLE};
-if (_offensiveAir) then {_flags = _flags + AIR_VEHICLE};
 
 private _suitableUnits = [];
 {
@@ -55,17 +45,12 @@ private _suitableUnits = [];
         // Optionally go through submunitions. More info in header.
         if !(_checkSubmunition) then {continue}; // Invert & continue to reduce indentation
 
-        // Can't use checkMagazineAiUsageFlags for submunitions
         private _mainAmmo = getText (configFile >> "cfgMagazines" >> _x >> "ammo");
         private _submunition = getText (configFile >> "cfgAmmo" >> _mainAmmo >> "submunitionAmmo");
         if (_submunition isEqualTo "") then {continue};
-        private _submunitionFlags = getText (configFile >> "cfgAmmo" >> _submunition >> "aiAmmoUsageFlags");
+        private _submunitionFlags = getNumber(configFile >> "cfgAmmo" >> _submunition >> "aiAmmoUsageFlags");
 
-        if (
-            (_offensiveVeh && (QUOTE(LIGHT_VEHICLE) in _submunitionFlags))
-            || {_offensiveAir && (QUOTE(AIR_VEHICLE) in _submunitionFlags)}
-            || {_offensiveArmor && (QUOTE(HEAVY_VEHICLE) in _submunitionFlags)}
-        ) exitWith {_suitableUnits pushBackUnique _currentUnit};
+        if ([_submunitionFlags, _flags] call BIS_fnc_bitflagsCheck) exitWith {_suitableUnits pushBackUnique _currentUnit};
     } forEachReversed _unitsMagazines;
     // We iterate back to front for performance, because _unitsMagazines is structured -
     // as follows: uniform magazines -> vest magazines -> backpack magazines, and -

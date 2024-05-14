@@ -1,6 +1,18 @@
 #include "\x\cba\addons\main\script_macros_common.hpp"
+
 #define DFUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define RND(var) random 1 > var
+
+#define AI_AMMO_USAGE_FLAG_LIGHT 1
+#define AI_AMMO_USAGE_FLAG_MARKING 2
+#define AI_AMMO_USAGE_FLAG_CONCEALMENT 4
+#define AI_AMMO_USAGE_FLAG_COUNTERMEASURES 8
+#define AI_AMMO_USAGE_FLAG_MINE 16
+#define AI_AMMO_USAGE_FLAG_UNDERWATER 32
+#define AI_AMMO_USAGE_FLAG_INFATRY 64
+#define AI_AMMO_USAGE_FLAG_VEHICLE 128
+#define AI_AMMO_USAGE_FLAG_AIR 256
+#define AI_AMMO_USAGE_FLAG_ARMOUR 512
 
 #define GET_CURATOR_GRP_UNDER_CURSOR call { \
     private _group = grpNull; \
