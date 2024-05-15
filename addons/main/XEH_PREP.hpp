@@ -5,6 +5,7 @@ PREP(doAnimation);
 PREP(doCallout);
 PREP(doGesture);
 PREP(doShareInformation);
+PREP(getLauncherUnits);
 PREP(getShareInformationParams);
 PREP(shouldSuppressPosition);
 
