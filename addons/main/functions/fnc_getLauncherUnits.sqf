@@ -12,7 +12,7 @@
  * Disposable launchers get mostly ignored, AI doesn't seem to even use them.
  *
  * Arguments:
- * 0: Group to search in <GROUP>
+ * 0: Group to search in <GROUP, ARRAY<OBJECT>>
  * 1: Flags to check Against <NUMBER>
  * 2: Check through submunitions <BOOLEAN>
  *
@@ -26,11 +26,14 @@
 */
 
 params [
-    ["_group", grpNull, [grpNull]],
+    ["_group", [], [grpNull, []]],
     ["_flags", 896, [0]], // 896 == AI_AMMO_USAGE_FLAG_VEHICLE + AI_AMMO_USAGE_FLAG_AIR + AI_AMMO_USAGE_FLAG_ARMOUR
     ["_checkSubmunition", false, [false]]
 ];
 
+if (_group isEqualType grpNull) then {
+    _group = units _group;
+};
 private _suitableUnits = [];
 {
     if ((secondaryWeapon _x) isEqualTo "") then {continue};
@@ -55,6 +58,6 @@ private _suitableUnits = [];
     // We iterate back to front for performance, because _unitsMagazines is structured -
     // as follows: uniform magazines -> vest magazines -> backpack magazines, and -
     // launcher ammo is usually in the backpack. This is a ~3-4x speedup.
-} forEach (units _group);
+} forEach _group;
 
 _suitableUnits
