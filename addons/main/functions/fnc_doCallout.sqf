@@ -94,7 +94,7 @@ if (isNil "_cachedSounds") then {
             } forEach [".ogg", ".wss", ".wav", ".mp3"];
         };
 
-        if (_sound == "" || !_hasFileEnding) then {
+        if (!_hasFileEnding || {!fileExists _sound}) then {
             _deleted = true;
             _cachedSounds set [_forEachIndex, objNull];
             continue;
