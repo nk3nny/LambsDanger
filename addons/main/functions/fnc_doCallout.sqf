@@ -20,7 +20,6 @@
 
 if (GVAR(disableAICallouts)) exitWith {};
 
-scopeName QGVAR(doCallout_main);
 params [
     ["_unit", objNull, [objNull]],
     ["_behavior", "", [""]],
@@ -74,15 +73,31 @@ if (isNil "_cachedSounds") then {
     _cachedSounds = getArray (_protocolConfig >> _callout);
     private _deleted = false;
     {
-        private _sound = _x;
+        private _sound = toLowerANSI _x;
         if (_sound == "") then {
-            _sound = objNull;
             _deleted = true;
-        } else {
-            if (_sound select [0, 1] != "\") then {
-                _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
-            };
+            _cachedSounds set [_forEachIndex, objNull];
+            continue;
         };
+
+        if !(fileExists _sound) then {
+            {
+                if (fileExists (_sound + _x)) exitWith {
+                    _sound = _sound + _x;
+                };
+            } forEach [".ogg", ".wss", ".wav", ".mp3"];
+        };
+
+        if (_sound == "") then {
+            _deleted = true;
+            _cachedSounds set [_forEachIndex, objNull];
+            continue;
+        };
+
+        if (_sound select [0, 1] != "\") then {
+            _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
+        };
+
         _cachedSounds set [_forEachIndex, _sound];
     } forEach _cachedSounds;
 
