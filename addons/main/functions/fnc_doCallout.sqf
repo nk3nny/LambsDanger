@@ -79,8 +79,14 @@ if (isNil "_cachedSounds") then {
             _cachedSounds set [_forEachIndex, objNull];
             continue;
         };
+        
+        private _hasFileEnding = _sound regexMatch ".+?\.(?:ogg|wss|wav|mp3)$/io";
 
-        if !(fileExists _sound) then {
+        if (_sound select [0, 1] != "\") then {
+            _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
+        };
+
+        if (!fileExists _sound && !_hasFileEnding) then {
             {
                 if (fileExists (_sound + _x)) exitWith {
                     _sound = _sound + _x;
@@ -88,14 +94,10 @@ if (isNil "_cachedSounds") then {
             } forEach [".ogg", ".wss", ".wav", ".mp3"];
         };
 
-        if (_sound == "") then {
+        if (_sound == "" || !_hasFileEnding) then {
             _deleted = true;
             _cachedSounds set [_forEachIndex, objNull];
             continue;
-        };
-
-        if (_sound select [0, 1] != "\") then {
-            _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
         };
 
         _cachedSounds set [_forEachIndex, _sound];
