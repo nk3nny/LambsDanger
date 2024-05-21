@@ -86,7 +86,7 @@ if (isNil "_cachedSounds") then {
             _sound = (getArray (configFile >> "CfgVoice" >> _speaker >> "directories") select 0) + _sound;
         };
 
-        if (!fileExists _sound && !_hasFileEnding) then {
+        if (!_hasFileEnding && {!fileExists _sound}) then {
             {
                 if (fileExists (_sound + _x)) exitWith {
                     _sound = _sound + _x;
