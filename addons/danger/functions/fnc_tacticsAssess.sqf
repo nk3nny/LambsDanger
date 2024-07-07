@@ -86,7 +86,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     };
 
     // soft vehicle response
-    private _hasAT = ((units _unit) findIf {(secondaryWeapon _x) isNotEqualTo ""}) isNotEqualTo -1;
+    private _hasAT = ([_group, false, true, false, true] call EFUNC(main,getLauncherUnits)) isNotEqualTo [];
     private _vehicleTarget = _enemies findIf {
         _hasAT
         && {_unit distance2D _x < RANGE_NEAR}
