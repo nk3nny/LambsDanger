@@ -27,7 +27,7 @@
 
 params [
     ["_group", [], [grpNull, []]],
-    ["_flags", 896, [0]], // 896 == AI_AMMO_USAGE_FLAG_VEHICLE + AI_AMMO_USAGE_FLAG_AIR + AI_AMMO_USAGE_FLAG_ARMOUR
+    ["_flags", AI_AMMO_USAGE_FLAG_VEHICLE + AI_AMMO_USAGE_FLAG_AIR + AI_AMMO_USAGE_FLAG_ARMOUR, [0]],
     ["_checkSubmunition", false, [false]]
 ];
 
