@@ -1221,5 +1221,59 @@
             <Italian>Registri artiglieria per uso dinamico</Italian>
             <Chinesesimp>动态使用方面的火炮指示</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_displayName">
+            <English>TASK ASSAULT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_Tooltip">
+            <English>Rushes to target position with no regard for safety\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_displayName">
+            <English>TASK RETREAT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_Tooltip">
+            <English>Retreats to target position while ignoring enemies\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_displayName">
+            <English>TASK GARRISON</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_Tooltip">
+            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_displayName">
+            <English>TASK PATROL</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_Tooltip">
+            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_displayName">
+            <English>TASK RUSH</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_Tooltip">
+            <English>Rushes players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_displayName">
+            <English>TASK HUNT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_Tooltip">
+            <English>Hunts players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_displayName">
+            <English>TASK CREEP</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_Tooltip">
+            <English>Stalks players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_displayName">
+            <English>TASK CQB</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_Tooltip">
+            <English>Enters and clears buildings within WP completion radius (Default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_displayName">
+            <English>REGISTER ARTILLERY</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_Tooltip">
+            <English>Registers artillery for dynamic use\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        </Key>
     </Package>
 </Project>
