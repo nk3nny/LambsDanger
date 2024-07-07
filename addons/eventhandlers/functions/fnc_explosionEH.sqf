@@ -41,11 +41,11 @@ if (RND(0.5)) then {
 
 // standing to Right prone
 if (_dir > 330 && { RND(0.2) }) exitWith {
-    _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft";
+    [_unit, "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft"] remoteExec ["switchMove"];
     [
         {
             if (_this call EFUNC(main,isAlive)) then {
-                _this switchMove "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"
+                [_this, "AadjPpneMstpSrasWrflDleft_AmovPercMstpSrasWrflDnon"] remoteExec ["switchMove"];
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
     ] call CBA_fnc_waitAndExecute;
@@ -53,11 +53,11 @@ if (_dir > 330 && { RND(0.2) }) exitWith {
 
 // standing to Left prone
 if (_dir < 30 && { RND(0.2) }) exitWith {
-    _unit switchMove "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright";
+    [_unit, "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright"] remoteExec ["switchMove"];
     [
         {
             if (_this call EFUNC(main,isAlive)) then {
-                _this switchMove "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"
+                [_this, "AadjPpneMstpSrasWrflDright_AmovPercMstpSrasWrflDnon"] remoteExec ["switchMove"];
             };
         }, _unit, (GVAR(ExplosionReactionTime) - 4) + random 3
     ] call CBA_fnc_waitAndExecute;
@@ -71,7 +71,7 @@ _unit setDestination [_pos, "FORMATION PLANNED", false];
 _unit doWatch _pos;
 
 // all others ~ go straight down
-_unit switchMove "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon";
+[_unit, "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon"] remoteExec ["switchMove"];
 _unit setUnitPos "DOWN";
 
 // get back
