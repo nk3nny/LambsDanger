@@ -1,6 +1,6 @@
 class CfgWaypoints {
     class LAMBS_DangerAI {
-        displayName = "!!!DEPRECATED, USE MODULES!!! - Advanced AI [LAMBS]";
+        displayName = "Advanced AI [LAMBS] - DEPRECATED, USE MODULES";
         class EGVAR(danger,Attack) {
             displayName = CSTRING(Waypoint_Deprecated_TaskAssault_displayName);
             displayNameDebug = QEGVAR(danger,Attack);
