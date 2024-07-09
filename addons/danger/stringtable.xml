@@ -245,7 +245,7 @@
             <Chinesesimp>切换AI小组自动使用烟雾弹掩护小组的功能</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
-            <English>Disable units using flares for illumination </English>
+            <English>Disable units using flares for illumination</English>
             <Czech>Vypíná schopnost jednotek používat světlice k osvětlení</Czech>
             <Polish>Wyłącz autonomiczne używanie flar przez AI</Polish>
             <Russian>Отключить способность ИИ использовать осветительные ракеты для освещения</Russian>
@@ -261,6 +261,12 @@
             <German>Schaltet die Fähigkeit der KI-Gruppe um, autonom Flares zur nächtlichen Beleuchtung zu verwenden, es sei denn, NVGs sind verfügbar oder die Einheit befindet sich im Schleichen-Modus</German>
             <Italian>Attiva o disattiva la capacità del gruppo IA di utilizzare autonomamente i bagliori per l'illuminazione di notte, a meno che non siano disponibili NVG o che l'unità sia in modalità invisibile</Italian>
             <Chinesesimp>切换AI组在夜间自主使用照明弹进行照明的功能除非NVG可用或单位处于隐身模式</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableIncapacitatedKills">
+            <English>Disable units killing incapacitated enemies (ACE3)</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DisableIncapacitatedKills_ToolTip">
+            <English>Disables AI groups ability to identify incapacitated enemies as threats in CQB (ACE3 only). Note that disabling this feature will add more instances where the AI gets stuck in CQB</English>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
