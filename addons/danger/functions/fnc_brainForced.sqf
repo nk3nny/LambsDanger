@@ -52,7 +52,7 @@ if ((currentCommand _unit) isEqualTo "ATTACK") then {
         _unit doWatch objNull;
     };
     [_unit, _attackTarget] call EFUNC(main,doAssaultSpeed);
-    _unit setUnitPosWeak (["MIDDLE", "PRONE"] select (getSuppression _unit > 0.9));
+    _unit setUnitPosWeak (["MIDDLE", "DOWN"] select (getSuppression _unit > 0.9));
     _unit setVariable [QEGVAR(main,currentTask), "Attacking", EGVAR(main,debug_functions)];
 };
 
