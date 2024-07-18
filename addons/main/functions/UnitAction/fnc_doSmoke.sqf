@@ -20,7 +20,7 @@
 params [
     ["_unit", objNull, [grpNull, objNull, []]],
     ["_pos", [], [[]]],
-    ["_type", 4, [0]]
+    ["_type", AI_AMMO_USAGE_FLAG_CONCEALMENT, [0]]
 ];
 
 // single unit

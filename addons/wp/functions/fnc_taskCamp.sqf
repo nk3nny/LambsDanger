@@ -67,27 +67,36 @@ if (_area isNotEqualTo []) then {
 
 // STAGE 1 - PATROL --------------------------
 if (_patrol) then {
-    private _group2 = createGroup [(side _group), true];
-    [selectRandom _units] join _group2;
-    if (count _units > 4)  then { [selectRandom units _group] join _group2; };
+    private _patrolGroup = createGroup [(side _group), true];
+    [selectRandom _units] join _patrolGroup;
+    if (count _units > 4)  then { [selectRandom units _group] join _patrolGroup; };
 
     // performance
     if (dynamicSimulationEnabled _group) then {
-        [_group2, true] remoteExecCall ["enableDynamicSimulation", 2];
+        [_patrolGroup, true] remoteExec ["enableDynamicSimulation", 2];
     };
 
     // id
-    _group2 setGroupIDGlobal [format ["Patrol (%1)", groupId _group2]];
+    _patrolGroup setGroupIDGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
 
     // orders
     if (_area isEqualTo []) then {
-        [_group2, _pos, _range * 2, 4, nil, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _range * 2, 4, nil, true] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [0, (_area2 select 1) * 2];
-        [_group2, _pos, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _range * 2, 4, _area2, true] call FUNC(taskPatrol);
     };
+
+    // eventhandler
+    _group setVariable [QGVAR(baseGroup), _patrolGroup];
+    _group addEventHandler ["CombatModeChanged", {
+        params ["_group"];
+        private _patrolGroup = _group getVariable [QGVAR(baseGroup), grpNull];
+        (units _patrolGroup) joinSilent _group;
+        _group removeEventHandler [_thisEvent, _thisEventHandler];
+    }];
 
     // update
     _units = units _group;
@@ -117,7 +126,7 @@ reverse _units;
             },
             {
                 params ["_unit", "_target"];
-                if (surfaceIsWater (getPos _unit) || (_unit distance _target > 2)) exitWith { _unit doFollow (leader _unit); };
+                if (surfaceIsWater (getPosASL _unit) || (_unit distance _target > 2)) exitWith { _unit doFollow (leader _unit); };
                 doStop _unit;
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             },
@@ -192,7 +201,7 @@ private _dir = random 360;
         unitReady _unit
     }, {
         params ["_unit", "_target", "_center", "_anim"];
-        if (surfaceIsWater (getPos _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
+        if (surfaceIsWater (getPosASL _unit) || (_unit distance2D _target > 1)) exitWith { _unit doFollow (leader _unit); };
         [_unit, _anim, 2] call EFUNC(main,doAnimation);
 
         _unit disableAI "ANIM";

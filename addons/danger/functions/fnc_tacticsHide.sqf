@@ -100,26 +100,28 @@ _units doWatch objNull;
 // disperse and hide unit ~ notice that cover is added as building positions nkenny
 [_units, _target, _cover] call EFUNC(main,doGroupHide);
 
-// find launcher and armour
-private _launchers = _units select {(secondaryWeapon _x) isNotEqualTo ""};
+// find launcher units
+private _launchersAA = [_units, AI_AMMO_USAGE_FLAG_AIR, true] call EFUNC(main,getLauncherUnits);
+private _launchersAT = [_units, AI_AMMO_USAGE_FLAG_ARMOUR] call EFUNC(main,getLauncherUnits);
 
-// find enemy air/tanks
+// find enemy vehicles
 private _enemies = _unit targets [true, 600, [], 0, _target];
 private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
 
-if (_antiTank && { _tankAir != -1 } && { _launchers isNotEqualTo [] }) then {
+if (_antiTank && { _tankAir != -1 } && { _launchersAT isNotEqualTo [] || (_launchersAA isNotEqualTo []) }) then {
+    private _targetVehicle = vehicle (_enemies select _tankAir);
     {
         // launcher units target air/tank
         _x setCombatMode "RED";
-        _x commandTarget (_enemies select _tankAir);
+        _x commandTarget _targetVehicle;
 
         // extra impetuous to select launcher
         _x selectWeapon (secondaryWeapon _x);
         _x setUnitPosWeak "MIDDLE";
-    } forEach _launchers;
+    } forEach ([_launchersAT, _launchersAA] select (_targetVehicle isKindOf "Air"));
 
     // extra aggression from unit
-    _unit doFire (_enemies select _tankAir);
+    _unit doFire _targetVehicle;
 };
 
 // debug

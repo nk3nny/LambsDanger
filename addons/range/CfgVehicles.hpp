@@ -1,6 +1,6 @@
 class CfgVehicles {
-    class Land;
-    class Man : Land {
+    class Man;
+    class CAManBase: Man {
         sensitivity = 6;
     };
 };

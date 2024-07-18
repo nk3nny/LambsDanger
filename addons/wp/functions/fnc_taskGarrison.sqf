@@ -11,7 +11,7 @@
  * 1: Position to occupy, default group location <ARRAY or OBJECT>
  * 2: Range of tracking, default is 50 meters <NUMBER>
  * 3: Area the AI Camps in, default [] <ARRAY>
- * 4: Teleprt Units to Position <BOOL>
+ * 4: Teleport Units to Position <BOOL>
  * 5: Sort Based on Height <BOOL>
  * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <NUMBER>
  * 7: Patrol <BOOL>
@@ -84,7 +84,7 @@ if (_patrol) then {
 
     // performance
     if (dynamicSimulationEnabled _group) then {
-        [_patrolGroup, true] remoteExecCall ["enableDynamicSimulation", 2];
+        [_patrolGroup, true] remoteExec ["enableDynamicSimulation", 2];
     };
 
     // id
@@ -99,6 +99,16 @@ if (_patrol) then {
         _area2 set [1, (_area2 select 1) * 2];
         [_patrolGroup, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
     };
+
+    // eventhandler
+    _group setVariable [QGVAR(baseGroup), _patrolGroup];
+    _group addEventHandler ["CombatModeChanged", {
+        params ["_group"];
+        private _patrolGroup = _group getVariable [QGVAR(baseGroup), grpNull];
+        (units _patrolGroup) joinSilent _group;
+        _group removeEventHandler [_thisEvent, _thisEventHandler];
+    }];
+
 };
 
 // man static weapons
@@ -203,7 +213,7 @@ private _fnc_addEventHandler = {
                 unitReady _unit
             }, {
                 params ["_unit", "_target"];
-                if (surfaceIsWater (getPos _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
+                if (surfaceIsWater (getPosASL _unit) || (_unit distance _target > 1.5)) exitWith { _unit doFollow (leader _unit); };
                 _unit disableAI "PATH";
                 _unit setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
             }, [_x, _house]
