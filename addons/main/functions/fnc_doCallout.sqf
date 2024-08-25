@@ -40,7 +40,7 @@ if (_time >= time) exitWith {
 private _speaker = speaker _unit;
 if (toUpper(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if Unit is "Mute"
 
-switch (toLower(_callout)) do {
+switch (toLowerANSI(_callout)) do {
     case ("contact"): {
         _callout = selectRandom ["ContactE_1", "ContactE_2", "ContactE_3", "Danger"];
     };
