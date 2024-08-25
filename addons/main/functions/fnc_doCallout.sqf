@@ -38,7 +38,7 @@ if (_time >= time) exitWith {
 };
 
 private _speaker = speaker _unit;
-if (toUpper(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if Unit is "Mute"
+if (toUpperANSI(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if Unit is "Mute"
 
 switch (toLowerANSI(_callout)) do {
     case ("contact"): {
