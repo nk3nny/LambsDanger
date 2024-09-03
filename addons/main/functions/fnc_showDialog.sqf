@@ -328,7 +328,7 @@ private _fnc_AddSideSelector = {
         _x params ["_side", ["_tooltip", "", [""]]];
         private _b = [_tooltip, _side, [_xpos, _basePositionY, PX(CONST_HEIGHT), PY(CONST_HEIGHT)]] call _fnc_CreateButton;
         _xpos = _xpos + _xoffset;
-        _buttons pushback _b;
+        _buttons pushBack _b;
         if (_default == _side) then {
             (_buttons select 0) setVariable [QGVAR(SelectedSide), _side];
             _b ctrlSetTextColor [1, 1, 1, 1];
@@ -348,7 +348,7 @@ private _controls = [];
     switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {
-            _controls pushback [(_x call _fnc_AddBoolean), _type];
+            _controls pushBack [(_x call _fnc_AddBoolean), _type];
         };
         case ("LISTBOX");
         case ("LIST");
@@ -363,7 +363,7 @@ private _controls = [];
         case ("INTEGER");
         case ("TEXT");
         case ("EDIT"): {
-            _controls pushback [(_x call _fnc_AddTextField), _type];
+            _controls pushBack [(_x call _fnc_AddTextField), _type];
         };
         case ("DESCRIPTION"): {
             _x call _fnc_DescriptionField; // This Type does not generate any Data and will not be enterted into the return data
@@ -372,7 +372,7 @@ private _controls = [];
             _controls pushBack [(_x call _fnc_AddSideSelector), _type];
         };
         default {
-            _controls pushback [(_x call _fnc_AddTextField), _type];
+            _controls pushBack [(_x call _fnc_AddTextField), _type];
             hint format ["%1 type unknown %2", _type, _x];
             // TYPE NOT FOUND
         };

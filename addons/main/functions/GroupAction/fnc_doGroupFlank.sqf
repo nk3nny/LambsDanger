@@ -34,14 +34,14 @@ _vehicles = _vehicles select { canFire _x };
     _x setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
     // suppress
-    private _posASL = AGLtoASL (selectRandom _pos);
+    private _posASL = AGLToASL (selectRandom _pos);
     if (
         (_forEachIndex % 2) isEqualTo _teamAlpha
         && {!(terrainIntersectASL [eyePos _x, _posASL vectorAdd [0, 0, 3]])}
     ) then {
         [{_this call FUNC(doSuppress)}, [_x, _posASL vectorAdd [0, 0, random 1], true], 1 + random 3] call CBA_fnc_waitAndExecute;
     };
-} foreach _units;
+} forEach _units;
 
 // reset alpha status
 _teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
@@ -52,11 +52,11 @@ if ((_cycle % 2) isEqualTo 0) then {
         private _posAGL = selectRandom _pos;
         _x doWatch _posAGL;
         [_x, _posAGL] call FUNC(doVehicleSuppress);
-    } foreach _vehicles;
+    } forEach _vehicles;
 } else {
     // check for roads
     private _roads = _overwatch nearRoads 50;
-    if (_roads isNotEqualTo []) exitWith {_vehicles doMove (ASLtoAGL (getPosASL (selectRandom _roads)));};
+    if (_roads isNotEqualTo []) exitWith {_vehicles doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
     _vehicles doMove _overwatch;
 };
 

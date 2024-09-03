@@ -23,14 +23,14 @@ private _fnc_toggle_AI = {
             GVAR(disableAIPlayerGroup) = false;
             {
                 _x setVariable [QGVAR(disableAI), false];    // added to ensure it triggers -- nkenny
-            } foreach units player;
+            } forEach units player;
         } else {
             (group player) setVariable [QEGVAR(main,groupMemory), []];
             GVAR(disableAIPlayerGroup) = true;
             {
                 _x setUnitPosWeak "AUTO";
                 _x setVariable [QGVAR(disableAI), true];
-            } foreach units player;
+            } forEach units player;
         };
     private _txt = format ["%1 toggled AI %2", side player, ["on", "off"] select (GVAR(disableAIPlayerGroup))];
     [["LAMBS Danger.fsm"], [_txt, 1.4], true] call CBA_fnc_notify;
@@ -68,7 +68,7 @@ private _fnc_suppress_AI = {
                     }, [_x, _firePos, true], random 1.5
                 ] call CBA_fnc_waitAndExecute;
         };
-    } foreach _units;
+    } forEach _units;
     private _txt = format ["%1 quick suppression (%2 units)", side player, count _units];
     [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;
     true
@@ -81,7 +81,7 @@ private _fnc_hide_AI = {
     private _units = (units player) select {player distance2D _x < 55 && {!isPlayer _x}};
     {
         [_x, _pos, 12, _buildings] call EFUNC(main,doHide);
-    } foreach _units;
+    } forEach _units;
     private _txt = format ["%1 quick hide (%2 units | %3 spots)", side player, count _units, count _buildings];
     [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;
     true
@@ -112,7 +112,7 @@ private _fnc_assault_AI = {
         } else {
             [_x, _enemy] call EFUNC(main,doAssault);
         };
-    } foreach _units;
+    } forEach _units;
     private _txt = format ["%1 quick assault (%2 units | %3 spots)", side player, count _units, count ((group player) getVariable [QEGVAR(main,groupMemory), []])];
     [["LAMBS Danger.fsm"], [_txt, 1.4]] call CBA_fnc_notify;
     true

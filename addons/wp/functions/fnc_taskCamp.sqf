@@ -77,7 +77,7 @@ if (_patrol) then {
     };
 
     // id
-    _patrolGroup setGroupIDGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
+    _patrolGroup setGroupIdGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
 
     // orders
     if (_area isEqualTo []) then {
@@ -254,7 +254,7 @@ _wp2 setWaypointType _wp2Type;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 taskCamp: %2 established camp", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskCamp: %2 established camp", side _group, groupId _group] call EFUNC(main,debugLog);
 };
 
 // end

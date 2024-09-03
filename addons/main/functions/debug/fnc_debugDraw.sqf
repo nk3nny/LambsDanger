@@ -43,10 +43,10 @@ QGVAR(debug_drawRectCacheGame) call _fnc_clearControls;
 QGVAR(debug_drawRectCacheCurator) call _fnc_clearControls;
 QGVAR(debug_drawRectCacheEGSpectator) call _fnc_clearControls;
 
-private _gameCache = uiNamespace getvariable [QGVAR(debug_drawRectCacheGame), []];
+private _gameCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheGame), []];
 private _gameInUse = [];
 
-private _curatorCache = uiNamespace getvariable [QGVAR(debug_drawRectCacheCurator), []];
+private _curatorCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheCurator), []];
 private _curatorInUse = [];
 
 private _spectatorCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheEGSpectator), []];
@@ -69,7 +69,7 @@ private _fnc_getRect = {
         } else {
             _control = _curatorCache deleteAt 0;
         };
-        _curatorInUse pushback _control;
+        _curatorInUse pushBack _control;
         _control
     };
     if (!isNull _displayEGSpectator) exitWith {
@@ -79,7 +79,7 @@ private _fnc_getRect = {
         } else {
             _control = _spectatorCache deleteAt 0;
         };
-        _spectatorInUse pushback _control;
+        _spectatorInUse pushBack _control;
         _control
     };
     if (_gameCache isEqualTo []) then {
@@ -88,7 +88,7 @@ private _fnc_getRect = {
     } else {
         _control = _gameCache deleteAt 0;
     };
-    _gameInUse pushback _control;
+    _gameInUse pushBack _control;
     _control
 };
 
@@ -97,7 +97,7 @@ private _fnc_debug_drawRect = {
     private _pos2D = worldToScreen _pos;
     if (_pos2D isEqualTo []) exitWith {};
     private _control = call _fnc_getRect;
-    _textData pushback "</t>";
+    _textData pushBack "</t>";
 
     private _text = "";
     {
@@ -144,7 +144,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             private _unitIsLocal = local _unit;
             if (_unitIsLocal || !getRemoteSensorsDisabled) then {
                 private _knowledge = _unit targetKnowledge _currentTarget;
-                private _knowledgePosition = ASLtoAGL(_knowledge select 6);
+                private _knowledgePosition = ASLToAGL(_knowledge select 6);
                 private _knowledgeAge = _knowledge select 2;
                 if (_knowledgeAge == time && _unitIsLocal) then {
                     _unit setVariable [QGVAR(debug_LastSeenPos), _knowledgePosition, GVAR(debug_functions)];

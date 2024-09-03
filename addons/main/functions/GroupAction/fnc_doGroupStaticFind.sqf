@@ -46,7 +46,7 @@ if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's law
     private _unit = _units select 0;
 
     // asign no target
-    _unit doWatch ObjNull;
+    _unit doWatch objNull;
 
     // order to man the vehicle
     _unit assignAsGunner _weapons;

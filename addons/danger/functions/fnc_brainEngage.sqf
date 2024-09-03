@@ -66,9 +66,9 @@ if (
     && {RND(getSuppression _unit)}
     && {_type isEqualTo DANGER_CANFIRE}
 ) exitWith {
-    private _posASL = ATLtoASL (_unit getHideFrom _target);
-    if (((ASLtoAGL _posASL) select 2) > 6) then {
-        _posASL = ASLtoAGL _posASL;
+    private _posASL = ATLToASL (_unit getHideFrom _target);
+    if (((ASLToAGL _posASL) select 2) > 6) then {
+        _posASL = ASLToAGL _posASL;
         _posASL set [2, 0.5];
         _posASL = AGLToASL _posASL
     };

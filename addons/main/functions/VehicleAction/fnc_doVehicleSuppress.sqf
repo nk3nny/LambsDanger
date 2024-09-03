@@ -25,7 +25,7 @@ if (speed _vehicle > 30 || {(_pos select 2) > 100}) exitWith {false};
 
 // pos
 private _eyePos = eyePos _unit;
-_pos = (AGLtoASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
+_pos = (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
 
 // target is close or terrain occludes target
 if (

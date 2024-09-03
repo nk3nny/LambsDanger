@@ -35,7 +35,7 @@ private _predictedPos = _unit getHideFrom _target;
 if (_predictedPos isEqualTo [0, 0, 0]) exitWith {false};
 
 // define buildings
-private _visibility = [objNull, "VIEW", _vehicle] checkVisibility [eyePos _vehicle, ATLtoASL (_predictedPos vectorAdd [0, 0, 1.5])];
+private _visibility = [objNull, "VIEW", _vehicle] checkVisibility [eyePos _vehicle, ATLToASL (_predictedPos vectorAdd [0, 0, 1.5])];
 if (_buildings isEqualTo [] && {_visibility < 0.5}) then {
     _buildings = [_target, 12, false, false] call FUNC(findBuildings);
 };
@@ -47,7 +47,7 @@ if (_buildings isNotEqualTo []) then {
 
 // add predicted location -- just to ensure shots fired!
 if (_buildings isEqualTo []) then {
-    _predictedPos = ASLtoAGL (ATLtoASL _predictedPos);
+    _predictedPos = ASLToAGL (ATLToASL _predictedPos);
     if ((_predictedPos select 2) > 6) then {_predictedPos set [2, 0.5]};
     _buildings pushBack _predictedPos;
 };
@@ -56,7 +56,7 @@ if (_buildings isEqualTo []) then {
 _pos = selectRandom _buildings;
 
 // look at position
-_vehicle doWatch (AGLtoASL _pos);
+_vehicle doWatch (AGLToASL _pos);
 
 // suppression
 private _suppression = [_unit, _pos] call FUNC(doVehicleSuppress);
@@ -98,7 +98,7 @@ if (GVAR(debug_functions)) then {
 
     private _m = [_unit, "", _unit call FUNC(debugMarkerColor), "mil_arrow2"] call FUNC(dotMarker);
     private _mt = [_pos, "", _unit call FUNC(debugMarkerColor),"mil_destroy"] call FUNC(dotMarker);
-    {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
+    {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _target);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], 15] call CBA_fnc_waitAndExecute;
 };

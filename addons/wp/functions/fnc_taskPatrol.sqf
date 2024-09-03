@@ -120,7 +120,7 @@ if (_moveWaypoints) then {
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 taskPatrol: %2 Patrols", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskPatrol: %2 Patrols", side _group, groupId _group] call EFUNC(main,debugLog);
 };
 
 // end

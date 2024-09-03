@@ -24,7 +24,7 @@ params [["_magazine", "", [""]], ["_flags", 0, [0]]];
 
 GVAR(aiUsageFlagCache) getOrDefaultCall [_magazine + str _flags,{
     // find smoke shell
-    private _ammo = getText (configfile >> "CfgMagazines" >> _magazine >> "Ammo");
-    private _aiAmmoUsage = getNumber (configfile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
+    private _ammo = getText (configFile >> "CfgMagazines" >> _magazine >> "Ammo");
+    private _aiAmmoUsage = getNumber (configFile >> "CfgAmmo" >> _ammo >> "aiAmmoUsageFlags");
     [_aiAmmoUsage, _flags] call BIS_fnc_bitflagsCheck;
 }, true];

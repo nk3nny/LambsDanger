@@ -117,7 +117,7 @@ if (
 
     // get position
     private _posASL = _unit getHideFrom _enemy;
-    if (((ASLtoAGL _posASL) select 2) > 6) then {_posASL set [2, 0.5];};
+    if (((ASLToAGL _posASL) select 2) > 6) then {_posASL set [2, 0.5];};
     _posASL = ATLToASL _posASL;
 
     // execute suppression
@@ -135,7 +135,7 @@ if (
             [_x, _posASL],
             8
         ] call CBA_fnc_waitAndExecute;
-    } foreach _units;
+    } forEach _units;
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (suppress)", EGVAR(main,debug_functions)];
@@ -184,7 +184,7 @@ if (
         _x forceSpeed 3;
         _x setVariable [QEGVAR(main,currentTask), "Assault (contact)", EGVAR(main,debug_functions)];
 
-    } foreach _units;
+    } forEach _units;
     _units doMove (selectRandom _buildings);
 
     // group variable

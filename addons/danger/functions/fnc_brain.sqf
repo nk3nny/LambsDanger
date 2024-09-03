@@ -68,7 +68,7 @@ private _index = -1;
         _index = _forEachIndex;
         _priority = _priorities select _cause;
     };
-} foreach _queue;
+} forEach _queue;
 
 // select cause
 private _causeArray = _queue select _index;

@@ -90,7 +90,7 @@ if (GVAR(debug_functions)) then {
         name _unit,
         round (_unit distance _pos)
     ] call FUNC(debugLog);
-    private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLtoASL _pos, true];
+    private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLToASL _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;
 };

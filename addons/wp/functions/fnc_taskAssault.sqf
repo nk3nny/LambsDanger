@@ -150,7 +150,7 @@ _group setFormation "LINE";
         ] call CBA_fnc_addPerFrameHandler;
         _x setVariable [QGVAR(taskAssault), true];
     };
-} foreach _units;
+} forEach _units;
 
 // execute move
 waitUntil {

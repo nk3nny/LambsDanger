@@ -85,7 +85,7 @@ if (isServer) then {
         _x enableAI 'PATH';
         [_x, _x getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
         _x setVariable [QGVAR(eventhandlers), nil];
-    } foreach (units _unit);
+    } forEach (units _unit);
     [_unit, "", 2] call EFUNC(main,doAnimation);
     _unit setUnitPos "AUTO";
 }] call CBA_fnc_addEventhandler;

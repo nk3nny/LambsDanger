@@ -24,7 +24,7 @@ _group setSpeedMode "FULL";
 {
     _x enableAI "MOVE";
     _x enableAI "PATH";
-} foreach units _group;
+} forEach units _group;
 
 // low level move order
 _group move _pos;

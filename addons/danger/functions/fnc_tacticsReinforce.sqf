@@ -136,7 +136,7 @@ if (_distance > 500) then {
 
 // pack & deploy static weapons
 if !(GVAR(disableAIDeployStaticWeapons)) then {
-    private _intersect = terrainIntersectASL [eyePos _unit, AGLtoASL (_target vectorAdd [0, 0, 10])];
+    private _intersect = terrainIntersectASL [eyePos _unit, AGLToASL (_target vectorAdd [0, 0, 10])];
     if (_distance > 400 || {_intersect}) then {
         _units = [leader _group] call EFUNC(main,doGroupStaticPack);
     };

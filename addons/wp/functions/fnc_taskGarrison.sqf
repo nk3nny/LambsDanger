@@ -88,7 +88,7 @@ if (_patrol) then {
     };
 
     // id
-    _patrolGroup setGroupIDGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
+    _patrolGroup setGroupIdGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
 
     // orders
     if (_area isEqualTo []) then {
@@ -238,7 +238,7 @@ _wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskGarrison: %2 garrisoned", side _group, groupId _group] call EFUNC(main,debugLog);
 };
 
 // end

@@ -96,7 +96,7 @@ if (EGVAR(main,debug_functions)) then {
         _m setMarkerDirLocal (getDir _x);
         _m setMarkerTextLocal str (_unit knowsAbout _x);
         _markers pushBack _m;
-    } foreach ((units _target) select {_unit knowsAbout _x > 0});
+    } forEach ((units _target) select {_unit knowsAbout _x > 0});
 
     // friendly units
     {
@@ -104,7 +104,7 @@ if (EGVAR(main,debug_functions)) then {
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
         _markers pushBack _m;
-    } foreach units _unit;
+    } forEach units _unit;
     [{{deleteMarker _x;true} count _this;}, _markers, 60] call CBA_fnc_waitAndExecute;
 };
 
