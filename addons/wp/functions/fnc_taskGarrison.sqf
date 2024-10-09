@@ -10,7 +10,7 @@
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
  * 1: Position to occupy, default group location <ARRAY or OBJECT>
  * 2: Range of tracking, default is 50 meters <NUMBER>
- * 3: Area the AI Camps in, default [] <ARRAY>
+ * 3: Area the AI garrisons, default [] <ARRAY>
  * 4: Teleport Units to Position <BOOL>
  * 5: Sort Based on Height <BOOL>
  * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <NUMBER>
@@ -51,18 +51,37 @@ private _weapons = nearestObjects [_pos, ["Landvehicle"], _radius, true];
 _weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } };
 
 // find buildings // remove half outdoor spots // shuffle array
-private _houses = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
-_houses = _houses select { RND(0.5) || {lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]}};
+private _buildingPos = [_pos, _radius, true, false] call EFUNC(main,findBuildings);
+
 if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
-    _houses = _houses select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
+    _buildingPos = _buildingPos select { _x inArea [_pos, _a, _b, _angle, _isRectangle, _c] };
     _weapons = _weapons select {(getPos _x) inArea [_pos, _a, _b, _angle, _isRectangle, _c]};
 };
-[_houses, true] call CBA_fnc_Shuffle;
 
-// sort based on height
+private _outsidePos = [];
+{
+    if !(lineIntersects [AGLToASL _x, (AGLToASL _x) vectorAdd [0, 0, 6]]) then {
+        _outsidePos pushBack _x;
+    };
+} forEach _buildingPos;
+_buildingPos = _buildingPos - _outsidePos;
+
+// declare units
+private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
+
+// match inside positions to outside positions if possible.
+if (count _units >= count _buildingPos) then {
+    _buildingPos append _outsidePos;
+} else {
+    _buildingPos append ( _outsidePos select { RND(0.5) } );
+};
+
+// sort based on height or true random
 if (_sortBasedOnHeight) then {
-    _houses = [_houses, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
+    _buildingPos = [_buildingPos, [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
+} else {
+    [_buildingPos, true] call CBA_fnc_Shuffle;
 };
 
 // orders
@@ -71,9 +90,6 @@ _group enableAttack false;
 
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), "taskGarrison", EGVAR(main,debug_functions)];
-
-// declare units + sort vehicles + tweak count to match house positions
-private _units = (units _group) select {!isPlayer _x && {isNull objectParent _x}};
 
 // add sub patrols
 reverse _units;
@@ -126,7 +142,7 @@ if (_patrol) then {
 _units = _units - [objNull];
 
 // enter buildings
-if (count _units > count _houses) then {_units resize (count _houses);};
+if (count _units > count _buildingPos) then {_units resize (count _buildingPos);};
 private _fnc_addEventHandler = {
     params ["_unit", "_type"];
     if (_type == 0) exitWith {};
@@ -191,16 +207,21 @@ private _fnc_addEventHandler = {
 {
     // prepare
     doStop _x;
-    private _house = _houses deleteAt 0;
+    private _house = _buildingPos deleteAt 0;
 
     // move and delay stopping + stance
     if (_teleport) then {
         if (surfaceIsWater _house) then {
             _x doFollow (leader _x);
         } else {
-            _x setPos _house;
+            _x setVehiclePosition [_house, [], 0, "CAN_COLLIDE"];
             _x disableAI "PATH";
             _x setUnitPos selectRandom ["UP", "UP", "MIDDLE"];
+
+            // look away from nearest building
+            if !([_x] call EFUNC(main,isIndoor)) then {
+                _x doWatch AGLtoASL (_x getPos [250, (nearestBuilding _house) getDir _house]);
+            };
         };
     } else {
         if (surfaceIsWater _house) exitWith {
