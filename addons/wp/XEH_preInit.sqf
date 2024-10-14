@@ -80,12 +80,10 @@ if (isServer) then {
 
 [QGVAR(taskCampReset), {
     params ["_unit"];
-    {
-        _x enableAI 'ANIM';
-        _x enableAI 'PATH';
-        [_x, _x getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
-        _x setVariable [QGVAR(eventhandlers), nil];
-    } forEach (units _unit);
+    _unit enableAI 'ANIM';
+    _unit enableAI 'PATH';
+    [_unit, _unit getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+    _unit setVariable [QGVAR(eventhandlers), nil];
     [_unit, "", 2] call EFUNC(main,doAnimation);
     _unit setUnitPos "AUTO";
 }] call CBA_fnc_addEventhandler;
