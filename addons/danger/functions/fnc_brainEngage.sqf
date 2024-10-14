@@ -50,6 +50,13 @@ if (
     && {(vehicle _target) isKindOf "CAManBase"}
     // && {_target call EFUNC(main,isAlive)}
 ) exitWith {
+
+    // set incapacitated ACE units visible
+    if (!GVAR(disableIncapacitatedKills)) then {
+        private _vis = _target getVariable ["ace_common_oldVisibility", 1];
+        if (_vis isEqualTo 0) then {_target setUnitTrait ["camouflageCoef", _vis];};
+    };
+
     _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
     [_unit, _target] call EFUNC(main,doAssault);
     _timeout + 1.4
