@@ -220,7 +220,7 @@ private _fnc_addEventHandler = {
 
             // look away from nearest building
             if !([_x] call EFUNC(main,isIndoor)) then {
-                _x doWatch AGLtoASL (_x getPos [250, (nearestBuilding _house) getDir _house]);
+                _x doWatch AGLToASL (_x getPos [250, (nearestBuilding _house) getDir _house]);
             };
         };
     } else {
