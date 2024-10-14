@@ -344,7 +344,7 @@ private _fnc_AddSideSelector = {
 
 private _controls = [];
 {
-    private _type = toUpper (_x select 1);
+    private _type = toUpperANSI (_x select 1);
     switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {

@@ -47,7 +47,7 @@ if (_switchMuzzle) then {
         private _muzzles = getArray (configFile >> "CfgWeapons" >> _turret >> "muzzles");
 
         // first pass, try to find a muzzle that has the same name
-        private _index = _muzzles findIf {(toUpper _x) in _warheadTypes};
+        private _index = _muzzles findIf {(toUpperANSI _x) in _warheadTypes};
         if (_index > -1 && { // found muzzle with same name
             // one of the mags that can be loaded into that muzzle is in available mags
             ((getArray (configFile >> "CfgWeapons" >> _turret >> (_muzzles select _index) >> "magazines")) arrayIntersect _availableMags) isNotEqualTo []
@@ -74,7 +74,7 @@ if (_muzzle isEqualTo "") then {
             {
                 private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
                 if (_ammo isEqualTo "") then {continue};
-                if ((toUpper (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) then {
+                if ((toUpperANSI (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) then {
                     _foundMag = _x;
                     break;
                 };

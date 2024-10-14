@@ -30,7 +30,7 @@ params [
 
 // switchMove "" no longer works in dev 1.37
 if (_animation == "") then {
-    _animation = toLower (animationState _unit);
+    _animation = toLowerANSI (animationState _unit);
 
     // stances are broken for some Animations
     private _stance = switch (_animation select [4, 4]) do {
