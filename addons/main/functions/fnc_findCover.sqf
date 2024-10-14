@@ -82,7 +82,7 @@ if (_dangerPos isNotEqualTo [0, 0, 1.8]) then {
                             _stances pushBack "UP";
                         };
                     };
-                    _ret pushback [_pos, selectRandom _stances];
+                    _ret pushBack [_pos, selectRandom _stances];
                     _numFound = _numFound + 1;
 
                     _found = ((_maxResults isNotEqualTo -1) && {_numFound isEqualTo _maxResults});

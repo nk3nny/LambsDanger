@@ -122,7 +122,7 @@ private _fnc_act = {
 
             // debug
             if (EGVAR(main,debug_functions)) then {
-                private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLtoASL _buildingPosSelected, true];
+                private _arrow = createSimpleObject ["Sign_Arrow_Large_Blue_F", AGLToASL _buildingPosSelected, true];
                 _arrow setObjectTexture [0, [_x] call EFUNC(main,debugObjectColor)];
             };
 
@@ -211,7 +211,7 @@ waitUntil {
     [_enemy, _group, _building] call _fnc_act;
 
     // debug
-    if (EGVAR(main,debug_functions)) then {["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupID _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
+    if (EGVAR(main,debug_functions)) then {["%1 taskCQB: (team: %2) (units: %3) (enemies: %4)", side _group, groupId _group, count units _group, !isNull _enemy] call EFUNC(main,debugLog);}; // instead of boolean for enemies, would be better with a count -nkenny
 
     // wait
     sleep _cycle;
@@ -224,9 +224,9 @@ waitUntil {
 // reset
 {
     _x setVariable [QEGVAR(danger,disableAI), nil];
-    _x setUnitpos "AUTO";
+    _x setUnitPos "AUTO";
     _x doFollow (leader _x);
-} foreach units _group;
+} forEach units _group;
 
 // debug
 if (EGVAR(main,debug_functions)) then {["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};

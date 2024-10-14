@@ -25,7 +25,7 @@ GVAR(CalloutCacheNamespace) = call CBA_fnc_createNamespace;
         } forEach _controls;
     };
     uiNamespace setVariable [_x, []];
-} foreach [
+} forEach [
     QGVAR(debug_drawRectCacheGame),
     QGVAR(debug_drawRectCacheEGSpectator),
     QGVAR(debug_drawRectCacheCurator)
@@ -41,7 +41,7 @@ GVAR(debug_sideColorLUT) = createHashMap;
     private _b = profileNamespace getVariable [format ["map_%1_b", _name], _default select 2];
     private _color = [_r, _g, _b] call BIS_fnc_colorRGBToHTML;
     GVAR(debug_sideColorLUT) set [_side, _color];
-} foreach [
+} forEach [
     ["blufor", west, [0, 0.3, 0.6]],
     ["opfor", east, [0.5,0,0]],
     ["independent", independent, [0,0.5,0]],

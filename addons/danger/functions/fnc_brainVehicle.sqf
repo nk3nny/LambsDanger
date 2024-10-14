@@ -41,7 +41,7 @@ private _index = -1;
         _index = _forEachIndex;
         _priority = _priorities select _cause;
     };
-} foreach _queue;
+} forEach _queue;
 
 // select cause
 private _causeArray = _queue select _index;
@@ -57,7 +57,7 @@ private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT,
 if (_attack) then {
     private _dangerPos = _unit getHideFrom _dangerCausedBy;
     if (_dangerPos isEqualTo [0, 0, 0]) exitWith {_attack = false;};
-    _dangerPos = ASLtoAGL (ATLtoASL _dangerPos);
+    _dangerPos = ASLToAGL (ATLToASL _dangerPos);
     if ((_dangerPos select 2) > 6 || {(_dangerPos select 2) < 2}) then {_dangerPos set [2, 1]};
 };
 
@@ -178,7 +178,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
         // delayed unload
         [
             {
-                params [["_cargo", []], ["_side", EAST], ["_vehicle", objNull]];
+                params [["_cargo", []], ["_side", east], ["_vehicle", objNull]];
                 _cargo orderGetIn false;
                 _cargo allowGetIn false;
                 if (EGVAR(main,debug_functions)) then {["%1 %2 unloading %3 carried troops", _side, getText (configOf _vehicle >> "displayName"), count _cargo] call EFUNC(main,debugLog);};
@@ -226,7 +226,7 @@ if (_car) exitWith {
     };
 
     // look to danger
-    if (_attack && {_vehicle knowsAbout _dangerCausedBy > 3}) then {_vehicle doWatch (AGLtoASL _dangerPos);};
+    if (_attack && {_vehicle knowsAbout _dangerCausedBy > 3}) then {_vehicle doWatch (AGLToASL _dangerPos);};
 
     // suppression
     if (_attack && {_slow}) then {

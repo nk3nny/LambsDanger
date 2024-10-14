@@ -38,7 +38,7 @@ private _nearestEnemy = _unit findNearestEnemy _unit;
 if (
     (_unit distanceSqr _nearestEnemy < 5041)
     && {(vehicle _nearestEnemy) isKindOf "CAManBase"}
-    && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isEqualTo 1 || {_unit distanceSqr _nearestEnemy < 64 && {(round (getposATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
+    && {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _nearestEnemy] isEqualTo 1 || {_unit distanceSqr _nearestEnemy < 64 && {(round (getPosATL _unit select 2)) isEqualTo (round ((getPosATL _nearestEnemy) select 2))}}}
 ) exitWith {
     [_unit, _nearestEnemy, 12, true] call FUNC(doAssault);
 };
@@ -91,7 +91,7 @@ _group setVariable [QGVAR(groupMemory), _groupMemory, false];
 // debug
 if (GVAR(debug_functions)) then {
     ["%1 assaulting (sympathetic) (%2 @ %3m - %4 spots)", side _unit, name _unit, round (_unit distance _pos), count _groupMemory] call FUNC(debugLog);
-    private _sphere = createSimpleObject ["Sign_Arrow_F", AGLtoASL _pos, true];
+    private _sphere = createSimpleObject ["Sign_Arrow_F", AGLToASL _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;
 };

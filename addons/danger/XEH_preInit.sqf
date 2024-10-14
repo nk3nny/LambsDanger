@@ -3,7 +3,7 @@ ADDON = false;
 #include "XEH_PREP.hpp"
 
 // mod check
-GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
+GVAR(Loaded_WP) = isClass (configFile >> "CfgPatches" >> "lambs_wp");
 
 #include "settings.inc.sqf"
 

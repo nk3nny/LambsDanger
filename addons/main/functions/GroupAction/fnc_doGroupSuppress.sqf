@@ -32,7 +32,7 @@ _vehicles = _vehicles select { canFire _x };
     // suppressive fire
     _x forceSpeed 1;
     _x setUnitPosWeak "MIDDLE";
-    private _suppress = [_x, AGLtoASL _posAGL] call FUNC(doSuppress);
+    private _suppress = [_x, AGLToASL _posAGL] call FUNC(doSuppress);
     _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
 
     // no LOS
@@ -51,17 +51,17 @@ _vehicles = _vehicles select { canFire _x };
                 [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
             };
         },
-        [_x, AGLtoASL _posAGL],
+        [_x, AGLToASL _posAGL],
         5
     ] call CBA_fnc_waitAndExecute;
-} foreach _units;
+} forEach _units;
 
 // vehicles
 {
     private _posAGL = selectRandom _pos;
     _x doWatch _posAGL;
     [_x, _posAGL] call FUNC(doVehicleSuppress);
-} foreach _vehicles;
+} forEach _vehicles;
 
 // recursive cyclic
 if !(_cycle <= 1 || {_units isEqualTo []}) then {

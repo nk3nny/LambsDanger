@@ -238,7 +238,7 @@ _curCat = LSTRING(Settings_Debug);
                 } forEach _controls;
             };
             uiNamespace setVariable [_x, []];
-        } foreach [
+        } forEach [
             QGVAR(debug_drawRectCacheGame),
             QGVAR(debug_drawRectCacheEGSpectator),
             QGVAR(debug_drawRectCacheCurator)

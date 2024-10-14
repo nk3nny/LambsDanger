@@ -66,7 +66,7 @@ _buildings = _buildings apply { _x select 1 };
 
 // failsafe
 if (_buildings isEqualTo []) exitWith {
-    {_x doFollow leader _x} foreach _units;
+    {_x doFollow leader _x} forEach _units;
 };
 
 // update target ~ better both for debugging and stacking soldiers

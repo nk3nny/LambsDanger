@@ -24,8 +24,8 @@ if (_override) exitWith { [_unit, _range, _radio] };
 
 // get range by faction
 _range = switch (side _unit) do {
-    case WEST: { GVAR(radioWest) };
-    case EAST: { GVAR(radioEast) };
+    case west: { GVAR(radioWest) };
+    case east: { GVAR(radioEast) };
     default { GVAR(radioGuer) };
 };
 

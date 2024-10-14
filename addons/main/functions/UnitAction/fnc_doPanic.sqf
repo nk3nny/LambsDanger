@@ -14,7 +14,7 @@
  *
  * Public: No
 */
-params [["_unit", ObjNull, [ObjNull]]];
+params [["_unit", objNull, [objNull]]];
 
 // exit if unit is dead or otherwis captured
 if (

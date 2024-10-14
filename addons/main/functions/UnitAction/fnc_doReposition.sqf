@@ -15,7 +15,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", ObjNull, [objNull, []]]];
+params ["_unit", ["_target", objNull, [objNull, []]]];
 
 // enemy
 if (!(_target isEqualType []) && {isNull _target}) then {

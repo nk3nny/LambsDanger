@@ -26,7 +26,7 @@ if (_units isEqualTo [] || {_pos isEqualTo []}) exitWith {
         _x setVariable [QEGVAR(danger,forceMove), nil];
         _x doFollow (leader _x);
         _x forceSpeed -1;
-    } foreach _units;
+    } forEach _units;
     false
 };
 
@@ -58,7 +58,7 @@ private _targetPos = _pos select 0;
 
     // remove positions
     _pos = _pos select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] < 0.01};
-} foreach _units;
+} forEach _units;
 
 // remove  positions
 _pos = _pos select {(_units select 0) distance _x > 3};

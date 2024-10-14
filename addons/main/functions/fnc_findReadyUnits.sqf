@@ -44,6 +44,6 @@ _units = _units select {
 {
     _x setUnitCombatMode "BLUE";
     _x setUnitCombatMode "YELLOW";
-} foreach (_units select {currentCommand _x isEqualTo "ATTACK"});
+} forEach (_units select {currentCommand _x isEqualTo "ATTACK"});
 
 _units

@@ -60,7 +60,7 @@ _destination = selectRandom _destination;
 
 // check for roads
 private _roads = _destination nearRoads (_range * 0.5);
-if (_roads isNotEqualTo []) then {_destination = ASLtoAGL (getPosASL (selectRandom _roads));};
+if (_roads isNotEqualTo []) then {_destination = ASLToAGL (getPosASL (selectRandom _roads));};
 
 // make tanks pop smoke when moving
 private _time = _vehicle getVariable [QGVAR(smokescreenTime), 0];

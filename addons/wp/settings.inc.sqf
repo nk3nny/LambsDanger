@@ -6,7 +6,7 @@ DFUNC(ArtilleryScan) = {
     };
     {
         _x call FUNC(taskArtilleryRegister);
-    } foreach (vehicles select {
+    } forEach (vehicles select {
         getNumber (configOf _x >> "artilleryScanner") > 0
         && {!(_x getVariable [QGVAR(autoAddArtilleryBlocked), false])}
     });

@@ -5,7 +5,7 @@ ADDON = false;
 GVAR(ChooseDialogSettingsCache) = false call CBA_fnc_createNamespace;
 
 // check for WP module
-GVAR(Loaded_WP) = isClass (configfile >> "CfgPatches" >> "lambs_wp");
+GVAR(Loaded_WP) = isClass (configFile >> "CfgPatches" >> "lambs_wp");
 
 GVAR(shareHandlers) = [];
 
@@ -20,12 +20,12 @@ if (isServer) then {
         if (!isNil QGVAR(versionLoadedOnServer) && {GVAR(versionLoadedOnServer) isEqualTo QUOTE(VERSION_STR)}) exitWith {};
 
         private _error = if (isNil QGVAR(versionloadedonServer)) then {
-            "LAMBS DANGER NOT LOADED ON SERVER!" hintC parsetext format [
+            "LAMBS DANGER NOT LOADED ON SERVER!" hintC parseText format [
                 "Lambs Danger is not loaded on server but on Client!"
             ];
             "Lambs Danger is not loaded on server but on Client!"
         } else {
-            "LAMBS DANGER VERSION MISMATCH ERROR!!!!" hintC parsetext format [
+            "LAMBS DANGER VERSION MISMATCH ERROR!!!!" hintC parseText format [
                 "Lambs Danger Version mismatch Error.<br/>Client Version: %1<br/>Server Version: %2",
                 QUOTE(VERSION_str),
                 GVAR(versionloadedonServer)

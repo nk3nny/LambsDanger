@@ -63,7 +63,7 @@ for "_i" from 0 to 300 do {
 
     if ((_height > _minHeight) && _distCheck) then {
         if !(_terrainBlocked) then {
-            _selectedPositions pushback _checkPos;
+            _selectedPositions pushBack _checkPos;
         };
     };
     if (count _selectedPositions >= 5) then {

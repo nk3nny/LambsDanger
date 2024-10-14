@@ -53,7 +53,7 @@ private _data = [];
     };
     private _cacheName = _ctrl getVariable [QGVAR(CacheName), ""];
     GVAR(ChooseDialogSettingsCache) setVariable [_cacheName, _d];
-    _data pushback _d;
+    _data pushBack _d;
 } forEach (_element getVariable [QGVAR(ControlData), []]);
 
 _data;

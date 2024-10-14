@@ -36,18 +36,18 @@ private _unit = _units findIf {
 
         if (_weapon isNotEqualTo "") then {
 
-            _muzzle = (getArray (configfile >> "CfgWeapons" >> _weapon >> "muzzles") - ["SAFE", "this"]) param [0, ""];
+            _muzzle = (getArray (configFile >> "CfgWeapons" >> _weapon >> "muzzles") - ["SAFE", "this"]) param [0, ""];
 
             // find flares
             if (_muzzle isNotEqualTo "") then {
-                private _findFlares = getArray (configfile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
+                private _findFlares = getArray (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
                 _findFlares = _findFlares arrayIntersect (magazines _x);
                 if (_findFlares isEqualTo []) exitWith {false};
 
                 // sort flares
                 private _index = _findFlares findIf {
-                    private _ammo = getText (configfile >> "CfgMagazines" >> _x >> "Ammo");
-                    private _flareSimulation = getText (configfile >> "CfgAmmo" >> _ammo >> "simulation");
+                    private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "Ammo");
+                    private _flareSimulation = getText (configFile >> "CfgAmmo" >> _ammo >> "simulation");
                     (_flareSimulation find _type) isNotEqualTo -1
                 };
 

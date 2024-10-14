@@ -50,7 +50,7 @@ private _fnc_flare = {
             private _units = units _leader;
             private _unitsPostUGL = [_units] call EFUNC(main,doUGL);
             if (_units isEqualTo _unitsPostUGL) then {
-                private _flare = "F_20mm_Red" createVehicle (_leader ModelToWorld [0, 0, 200]);
+                private _flare = "F_20mm_Red" createVehicle (_leader modelToWorld [0, 0, 200]);
                 _flare setVelocity [0, 0, -10];
             };
         };
@@ -67,7 +67,7 @@ if (!local _group) exitWith {false};
 if (_group isEqualType objNull) then { _group = group _group; };
 
 // orders
-_group setbehaviour "SAFE";
+_group setBehaviour "SAFE";
 _group setSpeedMode "LIMITED";
 _group enableAttack false;
 
@@ -101,7 +101,7 @@ waitUntil {
         _group enableIRLasers true;
 
         // debug
-        if (EGVAR(main,debug_functions)) then {["%1 taskHunt: %2 targets %3 at %4M", side _group, groupID _group, name _target, floor (leader _group distance2D _target)] call EFUNC(main,debugLog);};
+        if (EGVAR(main,debug_functions)) then {["%1 taskHunt: %2 targets %3 at %4M", side _group, groupId _group, name _target, floor (leader _group distance2D _target)] call EFUNC(main,debugLog);};
 
         // flare
         if (!_combat && {_onFoot} && {RND(0.8)}) then { [leader _group] call _fnc_flare; };

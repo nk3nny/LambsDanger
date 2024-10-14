@@ -64,7 +64,7 @@ if !((vehicle _gun) isKindOf "StaticMortar") then {
 private _isMLRS = _gun getVariable [QEGVAR(main,isArtilleryMRLS), false];
 if (_isMLRS) then {
     _skipCheckrounds = true;
-    _salvo = (gunner _gun) Ammo (currentMuzzle (gunner _gun));
+    _salvo = (gunner _gun) ammo (currentMuzzle (gunner _gun));
     _rounds = 1;
     if ((_salvo mod 6) isEqualTo 0) then {
         _rounds = floor (_salvo * 0.334);
@@ -121,7 +121,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
                 // debug
                 if (EGVAR(main,debug_functions)) then {
-                    private _marker = [_target, ["%1 %2 (check round barrage %3)", getText (configOf _gun >> "displayName"), groupID (group _gun), _check], "Color4_FD_F", "mil_destroy"] call EFUNC(main,dotMarker);
+                    private _marker = [_target, ["%1 %2 (check round barrage %3)", getText (configOf _gun >> "displayName"), groupId (group _gun), _check], "Color4_FD_F", "mil_destroy"] call EFUNC(main,dotMarker);
                     _markerList pushBack _marker;
                 };
 
@@ -163,7 +163,7 @@ if (canFire _gun && {(_caller call EFUNC(main,isAlive))}) then {
 
             // debug
             if (EGVAR(main,debug_functions)) then {
-                private _marker = [_target, ["%1 %2 (main salvo %3)", getText (configOf _gun >> "displayName"), groupID (group _gun), _i], "Color5_FD_F", "mil_destroy"] call EFUNC(main,dotMarker);
+                private _marker = [_target, ["%1 %2 (main salvo %3)", getText (configOf _gun >> "displayName"), groupId (group _gun), _i], "Color5_FD_F", "mil_destroy"] call EFUNC(main,dotMarker);
                 _markerList pushBack _marker;
             };
 

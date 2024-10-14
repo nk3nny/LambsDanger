@@ -32,7 +32,7 @@ if (!canMove _unit || {currentCommand _unit isEqualTo "MOVE"}) exitWith {false};
 
 // CQB tweak -- target within 75m - look instead
 if (_unit distanceSqr _target < 5625) exitWith {
-    (vehicle _unit) doWatch (ATLtoASL _target);
+    (vehicle _unit) doWatch (ATLToASL _target);
     false
 };
 

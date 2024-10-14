@@ -59,7 +59,7 @@ if (_artillery isEqualTo []) exitWith {false};
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupID _group, count _artillery] call EFUNC(main,debugLog);
+    ["%1 Registered Artillery: %2 registered %3 guns", side _group, groupId _group, count _artillery] call EFUNC(main,debugLog);
 };
 
 // end

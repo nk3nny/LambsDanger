@@ -104,7 +104,7 @@ if (_patrol) then {
     };
 
     // id
-    _patrolGroup setGroupIDGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
+    _patrolGroup setGroupIdGlobal [format ["Patrol (%1)", groupId _patrolGroup]];
 
     // orders
     if (_area isEqualTo []) then {
@@ -220,7 +220,7 @@ private _fnc_addEventHandler = {
 
             // look away from nearest building
             if !([_x] call EFUNC(main,isIndoor)) then {
-                _x doWatch AGLtoASL (_x getPos [250, (nearestBuilding _house) getDir _house]);
+                _x doWatch AGLToASL (_x getPos [250, (nearestBuilding _house) getDir _house]);
             };
         };
     } else {
@@ -259,7 +259,7 @@ _wp setWaypointCompletionRadius _radius;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 taskGarrison: %2 garrisoned", side _group, groupID _group] call EFUNC(main,debugLog);
+    ["%1 taskGarrison: %2 garrisoned", side _group, groupId _group] call EFUNC(main,debugLog);
 };
 
 // end

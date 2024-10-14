@@ -52,7 +52,7 @@ private _assistantIndex = _units findIf {
 
 // define assistant
 if (_assistantIndex isEqualTo -1) exitWith {
-    _units pushback _gunner;
+    _units pushBack _gunner;
     _units
 };
 private _assistant = _units deleteAt _assistantIndex;
@@ -98,7 +98,7 @@ if (_weaponPos isEqualTo []) then {
     _x setVariable [QGVAR(currentTarget), _weaponPos, GVAR(debug_functions)];
     _x doMove _weaponPos;
     _x setDestination [_weaponPos, "LEADER DIRECT", true];
-} foreach [_gunner, _assistant];
+} forEach [_gunner, _assistant];
 
 // do it
 [
@@ -145,7 +145,7 @@ if (_weaponPos isEqualTo []) then {
         // reset fsm
         {
             _x setVariable [QEGVAR(danger,forceMove), nil];
-        } foreach [_gunner, _assistant];
+        } forEach [_gunner, _assistant];
     },
     [_gunner, _assistant, _pos, _weaponPos, _EH], 12,
     {
@@ -154,7 +154,7 @@ if (_weaponPos isEqualTo []) then {
         {
             [_x] doFollow (leader _x);
             _x setVariable [QEGVAR(danger,forceMove), nil];
-        } foreach [_gunner, _assistant];
+        } forEach [_gunner, _assistant];
         _gunner removeEventHandler ["WeaponAssembled", _EH];
     }
 ] call CBA_fnc_waitUntilAndExecute;

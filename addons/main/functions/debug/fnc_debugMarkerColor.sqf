@@ -17,8 +17,8 @@
 params ["_unit"];
 
 // return
-if (side _unit isEqualTo EAST) exitWith { "colorEAST" };
-if (side _unit isEqualTo WEST) exitWith { "colorWEST" };
-if (side _unit isEqualTo CIVILIAN) exitWith { "ColorCIV" };
-if (side _unit isEqualTo INDEPENDENT) exitWith { "colorIndependent" };
+if (side _unit isEqualTo east) exitWith { "colorEAST" };
+if (side _unit isEqualTo west) exitWith { "colorWEST" };
+if (side _unit isEqualTo civilian) exitWith { "ColorCIV" };
+if (side _unit isEqualTo independent) exitWith { "colorIndependent" };
 "ColorUNKNOWN"

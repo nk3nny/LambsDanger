@@ -45,7 +45,7 @@ _target = _target call CBA_fnc_getPos;
             _group setCombatMode _combatMode;
             _group enableAttack _enableAttack;
             _group setFormation _formation;
-            {_x doFollow (leader _x)} foreach units _group;
+            {_x doFollow (leader _x)} forEach units _group;
         };
     },
     [_group, combatMode _group, attackEnabled _group, formation _group],

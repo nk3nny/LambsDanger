@@ -69,7 +69,7 @@ _unit setDestination [_buildingPosSelected, "FORMATION PLANNED", false];
 
 // debug
 if (GVAR(debug_functions)) then {
-    private _arrow = createSimpleObject ["Sign_Arrow_Large_F", AGLtoASL _buildingPosSelected, true];
+    private _arrow = createSimpleObject ["Sign_Arrow_Large_F", AGLToASL _buildingPosSelected, true];
     _arrow setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _arrow, 20] call CBA_fnc_waitAndExecute;
 };

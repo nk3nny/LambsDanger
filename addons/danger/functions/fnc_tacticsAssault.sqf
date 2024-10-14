@@ -51,7 +51,7 @@ if ((_target select 2) > 6) then {
                 _x setUnitPos "AUTO";
                 _x doFollow leader _x;
                 _x forceSpeed -1;
-            } foreach (units _group);
+            } forEach (units _group);
         };
     },
     [_group, attackEnabled _group, _unit isIRLaserOn (currentWeapon _unit), speedMode _group, formation _group],
@@ -77,7 +77,7 @@ _buildings = _buildings apply { _x select 1 };
 private _housePos = [];
 {
     _housePos append (_x buildingPos -1);
-} foreach _buildings;
+} forEach _buildings;
 
 // add building positions to group memory
 _group setVariable [QEGVAR(main,groupMemory), _housePos];
@@ -87,11 +87,11 @@ if (_housePos isEqualTo []) then {_housePos pushBack _target;};
 
 // find vehicles
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
-private _overwatch = [ASLtoAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
+private _overwatch = [ASLToAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
 if (_overwatch isNotEqualTo []) then {
     {
         private _roads = _overwatch nearRoads 30;
-        if (_roads isNotEqualTo []) then {_overwatch = ASLtoAGL (getPosASL (selectRandom _roads))};
+        if (_roads isNotEqualTo []) then {_overwatch = ASLToAGL (getPosASL (selectRandom _roads))};
         _x doMove _overwatch;
         _x doWatch (selectRandom _housePos);
     } forEach _vehicles;
@@ -129,7 +129,7 @@ _units doWatch objNull;
 // check for reload
 {
     reload _x;
-} foreach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
+} forEach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
 
 // execute function
 [{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units + [_unit], _housePos], 2 + random 3] call CBA_fnc_waitAndExecute;
@@ -139,7 +139,7 @@ if (EGVAR(main,debug_functions)) then {
     ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 buildings)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics assault", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_join"] call EFUNC(main,dotMarker);
-    {_x setMarkerSizeLocal [0.6, 0.6];} foreach [_m, _mt];
+    {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];
     _m setMarkerDirLocal (_unit getDir _target);
     [{{deleteMarker _x;true} count _this;}, [_m, _mt], _delay + 30] call CBA_fnc_waitAndExecute;
 };

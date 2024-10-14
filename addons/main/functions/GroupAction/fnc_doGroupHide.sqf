@@ -50,7 +50,7 @@ if (_units isEqualTo []) exitWith {false};
         [[_unit, _pos, nil, _buildings], _action],
         1 + random 2
     ] call CBA_fnc_waitAndExecute;
-} foreach _units;
+} forEach _units;
 
 // end
 true
