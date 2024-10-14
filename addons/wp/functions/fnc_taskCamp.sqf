@@ -117,7 +117,7 @@ reverse _units;
     if ((_buildings isNotEqualTo []) && { RND(0.6) }) then {
         _x setUnitPos "UP";
         private _buildingPos = selectRandom ((_buildings deleteAt 0) buildingPos -1);
-        if (_teleport) then { _x setPos _buildingPos; };
+        if (_teleport) then { _x setVehiclePosition [_buildingPos, [], 0, "CAN_COLLIDE"]; };
         _x doMove _buildingPos;
         [
             {
@@ -183,7 +183,7 @@ private _dir = random 360;
     // teleport
     if (_teleport) then {
         _x setDir (_x getDir _pos);
-        _x setPos _campPos;
+        _x setVehiclePosition [_campPos, [], 0, "CAN_COLLIDE"];
     };
 
     // execute move
@@ -232,7 +232,7 @@ _wp setWaypointStatements ["true", "
         {
             _x enableAI 'ANIM';
             _x enableAI 'PATH';
-            if (isNull objectParent _x) then {[_x, '', 2] call lambs_main_fnc_doAnimation;};
+            if (isNull objectParent _x && speed _x < 0.1) then {[_x, '', 2] call lambs_main_fnc_doAnimation;};
         } foreach thisList;
     };"
 ];
