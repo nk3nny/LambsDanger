@@ -23,4 +23,5 @@ if (behaviour _unit isEqualTo "STEALTH"
 ) exitWith {false};
 
 // night check
-(getPos _unit) getEnvSoundController "night" isEqualTo 1
+// ~65 is the light level where vanilla AI puts nightvision goggles on
+(getLighting # 1) < 65
