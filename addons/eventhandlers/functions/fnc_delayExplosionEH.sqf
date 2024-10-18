@@ -13,7 +13,7 @@
  * None
  *
  * Example:
- * [BIS EXPLOSION EH ARGS] call lambs_eventhandlers_fnc_explosionEH;
+ * [BIS EXPLOSION EH ARGS] call lambs_eventhandlers_fnc_delayExplosionEH;
  *
  * Public: No
 */
@@ -28,7 +28,11 @@ if (!alive _unit ||
     isPlayer _unit) exitWith {};
 
 private _skill = _unit skill "general";
-private _timeOfFlight = (_unit distance _explosionSource) / 343; // 343 m/s - good value for speed of sound
+private _timeOfFlight = if (isNull _explosionSource) then {
+    0.03 // 10 m radius
+} else {
+    (_unit distance _explosionSource) / 343 // 343 m/s - good value for speed of sound
+};
 // min delay of 160 ms based on
 // EFFECTS OF PREKNOWLEDGE AND STIMULUS INTENSITY UPON SIMPLE REACTION TIME by J. M. Speiss
 // Loudness and reaction time: I by D. L. Kohfeld, J. L. Santee, and N. D. Wallace
