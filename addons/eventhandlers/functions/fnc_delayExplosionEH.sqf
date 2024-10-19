@@ -37,6 +37,6 @@ private _timeOfFlight = if (isNull _explosionSource) then {
 // min delay of 160 ms based on
 // EFFECTS OF PREKNOWLEDGE AND STIMULUS INTENSITY UPON SIMPLE REACTION TIME by J. M. Speiss
 // Loudness and reaction time: I by D. L. Kohfeld, J. L. Santee, and N. D. Wallace
-private _delay = 0.16 + _timeOfFlight + 0.2 * random (1 - _skill);
+private _delay = 0.16 + _timeOfFlight + 0.5 * random (1 - _skill);
 if (_unit getVariable [QGVAR(explosionReactionTime), 0] > time + _delay) exitWith {};
 [{_this call FUNC(explosionEH)}, _this, _delay] call CBA_fnc_waitAndExecute;
