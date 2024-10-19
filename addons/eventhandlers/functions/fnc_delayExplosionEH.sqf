@@ -23,9 +23,10 @@ params [
     ["_explosionSource", objNull]
 ];
 
-if (!alive _unit ||
-    !(local _unit) ||
-    isPlayer _unit) exitWith {};
+if (!GVAR(ExplosionEventHandlerEnabled)
+    || !(local _unit)
+    || isPlayer _unit
+    || {!(_unit call EFUNC(main,isAlive))}) exitWith {};
 
 private _skill = _unit skill "general";
 private _timeOfFlight = if (isNull _explosionSource) then {
@@ -36,4 +37,6 @@ private _timeOfFlight = if (isNull _explosionSource) then {
 // min delay of 160 ms based on
 // EFFECTS OF PREKNOWLEDGE AND STIMULUS INTENSITY UPON SIMPLE REACTION TIME by J. M. Speiss
 // Loudness and reaction time: I by D. L. Kohfeld, J. L. Santee, and N. D. Wallace
-[{_this call FUNC(explosionEH)}, _this, 0.16 + _timeOfFlight + 0.2 * (1 - random _skill)] call CBA_fnc_waitAndExecute;
+private _delay = 0.16 + _timeOfFlight + 0.2 * random (1 - _skill);
+if (_unit getVariable [QGVAR(explosionReactionTime), 0] > time + _delay) exitWith {};
+[{_this call FUNC(explosionEH)}, _this, _delay] call CBA_fnc_waitAndExecute;
