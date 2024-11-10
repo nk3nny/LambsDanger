@@ -100,6 +100,12 @@ if (
     || {isPlayer (leader _unit) && {GVAR(disableAIPlayerGroupReaction)}}
 ) exitWith {true};
 
+// units indoors stay inside
+if ([_unit] call EFUNC(main,isIndoor)) exitWith {
+    private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
+    _group setVariable [QEGVAR(main,groupMemory), _buildings, false];
+};
+
 // set current task
 //_unit setVariable [QEGVAR(main,currentTarget), _enemy, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
