@@ -19,8 +19,11 @@
 
 params ["_unit", ["_pos", [], [[]]]];
 
-// check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {false};
+// stance change
+_unit setUnitPosWeak "DOWN";
+
+// check if stopped or inside a building
+if (!(_unit checkAIFeature "PATH") || {(insideBuilding _unit) isEqualTo 1}) exitWith {false};
 
 // find cover
 if (_pos isEqualTo []) then {

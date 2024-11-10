@@ -58,7 +58,8 @@ private _anim = call {
 
     // drop down
     if !(_nearDistance || {_still}) exitWith {
-        ["Down"]
+        _unit setUnitPosWeak "DOWN";
+        "Down"
     };
 
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny
