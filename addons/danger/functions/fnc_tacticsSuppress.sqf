@@ -77,7 +77,7 @@ _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functio
 _unit setVariable [QEGVAR(main,currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 // set group task
-private _group = group _unit;
+_group = group _unit;
 _group enableAttack false;
 _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_functions)];
 

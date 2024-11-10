@@ -24,7 +24,7 @@ if (
     GVAR(disableAIDodge)
     || {!(_unit checkAIFeature "MOVE")}
     || {!(_unit checkAIFeature "PATH")}
-    || {!((currentWeapon _unit) isEqualTo (primaryWeapon _unit))}
+    || {((currentWeapon _unit) isNotEqualTo (primaryWeapon _unit))}
 ) exitWith {false};
 
 // dodge

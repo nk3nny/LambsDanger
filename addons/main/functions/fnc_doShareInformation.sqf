@@ -44,14 +44,14 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 //_unit setVariable [QGVAR(currentTask), "Share Information", GVAR(debug_functions)]; // do not update task -- sharing information is secondary info ~ nkenny
 
 // range
-([_unit, _range, _override] call FUNC(getShareInformationParams)) params ["_unit", "_range"];
+([_unit, _range, _override] call FUNC(getShareInformationParams)) params ["_newUnit", "_newRange"];
 
 // find units
-private _group = group _unit;
+private _group = group _newUnit;
 private _side = side _group;
 private _groups = allGroups select {
     private _leader = leader _x;
-    _leader distance2D _unit < _range
+    _leader distance2D _newUnit < _newRange
     && {simulationEnabled (vehicle _leader)}
     && {((side _x) getFriend _side) > 0.6}
     && {(behaviour _leader) isNotEqualTo "CARELESS"}
@@ -61,50 +61,50 @@ private _groups = allGroups select {
 
 // share information
 if !(isNull _target) then {
-    private _knowsAbout = (_unit knowsAbout _target) min GVAR(maxRevealValue);
+    private _knowsAbout = (_newUnit knowsAbout _target) min GVAR(maxRevealValue);
     {
         [_x, [_target, _knowsAbout]] remoteExec ["reveal", leader _x];
-    } forEach (_groups select {_unit distance2D (leader _x) < GVAR(combatShareRange)});
+    } forEach (_groups select {_newUnit distance2D (leader _x) < GVAR(combatShareRange)});
 };
 
-[QGVAR(OnInformationShared), [_unit, group _unit, _target, _groups]] call FUNC(eventCallback);
+[QGVAR(OnInformationShared), [_newUnit, group _newUnit, _target, _groups]] call FUNC(eventCallback);
 
 // play animation
 if (
     RND(0.2)
-    && {_range > 100}
-    && {_unit distance2D _target > 4}
+    && {_newRange > 100}
+    && {_newUnit distance2D _target > 4}
 ) then {
-    [_unit, "HandSignalRadio"] call FUNC(doGesture);
+    [_newUnit, "HandSignalRadio"] call FUNC(doGesture);
 };
 
 // debug
 if (EGVAR(main,debug_functions)) then {
     // debug message
-    ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _unit, name _unit, (_unit knowsAbout _target) min GVAR(maxRevealValue), count _groups, round _range] call FUNC(debugLog);
+    ["%1 share information (%2 knows %3 to %4 groups @ %5m range)", side _newUnit, name _newUnit, (_newUnit knowsAbout _target) min GVAR(maxRevealValue), count _groups, round _range] call FUNC(debugLog);
 
     // debug marker
-    private _zm = [_unit, [_range, _range], _unit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
-    private _zmm = [_unit, [_range min GVAR(combatShareRange), _range min GVAR(combatShareRange)], _unit call FUNC(debugMarkerColor), "SolidBorder"] call FUNC(zoneMarker);
+    private _zm = [_newUnit, [_newRange, _newRange], _newUnit call FUNC(debugMarkerColor), "Border"] call FUNC(zoneMarker);
+    private _zmm = [_newUnit, [_newRange min GVAR(combatShareRange), _newRange min GVAR(combatShareRange)], _newUnit call FUNC(debugMarkerColor), "SolidBorder"] call FUNC(zoneMarker);
     _zmm setMarkerAlphaLocal 0.3;
     private _markers = [_zm, _zmm];
 
     // enemy units
     {
-        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
+        private _m = [_newUnit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
-        _m setMarkerTextLocal str (_unit knowsAbout _x);
+        _m setMarkerTextLocal str (_newUnit knowsAbout _x);
         _markers pushBack _m;
-    } forEach ((units _target) select {_unit knowsAbout _x > 0});
+    } forEach ((units _target) select {_newUnit knowsAbout _x > 0});
 
     // friendly units
     {
-        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
+        private _m = [_newUnit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
         _markers pushBack _m;
-    } forEach units _unit;
+    } forEach units _newUnit;
     [{{deleteMarker _x;true} count _this;}, _markers, 60] call CBA_fnc_waitAndExecute;
 };
 
