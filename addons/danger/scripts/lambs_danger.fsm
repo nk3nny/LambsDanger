@@ -2,7 +2,7 @@
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start_Danger",0,250,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"Start Danger"};
-item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-175.000000,-225.000000,-100.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.6.0"};
+item1[] = {"LAMBS_DANGER_FSM",-1,250,-675.000000,-175.000000,-225.000000,-100.000000,0.000000,"LAMBS DANGER FSM" \n "v.2.6.2"};
 item2[] = {"true",8,218,-75.000000,-75.000000,25.000000,-25.000000,0.000000,"true"};
 item3[] = {"Init",2,250,-75.000000,50.000000,25.000000,100.000000,0.000000,"Init"};
 item4[] = {"Vehicle",4,218,-325.000000,150.000000,-225.000000,200.000000,0.000000,"Vehicle"};
@@ -112,8 +112,8 @@ link42[] = {36,24};
 link43[] = {37,3};
 link44[] = {38,39};
 link45[] = {41,40};
-globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-916.740479,1280.692139,1530.359497,-551.666748,933,884,1};
-window[] = {2,-1,-1,-1,-1,967,208,1648,208,3,951};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1017.364929,1292.536743,1481.373169,-707.215454,933,884,1};
+window[] = {2,-1,-1,-1,-1,837,78,1518,78,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -249,7 +249,7 @@ class FSM
                         itemno = 9;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// keep attacking" \n
-                         "if (_dangerCause in [8, 9] && {_dangerCausedBy call lambs_main_fnc_isAlive}) then {" \n
+                         "if (_dangerCause in [2, 4, 8, 9] && {_dangerCausedBy call lambs_main_fnc_isAlive}) then {" \n
                          "    _queue pushBack [0, _dangerPos, time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
                          "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -360,7 +360,7 @@ class FSM
                          "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
                          "" \n
                          "// re-insert" \n
-                         "_queue pushBack [8, _dangerPos, _dangerUntil + 3, _dangerCausedBy];"/*%FSM</STATEINIT""">*/;
+                         "//_queue pushBack [0, _dangerPos, _dangerUntil + 3, _dangerCausedBy];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
