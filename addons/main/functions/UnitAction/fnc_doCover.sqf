@@ -15,7 +15,6 @@
  *
  * Public: No
 */
-#define SEARCH_FOR_HIDE 6
 
 params ["_unit", ["_pos", [], [[]]]];
 
@@ -27,7 +26,7 @@ if (!(_unit checkAIFeature "PATH") || {(insideBuilding _unit) isEqualTo 1}) exit
 
 // find cover
 if (_pos isEqualTo []) then {
-    _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE"], SEARCH_FOR_HIDE, true, true];
+    _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE"], 6, true, true];
     _pos = if (_pos isEqualTo []) then {
         getPosASL _unit
     } else {
