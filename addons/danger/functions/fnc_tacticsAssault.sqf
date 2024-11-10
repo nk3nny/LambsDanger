@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 70]];
+params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 85]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -70,20 +70,16 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-private _buildings = [_target, 28, false, false] call EFUNC(main,findBuildings);
+private _buildings = [_target, 28, true, false, true] call EFUNC(main,findBuildings);
 _buildings = _buildings apply { [_unit distanceSqr _x, _x] };
 _buildings sort true;
 _buildings = _buildings apply { _x select 1 };
-private _housePos = [];
-{
-    _housePos append (_x buildingPos -1);
-} forEach _buildings;
 
 // add building positions to group memory
-_group setVariable [QEGVAR(main,groupMemory), _housePos];
+_group setVariable [QEGVAR(main,groupMemory), _buildings];
 
 // add base position
-if (_housePos isEqualTo []) then {_housePos pushBack _target;};
+if (_buildings isEqualTo []) then {_buildings pushBack _target;};
 
 // find vehicles
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
@@ -93,7 +89,7 @@ if (_overwatch isNotEqualTo []) then {
         private _roads = _overwatch nearRoads 30;
         if (_roads isNotEqualTo []) then {_overwatch = ASLToAGL (getPosASL (selectRandom _roads))};
         _x doMove _overwatch;
-        _x doWatch (selectRandom _housePos);
+        _x doWatch (selectRandom _buildings);
     } forEach _vehicles;
 };
 
@@ -125,6 +121,7 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
 _units doWatch objNull;
+doStop _units;
 
 // check for reload
 {
@@ -132,7 +129,7 @@ _units doWatch objNull;
 } forEach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
 
 // execute function
-[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units + [_unit], _housePos], 2 + random 3] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units + [_unit], _buildings], 2 + random 3] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
