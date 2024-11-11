@@ -120,14 +120,14 @@ private _fnc_debug_drawRect = {
 };
 
 private _sideUnknownColor = GVAR(debug_sideColorLUT) get sideUnknown;
-private _viewDistance = viewDistance;
+private _viewDistance = viewDistance min 250;
 private _posCam = positionCameraToWorld [0, 0, 0];
 {
     private _unit = _x;
     private _renderPos = getPosATLVisual _unit;
     private _isLeader = _unit isEqualTo (leader _unit);
-    private _sideColor = [side _unit, false] call BIS_fnc_sideColor;
-    if ((_posCam distance _renderPos) <= _viewDistance) then {
+    private _sideColor = [side (group _unit), false] call BIS_fnc_sideColor;
+    if ((_posCam distance _renderPos) <= _viewDistance && {((units _unit - [_unit]) findIf {_x distanceSqr _unit < 1}) isEqualTo -1}) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
@@ -137,7 +137,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                 drawLine3D [_renderPos, _pos2, [1, 1, 1, 0.5], 10];
             } forEach ((units _unit) select {alive _x});
             private _color = GVAR(debug_sideColorLUT) getOrDefault [(side _unit), _sideUnknownColor]; // TODO: replace with new Syntax for setting default for hashMap!
-            _textData pushBack "<t shadow='0' size='%2' color='" + _color + "'>" + groupId (group _unit) + "</t><br/>";
+            _textData pushBack "<t shadow='0' size='%2' font='PuristaBold' color='" + _color + "'>" + groupId (group _unit) + "</t><br/>";
         };
         _unit getVariable [QGVAR(FSMDangerCauseData), [-1, [0, 0, 0], -1]] params [["_dangerType", -1], ["_pos", [0, 0, 0]], ["_time", -1], ["_currentTarget", objNull]];
 
@@ -164,13 +164,14 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                     "    Position Error: ", (_knowledge select 5) toFixed 2, "</t><br/>"
                 ];
 
-                if (alive _currentTarget && {(side _unit) isNotEqualTo (side _currentTarget)}) then {
-                    drawLine3D [_renderPos, _knowledgePosition, _sideColor];
+                if ((side _unit) isNotEqualTo (side _currentTarget)) then {
+                    drawLine3D [ASLtoATL (aimPos _unit), _knowledgePosition, _sideColor, 6 * (1 - needReload _unit)];
                     drawIcon3D ["\a3\ui_f\data\igui\cfg\targeting\impactpoint_ca.paa", _sideColor, _knowledgePosition, 1, 1, 0, ["Estimated Target Position", ""] select (_knowledgePosition distanceSqr _lastSeen < 1)];
 
                     if !(_lastSeen isEqualType "") then {
+                        private _suppressionFactor = (1 + getSuppression _unit) min 2;
                         drawLine3D [_knowledgePosition, _lastSeen, _sideColor];
-                        drawIcon3D ["\a3\ui_f\data\igui\cfg\targeting\hitprediction_ca.paa", _sideColor, _lastSeen, 1, 1, 0, ["Last Seen Position", ""] select (_knowledgePosition distanceSqr _lastSeen < 1)];
+                        drawIcon3D ["\a3\ui_f\data\igui\cfg\targeting\hitprediction_ca.paa", _sideColor, _lastSeen, _suppressionFactor, _suppressionFactor, 0, ["Last Seen Position", ""] select (_knowledgePosition distanceSqr _lastSeen < 1)];
                     };
                 };
 
@@ -229,7 +230,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         _textData append [
             "    Danger Timeout: ", format ["%1s", [(_time - time) toFixed 2, 0] select ((_time - time) < 0)], "</t><br/>",
-            "Current Target: ", format ["%1 (%2 visiblity)", _name, ([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) toFixed 1], "<br/>"
+            "Current Target: ", format ["%1 (%2 visibility)", _name, ([objNull, "VIEW", objNull] checkVisibility [eyePos _unit, _currentTarget call _fnc_getEyePos]) toFixed 1], "<br/>"
         ];
 
         //_textData append _targetKnowledge;    ~ Hidden to reduce information overload ~ nkenny
@@ -256,7 +257,10 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             _textData append ["<t color='#FFC0CB'>Fleeing</t>", "<br/>"];
         };
         if (isHidden _unit) then {
-            _textData append ["<t color='#1e18d9'>Hidden</t>", "<br/>"];
+            _textData append ["<t color='#3631de'>Hidden</t>", "<br/>"];
+        };
+        if (insideBuilding _unit isEqualTo 1) then {
+            _textData append ["<t color='#cc18bc'>Inside</t>", "<br/>"];
         };
         if !(unitReady _unit) then {
             _textData append ["<t color='#FFA500'>Busy</t>", "<br/>"];
@@ -269,7 +273,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
             drawLine3D [_renderPos, _pos, [1, 1, 1, 1]];
             private _iconSize = linearConversion [0, 30, speed _unit, 0.4, 1.2, true];
             drawIcon3D [
-                "\a3\ui_f\data\igui\cfg\simpletasks\types\walk_ca.paa",
+                ["\a3\ui_f\data\igui\cfg\simpletasks\types\walk_ca.paa", "\a3\ui_f\data\igui\cfg\simpletasks\types\car_ca.paa"] select (speed _unit > 24),
                 [1, 1, 1, 1],
                 _pos,
                 _iconSize,
