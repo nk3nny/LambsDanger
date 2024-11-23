@@ -394,6 +394,19 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_PATROL_ENABLEREINFORCEMENT);
         };
+
+        class GVAR(Teleport): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
+            property = QGVAR(teleport);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_PATROL_TELEPORT);
+        };
+
+
         class ModuleDescription: ModuleDescription {};
     };
     class ModuleDescription: ModuleDescription {

@@ -108,12 +108,12 @@ if (_patrol) then {
 
     // orders
     if (_area isEqualTo []) then {
-        [_patrolGroup, _pos, _radius, 4, nil, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _radius, 4, nil, true, false, _teleport] call FUNC(taskPatrol);
     } else {
         private _area2 = +_area;
         _area2 set [0, (_area2 select 0) * 2];
         _area2 set [1, (_area2 select 1) * 2];
-        [_patrolGroup, _pos, _radius, 4, _area2, true] call FUNC(taskPatrol);
+        [_patrolGroup, _pos, _radius, 4, _area2, true, false, _teleport] call FUNC(taskPatrol);
     };
 
     // eventhandler

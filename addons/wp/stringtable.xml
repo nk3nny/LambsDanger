@@ -419,7 +419,7 @@
             <Chinesesimp>传送单位</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_Tooltip">
-            <English>Teleport units instantly to position</English>
+            <English>Teleport units instantly into position</English>
             <Czech>Teleportovat jednotky ihned na pozice</Czech>
             <German>Teleportiert Einheiten sofort zur Position</German>
             <Polish>Teleportuj jednostki od razu na pozycje</Polish>

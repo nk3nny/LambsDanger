@@ -12,6 +12,7 @@
  * 4: Area the AI Camps in, default [] <ARRAY>
  * 5: Dynamic patrol pattern, default false <BOOL>
  * 6: enable dynamic reinforcement <BOOL>
+ * 7: Teleport group <BOOL>
  *
  * Return Value:
  * none
@@ -32,7 +33,8 @@ params [
     ["_waypointCount", TASK_PATROL_WAYPOINTCOUNT, [0]],
     ["_area", [], [[]]],
     ["_moveWaypoints", TASK_PATROL_MOVEWAYPOINTS, [false]],
-    ["_enableReinforcement", TASK_PATROL_ENABLEREINFORCEMENT, [false]]
+    ["_enableReinforcement", TASK_PATROL_ENABLEREINFORCEMENT, [false]],
+    ["_teleport", TASK_PATROL_TELEPORT, [false]]
 ];
 
 // sort grp
@@ -116,6 +118,16 @@ if (_moveWaypoints) then {
     _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1]; call %2;};", _fistWPId, QFUNC(TaskPatrol_WaypointStatement)]];
 } else {
     _wp setWaypointStatements ["true", format ["if (local this) then {(group this) enableGunLights 'forceOn'; (group this) setCurrentWaypoint [(group this), %1];};", _fistWPId]];
+};
+
+// teleport to random waypoint position
+if (_teleport) then {
+
+    private _teleportDestination = waypointPosition (selectRandom (waypoints _group));
+    {
+        (vehicle _x) setVehiclePosition [_teleportDestination, [], precision (vehicle _x), "NONE"];
+    } forEach units _group;
+
 };
 
 // debug
