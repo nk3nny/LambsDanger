@@ -39,7 +39,7 @@ switch (_mode) do {
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
+                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement", "_teleport"];
                         private _group = _groups select _groupIndex;
                         [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement, _teleport], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
