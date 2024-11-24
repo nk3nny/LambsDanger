@@ -241,7 +241,7 @@ private _handle = [
             if (_distance2D > _radius) then {
 
                 // share info and check for artillery
-                if ([_leader] call EFUNC(main,isAlive) && {getSuppression _leader < 0.5}) then {
+                if (_leader call EFUNC(main,isAlive) && {getSuppression _leader < 0.5}) then {
 
                     // share info
                     [_leader] call EFUNC(main,doShareInformation);
