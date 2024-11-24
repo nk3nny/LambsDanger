@@ -78,6 +78,10 @@ if (isServer) then {
     _this spawn FUNC(taskRush);
 }] call CBA_fnc_addEventhandler;
 
+[QGVAR(taskDefend), {
+    _this spawn FUNC(taskDefend);
+}] call CBA_fnc_addEventhandler;
+
 [QGVAR(taskCampReset), {
     params ["_unit"];
     _unit enableAI 'ANIM';

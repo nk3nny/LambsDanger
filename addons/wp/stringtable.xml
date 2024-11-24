@@ -580,6 +580,36 @@
             <Italian>Task Patrol effettua il pattugliamento dell'unità all'interno dell'area impostata dagli attributi 3DEN.</Italian>
             <Chinesesimp>任务巡逻使单位在3DEN属性设置的区域内巡逻.</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_DisplayName">
+            <English>Task Defend</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_DisplayName">
+            <English>Teleport units</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_Tooltip">
+            <English>Teleport units instantly into building and cover positions</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Stealth_DisplayName">
+            <English>Stealth mode</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Stealth_Tooltip">
+            <English>The group will hold fire and attempt to ambush attackers.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_UseCover_DisplayName">
+            <English>Defensive positions</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_UseCover_Tooltip">
+            <English>Selection of available defensive positions available to the group. By default the group will add bushes, trees, and large rocks to potential defensive positions.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_DisplayName">
+            <English>Radius</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_Tooltip">
+            <English>The zone the group will try to defend.</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_ModuleDescription">
+            <English>Task Defend makes the unit hold position within the assigned area. Individual soldiers will shift from cover to cover, or building to building, while manning turrets and static weapons, sharing enemy information, and aggressively calling for artillery support if availalble.</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
             <English>Task Reset</English>
             <Czech>Úkol reset</Czech>
@@ -1008,6 +1038,24 @@
             <German>Unterdrückt</German>
             <Italian>Soppresso</Italian>
             <Chinesesimp>已压制</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Buildings">
+            <English>Buildings</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Walls">
+            <English>Walls</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Vegetation">
+            <English>Vegetation</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_BuildingsAndVegetation">
+            <English>Buildings and vegetation</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_BuildingsAndWalls">
+            <English>Buildings and walls</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_WallsAndVegetation">
+            <English>Walls and vegetation</English>
         </Key>
         <Key ID="STR_Lambs_WP_OnlyIfUGL">
             <English>Only when units are equipped with an UGL and flares</English>

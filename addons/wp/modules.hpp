@@ -419,6 +419,100 @@ class GVAR(TaskReset) : GVAR(BaseModule) {
     };
 };
 
+class GVAR(TaskDefend) : GVAR(BaseModule) {
+    _generalMacro = QGVAR(TaskDefend);
+    scope = 2;
+    displayName = CSTRING(Module_TaskDefend_DisplayName);
+    category = "Lambs_Danger_WP_Cat";
+    function = QFUNC(moduleDefend);
+    icon = "\a3\3DEN\Data\CfgWaypoints\Hold_ca.paa";
+    portrait = "\a3\3DEN\Data\CfgWaypoints\Hold_ca.paa";
+    canSetArea = 1;
+    canSetAreaShape = 1;
+    class AttributeValues {
+        size3[] = {TASK_DEFEND_SIZE, TASK_DEFEND_SIZE, -1};
+        isRectangle = 0;
+    };
+    class Attributes: AttributesBase {
+        class GVAR(useCover): Combo {
+            displayName = CSTRING(Module_TaskDefend_UseCover_DisplayName);
+            tooltip = CSTRING(Module_TaskDefend_UseCover_Tooltip);
+            property = QGVAR(useCover);
+            defaultValue = TASK_DEFEND_USECOVER;
+            unique = 0;
+            condition = "0";
+            typeName = "NUMBER";
+            expression = "_this setVariable ['%s', _value, true];";
+            class Values {
+                class All {
+                    name = CSTRING(All);
+                    value = 0;
+                };
+                class Buildings {
+                    name = CSTRING(Buildings);
+                    value = 1;
+                };
+                class Walls {
+                    name = CSTRING(Walls);
+                    value = 2;
+                };
+                class Vegetation {
+                    name = CSTRING(Vegetation);
+                    value = 3;
+                };
+                class BuildingsAndVegetation {
+                    name = CSTRING(BuildingsAndVegetation);
+                    value = 4;
+                };
+                class BuildingsAndWalls {
+                    name = CSTRING(BuildingsAndWalls);
+                    value = 5;
+                };
+                class WallsandVegetation {
+                    name = CSTRING(WallsandVegetation);
+                    value = 6;
+                };
+            };
+        };
+        class GVAR(stealth): Checkbox {
+            displayName = CSTRING(Module_TaskDefend_Stealth_DisplayName);
+            tooltip = CSTRING(Module_TaskDefend_Stealth_Tooltip);
+            property = QGVAR(stealth);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_DEFEND_STEALTH);
+        };
+        class GVAR(Teleport): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
+            property = QGVAR(Teleport);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_DEFEND_TELEPORT);
+        };
+        class GVAR(Patrol): Checkbox {
+            displayName = CSTRING(Module_TaskGarrison_Patrol_DisplayName);
+            tooltip = CSTRING(Module_TaskGarrison_Patrol_Tooltip);
+            property = QGVAR(Patrol);
+            unique = 0;
+            validate = "none";
+            condition = "0";
+            typeName = "BOOL";
+            defaultValue = QUOTE(TASK_DEFEND_PATROL);
+        };
+        class ModuleDescription: ModuleDescription {};
+    };
+    class ModuleDescription: ModuleDescription {
+        duplicate = 1;
+        direction = 1;
+        description = CSTRING(Module_TaskDefend_ModuleDescription);
+    };
+};
+
 // Search Modules
 class GVAR(TaskCreep) : GVAR(BaseModule) {
     _generalMacro = QGVAR(TaskCreep);

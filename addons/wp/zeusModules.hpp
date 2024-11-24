@@ -226,3 +226,23 @@ class GVAR(ZeusTaskRush) : Module_F {
         };
     };
 };
+
+// new defense module
+class GVAR(ZeusTaskDefend) : Module_F {
+    _generalMacro = QGVAR(ZeusTaskDefend);
+    scope = 1;
+    scopeCurator = 2;
+    isGlobal = 0;
+    is3DEN = 1;
+    displayName = CSTRING(Module_TaskDefend_DisplayName);
+    category = "Lambs_Danger_WP_Cat";
+    icon = "\a3\3DEN\Data\CfgWaypoints\Hold_ca.paa";
+    portrait = "\a3\3DEN\Data\CfgWaypoints\Hold_ca.paa";
+    function = QFUNC(moduleDefend);
+    class EventHandlers {
+        class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
+        class ADDON {
+            init = QUOTE(_this call EFUNC(main,initModules));
+        };
+    };
+};
