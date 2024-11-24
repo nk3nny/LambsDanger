@@ -182,7 +182,7 @@ _group setVariable [QGVAR(defendUpdate), time];
 
 private _handle = [
     {
-        params ["_args", "_handle"];
+        params ["_args"];
         _args params ["_group", "_pos", "_radius", "_defensivePos"];
 
         // get variables
