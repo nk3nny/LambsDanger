@@ -69,9 +69,9 @@ switch (_mode) do {
                     ], {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic", "_targets"];
-                        _data params ["_groupIndex", "_range", "_useCover", "_teleport", "_stealth", "_patrol"];
+                        _data params ["_targetIndex", "_range", "_useCover", "_teleport", "_stealth", "_patrol"];
                         private _target = _targets select _targetIndex;
-                        [QGVAR(taskDefend), [_group, getPos _logic, _range, nil, _teleport, _useCover, _stealth, _patrol], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskDefend), [_group, getPos _target, _range, nil, _teleport, _useCover, _stealth, _patrol], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
