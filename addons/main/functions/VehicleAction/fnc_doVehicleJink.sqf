@@ -57,12 +57,9 @@ _destination = _destination select {(_x isNotEqualTo []) && {!(surfaceIsWater _x
 
 // check -- no location -- exit
 if (_destination isEqualTo []) exitWith { getPosASL _unit };
-//_destination = selectRandom _destination;
-
 _destination = _destination apply {[_x select 2, _x]};
 _destination sort true;
 _destination = (_destination select 0) select 1;
-
 
 // check for roads
 private _roads = _destination nearRoads (_range * 0.5);
