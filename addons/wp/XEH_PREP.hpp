@@ -12,6 +12,7 @@ PREP(taskHunt);
 PREP(taskPatrol);
 PREP(taskReset);
 PREP(taskRush);
+PREP(taskDefend);
 
 SUBPREP(Modules,moduleArtillery);
 SUBPREP(Modules,moduleArtilleryRegister);
@@ -25,6 +26,7 @@ SUBPREP(Modules,modulePatrol);
 SUBPREP(Modules,moduleReset);
 SUBPREP(Modules,moduleRush);
 SUBPREP(Modules,moduleTarget);
+SUBPREP(Modules,moduleDefend);
 
 
 SUBPREP(ZEN,setArtilleryRegister);
@@ -37,3 +39,4 @@ SUBPREP(ZEN,setPatrol);
 SUBPREP(ZEN,setReset);
 SUBPREP(ZEN,setRush);
 SUBPREP(ZEN,setTarget);
+SUBPREP(ZEN,setDefend);
