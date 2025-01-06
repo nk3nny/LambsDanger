@@ -409,7 +409,7 @@
             <Italian>Compito Guarnigione</Italian>
             <Chinesesimp>驻防任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_DisplayName">
+        <Key ID="STR_Lambs_WP_Module_Teleport_DisplayName">
             <English>Teleport units</English>
             <Czech>Teleportovat jednotky</Czech>
             <German>Einheiten teleportieren</German>

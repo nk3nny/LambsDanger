@@ -321,7 +321,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             defaultValue = QUOTE(TASK_GARRISON_SORTBYHEIGHT);
         };
         class GVAR(Teleport): Checkbox {
-            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            displayName = CSTRING(Module_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
             property = QGVAR(Teleport);
             unique = 0;
@@ -396,7 +396,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
         };
 
         class GVAR(Teleport): Checkbox {
-            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            displayName = CSTRING(Module_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
             property = QGVAR(teleport);
             unique = 0;

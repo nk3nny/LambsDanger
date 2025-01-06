@@ -12,7 +12,7 @@
  * 4: Area the AI Camps in, default [] <ARRAY>
  * 5: Dynamic patrol pattern, default false <BOOL>
  * 6: enable dynamic reinforcement <BOOL>
- * 7: Teleport group <BOOL>
+ * 7: Teleport group to a randomly selected waypoint <BOOL>
  *
  * Return Value:
  * none

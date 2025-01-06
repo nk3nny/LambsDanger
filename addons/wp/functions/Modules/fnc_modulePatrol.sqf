@@ -35,7 +35,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
                         [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
@@ -65,7 +65,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
                         [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
