@@ -24,7 +24,7 @@ if (
     GVAR(disableAIDodge)
     || {!(_unit checkAIFeature "MOVE")}
     || {!(_unit checkAIFeature "PATH")}
-    || {!((currentWeapon _unit) isEqualTo (primaryWeapon _unit))}
+    || {((currentWeapon _unit) isNotEqualTo (primaryWeapon _unit))}
 ) exitWith {false};
 
 // dodge
@@ -58,7 +58,8 @@ private _anim = call {
 
     // drop down
     if !(_nearDistance || {_still}) exitWith {
-        ["Down"]
+        _unit setUnitPosWeak "DOWN";
+        "Down"
     };
 
     // move back ~ more checks because sometimes we want the AI to move forward in CQB - nkenny

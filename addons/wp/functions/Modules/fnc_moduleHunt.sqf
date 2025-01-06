@@ -42,7 +42,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly", "_enableReinforcement", "_doUGL"];
-                        private _args = [_group, _range, _cycle, nil, nil, _playerOnly, _enableReinforcement, _doUGL];
+                        _args = [_group, _range, _cycle, nil, nil, _playerOnly, _enableReinforcement, _doUGL];
                         if !(_movingCenter) then {
                             _args set [4, getPos _logic];
                         };

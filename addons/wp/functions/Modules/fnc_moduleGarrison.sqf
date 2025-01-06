@@ -34,7 +34,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], TASK_GARRISON_SIZE, 2],
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(None), LSTRING(Hit), LSTRING(Fired), LSTRING(FiredNear), LSTRING(Suppressed)], TASK_GARRISON_EXITCONDITIONS + 2],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), TASK_GARRISON_SORTBYHEIGHT],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_GARRISON_PATROL]
                     ], {
                         params ["_data", "_args"];
@@ -63,7 +63,7 @@ switch (_mode) do {
                         [LSTRING(Module_TaskGarrison_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskGarrison_Radius_ToolTip), [10, 500], [2, 1], TASK_GARRISON_SIZE, 2],
                         [LSTRING(Module_TaskGarrison_ExitCondition_DisplayName), "DROPDOWN", LSTRING(Module_TaskGarrison_ExitCondition_Tooltip), [LSTRING(Random), LSTRING(All), LSTRING(None), LSTRING(Hit), LSTRING(Fired), LSTRING(FiredNear), LSTRING(Suppressed)], TASK_GARRISON_EXITCONDITIONS + 2],
                         [LSTRING(Module_TaskGarrison_SortByHeight_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_SortByHeight_Tooltip), TASK_GARRISON_SORTBYHEIGHT],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_GARRISON_PATROL]
 
                     ], {

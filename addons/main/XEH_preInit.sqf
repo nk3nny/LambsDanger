@@ -27,12 +27,12 @@ if (isServer) then {
         } else {
             "LAMBS DANGER VERSION MISMATCH ERROR!!!!" hintC parseText format [
                 "Lambs Danger Version mismatch Error.<br/>Client Version: %1<br/>Server Version: %2",
-                QUOTE(VERSION_str),
+                QUOTE(VERSION_STR),
                 GVAR(versionloadedonServer)
             ];
             format [
                 "Lambs Danger Version mismatch Error. Client Version: %1 Server Version: %2",
-                QUOTE(VERSION_str),
+                QUOTE(VERSION_STR),
                 GVAR(versionloadedonServer)
             ];
         };

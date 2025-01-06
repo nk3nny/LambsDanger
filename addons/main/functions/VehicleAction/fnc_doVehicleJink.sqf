@@ -37,6 +37,7 @@ _unit setVariable [QGVAR(currentTask), "Jink Vehicle", GVAR(debug_functions)];
 private _destination = [];
 _destination pushBack (_vehicle modelToWorldVisual [_range, -5, 0]);
 _destination pushBack (_vehicle modelToWorldVisual [-_range, -5, 0]);
+_destination pushBack (_vehicle modelToWorldVisual [0, _range, 0]); // <-- forward movement!
 //_destination pushBack (_vehicle modelToWorldVisual [0, -50, 0]);  <-- rear movement just confuses AI - nkenny
 
 // near enemy?
@@ -56,7 +57,9 @@ _destination = _destination select {(_x isNotEqualTo []) && {!(surfaceIsWater _x
 
 // check -- no location -- exit
 if (_destination isEqualTo []) exitWith { getPosASL _unit };
-_destination = selectRandom _destination;
+_destination = _destination apply {[_x select 2, _x]};
+_destination sort true;
+_destination = (_destination select 0) select 1;
 
 // check for roads
 private _roads = _destination nearRoads (_range * 0.5);

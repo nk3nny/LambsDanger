@@ -280,7 +280,7 @@ private _fnc_AddSideSelector = {
     _basePositionY = _basePositionY + PY(CONST_HEIGHT + CONST_SPACE_HEIGHT);
 
     private _cacheName = format ["lambs_%1_%2", _name, _text];
-    private _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
+    _default = GVAR(ChooseDialogSettingsCache) getVariable [_cacheName, _default];
 
     [_text, _tooltip] call _fnc_CreateLabel;
 
@@ -344,7 +344,7 @@ private _fnc_AddSideSelector = {
 
 private _controls = [];
 {
-    private _type = toUpper (_x select 1);
+    private _type = toUpperANSI (_x select 1);
     switch (_type) do {
         case ("BOOLEAN");
         case ("BOOL"): {

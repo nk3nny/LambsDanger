@@ -19,6 +19,6 @@
 && {weapons _this isEqualTo []}
 && {_this checkAIFeature "PATH"}
 && {_this checkAIFeature "MOVE"}
-&& {!(((expectedDestination _this) select 1) isEqualTo "DoNotPlan")}
+&& {(((expectedDestination _this) select 1) isNotEqualTo "DoNotPlan")}
 && {!isForcedWalk _this}
 && {!(surfaceIsWater getPosASL _this)}

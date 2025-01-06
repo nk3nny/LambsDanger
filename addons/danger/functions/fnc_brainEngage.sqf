@@ -4,7 +4,7 @@
  * handles responses while engaging
  *
  * Arguments:
- * 0: unit doing the avaluation <OBJECT>
+ * 0: unit doing the evaluation <OBJECT>
  * 1: type of data <NUMBER>
  * 2: known target <OBJECT>
  *
@@ -32,10 +32,12 @@ private _timeout = time + 0.5;
 // check
 if (
     isNull _target
-    || {_unit knowsAbout _target isEqualTo 0}
+    || {(_unit knowsAbout _target) isEqualTo 0}
     || {(speed _target) > 20}
     || {(weapons _unit) isEqualTo []}
     || {(combatMode _unit) in ["BLUE", "GREEN"]}
+    || {(behaviour _unit) isEqualTo "STEALTH"}
+    || {(getUnitState _unit) in ["PLANNING", "BUSY"]}
 ) exitWith {
     _timeout + 1
 };
@@ -72,7 +74,7 @@ if (
         _posASL set [2, 0.5];
         _posASL = AGLToASL _posASL
     };
-    _unit forceSpeed 0;
+    _unit forceSpeed 1;
     _unit suppressFor 4;
     [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 4

@@ -195,10 +195,12 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     if (_attack && {speed _vehicle < 20}) then {
 
         // rotate
-        [_vehicle, _dangerPos] call EFUNC(main,doVehicleRotate);
+        if ((getUnitState _unit) isEqualTo "OK") then {
+            [_vehicle, _dangerPos] call EFUNC(main,doVehicleRotate);
+        };
 
         // assault
-        if (_distance < 750 && {_dangerCausedBy isKindOf "Man"}) then {
+        if (_distance < 750 && {_dangerCausedBy isKindOf "Man"} && {_cause isEqualTo DANGER_ENEMYDETECTED}) then {
             [
                 {_this call EFUNC(main,doVehicleAssault)},
                 [_unit, _dangerPos, _dangerCausedBy],

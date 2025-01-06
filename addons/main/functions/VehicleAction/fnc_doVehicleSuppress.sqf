@@ -18,7 +18,7 @@
 params ["_unit", ["_pos", [0, 0, 0]]];
 
 private _vehicle = vehicle _unit;
-private _pos = _pos call CBA_fnc_getPos;
+_pos = _pos call CBA_fnc_getPos;
 
 // exit if vehicle is moving too fast or target is too high
 if (speed _vehicle > 30 || {(_pos select 2) > 100}) exitWith {false};

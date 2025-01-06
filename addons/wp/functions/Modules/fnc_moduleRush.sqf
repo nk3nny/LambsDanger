@@ -41,7 +41,7 @@ switch (_mode) do {
                         params ["_data", "_args"];
                         _args params ["_group", "_logic"];
                         _data params ["_range", "_cycle", "_movingCenter", "_playerOnly"];
-                        private _args = [[_group, _range, _cycle, nil, getPos _logic, _playerOnly], [_group, _range, _cycle, nil, nil, _playerOnly]] select _movingCenter;
+                        _args = [[_group, _range, _cycle, nil, getPos _logic, _playerOnly], [_group, _range, _cycle, nil, nil, _playerOnly]] select _movingCenter;
                         [QGVAR(taskRush), _args, leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {

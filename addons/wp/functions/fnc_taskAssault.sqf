@@ -42,8 +42,9 @@ if (_useWaypoint) then {
     _pos = [_group, (currentWaypoint _group) min ((count waypoints _group) - 1)];
 };
 
-// sort group
+// sort group + vehicles
 private _units = units _group select {!isPlayer _x && {_x call EFUNC(main,isAlive)} && {isNull objectParent _x}};
+private _vehicles = [leader _group] call EFUNC(main,findReadyVehicles);
 
 // add group variables
 _group setVariable [QGVAR(taskAssaultDestination), _pos];
@@ -54,7 +55,7 @@ _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] s
 
 // set group orders
 _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
-_group setCombatMode (["WHITE", "BLUE"] select _retreat);
+_group setCombatMode (["RED", "BLUE"] select _retreat);
 _group enableAttack false;
 _group allowFleeing 0;
 _group setSpeedMode "FULL";
@@ -84,6 +85,26 @@ _group setFormation "LINE";
         ]] remoteExec["switchMove", 0];
     };
 
+    // fired EH
+    private _firedEH = _x addEventHandler ["Fired", {
+        params ["_unit"];
+        _unit forceSpeed 2;
+    }];
+
+    // dodge hits
+    private _hitEH = _x addEventHandler ["Hit", {
+        params ["_unit", "", "", "_shooter"];
+        private _unitPos = unitPos _unit;
+
+        // tune stance
+        if (_unitPos isEqualTo "Down") exitWith {};
+        if (_unitPos isEqualTo "Middle" && {_unit distance2D _shooter > 30}) exitWith {_unit setUnitPos "DOWN";};
+        _unit setUnitPos "MIDDLE";
+    }];
+
+    // variables
+    _x setVariable [QGVAR(eventhandlers), [["Fired", _firedEH], ["Hit", _hitEH]]];
+
     // adds frame handler
     if (!(_x getVariable [QGVAR(taskAssault), false])) then {
         [
@@ -107,15 +128,20 @@ _group setFormation "LINE";
                     [_unit, _retreat] call FUNC(doAssaultUnitReset);
                 };
 
+                // handle get In get out
+                private _currentCommand = currentCommand _unit;
+                if (_currentCommand in ["GET IN", "GET OUT"] || {!isNull objectParent _unit}) exitWith {};
+
                 // unAttack
-                if ((currentCommand _unit) isEqualTo "ATTACK") then {
+                if (_currentCommand isEqualTo "ATTACK") then {
                     [_unit] joinSilent (createGroup [(side (group _unit)), true]);
                     [_unit] joinSilent _group;
                 };
 
                 // move
                 if ((expectedDestination _unit select 0) isNotEqualTo _destination) then {_unit doMove _destination};
-                _unit forceSpeed ([3, 24] select _retreat);
+                _unit forceSpeed 24;
+                _unit setUnitPos (["UP", "MIDDLE"] select (RND(0.5) && (unitPos _unit) isEqualTo "Down"));
 
                 // no animation on retreat
                 if (_retreat) exitWith {};
@@ -124,22 +150,22 @@ _group setFormation "LINE";
                 private _dir = 360 - (_unit getRelDir _destination);
                 private _anim = call {
                     // move right
-                    if (_dir > 250 && {_dir < 320}) exitWith {
+                    if (_dir > 240 && {_dir < 320}) exitWith {
                         ["TactR", "TactRF"];
                     };
 
                     // move left
-                    if (_dir < 110 && {_dir > 40}) exitWith {
+                    if (_dir < 120 && {_dir > 40}) exitWith {
                         ["TactL", "TactLF"];
                     };
 
                     // move back
-                    if (_dir > 150 && {_dir < 210}) exitWith {
+                    if (_dir > 120 && {_dir < 240}) exitWith {
                         "TactB"
                     };
 
                     // forward
-                    "TactF";
+                    "TactF"
                 };
 
                 // execute
@@ -152,6 +178,7 @@ _group setFormation "LINE";
     };
 } forEach _units;
 
+
 // execute move
 waitUntil {
 
@@ -163,6 +190,24 @@ waitUntil {
 
     // end if WP is odd
     if (_wPos isEqualTo [0,0,0]) exitWith {true};
+
+    // get vehicles moving
+    {
+        private _vehicle = _x;
+
+        // execute movement
+        _vehicle doWatch _wPos;
+        _vehicle doMove _wPos;
+
+        // unload vehicles
+        if (_vehicle distance _wPos < (_threshold * 2)) then {
+            private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
+            _cargo append ((fullCrew [_vehicle, "turret"] select {_x select 4}) apply {_x select 0});
+            _cargo orderGetIn false;
+            _cargo allowGetIn false;
+        };
+
+    } forEach _vehicles;
 
     // debug
     if (EGVAR(main,debug_functions)) then {
