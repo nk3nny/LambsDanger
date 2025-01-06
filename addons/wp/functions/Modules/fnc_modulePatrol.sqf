@@ -34,13 +34,14 @@ switch (_mode) do {
                         [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
-                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_groups", "_logic"];
-                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
+                        _data params ["_groupIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement", "_teleport"];
                         private _group = _groups select _groupIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, getPos _logic, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement, _teleport], leader _group] call CBA_fnc_targetEvent;
                         deleteVehicle _logic;
                     }, {
                         params ["", "_logic"];
@@ -63,13 +64,14 @@ switch (_mode) do {
                         [LSTRING(Module_TaskPatrol_Range_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Range_ToolTip), [20, 2000], [1, 0.5], TASK_PATROL_SIZE, 1],
                         [LSTRING(Module_TaskPatrol_Waypoints_DisplayName), "SLIDER", LSTRING(Module_TaskPatrol_Waypoints_ToolTip), [2, 15], [2, 1], TASK_PATROL_WAYPOINTCOUNT, 0],
                         [LSTRING(Module_TaskPatrol_MoveWaypoints_DisplayName), "BOOLEAN", LSTRING(Module_TaskPatrol_MoveWaypoints_ToolTip), TASK_PATROL_MOVEWAYPOINTS],
-                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT]
+                        [LSTRING(Module_Task_EnableReinforcement_DisplayName), "BOOLEAN", LSTRING(Module_Task_EnableReinforcement_ToolTip), TASK_PATROL_ENABLEREINFORCEMENT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_PATROL_TELEPORT]
                     ], {
                         params ["_data", "_args"];
                         _args params ["_targets", "_logic", "_group"];
-                        _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement"];
+                        _data params ["_targetIndex", "_range", "_waypointCount", "_moveWaypoint", "_enableReinforcement", "_teleport"];
                         private _target = _targets select _targetIndex;
-                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement], leader _group] call CBA_fnc_targetEvent;
+                        [QGVAR(taskPatrol), [_group, getPos _target, _range, _waypointCount, [], _moveWaypoint, _enableReinforcement, _teleport], leader _group] call CBA_fnc_targetEvent;
                         if (_logic isNotEqualTo _target) then {
                             deleteVehicle _logic;
                         };
@@ -91,8 +93,9 @@ switch (_mode) do {
             private _moveWaypoint = _logic getVariable [QGVAR(moveWaypoints), TASK_PATROL_MOVEWAYPOINTS];
             private _enableReinforcement = _logic getVariable [QGVAR(EnableReinforcement), TASK_PATROL_ENABLEREINFORCEMENT];
             private _waypointCount =_logic getVariable [QGVAR(WaypointCount), TASK_PATROL_WAYPOINTCOUNT];
+            private _teleport =_logic getVariable [QGVAR(Teleport), TASK_PATROL_TELEPORT];
             {
-                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint, _enableReinforcement], leader _x] call CBA_fnc_targetEvent;
+                [QGVAR(taskPatrol), [_x, getPos _logic, _range, _waypointCount, _area, _moveWaypoint, _enableReinforcement, _teleport], leader _x] call CBA_fnc_targetEvent;
             } forEach _groups;
             deleteVehicle _logic;
         };
