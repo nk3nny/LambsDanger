@@ -37,7 +37,8 @@ if (!_retreat && {animationState _unit in ["apanpknlmsprsnonwnondf", "apanpercms
 
 // retreat
 if (_retreat) then {
-    _unit switchMove (["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select ((primaryWeapon _unit) isEqualTo ""));
+    private _animation = ["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select ((primaryWeapon _unit) isEqualTo "");
+    [QGVAR(doSwitchMove), [_unit, _animation]] call CBA_fnc_globalEvent;
     _unit enableAI "AUTOTARGET";
     _unit doWatch ObjNull;
 };
