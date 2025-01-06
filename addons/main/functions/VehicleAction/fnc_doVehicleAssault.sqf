@@ -47,7 +47,7 @@ if (_buildings isNotEqualTo []) then {
 
 // add predicted location -- just to ensure shots fired!
 if (_buildings isEqualTo []) then {
-    //_predictedPos = ASLToAGL (ATLToASL _predictedPos);
+    _predictedPos = ASLToAGL (ATLToASL _predictedPos);
     if ((nearestObjects [_predictedPos, ["house", "man"], 6]) isEqualTo []) then {_predictedPos set [2, 0.5]};
     _buildings pushBack _predictedPos;
 };
