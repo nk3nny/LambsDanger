@@ -30,23 +30,25 @@ if (_unit isEqualType grpNull) then {_unit = leader _unit;};
 // local
 if (!local _unit || {isPlayer _unit}) exitWith {false};
 
-// get magazines
-private _magazines = magazinesAmmo _unit;
-_magazines = _magazines select {(_x select 1) isEqualTo 1};
-_magazines = _magazines apply {_x select 0};
-if (_magazines isEqualTo []) exitWith {false};
+// get throwables
+private _throwables = throwables _unit;
+
+if (_throwables isEqualTo []) exitWith {false};
 
 // find smoke shell
-private _smokeshell = _magazines findIf {
-    [_x, _type] call FUNC(checkMagazineAiUsageFlags);
+private _smokeshellIndex = _throwables findIf {
+    [_x # 0, _type] call FUNC(checkMagazineAiUsageFlags);
 };
 
 // select smoke
-if (_smokeshell == -1) exitWith {false};
-_smokeshell = (_magazines select _smokeshell);
+if (_smokeshellIndex == -1) exitWith {false};
+private _smokeshell = ((_throwables # _smokeshellIndex) # 0);
+private _muzzle = ((_throwables # _smokeshellIndex) # 1);
 
-// get muzzle
-private _muzzle = _smokeshell call FUNC(getCompatibleThrowMuzzle);
+// the muzzle wasn't in the throwables array, use custom search
+if (_muzzle isEqualTo "") then {
+    _muzzle = _smokeshell call FUNC(getCompatibleThrowMuzzle);
+};
 
 // select muzzle
 if (_muzzle isEqualTo "") exitWith {false};
