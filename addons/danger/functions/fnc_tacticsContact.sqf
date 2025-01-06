@@ -134,7 +134,7 @@ if (
         [
             {
                 params ["_unit", "_posASL"];
-                if (_unit call EFUNC(main,isAlive) && {!(currentCommand _unit isEqualTo "Suppress")}) then {
+                if (_unit call EFUNC(main,isAlive) && {(currentCommand _unit isNotEqualTo "Suppress")}) then {
                     [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
                 };
             },

@@ -86,12 +86,12 @@ _assistant doMove getPosATL (vehicle _gunner);
 [
     {
         // condition
-        params ["_gunner", "_assistant", "_pos"];
+        params ["", "_assistant", "_pos"];
         (_assistant distance2D _pos < 4 || {unitReady _assistant})
     },
     {
         // on success
-        params ["_gunner", "_assistant", "", "_EH"];
+        params ["_gunner", "_assistant"];
 
         if (fleeing _gunner || {fleeing _assistant} || {!(_assistant call FUNC(isAlive))}) exitWith {false};
 

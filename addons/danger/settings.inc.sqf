@@ -85,7 +85,7 @@ private _curCat = ELSTRING(main,Settings_MainCat);
 ] call CBA_fnc_addSetting;
 
 
-private _curCat = LSTRING(Settings_GeneralCat);
+_curCat = LSTRING(Settings_GeneralCat);
 
 // Range at which units consider themselves in CQB
 [
