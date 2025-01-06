@@ -32,6 +32,10 @@ _unit enableAI "COVER";
 _unit enableAI "SUPPRESSION";
 _unit enableAI "TARGET";
 
+// eventhandlers
+[_unit, _unit getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
+_unit setVariable [QGVAR(eventhandlers), nil];
+
 // double check retreat
 if (!_retreat && {animationState _unit in ["apanpknlmsprsnonwnondf", "apanpercmsprsnonWnondf"]}) then {_retreat = true};
 
