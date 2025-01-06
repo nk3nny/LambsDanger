@@ -498,7 +498,7 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
             defaultValue = QUOTE(TASK_DEFEND_STEALTH);
         };
         class GVAR(Teleport): Checkbox {
-            displayName = CSTRING(Module_TaskGarrison_Teleport_DisplayName);
+            displayName = CSTRING(Module_Teleport_DisplayName);
             tooltip = CSTRING(Module_TaskGarrison_Teleport_Tooltip);
             property = QGVAR(Teleport);
             unique = 0;

@@ -33,7 +33,7 @@ switch (_mode) do {
                         [LSTRING(Groups_DisplayName), "DROPDOWN", LSTRING(Groups_ToolTip), _groups apply { format ["%1 - %2 (%3 m)", side _x, groupId _x, round ((leader _x) distance _logic)] }, 0],
                         [LSTRING(Module_TaskDefend_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskDefend_Radius_Tooltip), [10, 500], [2, 1], TASK_DEFEND_SIZE, 2],
                         [LSTRING(Module_TaskDefend_UseCover_DisplayName), "DROPDOWN", LSTRING(Module_TaskDefend_UseCover_Tooltip), [LSTRING(All), LSTRING(Buildings), LSTRING(Walls), LSTRING(Vegetation), LSTRING(BuildingsAndVegetation), LSTRING(BuildingsAndWalls), LSTRING(WallsandVegetation)], TASK_DEFEND_USECOVER],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
                         [LSTRING(Module_TaskDefend_Stealth_DisplayName), "BOOLEAN", LSTRING(Module_TaskDefend_Stealth_Tooltip), TASK_DEFEND_STEALTH],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_DEFEND_PATROL]
                     ], {
@@ -62,7 +62,7 @@ switch (_mode) do {
                         [LSTRING(Centers_DisplayName), "DROPDOWN", LSTRING(Centers_ToolTip), _targets apply {  format ["%1 (%2 m)", vehicleVarName _x, round (_x distance _logic)] }, 0],
                         [LSTRING(Module_TaskDefend_Radius_DisplayName), "SLIDER", LSTRING(Module_TaskDefend_Radius_Tooltip), [10, 500], [2, 1], TASK_DEFEND_SIZE, 2],
                         [LSTRING(Module_TaskDefend_UseCover_DisplayName), "DROPDOWN", LSTRING(Module_TaskDefend_UseCover_Tooltip), [LSTRING(All), LSTRING(Buildings), LSTRING(Walls), LSTRING(Vegetation), LSTRING(BuildingsAndVegetation), LSTRING(BuildingsAndWalls), LSTRING(WallsandVegetation)], TASK_DEFEND_USECOVER],
-                        [LSTRING(Module_TaskGarrison_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
+                        [LSTRING(Module_Teleport_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Teleport_Tooltip), TASK_GARRISON_TELEPORT],
                         [LSTRING(Module_TaskDefend_Stealth_DisplayName), "BOOLEAN", LSTRING(Module_TaskDefend_Stealth_Tooltip), TASK_DEFEND_STEALTH],
                         [LSTRING(Module_TaskGarrison_Patrol_DisplayName), "BOOLEAN", LSTRING(Module_TaskGarrison_Patrol_Tooltip), TASK_DEFEND_PATROL]
 
