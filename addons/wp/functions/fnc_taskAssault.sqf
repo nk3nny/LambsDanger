@@ -77,13 +77,13 @@ _group setFormation "LINE";
     if (_retreat) then {
         _x disableAI "AUTOTARGET";
         [_x, "ApanPercMrunSnonWnonDf"] remoteExec ["switchMove", 0];
-        [QGVAR(doSwitchMove), [_unit, "ApanPercMrunSnonWnonDf"]] call CBA_fnc_globalEvent;
+        [QEGVAR(main,doSwitchMove), [_x, "ApanPercMrunSnonWnonDf"]] call CBA_fnc_globalEvent;
         private _animation = selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
         ];
-        [QGVAR(doSwitchMove), [_unit, _animation]] call CBA_fnc_globalEvent;
+        [QEGVAR(main,doSwitchMove), [_x, _animation]] call CBA_fnc_globalEvent;
     };
 
     // adds frame handler

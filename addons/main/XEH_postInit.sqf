@@ -101,6 +101,6 @@ GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1,
 }] call CBA_fnc_addEventHandler;
 
 [QGVAR(doSwitchMove), {
-    params [["_unit", objNull, ["_move", ""]]];
+    params [["_unit", objNull], ["_move", ""]];
     _unit switchMove [_move, 0, 0.5, false];
 }] call CBA_fnc_addEventHandler;
