@@ -63,10 +63,10 @@ _pos = _pos apply {_x select 2};
     // remove positions
     _pos = _pos select {[objNull, "VIEW", objNull] checkVisibility [eyePos _unit, (AGLToASL _x) vectorAdd [0, 0, 0.5]] < 0.01};
 
-    // update group variable
-    (group _unit) setVariable [QGVAR(groupMemory), _pos, false];
-
 } forEach (_units select {!((getUnitState _x) in ["PLANNING", "BUSY"])});
+
+// update group variable
+(group (_units select 0)) setVariable [QGVAR(groupMemory), _pos, false];
 
 // remove  positions
 _pos = _pos select {(_units select 0) distance _x > 3};
