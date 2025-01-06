@@ -52,6 +52,11 @@ private _pos = call {
             getPosATL _unit
         };
 
+        // forget targets when too close
+        if (_unit distance2D _getHide < 1.7) then {
+            _unit forgetTarget _target;
+        };
+
         // select target location
         _doMove = true;
         _getHide
@@ -62,6 +67,7 @@ private _pos = call {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
         if (_groupMemory isEqualTo []) then {
+            _buildings pushBack _getHide;
             _group setVariable [QGVAR(groupMemory), _buildings];
         };
     };

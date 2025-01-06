@@ -18,7 +18,7 @@
 params ["_unit", ["_groupMemory", []]];
 
 // check if stopped
-if (!(_unit checkAIFeature "PATH")) exitWith {false};
+if (!(_unit checkAIFeature "PATH") || {(getUnitState _unit) isEqualTo "PLANNING"}) exitWith {false};
 
 // check it
 private _group = group _unit;
@@ -54,7 +54,7 @@ private _pos = _groupMemory select 0;
 private _distance2D = _unit distance2D _pos;
 
 // check for nearby enemy
-if (_unit distance2D _nearestEnemy < _distance2D) exitWith {
+if (_unit distance2D (_unit getHideFrom _nearestEnemy) < _distance2D) exitWith {
     [_unit, _nearestEnemy, 12, true] call FUNC(doAssault);
 };
 
