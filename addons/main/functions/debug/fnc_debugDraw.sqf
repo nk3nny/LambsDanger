@@ -165,7 +165,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                 ];
 
                 if ((side _unit) isNotEqualTo (side _currentTarget)) then {
-                    drawLine3D [ASLtoATL (aimPos _unit), _knowledgePosition, _sideColor, 6 * (1 - needReload _unit)];
+                    drawLine3D [ASLToATL (aimPos _unit), _knowledgePosition, _sideColor, 6 * (1 - needReload _unit)];
                     drawIcon3D ["\a3\ui_f\data\igui\cfg\targeting\impactpoint_ca.paa", _sideColor, _knowledgePosition, 1, 1, 0, ["Estimated Target Position", ""] select (_knowledgePosition distanceSqr _lastSeen < 1)];
 
                     if !(_lastSeen isEqualType "") then {
