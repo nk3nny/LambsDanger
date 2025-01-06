@@ -99,3 +99,8 @@ GVAR(debug_TextFactor) = linearConversion [0.55, 0.7, getResolution select 5, 1,
     [_this select 1, QEGVAR(danger,OnFleeing), _this] call BIS_fnc_callScriptedEventHandler;
     [QEGVAR(danger,OnFleeing), _this] call CBA_fnc_localEvent;
 }] call CBA_fnc_addEventHandler;
+
+[QGVAR(doSwitchMove), {
+    params [["_unit", objNull], ["_move", ""]];
+    _unit switchMove [_move, 0, 0.5, false];
+}] call CBA_fnc_addEventHandler;

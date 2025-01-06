@@ -77,12 +77,13 @@ _group setFormation "LINE";
     // check retreat
     if (_retreat) then {
         _x disableAI "AUTOTARGET";
-        [_x, "ApanPercMrunSnonWnonDf"] remoteExec ["switchMove", 0];
-        [_x, selectRandom [
+        [QEGVAR(main,doSwitchMove), [_x, "ApanPercMrunSnonWnonDf"]] call CBA_fnc_globalEvent;
+        private _animation = selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
-        ]] remoteExec["switchMove", 0];
+        ];
+        [QEGVAR(main,doSwitchMove), [_x, _animation]] call CBA_fnc_globalEvent;
     };
 
     // fired EH

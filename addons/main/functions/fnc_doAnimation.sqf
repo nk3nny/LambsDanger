@@ -67,7 +67,7 @@ if (_priority >= 2) then {
         params ["_unit", "_animation"];
         if (animationState _unit != _animation) then {
             // Execute on all machines. SwitchMove has local effects.
-            [_unit, _animation] remoteExec ["switchMove", 0];
+            [QGVAR(doSwitchMove), [_unit, _animation]] call CBA_fnc_globalEvent;
         };
     }, [_unit, _animation], 0.1] call CBA_fnc_waitAndExecute;
 };
