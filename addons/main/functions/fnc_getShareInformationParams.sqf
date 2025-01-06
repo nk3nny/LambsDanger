@@ -40,7 +40,7 @@ private _units = units _unit select {
 private _index = _units findIf {
     _x getVariable [QEGVAR(danger,dangerRadio), false]
     //|| {(!isNull objectParent _x && {_x distance2D _unit < 70})}
-    || {"b_radiobag_01_" in (toLower backpack _x)}
+    || {"b_radiobag_01_" in (toLowerANSI backpack _x)}
     || {(getNumber (configFile >> "CfgVehicles" >> (backpack _x) >> "tf_hasLRradio")) isEqualTo 1}
 };
 _radio = _index isNotEqualTo -1;
