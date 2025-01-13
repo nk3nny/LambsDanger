@@ -127,7 +127,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
     private _renderPos = getPosATLVisual _unit;
     private _isLeader = _unit isEqualTo (leader _unit);
     private _sideColor = [side (group _unit), false] call BIS_fnc_sideColor;
-    if ((_posCam distance _renderPos) <= _viewDistance && {((units _unit - [_unit]) findIf {_x distanceSqr _unit < 1}) isEqualTo -1}) then {
+    if ((_posCam distance _renderPos) <= _viewDistance) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 

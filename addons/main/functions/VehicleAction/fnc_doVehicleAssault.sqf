@@ -66,7 +66,7 @@ _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functio
 _unit setVariable [QEGVAR(main,currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
 
 // minor jink if no suppression possible
-if (!_suppression) then {[_unit, 25] call FUNC(doVehicleJink)};
+if (!_suppression) exitWith {[_unit, 35] call FUNC(doVehicleJink)};
 
 // cannon direction ~ threshold 30 degrees
 private _fnc_turretDir = {
