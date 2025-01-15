@@ -117,7 +117,7 @@ if (_artillery) exitWith {
         };
 
         // check for issues
-        if ( _dangerRound || !( _dangerPos inRangeOfArtillery [[_vehicle], _shell] ) ) exitWith {};
+        if ( _dangerRound || { !(_dangerPos inRangeOfArtillery [[_vehicle], _shell]) } ) exitWith {};
 
         // execute fire command
         _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 80, (_dangerPos getDir _vehicle) - 10 + random 20], _shell, 1 + random 2];
@@ -127,7 +127,7 @@ if (_artillery) exitWith {
             [
                 {
                     params [["_vehicle", objNull], ["_dangerPos", [0, 0, 0]], ["_shell", ""]];
-                    if (canFire _vehicle && unitReady _vehicle) then {
+                    if ( canFire _vehicle && { unitReady _vehicle } ) then {
                         _vehicle commandArtilleryFire [_dangerPos, _shell, ( 2 + random 1 ) min ((gunner _vehicle) ammo (currentMuzzle (gunner _vehicle)))];
                     };
                 },
