@@ -93,18 +93,18 @@ if (_artillery) exitWith {
         private _ammo = getArtilleryAmmo [_vehicle];
         private _shell = _ammo param [0, ""];
         if (_shell isEqualTo "") exitWith {};
-        private _flareIndex = _ammo findIf {"flare" in (toLower _x)};
-        private _smokeIndex = _ammo findIf {"smoke" in (toLower _x)};
+        private _flareIndex = _ammo findIf {"flare" in (toLowerANSI _x)};
+        private _smokeIndex = _ammo findIf {"smoke" in (toLowerANSI _x)};
 
         // check friendlies
         private _dangerRound = false;
         private _repeatRounds = true;
         if ( RND(0.8) || { ([_unit, _dangerPos, 150] call EFUNC(main,findNearbyFriendlies)) isNotEqualTo [] } ) then {
-             if (_smokeIndex isNotEqualTo -1) then {
+             if (_smokeIndex isEqualTo -1) then {
+                _dangerRound = true;
+             } else {
                 _shell = _ammo select _smokeIndex;
                 _repeatRounds = RND(0.5);
-             } else {
-                _dangerRound = true;
              };
         };
 
@@ -246,7 +246,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     private _slow = speed _vehicle < 20;
     if (
         RND(0.4)
-        && {_slow}
+        && _slow
         && {someAmmo _vehicle}
         && {_cause isEqualTo DANGER_ENEMYDETECTED}
         && {!alive (gunner _vehicle)}
@@ -265,7 +265,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     };
 
     // tank assault
-    if (_attack && {_slow} && {(getUnitState _unit) isEqualTo "OK"}) then {
+    if (_attack && _slow && {(getUnitState _unit) isEqualTo "OK"}) then {
 
         // rotate
         private _rotate = [_vehicle, _dangerPos] call EFUNC(main,doVehicleRotate);
