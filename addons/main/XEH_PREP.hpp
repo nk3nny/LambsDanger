@@ -37,6 +37,8 @@ SUBPREP(GroupAction,doGroupSuppress);
 SUBPREP(GroupAction,doGroupStaticDeploy);
 SUBPREP(GroupAction,doGroupStaticFind);
 SUBPREP(GroupAction,doGroupStaticPack);
+SUBPREP(GroupAction,doGroupCommandoDeploy);
+SUBPREP(GroupAction,doGroupCommandoPack);
 
 SUBPREP(UnitAction,doAssault);
 SUBPREP(UnitAction,doAssaultCQB);
