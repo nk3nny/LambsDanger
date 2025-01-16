@@ -36,6 +36,13 @@ if (_guns isEqualTo []) then {
 _guns = _guns select {alive _x && {(vehicle _x) isKindOf "StaticWeapon"} && ((crew _x) isNotEqualTo [])};
 if (_guns isEqualTo []) exitWith { _units };
 
+// check for commando mortars
+private _commandoIndex = _guns findIf {(vehicle _x) isKindOf "CommandoMortar_base_RF"};
+if (_commandoIndex isNotEqualTo -1) exitWith {
+    [_guns select _commandoIndex] call FUNC(doGroupCommandoPack);
+    _units
+};
+
 // get gunner
 private _weapon = _guns deleteAt 0;
 private _gunner = gunner _weapon;
@@ -75,7 +82,7 @@ private _EH = _gunner addEventHandler ["WeaponDisassembled", {
 // assistant moves to gunner
 doStop _assistant;
 _assistant doWatch vehicle _gunner;
-_assistant setUnitPosWeak "MIDDLE";
+_assistant setUnitPos "MIDDLE";
 _assistant forceSpeed 24;
 _assistant setVariable [QEGVAR(danger,forceMove), true];
 _assistant setVariable [QGVAR(currentTask), "Pack Static Weapon", GVAR(debug_functions)];
@@ -102,7 +109,7 @@ _assistant doMove getPosATL (vehicle _gunner);
         _group leaveVehicle assignedVehicle _gunner;
         unassignVehicle _gunner;
 
-        // dissassemble weapon
+        // disassemble weapon
         _gunner action ["Disassemble", _weapon];
 
         // de-register
@@ -113,6 +120,7 @@ _assistant doMove getPosATL (vehicle _gunner);
         // follow!
         [_gunner, _assistant] doFollow (leader _gunner);
         _assistant setVariable [QEGVAR(danger,forceMove), nil];
+        _assistant setUnitPos "AUTO";
     },
     [_gunner, _assistant, getPosATL _weapon, _EH], 10,
     {
@@ -122,6 +130,7 @@ _assistant doMove getPosATL (vehicle _gunner);
         // assistant reverts
         _assistant doFollow (leader _assistant);
         _assistant setVariable [QEGVAR(danger,forceMove), nil];
+        _assistant setUnitPos "AUTO";
 
         // removes eventhandler
         _gunner removeEventHandler ["WeaponDisassembled", _EH];

@@ -5,7 +5,7 @@
  *
  * Arguments:
  * 0: units <ARRAY>
- * 1: danger pos <ARRAY>
+ * 1: target or target position <ARRAY>, <OBJECT>
  * 2: position to deploy weapon <ARRAY>
  *
  * Return Value:
@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_units", ["_pos", []], ["_weaponPos", []]];
+params ["_units", ["_target", []], ["_weaponPos", []]];
 
 // sort units
 switch (typeName _units) do {
@@ -38,6 +38,12 @@ if (_gunnerIndex isEqualTo -1) exitWith { _units };
 // define gunner
 private _gunner = _units deleteAt _gunnerIndex;
 
+//check for commando Mortar
+if ("CommandoMortar" in (backpack _gunner)) exitWith {
+    [_gunner, _weaponPos] call FUNC(doGroupCommandoDeploy);
+    _units
+};
+
 // crudely and unapologetically lifted from BIS_fnc_unpackStaticWeapon by Rocket and Killzone_Kid
 private _cfgBase = configFile >> "CfgVehicles" >> backpack _gunner >> "assembleInfo" >> "base";
 private _compatibleBases = if (isText _cfgBase) then { [getText _cfgBase] } else { getArray _cfgBase };
@@ -58,8 +64,10 @@ if (_assistantIndex isEqualTo -1) exitWith {
 private _assistant = _units deleteAt _assistantIndex;
 
 // check pos
-if (_pos isEqualTo []) then {
-    _pos = _gunner findNearestEnemy _gunner;
+if (_target isEqualType objNull) then {_target = _target call CBA_fnc_getPos;};
+if (_target isEqualTo [] || {_target distance2D _gunner < 2}) then {
+    _target = _gunner findNearestEnemy _gunner;
+    if (isNull _target) then {_target = _gunner getPos [100, formationDirection (leader _gunner)];};
 };
 
 // Manoeuvre gunner
@@ -82,16 +90,18 @@ private _EH = _gunner addEventHandler ["WeaponAssembled", {
 // callout
 [formationLeader _gunner, "aware", "AssembleThatWeapon"] call FUNC(doCallout);
 
-// find position ~ kept simple for now!
+// find position
 if (_weaponPos isEqualTo []) then {
-    _weaponPos = [getPos (leader _gunner), 0, 15, 2, 0, 0.19, 0, [], [getPos _assistant, getPos _assistant]] call BIS_fnc_findSafePos;
+    private _leaderPos = getPos (leader _gunner);
+    _weaponPos = [_leaderPos, 0, 16, 3, 0, 0.07, 0, [], [_leaderPos, _leaderPos]] call BIS_fnc_findSafePos;
     _weaponPos set [2, 0];
 };
 
 // ready units
 {
     doStop _x;
-    _x setUnitPosWeak "MIDDLE";
+    _x doWatch _weaponPos;
+    _x setUnitPos "MIDDLE";
     _x forceSpeed 24;
     _x setVariable [QEGVAR(danger,forceMove), true];
     _x setVariable [QGVAR(currentTask), "Deploy Static Weapon", GVAR(debug_functions)];
@@ -106,54 +116,61 @@ if (_weaponPos isEqualTo []) then {
         // condition
         params ["_gunner", "_assistant", "", "_weaponPos"];
         _gunner distance2D _weaponPos < 2 || {_gunner distance2D _assistant < 3}
-        // use of OR here to facilitiate the sometimes irreverent A3 pathfinding ~ nkenny
+        // use of OR here to facilitate the sometimes irreverent A3 pathfinding ~ nkenny
     },
     {
         // on near gunner
-        params ["_gunner", "_assistant", "_pos"];
+        params ["_gunner", "_assistant", "_target"];
         if (
             !(_gunner call FUNC(isAlive))
             || {!(_assistant call FUNC(isAlive))}
+            || {[_gunner] call FUNC(isIndoor)}
         ) exitWith {false};
 
         // assemble weapon
+        doStop _gunner;
         _gunner action ["PutBag", _assistant];
         _gunner action ["Assemble", unitBackpack _assistant];
 
         // organise weapon and gunner
         [
             {
-                params ["_gunner", "_pos"];
+                params ["_gunner", "_target"];
                 private _weapon = vehicle _gunner;
-                _weapon setDir (_gunner getDir _pos);
-                _weapon setVectorUp surfaceNormal position _weapon;
-                _weapon doWatch _pos;
+                _weapon setDir (_gunner getDir _target);
+                _weapon setVectorUp ( surfaceNormal ( getPos _weapon ) );
+                _weapon doWatch _target;
 
                 // register
                 private _group = group _gunner;
                 private _weaponList = _group getVariable [QGVAR(staticWeaponList), []];
                 _weaponList pushBackUnique _weapon;
                 _group setVariable [QGVAR(staticWeaponList), _weaponList, true];
-            }, [_gunner, _pos], 1
+
+                // reset
+                _gunner setVariable [QEGVAR(danger,forceMove), nil];
+                _gunner setUnitPos "AUTO";
+            }, [_gunner, _target], 1
         ] call CBA_fnc_waitAndExecute;
 
         // assistant
         doStop _assistant;
-        _assistant doWatch _pos;
+        _assistant doWatch _target;
         [_assistant, "gesturePoint"] call FUNC(doGesture);
 
         // reset fsm
-        {
-            _x setVariable [QEGVAR(danger,forceMove), nil];
-        } forEach [_gunner, _assistant];
+        _assistant setVariable [QEGVAR(danger,forceMove), nil];
+        _assistant setUnitPos "AUTO";
+
     },
-    [_gunner, _assistant, _pos, _weaponPos, _EH], 12,
+    [_gunner, _assistant, _target, _weaponPos, _EH], 12,
     {
         // on timeout
         params ["_gunner", "_assistant", "", "", "_EH"];
         {
             [_x] doFollow (leader _x);
             _x setVariable [QEGVAR(danger,forceMove), nil];
+            _x setUnitPos "AUTO";
         } forEach [_gunner, _assistant];
         _gunner removeEventHandler ["WeaponAssembled", _EH];
     }
