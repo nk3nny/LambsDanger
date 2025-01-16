@@ -22,7 +22,7 @@ private _gunner = gunner _gun;
 // callout
 [leader _gunner, "aware", "DisassembleThatWeapon"] call FUNC(doCallout);
 
-private _EH = _gunner addEventHandler ["WeaponDisassembled", {
+_gunner addEventHandler ["WeaponDisassembled", {
         params ["_gunner", "_weaponBag"];
 
         // get bags
