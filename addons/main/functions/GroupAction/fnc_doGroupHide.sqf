@@ -25,7 +25,7 @@ if (_units isEqualTo []) exitWith {false};
 {
     [_x, _pos] call FUNC(doHide);
     if (_action isNotEqualTo "") then {
-        _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
+        _x setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
     };
 } forEach _units;
 
