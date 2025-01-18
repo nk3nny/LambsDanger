@@ -68,7 +68,7 @@ _group setFormDir (_unit getDir _enemy);
 
 // gesture + callouts for larger units
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"] && {!isPlayer _x} && {isNull objectParent _x} && {_x checkAIFeature "MOVE"} && {_x checkAIFeature "PATH"}};
+private _units = (units _unit) select {(currentCommand _x) in ["", "MOVE"] && {!isPlayer _x} && {isNull objectParent _x} && {_x checkAIFeature "MOVE"} && {_x checkAIFeature "PATH"} && {!(_x getVariable [QGVAR(forceMove), false])}};
 private _count = count _units;
 if (_count > 2) then {
     // gesture
@@ -110,6 +110,27 @@ if ([_unit] call EFUNC(main,isIndoor)) exitWith {
 //_unit setVariable [QEGVAR(main,currentTarget), _enemy, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Tactics Contact", EGVAR(main,debug_functions)];
 
+// immediate action -- anti Tank/Air
+if (
+    _enemy isKindOf "Tank"
+    || { _enemy isKindOf "Air" && { ( ( getPos _enemy ) select 2 ) > 10 } }
+) exitWith {
+
+    // tactics
+    [_group, _enemy, true, _delay] call lambs_danger_fnc_tacticsHide;
+
+    // group variable
+    _group setVariable [QEGVAR(main,currentTactic), "Contact! (tank/air)", EGVAR(main,debug_functions)];
+
+    // debug
+    if (EGVAR(main,debug_functions)) then {
+        ["%1 TACTICS SUPPRESSION CONTACT! %2", side _unit, groupId _group] call EFUNC(main,debugLog);
+        private _m = [_unit, "tank/air contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
+        _m setMarkerSizeLocal [0.8, 0.8];
+        [{{deleteMarker _x;true} count _this;}, [_m], _delay + 45] call CBA_fnc_waitAndExecute;
+    };
+};
+
 // check suppression status
 private _aggressiveResponse = (units _unit) findIf {getSuppression _x > 0.95 || {!(_x call EFUNC(main,isAlive))}};
 _aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_aggressiveResponse isEqualTo -1};
@@ -118,7 +139,7 @@ _aggressiveResponse = _count > random 4 && {_unit knowsAbout _enemy > 0.1} && {_
 if (
     RND(getSuppression _unit)
     && {_aggressiveResponse}
-    && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.5)}
+    && {_unit distance2D _enemy > (GVAR(cqbRange) * 0.75)}
 ) exitWith {
 
     // get position
@@ -128,7 +149,7 @@ if (
 
     // execute suppression
     {
-        _x setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
+        //_x setUnitPosWeak selectRandom ["DOWN", "MIDDLE"];
         [_x, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
         _x suppressFor 7;
         [
@@ -139,7 +160,7 @@ if (
                 };
             },
             [_x, _posASL],
-            8
+            8 +  random 4
         ] call CBA_fnc_waitAndExecute;
     } forEach _units;
 
@@ -206,7 +227,7 @@ if (
 };
 
 // immediate action -- leaders further away get their subordinates to hide!
-[_units, _enemy, _buildings, "contact"] call EFUNC(main,doGroupHide);
+[_units, _enemy, "contact"] call EFUNC(main,doGroupHide);
 
 // debug
 if (EGVAR(main,debug_functions)) then {
