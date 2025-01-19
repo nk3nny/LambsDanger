@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 85]];
+params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 160]];
 
 // group is missing
 if (isNull _group) exitWith {false};
