@@ -74,7 +74,10 @@ if (_muzzle isEqualTo "") then {
             {
                 private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
                 if (_ammo isEqualTo "") then {continue};
-                if ((toUpperANSI (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) then {
+                if ((toUpperANSI (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes && {
+                    // do skip munition that needs a manual lase
+                    !isClass (configFile >> "CfgAmmo" >> _ammo >> "Components" >> "SensorsManagerComponent" >> "Components" >> "LaserSensorComponent")
+                }) then {
                     _foundMag = _x;
                     break;
                 };
@@ -94,14 +97,36 @@ if (_muzzle == "this") then {
 
 if (_turret isEqualTo "" || {_muzzle isEqualTo ""}) exitWith {false};
 
+private _weaponState = weaponState [_vehicle, _turretPath, _muzzle];
 // load mag type if exists and is not currently loaded
-if (_foundMag isNotEqualTo "" && {_foundMag isNotEqualTo ((weaponState [_vehicle, _turretPath, _muzzle]) select 3)}) then {
+if (_foundMag isNotEqualTo "" && {_foundMag isNotEqualTo (_weaponState select 3)}) then {
     _vehicle loadMagazine [_turretPath, _turret, _foundMag];
+    if (GVAR(debug_functions)) then {
+        ["%1 loading magazine %2 into turret %3", typeOf _vehicle, _foundMag, _turret] call FUNC(debugLog);
+    };
 };
 
 // switch to muzzle if currently not active
-if (_switchMuzzle && {(currentMuzzle _gunner) isNotEqualTo _muzzle}) then {
-    _gunner selectWeapon _muzzle;
+if (_switchMuzzle) then {
+    private _modes = getArray (configFile >> "CfgWeapons" >> _turret >> "modes");
+    private _topDownIndex = _modes findIf {(toUpperANSI _x) isEqualTo "TOPDOWN"};
+
+    // if muzzle is the same as that it wants to switch to, and if there is a topdown fire mode and it is already selected, skip
+    if !((currentMuzzle _gunner) isNotEqualTo _muzzle || {
+        _topDownIndex > -1 && {(_modes select _topDownIndex) isNotEqualTo (_weaponState select 2)}}) exitWith {};
+    if (_topDownIndex > -1) then {
+        // if weapon has a topdown mode, use it
+        // works sadly unreliable, the AI likes to switch firemode right before firing
+        _gunner selectWeapon [_turret, _muzzle, _modes select _topDownIndex];
+        if (GVAR(debug_functions)) then {
+            ["%1 switching to muzzle %2 with mode %4 in %3", _gunner, _muzzle, typeOf _vehicle, _modes select _topDownIndex] call FUNC(debugLog);
+        };
+    } else {
+        _gunner selectWeapon _muzzle;
+        if (GVAR(debug_functions)) then {
+            ["%1 switching to muzzle %2 in %3", _gunner, _muzzle, typeOf _vehicle] call FUNC(debugLog);
+        };
+    }
 };
 
 true
