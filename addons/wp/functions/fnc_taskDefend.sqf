@@ -83,8 +83,10 @@ if (_useCover in [0, 1, 4, 5]) then {
         private _buildingPos = _x buildingPos -1;
 
         // reduce building positions
-        [_buildingPos, true] call CBA_fnc_shuffle;
-        _buildingPos resize ((count _buildingPos) min 2);
+        if ( _useCover isNotEqualTo 2 && { _radius > 25 } ) then {
+            [_buildingPos, true] call CBA_fnc_shuffle;
+            _buildingPos resize ((count _buildingPos) min 2);
+        };
 
         _defensivePos append _buildingPos;
     } forEach _houses;
@@ -170,11 +172,15 @@ if (_stealth) then {
 
 // teleport
 if (_teleport) then {
+
+    private _units = (units _group) select { !(_x getVariable [QEGVAR(danger,forceMove), false ]) && { (vehicle _x) isKindOf "CAManBase" } };
+    if (count _units > count _defensivePos) then {_units resize (count _defensivePos)};
+    [_defensivePos, true] call CBA_fnc_shuffle;
     {
-        (vehicle _x) setVehiclePosition [selectRandom _defensivePos, [], precision (vehicle _x), "NONE"];
+        _x setVehiclePosition [_defensivePos select _forEachIndex, [], precision _x, "CAN_COLLIDE"];
         if (!_stealth) then {_x setUnitPosWeak selectRandom ["MIDDLE", "MIDDLE", "UP"];};
         doStop _x;
-    } forEach ((units _group) select {!(_x getVariable [QEGVAR(danger,forceMove), false]) && {(vehicle _x) isKindOf "Man"}});
+    } forEach _units;
 };
 
 // update group settings
@@ -203,8 +209,10 @@ private _handle = [
 
         {
             private _unit = _x;
-            // unit is outside zone -- return to zone
-            if (_unit distance2D _pos > _radius) then {
+            // unit is outside zone -- return to zone or stacked
+            private _nearby = _x nearEntities ["CAManBase", 1];
+            if (_unit distance2D _pos > _radius || { count _nearby > 1 }) then {
+                // systemChat format ["%1 %2 %3!", side _unit, ["outside", "stacked"] select (count _nearby > 1), name _unit];
                 _unit doMove (_pos getPos [_radius * 0.9, _pos getDir _unit]);
                 _units deleteAt _forEachIndex;
             };
@@ -261,21 +269,23 @@ private _handle = [
                 _defensivePos = _defensivePos apply {_x select 1};
 
                 // check available cover
-                if (count _units > count _defensivePos) then {_units = _units resize (count _defensivePos)};
+                if (count _units > count _defensivePos) then {_units resize (count _defensivePos)};
 
                 // debug
                 // systemChat format ["%1 units vs hides - ready units %2  - hides %3  - time %4", side _group, count _units, count _defensivePos, time];
 
                 // units move
                 {
+                    private _unit = _x;
                     private _movePos = (_defensivePos select _forEachIndex);
-                    private _moveDistance2D = _x distance2D _movePos;
+                    private _moveDistance2D = _unit distance2D _movePos;
+
 
                     // debug
-                    // systemChat format ["%1 unitMove %2 - %3m - %4", side _x, name _x, round _moveDistance2D, currentCommand _x];
+                    // systemChat format ["%1 unitMove %2 - %3m - %4", side _unit, name _unit, round _moveDistance2D, currentCommand _unit];
 
-                    if (_moveDistance2D > 3 && {unitReady _x || (currentCommand _x) isEqualTo "STOP"}) then {
-                        _x doMove _movePos;
+                    if (_moveDistance2D > 3 && {unitReady _unit || (currentCommand _unit) isEqualTo "STOP"}) then {
+                        _unit doMove _movePos;
                         [
                             {
                                 params ["_unit"];
@@ -285,18 +295,18 @@ private _handle = [
                                 params ["_unit"];
                                 doStop _unit
                             },
-                            [_x]
+                            [_unit]
                         ] call CBA_fnc_waitUntilAndExecute;
                     };
 
                     // nearby? Just hold
-                    if (_moveDistance2D < 3 && {(currentCommand _x) isNotEqualTo "STOP"}) then {
-                        doStop _x;
+                    if (_moveDistance2D < 3 && {(currentCommand _unit) isNotEqualTo "STOP"}) then {
+                        doStop _unit;
                     };
 
                     // not useful?
-                    if (_moveDistance2D > _radius && {(getSuppression _x) isEqualTo 0} && {(currentCommand _x) isEqualTo "STOP"}) then {
-                        _x doFollow (leader _x);
+                    if (_moveDistance2D > _radius && {(getSuppression _unit) isEqualTo 0} && {(currentCommand _unit) isEqualTo "STOP"}) then {
+                        _unit doFollow (leader _unit);
                     };
 
                 } forEach _units;
