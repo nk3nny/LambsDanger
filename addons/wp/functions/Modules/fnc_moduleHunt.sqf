@@ -68,7 +68,7 @@ switch (_mode) do {
             private _range = _area select ((_area select 0) < (_area select 1));
             private _cycle = _logic getVariable [QGVAR(CycleTime), TASK_HUNT_CYCLETIME];
             private _movingCenter = _logic getVariable [QGVAR(MovingCenter), TASK_HUNT_MOVINGCENTER];
-            private _playerOnly = _logic getVariable [QGVAR(PlayerOnly), TASK_HUNT_PLAYERSONLY];
+            private _playerOnly = _logic getVariable [QGVAR(PlayersOnly), TASK_HUNT_PLAYERSONLY];
             private _enableReinforcement = _logic getVariable [QGVAR(EnableReinforcement), TASK_HUNT_ENABLEREINFORCEMENT];
             private _doUGL = _logic getVariable [QGVAR(doUGL), TASK_HUNT_TRYUGLFLARE];
 
