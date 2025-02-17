@@ -86,7 +86,7 @@ private _launchersAT = [_units, AI_AMMO_USAGE_FLAG_ARMOUR] call EFUNC(main,getLa
 
 // find enemy vehicles
 private _enemies = _unit targets [true, 600, [], 0, _target];
-private _vehicleIndex = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
+private _vehicleIndex = _enemies findIf {private _vehicle = vehicle _x; _vehicle isKindOf "Tank" || {_vehicle isKindOf "Air"}};
 
 if (_antiTank && { _vehicleIndex != -1 } && { _launchersAT isNotEqualTo [] || (_launchersAA isNotEqualTo []) }) then {
     private _targetVehicle = vehicle (_enemies select _vehicleIndex);
