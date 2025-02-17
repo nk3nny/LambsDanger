@@ -72,7 +72,7 @@ _pos = _pos apply {_x select 2};
         _enemy = _nearMen select 0;
         private _surface = lineIntersectsSurfaces [(getPosASL _enemy) vectorAdd [0, 0, 2], (getPosASL _enemy) vectorAdd [-15 + random 30, -15 + random 30, -4], _enemy, objNull, true, 1, "GEOM", "VIEW"];
         if (_surface isNotEqualTo []) then {
-            _assaultPos = (ASLtoAGL ((_surface select 0) select 0));
+            _assaultPos = (ASLToAGL ((_surface select 0) select 0));
         };
     };
 
