@@ -7,8 +7,7 @@
  * 0: group executing tactics <GROUP> or group leader <UNIT>
  * 1: group threat unit <OBJECT> or position <ARRAY>
  * 2: ready anti-tank weapons <BOOL>
- * 3: predefined pieces of cover <ARRAY>
- * 4: delay until unit is ready again <NUMBER>
+ * 3: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * success
@@ -18,11 +17,8 @@
  *
  * Public: No
 */
-#define RETREAT_DISTANCE 8
-#define COVER_DISTANCE 15
-#define BUILDING_DISTANCE 25
 
-params ["_group", "_target", ["_antiTank", false], ["_cover", []], ["_delay", 240]];
+params ["_group", "_target", ["_antiTank", false], ["_delay", 240]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -45,7 +41,7 @@ _target = _target call CBA_fnc_getPos;
             _group setCombatMode _combatMode;
             _group enableAttack _enableAttack;
             _group setFormation _formation;
-            {_x doFollow (leader _x)} forEach units _group;
+            (units _group) doFollow (leader _group)
         };
     },
     [_group, combatMode _group, attackEnabled _group, formation _group],
@@ -53,8 +49,8 @@ _target = _target call CBA_fnc_getPos;
 ] call CBA_fnc_waitAndExecute;
 
 // hold-fire combat mode
-_group setFormation "DIAMOND";
-_group setCombatMode "GREEN";
+_group setFormation "LINE";
+_group setCombatMode "WHITE";
 _group enableAttack false;
 
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
@@ -77,28 +73,12 @@ _units = _units select {
     && {_x checkAIFeature "PATH"}
     && {_x checkAIFeature "MOVE"}
     && {!(_x call EFUNC(main,isIndoor))}
+    && {!(_x getVariable [QGVAR(forceMove), false])}
 };
 if (_units isEqualTo []) exitWith {false};
 
-// find cover
-if (_cover isEqualTo []) then {
-    private _coverPos = _unit getPos [RETREAT_DISTANCE, _target getDir _unit];
-    // find bushes
-    _cover = (nearestTerrainObjects [ _unit, ["BUSH", "TREE", "SMALL TREE", "HIDE"], COVER_DISTANCE, true, true]) apply {_x getPos [1.5, _target getDir _x]};
-
-    // add buildings
-    _cover append ([_coverPos, BUILDING_DISTANCE, true, true] call EFUNC(main,findBuildings));
-
-    // remove those closer to enemy
-    private _distance2D = (_unit distance2D _target) + 2;
-    _cover = _cover select {_x distance2D _target > _distance2D;};
-};
-
 // unit commands
 _units doWatch objNull;
-
-// disperse and hide unit ~ notice that cover is added as building positions nkenny
-[_units, _target, _cover] call EFUNC(main,doGroupHide);
 
 // find launcher units
 private _launchersAA = [_units, AI_AMMO_USAGE_FLAG_AIR, true] call EFUNC(main,getLauncherUnits);
@@ -106,27 +86,38 @@ private _launchersAT = [_units, AI_AMMO_USAGE_FLAG_ARMOUR] call EFUNC(main,getLa
 
 // find enemy vehicles
 private _enemies = _unit targets [true, 600, [], 0, _target];
-private _tankAir = _enemies findIf {(vehicle _x) isKindOf "Tank" || {(vehicle _x) isKindOf "Air"}};
+private _vehicleIndex = _enemies findIf {private _vehicle = vehicle _x; _vehicle isKindOf "Tank" || {_vehicle isKindOf "Air"}};
 
-if (_antiTank && { _tankAir != -1 } && { _launchersAT isNotEqualTo [] || (_launchersAA isNotEqualTo []) }) then {
-    private _targetVehicle = vehicle (_enemies select _tankAir);
+if (_antiTank && { _vehicleIndex != -1 } && { _launchersAT isNotEqualTo [] || (_launchersAA isNotEqualTo []) }) then {
+    private _targetVehicle = vehicle (_enemies select _vehicleIndex);
     {
         // launcher units target air/tank
         _x setCombatMode "RED";
-        _x commandTarget _targetVehicle;
+        _x doTarget _targetVehicle;
 
         // extra impetuous to select launcher
-        _x selectWeapon (secondaryWeapon _x);
-        _x setUnitPosWeak "MIDDLE";
+        [_x, secondaryWeapon _x] call CBA_fnc_selectWeapon;
+        _x setUnitPos "MIDDLE";
+        systemChat format ["%1 tacticsHide %2 changing weapons!", side _x, name _x];
+        [
+            {
+                params ["_unit", "_target"];
+                _unit doFire _target;
+                _unit setUnitPos "AUTO";
+                systemChat format ["%1 doFire! %2 @ %3m", side _unit, name _unit, round (_unit distance _target)];
+            },
+            [_x, _targetVehicle], 5 + random 3
+        ] call CBA_fnc_waitAndExecute;
+        _units = _units - [_x];
     } forEach ([_launchersAT, _launchersAA] select (_targetVehicle isKindOf "Air"));
-
-    // extra aggression from unit
-    _unit doFire _targetVehicle;
 };
+
+// disperse and hide unit
+[_units, _target] call EFUNC(main,doGroupHide);
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS HIDE %2 (cover %3)%4", side _unit, groupId _group, count _cover, ["", " (anti tank/air)"] select _antiTank] call EFUNC(main,debugLog);
+    ["%1 TACTICS HIDE %2 %4", side _unit, groupId _group, ["", " (anti tank/air)"] select _antiTank] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics hide", _unit call EFUNC(main,debugMarkerColor), "hd_ambush"] call EFUNC(main,dotMarker);
     _m setMarkerSizeLocal [0.6, 0.6];
     _m setMarkerDirLocal ((_unit getDir _target) - 90);

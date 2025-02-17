@@ -13,7 +13,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe, 30] call lambs_main_fnc_doHide;
+ * [bob, angryJoe] call lambs_main_fnc_doHide;
  *
  * Public: No
 */
@@ -27,7 +27,8 @@ if (
 ) exitWith {false};
 
 // do nothing when already inside
-if (RND(GVAR(indoorMove)) && {_unit call FUNC(isIndoor)}) exitWith {
+if (RND(GVAR(indoorMove)) && { private _eyePos = eyePos _unit; lineIntersects [ _eyePos, _eyePos vectorAdd [0, 0, 10] ] } ) exitWith {
+    _unit setUnitPosWeak "DOWN";
     doStop _unit;
     false
 };
@@ -41,19 +42,31 @@ if (_buildings isEqualTo []) then {
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Hide!", GVAR(debug_functions)];
 
-// stop
-//doStop _unit;
+// set speed
 _unit forceSpeed 24;
 
+// set stance reset
+[
+    {
+        if (alive _this) then {
+            _this setUnitPos "AUTO";
+            _this setUnitPosWeak "DOWN";
+            // systemChat format ["%1 reset stance %2", side _this, name _this];
+        };
+    },
+    _unit,
+    6 + random 4
+] call CBA_fnc_waitAndExecute;
+
 // Randomly scatter into buildings or hide!
-if (RND(0.1) && { _buildings isNotEqualTo [] }) exitWith {
+if ( RND(0.2) && { _buildings isNotEqualTo [] } ) exitWith {
 
     // update variable
     _unit setVariable [QGVAR(currentTask), "Hide (inside)", GVAR(debug_functions)];
 
     // execute move
-    _unit setUnitPosWeak "MIDDLE";
-    _unit doMove (selectRandom _buildings);
+    _unit setUnitPos "MIDDLE";
+    _unit doMove (_buildings selectRandomWeighted (_buildings apply { _unit distance2D _x }) );
 
     // debug
     if (GVAR(debug_functions)) then {
@@ -62,20 +75,26 @@ if (RND(0.1) && { _buildings isNotEqualTo [] }) exitWith {
 };
 
 // hide
-_unit setUnitPosWeak "DOWN";
+_unit setUnitPos "DOWN";
 
 // check for rear-cover
-private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "ROCK", "WALL", "FENCE"], 15, true, true ];
+private _cover = nearestTerrainObjects [ _unit getPos [5, _pos getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, false, true ];
+
+// remove those close to danger
+private _distance2D = (_unit distance2D _pos) + 2;
+_cover = _cover select {_x distance2D _pos > _distance2D;};
 
 // targetPos
 private _targetPos = if (_cover isEqualTo []) then {
-    _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
+    _unit getPos [25 + random _range, (_pos getDir _unit) + 20 - random 40]
 } else {
-    (_cover select 0) getPos [-0.6, _unit getDir (_cover select 0)]
+    (_cover select 0) getPos [1.2, _pos getDir (_cover select 0)]
 };
 
 // water means hold
-if (surfaceIsWater _targetPos) then {_targetPos = getPosATL _unit;};
+if (surfaceIsWater _targetPos) exitWith {
+    false
+};
 
 // cover move
 doStop _unit;

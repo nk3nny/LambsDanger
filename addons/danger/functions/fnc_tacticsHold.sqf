@@ -71,14 +71,11 @@ if (count _units > 2) then {
             // set group task
             _group setVariable [QEGVAR(main,currentTactic), "Holding!", EGVAR(main,debug_functions)];
 
-            // get buildings and dangerPos
-            private _buildings = [leader _unit, 30, true, true] call EFUNC(main,findBuildings);
-
             // gesture wildly!
             [_unit, "gestureCeaseFire"] call EFUNC(main,doGesture);
 
             // execute hiding
-            [_units, _pos, _buildings, "holding"] call EFUNC(main,doGroupHide);
+            [_units, _pos, "holding"] call EFUNC(main,doGroupHide);
 
             // debug
             if (EGVAR(main,debug_functions)) then {
