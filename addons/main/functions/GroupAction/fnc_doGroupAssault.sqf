@@ -70,7 +70,8 @@ _pos = _pos apply {_x select 2};
     private _nearMen = _assaultPos nearEntities ["CAManBase", 1];
     if (_nearMen isNotEqualTo []) then {
         _enemy = _nearMen select 0;
-        private _surface = lineIntersectsSurfaces [(getPosASL _enemy) vectorAdd [0, 0, 2], (getPosASL _enemy) vectorAdd [-15 + random 30, -15 + random 30, -4], _enemy, objNull, true, 1, "GEOM", "VIEW"];
+        private _enemyPos = getPosASL _enemy;
+        private _surface = lineIntersectsSurfaces [_enemyPos vectorAdd [0, 0, 2], _enemyPos vectorAdd [-15 + random 30, -15 + random 30, -4], _enemy, objNull, true, 1, "GEOM", "VIEW"];
         if (_surface isNotEqualTo []) then {
             _assaultPos = (ASLToAGL ((_surface select 0) select 0));
         };
