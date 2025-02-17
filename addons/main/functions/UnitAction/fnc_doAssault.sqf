@@ -34,7 +34,7 @@ private _pos = call {
 
     // can see target!
     if (_vis) exitWith {
-        _unit lookAt (aimPos _target);
+        _unit lookAt (ASLToAGL (aimPos _target));
         getPosATL _target
     };
 
@@ -49,6 +49,7 @@ private _pos = call {
         if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
             _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
             _unit setUnitPosWeak "MIDDLE";
+            _unit lookAt _getHide;
             getPosATL _unit
         };
 
@@ -89,10 +90,11 @@ if (_doMove) then {_unit doMove _pos;};
 // debug
 if (GVAR(debug_functions)) then {
     [
-        "%1 %2 %3(%4 @ %5m)",
+        "%1 %2 %3%4(%5 @ %6m)",
         side _unit,
         ["assaulting ", "staying inside "] select (_unit distance2D _pos < 1),
         ["(building) ", ""] select (_buildings isEqualTo []),
+        ["", "(target visible) "] select _vis,
         name _unit,
         round (_unit distance _pos)
     ] call FUNC(debugLog);
