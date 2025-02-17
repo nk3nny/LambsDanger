@@ -78,7 +78,7 @@ _pos = _pos apply {_x select 2};
     };
 
     // modify movement (if far)
-    if (_distance2D > 20 && {!_indoor}) then {
+    if (!_indoor && {_distance2D > 20}) then {
         _assaultPos = _unit getPos [20, _unit getDir _assaultPos];
     };
 
