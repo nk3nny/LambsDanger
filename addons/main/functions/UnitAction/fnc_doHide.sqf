@@ -27,7 +27,7 @@ if (
 ) exitWith {false};
 
 // do nothing when already inside
-if (RND(GVAR(indoorMove)) && { lineIntersects [ eyePos _unit, ( eyePos _unit ) vectorAdd [0, 0, 10] ] } ) exitWith {
+if (RND(GVAR(indoorMove)) && { private _eyePos = eyePos _unit; lineIntersects [ _eyePos, _eyePos vectorAdd [0, 0, 10] ] } ) exitWith {
     _unit setUnitPosWeak "DOWN";
     doStop _unit;
     false
