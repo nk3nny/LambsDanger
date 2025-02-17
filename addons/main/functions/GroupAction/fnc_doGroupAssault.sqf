@@ -51,7 +51,7 @@ _pos = _pos apply {_x select 2};
 
         // can see enemy or enemy within 5 meters
         if (_vis || {_unit distanceSqr _enemy < 25}) then {
-            _unit lookAt (ASLtoAGL (aimPos _enemy));
+            _unit lookAt (ASLToAGL (aimPos _enemy));
             _assaultPos = getPosATL _enemy;
         };
     };
