@@ -30,7 +30,14 @@ _target = _target call CBA_fnc_getPos;
 
 // cannot move or moving
 private _vehicle = vehicle _unit;
-if (!canMove _vehicle || {(currentCommand _vehicle) isEqualTo "MOVE"} || {!alive (driver _vehicle)}) exitWith {false};
+if (
+    !canMove _vehicle
+    || {(currentCommand _vehicle) isEqualTo "MOVE"}
+    || {!((driver _vehicle) call FUNC(isAlive))}
+    || {((vehicleMoveInfo _vehicle) select 1) in ["LEFT", "RIGHT"]}
+) exitWith {
+    false
+};
 
 // CQB tweak -- target within 35m - look instead
 if (_unit distanceSqr _target < 1225) exitWith {
@@ -38,13 +45,13 @@ if (_unit distanceSqr _target < 1225) exitWith {
     false
 };
 
-_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
-_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
-
 // within acceptable limits
-if (_unit getRelDir _target < _threshold || {_unit getRelDir _target > (360-_threshold)}) exitWith {
+if (_vehicle getRelDir _target < _threshold || {_vehicle getRelDir _target > (360-_threshold)}) exitWith {
     false
 };
+
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Rotate", GVAR(debug_functions)];
 
 // move
 _unit setFormDir (_unit getDir _target);
@@ -60,7 +67,7 @@ if (_vehicle isKindOf "Tank") then {
     private _min = 20;      // Minimum range
 
     for "_i" from 0 to 5 do {
-        _pos = (_unit getPos [_min, _unit getDir _target]) findEmptyPosition [0, 2.2, typeOf _unit];
+        _pos = (_vehicle getPos [_min, _vehicle getDir _target]) findEmptyPosition [0, precision _vehicle, typeOf _vehicle];
 
         // water or exit
         if !(_pos isEqualTo [] || {surfaceIsWater _pos}) exitWith {};
@@ -68,32 +75,31 @@ if (_vehicle isKindOf "Tank") then {
         // update
         _min = _min + 15;
     };
-    if (_pos isEqualTo []) then {_pos = _unit modelToWorldVisual [0, -100, 0]};
-    _unit doMove _pos;
+    if (_pos isEqualTo []) then {_pos = _vehicle modelToWorldVisual [0, -100, 0]};
+    _vehicle doMove _pos;
 };
 
 
 // waitUntil
 [
     {
-        params ["_unit", "_target", "_threshold"];
-        ((_unit getRelDir _target) < _threshold || {(_unit getRelDir _target) > (360 - _threshold)})
+        params ["_vehicle", "_target", "_threshold"];
+        ((_vehicle getRelDir _target) < _threshold || {(_vehicle getRelDir _target) > (360 - _threshold)})
     }, {
-        params ["_unit", "_target"];
-        // check vehicle
-        if (canMove _unit && {(crew _unit) isNotEqualTo []}) then {
+        params ["_vehicle", "_target"];
+        // refresh ready
+        _vehicle sendSimpleCommand "STOPTURNING";
+        _vehicle sendSimpleCommand "STOP";
+        _vehicle doMove (_vehicle getPos [precision _vehicle, _vehicle getDir _target]);
 
-            // refresh ready
-            (vehicle _unit) sendSimpleCommand "STOPTURNING";
-            (effectiveCommander _unit) doMove (_unit getPos [10, _unit getDir _target]);
-
-            // refresh formation
-            (group _unit) setFormDir (_unit getDir _target);
-        };
-    }, [_unit, _target, _threshold * 2], 4 + random 3,
+        // refresh formation
+        (group _vehicle) setFormDir (_vehicle getDir _target);
+    }, [_vehicle, _target, _threshold * 3], 4 + random 3,
     {
-        params ["_unit"];
-        (vehicle _unit) sendSimpleCommand "STOPTURNING";
+        params ["_vehicle", "_target"];
+        _vehicle doWatch (ATLToASL _target);
+        _vehicle sendSimpleCommand "STOPTURNING";
+        _vehicle doMove (getPosASL _vehicle);
     }
 ] call CBA_fnc_waitUntilAndExecute;
 

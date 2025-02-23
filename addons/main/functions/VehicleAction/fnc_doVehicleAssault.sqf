@@ -62,8 +62,8 @@ _vehicle doWatch (AGLToASL _pos);
 private _suppression = [_unit, _pos] call FUNC(doVehicleSuppress);
 
 // set task
-_unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
-_unit setVariable [QEGVAR(main,currentTask), "Vehicle Assault", EGVAR(main,debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
 
 // minor jink if no suppression possible
 if (!_suppression) exitWith {[_unit, 35] call FUNC(doVehicleJink)};

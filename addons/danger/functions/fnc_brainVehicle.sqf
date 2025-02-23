@@ -51,7 +51,7 @@ _causeArray params ["_cause", "_dangerPos", "", "_dangerCausedBy"]; // "_dangerU
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
 
 // is it an attack?
-private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {(side _dangerCausedBy) isNotEqualTo (side _unit)} && {!isNull _dangerCausedBy};
+private _attack = _cause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_HIT, DANGER_CANFIRE, DANGER_BULLETCLOSE] && {(side _dangerCausedBy) isNotEqualTo (side _unit)} && {!isNull _dangerCausedBy} && {(behaviour _unit) isEqualTo "COMBAT"};
 
 // update dangerPos if attacking. Check that the position is not too far above, or below ground.
 if (_attack) then {
@@ -83,7 +83,7 @@ if (_artillery) exitWith {
 
     // mortars fire rounds
     private _mortarTime = _vehicle getVariable [QEGVAR(main,mortarTime), 0];
-    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time}) then {
+    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time} && {isTouchingGround _dangerCausedBy}) then {
 
         // delay
         _timeout = _timeout + 2;
@@ -121,7 +121,7 @@ if (_artillery) exitWith {
 
         // execute fire command
         _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 80, (_dangerPos getDir _vehicle) - 10 + random 20], _shell, 1 + random 2];
-        _vehicle setVariable [QEGVAR(main,mortarTime), time + 24 + random 6];
+        _vehicle setVariable [QEGVAR(main,mortarTime), time + 24 + random 66];
         _unit setVariable [QEGVAR(main,currentTask), "Mortar Fire", EGVAR(main,debug_functions)];
         if (_repeatRounds) then {
             [
@@ -152,7 +152,7 @@ if (_vehicle isKindOf "StaticWeapon") exitWith {
 
     // get out if enemy near OR out of ammunition
     if ((count (magazines _vehicle)) isEqualTo 0 || {(_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)}) then {
-        private _vehicleCrew = (crew _vehicle);
+        private _vehicleCrew = crew _vehicle;
         _vehicleCrew orderGetIn false;
         [_unit, "Combat", "Eject"] call EFUNC(main,doCallout);
         {
@@ -168,6 +168,12 @@ if (_vehicle isKindOf "StaticWeapon") exitWith {
 
     // end
     [_timeout + random 4] + _causeArray
+};
+
+// Make leadership assessment as infantry
+private _leader = leader _unit;
+if (((vehicle _leader) isEqualTo _vehicle) && {_leader call FUNC(isLeader)}) then {
+    [_leader, _dangerCausedBy] call FUNC(tactics);
 };
 
 // update information
@@ -223,9 +229,9 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
         // define enemy direction
         _group setFormDir (_vehicle getDir _dangerCausedBy);
-        _cargo doMove _dangerPos;
 
         // delayed unload
+        _unit setVariable [QEGVAR(main,currentTask), "Dismounting troops", EGVAR(main,debug_functions)];
         [
             {
                 params [["_cargo", []], ["_side", east], ["_vehicle", objNull]];
@@ -233,6 +239,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
                 [selectRandom _cargo, "Combat", "Dismount"] call EFUNC(main,doCallout);
                 _cargo allowGetIn false;
                 if (EGVAR(main,debug_functions)) then {["%1 %2 unloading %3 carried troops", _side, getText (configOf _vehicle >> "displayName"), count _cargo] call EFUNC(main,debugLog);};
+                _vehicle doMove (getPosASL _vehicle);
             },
             [_cargo, side _group, _vehicle],
             0.1
@@ -265,18 +272,32 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     };
 
     // tank assault
-    if (_attack && _slow && {(getUnitState _unit) isEqualTo "OK"}) then {
+    if (_attack && _slow && {(getUnitState _unit) in ["OK", "DELAY"]}) then {
 
         // rotate
-        private _rotate = [_vehicle, _dangerPos] call EFUNC(main,doVehicleRotate);
+        private _rotate = [_unit, _dangerPos] call EFUNC(main,doVehicleRotate);
 
-        // assault
-        if (!_rotate && {_distance < 750} && {_dangerCausedBy isKindOf "CAManBase"} && {(gunner _vehicle) call EFUNC(main,isAlive)}) then {
-            [
-                {_this call EFUNC(main,doVehicleAssault)},
-                [_unit, _dangerPos, _dangerCausedBy],
-                _delay - 1.5
-            ] call CBA_fnc_waitAndExecute;
+        // assault + vehicle assault
+        if (!_rotate && {_distance < 750} && {(gunner _vehicle) call EFUNC(main,isAlive)}) then {
+
+            // infantry
+            if ( _dangerCausedBy isKindOf "CAManBase" && { !( terrainIntersectASL [ eyePos _vehicle, eyePos _dangerCausedBy ] ) } ) exitWith {
+                [
+                    {_this call EFUNC(main,doVehicleAssault)},
+                    [_unit, _dangerPos, _dangerCausedBy],
+                    _delay - 1.5
+                ] call CBA_fnc_waitAndExecute;
+            };
+
+            // everything else -- assault!
+            if (
+                isTouchingGround _dangerCausedBy
+                && { unitReady _vehicle }
+                && { (driver _vehicle) call EFUNC(main,isAlive) }
+                && { [_vehicle, "VIEW", vehicle _dangerCausedBy] checkVisibility [eyePos _vehicle, eyePos _dangerCausedBy] < 0.5 }
+            ) then {
+                [_unit, _dangerPos, _dangerCausedBy, _distance] call EFUNC(main,doVehicleAssaultMove);
+            };
         };
     };
 
@@ -364,11 +385,6 @@ if (_vehicle isKindOf "Car_F" && {!someAmmo _vehicle}) then {
         _driver setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
         [_driver, "Combat", "Eject"] call EFUNC(main,doCallout);
     };
-};
-
-// Make leadership assessment as infantry
-if (_unit call FUNC(isLeader)) then {
-    [_unit, _dangerCausedBy] call FUNC(tactics);
 };
 
 // end
