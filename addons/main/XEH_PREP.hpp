@@ -55,6 +55,7 @@ SUBPREP(UnitAction,doSuppress);
 SUBPREP(UnitAction,doUGL);
 
 SUBPREP(VehicleAction,doVehicleAssault);
+SUBPREP(VehicleAction,doVehicleAssaultMove);
 SUBPREP(VehicleAction,doVehicleJink);
 SUBPREP(VehicleAction,doVehicleRotate);
 SUBPREP(VehicleAction,doVehicleSuppress);

@@ -59,6 +59,9 @@ switch (toLowerANSI(_callout)) do {
     case ("flank"): {
         _callout = selectRandom ["OnYourFeet", "Advance", "FlankLeft", "FlankRight"];
     };
+    case ("eject"): {
+        _callout = selectRandom ["Eject", "EndangeredE"];
+    };
 };
 
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
@@ -79,7 +82,7 @@ if (isNil "_cachedSounds") then {
             _cachedSounds set [_forEachIndex, objNull];
             continue;
         };
-        
+
         private _hasFileEnding = _sound regexMatch ".+?\.(?:ogg|wss|wav|mp3)$/io";
 
         if (_sound select [0, 1] != "\") then {

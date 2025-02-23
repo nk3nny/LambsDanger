@@ -39,11 +39,6 @@ if (fleeing _unit) exitWith {
     _timeout
 };
 
-// units in vehicles
-if (!isNull objectParent _unit) exitWith {
-    _timeout + 1.5
-};
-
 // attack speed and stance
 if ((currentCommand _unit) isEqualTo "ATTACK") then {
     private _attackTarget = getAttackTarget _unit;
