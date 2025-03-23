@@ -34,13 +34,13 @@ if (isNull _caller) then {
     _caller = _gun;
 };
 
-[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(main,eventCallback);
-
 // gun and caller must be alive
 if !(canFire _gun && {(_caller call EFUNC(main,isAlive))}) exitWith {
     [QGVAR(RegisterArtillery), [_gun]] call CBA_fnc_serverEvent;
     false
 };
+
+[QEGVAR(danger,OnArtilleryCalled), [_caller, group _caller, _gun, _pos]] call EFUNC(main,eventCallback);
 
 // turn gun
 _gun doWatch _pos;

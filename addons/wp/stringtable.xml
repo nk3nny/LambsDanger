@@ -1323,5 +1323,8 @@
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification_NoArtillery">
+            <English>No Artillery Unit available to shoot at this position</English>
+        </Key>
     </Package>
 </Project>
