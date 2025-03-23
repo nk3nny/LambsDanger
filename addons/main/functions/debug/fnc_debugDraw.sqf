@@ -18,30 +18,9 @@
 if !(GVAR(debug_Drawing)) exitWith {};
 if (is3DEN) exitWith {};
 
-private _fnc_clearControls = {
-    params ["_variable"];
-    private _delete = false;
-    private _data = uiNamespace getVariable _variable;
-    {
-        if (isNull _x) then {
-            _delete = true;
-        } else {
-            _x ctrlSetFade 1;
-            _x ctrlCommit 0;
-        };
-    } forEach _data;
-    if (_delete) then {
-        uiNamespace setVariable [_variable, _data - [controlNull]];
-    };
-};
-
 private _displayGame = findDisplay 46;
 private _displayEGSpectator = findDisplay 60492;
 private _displayCurator = findDisplay 312;
-
-QGVAR(debug_drawRectCacheGame) call _fnc_clearControls;
-QGVAR(debug_drawRectCacheCurator) call _fnc_clearControls;
-QGVAR(debug_drawRectCacheEGSpectator) call _fnc_clearControls;
 
 private _gameCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheGame), []];
 private _gameInUse = [];
@@ -285,11 +264,21 @@ private _posCam = positionCameraToWorld [0, 0, 0];
     };
 } forEach (allUnits select {!(isPlayer _x)});
 
-_gameCache append _gameInUse;
+private _fnc_clearControls = {
+    {
+        ctrlDelete _x;
+    } forEach _this;
+};
 
-_spectatorCache append _spectatorInUse;
+_gameCache call _fnc_clearControls;
+_spectatorCache call _fnc_clearControls;
+_curatorCache call _fnc_clearControls;
 
-_curatorCache append _curatorInUse;
+_gameCache = _gameInUse;
+
+_spectatorCache = _spectatorInUse;
+
+_curatorCache = _curatorInUse;
 
 uiNamespace setVariable [QGVAR(debug_drawRectCacheGame), _gameCache];
 uiNamespace setVariable [QGVAR(debug_drawRectCacheEGSpectator), _spectatorCache];
