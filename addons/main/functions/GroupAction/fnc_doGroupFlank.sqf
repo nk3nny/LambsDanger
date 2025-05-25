@@ -21,7 +21,7 @@
 params ["_cycle", "_units", "_vehicles", "_pos", "_overwatch", ["_teamAlpha", 0]];
 
 // update
-_units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } && {_x distance2D _overwatch > 5}};
+_units = _units select { _x call FUNC(isAlive) && { !isPlayer _x } && {_x distance2D _overwatch > 5} && {!(_x getVariable [QEGVAR(danger,disableAI), false])}};
 _vehicles = _vehicles select { canFire _x };
 
 {

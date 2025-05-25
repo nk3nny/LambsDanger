@@ -20,7 +20,7 @@
 params ["_cycle", "_units", "_vehicles", "_pos"];
 
 // update
-_units = _units select {_x call FUNC(isAlive) && { !isPlayer _x }};
+_units = _units select {_x call FUNC(isAlive) && { !isPlayer _x } && {!(_x getVariable [QEGVAR(danger,disableAI), false])}};
 _vehicles = _vehicles select { canFire _x };
 
 // infantry

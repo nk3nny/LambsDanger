@@ -19,7 +19,7 @@
 params ["_cycle", "_units", "_pos"];
 
 // update
-_units = _units select {_x call FUNC(isAlive) && {!isPlayer _x} && {!fleeing _x}};
+_units = _units select {_x call FUNC(isAlive) && {!isPlayer _x} && {!fleeing _x} && {!(_x getVariable [QEGVAR(danger,disableAI), false])}};
 if (_units isEqualTo [] || {_pos isEqualTo []}) exitWith {
     // early reset
     {
