@@ -18,24 +18,33 @@ home here. Until revisited by more capable personnell.
 if (!hasInterface) exitWith {};
 
 // functions ~ toggle AI
-private _fnc_toggle_AI = {
+GVAR(fnc_toggle_AI) = {
     if (GVAR(disableAIPlayerGroup)) then {
-            GVAR(disableAIPlayerGroup) = false;
-            {
-                _x setVariable [QGVAR(disableAI), false];    // added to ensure it triggers -- nkenny
-            } forEach units player;
-        } else {
-            (group player) setVariable [QEGVAR(main,groupMemory), []];
-            GVAR(disableAIPlayerGroup) = true;
-            {
-                _x setUnitPosWeak "AUTO";
-                _x setVariable [QGVAR(disableAI), true];
-            } forEach units player;
-        };
+        GVAR(disableAIPlayerGroup) = false;
+        {
+            _x setVariable [QGVAR(disableAI), false];
+        } forEach units player;
+    } else {
+        (group player) setVariable [QEGVAR(main,groupMemory), []];
+        GVAR(disableAIPlayerGroup) = true;
+        {
+            _x setUnitPosWeak "AUTO";
+            _x setVariable [QGVAR(disableAI), true];
+        } forEach units player;
+    };
     private _txt = format ["%1 toggled AI %2", side player, ["on", "off"] select (GVAR(disableAIPlayerGroup))];
     [["LAMBS Danger.fsm"], [_txt, 1.4], true] call CBA_fnc_notify;
     true
 };
+
+// then use:
+[
+    COMPONENT_NAME,
+    QGVAR(disableAIPlayerGroup),
+    ["Toggle Player Group AI","Toggle danger.fsm for player group"],
+    {call GVAR(fnc_toggle_AI)},
+    ""
+] call CBA_fnc_addKeybind;
 
 // functions ~ easy suppress
 private _fnc_suppress_AI = {
