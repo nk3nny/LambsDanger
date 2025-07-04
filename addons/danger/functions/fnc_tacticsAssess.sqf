@@ -27,6 +27,12 @@
 
 params [["_unit", objNull, [objNull]]];
 
+// validate unit
+if (isNull _unit || {!(_unit call EFUNC(main,isAlive))}) exitWith {
+    EGVAR(main,debug_functions) && {["tacticsAssess called with invalid unit"] call EFUNC(main,debugLog)};
+    false
+};
+
 // check if group AI disabled
 private _group = group _unit;
 
