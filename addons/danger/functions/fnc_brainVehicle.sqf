@@ -94,12 +94,17 @@ if (_vehicle isKindOf "Air") exitWith {
 if (_vehicle isKindOf "StaticWeapon") exitWith {
 
     // get out if enemy near OR out of ammunition
-    if ((count (magazines _vehicle)) isEqualTo 0 || {(_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)}) then {
+    private _hasAmmo = false;
+    {
+        if ((_x select 2) > 0) exitWith {_hasAmmo = true;};
+    } forEach (magazinesAllTurrets _vehicle);
+    
+    if (!_hasAmmo || {!isNull _dangerCausedBy && {(_unit findNearestEnemy _dangerPos) distance _vehicle < (6 + random 15)}}) then {
         private _vehicleCrew = (crew _vehicle);
         _vehicleCrew orderGetIn false;
         {
             _x setSuppression 0.94; // to prevent instant laser aim on exiting vehicle
-        } forEach _vehicleCrew; // There may be more than one unit in vehicle
+        } forEach _vehicleCrew;
     } else {
         // suppression
         if (_attack) then {
