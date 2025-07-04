@@ -603,7 +603,7 @@ class FSM
                         itemno = 33;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset queue" \n
-                         "_queue = _queue select {(_x select 2) < time};"/*%FSM</STATEINIT""">*/;
+                         "_queue = _queue select {(_x select 2) > time};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
