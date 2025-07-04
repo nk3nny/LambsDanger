@@ -578,7 +578,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 assess %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos, _dangerCausedby] call lambs_danger_fnc_brainAssess;"/*%FSM</STATEINIT""">*/;
+                         "_timeout = [_this, _dangerCause, _dangerPos, _dangerCausedBy] call lambs_danger_fnc_brainAssess;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
