@@ -414,13 +414,13 @@
             <Chinesesimp>启用AI小组</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Context_Main_DisplayName">
-            <English>Lamber Danger FSM</English>
+            <English>LAMBS Danger FSM</English>
             <Czech>LAMBS Danger FSM</Czech>
             <Polish>LAMBS Danger FSM</Polish>
             <Russian>LAMBS Danger FSM</Russian>
             <German>LAMBS Danger FSM</German>
-            <Italian>Lamber Danger FSM</Italian>
-            <Chinesesimp>Lambs Danger FSM</Chinesesimp>
+            <Italian>LAMBS Danger FSM</Italian>
+            <Chinesesimp>LAMBS Danger FSM</Chinesesimp>
         </Key>
     </Package>
 </Project>
