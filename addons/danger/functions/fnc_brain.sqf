@@ -43,7 +43,20 @@
 #define ACTION_ENGAGE 2
 #define ACTION_ASSESS 3
 
-params ["_unit", ["_queue", []]];
+params [
+    ["_unit", objNull, [objNull]], 
+    ["_queue", [], [[]]]
+];
+
+// validate inputs
+if (isNull _unit) exitWith {
+    EGVAR(main,debug_functions) && {["fnc_brain called with null unit"] call EFUNC(main,debugLog)};
+    [false, false, false, false, []]
+};
+
+if !(_queue isEqualType []) then {
+    _queue = [];
+};
 
 // init ~ immediate action, hide, engage, assess
 private _return = [false, false, false, false];
