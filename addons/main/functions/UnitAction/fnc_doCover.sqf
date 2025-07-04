@@ -4,7 +4,7 @@
  * moved the unit into cover
  *
  * Arguments:
- * 0: unit doing the flight <OBJECT>
+ * 0: unit moving to cover <OBJECT>
  * 1: position of cover <ARRAY>
  *
  * Return Value:
@@ -17,6 +17,9 @@
 */
 
 params ["_unit", ["_pos", [], [[]]]];
+
+// validate unit
+if (isNull _unit || {!alive _unit}) exitWith {false};
 
 // stance change
 _unit setUnitPosWeak "DOWN";
@@ -38,10 +41,14 @@ if (_pos isEqualTo []) then {
 if (_unit distance2D _pos < 0.6) exitWith {false};
 private _direction = _unit getRelDir _pos;
 private _anim = call {
-    if (_direction > 315) exitWith {["WalkF", "WalkLF"]};
-    if (_direction > 225) exitWith {["WalkL", "WalkLF"]};
-    if (_direction > 135) exitWith {["WalkB"]};
-    if (_direction > 45) exitWith {["WalkR", "WalRF"]};
+    if (_direction >= 337.5 || _direction < 22.5) exitWith {["WalkF", "WalkRF"]};
+    if (_direction >= 22.5 && _direction < 67.5) exitWith {["WalkRF", "WalkR"]};
+    if (_direction >= 67.5 && _direction < 112.5) exitWith {["WalkR", "WalkRF"]};
+    if (_direction >= 112.5 && _direction < 157.5) exitWith {["WalkB"]};
+    if (_direction >= 157.5 && _direction < 202.5) exitWith {["WalkB"]};
+    if (_direction >= 202.5 && _direction < 247.5) exitWith {["WalkL", "WalkLF"]};
+    if (_direction >= 247.5 && _direction < 292.5) exitWith {["WalkLF", "WalkF"]};
+    if (_direction >= 292.5 && _direction < 337.5) exitWith {["WalkF", "WalkRF"]};
     ["WalkF", "WalkRF"]
 };
 
@@ -50,7 +57,7 @@ _unit moveTo _pos;
 _unit setDestination [_pos, "FORMATION PLANNED", true];
 
 // do anim
-[_unit, _anim, false] call FUNC(doGesture);       // gesture is not forced to allow cover movement to appear smoother - nkenny
+[_unit, _anim, false] call FUNC(doGesture); // gesture is not forced to allow cover movement to appear smoother - nkenny
 
 // end
 true
