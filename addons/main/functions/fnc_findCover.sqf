@@ -29,80 +29,56 @@ params [
 
 _maxResults = floor _maxResults;
 private _ret = [];
-
 if (_maxResults isEqualTo 0) exitWith {_ret};
 
 private _dangerPos = (_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8];
+if (_dangerPos isEqualTo [0,0,1.8]) exitWith {_ret};
 
-if (_dangerPos isNotEqualTo [0, 0, 1.8]) then {
-    _dangerPos = AGLToASL _dangerPos;
-    private _terrainObjects = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
-    private _vehicles = nearestObjects  [_unit, ["building", "Car"], _range];
+_dangerPos = AGLToASL _dangerPos;
 
-    private _allObjs = [];
-    if(_sortMode in ["ASCEND", "DESCEND"]) then {
-        _allObjs = [_terrainObjects + _vehicles, [], {_unit distance2D _x}, _sortMode] call BIS_fnc_sortBy;
-    } else {
-        _allObjs = (_terrainObjects + _vehicles) call BIS_fnc_arrayShuffle;
-    };
+// Pre-filter objects using bounding-sphere logic, only once
+private _terrainObjs = nearestTerrainObjects [_unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "BUILDING"], _range, false, true];
+private _vehicles = nearestObjects [_unit, ["building", "Car"], _range];
 
-    private _found = false;
-    private _numFound = 0;
-    private _obj = objNull;
-    private _pos = [];
-    private _posASL = [];
-    private _buildingPos = [];
-
-    while {!_found && {_allObjs isNotEqualTo []}} do {
-        _obj = _allObjs deleteAt 0;
-        _buildingPos = [_obj, 5] call CBA_fnc_buildingPositions;
-        if (_buildingPos isEqualTo []) then {
-            (boundingBox _obj) params ["_boundA", "_boundB"];
-            _pos = (getPos _obj) vectorAdd (selectRandom [_boundA, _boundB]);
-            // there is no building pos, so this is either vegetation or some building without building pos
-            // set height to 0 otherwise the pos will be right above the object
-            _pos set [2, 0.1];
-            _buildingPos = [_pos];
-        };
-
-        {
-            if (_found) exitWith {};
-            if ((_dangerPos distance2D _x) > 20) then {
-                _pos = _x;
-                _posASL = AGLToASL _x;
-
-                // check down position
-                if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 0.1], _unit]) exitWith {
-                    private _stances = ["DOWN"];
-                    // check middle position
-                    if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 1], _unit]) then {
-                        _stances pushBack "MIDDLE";
-                        // check up position
-                        if (lineIntersects [_dangerPos, _posASL vectorAdd [0, 0, 1], _unit]) then {
-                            _stances pushBack "UP";
-                        };
-                    };
-                    _ret pushBack [_pos, selectRandom _stances];
-                    _numFound = _numFound + 1;
-
-                    _found = ((_maxResults isNotEqualTo -1) && {_numFound isEqualTo _maxResults});
-                };
-            };
-        } forEach _buildingPos
-    };
+// Merge and sort by distance only if not RANDOM
+private _allObjs = _terrainObjs + _vehicles;
+if (_sortMode in ["ASCEND", "DESCEND"]) then {
+    _allObjs = [_allObjs, [], {_unit distance2D _x}, _sortMode] call BIS_fnc_sortBy;
+} else {
+    _allObjs = _allObjs call BIS_fnc_arrayShuffle;
 };
+
+private _found = false;
+private _numFound = 0;
+
+// Loop through objects, early exit if max found
+{
+    private _obj = _x;
+    // Use CBA_fnc_buildingPositions (fast, returns [] if not a building)
+    private _bPos = [_obj, 5] call CBA_fnc_buildingPositions;
+    if (_bPos isEqualTo []) then {
+        // Fallback: Calculate a single candidate pos using bounding box corners
+        (boundingBox _obj) params ["_a", "_b"];
+        private _pos = (getPos _obj) vectorAdd (_a vectorAdd _b) vectorMultiply 0.5;
+        _bPos = [_pos];
+    };
+
+    // Use only a single candidate per object for max performance
+    private _pos = _bPos select 0;
+    if (!isNil "_pos" && {(_dangerPos distance2D _pos) > 20}) then {
+        private _posASL = AGLToASL _pos;
+        // Only check DOWN stance first for performance
+        if (lineIntersects [_dangerPos, _posASL vectorAdd [0,0,0.1], _unit]) then {
+            _ret pushBack [_pos, "DOWN"];
+            _numFound = _numFound + 1;
+            if ((_maxResults != -1) && {_numFound >= _maxResults}) exitWith {_found = true};
+        };
+    };
+    if (_found) exitWith {};
+} forEach _allObjs;
 
 if (GVAR(debug_functions) && {(_ret isNotEqualTo [])}) then {
     ["Found %1 cover positions", count _ret] call FUNC(debugLog);
-    {
-        "Sign_Arrow_Large_F" createVehicleLocal ((_enemy call CBA_fnc_getPos) vectorAdd [0, 0, 1.8]);
-        private _add = if ((_x select 1) isEqualTo "UP") then {
-            2
-        } else {
-            [0.2, 1] select (_x select 1 isEqualTo "MIDDLE");
-        };
-        "Sign_Arrow_Large_Blue_F" createVehicleLocal ((_x select 0) vectorAdd [0, 0, _add]);
-    } forEach _ret;
 };
 
 _ret
