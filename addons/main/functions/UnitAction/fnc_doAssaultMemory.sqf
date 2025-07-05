@@ -44,8 +44,8 @@ if (
 };
 
 // sort positions from nearest to furthest prioritising positions on the same floor
-private _unitATL2 = round (getPosATL _unit select 2);
-_groupMemory = _groupMemory apply {[_unitATL2 isEqualTo (round (_x select 2)), _x distanceSqr _unit, _x]};
+private _unitASL2 = round ( ( getPosASL _unit ) select 2 );
+_groupMemory = _groupMemory apply {[_unitASL2 + (round ((AGLToASL _x) select 2)), _x distanceSqr _unit, _x]};
 _groupMemory sort true;
 _groupMemory = _groupMemory apply {_x select 2};
 
@@ -78,6 +78,7 @@ _unit setUnitPosWeak (["UP", "MIDDLE"] select (_indoor || {_distance2D > 8} || {
 if (_distance2D < 7) then {_unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime];};
 
 // execute move
+_unit lookAt (_pos vectorAdd [0, 0, 1]);
 _unit doMove _pos;
 _unit setDestination [_pos, "LEADER PLANNED", _indoor];
 
