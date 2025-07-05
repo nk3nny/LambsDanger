@@ -18,7 +18,7 @@
 params ["_unit", ["_queue", []]];
 
 // timeout
-private _timeout = time + 1;
+private _timeout = time + 0.1;
 
 // commander
 private _vehicle = vehicle _unit;
