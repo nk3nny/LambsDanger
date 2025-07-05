@@ -49,6 +49,7 @@ private _pos = call {
         if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
             _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
             _unit setUnitPosWeak "MIDDLE";
+            _unit lookAt _getHide;
             getPosATL _unit
         };
 
