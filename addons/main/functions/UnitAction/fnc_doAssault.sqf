@@ -90,10 +90,11 @@ if (_doMove) then {_unit doMove _pos;};
 // debug
 if (GVAR(debug_functions)) then {
     [
-        "%1 %2 %3(%4 @ %5m)",
+        "%1 %2 %3%4(%5 @ %6m)",
         side _unit,
         ["assaulting ", "staying inside "] select (_unit distance2D _pos < 1),
         ["(building) ", ""] select (_buildings isEqualTo []),
+        ["", "(target visible) "] select _vis,
         name _unit,
         round (_unit distance _pos)
     ] call FUNC(debugLog);
