@@ -26,7 +26,7 @@
 params ["_unit", "", "", ["_target", objNull]];
 
 // timeout
-private _timeout = time + 3;
+private _timeout = time + 0.1;
 
 // check if stopped
 if (
