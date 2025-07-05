@@ -15,9 +15,13 @@
  *
  * Public: No
 */
-params ["", ["_priorities", GVAR(fsmPriorities)]];
+params ["_unit", ["_priorities", GVAR(fsmPriorities)]];
 
 // this function may have use in the future - nkenny
+// Add validation for priorities array
+if !(_priorities isEqualType []) then {
+    _priorities = GVAR(fsmPriorities);
+};
 
 // end
-_priorties
+_priorities
