@@ -28,7 +28,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 2;
+private _timeout = time + 0.1;
 
 // check screams
 if (_type isEqualTo DANGER_SCREAM) exitWith {
