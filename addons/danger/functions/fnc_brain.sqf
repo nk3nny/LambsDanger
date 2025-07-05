@@ -77,11 +77,21 @@ private _priority = -1;
 private _index = -1;
 {
     private _cause = _x select 0;
-    if ((_priorities select _cause) > _priority) then {
-        _index = _forEachIndex;
-        _priority = _priorities select _cause;
+    // Validate array bounds
+    if (_cause >= 0 && _cause < count _priorities) then {
+        if ((_priorities select _cause) > _priority) then {
+            _index = _forEachIndex;
+            _priority = _priorities select _cause;
+        };
     };
 } forEach _queue;
+
+// validate index found
+if (_index == -1) exitWith {
+    private _causeArray = [DANGER_ASSESS, getPosWorld _unit, time + GVAR(dangerUntil), assignedTarget _unit];
+    _unit setVariable [QEGVAR(main,FSMDangerCauseData), _causeArray, EGVAR(main,debug_functions)];
+    [false, false, false, true, _causeArray]
+};
 
 // select cause
 private _causeArray = _queue select _index;
@@ -99,9 +109,13 @@ if (_dangerCause isEqualTo DANGER_ASSESS) exitWith {
     _return
 };
 
-// immediate actions
+// immediate actions - Add null check for _dangerCausedBy
 if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE] && {getSuppression _unit < 0.9}) exitWith {
-    _return set [ACTION_IMMEDIATE, (side _group) isNotEqualTo side (group _dangerCausedBy)];
+    private _isHostile = false;
+    if (!isNull _dangerCausedBy) then {
+        _isHostile = (side _group) isNotEqualTo side (group _dangerCausedBy);
+    };
+    _return set [ACTION_IMMEDIATE, _isHostile];
     _return
 };
 
@@ -109,16 +123,24 @@ if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FI
 if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) exitWith {
 
     // gesture + share information
-    if (_dangerCause isEqualTo DANGER_ENEMYNEAR && { (_group getVariable [QGVAR(contact), 0]) < time }) then {
+    if (_dangerCause isEqualTo DANGER_ENEMYNEAR && { (_group getVariable [QGVAR(contact), 0]) < time } && !isNull _dangerCausedBy) then {
         [_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 50)] call EFUNC(main,doGesture);
         [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
         [_unit, _dangerCausedBy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
     };
 
+    // Enhanced null checks and side validation
+    private _isHostile = false;
+    private _shouldHide = false;
+    
+    if (!isNull _dangerCausedBy) then {
+        _isHostile = (side _group) isNotEqualTo side (group _dangerCausedBy);
+        _shouldHide = _unit knowsAbout _dangerCausedBy < 0.1 && {(typeOf _dangerCausedBy) isNotEqualTo "SuppressTarget"};
+    };
+
     // return
-    _return set [ACTION_ENGAGE, (side _group) isNotEqualTo side (group _dangerCausedBy)];
-    // add null check before using typeOf
-    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1 && {!isNull _dangerCausedBy} && {(typeOf _dangerCausedBy) isNotEqualTo "SuppressTarget"}];
+    _return set [ACTION_ENGAGE, _isHostile];
+    _return set [ACTION_HIDE, _shouldHide];
     _return
 };
 
