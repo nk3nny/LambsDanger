@@ -28,7 +28,7 @@
 params ["_unit", ["_type", -1], ["_pos", [0, 0, 0]]];
 
 // timeout
-private _timeout = time + 1.4;
+private _timeout = time + 0.1;
 
 // ACE3
 _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
