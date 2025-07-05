@@ -74,7 +74,10 @@ if (_muzzle isEqualTo "") then {
             {
                 private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
                 if (_ammo isEqualTo "") then {continue};
-                if ((toUpperANSI (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes) then {
+                if ((toUpperANSI (getText (configFile >> "CfgAmmo" >> _ammo >> "warheadName"))) in _warheadTypes && {
+                    // do skip munition that needs a manual lase
+                    !isClass (configFile >> "CfgAmmo" >> _ammo >> "Components" >> "SensorsManagerComponent" >> "Components" >> "LaserSensorComponent")
+                }) then {
                     _foundMag = _x;
                     break;
                 };
