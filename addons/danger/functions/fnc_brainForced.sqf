@@ -17,7 +17,7 @@
 params ["_unit"];
 
 // timeout
-private _timeout = time + 2;
+private _timeout = time + 0.1;
 
 // debug variable
 _unit setVariable [QEGVAR(main,FSMDangerCauseData), [-2, getPosWorld _unit, _timeout, assignedTarget _unit], EGVAR(main,debug_functions)];
