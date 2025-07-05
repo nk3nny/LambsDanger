@@ -34,7 +34,7 @@ private _pos = call {
 
     // can see target!
     if (_vis) exitWith {
-        _unit lookAt (aimPos _target);
+        _unit lookAt (ASLToAGL (aimPos _target));
         getPosATL _target
     };
 
