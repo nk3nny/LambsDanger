@@ -372,6 +372,17 @@ if (_vehicle isKindOf "Car_F" && {!someAmmo _vehicle}) then {
     // speed
     private _stopped = speed _vehicle < 2;
 
+    // leaders should dismount unarmed vehicles
+    if (
+        _stopped
+        && {_unit isEqualTo _leader}
+        && {_leader isEqualTo (driver _vehicle)}
+        && {canUnloadInCombat _vehicle}
+        && {_cause in [DANGER_HIT, DANGER_BULLETCLOSE]}
+    ) exitWith {
+        [{moveOut _this; unassignVehicle _this;}, _unit, 1] call CBA_fnc_waitAndExecute;
+    };
+
     // is static and a driver and enemy near and a threat - enemy within 10-35 meters
     if (
         _stopped
