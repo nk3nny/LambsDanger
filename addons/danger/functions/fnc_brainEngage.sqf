@@ -37,7 +37,7 @@ if (
     || {(weapons _unit) isEqualTo []}
     || {(combatMode _unit) in ["BLUE", "GREEN"]}
     || {(behaviour _unit) isEqualTo "STEALTH"}
-    || {(getUnitState _unit) in ["PLANNING", "BUSY"]}
+    || {(getUnitState _unit) isEqualTo "PLANNING"}
 ) exitWith {
     _timeout + 1
 };
