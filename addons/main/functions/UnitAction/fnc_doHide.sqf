@@ -28,6 +28,7 @@ if (
 
 // do nothing when already inside
 if (RND(GVAR(indoorMove)) && {_unit call FUNC(isIndoor)}) exitWith {
+    _unit setUnitPosWeak "DOWN";
     doStop _unit;
     false
 };
@@ -71,15 +72,19 @@ private _cover = nearestTerrainObjects [ _unit getPos [1, getDir _unit], ["BUSH"
 private _targetPos = if (_cover isEqualTo []) then {
     _unit getPos [10 + random _range, (_pos getDir _unit) + 45 - random 90]
 } else {
-    (_cover select 0) getPos [-0.6, _unit getDir (_cover select 0)]
+    (_cover select 0) getPos [1, _pos getDir (_cover select 0)]
 };
 
 // water means hold
 if (surfaceIsWater _targetPos) then {_targetPos = getPosATL _unit;};
 
-// cover move
-doStop _unit;
-_unit doMove _targetPos;
+// cover move or stay put
+if (_unit distanceSqr _targetPos > 1.5) then {
+    _unit doMove _targetPos;
+    [{unitReady _this}, {doStop _this}, _unit, 2] call CBA_fnc_waitUntilAndExecute;
+} else {
+    doStop _unit;
+};
 
 // debug
 if (GVAR(debug_functions)) then {
