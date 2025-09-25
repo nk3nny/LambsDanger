@@ -45,7 +45,7 @@ private _distance2D = _unit distance2D _pos;
 
 // check for nearby enemy
 private _targets = _unit targets [true, 71];
-_index = _targets findIf {
+private _index = _targets findIf {
     private _getHideFrom = _unit getHideFrom _x;
     _unit distance2D _getHideFrom < _distance2D || {_unit distanceSqr _getHideFrom < 26};
 };
