@@ -29,13 +29,21 @@ params ["_unit", ["_type", -1], ["_target", objNull]];
 // timeout
 private _timeout = time + 0.5;
 
+// hide when static and ordered to hold fire.
+if (
+    speed _unit < 1
+    && {(combatMode _unit) in ["BLUE", "GREEN"]}
+) exitWith {
+    [_unit, _target] call EFUNC(main,doHide);
+    _timeout + 3
+};
+
 // check
 if (
     isNull _target
     || {(_unit knowsAbout _target) isEqualTo 0}
     || {(speed _target) > 20}
     || {(weapons _unit) isEqualTo []}
-    || {(combatMode _unit) in ["BLUE", "GREEN"]}
     || {(behaviour _unit) isEqualTo "STEALTH"}
     || {(getUnitState _unit) isEqualTo "PLANNING"}
 ) exitWith {
@@ -62,10 +70,9 @@ _unit setUnitPosWeak "MIDDLE";
 
 // far, try to suppress
 if (
-    _distance < 500
+    _distance > EGVAR(main,minSuppressionRange)
     && {unitReady _unit}
     && {speed _unit < 5}
-    && {RND(getSuppression _unit)}
     && {_type isEqualTo DANGER_CANFIRE}
 ) exitWith {
     private _posASL = ATLToASL (_unit getHideFrom _target);
