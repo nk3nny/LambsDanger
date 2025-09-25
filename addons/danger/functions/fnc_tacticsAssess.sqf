@@ -153,7 +153,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         && {((getPosASL _x) select 2) > ((_eyePos select 2) + 15)}
         && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])}
     };
-    if (_farHigherTarget != -1) exitWith {
+    if (_farHigherTarget isNotEqualTo -1) exitWith {
         _plan append [TACTICS_SUPPRESS, TACTICS_HIDE, TACTICS_HIDE];
         _pos = _unit getHideFrom (_enemies select _farHigherTarget);
     };
