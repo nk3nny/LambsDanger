@@ -250,7 +250,6 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_group, _pos, _units], 22 + random 8] call CBA_fnc_waitAndExecute;
         [{_this call FUNC(tacticsFlank)}, [_group, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_GARRISON: {
