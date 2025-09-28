@@ -73,8 +73,8 @@ private _leader = leader _group;
     } else {
 
         // move up behind leader
-        _x doWatch (selectRandom _posList);
-        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), _overwatch getDir _leader];
+        _x doWatch (_posList select _index);
+        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), (_posList select _index) getDir _leader];
 
         // check for roads
         private _roads = _leaderPos nearRoads 50;

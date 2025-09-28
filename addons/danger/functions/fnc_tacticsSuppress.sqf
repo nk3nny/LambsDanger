@@ -51,6 +51,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
             _group setVariable [QGVAR(isExecutingTactic), nil];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
+            _group setFormation _formation;
             {
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
                 _x doFollow (leader _x);
