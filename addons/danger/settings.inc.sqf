@@ -112,7 +112,7 @@ addMissionEventHandler ["GroupCreated", {
     params ["_group"];
     [
         {
-            if (count (units _this) > 0) then {
+            if (units _this isNotEqualTo []) then {
                 if (GVAR(autoAddDynamicReinforcement)) then {_this setVariable [QGVAR(enableGroupReinforce), true, true];};
                 if !(GVAR(disableAttackOverride)) then {_this enableAttack false;};
                 if (GVAR(disableFleeingOverride)) then {_this allowFleeing 0;};
