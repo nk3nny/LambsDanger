@@ -22,10 +22,9 @@ if !((leader _unit) isEqualTo _unit || {_unit call EFUNC(main,isAlive)}) exitWit
 
 // identify enemy
 if (isNull _enemy) then {
-    _enemy = (_unit targets [true]) select 0;
-    if (_enemy isEqualTo []) then {
-        _enemy = _unit findNearestEnemy _unit;
-    };
+    private _enemies = _unit targets [true];
+    if (_enemies isNotEqualTo []) exitWith {_enemy = _enemies select 0};
+    _enemy = objNull
 };
 
 // no enemy -- minor pause
