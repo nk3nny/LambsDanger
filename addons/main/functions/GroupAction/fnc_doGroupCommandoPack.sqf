@@ -23,15 +23,14 @@ private _gunner = gunner _gun;
 [leader _gunner, "aware", "DisassembleThatWeapon"] call FUNC(doCallout);
 
 _gunner addEventHandler ["WeaponDisassembled", {
-        params ["_gunner", "_weaponBag"];
+    params ["_gunner", "_weaponBag"];
 
-        // get bags
-        _gunner action ["TakeBag", _weaponBag];
+    // get bags
+    _gunner action ["TakeBag", _weaponBag];
 
-        // remove EH
-        _gunner removeEventHandler ["WeaponDisassembled", _thisEventHandler];
-    }
-];
+    // remove EH
+    _gunner removeEventHandler ["WeaponDisassembled", _thisEventHandler];
+}];
 
 // get mortar
 private _vehicle = vehicle _gunner;
