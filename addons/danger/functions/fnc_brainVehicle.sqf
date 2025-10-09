@@ -356,7 +356,7 @@ if (_car) exitWith {
     ) then {_vehicle doWatch (AGLToASL _dangerPos);};
 
     // suppression
-    if (_attack && {_slow}) then {
+    if (_attack && _slow) then {
         [_unit, _dangerPos vectorAdd [0, 0, random 1]] call EFUNC(main,doVehicleSuppress);
         [{_this call EFUNC(main,doVehicleSuppress)}, [_unit, _dangerPos vectorAdd [0, 0, random 2]], 3] call CBA_fnc_waitAndExecute;
         _delay = random 4;

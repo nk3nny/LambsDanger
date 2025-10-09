@@ -4,590 +4,611 @@
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_DisplayName">
             <English>Register as LAMBS artillery</English>
             <Czech>Registrovat jako LAMBS dělostřelectvo</Czech>
-            <German>Als LAMBS Artillerie registrieren</German>
+            <Italian>Registrati come artiglieria LAMBS</Italian>
             <Polish>Zarejestruj jako artyleria LAMBS</Polish>
             <Russian>Зарегистрировать как артиллерия LAMBS</Russian>
-            <Italian>Registrati come artiglieria LAMBS</Italian>
+            <German>Als LAMBS Artillerie registrieren</German>
             <Chinesesimp>指示为 LAMBS 火炮</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_3DEN_Attributes_RegisterArtillery_Tooltip">
             <English>Vehicle will be automatically registered as available artillery for dynamic strikes</English>
             <Czech>Vozidlo bude automaticky zaregistrováno jako dostupné dělostřelectvo pro dynamický úder</Czech>
-            <German>Das Fahrzeug wird automatisch als verfügbare Artillerie für dynamische Angriffe registriert.</German>
+            <Italian>Il veicolo verrà automaticamente registrato come artiglieria disponibile per attacchi dinamici</Italian>
             <Polish>Pojazd będzie automatycznie zarejestrowany jako dostępna artyleria do dynamicznych ataków</Polish>
             <Russian>Машина будет автоматически зарегистрирована как доступная артиллерия для динамических ударов.</Russian>
-            <Italian>Il veicolo verrà automaticamente registrato come artiglieria disponibile per attacchi dinamici</Italian>
+            <German>Das Fahrzeug wird automatisch als verfügbare Artillerie für dynamische Angriffe registriert.</German>
             <Chinesesimp>载具将为具有动态击打的火炮提供自动指示</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_All">
+            <English>All</English>
+            <Czech>Všichni</Czech>
+            <Italian>Tutto</Italian>
+            <Polish>Wszystkie</Polish>
+            <Russian>Все</Russian>
+            <German>Alle</German>
+            <Chinesesimp>全部的</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Buildings">
+            <English>Buildings</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_BuildingsAndVegetation">
+            <English>Buildings and vegetation</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_BuildingsAndWalls">
+            <English>Buildings and walls</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Centers_DisplayName">
+            <English>Center</English>
+            <Czech>Centrum</Czech>
+            <Italian>Centro</Italian>
+            <Polish>Centrum</Polish>
+            <Russian>Центр</Russian>
+            <German>Mittelpunkt</German>
+            <Chinesesimp>中心</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Centers_Tooltip">
+            <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
+            <Czech>Nastaví centrum pro spuštění skriptu. Může to být vlastní nebo dynamický cíl LAMBS vybraný ze seznamu</Czech>
+            <Italian>Imposta il centro per l'esecuzione dello script. Questo può essere se stesso o un target dinamico LAMBS selezionato dall'elenco</Italian>
+            <Polish>Ustawia centrum dla wykonywanego skryptu. Moduł może być Dynamicznym Celem LAMBS wybranym z listy lub własną pozycją</Polish>
+            <Russian>Устанавливает центр выполнения скрипта. Это может быть собственная или динамическая цель LAMBS, выбранная из списка.</Russian>
+            <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
+            <Chinesesimp>设置脚本执行的中心.这可以是自己或从列表中选择的LAMBS动态目标</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Context_CreateTarget">
+            <English>Create Dynamic Target</English>
+            <Czech>Vytvořit dynamický cíl</Czech>
+            <Italian>Crea target dinamico</Italian>
+            <Polish>Stwórz Dynamiczny Cel</Polish>
+            <Russian>Создать динамическую цель</Russian>
+            <German>Erstelle Dynamisches Ziel</German>
+            <Chinesesimp>创造动态目标</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
+            <English>LAMBS Danger Waypoints</English>
+            <Czech>LAMBS Danger body</Czech>
+            <Italian>LAMBS Danger Waypoints</Italian>
+            <Polish>LAMBS Danger Waypoints</Polish>
+            <Russian>Маршрутные точки LAMBS Danger</Russian>
+            <German>LAMBS Danger Wegpunkte</German>
+            <Chinesesimp>LAMBS Danger路径点</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
+            <English>LAMBS Danger Search Waypoints</English>
+            <Czech>LAMBS Danger body hledání</Czech>
+            <Italian>LAMBS Danger ricerca Waypoints</Italian>
+            <Polish>LAMBS Danger Search Waypoints</Polish>
+            <Russian>Поисковые точки LAMBS Danger </Russian>
+            <German>LAMBS Danger suchen Wegpunkt</German>
+            <Chinesesimp>LAMBS Danger搜索路径点</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Fired">
+            <English>Fired</English>
+            <Czech>Vystřelil</Czech>
+            <Italian>Sparo</Italian>
+            <Polish>Wystrzał</Polish>
+            <Russian>Выстрел</Russian>
+            <German>Geschossen</German>
+            <Chinesesimp>开火</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_FiredNear">
+            <English>Fired Near</English>
+            <Czech>Vystřelil blízko</Czech>
+            <Italian>licenziato vicino</Italian>
+            <Polish>Strzały blisko</Polish>
+            <Russian>Выстрел поблизости</Russian>
+            <German>In der Nähe geschossen</German>
+            <Chinesesimp>在附近开火</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Groups_DisplayName">
+            <English>Groups</English>
+            <Czech>Skupiny</Czech>
+            <Italian>Gruppi</Italian>
+            <Polish>Grupy</Polish>
+            <Russian>Группы</Russian>
+            <German>Gruppen</German>
+            <Chinesesimp>小组</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Groups_Tooltip">
+            <English>Select which unit script applies to.\nList is sorted by distance</English>
+            <Czech>Vybrat jednotku na kterou se script aplikuje.\nSenam je tříděn dle vzdálenosti</Czech>
+            <Italian>Seleziona a quale unità si applica lo script.\nL'elenco è ordinato per distanza</Italian>
+            <Polish>Określa na jaką jednostkę ma zadziałać skrypt.\nLista jest sortowana po dystansie.</Polish>
+            <Russian>Выберите, к какому модулю применяется скрипт.\nЛист сортируется по расстоянию</Russian>
+            <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
+            <Chinesesimp>选择适用的单位脚本.\n列表按距离排序</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Hit">
+            <English>Hit</English>
+            <Czech>Zasažen</Czech>
+            <Italian>Incontrato</Italian>
+            <Polish>Trafienie</Polish>
+            <Russian>Ранение</Russian>
+            <German>Getroffen</German>
+            <Chinesesimp>命中</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Target_DisplayName">
             <English>Dynamic Target</English>
             <Czech>Dynamický cíl</Czech>
-            <German>Dynamisches Ziel</German>
+            <Italian>Obiettivo dinamico</Italian>
             <Polish>Dynamiczny Cel</Polish>
             <Russian>Динамичная цель</Russian>
-            <Italian>Obiettivo dinamico</Italian>
+            <German>Dynamisches Ziel</German>
             <Chinesesimp>动态目标</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
+            <English>Task Artillery Register</English>
+            <Czech>Registr Úkolu dělostrectva</Czech>
+            <Italian>Registro dell'artiglieria</Italian>
+            <Polish>Zadanie - Rejestracja artylerii</Polish>
+            <Russian>Задача регистрация артиллерии</Russian>
+            <German>Aufgabe Artillerie-Register</German>
+            <Chinesesimp>火炮指示任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ModuleDescription">
+            <English>Register units to that sides artillery pool.</English>
+            <Czech>Registrovat jednotky které se přiklání do dělostřeleckého fondu</Czech>
+            <Italian>Registrate le unità nel pool di artiglieria di quella parte.</Italian>
+            <Polish>Dodaje jednostki do puli dostępnej artylerii dla danej strony</Polish>
+            <Russian>Зарегистрировать юнита на этой стороне артиллерийского пула</Russian>
+            <German>Registriere Einheiten zum Artillerie-Pool dieser Seite hinzugefügt.</German>
+            <Chinesesimp>指示单位到该方的炮池.</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded">
+            <English>No Units have been added to Artillery Pool</English>
+            <Czech>Žádné jednotky nebyly přidány do dělostřeleckého fondu</Czech>
+            <Italian>Nessuna unità è stata aggiunta alla riserva di artiglieria</Italian>
+            <Polish>Żadna jednostka nie została dodana do puli artylerii</Polish>
+            <Russian>Ни один юнит не был добавлен в артиллерийский пул</Russian>
+            <German>Keine Einheiten wurden zum Artillerie-Pool dieser Seite hinzugefügt.</German>
+            <Chinesesimp>没有单位被添加到炮池</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_UnitAdded">
+            <English>Units have been added to Artillery Pool</English>
+            <Czech>Jednotky byly přidány do dělostřeleckého fondu</Czech>
+            <Italian>Le unità sono state aggiunte alla riserva di artiglieria</Italian>
+            <Polish>Jednostki zostały dodane do puli artylerii</Polish>
+            <Russian>Юнит добавлен в  артиллерийский пул</Russian>
+            <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
+            <Chinesesimp>单位被添加到炮池</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_DisplayName">
             <English>Task Artillery</English>
             <Czech>Úkol dělostřelectvo</Czech>
-            <German>Aufgabe Artillerie</German>
+            <Italian>Artiglieria</Italian>
             <Polish>Zadanie - Artyleria</Polish>
             <Russian>Задача артиллерия</Russian>
-            <Italian>Artiglieria</Italian>
+            <German>Aufgabe Artillerie</German>
             <Chinesesimp>火炮任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ModuleDescription">
-            <English>This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance</English>
-            <Czech>Tato oblast je zacílena první dostupnou dělostřeleckou jednotkou dané strany. Dělostřelecká jednotka musí být zaregistrována pro danou stranu a musí být v dosahu úderu</Czech>
-            <German>Diese Position wird durch die erste, verfügbare Artillerie der gegebenen Seite anvisiert. Die Artillerie muss für die Seite registriert und in Reichweite sein.</German>
-            <Polish>Ta pozycja będzie ostrzelana przez pierwszą dostępną artylerię po danej stronie. Artyleria musi być zarejestrowana dla strony i być w zasięgu.</Polish>
-            <Russian>Это место нацелено на первую доступную артиллерийскую установку с юнитом данной стороны. Юнит Артиллерии должен зарегистрирован за сторону и находиться в пределах досягаемости залпа</Russian>
-            <Italian>Questa posizione è presa di mira dalla prima unità di artiglieria disponibile di un dato lato. L'unità di artiglieria deve essere registrata a lato ed essere a distanza di tiro</Italian>
-            <Chinesesimp>该位置是给定一方的第一个可用炮兵部队的目标.炮兵部队必须在一方指示并在击打距离内</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
-            <English>Side</English>
-            <Czech>Strana</Czech>
-            <German>Seite</German>
-            <Polish>Strona</Polish>
-            <Russian>Сторона</Russian>
-            <Italian>Lato</Italian>
-            <Chinesesimp>一方</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip">
-            <English>Which side is calling for artillery</English>
-            <Czech>Která strana volá dělostřelectvo</Czech>
-            <German>Die Seite die die Artillerie ruft.</German>
-            <Polish>Która strona wzywa ostrzał artyleryjski</Polish>
-            <Russian>Какая сторона вызывает артиллерию</Russian>
-            <Italian>Da che parte sta chiedendo l'artiglieria</Italian>
-            <Chinesesimp>哪一方在呼叫火炮</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_DisplayName">
             <English>Main Salvo</English>
             <Czech>Hlavní salva</Czech>
-            <German>Hauptsalve</German>
+            <Italian>Salvo principale</Italian>
             <Polish>Główna salwa</Polish>
             <Russian>Главный залп</Russian>
-            <Italian>Salvo principale</Italian>
+            <German>Hauptsalve</German>
             <Chinesesimp>主炮齐射</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_MainSalvo_Tooltip">
             <English>Number of rounds in the main salvo. MLRS artillery ignore this value.</English>
             <German>Anzahl an Schüssen der Hauptsalve. MLRS-Artillerie ignoriert diesen Wert.</German>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
-            <English>Spread</English>
-            <Czech>Rozpětí</Czech>
-            <German>Streuung</German>
-            <Polish>Rozrzut</Polish>
-            <Russian>Разброс</Russian>
-            <Italian>Propagazione</Italian>
-            <Chinesesimp>散布</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ModuleDescription">
+            <English>This location is targeted by the first available artillery unit of a given side. The artillery unit must be registered to the side and be within striking distance</English>
+            <Czech>Tato oblast je zacílena první dostupnou dělostřeleckou jednotkou dané strany. Dělostřelecká jednotka musí být zaregistrována pro danou stranu a musí být v dosahu úderu</Czech>
+            <Italian>Questa posizione è presa di mira dalla prima unità di artiglieria disponibile di un dato lato. L'unità di artiglieria deve essere registrata a lato ed essere a distanza di tiro</Italian>
+            <Polish>Ta pozycja będzie ostrzelana przez pierwszą dostępną artylerię po danej stronie. Artyleria musi być zarejestrowana dla strony i być w zasięgu.</Polish>
+            <Russian>Это место нацелено на первую доступную артиллерийскую установку с юнитом данной стороны. Юнит Артиллерии должен зарегистрирован за сторону и находиться в пределах досягаемости залпа</Russian>
+            <German>Diese Position wird durch die erste, verfügbare Artillerie der gegebenen Seite anvisiert. Die Artillerie muss für die Seite registriert und in Reichweite sein.</German>
+            <Chinesesimp>该位置是给定一方的第一个可用炮兵部队的目标.炮兵部队必须在一方指示并在击打距离内</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
-            <English>Default dispersion of the main salvo</English>
-            <Czech>Výchozí rozptyl hlavní salvy</Czech>
-            <German>Standard Streuung der Hauptsalve.</German>
-            <Polish>Standardowy rozrzut głównej salwy</Polish>
-            <Russian>Стандартный разброс для главного залпа</Russian>
-            <Italian>Dispersione predefinita della salva principale</Italian>
-            <Chinesesimp>主炮默认散布</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_DisplayName">
+            <English>Side</English>
+            <Czech>Strana</Czech>
+            <Italian>Lato</Italian>
+            <Polish>Strona</Polish>
+            <Russian>Сторона</Russian>
+            <German>Seite</German>
+            <Chinesesimp>一方</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Side_Tooltip">
+            <English>Which side is calling for artillery</English>
+            <Czech>Která strana volá dělostřelectvo</Czech>
+            <Italian>Da che parte sta chiedendo l'artiglieria</Italian>
+            <Polish>Która strona wzywa ostrzał artyleryjski</Polish>
+            <Russian>Какая сторона вызывает артиллерию</Russian>
+            <German>Die Seite die die Artillerie ruft.</German>
+            <Chinesesimp>哪一方在呼叫火炮</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_DisplayName">
             <English>Skip adjusting rounds</English>
             <Czech>Přeskočit upravování střel</Czech>
-            <German>Anpassen der Schüsse überspringen</German>
+            <Italian>Salta i turni di regolazione</Italian>
             <Polish>Pomiń strzały korygujące</Polish>
             <Russian>Пропустить подстройку снарядов</Russian>
-            <Italian>Salta i turni di regolazione</Italian>
+            <German>Anpassen der Schüsse überspringen</German>
             <Chinesesimp>跳过调整回合</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_SkipCheckrounds_Tooltip">
             <English>Check this to disable initial rounds used by the fire controller to adjust rounds on target.\nSkipping this will make the barrage immediately hit on target</English>
             <Czech>Zakšrtněte pro vypnutí náměrných střel, které používá návodčí pro korekci střel na cíl.\Přeskočení bude znamenat to, že palba okamžitě zasáhne cíl</Czech>
-            <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
+            <Italian>Seleziona questo per disabilitare i colpi iniziali utilizzati dal controller di fuoco per regolare i colpi sul bersaglio.\nSaltare questo farà sì che la raffica colpisca immediatamente il bersaglio</Italian>
             <Polish>Włącz tę opcję, aby nie wystrzelić strzałów korygujących, używanych przez kontrolera do skorygowania ostrzału na punkt.\nWłączenie tej opcji spowoduje natychmiastowy ostrzał na wyznaczony cel.</Polish>
             <Russian>Эта опция отключает начальные снаряды, используемые арт наводчиком для корректировки попадания по цели.\nОтключение этой опции приведет к немедленному попаданию выстрелов в цель.</Russian>
-            <Italian>Seleziona questo per disabilitare i colpi iniziali utilizzati dal controller di fuoco per regolare i colpi sul bersaglio.\nSaltare questo farà sì che la raffica colpisca immediatamente il bersaglio</Italian>
+            <German>Aktiviere diese Option um ein Kalibrieren der Schüsse zu deaktivieren.\nWenn diese Option aktiviert trifft der Beschuss das Ziel sofort.</German>
             <Chinesesimp>检查此选项可禁用火力指挥者用于调整目标轮次的初始回合.\n跳过此选项将使火炮立即击中目标</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_DisplayName">
+            <English>Spread</English>
+            <Czech>Rozpětí</Czech>
+            <Italian>Propagazione</Italian>
+            <Polish>Rozrzut</Polish>
+            <Russian>Разброс</Russian>
+            <German>Streuung</German>
+            <Chinesesimp>散布</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_Spread_Tooltip">
+            <English>Default dispersion of the main salvo</English>
+            <Czech>Výchozí rozptyl hlavní salvy</Czech>
+            <Italian>Dispersione predefinita della salva principale</Italian>
+            <Polish>Standardowy rozrzut głównej salwy</Polish>
+            <Russian>Стандартный разброс для главного залпа</Russian>
+            <German>Standard Streuung der Hauptsalve.</German>
+            <Chinesesimp>主炮默认散布</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification">
             <English>Artillery target created for %1</English>
             <Czech>Dělostřelecký cíl byl vytvořen pro %1</Czech>
-            <German>Artillerie-Ziel erstellt für %1</German>
+            <Italian>Bersaglio di artiglieria creato per %1</Italian>
             <Polish>Cel artyleryjski stworzony dla %1</Polish>
             <Russian>Цель для артиллерии создана для %1</Russian>
-            <Italian>Bersaglio di artiglieria creato per %1</Italian>
+            <German>Artillerie-Ziel erstellt für %1</German>
             <Chinesesimp>为%1创建火炮目标</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_DisplayName">
-            <English>Task Artillery Register</English>
-            <Czech>Registr Úkolu dělostrectva</Czech>
-            <German>Aufgabe Artillerie-Register</German>
-            <Polish>Zadanie - Rejestracja artylerii</Polish>
-            <Russian>Задача регистрация артиллерии</Russian>
-            <Italian>Registro dell'artiglieria</Italian>
-            <Chinesesimp>火炮指示任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ModuleDescription">
-            <English>Register units to that sides artillery pool.</English>
-            <Czech>Registrovat jednotky které se přiklání do dělostřeleckého fondu</Czech>
-            <German>Registriere Einheiten zum Artillerie-Pool dieser Seite hinzugefügt.</German>
-            <Polish>Dodaje jednostki do puli dostępnej artylerii dla danej strony</Polish>
-            <Russian>Зарегистрировать юнита на этой стороне артиллерийского пула</Russian>
-            <Italian>Registrate le unità nel pool di artiglieria di quella parte.</Italian>
-            <Chinesesimp>指示单位到该方的炮池.</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_UnitAdded">
-            <English>Units have been added to Artillery Pool</English>
-            <Czech>Jednotky byly přidány do dělostřeleckého fondu</Czech>
-            <German>Einheiten wurden zum Artillerie-Pool hinzugefügt</German>
-            <Polish>Jednostki zostały dodane do puli artylerii</Polish>
-            <Russian>Юнит добавлен в  артиллерийский пул</Russian>
-            <Italian>Le unità sono state aggiunte alla riserva di artiglieria</Italian>
-            <Chinesesimp>单位被添加到炮池</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtilleryRegister_ZeusNotification_NoUnitAdded">
-            <English>No Units have been added to Artillery Pool</English>
-            <Czech>Žádné jednotky nebyly přidány do dělostřeleckého fondu</Czech>
-            <German>Keine Einheiten wurden zum Artillerie-Pool dieser Seite hinzugefügt.</German>
-            <Polish>Żadna jednostka nie została dodana do puli artylerii</Polish>
-            <Russian>Ни один юнит не был добавлен в артиллерийский пул</Russian>
-            <Italian>Nessuna unità è stata aggiunta alla riserva di artiglieria</Italian>
-            <Chinesesimp>没有单位被添加到炮池</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
-            <English>Task Assault/Retreat</English>
-            <Czech>Úkol Útok/Ústup</Czech>
-            <German>Aufgabe Angriff/Rückzug</German>
-            <Polish>Zadanie - Atak/Odwrót</Polish>
-            <Russian>Задача Нападение/Отступление</Russian>
-            <Italian>Compito Assalto/Ritirata</Italian>
-            <Chinesesimp>突袭/撤退任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
-            <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
-            <Czech>Úkol Útok/Ústup je víceúčelový modul. Připojená jednotka je donucena buď šíleně nabíhat nebo ustupovat vůči cíli modulu. Modul lze přesunout a dynamicky změnit konečný cíl. </Czech>
-            <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
-            <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
-            <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
-            <Italian>Task Assalto/Ritirata è un modulo multiuso. Fa sì che le unità collegate si precipitino o si ritirino alla follia verso la destinazione del modulo. Il modulo può essere spostato per modificare dinamicamente la destinazione finale.</Italian>
-            <Chinesesimp>突击/撤退任务是一个多用途模块.它使与之相连的单位奔向或疯狂地向模块目的地撤退.可以移动模块来动态更改最终目的地.</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
-            <English>Unit is fleeing</English>
-            <Czech>Jednotka prchá</Czech>
-            <German>Einheit flieht</German>
-            <Polish>Jednostka ucieka</Polish>
-            <Russian>Юнит в бегстве</Russian>
-            <Italian>L'unità sta fuggendo</Italian>
-            <Chinesesimp>撤退的单位</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
-            <English>Enable this to make the unit retreat and ignore enemies</English>
-            <Czech>Povolením tohoto se donutí jednotka k ústupu a bude ignorovat nepřátele</Czech>
-            <German>Aktiviere diese Option um die Einheit zum Rückzug zu zwingen. Feindliche Einheiten werden beim Rückzug ignoriert.</German>
-            <Polish>Aktywuj tę opcję, aby zmusić jednostkę do odwrotu. Jednostki wroga są ignorowane podczas odwrotu.</Polish>
-            <Russian>Включите это, чтобы юнит отступил и игнорировал врагов</Russian>
-            <Italian>Abilitalo per far ritirare l'unità e ignorare i nemici</Italian>
-            <Chinesesimp>启用此功能可使单位撤退并忽略敌人</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_DisplayName">
-            <English>Remove module on Start-Up</English>
-            <Czech>Odstranit modul při spuštění</Czech>
-            <German>Entferne das Modul beim Start</German>
-            <Polish>Usuń moduł podczas uruchamiania</Polish>
-            <Russian>Удалить модуль при запуске</Russian>
-            <Italian>Rimuovere il modulo all'avvio</Italian>
-            <Chinesesimp>启动时移除模块</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
-            <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
-            <Czech>Odstraní modul při spuštění.\nPokud není zaškrtnuto, je možné s modulem dynamicky pohybovat ke změně cíle</Czech>
-            <German>Entfernt das Modul beim Start.\n Wenn nicht aktiviert ist es möglich das Module zu verschieben um den Zielort dynamisch anzupassen.</German>
-            <Polish>Usuwa moduł podczas uruchamiania.\nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
-            <Russian>Удаляет модуль при запуске.\nЕсли этот флажок не установлен, можно перемещать модуль для динамического изменения места назначения.</Russian>
-            <Italian>Elimina il modulo all'avvio.\nSe non selezionato è possibile spostare il modulo per cambiare destinazione dinamicamente</Italian>
-            <Chinesesimp>启动时删除模块.\n如果未选中,则可以动态的移动模块以更改目的地</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
-            <English>Completion Threshold</English>
-            <Czech>Práh dokončení </Czech>
-            <German>Abschlussradius</German>
-            <Polish>Zasięg ukończenia</Polish>
-            <Russian>Порог завершения</Russian>
-            <Italian>Soglia di completamento</Italian>
-            <Chinesesimp>完成阈值</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip">
-            <English>Units within this many meters will revert to regular behavior</English>
-            <Czech>Jednotky v rámci vzdálenosti těchto metrů se vrátí k normálnímu chování</Czech>
-            <German>Einheiten innerhalb dieses Radius werden zu ihrem regulären Verhalten zurückkehren.</German>
-            <Polish>Jednostki na tym obszarze będą powracały do swojego normalnego zachowania</Polish>
-            <Russian>Юниты в пределах этого количества метров вернутся к обычному поведению</Russian>
-            <Italian>Le unità entro questo numero di metri torneranno al comportamento normale</Italian>
-            <Chinesesimp>在这个公里范围内的单位将恢复常规行为</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
-            <German>Skript-Interval</German>
+            <Italian>Intervallo di script</Italian>
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта</Russian>
-            <Italian>Intervallo di script</Italian>
+            <German>Skript-Interval</German>
             <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_Tooltip">
             <English>The cycle time of the script</English>
             <Czech>Čas cyklu pro skript</Czech>
-            <German>Die Zykluszeit des Skripts.</German>
+            <Italian>Il tempo di ciclo dello script</Italian>
             <Polish>Czas cyklu skryptu</Polish>
             <Russian>Время цикла скрипта</Russian>
-            <Italian>Il tempo di ciclo dello script</Italian>
+            <German>Die Zykluszeit des Skripts.</German>
             <Chinesesimp>脚本的循环时间</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_DisplayName">
+            <English>Remove module on Start-Up</English>
+            <Czech>Odstranit modul při spuštění</Czech>
+            <Italian>Rimuovere il modulo all'avvio</Italian>
+            <Polish>Usuń moduł podczas uruchamiania</Polish>
+            <Russian>Удалить модуль при запуске</Russian>
+            <German>Entferne das Modul beim Start</German>
+            <Chinesesimp>启动时移除模块</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DeleteOnStartup_Tooltip">
+            <English>Deletes module on startup.\nIf unchecked it is possible to move the module to change destination dynamically</English>
+            <Czech>Odstraní modul při spuštění.\nPokud není zaškrtnuto, je možné s modulem dynamicky pohybovat ke změně cíle</Czech>
+            <Italian>Elimina il modulo all'avvio.\nSe non selezionato è possibile spostare il modulo per cambiare destinazione dinamicamente</Italian>
+            <Polish>Usuwa moduł podczas uruchamiania.\nJeśli opcja nie jest aktywowana, można przemieścić moduł w celu dynamicznego dostosowywania lokalizacji docelowej.</Polish>
+            <Russian>Удаляет модуль при запуске.\nЕсли этот флажок не установлен, можно перемещать модуль для динамического изменения места назначения.</Russian>
+            <German>Entfernt das Modul beim Start.\n Wenn nicht aktiviert ist es möglich das Module zu verschieben um den Zielort dynamisch anzupassen.</German>
+            <Chinesesimp>启动时删除模块.\n如果未选中,则可以动态的移动模块以更改目的地</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DisplayName">
+            <English>Task Assault/Retreat</English>
+            <Czech>Úkol Útok/Ústup</Czech>
+            <Italian>Compito Assalto/Ritirata</Italian>
+            <Polish>Zadanie - Atak/Odwrót</Polish>
+            <Russian>Задача Нападение/Отступление</Russian>
+            <German>Aufgabe Angriff/Rückzug</German>
+            <Chinesesimp>突袭/撤退任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
+            <English>Completion Threshold</English>
+            <Czech>Práh dokončení </Czech>
+            <Italian>Soglia di completamento</Italian>
+            <Polish>Zasięg ukończenia</Polish>
+            <Russian>Порог завершения</Russian>
+            <German>Abschlussradius</German>
+            <Chinesesimp>完成阈值</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_Tooltip">
+            <English>Units within this many meters will revert to regular behavior</English>
+            <Czech>Jednotky v rámci vzdálenosti těchto metrů se vrátí k normálnímu chování</Czech>
+            <Italian>Le unità entro questo numero di metri torneranno al comportamento normale</Italian>
+            <Polish>Jednostki na tym obszarze będą powracały do swojego normalnego zachowania</Polish>
+            <Russian>Юниты в пределах этого количества метров вернутся к обычному поведению</Russian>
+            <German>Einheiten innerhalb dieses Radius werden zu ihrem regulären Verhalten zurückkehren.</German>
+            <Chinesesimp>在这个公里范围内的单位将恢复常规行为</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ErrorNotModuleTarget">
             <English>Using Task Assault on a Unit without a Dynamic Target is not supported!</English>
             <Czech>Použití Úkolu útok na jednotku bez dynamického cíle není podporováno!</Czech>
+            <Italian>L'utilizzo di Task Assault su un'unità senza un target dinamico non è supportato!</Italian>
             <Polish>Używanie zadania Atak na jednostce bez Dynamicznego celu nie jest wspierane!</Polish>
             <German>Die Verwendung der Aufgabe Angriff auf einer Einheit ohne dynamisches Ziel wird nicht unterstützt!</German>
-            <Italian>L'utilizzo di Task Assault su un'unità senza un target dinamico non è supportato!</Italian>
             <Chinesesimp>不支持对没有动态目标的部队进行攻击任务！</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
-            <English>Task Camp</English>
-            <Czech>Úkol tábor</Czech>
-            <German>Aufgabe Lager</German>
-            <Polish>Zadanie - Obóz</Polish>
-            <Russian>Задание лагерь</Russian>
-            <Italian>Compito magazzino</Italian>
-            <Chinesesimp>营地任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
+            <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
+            <Czech>Úkol Útok/Ústup je víceúčelový modul. Připojená jednotka je donucena buď šíleně nabíhat nebo ustupovat vůči cíli modulu. Modul lze přesunout a dynamicky změnit konečný cíl. </Czech>
+            <Italian>Task Assalto/Ritirata è un modulo multiuso. Fa sì che le unità collegate si precipitino o si ritirino alla follia verso la destinazione del modulo. Il modulo può essere spostato per modificare dinamicamente la destinazione finale.</Italian>
+            <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
+            <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
+            <German>Aufgabe Angriff/Rückzug ist ein multifunktionales Modul. Es bringt alle verlinkten Einheiten dazu sich blindwütig zum Modulzielpunkt zu bewegen.</German>
+            <Chinesesimp>突击/撤退任务是一个多用途模块.它使与之相连的单位奔向或疯狂地向模块目的地撤退.可以移动模块来动态更改最终目的地.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_ModuleDescription">
-            <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.&lt;br/&gt;Set area in 3DEN.</English>
-            <Czech>Úkol tábor způsobí, že se jednotka shromáždí kolem jednoho bodu, obvykle táboru. Některé jednotky se oddělí, aby obsadily statické zbraně, umístily posádku do budov a hlídaly oblast.&lt;br/&gt;Nastavit oblast v 3DEN.</Czech>
-            <German>Durch Aufgabe Lager sammeln sich Einheiten um einen Punkt, typischerweise ein Lagerplatz,  herum. Manche Einheiten splittern sich von der Gruppe ab um stationiäe Geschütze zu bemannen, Häuser zu besetzen oder zu patroullieren.</German>
-            <Polish>Zadanie - Obóz sprawia, że przydzielone jednostki gromadzą się wokół jednego punktu, zazwyczaj obozu. Niektóre jednostki mogą się oddzielić, żeby obsadzić broń statyczną, garnizonować budynki lub patrolować teren. &lt;br\&gt; Ustaw obszar w 3DEN.</Polish>
-            <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за стационарное оружие, входить в здания и патрулировать территорию.</Russian>
-            <Italian>Compito magazzino fa sembrare che l'unità si raccolga intorno a un singolo punto, in genere un campeggio. Alcune unità si sposteranno per utilizzare armi statiche, presidiare edifici e pattugliare l'area.&lt;br/&gt;Imposta l'area in 3DEN.</Italian>
-            <Chinesesimp>营地任务使单位看起来聚集在一个点周围,通常是一个露营地.一些单位会离开以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在3DEN中设置区域.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_DisplayName">
+            <English>Unit is fleeing</English>
+            <Czech>Jednotka prchá</Czech>
+            <Italian>L'unità sta fuggendo</Italian>
+            <Polish>Jednostka ucieka</Polish>
+            <Russian>Юнит в бегстве</Russian>
+            <German>Einheit flieht</German>
+            <Chinesesimp>撤退的单位</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
-            <English>Radius</English>
-            <Czech>Rádius</Czech>
-            <German>Radius</German>
-            <Polish>Promień</Polish>
-            <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
-            <Chinesesimp>半径</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_Tooltip">
-            <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
-            <Czech>Rádius budov a statických zbraních které jsou osazené\nDvojnásobek tohoto čísla je použit pro hlídky.</Czech>
-            <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
-            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone.\nObszar dwa razy większy jest używany do patroli.</Polish>
-            <Russian>Радиус зданий и стационарного оружие которые будут укомплектованы людьми\nДвукртаное значение  этого числа используется для патрулирования.</Russian>
-            <Italian>Gli edifici del raggio e le armi statiche sono presidiati e presidiati\nIl doppio di questo numero viene utilizzato per le pattuglie</Italian>
-            <Chinesesimp>建筑和静态武器半径范围内驻守并配备/n两倍于该数字的人员用于巡逻</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
-            <English>Teleport units</English>
-            <Czech>Teleport jednotek</Czech>
-            <German>Einheiten teleportieren</German>
-            <Polish>Teleportuj jednostki</Polish>
-            <Russian>Телепортация юнита</Russian>
-            <Italian>Unità di teletrasporto</Italian>
-            <Chinesesimp>传送单位</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_Tooltip">
-            <English>Teleport units instantly to position</English>
-            <Czech>Teleportovat jednotky ihned na pozice</Czech>
-            <German>Teleportiert Einheiten sofort zur Position</German>
-            <Polish>Teleportuj jednostki od razu na pozycje</Polish>
-            <Russian>Телепортировать юнитов к позиции мгновенно</Russian>
-            <Italian>Teletrasporta le unità istantaneamente in posizione</Italian>
-            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
-            <English>Last Waypoint</English>
-            <Czech>Poslední bod trasy</Czech>
-            <Polish>Ostatni punkt nawigacyjny</Polish>
-            <Russian>Последняя маршрутная точка</Russian>
-            <German>Letzter Wegpunkt</German>
-            <Italian>Ultimo waypoint</Italian>
-            <Chinesesimp>上一个路径点</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
-            <English>The waypoint the group adopts after leaving the camped state</English>
-            <Czech>Trasový bod který jednotka převezme poté co opustí stav táboření</Czech>
-            <Polish>Punkt nawigacyjny, który grupa przyjmuje po opuszczeniu obozowania</Polish>
-            <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
-            <German>Der Wegpunkt, den die Gruppe nach dem Verlassen des Lagerzustands annimmt</German>
-            <Italian>Il waypoint che il gruppo adotta dopo aver lasciato lo stato di accampamento</Italian>
-            <Chinesesimp>小组离开驻扎状态后采用的路径点</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
-            <English>Task CQB</English>
-            <Czech>Úkol CQB</Czech>
-            <German>Aufgabe CQB</German>
-            <Polish>Zadanie - CQB</Polish>
-            <Russian>Задача CQB</Russian>
-            <Italian>Compito CQB</Italian>
-            <Chinesesimp>CQB任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskAssault_Retreating_Tooltip">
+            <English>Enable this to make the unit retreat and ignore enemies</English>
+            <Czech>Povolením tohoto se donutí jednotka k ústupu a bude ignorovat nepřátele</Czech>
+            <Italian>Abilitalo per far ritirare l'unità e ignorare i nemici</Italian>
+            <Polish>Aktywuj tę opcję, aby zmusić jednostkę do odwrotu. Jednostki wroga są ignorowane podczas odwrotu.</Polish>
+            <Russian>Включите это, чтобы юнит отступил и игнорировал врагов</Russian>
+            <German>Aktiviere diese Option um die Einheit zum Rückzug zu zwingen. Feindliche Einheiten werden beim Rückzug ignoriert.</German>
+            <Chinesesimp>启用此功能可使单位撤退并忽略敌人</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
-            <German>Skript-Interval</German>
+            <Italian>Intervallo di script</Italian>
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта.</Russian>
-            <Italian>Intervallo di script</Italian>
+            <German>Skript-Interval</German>
             <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers make units search buildings more carefully.\nDefault 21 seconds</English>
             <Czech>Čas cyklu pro skript v sekundách. Vyšší hodnoty způsobí, že jednotky budou dané jednotky prohledávat opatrněji.\nVýchozí 21 sekund</Czech>
-            <German>Die Zykluszeit des Skripts in Sekunden. Eine höherer Wert sorgt dafür das Gebäude vorsichtiger von Einheiten durchsucht werden.\nStandardwert ist 21 Sekunden.</German>
+            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti fanno sì che le unità cerchino più attentamente gli edifici.\nPredefinito 21 secondi</Italian>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą przeszukiwać budynki bardziej ostrożnie.\nDomyślnie 21 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Чем больше число, тем больше юниты обыскивают здания.\nПо умолчанию 21 секунда.</Russian>
-            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti fanno sì che le unità cerchino più attentamente gli edifici.\nPredefinito 21 secondi</Italian>
+            <German>Die Zykluszeit des Skripts in Sekunden. Eine höherer Wert sorgt dafür das Gebäude vorsichtiger von Einheiten durchsucht werden.\nStandardwert ist 21 Sekunden.</German>
             <Chinesesimp>脚本的周期时间以秒为单位.数字越高搜索建筑的时候就越仔细.\ n默认21秒</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_DisplayName">
             <English>Remove Dynamic center</English>
             <Czech>Odstranit dynamický střed</Czech>
-            <German>Dynamischen Mittelpunkt entfernen</German>
+            <Italian>Rimuovi il centro dinamico</Italian>
             <Polish>Usuń dynamiczne centrum</Polish>
             <Russian>Удалить динамический центр</Russian>
-            <Italian>Rimuovi il centro dinamico</Italian>
+            <German>Dynamischen Mittelpunkt entfernen</German>
             <Chinesesimp>移除动态中心</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_DeleteOnStartUp_Tooltip">
             <English>With the dynamic center present, it is possible to move the center point of the building search pattern</English>
             <Czech>S přítomným dynamickým středem je možné přesunout středový bod vzoru prohledávání budov</Czech>
-            <German>Wenn der dynamische Mittelpunkt vorhanden ist, kann der Mittelpunkt für das Gebäudesuchmuster verschoben werden.</German>
+            <Italian>Con il centro dinamico presente, è possibile spostare il punto centrale del pattern di ricerca dell'edificio</Italian>
             <Polish>Gdy dynamiczne centrum jest widoczne, jest możliwe, żeby poruszać centralnym punktem przeszukiwania budynku.</Polish>
             <Russian>При наличии динамического центра можно перемещать центральную точку шаблона поиска здания.</Russian>
-            <Italian>Con il centro dinamico presente, è possibile spostare il punto centrale del pattern di ricerca dell'edificio</Italian>
+            <German>Wenn der dynamische Mittelpunkt vorhanden ist, kann der Mittelpunkt für das Gebäudesuchmuster verschoben werden.</German>
             <Chinesesimp>在存在动态中心的情况下,可以移动建筑物搜索模式的中心点</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCQB_DisplayName">
+            <English>Task CQB</English>
+            <Czech>Úkol CQB</Czech>
+            <Italian>Compito CQB</Italian>
+            <Polish>Zadanie - CQB</Polish>
+            <Russian>Задача CQB</Russian>
+            <German>Aufgabe CQB</German>
+            <Chinesesimp>CQB任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskCQB_ModuleDescription">
+            <English>Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.&lt;br/&gt;&lt;br/&gt;In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.</English>
+            <Czech>Úkol CQB způsobí, že jednotka prohledá budovy společně s oblastí. Nastavte velikost modulu v 3DEN ke konfiguraci oblasti hledání. Modul může být přemístěn k dynamické změně oblasti hledání.&lt;br/&gt;&lt;br/&gt;Obecně modul funguje nejlépe v menších oblastech působení. Je lepší spojit více modulů nebo trasových bodů dohromady než mít jeden masivní. Skupiny na stejné straně budou sdílet, které budovy byly vyčištěny a které stále potřebují prohledat.</Czech>
+            <Italian>Il compito CQB fa sì che l'unità cerchi gli edifici con l'area. Imposta la dimensione del modulo in 3DEN per configurare l'area di ricerca. Il modulo può essere spostato per spostare dinamicamente l'area di ricerca.&lt;br/&gt;&lt;br/&gt;In generale il modulo funziona meglio con un AOE più piccolo. Meglio mettere insieme più moduli o waypoint piuttosto che averne uno enorme. I gruppi dello stesso lato condivideranno quali edifici sono stati sgomberati e quali devono ancora essere perquisiti.</Italian>
+            <Polish>Zadanie - CQB pozwala jednostkom przeszukiwać budynki w okolicy. Ustaw zasięg modułu w 3DEN, żeby konfigurować obszar przeszukiwania. Moduł można przesunąć, żeby dynamicznie zmieniać przeszukiwany obszar. &lt;br\&gt; &lt;br\&gt; Moduł działa najlepiej na małym obszarze. Wskazane jest użycie wielu modułów o małym obszarze działania i połączenie ich w jedną trasę.</Polish>
+            <Russian>Задача CQB заставляет юнит обыскивать постройки в данной области. Установите размер модуля в 3DEN, чтобы настроить область поиска. Модуль можно перемещать, чтобы динамически перемещать область поиска. &lt;br\&gt; &lt;br\&gt; В целом модуль лучше всего работает с меньшим AOE. Лучше связать несколько модулей или путевых точек вместе, чем иметь один массив. Группы одной стороны поделятся информацией, какие здания были зачищены, а какие еще требуют поиска.</Russian>
+            <German>Die Aufgabe CQB lässt Einheiten Gebäude innerhalb des Gebietes durchsuchen. Die Modulgröße in Eden Editor kann dazu verwendet werden das Suchgebiet zu verändern. Das Modul kann verschoben werden um das Suchgebiet zu verschieben.&lt;br/&gt;&lt;br/&gt;In der Regel funktioniert das Modul am besten mit einem kleinen Einsatzgebiet. Es wird empfohlen mehrere Module und Wegpunkte zusammenzuschalten, Gruppen der selben Seite teilen Informationen über durchsuchte Gebäude.</German>
+            <Chinesesimp>指派任务CQB使单位搜索该区域的建筑物. 在3DEN中设置模块大小以配置搜索区域. 可以移动模块以动态移动搜索区域.&lt;br/&gt;&lt;br/&gt;通常,该模块在较小的AOE下效果最佳.将多个模块或路径点串在一起比一个庞大的模块或航路点更好.同一方的小组将共享哪些建筑物已被清除哪些仍需要搜索.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_DisplayName">
             <English>Radius</English>
             <Czech>Rádius</Czech>
-            <German>Radius</German>
+            <Italian>Raggio</Italian>
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
+            <German>Radius</German>
             <Chinesesimp>半径</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskCQB_Radius_Tooltip">
             <English>Max distance houses will be searched</English>
             <Czech>Maximální vzdálenost na kterou budou domy prohledány</Czech>
-            <German>Maximale Distanz in der Häuser durchsucht werden.</German>
+            <Italian>Verranno cercate case a distanza massima</Italian>
             <Polish>Promień w którym zostaną sprawdzone budynki</Polish>
             <Russian>Будет произведен поиск домов на максимальном расстоянии</Russian>
-            <Italian>Verranno cercate case a distanza massima</Italian>
+            <German>Maximale Distanz in der Häuser durchsucht werden.</German>
             <Chinesesimp>将搜索最远距离的房屋</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCQB_ModuleDescription">
-            <English>Task CQB makes the unit search buildings with the area. Set the module size in 3DEN to configure the search area. The module can be moved to dynamically shift the searched area.&lt;br/&gt;&lt;br/&gt;In general the module works best with a smaller AOE. Better to string multiple modules or waypoints together than have one massive one. Groups of the same side will share which buildings have been cleared and which still need searching.</English>
-            <Czech>Úkol CQB způsobí, že jednotka prohledá budovy společně s oblastí. Nastavte velikost modulu v 3DEN ke konfiguraci oblasti hledání. Modul může být přemístěn k dynamické změně oblasti hledání.&lt;br/&gt;&lt;br/&gt;Obecně modul funguje nejlépe v menších oblastech působení. Je lepší spojit více modulů nebo trasových bodů dohromady než mít jeden masivní. Skupiny na stejné straně budou sdílet, které budovy byly vyčištěny a které stále potřebují prohledat.</Czech>
-            <German>Die Aufgabe CQB lässt Einheiten Gebäude innerhalb des Gebietes durchsuchen. Die Modulgröße in Eden Editor kann dazu verwendet werden das Suchgebiet zu verändern. Das Modul kann verschoben werden um das Suchgebiet zu verschieben.&lt;br/&gt;&lt;br/&gt;In der Regel funktioniert das Modul am besten mit einem kleinen Einsatzgebiet. Es wird empfohlen mehrere Module und Wegpunkte zusammenzuschalten, Gruppen der selben Seite teilen Informationen über durchsuchte Gebäude.</German>
-            <Polish>Zadanie - CQB pozwala jednostkom przeszukiwać budynki w okolicy. Ustaw zasięg modułu w 3DEN, żeby konfigurować obszar przeszukiwania. Moduł można przesunąć, żeby dynamicznie zmieniać przeszukiwany obszar. &lt;br\&gt; &lt;br\&gt; Moduł działa najlepiej na małym obszarze. Wskazane jest użycie wielu modułów o małym obszarze działania i połączenie ich w jedną trasę.</Polish>
-            <Russian>Задача CQB заставляет юнит обыскивать постройки в данной области. Установите размер модуля в 3DEN, чтобы настроить область поиска. Модуль можно перемещать, чтобы динамически перемещать область поиска. &lt;br\&gt; &lt;br\&gt; В целом модуль лучше всего работает с меньшим AOE. Лучше связать несколько модулей или путевых точек вместе, чем иметь один массив. Группы одной стороны поделятся информацией, какие здания были зачищены, а какие еще требуют поиска.</Russian>
-            <Italian>Il compito CQB fa sì che l'unità cerchi gli edifici con l'area. Imposta la dimensione del modulo in 3DEN per configurare l'area di ricerca. Il modulo può essere spostato per spostare dinamicamente l'area di ricerca.&lt;br/&gt;&lt;br/&gt;In generale il modulo funziona meglio con un AOE più piccolo. Meglio mettere insieme più moduli o waypoint piuttosto che averne uno enorme. I gruppi dello stesso lato condivideranno quali edifici sono stati sgomberati e quali devono ancora essere perquisiti.</Italian>
-            <Chinesesimp>指派任务CQB使单位搜索该区域的建筑物. 在3DEN中设置模块大小以配置搜索区域. 可以移动模块以动态移动搜索区域.&lt;br/&gt;&lt;br/&gt;通常,该模块在较小的AOE下效果最佳.将多个模块或路径点串在一起比一个庞大的模块或航路点更好.同一方的小组将共享哪些建筑物已被清除哪些仍需要搜索.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_DisplayName">
+            <English>Task Camp</English>
+            <Czech>Úkol tábor</Czech>
+            <Italian>Compito magazzino</Italian>
+            <Polish>Zadanie - Obóz</Polish>
+            <Russian>Задание лагерь</Russian>
+            <German>Aufgabe Lager</German>
+            <Chinesesimp>营地任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
-            <English>Task Garrison</English>
-            <Czech>Úkol umístění posádky</Czech>
-            <German>Aufgabe Besetzen</German>
-            <Polish>Zadanie - Garnizon</Polish>
-            <Russian>Задача занять позицию в здании</Russian>
-            <Italian>Compito Guarnigione</Italian>
-            <Chinesesimp>驻防任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_DisplayName">
+            <English>Last Waypoint</English>
+            <Czech>Poslední bod trasy</Czech>
+            <Italian>Ultimo waypoint</Italian>
+            <Polish>Ostatni punkt nawigacyjny</Polish>
+            <Russian>Последняя маршрутная точка</Russian>
+            <German>Letzter Wegpunkt</German>
+            <Chinesesimp>上一个路径点</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_Teleport_DisplayName">
-            <English>Teleport units</English>
-            <Czech>Teleportovat jednotky</Czech>
-            <German>Einheiten teleportieren</German>
-            <Polish>Teleportuj jednostki</Polish>
-            <Russian>Телепортировать юнита</Russian>
-            <Italian>Unità di teletrasporto</Italian>
-            <Chinesesimp>传送单位</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_ExitWP_Tooltip">
+            <English>The waypoint the group adopts after leaving the camped state</English>
+            <Czech>Trasový bod který jednotka převezme poté co opustí stav táboření</Czech>
+            <Italian>Il waypoint che il gruppo adotta dopo aver lasciato lo stato di accampamento</Italian>
+            <Polish>Punkt nawigacyjny, który grupa przyjmuje po opuszczeniu obozowania</Polish>
+            <Russian>Маршрутная точка, которую принимает группа после выхода из лагеря.</Russian>
+            <German>Der Wegpunkt, den die Gruppe nach dem Verlassen des Lagerzustands annimmt</German>
+            <Chinesesimp>小组离开驻扎状态后采用的路径点</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_Tooltip">
-            <English>Teleport units instantly into position</English>
-            <Czech>Teleportovat jednotky ihned na pozice</Czech>
-            <German>Teleportiert Einheiten sofort zur Position</German>
-            <Polish>Teleportuj jednostki od razu na pozycje</Polish>
-            <Russian>Мгновенно телепортировать юнита на позицию</Russian>
-            <Italian>Teletrasporta le unità istantaneamente in posizione</Italian>
-            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_ModuleDescription">
+            <English>Task Camp makes the unit appear to gather around a single point, typically a campsite. Some units will peel off to man static weapons, garrison buildings and patrol the area.&lt;br/&gt;Set area in 3DEN.</English>
+            <Czech>Úkol tábor způsobí, že se jednotka shromáždí kolem jednoho bodu, obvykle táboru. Některé jednotky se oddělí, aby obsadily statické zbraně, umístily posádku do budov a hlídaly oblast.&lt;br/&gt;Nastavit oblast v 3DEN.</Czech>
+            <Italian>Compito magazzino fa sembrare che l'unità si raccolga intorno a un singolo punto, in genere un campeggio. Alcune unità si sposteranno per utilizzare armi statiche, presidiare edifici e pattugliare l'area.&lt;br/&gt;Imposta l'area in 3DEN.</Italian>
+            <Polish>Zadanie - Obóz sprawia, że przydzielone jednostki gromadzą się wokół jednego punktu, zazwyczaj obozu. Niektóre jednostki mogą się oddzielić, żeby obsadzić broń statyczną, garnizonować budynki lub patrolować teren. &lt;br\&gt; Ustaw obszar w 3DEN.</Polish>
+            <Russian>Задание лагерь создает впечатление, что отряд собирается вокруг одной точки, обычно лагеря. Некоторые юниты будут садиться за стационарное оружие, входить в здания и патрулировать территорию.</Russian>
+            <German>Durch Aufgabe Lager sammeln sich Einheiten um einen Punkt, typischerweise ein Lagerplatz,  herum. Manche Einheiten splittern sich von der Gruppe ab um stationiäe Geschütze zu bemannen, Häuser zu besetzen oder zu patroullieren.</German>
+            <Chinesesimp>营地任务使单位看起来聚集在一个点周围,通常是一个露营地.一些单位会离开以操作静态武器、驻军建筑物并在该区域巡逻.&lt;br/&gt;gt;在3DEN中设置区域.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_DisplayName">
-            <English>Sort positions by height</English>
-            <Czech>Seřadit pozice dle výšky</Czech>
-            <German>Gebäudepositionen nach Höhe sortieren</German>
-            <Polish>Sortuj pozycje względem wysokości</Polish>
-            <Russian>Сортировать позиции по высоте</Russian>
-            <Italian>Ordina le posizioni per altezza</Italian>
-            <Chinesesimp>按高度对位置进行排序</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_Tooltip">
-            <English>Sort building positions by height. Units will prefer positions on higher in buildings</English>
-            <Czech>Seřadit pozice v budovách dle výšky. Jednotky budou preferovat pozice, které jsou vyšší</Czech>
-            <German>Gebäudepositionen nach Höhe sortieren. Einheiten bevorzugen höhergelegene Position in Gebäuden.</German>
-            <Polish>Sortuj pozycje względem wysokości. Jednostki będą preferować pozycje położone wyżej</Polish>
-            <Russian>Отсортируйте позиции зданий по высоте. Юниты предпочтут позиции выше в зданиях</Russian>
-            <Italian>Ordina le posizioni degli edifici per altezza. Le unità preferiranno le posizioni più in alto negli edifici</Italian>
-            <Chinesesimp>按高度对建筑位置进行排序.单位更偏向于高层建筑的单位</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_DisplayName">
             <English>Radius</English>
             <Czech>Rádius</Czech>
-            <German>Radius</German>
+            <Italian>Raggio</Italian>
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
+            <German>Radius</German>
             <Chinesesimp>半径</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_Tooltip">
-            <English>Distance buildings are occupied</English>
-            <Czech>Vzdálené budovy jsou obsazené</Czech>
-            <German>Distanz in der Gebäude besetzt werden.</German>
-            <Polish>Dystans na którym budynku będą garnizonowane</Polish>
-            <Russian>Дистанция занимаемых зданий</Russian>
-            <Italian>Gli edifici a distanza sono occupati</Italian>
-            <Chinesesimp>远距离建筑物被占领</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Radius_Tooltip">
+            <English>Radius buildings and static weapons are garrisoned and manned\nTwice this number is used for patrols</English>
+            <Czech>Rádius budov a statických zbraních které jsou osazené\nDvojnásobek tohoto čísla je použit pro hlídky.</Czech>
+            <Italian>Gli edifici del raggio e le armi statiche sono presidiati e presidiati\nIl doppio di questo numero viene utilizzato per le pattuglie</Italian>
+            <Polish>Promień w którym budynki oraz broń statyczna zostają obsadzone.\nObszar dwa razy większy jest używany do patroli.</Polish>
+            <Russian>Радиус зданий и стационарного оружие которые будут укомплектованы людьми\nДвукртаное значение  этого числа используется для патрулирования.</Russian>
+            <German>Radius in dem Gebäude besetzt oder Geschütze bemannt werden.\n Das Zweifache dieser Größe wird für Patrouillien verwendet.</German>
+            <Chinesesimp>建筑和静态武器半径范围内驻守并配备/n两倍于该数字的人员用于巡逻</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_DisplayName">
-            <English>Exit Trigger</English>
-            <Czech>Spouštěč opuštění</Czech>
-            <German>Trigger verlassen</German>
-            <Polish>Trigger zakończenia</Polish>
-            <Russian>Выйти из триггера</Russian>
-            <Italian>Esci dal grilletto</Italian>
-            <Chinesesimp>离开的诱因</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_DisplayName">
+            <English>Teleport units</English>
+            <Czech>Teleport jednotek</Czech>
+            <Italian>Unità di teletrasporto</Italian>
+            <Polish>Teleportuj jednostki</Polish>
+            <Russian>Телепортация юнита</Russian>
+            <German>Einheiten teleportieren</German>
+            <Chinesesimp>传送单位</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_Tooltip">
-            <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
-            <Czech>Podmínka, aby jednotky opustily své posádkové postavení.\nMožnosti jsou zasaženy, střelba na vlastní zbraně, slyšení nepřátelské palby nebo vše. Výchozí nastavení je náhodné.</Czech>
-            <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
-            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje.\nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
-            <Russian>Условие выхода юнитов из своих гарнизонных позиций.\nВарианты: попадание, стрельба из собственного оружия, звук вражеского огня или все вместе. По умолчанию выбрано случайное.</Russian>
-            <Italian>La condizione per le unità di lasciare la loro posizione di guarnigione.\nLe opzioni vengono colpite, sparare con la propria arma, sentire il fuoco nemico o tutte. L'impostazione predefinita è casuale.</Italian>
-            <Chinesesimp>单位离开驻防地的条件.\n选项是被击中,射向自己的武器,听到部分枪声或者敌方全部开火. 默认是随机的.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCamp_Teleport_Tooltip">
+            <English>Teleport units instantly to position</English>
+            <Czech>Teleportovat jednotky ihned na pozice</Czech>
+            <Italian>Teletrasporta le unità istantaneamente in posizione</Italian>
+            <Polish>Teleportuj jednostki od razu na pozycje</Polish>
+            <Russian>Телепортировать юнитов к позиции мгновенно</Russian>
+            <German>Teleportiert Einheiten sofort zur Position</German>
+            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
-            <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
-            <Czech>Úkol umístění posádky způsobí, že jednotka zabere pozice v budovách a osadí volné statické zbraně v rámci oblasti definované pomocí 3DEN atributů.</Czech>
-            <German>Task Besetzen lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, Stellung in Häusern beziehen und Geschütze bemannen.</German>
-            <Polish>Zadanie - Garnizon pozwala jednostkom znajdującym się na obszarze określonym przez moduł, zajmować pozycje w domach i obsadzać broń stacjonarną.</Polish>
-            <Russian>Задача занятие позиций заставляет юниты занимать позиции в зданиях и управлять доступными турелями и статическим оружием в пределах области, определяемой атрибутами 3DEN</Russian>
-            <Italian>Compito Guarnigione fa sì che l'unità prenda posizione negli edifici e metta a disposizione torrette e armi statiche all'interno di un'area definita dagli attributi 3DEN.</Italian>
-            <Chinesesimp>驻军任务使该单位占据建筑物中的位置并在由3DEN属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_DisplayName">
+            <English>Script interval</English>
+            <Czech>Interval skriptu</Czech>
+            <Italian>Intervallo di script</Italian>
+            <Polish>Interwał skryptu</Polish>
+            <Russian>Интервал скрипта</Russian>
+            <German>Skript-Interval</German>
+            <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_DisplayName">
-            <English>Dynamic patrol</English>
-            <Czech>Dynamická hlídka</Czech>
-            <Polish>Patrol dynamiczny</Polish>
-            <Russian>Динамичный патруль</Russian>
-            <German>Dynamische Patrouille</German>
-            <Italian>Pattugliamento dinamico</Italian>
-            <Chinesesimp>动态巡逻</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_Tooltip">
+            <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
+            <Czech>Čas cyklu pro skript v sekundách. Vyšší hodnoty mohou být použity na snížení přenosti plížící se skupiny.\nVýchozí 15 sekund</Czech>
+            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti possono essere usati per rendere il gruppo strisciante meno preciso.\nPredefinito 15 secondi</Italian>
+            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 15 sekund</Polish>
+            <Russian>Время цикла скрипта в секундах. Можно использовать более высокие числа, чтобы сделать подкрадывающуюся группу менее точной.\nПо умолчанию 15 секунд</Russian>
+            <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
+            <Chinesesimp>脚本的循环时间以秒为单位.更高的数字可能会降低匍匐组的准确性.\n默认15秒</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_Tooltip">
-            <English>The unit will create a subgroup to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
-            <Czech>Jednotka si vytvoří podskupinu určenou k hlídání oblasti.\nNB: Hlídka opustí svoji původní skupinu a založí novou.</Czech>
-            <Polish>Jednostka stworzy podgrupę do patrolowania terenu.\nPatrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
-            <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
-            <German>Die Einheit erstellt eine Untergruppe, um das Gebiet zu patrouillieren.\nNB: Die Patrouille wird ihre ursprüngliche Gruppe verlassen, um eine neue zu bilden.</German>
-            <Italian>L'unità creerà un sottogruppo per pattugliare l'area.\nNB: La pattuglia lascerà il gruppo originale per formarne uno nuovo.</Italian>
-            <Chinesesimp>该部队将成立一个小组在该地区巡逻.\nNB:巡逻队将离开原来的小组,组建一个新的小组.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
+            <English>Task Creep</English>
+            <Czech>Úkol plížit se</Czech>
+            <Italian>Compito Strisciamento</Italian>
+            <Polish>Zadanie - Zasadzka</Polish>
+            <Russian>Задача подкрасться</Russian>
+            <German>Aufgabe Schleichen</German>
+            <Chinesesimp>匍匐任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
-            <English>Task Patrol</English>
-            <Czech>Úkol hlídka</Czech>
-            <German>Aufgabe Patrouillieren</German>
-            <Polish>Zadanie - Patrol</Polish>
-            <Russian>Задание патруль</Russian>
-            <Italian>Compito Pattuglia</Italian>
-            <Chinesesimp>巡逻任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
+            <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
+            <Czech>Úkol plížení způsobí, že se daná jednotka zkusí připlížit k nepřátelům v rámci oblasti nastavené pomocí 3DEN atributů. Skupina bude využívat krytů a bude se snažit držet nízky profil aby zůstala neodhalená.&lt;br/&gt;&lt;br/&gt;V základu vyhledávací moduly cílí pouze na nepřátelské hráče</Czech>
+            <Italian>Task Creep fa sì che l'unità tenti di tendere un'imboscata ai nemici all'interno dell'area impostata dagli attributi 3DEN. Il gruppo utilizzerà la copertura disponibile e manterrà una posizione bassa per rimanere nascosto.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
+            <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
+            <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
+            <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
+            <Chinesesimp>匍匐小组变使单位尝试在3DEN属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName">
-            <English>Waypoints</English>
-            <Czech>Trasové body</Czech>
-            <German>Wegpunkte</German>
-            <Polish>Punkty nawigacyjne</Polish>
-            <Russian>Маршрутные точки</Russian>
-            <Italian>Waypoint</Italian>
-            <Chinesesimp>路径点</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
+            <English>Use group as center</English>
+            <Czech>Použít skupinu jako středobod</Czech>
+            <Italian>Usa il gruppo come centro</Italian>
+            <Polish>Użyj pozycji grupy jako centrum</Polish>
+            <Russian>Взять группу в качестве центра</Russian>
+            <German>Gruppe als Mittelpunkt benutzen</German>
+            <Chinesesimp>以小组为中心</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_Tooltip">
-            <English>Number of waypoints created</English>
-            <Czech>Počet vytvořených bodů</Czech>
-            <German>Anzahl an erstellen Wegpunkten</German>
-            <Polish>Liczba punktów nawigacyjnych</Polish>
-            <Russian>Количество созданных маршрутных точек</Russian>
-            <Italian>Numero di waypoint creati</Italian>
-            <Chinesesimp>创建的路径点数量</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_Tooltip">
+            <English>The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <Czech>Plížící se skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
+            <Italian>Il gruppo strisciante utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
+            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
+            <Russian>Подкрадывающаяся группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы использовать вместо этого позицию модуля. Это создает более оборонительную группу.</Russian>
+            <German>Die schleichende Gruppe wird den Gruppenführer als Mittelpunkt für das Suchmuster verwenden. Das Ausschalten sorgt dafür, dass die Einheiten die Modulposition als Mittelpunkt verwenden, dies macht die Gruppe defensiver.</German>
+            <Chinesesimp>匍匐组将使用组长作为搜索模式的中心. 禁用让单位使用模块位置替代.这创造了一个更具防御性的群体</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
-            <English>Dynamic patrol pattern</English>
-            <Czech>Dynamický hlídkový vzor</Czech>
-            <German>Dynamisches Patrouillienmuster</German>
-            <Polish>Dynamiczny wzór patrolu</Polish>
-            <Russian>Паттерн динамического патруля</Russian>
-            <Italian>Modello di pattugliamento dinamico</Italian>
-            <Chinesesimp>动态巡逻模式</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_DisplayName">
+            <English>Group only targets players</English>
+            <Czech>SKupina cílí pouze na hráče</Czech>
+            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
+            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
+            <Russian>Группа нацелена только на игроков</Russian>
+            <German>Gruppe visiert nur Spieler an.</German>
+            <Chinesesimp>小组只针对玩家</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_Tooltip">
-            <English>The unit will generate a new patrol pattern once one patrol cycle is complete</English>
-            <Czech>Jednotka bude generovat nové hlídkové vzory pokaždé když je jeden cyklus hlídky dokončen</Czech>
-            <German>Die Einheiten erstellen ein neues Patroullienmuster, sobald das Alte abgeschlossen wurde.</German>
-            <Polish>Jednostka stworzy nowy wzór punktów nawigacyjnych do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
-            <Russian>Устройство сгенерирует новую схему патрулирования после завершения одного цикла патрулирования.</Russian>
-            <Italian>L'unità genererà un nuovo schema di pattugliamento una volta completato un ciclo di pattugliamento</Italian>
-            <Chinesesimp>一个巡逻周期完成后该单位将生成新的巡逻模式</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_Tooltip">
+            <English>The creeping group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <Czech>Plížící se skupina bude pouze cílit na hráče. Vypněte abyste umožnili skupině cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
+            <Italian>Il gruppo strisciante prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
+            <Polish>Grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
+            <Russian>Подкрадывающаяся группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
+            <German>Die schleichende Gruppe visiert nur Spieler an. Durch Ausschalten visiert die Gruppe alle feindlichen Einheiten innerhalb der Reichweite an.</German>
+            <Chinesesimp>匍匐组只会瞄准玩家.禁用此选项使团队可以瞄准射程内的任何敌对单位.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName">
-            <English>Range</English>
-            <Czech>Vzdálenost</Czech>
-            <German>Reichweite</German>
-            <Polish>Zasięg</Polish>
-            <Russian>Расстояние</Russian>
-            <Italian>Gamma</Italian>
-            <Chinesesimp>范围</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
+            <English>Radius</English>
+            <Czech>Rádius</Czech>
+            <Italian>Raggio</Italian>
+            <Polish>Promień</Polish>
+            <Russian>Радиус</Russian>
+            <German>Radius</German>
+            <Chinesesimp>半径</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_Tooltip">
-            <English>Max distance between waypoints</English>
-            <Czech>Maximální vzdálenost mezi body</Czech>
-            <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
-            <Polish>Maksymalny dystans pomiędzy punktami nawigacyjnymi</Polish>
-            <Russian>Максимальное расстояние между маршрутными точками</Russian>
-            <Italian>Distanza massima tra i waypoint</Italian>
-            <Chinesesimp>路径点之间的最大距离</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
-            <English>Task Patrol makes the unit patrol within the area set by 3DEN attributes.</English>
-            <Czech>Úkol hlídka způsobí, že daná jednotka bude hlídkovat v rámci oblasti nastavení pomocí 3DEN atributů.</Czech>
-            <German>Task Patroullie lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, patrouillieren</German>
-            <Polish>Zadanie - Patrol pozwala jednostkom na patrolowanie obszaru.</Polish>
-            <Russian>Задача патруль выполняет патрулирование юнита в пределах области, заданной атрибутами 3DEN.</Russian>
-            <Italian>Task Patrol effettua il pattugliamento dell'unità all'interno dell'area impostata dagli attributi 3DEN.</Italian>
-            <Chinesesimp>任务巡逻使单位在3DEN属性设置的区域内巡逻.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_Tooltip">
+            <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
+            <Czech>Vzdálenost po kterou bude plížící se skupina vyhledávat nepřátele.\nV základu tento modul cílí pouze na nepřátelské hráče</Czech>
+            <Italian>Il gruppo che si sposta a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
+            <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
+            <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
+            <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
+            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下 该模块只针对敌方玩家</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskDefend_DisplayName">
             <English>Task Defend</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_DisplayName">
-            <English>Teleport units</English>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_ModuleDescription">
+            <English>Task Defend makes the unit hold position within the assigned area. Individual soldiers will shift from cover to cover, or building to building, while manning turrets and static weapons, sharing enemy information, and aggressively calling for artillery support if availalble.</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_Tooltip">
-            <English>Teleport units instantly into building and cover positions</English>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_DisplayName">
+            <English>Radius</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_Tooltip">
+            <English>The zone the group will try to defend.</English>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskDefend_Stealth_DisplayName">
             <English>Stealth mode</English>
@@ -601,727 +622,665 @@
         <Key ID="STR_Lambs_WP_Module_TaskDefend_UseCover_Tooltip">
             <English>Selection of available defensive positions available to the group. By default the group will add bushes, trees, and large rocks to potential defensive positions.</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_DisplayName">
-            <English>Radius</English>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_DisplayName">
+            <English>Task Garrison</English>
+            <Czech>Úkol umístění posádky</Czech>
+            <Italian>Compito Guarnigione</Italian>
+            <Polish>Zadanie - Garnizon</Polish>
+            <Russian>Задача занять позицию в здании</Russian>
+            <German>Aufgabe Besetzen</German>
+            <Chinesesimp>驻防任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Radius_Tooltip">
-            <English>The zone the group will try to defend.</English>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_DisplayName">
+            <English>Exit Trigger</English>
+            <Czech>Spouštěč opuštění</Czech>
+            <Italian>Esci dal grilletto</Italian>
+            <Polish>Trigger zakończenia</Polish>
+            <Russian>Выйти из триггера</Russian>
+            <German>Trigger verlassen</German>
+            <Chinesesimp>离开的诱因</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_ModuleDescription">
-            <English>Task Defend makes the unit hold position within the assigned area. Individual soldiers will shift from cover to cover, or building to building, while manning turrets and static weapons, sharing enemy information, and aggressively calling for artillery support if availalble.</English>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ExitCondition_Tooltip">
+            <English>The condition for units to leave their garrisoned position.\nOptions are being hit, shooting own weapon, hearing enemy fire or all of them. Default is random.</English>
+            <Czech>Podmínka, aby jednotky opustily své posádkové postavení.\nMožnosti jsou zasaženy, střelba na vlastní zbraně, slyšení nepřátelské palby nebo vše. Výchozí nastavení je náhodné.</Czech>
+            <Italian>La condizione per le unità di lasciare la loro posizione di guarnigione.\nLe opzioni vengono colpite, sparare con la propria arma, sentire il fuoco nemico o tutte. L'impostazione predefinita è casuale.</Italian>
+            <Polish>Warunek, żeby jednostki opuściły garnizonowane pozycje.\nOpcje to: zostanie postrzelonym, strzelanie z własnej broni, słyszenie wrogich strzałów lub wszystkie z nich. Domyślnie jest ustawione "losowo".</Polish>
+            <Russian>Условие выхода юнитов из своих гарнизонных позиций.\nВарианты: попадание, стрельба из собственного оружия, звук вражеского огня или все вместе. По умолчанию выбрано случайное.</Russian>
+            <German>Die Bedingung das die Einheiten ihre besetzten Positionen verlassen.\nFolgende Optionen stehen zur Verfügung: Wenn getroffen, wenn eigene Waffe abgefeuert, wenn Feindfeuer gehört wurde, oder eine Kombination aus allen. Standardwert ist zufällig.</German>
+            <Chinesesimp>单位离开驻防地的条件.\n选项是被击中,射向自己的武器,听到部分枪声或者敌方全部开火. 默认是随机的.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
-            <English>Task Reset</English>
-            <Czech>Úkol reset</Czech>
-            <German>Aufgabe Zurücksetzen</German>
-            <Polish>Zadanie - Reset</Polish>
-            <Russian>Залада перезапуск</Russian>
-            <Italian>Compito Ripristina</Italian>
-            <Chinesesimp>重置任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_ModuleDescription">
+            <English>Task Garrison makes the unit take up positions in buildings and man available turrets and static weapons within an area defined by 3DEN attributes.</English>
+            <Czech>Úkol umístění posádky způsobí, že jednotka zabere pozice v budovách a osadí volné statické zbraně v rámci oblasti definované pomocí 3DEN atributů.</Czech>
+            <Italian>Compito Guarnigione fa sì che l'unità prenda posizione negli edifici e metta a disposizione torrette e armi statiche all'interno di un'area definita dagli attributi 3DEN.</Italian>
+            <Polish>Zadanie - Garnizon pozwala jednostkom znajdującym się na obszarze określonym przez moduł, zajmować pozycje w domach i obsadzać broń stacjonarną.</Polish>
+            <Russian>Задача занятие позиций заставляет юниты занимать позиции в зданиях и управлять доступными турелями и статическим оружием в пределах области, определяемой атрибутами 3DEN</Russian>
+            <German>Task Besetzen lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, Stellung in Häusern beziehen und Geschütze bemannen.</German>
+            <Chinesesimp>驻军任务使该单位占据建筑物中的位置并在由3DEN属性定义的区域内配备可用的火炮和静态武器.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
-            <English>This module resets all custom LAMBS scripts running on the unit</English>
-            <Czech>Tento modul resetuje veškeré vlastní LAMBS skripty běžící na jednotce</Czech>
-            <German>Dieses Modul setzt alle benutzerdefinierten LAMBS Skripte zurück die für diese Einheit laufen.</German>
-            <Polish>Resetuje wszystkie skrypty LAMBS działające na jednostce.</Polish>
-            <Russian>Этот модуль сбрасывает все пользовательские скрипты LAMBS, запущенные на устройстве.</Russian>
-            <Italian>Questo modulo ripristina tutti gli script LAMBS personalizzati in esecuzione sull'unità</Italian>
-            <Chinesesimp>此模块重置单位上运行的所有自定义LAMBS脚本</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_DisplayName">
+            <English>Dynamic patrol</English>
+            <Czech>Dynamická hlídka</Czech>
+            <Italian>Pattugliamento dinamico</Italian>
+            <Polish>Patrol dynamiczny</Polish>
+            <Russian>Динамичный патруль</Russian>
+            <German>Dynamische Patrouille</German>
+            <Chinesesimp>动态巡逻</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_DisplayName">
-            <English>Task Creep</English>
-            <Czech>Úkol plížit se</Czech>
-            <German>Aufgabe Schleichen</German>
-            <Polish>Zadanie - Zasadzka</Polish>
-            <Russian>Задача подкрасться</Russian>
-            <Italian>Compito Strisciamento</Italian>
-            <Chinesesimp>匍匐任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Patrol_Tooltip">
+            <English>The unit will create a subgroup to patrol the area.\nNB: The patrol will leave their original group to form a new one.</English>
+            <Czech>Jednotka si vytvoří podskupinu určenou k hlídání oblasti.\nNB: Hlídka opustí svoji původní skupinu a založí novou.</Czech>
+            <Italian>L'unità creerà un sottogruppo per pattugliare l'area.\nNB: La pattuglia lascerà il gruppo originale per formarne uno nuovo.</Italian>
+            <Polish>Jednostka stworzy podgrupę do patrolowania terenu.\nPatrol opuści dotychczasowy oddział w celu stworzenia nowego.</Polish>
+            <Russian>Отряд создаст подгруппу для патрулирования местности.\nNB: патруль покинет свою первоначальную группу, чтобы сформировать новую.</Russian>
+            <German>Die Einheit erstellt eine Untergruppe, um das Gebiet zu patrouillieren.\nNB: Die Patrouille wird ihre ursprüngliche Gruppe verlassen, um eine neue zu bilden.</German>
+            <Chinesesimp>该部队将成立一个小组在该地区巡逻.\nNB:巡逻队将离开原来的小组,组建一个新的小组.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_DisplayName">
-            <English>Use group as center</English>
-            <Czech>Použít skupinu jako středobod</Czech>
-            <German>Gruppe als Mittelpunkt benutzen</German>
-            <Polish>Użyj pozycji grupy jako centrum</Polish>
-            <Russian>Взять группу в качестве центра</Russian>
-            <Italian>Usa il gruppo come centro</Italian>
-            <Chinesesimp>以小组为中心</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_MovingCenter_Tooltip">
-            <English>The creeping group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
-            <Czech>Plížící se skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
-            <German>Die schleichende Gruppe wird den Gruppenführer als Mittelpunkt für das Suchmuster verwenden. Das Ausschalten sorgt dafür, dass die Einheiten die Modulposition als Mittelpunkt verwenden, dies macht die Gruppe defensiver.</German>
-            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
-            <Russian>Подкрадывающаяся группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы использовать вместо этого позицию модуля. Это создает более оборонительную группу.</Russian>
-            <Italian>Il gruppo strisciante utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
-            <Chinesesimp>匍匐组将使用组长作为搜索模式的中心. 禁用让单位使用模块位置替代.这创造了一个更具防御性的群体</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_DisplayName">
-            <English>Group only targets players</English>
-            <Czech>SKupina cílí pouze na hráče</Czech>
-            <German>Gruppe visiert nur Spieler an.</German>
-            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
-            <Russian>Группа нацелена только на игроков</Russian>
-            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
-            <Chinesesimp>小组只针对玩家</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_PlayersOnly_Tooltip">
-            <English>The creeping group will only target players. Disable to let the group target any hostile unit within range.</English>
-            <Czech>Plížící se skupina bude pouze cílit na hráče. Vypněte abyste umožnili skupině cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
-            <German>Die schleichende Gruppe visiert nur Spieler an. Durch Ausschalten visiert die Gruppe alle feindlichen Einheiten innerhalb der Reichweite an.</German>
-            <Polish>Grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
-            <Russian>Подкрадывающаяся группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
-            <Italian>Il gruppo strisciante prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
-            <Chinesesimp>匍匐组只会瞄准玩家.禁用此选项使团队可以瞄准射程内的任何敌对单位.</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_DisplayName">
-            <English>Script interval</English>
-            <Czech>Interval skriptu</Czech>
-            <German>Skript-Interval</German>
-            <Polish>Interwał skryptu</Polish>
-            <Russian>Интервал скрипта</Russian>
-            <Italian>Intervallo di script</Italian>
-            <Chinesesimp>脚本间隔</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_CycleTime_Tooltip">
-            <English>The cycle time for the script in seconds. Higher numbers can be used to make the creeping group less accurate.\nDefault 15 seconds</English>
-            <Czech>Čas cyklu pro skript v sekundách. Vyšší hodnoty mohou být použity na snížení přenosti plížící se skupiny.\nVýchozí 15 sekund</Czech>
-            <German>Die Zykluszeit des Skripts in Sekunden. Ein höherer Wert kann dazu verwendet werden die schleichende Einheiten weniger genau werden zu lassen.\nStandardwert sind 15 Sekunden.</German>
-            <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 15 sekund</Polish>
-            <Russian>Время цикла скрипта в секундах. Можно использовать более высокие числа, чтобы сделать подкрадывающуюся группу менее точной.\nПо умолчанию 15 секунд</Russian>
-            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti possono essere usati per rendere il gruppo strisciante meno preciso.\nPredefinito 15 secondi</Italian>
-            <Chinesesimp>脚本的循环时间以秒为单位.更高的数字可能会降低匍匐组的准确性.\n默认15秒</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_DisplayName">
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_DisplayName">
             <English>Radius</English>
             <Czech>Rádius</Czech>
-            <German>Radius</German>
+            <Italian>Raggio</Italian>
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
+            <German>Radius</German>
             <Chinesesimp>半径</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_Radius_Tooltip">
-            <English>Distance creeping group will search for enemies.\nBy default this module only targets enemy players</English>
-            <Czech>Vzdálenost po kterou bude plížící se skupina vyhledávat nepřátele.\nV základu tento modul cílí pouze na nepřátelské hráče</Czech>
-            <German>Distanz in der die schleichende Gruppe nach Feinden sucht.\nStandardmäßig visiert diese Modul nur Spieler an.</German>
-            <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Расстояние, на котором подкрадывающаяся группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
-            <Italian>Il gruppo che si sposta a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
-            <Chinesesimp>远程匍匐小组将搜索敌人.\n默认情况下 该模块只针对敌方玩家</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Radius_Tooltip">
+            <English>Distance buildings are occupied</English>
+            <Czech>Vzdálené budovy jsou obsazené</Czech>
+            <Italian>Gli edifici a distanza sono occupati</Italian>
+            <Polish>Dystans na którym budynku będą garnizonowane</Polish>
+            <Russian>Дистанция занимаемых зданий</Russian>
+            <German>Distanz in der Gebäude besetzt werden.</German>
+            <Chinesesimp>远距离建筑物被占领</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskCreep_ModuleDescription">
-            <English>Task Creep makes the unit attempt to ambush enemies within the area set by 3DEN attributes. The group will use available cover and keep a low stance to remain undiscovered.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players</English>
-            <Czech>Úkol plížení způsobí, že se daná jednotka zkusí připlížit k nepřátelům v rámci oblasti nastavené pomocí 3DEN atributů. Skupina bude využívat krytů a bude se snažit držet nízky profil aby zůstala neodhalená.&lt;br/&gt;&lt;br/&gt;V základu vyhledávací moduly cílí pouze na nepřátelské hráče</Czech>
-            <German>Aufgabe Schleichen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiete, Feinde zu überfallen. Die Gruppe nutzt verfügbare Deckung und nutzt eine geduckte Haltung um unerkannt zu bleiben.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu utrzymania anonimowości.</Polish>
-            <Russian>Задача подкрасться заставляет юнита попытаться устроить засаду на врагов в пределах области, установленной атрибутами 3DEN. Группа будет использовать доступное укрытие и сохранять низкую стойку, чтобы оставаться незамеченной. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
-            <Italian>Task Creep fa sì che l'unità tenti di tendere un'imboscata ai nemici all'interno dell'area impostata dagli attributi 3DEN. Il gruppo utilizzerà la copertura disponibile e manterrà una posizione bassa per rimanere nascosto.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>匍匐小组变使单位尝试在3DEN属性设置的区域内伏击敌人.该小组将使用可用的掩护并保持低姿态以保持不被发现.&lt;br/&gt;&lt;br/&gt;默认情况下搜索模块仅针对敌对玩家</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_DisplayName">
+            <English>Sort positions by height</English>
+            <Czech>Seřadit pozice dle výšky</Czech>
+            <Italian>Ordina le posizioni per altezza</Italian>
+            <Polish>Sortuj pozycje względem wysokości</Polish>
+            <Russian>Сортировать позиции по высоте</Russian>
+            <German>Gebäudepositionen nach Höhe sortieren</German>
+            <Chinesesimp>按高度对位置进行排序</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
-            <English>Task Hunt</English>
-            <Czech>Úkol Lov</Czech>
-            <German>Aufgabe Jagen</German>
-            <Polish>Zadanie - Polowanie</Polish>
-            <Russian>Задача охота</Russian>
-            <Italian>Compito caccia</Italian>
-            <Chinesesimp>搜寻任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_SortByHeight_Tooltip">
+            <English>Sort building positions by height. Units will prefer positions on higher in buildings</English>
+            <Czech>Seřadit pozice v budovách dle výšky. Jednotky budou preferovat pozice, které jsou vyšší</Czech>
+            <Italian>Ordina le posizioni degli edifici per altezza. Le unità preferiranno le posizioni più in alto negli edifici</Italian>
+            <Polish>Sortuj pozycje względem wysokości. Jednostki będą preferować pozycje położone wyżej</Polish>
+            <Russian>Отсортируйте позиции зданий по высоте. Юниты предпочтут позиции выше в зданиях</Russian>
+            <German>Gebäudepositionen nach Höhe sortieren. Einheiten bevorzugen höhergelegene Position in Gebäuden.</German>
+            <Chinesesimp>按高度对建筑位置进行排序.单位更偏向于高层建筑的单位</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
-            <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
-            <Czech>Úkol Lov nastaví skupinu tak aby hlídkovala v rámci oblasti dle nastavení 3DEN atributů. Skupina se bude pohybovat přirozeně v pátracích vzorech a bude se spirálovitě přibližovat k cíli. Jednotka si zapne svítilnu pokud ji má k dispozici.&lt;br/&gt;&lt;br/&gt;V základu pátrací moduly pouze cílí na nepřátelské hráče</Czech>
-            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
-            <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu uniknięcia wykrycia. Domyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
-            <Russian>Задача охота заставляет отряд патрулировать область в пределах области, установленной атрибутами 3DEN. Группа будет случайно двигаться в поисковой схеме, постепенно приближаясь к цели. Юниты будут включать фонарики, если они доступны. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
-            <Italian>Task Hunt fa in modo che l'unità pattuglia l'area all'interno dell'area impostata dagli attributi 3DEN. Il gruppo si sposterà casualmente in uno schema di ricerca avvicinandosi gradualmente al bersaglio. L'unità abiliterà le torce, se disponibili.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
-            <Chinesesimp>搜寻任务使单位在3DEN属性设置的区域内巡逻.该小组将以搜索模式随意移动逐渐接近目标.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
-            <English>Use group as center</English>
-            <Czech>Použít skupinu jako středobod</Czech>
-            <German>Gruppe als Mittelpunkt benutzen</German>
-            <Polish>Użyj pozycji grupy jako centrum</Polish>
-            <Russian>Использовать группу как центр</Russian>
-            <Italian>Usa il gruppo come centro</Italian>
-            <Chinesesimp>以小组为中心</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
-            <English>Group only targets players</English>
-            <Czech>Skupina cílí pouze na hráče</Czech>
-            <German>Gruppe nimmt nur Spieler ins Visier</German>
-            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
-            <Russian>Группа нацелена только на игроков</Russian>
-            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
-            <Chinesesimp>小组仅针对玩家</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_Tooltip">
-            <English>The hunting group will only target players. Disable to let the group target any hostile unit within range.</English>
-            <Czech>Lovecká skupina bude cílit pouze na hráče. Vypnutí nechá skupinu cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
-            <German>Die jagende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
-            <Polish>Polująca grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
-            <Russian>Группа охоты будет нацелена только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
-            <Italian>Il gruppo di caccia prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
-            <Chinesesimp>搜寻小组只会瞄准玩家.禁用此选项使团队可以瞄准射程内的任何敌对单位.</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_Tooltip">
-            <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
-            <Czech>Nabíhající skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
-            <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
-            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
-            <Russian>Группа поиска будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы устройство использовало вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
-            <Italian>Il gruppo di caccia utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
-            <Chinesesimp>搜寻组将使用组长作为搜索模式的中心.禁用让单位使用模块位置.这创造了一个更具防御性的群体</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskGarrison_Teleport_Tooltip">
+            <English>Teleport units instantly into position</English>
+            <Czech>Teleportovat jednotky ihned na pozice</Czech>
+            <Italian>Teletrasporta le unità istantaneamente in posizione</Italian>
+            <Polish>Teleportuj jednostki od razu na pozycje</Polish>
+            <Russian>Мгновенно телепортировать юнита на позицию</Russian>
+            <German>Teleportiert Einheiten sofort zur Position</German>
+            <Chinesesimp>立即将单位传送到指定位置</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
-            <German>Skript-Interval</German>
+            <Italian>Intervallo di script</Italian>
             <Polish>Interwał skryptu</Polish>
             <Russian>Интервал скрипта</Russian>
-            <Italian>Intervallo di script</Italian>
+            <German>Skript-Interval</German>
             <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make the hunting group less accurate.\nDefault 70 seconds</English>
             <Czech>Čas cyklu pro skript v sekundách. Vyšší hodnoty mohou být použity na snížení přenosti lovecké skupiny.\nVýchozí 70 sekund</Czech>
-            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
+            <Italian>Il tempo di ciclo per lo script in secondi. È possibile utilizzare numeri più alti per rendere meno preciso il gruppo di ricerca.\nPredefinito 70 secondi</Italian>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 70 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Чем больше число, тем меньше точность группы поиска.\nПо умолчанию 70 секунд</Russian>
-            <Italian>Il tempo di ciclo per lo script in secondi. È possibile utilizzare numeri più alti per rendere meno preciso il gruppo di ricerca.\nPredefinito 70 secondi</Italian>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die jagende Gruppe weniger genau.\nStandardgemäß 70 Sekunden</German>
             <Chinesesimp>脚本的循环时间以秒为单位.更高的数字可能会降低搜寻小组的准确度.\n默认值为70秒</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_DisplayName">
+            <English>Task Hunt</English>
+            <Czech>Úkol Lov</Czech>
+            <Italian>Compito caccia</Italian>
+            <Polish>Zadanie - Polowanie</Polish>
+            <Russian>Задача охота</Russian>
+            <German>Aufgabe Jagen</German>
+            <Chinesesimp>搜寻任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_ModuleDescription">
+            <English>Task Hunt makes the unit patrol the area within the area set by 3DEN attributes. The group will move casually in a search pattern gradually spiraling closer to the target. The unit will enable flashlights if available.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players.</English>
+            <Czech>Úkol Lov nastaví skupinu tak aby hlídkovala v rámci oblasti dle nastavení 3DEN atributů. Skupina se bude pohybovat přirozeně v pátracích vzorech a bude se spirálovitě přibližovat k cíli. Jednotka si zapne svítilnu pokud ji má k dispozici.&lt;br/&gt;&lt;br/&gt;V základu pátrací moduly pouze cílí na nepřátelské hráče</Czech>
+            <Italian>Task Hunt fa in modo che l'unità pattuglia l'area all'interno dell'area impostata dagli attributi 3DEN. Il gruppo si sposterà casualmente in uno schema di ricerca avvicinandosi gradualmente al bersaglio. L'unità abiliterà le torce, se disponibili.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili.</Italian>
+            <Polish>Zadanie - Zasadzka pozwala jednostkom przeprowadzenie zasadzki na przeciwników. Grupa będzie używać osłon i trzymać się nisko w celu uniknięcia wykrycia. Domyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
+            <Russian>Задача охота заставляет отряд патрулировать область в пределах области, установленной атрибутами 3DEN. Группа будет случайно двигаться в поисковой схеме, постепенно приближаясь к цели. Юниты будут включать фонарики, если они доступны. &lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков.</Russian>
+            <German>Aufgabe Jagen bringt die Einheiten dazu, in dem durch die Eden Attribute festgelegtem Gebiet, zu patrouilieren. Die Gruppe nähert sich spiralförmig und gelassen an das Ziel an. Die Einheit wird eine Taschenlampe verwenden, wenn diese verfügbar ist.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler.</German>
+            <Chinesesimp>搜寻任务使单位在3DEN属性设置的区域内巡逻.该小组将以搜索模式随意移动逐渐接近目标.如果可用该单元将启用手电筒.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_DisplayName">
+            <English>Use group as center</English>
+            <Czech>Použít skupinu jako středobod</Czech>
+            <Italian>Usa il gruppo come centro</Italian>
+            <Polish>Użyj pozycji grupy jako centrum</Polish>
+            <Russian>Использовать группу как центр</Russian>
+            <German>Gruppe als Mittelpunkt benutzen</German>
+            <Chinesesimp>以小组为中心</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_MovingCenter_Tooltip">
+            <English>The hunting group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <Czech>Nabíhající skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
+            <Italian>Il gruppo di caccia utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
+            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
+            <Russian>Группа поиска будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы устройство использовало вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
+            <German>Die jegende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
+            <Chinesesimp>搜寻组将使用组长作为搜索模式的中心.禁用让单位使用模块位置.这创造了一个更具防御性的群体</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_DisplayName">
+            <English>Group only targets players</English>
+            <Czech>Skupina cílí pouze na hráče</Czech>
+            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
+            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
+            <Russian>Группа нацелена только на игроков</Russian>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
+            <Chinesesimp>小组仅针对玩家</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskHunt_PlayersOnly_Tooltip">
+            <English>The hunting group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <Czech>Lovecká skupina bude cílit pouze na hráče. Vypnutí nechá skupinu cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
+            <Italian>Il gruppo di caccia prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
+            <Polish>Polująca grupa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
+            <Russian>Группа охоты будет нацелена только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
+            <German>Die jagende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
+            <Chinesesimp>搜寻小组只会瞄准玩家.禁用此选项使团队可以瞄准射程内的任何敌对单位.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_DisplayName">
             <English>Radius</English>
             <Czech>Rádius</Czech>
-            <German>Radius</German>
+            <Italian>Raggio</Italian>
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
+            <German>Radius</German>
             <Chinesesimp>半径</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_Radius_Tooltip">
             <English>Distance hunting group will search for enemies.\nBy default this module only targets enemy players</English>
             <Czech>Vzdálenost kterou lovecká skupina použije pro hledání nepřátel.\nV základu tento modul cílí pouze na nepřátelské hráče</Czech>
-            <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
+            <Italian>Il gruppo di caccia a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние на котором группа охоты будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
-            <Italian>Il gruppo di caccia a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
+            <German>Die Distanz die die jagende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Chinesesimp>远程搜寻小组将搜索敌人.\默认情况下该模块只针对敌方玩家</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_DisplayName">
             <English>Use Flare</English>
             <Czech>Použít Světlici</Czech>
+            <Italian>Usa Flare</Italian>
             <Polish>Użyj flar</Polish>
             <German>Flare verwenden</German>
-            <Italian>Usa Flare</Italian>
             <Chinesesimp>使用照明弹</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskHunt_TryUGLFlare_Tooltip">
             <English>Sets how units use flares when hunting for enemies.</English>
             <Czech>Nastavuje jak budou jednotky používat světlice při lovu nepřátel</Czech>
+            <Italian>Imposta il modo in cui le unità usano i razzi durante la caccia ai nemici.</Italian>
             <Polish>Określa jak jednostki używają flar kiedy polują na graczy.</Polish>
             <German>Legt fest, wie Einheiten bei der Jagd nach Feinden Leuchtraketen verwenden.</German>
-            <Italian>Imposta il modo in cui le unità usano i razzi durante la caccia ai nemici.</Italian>
             <Chinesesimp>设定单位在追捕敌人时如何使用照明弹.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
-            <English>Task Rush</English>
-            <Czech>Úkol Nabíhání</Czech>
-            <German>Aufgabe Hetzen</German>
-            <Polish>Zadanie - Szturm</Polish>
-            <Russian>Задача Нападение</Russian>
-            <Italian>Compito Rush</Italian>
-            <Chinesesimp>冲锋任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_DisplayName">
+            <English>Task Patrol</English>
+            <Czech>Úkol hlídka</Czech>
+            <Italian>Compito Pattuglia</Italian>
+            <Polish>Zadanie - Patrol</Polish>
+            <Russian>Задание патруль</Russian>
+            <German>Aufgabe Patrouillieren</German>
+            <Chinesesimp>巡逻任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
-            <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
-            <Czech>Úkol nabíhání způsobí, že jednotky se budou pokošet nabíhat na nepřítele agresivně v rámci oblasti nastavené pomocí 3DEN atributů. Jednotka se bude pohybovat extrémně agresivně, mnohdy bude ignorovat krití a potlačovací palbu. &lt;br/&gt;&lt;br/&gt;V základu moduly vyhledávání cílí pouze na nepřátelské hráče. Vypněte FSM jednotky pro opravdu děsivého nepřítele.</Czech>
-            <German>Aufgabe Hetzen lässt die Einheit aggressiv auf Feinde in dem durch die Eden Attribute festgelegtem Gebiet losstürmen. Die Einheit wird sich aggressiv bewegen und meistens Deckung und Niederhaltung ignorieren.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler. Schalten Sie die Einheiten-FSM ab, um einen wirklich furchteinflößenden Feind zu erhalten.</German>
-            <Polish>Zadanie - Szturm sprawia, że jednostki agresywnie szturmują naprzeciw wrogom. Jednostki będą poruszać się bardzo agresywnie, często ignorując osłonę i ogień zaporowy.&lt;br/&gt;&lt;br/&gt;Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom. Wyłącz FSM dla jednostek, dla prawdziwie przerażających przeciwników.</Polish>
-            <Russian>Задача Нападение  заставляет отряд попытаться агрессивно бежать к врагам в пределах области, установленной атрибутами 3DEN. Отряд будет двигаться чрезвычайно агрессивно, часто игнорируя укрытие и подавление.&lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков. Отключает юнит FSM для поистине устрашающего врага</Russian>
-            <Italian>Task Rush fa sì che l'unità tenti di correre in modo aggressivo verso i nemici all'interno dell'area impostata dagli attributi 3DEN. L'unità si muoverà in modo estremamente aggressivo, spesso ignorando la copertura e la soppressione.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili. Disabilita l'unità FSM per un nemico davvero terrificante.</Italian>
-            <Chinesesimp>使单位尝试向3DEN属性设置的区域内的敌人发起攻击.该单位将极其激进地移动,通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.禁用FSM单位以获得真正可怕的敌人.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_ModuleDescription">
+            <English>Task Patrol makes the unit patrol within the area set by 3DEN attributes.</English>
+            <Czech>Úkol hlídka způsobí, že daná jednotka bude hlídkovat v rámci oblasti nastavení pomocí 3DEN atributů.</Czech>
+            <Italian>Task Patrol effettua il pattugliamento dell'unità all'interno dell'area impostata dagli attributi 3DEN.</Italian>
+            <Polish>Zadanie - Patrol pozwala jednostkom na patrolowanie obszaru.</Polish>
+            <Russian>Задача патруль выполняет патрулирование юнита в пределах области, заданной атрибутами 3DEN.</Russian>
+            <German>Task Patroullie lässt Einheiten innerhalb des Gebietes das durch die Eden Editor Attribute festgelegt wurde, patrouillieren</German>
+            <Chinesesimp>任务巡逻使单位在3DEN属性设置的区域内巡逻.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
-            <English>Use group as center</English>
-            <Czech>Použít skupinu jako středobod</Czech>
-            <German>Gruppe als Mittelpunkt verwenden</German>
-            <Polish>Użyj pozycji grupy jako centrum</Polish>
-            <Russian>Использовать группу как центр</Russian>
-            <Italian>Usa il gruppo come centro</Italian>
-            <Chinesesimp>以小组为中心</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_DisplayName">
+            <English>Dynamic patrol pattern</English>
+            <Czech>Dynamický hlídkový vzor</Czech>
+            <Italian>Modello di pattugliamento dinamico</Italian>
+            <Polish>Dynamiczny wzór patrolu</Polish>
+            <Russian>Паттерн динамического патруля</Russian>
+            <German>Dynamisches Patrouillienmuster</German>
+            <Chinesesimp>动态巡逻模式</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_DisplayName">
-            <English>Group only targets players</English>
-            <Czech>Skupina pouze cílí na hráče</Czech>
-            <German>Gruppe nimmt nur Spieler ins Visier</German>
-            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
-            <Russian>Группа нацелена только на игроков</Russian>
-            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
-            <Chinesesimp>小组仅针对玩家</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_MoveWaypoints_Tooltip">
+            <English>The unit will generate a new patrol pattern once one patrol cycle is complete</English>
+            <Czech>Jednotka bude generovat nové hlídkové vzory pokaždé když je jeden cyklus hlídky dokončen</Czech>
+            <Italian>L'unità genererà un nuovo schema di pattugliamento una volta completato un ciclo di pattugliamento</Italian>
+            <Polish>Jednostka stworzy nowy wzór punktów nawigacyjnych do patrolowania, po wykonaniu poprzedniego patrolu.</Polish>
+            <Russian>Устройство сгенерирует новую схему патрулирования после завершения одного цикла патрулирования.</Russian>
+            <German>Die Einheiten erstellen ein neues Patroullienmuster, sobald das Alte abgeschlossen wurde.</German>
+            <Chinesesimp>一个巡逻周期完成后该单位将生成新的巡逻模式</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_Tooltip">
-            <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
-            <Czech>Nabíhající skupina bude cílit pouze na hráče. Vypnutí nechá skupinu cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
-            <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
-            <Polish>Grupa szturmowa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
-            <Russian>Нападающая группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
-            <Italian>Il gruppo in corsa prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
-            <Chinesesimp>冲锋小组只会针对玩家.禁用让小组瞄准范围内的任何敌对单位.</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_DisplayName">
+            <English>Range</English>
+            <Czech>Vzdálenost</Czech>
+            <Italian>Gamma</Italian>
+            <Polish>Zasięg</Polish>
+            <Russian>Расстояние</Russian>
+            <German>Reichweite</German>
+            <Chinesesimp>范围</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_Tooltip">
-            <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
-            <Czech>Nabíhající skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
-            <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
-            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
-            <Russian>Нападающая группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы юнит использовал вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
-            <Italian>Il gruppo in corsa utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
-            <Chinesesimp>冲锋小组将以组长作为搜索模式的中心.禁用让单元使用模块位置.这创造了一个更具防御性的群体</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Range_Tooltip">
+            <English>Max distance between waypoints</English>
+            <Czech>Maximální vzdálenost mezi body</Czech>
+            <Italian>Distanza massima tra i waypoint</Italian>
+            <Polish>Maksymalny dystans pomiędzy punktami nawigacyjnymi</Polish>
+            <Russian>Максимальное расстояние между маршрутными точками</Russian>
+            <German>Maximale Distanz zwischen zwei Wegpunkten.</German>
+            <Chinesesimp>路径点之间的最大距离</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_DisplayName">
+            <English>Waypoints</English>
+            <Czech>Trasové body</Czech>
+            <Italian>Waypoint</Italian>
+            <Polish>Punkty nawigacyjne</Polish>
+            <Russian>Маршрутные точки</Russian>
+            <German>Wegpunkte</German>
+            <Chinesesimp>路径点</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskPatrol_Waypoints_Tooltip">
+            <English>Number of waypoints created</English>
+            <Czech>Počet vytvořených bodů</Czech>
+            <Italian>Numero di waypoint creati</Italian>
+            <Polish>Liczba punktów nawigacyjnych</Polish>
+            <Russian>Количество созданных маршрутных точек</Russian>
+            <German>Anzahl an erstellen Wegpunkten</German>
+            <Chinesesimp>创建的路径点数量</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskReset_DisplayName">
+            <English>Task Reset</English>
+            <Czech>Úkol reset</Czech>
+            <Italian>Compito Ripristina</Italian>
+            <Polish>Zadanie - Reset</Polish>
+            <Russian>Залада перезапуск</Russian>
+            <German>Aufgabe Zurücksetzen</German>
+            <Chinesesimp>重置任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskReset_ModuleDescription">
+            <English>This module resets all custom LAMBS scripts running on the unit</English>
+            <Czech>Tento modul resetuje veškeré vlastní LAMBS skripty běžící na jednotce</Czech>
+            <Italian>Questo modulo ripristina tutti gli script LAMBS personalizzati in esecuzione sull'unità</Italian>
+            <Polish>Resetuje wszystkie skrypty LAMBS działające na jednostce.</Polish>
+            <Russian>Этот модуль сбрасывает все пользовательские скрипты LAMBS, запущенные на устройстве.</Russian>
+            <German>Dieses Modul setzt alle benutzerdefinierten LAMBS Skripte zurück die für diese Einheit laufen.</German>
+            <Chinesesimp>此模块重置单位上运行的所有自定义LAMBS脚本</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
-            <German>Skript-Interval</German>
+            <Italian>Intervallo di script</Italian>
             <Polish>Interwał skryptu</Polish>
             <Russian>Пропустить интервал</Russian>
-            <Italian>Intervallo di script</Italian>
+            <German>Skript-Interval</German>
             <Chinesesimp>脚本间隔</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_CycleTime_Tooltip">
             <English>The cycle time for the script in seconds. Higher numbers can be used to make rushers less accurate.\nDefault 4 seconds</English>
             <Czech>Čas cyklu pro skript v sekundách. Vyšší hodnoty mohou být použity na snížení přenosti nabíhačů.\nVýchozí 4 sekundy</Czech>
-            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
+            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti possono essere usati per rendere meno precisi i corridori.\nPredefinito 4 secondi</Italian>
             <Polish>Czas cyklu skryptu w sekundach. Wyższy czas sprawi, że jednostki będą mniej celne.\nDomyślnie 4 sekund</Polish>
             <Russian>Время цикла скрипта в секундах. Более высокие числа могут быть использованы для уменьшения точности rushers.\nПо умолчанию 4 секунды</Russian>
-            <Italian>Il tempo di ciclo per lo script in secondi. I numeri più alti possono essere usati per rendere meno precisi i corridori.\nPredefinito 4 secondi</Italian>
+            <German>Zykluszeit für das Skript in Sekunden. Ein höherer Wert macht die hetzende Gruppe weniger genau.\nStandardgemäß 4 Sekunden</German>
             <Chinesesimp>脚本的循环时间以秒为单位. 较大的数字可用于降低冲锋者的准确度.\n默认 4 秒</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_DisplayName">
+            <English>Task Rush</English>
+            <Czech>Úkol Nabíhání</Czech>
+            <Italian>Compito Rush</Italian>
+            <Polish>Zadanie - Szturm</Polish>
+            <Russian>Задача Нападение</Russian>
+            <German>Aufgabe Hetzen</German>
+            <Chinesesimp>冲锋任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_ModuleDescription">
+            <English>Task Rush makes the unit attempt to run aggressively towards enemies within the area set by 3DEN attributes. The unit will move extremely aggressively, often ignoring cover and suppression.&lt;br/&gt;&lt;br/&gt;By default search modules only target hostile players. Disable unit FSM for a truly terrifying enemy.</English>
+            <Czech>Úkol nabíhání způsobí, že jednotky se budou pokošet nabíhat na nepřítele agresivně v rámci oblasti nastavené pomocí 3DEN atributů. Jednotka se bude pohybovat extrémně agresivně, mnohdy bude ignorovat krití a potlačovací palbu. &lt;br/&gt;&lt;br/&gt;V základu moduly vyhledávání cílí pouze na nepřátelské hráče. Vypněte FSM jednotky pro opravdu děsivého nepřítele.</Czech>
+            <Italian>Task Rush fa sì che l'unità tenti di correre in modo aggressivo verso i nemici all'interno dell'area impostata dagli attributi 3DEN. L'unità si muoverà in modo estremamente aggressivo, spesso ignorando la copertura e la soppressione.&lt;br/&gt;&lt;br/&gt;Per impostazione predefinita, i moduli di ricerca prendono di mira solo i giocatori ostili. Disabilita l'unità FSM per un nemico davvero terrificante.</Italian>
+            <Polish>Zadanie - Szturm sprawia, że jednostki agresywnie szturmują naprzeciw wrogom. Jednostki będą poruszać się bardzo agresywnie, często ignorując osłonę i ogień zaporowy.&lt;br/&gt;&lt;br/&gt;Domyślnie, moduł jest stworzony aby używać go przeciwko wrogim graczom. Wyłącz FSM dla jednostek, dla prawdziwie przerażających przeciwników.</Polish>
+            <Russian>Задача Нападение  заставляет отряд попытаться агрессивно бежать к врагам в пределах области, установленной атрибутами 3DEN. Отряд будет двигаться чрезвычайно агрессивно, часто игнорируя укрытие и подавление.&lt;br/&gt;&lt;br/&gt; По умолчанию поисковые модули нацелены только на враждебных игроков. Отключает юнит FSM для поистине устрашающего врага</Russian>
+            <German>Aufgabe Hetzen lässt die Einheit aggressiv auf Feinde in dem durch die Eden Attribute festgelegtem Gebiet losstürmen. Die Einheit wird sich aggressiv bewegen und meistens Deckung und Niederhaltung ignorieren.&lt;br/&gt;&lt;br/&gt;Standardgemäß zielt das Such-Modul nur auf Spieler. Schalten Sie die Einheiten-FSM ab, um einen wirklich furchteinflößenden Feind zu erhalten.</German>
+            <Chinesesimp>使单位尝试向3DEN属性设置的区域内的敌人发起攻击.该单位将极其激进地移动,通常无视掩护和压制.&lt;br/&gt;&lt;br/&gt;默认情况下,搜索模块仅针对敌对玩家.禁用FSM单位以获得真正可怕的敌人.</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_DisplayName">
+            <English>Use group as center</English>
+            <Czech>Použít skupinu jako středobod</Czech>
+            <Italian>Usa il gruppo come centro</Italian>
+            <Polish>Użyj pozycji grupy jako centrum</Polish>
+            <Russian>Использовать группу как центр</Russian>
+            <German>Gruppe als Mittelpunkt verwenden</German>
+            <Chinesesimp>以小组为中心</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_MovingCenter_Tooltip">
+            <English>The rushing group will use the group leader as a center for the search pattern. Disable to have the unit use the module position instead. This creates a more defensive group</English>
+            <Czech>Nabíhající skupina použije velitele skupiny jako středobod pro pátrací vzor. Při vypnutí místo toho jednotka použije poziční modul. Toto vytvoří více obrannou skupinu</Czech>
+            <Italian>Il gruppo in corsa utilizzerà il capogruppo come centro per il modello di ricerca. Disabilitare l'utilizzo della posizione del modulo da parte dell'unità. Questo crea un gruppo più difensivo</Italian>
+            <Polish>Grupa użyje lidera jako centrum wzoru wyszukiwania. Wyłączenie opcji sprawi, że jednostka użyje zamiast tego pozycji modułu, co skutkuje tym, że grupa jest bardziej defensywna.</Polish>
+            <Russian>Нападающая группа будет использовать лидера группы в качестве центра схемы поиска. Отключите, чтобы юнит использовал вместо этого позицию модуля. Это создает более оборонительную группу</Russian>
+            <German>Die hetzende Gruppe benutzt den Gruppenführer als Mittelpunkt für das Suchmuster. Durch Ausschalten benutzt die Gruppe die Modulposition als Mittelpunkt. Das erzeugt eine defensivere Gruppe.</German>
+            <Chinesesimp>冲锋小组将以组长作为搜索模式的中心.禁用让单元使用模块位置.这创造了一个更具防御性的群体</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_DisplayName">
+            <English>Group only targets players</English>
+            <Czech>Skupina pouze cílí na hráče</Czech>
+            <Italian>Il gruppo prende di mira solo i giocatori</Italian>
+            <Polish>Grupa będzie kierować się tylko do graczy.</Polish>
+            <Russian>Группа нацелена только на игроков</Russian>
+            <German>Gruppe nimmt nur Spieler ins Visier</German>
+            <Chinesesimp>小组仅针对玩家</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskRush_PlayersOnly_Tooltip">
+            <English>The rushing group will only target players. Disable to let the group target any hostile unit within range.</English>
+            <Czech>Nabíhající skupina bude cílit pouze na hráče. Vypnutí nechá skupinu cílit na jakékoliv nepřátelské jednotky v dosahu.</Czech>
+            <Italian>Il gruppo in corsa prenderà di mira solo i giocatori. Disabilita per consentire al gruppo di prendere di mira qualsiasi unità ostile nel raggio d'azione.</Italian>
+            <Polish>Grupa szturmowa będzie atakować tylko graczy. Wyłączenie opcji sprawi, że grupa będzie atakować każdą dowolną wrogą jednostkę w zasięgu.</Polish>
+            <Russian>Нападающая группа будет нацеливаться только на игроков. Отключите, чтобы позволить группе нацеливаться на любой враждебный юнит в пределах досягаемости</Russian>
+            <German>Die hetzende Gruppe wird nur Spieler ins Visier nehmen. Durch Ausschalten wird die Gruppe alle feindlichen Einheiten in Reichweite ins Ziel nehmen.</German>
+            <Chinesesimp>冲锋小组只会针对玩家.禁用让小组瞄准范围内的任何敌对单位.</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_DisplayName">
             <English>Radius</English>
             <Czech>Dosah</Czech>
-            <German>Radius</German>
+            <Italian>Raggio</Italian>
             <Polish>Promień</Polish>
             <Russian>Радиус</Russian>
-            <Italian>Raggio</Italian>
+            <German>Radius</German>
             <Chinesesimp>半径</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskRush_Radius_Tooltip">
             <English>Distance rushing group will search for enemies.\nBy default this module only targets enemy players</English>
             <Czech>Vzdálenost nabíhající skupiny po kterou bude hledat nepřátele.\nV základu jsou cílem jen hráči</Czech>
-            <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
+            <Italian>Il gruppo che corre a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
             <Polish>Obszar na którym grupa będzie szukać przeciwników.\nDomyślnie moduł wyszukuje tylko wrogich graczy.</Polish>
             <Russian>Расстояние, на котором нападающая группа будет искать врагов.\nПо умолчанию этот модуль нацелен только на вражеских игроков.</Russian>
-            <Italian>Il gruppo che corre a distanza cercherà i nemici.\nPer impostazione predefinita, questo modulo prende di mira solo i giocatori nemici</Italian>
+            <German>Die Distanz die die hetzende Gruppe nach Feinden sucht.\nStandardgemäß zielt das Such-Modul nur auf Spieler.</German>
             <Chinesesimp>远距离冲锋组会搜索敌人.\n默认此模块只针对敌方玩家</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
-            <English>Enable automatic artillery registration</English>
-            <Czech>Povolit automatické registrování dělostřelectva</Czech>
-            <German>Automisches Registrieren von Artillerie aktivieren</German>
-            <Polish>Włącz automatyczną rejestrację artylerii</Polish>
-            <Russian>Включить автоматическую регистрацию артиллерии</Russian>
-            <Italian>Abilita la registrazione automatica dell'artiglieria</Italian>
-            <Chinesesimp>启用自动火炮指示</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_Tooltip">
-            <English>Automatically adds artillery already present in the mission to Side</English>
-            <Czech>Automaticky přidá dělostřelectvo na stranu, které již je v misi</Czech>
-            <German>Fügt Artillerie die in der Mission vorhanden ist automatisch zur Seite hinzu.</German>
-            <Polish>Automatycznie dodaje artylerię postawioną w misji do puli strony</Polish>
-            <Russian>Автоматически добавляет артиллерию стороне, уже присутствующую в миссии.</Russian>
-            <Italian>Aggiunge automaticamente l'artiglieria già presente nella missione a Side</Italian>
-            <Chinesesimp>自动将任务中已有的火炮添加到这一方</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Self">
-            <English>Self</English>
-            <Czech>Sebe</Czech>
-            <German>Selber</German>
-            <Polish>Własna pozycja</Polish>
-            <Russian>Себя</Russian>
-            <Italian>Se stesso</Italian>
-            <Chinesesimp>自己</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Groups_DisplayName">
-            <English>Groups</English>
-            <Czech>Skupiny</Czech>
-            <German>Gruppen</German>
-            <Polish>Grupy</Polish>
-            <Russian>Группы</Russian>
-            <Italian>Gruppi</Italian>
-            <Chinesesimp>小组</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Groups_Tooltip">
-            <English>Select which unit script applies to.\nList is sorted by distance</English>
-            <Czech>Vybrat jednotku na kterou se script aplikuje.\nSenam je tříděn dle vzdálenosti</Czech>
-            <German>Legt fest, auf welche Einheit das Skript angewendet wird.\nDie List ist nach der Entfernung sortiert.</German>
-            <Polish>Określa na jaką jednostkę ma zadziałać skrypt.\nLista jest sortowana po dystansie.</Polish>
-            <Russian>Выберите, к какому модулю применяется скрипт.\nЛист сортируется по расстоянию</Russian>
-            <Italian>Seleziona a quale unità si applica lo script.\nL'elenco è ordinato per distanza</Italian>
-            <Chinesesimp>选择适用的单位脚本.\n列表按距离排序</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Centers_DisplayName">
-            <English>Center</English>
-            <Czech>Centrum</Czech>
-            <German>Mittelpunkt</German>
-            <Polish>Centrum</Polish>
-            <Russian>Центр</Russian>
-            <Italian>Centro</Italian>
-            <Chinesesimp>中心</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Centers_Tooltip">
-            <English>Sets center for the script execution. This can be self or a LAMBS Dynamic Target selected from the list</English>
-            <Czech>Nastaví centrum pro spuštění skriptu. Může to být vlastní nebo dynamický cíl LAMBS vybraný ze seznamu</Czech>
-            <German>Mittelpunkt für die Skript-Ausführung. Kann das Modul selber sein, oder ein LAMBS dynamisches Ziel aus der Liste sein.</German>
-            <Polish>Ustawia centrum dla wykonywanego skryptu. Moduł może być Dynamicznym Celem LAMBS wybranym z listy lub własną pozycją</Polish>
-            <Russian>Устанавливает центр выполнения скрипта. Это может быть собственная или динамическая цель LAMBS, выбранная из списка.</Russian>
-            <Italian>Imposta il centro per l'esecuzione dello script. Questo può essere se stesso o un target dinamico LAMBS selezionato dall'elenco</Italian>
-            <Chinesesimp>设置脚本执行的中心.这可以是自己或从列表中选择的LAMBS动态目标</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_None">
-            <English>None</English>
-            <Czech>Nikdo</Czech>
-            <German>Keine</German>
-            <Polish>Żaden</Polish>
-            <Russian>Никто</Russian>
-            <Italian>Nessuno</Italian>
-            <Chinesesimp>无</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Random">
-            <English>Random</English>
-            <Czech>Náhodný</Czech>
-            <German>Zufällig</German>
-            <Polish>Losowo</Polish>
-            <Russian>Случайно</Russian>
-            <Italian>A caso</Italian>
-            <Chinesesimp>随机的</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_All">
-            <English>All</English>
-            <Czech>Všichni</Czech>
-            <German>Alle</German>
-            <Polish>Wszystkie</Polish>
-            <Russian>Все</Russian>
-            <Italian>Tutto</Italian>
-            <Chinesesimp>全部的</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_FiredNear">
-            <English>Fired Near</English>
-            <Czech>Vystřelil blízko</Czech>
-            <German>In der Nähe geschossen</German>
-            <Polish>Strzały blisko</Polish>
-            <Russian>Выстрел поблизости</Russian>
-            <Italian>licenziato vicino</Italian>
-            <Chinesesimp>在附近开火</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Fired">
-            <English>Fired</English>
-            <Czech>Vystřelil</Czech>
-            <German>Geschossen</German>
-            <Polish>Wystrzał</Polish>
-            <Russian>Выстрел</Russian>
-            <Italian>Sparo</Italian>
-            <Chinesesimp>开火</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Hit">
-            <English>Hit</English>
-            <Czech>Zasažen</Czech>
-            <German>Getroffen</German>
-            <Polish>Trafienie</Polish>
-            <Russian>Ранение</Russian>
-            <Italian>Incontrato</Italian>
-            <Chinesesimp>命中</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Suppressed">
-            <English>Suppressed</English>
-            <Czech>Potlačen</Czech>
-            <Polish>Przytłoczenie ogniem</Polish>
-            <German>Unterdrückt</German>
-            <Italian>Soppresso</Italian>
-            <Chinesesimp>已压制</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Buildings">
-            <English>Buildings</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Walls">
-            <English>Walls</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Vegetation">
-            <English>Vegetation</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_BuildingsAndVegetation">
-            <English>Buildings and vegetation</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_BuildingsAndWalls">
-            <English>Buildings and walls</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_WallsAndVegetation">
-            <English>Walls and vegetation</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_OnlyIfUGL">
-            <English>Only when units are equipped with an UGL and flares</English>
-            <Czech>Pokud jsou jednotky vybaveni podhlavňovými granátomety a světlicemi</Czech>
-            <Polish>Tylko wtedy, gdy jednostki są wyposażone w granatniki i flary</Polish>
-            <German>Nur wenn Einheiten mit einem UGL und Flares ausgestattet sind</German>
-            <Italian>Solo quando le unità sono dotate di UGL e razzi</Italian>
-            <Chinesesimp>只有当部队装备UGL和照明弹时</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
-            <English>'%1' is only Possible if the Group is local</English>
-            <Czech>'%1' je možná pouze pokud je skupina místní</Czech>
-            <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
-            <Russian>'%1' возможно только в том случае, если группа является локальной.</Russian>
-            <German>'%1' ist nur möglich, wenn die Gruppe lokal ist</German>
-            <Italian>'%1'èpossibile solo se il gruppoèlocale</Italian>
-            <Chinesesimp>'%1' 仅当小组是本地的时才可能</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Context_CreateTarget">
-            <English>Create Dynamic Target</English>
-            <Czech>Vytvořit dynamický cíl</Czech>
-            <German>Erstelle Dynamisches Ziel</German>
-            <Polish>Stwórz Dynamiczny Cel</Polish>
-            <Russian>Создать динамическую цель</Russian>
-            <Italian>Crea target dinamico</Italian>
-            <Chinesesimp>创造动态目标</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Context_Main_DisplayName">
-            <English>LAMBS Danger Waypoints</English>
-            <Czech>LAMBS Danger body</Czech>
-            <Polish>LAMBS Danger Waypoints</Polish>
-            <Russian>Маршрутные точки LAMBS Danger</Russian>
-            <German>LAMBS Danger Wegpunkte</German>
-            <Italian>LAMBS Danger Waypoints</Italian>
-            <Chinesesimp>LAMBS Danger路径点</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Context_Search_DisplayName">
-            <English>LAMBS Danger Search Waypoints</English>
-            <Czech>LAMBS Danger body hledání</Czech>
-            <Polish>LAMBS Danger Search Waypoints</Polish>
-            <Russian>Поисковые точки LAMBS Danger </Russian>
-            <German>LAMBS Danger suchen Wegpunkt</German>
-            <Italian>LAMBS Danger ricerca Waypoints</Italian>
-            <Chinesesimp>LAMBS Danger搜索路径点</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_DisplayName">
             <English>Dynamic reinforcement</English>
             <Czech>Dynamické posily</Czech>
+            <Italian>Rinforzo dinamico</Italian>
             <Polish>Dynamiczne posiłki</Polish>
             <German>Dynamische Verstärkung</German>
-            <Italian>Rinforzo dinamico</Italian>
             <Chinesesimp>动态火力支援</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_Task_EnableReinforcement_Tooltip">
             <English>The unit will respond to known enemy positions that are identified by allies.\nNB: The reinforcement feature will override existing waypoints on groups responding to calls.</English>
             <Czech>Jednotka bude reagovat na známé pozice nepřátel, které jsou identifikovány spojenci.\nNB: Funkce posil přepíše existující body na trase u skupin reagujících na volání.</Czech>
+            <Italian>L'unità risponderà alle posizioni nemiche note identificate dagli alleati.\nNB: la funzione di rinforzo sovrascriverà i waypoint esistenti sui gruppi che rispondono alle chiamate.</Italian>
             <Polish>Jednostka będzie odpowiadać na zagrożenia wykryte przez sojuszników. \nWażne: Ta opcja będzie nadpisywać istniejące punkty nawigacyjne grup odpowiadających na wezwanie.</Polish>
             <German>Die Einheit reagiert auf bekannte feindliche Positionen, die von Verbündeten identifiziert wurden.\nNB: Die Verstärkungsfunktion überschreibt vorhandene Wegpunkte von Gruppen, die auf Funk reagieren.</German>
-            <Italian>L'unità risponderà alle posizioni nemiche note identificate dagli alleati.\nNB: la funzione di rinforzo sovrascriverà i waypoint esistenti sui gruppi che rispondono alle chiamate.</Italian>
             <Chinesesimp>该单位将对盟友识别的已知敌人位置做出响应.\nNB:支援功能将覆盖响应呼叫的组的现有路径点.</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoints_displayName">
-            <English>Advanced AI [LAMBS]</English>
-            <Czech>Pokročilé UI[LAMBS]</Czech>
-            <Polish>Advanced AI [LAMBS]</Polish>
-            <German>Erweiterte KI [LAMBS]</German>
-            <Italian>IA avanzata [LAMBS]</Italian>
-            <Chinesesimp>高级AI [LAMBS]</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Module_Teleport_DisplayName">
+            <English>Teleport units</English>
+            <Czech>Teleportovat jednotky</Czech>
+            <Italian>Unità di teletrasporto</Italian>
+            <Polish>Teleportuj jednostki</Polish>
+            <Russian>Телепортировать юнита</Russian>
+            <German>Einheiten teleportieren</German>
+            <Chinesesimp>传送单位</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
-            <English>TASK ASSAULT</English>
-            <Czech>ÚKOL ÚTOK</Czech>
-            <Polish>ZADANIE ATAK</Polish>
-            <German>AUFGABE ANGRIFF</German>
-            <Italian>COMPITO ASSALTO</Italian>
-            <Chinesesimp>突袭任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_None">
+            <English>None</English>
+            <Czech>Nikdo</Czech>
+            <Italian>Nessuno</Italian>
+            <Polish>Żaden</Polish>
+            <Russian>Никто</Russian>
+            <German>Keine</German>
+            <Chinesesimp>无</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
-            <English>Rushes to target position with no regard for safety</English>
-            <Czech>Naběhne na cílovou pozici bez ohledu na nebezpečí</Czech>
-            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie</Polish>
-            <German>Stürmt ohne Rücksicht auf die Sicherheit zur Zielposition</German>
-            <Italian>Si precipita verso la posizione di destinazione senza riguardo per la sicurezza</Italian>
-            <Chinesesimp>无视安全性冲向目标位置</Chinesesimp>
+        <Key ID="STR_Lambs_WP_OnlyIfUGL">
+            <English>Only when units are equipped with an UGL and flares</English>
+            <Czech>Pokud jsou jednotky vybaveni podhlavňovými granátomety a světlicemi</Czech>
+            <Italian>Solo quando le unità sono dotate di UGL e razzi</Italian>
+            <Polish>Tylko wtedy, gdy jednostki są wyposażone w granatniki i flary</Polish>
+            <German>Nur wenn Einheiten mit einem UGL und Flares ausgestattet sind</German>
+            <Chinesesimp>只有当部队装备UGL和照明弹时</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
-            <English>TASK RETREAT</English>
-            <Czech>ÚKOL ÚSTUP</Czech>
-            <Polish>ZADANIE ODWRÓT</Polish>
-            <German>AUFGABE RÜCKZUG</German>
-            <Italian>COMPITO RITIRO </Italian>
-            <Chinesesimp>撤退任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Random">
+            <English>Random</English>
+            <Czech>Náhodný</Czech>
+            <Italian>A caso</Italian>
+            <Polish>Losowo</Polish>
+            <Russian>Случайно</Russian>
+            <German>Zufällig</German>
+            <Chinesesimp>随机的</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
-            <English>Retreats to target position while ignoring enemies</English>
-            <Czech>Stáhne se na cílovou pozici a během toho bude ignorovat nepřátele</Czech>
-            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów</Polish>
-            <German>Zieht sich zur Zielposition zurück, während Feinde ignoriert werden</German>
-            <Italian>Si ritira nella posizione di destinazione ignorando i nemici</Italian>
-            <Chinesesimp>在无视敌人的情况下撤退到目标位置</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Self">
+            <English>Self</English>
+            <Czech>Sebe</Czech>
+            <Italian>Se stesso</Italian>
+            <Polish>Własna pozycja</Polish>
+            <Russian>Себя</Russian>
+            <German>Selber</German>
+            <Chinesesimp>自己</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
-            <English>TASK GARRISON</English>
-            <Czech>ÚKOL UMÍSTIT POSÁDKU</Czech>
-            <Polish>ZADANIE GARNIZON</Polish>
-            <German>AUFGABE GARNISON</German>
-            <Italian>COMPITO GUARRISONE</Italian>
-            <Chinesesimp>驻防任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_SettingIsOnlyForLocalGroups">
+            <English>'%1' is only Possible if the Group is local</English>
+            <Czech>'%1' je možná pouze pokud je skupina místní</Czech>
+            <Italian>'%1'èpossibile solo se il gruppoèlocale</Italian>
+            <Polish>'%1' jest tylko możliwa, jeśli Grupa jest lokalna</Polish>
+            <Russian>'%1' возможно только в том случае, если группа является локальной.</Russian>
+            <German>'%1' ist nur möglich, wenn die Gruppe lokal ist</German>
+            <Chinesesimp>'%1' 仅当小组是本地的时才可能</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
-            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
-            <Czech>Umístí posádku do budov v okolí bodu oblasti dokončení (Výchozí 50m)</Czech>
-            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
-            <German>Garnisonen in Gebäuden in der Nähe von Wegpunkten bis zum WP-Abschlussradius (Standard 50m)</German>
-            <Italian>Guarnigioni negli edifici intorno al waypoint fino al raggio di completamento del WP (predefinito 50 m)</Italian>
-            <Chinesesimp>路径点周围建筑物的驻守至WP完成半径(默认50m)</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_DisplayName">
+            <English>Enable automatic artillery registration</English>
+            <Czech>Povolit automatické registrování dělostřelectva</Czech>
+            <Italian>Abilita la registrazione automatica dell'artiglieria</Italian>
+            <Polish>Włącz automatyczną rejestrację artylerii</Polish>
+            <Russian>Включить автоматическую регистрацию артиллерии</Russian>
+            <German>Automisches Registrieren von Artillerie aktivieren</German>
+            <Chinesesimp>启用自动火炮指示</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
-            <English>TASK PATROL</English>
-            <Czech>ÚKOL HLÍDKA</Czech>
-            <Polish>ZADANIE PATROL</Polish>
-            <German>AUFGABE PATROUILLE</German>
-            <Italian>COMPITO PATTUGLIA</Italian>
-            <Chinesesimp>巡逻任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Settings_AutoRegisterArtillery_Tooltip">
+            <English>Automatically adds artillery already present in the mission to Side</English>
+            <Czech>Automaticky přidá dělostřelectvo na stranu, které již je v misi</Czech>
+            <Italian>Aggiunge automaticamente l'artiglieria già presente nella missione a Side</Italian>
+            <Polish>Automatycznie dodaje artylerię postawioną w misji do puli strony</Polish>
+            <Russian>Автоматически добавляет артиллерию стороне, уже присутствующую в миссии.</Russian>
+            <German>Fügt Artillerie die in der Mission vorhanden ist automatisch zur Seite hinzu.</German>
+            <Chinesesimp>自动将任务中已有的火炮添加到这一方</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
-            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
-            <Czech>Náhodná patrola v rámci bodu oblasti dokončení (Výchozí 200m)\nNB odstraní veškeré existující body skupiny</Czech>
-            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
-            <German>Zufällige Patrouille innerhalb des WP-Abschlussradius (Standard 200m)\nNB wird alle vorhandenen Wegpunkte der Gruppe entfernen</German>
-            <Italian>Pattuglia randomizzata entro il raggio di completamento del WP (predefinito 200 m)\nNB rimuoverà tutti i waypoint esistenti dal gruppo</Italian>
-            <Chinesesimp>WP完成半径内的随机巡逻(默认200m)\nNB将从组中删除所有现有的路径点</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Suppressed">
+            <English>Suppressed</English>
+            <Czech>Potlačen</Czech>
+            <Italian>Soppresso</Italian>
+            <Polish>Przytłoczenie ogniem</Polish>
+            <German>Unterdrückt</German>
+            <Chinesesimp>已压制</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
-            <English>TASK RUSH</English>
-            <Czech>ÚKOL NÁBĚH</Czech>
-            <Polish>ZADANIE SZTURM</Polish>
-            <German>AUFGABE HETZEN</German>
-            <Italian>COMPITO FRETTA</Italian>
-            <Chinesesimp>冲锋任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Vegetation">
+            <English>Vegetation</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
-            <English>Rushes players within WP completion radius (Default 1000m)</English>
-            <Czech>Naběhne na hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Hetzt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
-            <Italian>Spinge i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Chinesesimp>在WP完成半径内冲向玩家(默认1000m)</Chinesesimp>
+        <Key ID="STR_Lambs_WP_Walls">
+            <English>Walls</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
-            <English>TASK HUNT</English>
-            <Czech>ÚKOL LOVIT</Czech>
-            <Polish>ZADANIE POLOWANIE</Polish>
-            <German>AUFGABE JAGEN</German>
-            <Italian>COMPITO CACCIA</Italian>
-            <Chinesesimp>搜寻任务</Chinesesimp>
+        <Key ID="STR_Lambs_WP_WallsAndVegetation">
+            <English>Walls and vegetation</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
-            <English>Hunts players within WP completion radius (Default 1000m)</English>
-            <Czech>Loví hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
-            <Italian>Caccia i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Chinesesimp>在WP完成半径内追捕玩家(默认1000米)</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
-            <English>TASK CREEP</English>
-            <Czech>ÚKOL PLÍŽIT SE</Czech>
-            <Polish>ZADANIE ZASADZKA</Polish>
-            <German>AUFGABE SCHLEICHEN</German>
-            <Italian>COMPITO STRISCIAMENTO</Italian>
-            <Chinesesimp>匍匐任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
-            <English>Stalks players within WP completion radius (Default 1000m)</English>
-            <Czech>Pronásleduje hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
-            <Italian>Insegue i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
-            <English>TASK CQB</English>
-            <Czech>ÚKOL CQB</Czech>
-            <Polish>ZADANIE CQB</Polish>
-            <German>AUFGABE CQB</German>
-            <Italian>COMPITO CQB</Italian>
-            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
-            <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
-            <Czech>Vstoupí a vyčistí budovy v rámci bodu oblasti dokončení (Výchozí 50m)</Czech>
-            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
-            <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)</German>
-            <Italian>Entra e libera gli edifici entro il raggio di completamento del WP (predefinito 50 m)</Italian>
-            <Chinesesimp>CQB任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
-            <English>REGISTER ARTILLERY</English>
-            <Czech>ZAREGISTROVAT DĚLOSTŘELECTVO</Czech>
-            <Polish>REJESTRACJA ARTYLERII</Polish>
-            <German>ARTILLERIE REGISTRIEREN</German>
-            <Italian>REGISTRAZIONE ARTIGLIERIA</Italian>
-            <Chinesesimp>火炮指示</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
-            <English>Registers artillery for dynamic use</English>
-            <Czech>Zaregistruje dělostřelectvo pro dynamické užití</Czech>
-            <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
-            <German>Registriert Artillerie für den dynamischen Einsatz</German>
-            <Italian>Registri artiglieria per uso dinamico</Italian>
-            <Chinesesimp>动态使用方面的火炮指示</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_displayName">
-            <English>TASK ASSAULT</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_Tooltip">
-            <English>Rushes to target position with no regard for safety\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_displayName">
-            <English>TASK RETREAT</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_Tooltip">
-            <English>Retreats to target position while ignoring enemies\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_displayName">
-            <English>TASK GARRISON</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_Tooltip">
-            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_displayName">
-            <English>TASK PATROL</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_Tooltip">
-            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_displayName">
-            <English>TASK RUSH</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_Tooltip">
-            <English>Rushes players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_displayName">
-            <English>TASK HUNT</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_Tooltip">
-            <English>Hunts players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_displayName">
-            <English>TASK CREEP</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_Tooltip">
-            <English>Stalks players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_displayName">
-            <English>TASK CQB</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_Tooltip">
-            <English>Enters and clears buildings within WP completion radius (Default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_Tooltip">
+            <English>Registers artillery for dynamic use\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Zaregistruje dělostřelectvo pro dynamické užití\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Registri artiglieria per uso dinamico\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Rejestruje artylerię do dynamicznego użytku\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Registriert Artillerie für den dynamischen Einsatz\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>动态使用方面的火炮指示\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_Tooltip">
-            <English>Registers artillery for dynamic use\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_Tooltip">
+            <English>Rushes to target position with no regard for safety\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</English>
+            <Czech>Naběhne na cílovou pozici bez ohledu na nebezpečí\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Czech>
+            <Italian>Si precipita verso la posizione di destinazione senza riguardo per la sicurezza\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Italian>
+            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Polish>
+            <German>Stürmt ohne Rücksicht auf die Sicherheit zur Zielposition\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>无视安全性冲向目标位置\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_displayName">
+            <English>TASK ASSAULT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_Tooltip">
+            <English>Enters and clears buildings within WP completion radius (Default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Vstoupí a vyčistí budovy v rámci bodu oblasti dokončení (Výchozí 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Entra e libera gli edifici entro il raggio di completamento del WP (predefinito 50 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>CQB任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_displayName">
+            <English>TASK CQB</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_Tooltip">
+            <English>Stalks players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Pronásleduje hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
+            <Italian>Insegue i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
+            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
+            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_displayName">
+            <English>TASK CREEP</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_Tooltip">
+            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Umístí posádku do budov v okolí bodu oblasti dokončení (Výchozí 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Guarnigioni negli edifici intorno al waypoint fino al raggio di completamento del WP (predefinito 50 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Garnisonen in Gebäuden in der Nähe von Wegpunkten bis zum WP-Abschlussradius (Standard 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>路径点周围建筑物的驻守至WP完成半径(默认50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_displayName">
+            <English>TASK GARRISON</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_Tooltip">
+            <English>Hunts players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Loví hráče v rámci bodu oblasti dokončení (Výchozí 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Caccia i giocatori entro il raggio di completamento del WP (predefinito 1000 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在WP完成半径内追捕玩家(默认1000米)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_displayName">
+            <English>TASK HUNT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_Tooltip">
+            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Náhodná patrola v rámci bodu oblasti dokončení (Výchozí 200m)\nNB odstraní veškeré existující body skupiny\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Pattuglia randomizzata entro il raggio di completamento del WP (predefinito 200 m)\nNB rimuoverà tutti i waypoint esistenti dal gruppo\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Zufällige Patrouille innerhalb des WP-Abschlussradius (Standard 200m)\nNB wird alle vorhandenen Wegpunkte der Gruppe entfernen\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>WP完成半径内的随机巡逻(默认200m)\nNB将从组中删除所有现有的路径点\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_displayName">
+            <English>TASK PATROL</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_Tooltip">
+            <English>Retreats to target position while ignoring enemies\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Stáhne se na cílovou pozici a během toho bude ignorovat nepřátele\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Si ritira nella posizione di destinazione ignorando i nemici\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Zieht sich zur Zielposition zurück, während Feinde ignoriert werden\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在无视敌人的情况下撤退到目标位置\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_displayName">
+            <English>TASK RETREAT</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_Tooltip">
+            <English>Rushes players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Naběhne na hráče v rámci bodu oblasti dokončení (Výchozí 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Spinge i giocatori entro il raggio di completamento del WP (predefinito 1000 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Hetzt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在WP完成半径内冲向玩家(默认1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_displayName">
+            <English>TASK RUSH</English>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
+            <English>REGISTER ARTILLERY</English>
+            <Czech>ZAREGISTROVAT DĚLOSTŘELECTVO</Czech>
+            <Italian>REGISTRAZIONE ARTIGLIERIA</Italian>
+            <Polish>REJESTRACJA ARTYLERII</Polish>
+            <German>ARTILLERIE REGISTRIEREN</German>
+            <Chinesesimp>火炮指示</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
+            <English>TASK ASSAULT</English>
+            <Czech>ÚKOL ÚTOK</Czech>
+            <Italian>COMPITO ASSALTO</Italian>
+            <Polish>ZADANIE ATAK</Polish>
+            <German>AUFGABE ANGRIFF</German>
+            <Chinesesimp>突袭任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
+            <English>TASK CQB</English>
+            <Czech>ÚKOL CQB</Czech>
+            <Italian>COMPITO CQB</Italian>
+            <Polish>ZADANIE CQB</Polish>
+            <German>AUFGABE CQB</German>
+            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
+            <English>TASK CREEP</English>
+            <Czech>ÚKOL PLÍŽIT SE</Czech>
+            <Italian>COMPITO STRISCIAMENTO</Italian>
+            <Polish>ZADANIE ZASADZKA</Polish>
+            <German>AUFGABE SCHLEICHEN</German>
+            <Chinesesimp>匍匐任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
+            <English>TASK GARRISON</English>
+            <Czech>ÚKOL UMÍSTIT POSÁDKU</Czech>
+            <Italian>COMPITO GUARRISONE</Italian>
+            <Polish>ZADANIE GARNIZON</Polish>
+            <German>AUFGABE GARNISON</German>
+            <Chinesesimp>驻防任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
+            <English>TASK HUNT</English>
+            <Czech>ÚKOL LOVIT</Czech>
+            <Italian>COMPITO CACCIA</Italian>
+            <Polish>ZADANIE POLOWANIE</Polish>
+            <German>AUFGABE JAGEN</German>
+            <Chinesesimp>搜寻任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
+            <English>TASK PATROL</English>
+            <Czech>ÚKOL HLÍDKA</Czech>
+            <Italian>COMPITO PATTUGLIA</Italian>
+            <Polish>ZADANIE PATROL</Polish>
+            <German>AUFGABE PATROUILLE</German>
+            <Chinesesimp>巡逻任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
+            <English>TASK RETREAT</English>
+            <Czech>ÚKOL ÚSTUP</Czech>
+            <Italian>COMPITO RITIRO </Italian>
+            <Polish>ZADANIE ODWRÓT</Polish>
+            <German>AUFGABE RÜCKZUG</German>
+            <Chinesesimp>撤退任务</Chinesesimp>
+        </Key>
+        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
+            <English>TASK RUSH</English>
+            <Czech>ÚKOL NÁBĚH</Czech>
+            <Italian>COMPITO FRETTA</Italian>
+            <Polish>ZADANIE SZTURM</Polish>
+            <German>AUFGABE HETZEN</German>
+            <Chinesesimp>冲锋任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification_NoArtillery">
             <English>No artillery is available to target this position!</English>

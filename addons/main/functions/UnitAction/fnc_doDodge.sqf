@@ -57,7 +57,7 @@ if (_stance isEqualTo "STAND") then {_unit setUnitPosWeak "MIDDLE";};
 private _anim = call {
 
     // drop down
-    if !(_nearDistance || {_still}) exitWith {
+    if !(_nearDistance || _still) exitWith {
         _unit setUnitPosWeak "DOWN";
         "Down"
     };

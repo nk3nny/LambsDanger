@@ -62,7 +62,7 @@ if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
 };
 
 // indoor units exit
-if (RND(0.05) && {_indoor} && {RND(EGVAR(main,indoorMove))}) exitWith {
+if (_indoor && { RND(0.05) } && { RND(EGVAR(main,indoorMove)) }) exitWith {
     [_unit, _pos] call EFUNC(main,doReposition);
     _timeout
 };
