@@ -24,7 +24,7 @@ if (_units isEqualTo []) exitWith {false};
 
 {
     private _unit = _x;
-    [_unit, _pos, nil, _buildings] call FUNC(doHide);
+    [_unit, _pos] call FUNC(doHide);
     _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
 
     // force movement!
