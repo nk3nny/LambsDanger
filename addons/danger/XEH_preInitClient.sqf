@@ -10,7 +10,7 @@ Here four buttons are added:
 These functions and buttons could conceivably be moved to their own module.
 They might also benefit from added interface and more nuanced functions handling.
 That said: within the current scope of the AI mod. They can make a comfortable
-home here. Until revisited by more capable personell.
+home here. Until revisited by more capable people.
 - nkenny
 */
 
