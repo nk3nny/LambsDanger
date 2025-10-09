@@ -30,9 +30,19 @@ switch (_mode) do {
             }, [_side, _salvo, _spread, _skipCheckround, getPos _logic]] call CBA_fnc_waitUntilAndExecute;
         };
         if (_isCuratorPlaced) then {
+
+            private _sides = [west, east, independent] select {
+                [_x, getPos _logic] call FUNC(sideHasArtillery);
+            };
+
+            if (_sides isEqualTo []) exitWith {
+                [objNull, LLSTRING(Module_TaskArtillery_ZeusNotification_NoArtillery)] call BIS_fnc_showCuratorFeedbackMessage;
+                deleteVehicle _logic;
+            };
+
             [LSTRING(Module_TaskArtillery_DisplayName),
                 [
-                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), [west, east, independent]],
+                    [LSTRING(Module_TaskArtillery_Side_DisplayName), "SIDE", LSTRING(Module_TaskArtillery_Side_Tooltip), _sides],
                     [LSTRING(Module_TaskArtillery_MainSalvo_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_MainSalvo_Tooltip), [1, 20], [2, 1], TASK_ARTILLERY_ROUNDS, 0],
                     [LSTRING(Module_TaskArtillery_Spread_DisplayName), "SLIDER", LSTRING(Module_TaskArtillery_Spread_Tooltip), [1, 200], [2, 1], TASK_ARTILLERY_SPREAD, 2],
                     [LSTRING(Module_TaskArtillery_SkipCheckrounds_DisplayName), "BOOLEAN", LSTRING(Module_TaskArtillery_SkipCheckrounds_Tooltip), TASK_ARTILLERY_SKIPCHECKROUNDS]
