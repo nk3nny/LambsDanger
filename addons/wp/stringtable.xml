@@ -616,12 +616,6 @@
         <Key ID="STR_Lambs_WP_Module_TaskDefend_Stealth_Tooltip">
             <English>The group will hold fire and attempt to ambush attackers.</English>
         </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_DisplayName">
-            <English>Teleport units</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskDefend_Teleport_Tooltip">
-            <English>Teleport units instantly into building and cover positions</English>
-        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskDefend_UseCover_DisplayName">
             <English>Defensive positions</English>
         </Key>
@@ -1119,65 +1113,102 @@
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_Tooltip">
             <English>Registers artillery for dynamic use\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Zaregistruje dělostřelectvo pro dynamické užití\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Registri artiglieria per uso dinamico\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Rejestruje artylerię do dynamicznego użytku\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Registriert Artillerie für den dynamischen Einsatz\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>动态使用方面的火炮指示\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_Tooltip">
             <English>Rushes to target position with no regard for safety\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</English>
+            <Czech>Naběhne na cílovou pozici bez ohledu na nebezpečí\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Czech>
+            <Italian>Si precipita verso la posizione di destinazione senza riguardo per la sicurezza\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Italian>
+            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Polish>
+            <German>Stürmt ohne Rücksicht auf die Sicherheit zur Zielposition\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>无视安全性冲向目标位置\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskAssault_displayName">
             <English>TASK ASSAULT</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_Tooltip">
             <English>Enters and clears buildings within WP completion radius (Default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Vstoupí a vyčistí budovy v rámci bodu oblasti dokončení (Výchozí 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Entra e libera gli edifici entro il raggio di completamento del WP (predefinito 50 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>CQB任务</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCQB_displayName">
             <English>TASK CQB</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_Tooltip">
             <English>Stalks players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Pronásleduje hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
+            <Italian>Insegue i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
+            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
+            <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
+            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskCreep_displayName">
             <English>TASK CREEP</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_Tooltip">
             <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Umístí posádku do budov v okolí bodu oblasti dokončení (Výchozí 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Guarnigioni negli edifici intorno al waypoint fino al raggio di completamento del WP (predefinito 50 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Garnisonen in Gebäuden in der Nähe von Wegpunkten bis zum WP-Abschlussradius (Standard 50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>路径点周围建筑物的驻守至WP完成半径(默认50m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskGarrison_displayName">
             <English>TASK GARRISON</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_Tooltip">
             <English>Hunts players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Loví hráče v rámci bodu oblasti dokončení (Výchozí 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Caccia i giocatori entro il raggio di completamento del WP (predefinito 1000 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在WP完成半径内追捕玩家(默认1000米)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskHunt_displayName">
             <English>TASK HUNT</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_Tooltip">
             <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Náhodná patrola v rámci bodu oblasti dokončení (Výchozí 200m)\nNB odstraní veškeré existující body skupiny\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Pattuglia randomizzata entro il raggio di completamento del WP (predefinito 200 m)\nNB rimuoverà tutti i waypoint esistenti dal gruppo\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Zufällige Patrouille innerhalb des WP-Abschlussradius (Standard 200m)\nNB wird alle vorhandenen Wegpunkte der Gruppe entfernen\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>WP完成半径内的随机巡逻(默认200m)\nNB将从组中删除所有现有的路径点\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskPatrol_displayName">
             <English>TASK PATROL</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_Tooltip">
             <English>Retreats to target position while ignoring enemies\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Stáhne se na cílovou pozici a během toho bude ignorovat nepřátele\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Si ritira nella posizione di destinazione ignorando i nemici\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Zieht sich zur Zielposition zurück, während Feinde ignoriert werden\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在无视敌人的情况下撤退到目标位置\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_Tooltip">
             <English>Rushes players within WP completion radius (Default 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</English>
+            <Czech>Naběhne na hráče v rámci bodu oblasti dokončení (Výchozí 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Czech>
+            <Italian>Spinge i giocatori entro il raggio di completamento del WP (predefinito 1000 m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Italian>
+            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Polish>
+            <German>Hetzt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</German>
+            <Chinesesimp>在WP完成半径内冲向玩家(默认1000m)\nDEPRECATED, USE MODULES FOR MORE FLEXIBILITY</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_Deprecated_TaskRush_displayName">
             <English>TASK RUSH</English>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_Tooltip">
-            <English>Registers artillery for dynamic use</English>
-            <Czech>Zaregistruje dělostřelectvo pro dynamické užití</Czech>
-            <Italian>Registri artiglieria per uso dinamico</Italian>
-            <Polish>Rejestruje artylerię do dynamicznego użytku</Polish>
-            <German>Registriert Artillerie für den dynamischen Einsatz</German>
-            <Chinesesimp>动态使用方面的火炮指示</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_RegisterArtillery_displayName">
             <English>REGISTER ARTILLERY</English>
@@ -1187,14 +1218,6 @@
             <German>ARTILLERIE REGISTRIEREN</German>
             <Chinesesimp>火炮指示</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_Tooltip">
-            <English>Rushes to target position with no regard for safety</English>
-            <Czech>Naběhne na cílovou pozici bez ohledu na nebezpečí</Czech>
-            <Italian>Si precipita verso la posizione di destinazione senza riguardo per la sicurezza</Italian>
-            <Polish>Pędzi do pozycji docelowej bez względu na zagrożenie</Polish>
-            <German>Stürmt ohne Rücksicht auf die Sicherheit zur Zielposition</German>
-            <Chinesesimp>无视安全性冲向目标位置</Chinesesimp>
-        </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskAssault_displayName">
             <English>TASK ASSAULT</English>
             <Czech>ÚKOL ÚTOK</Czech>
@@ -1203,28 +1226,12 @@
             <German>AUFGABE ANGRIFF</German>
             <Chinesesimp>突袭任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_Tooltip">
-            <English>Enters and clears buildings within WP completion radius (Default 50m)</English>
-            <Czech>Vstoupí a vyčistí budovy v rámci bodu oblasti dokončení (Výchozí 50m)</Czech>
-            <Italian>Entra e libera gli edifici entro il raggio di completamento del WP (predefinito 50 m)</Italian>
-            <Polish>Wchodzi i czyści budynki w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 50m)</Polish>
-            <German>Betritt und säubert Gebäude innerhalb des WP-Abschlussradius (Standard 50m)</German>
-            <Chinesesimp>CQB任务</Chinesesimp>
-        </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCQB_displayName">
             <English>TASK CQB</English>
             <Czech>ÚKOL CQB</Czech>
             <Italian>COMPITO CQB</Italian>
             <Polish>ZADANIE CQB</Polish>
             <German>AUFGABE CQB</German>
-            <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_Tooltip">
-            <English>Stalks players within WP completion radius (Default 1000m)</English>
-            <Czech>Pronásleduje hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Italian>Insegue i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Polish>Śledzi graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Verfolgt Spieler innerhalb des WP-Abschluss Radiuses (Standard 1000m)</German>
             <Chinesesimp>跟踪WP完成半径内的玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskCreep_displayName">
@@ -1235,14 +1242,6 @@
             <German>AUFGABE SCHLEICHEN</German>
             <Chinesesimp>匍匐任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_Tooltip">
-            <English>Garrisons in buildings around waypoint out to WP completion radius (default 50m)</English>
-            <Czech>Umístí posádku do budov v okolí bodu oblasti dokončení (Výchozí 50m)</Czech>
-            <Italian>Guarnigioni negli edifici intorno al waypoint fino al raggio di completamento del WP (predefinito 50 m)</Italian>
-            <Polish>Garnizonuje w budynkach w promieniu zaliczenia punktu nawigacyjnego</Polish>
-            <German>Garnisonen in Gebäuden in der Nähe von Wegpunkten bis zum WP-Abschlussradius (Standard 50m)</German>
-            <Chinesesimp>路径点周围建筑物的驻守至WP完成半径(默认50m)</Chinesesimp>
-        </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskGarrison_displayName">
             <English>TASK GARRISON</English>
             <Czech>ÚKOL UMÍSTIT POSÁDKU</Czech>
@@ -1250,14 +1249,6 @@
             <Polish>ZADANIE GARNIZON</Polish>
             <German>AUFGABE GARNISON</German>
             <Chinesesimp>驻防任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_Tooltip">
-            <English>Hunts players within WP completion radius (Default 1000m)</English>
-            <Czech>Loví hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Italian>Caccia i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Polish>Poluje na graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Jagt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
-            <Chinesesimp>在WP完成半径内追捕玩家(默认1000米)</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskHunt_displayName">
             <English>TASK HUNT</English>
@@ -1267,14 +1258,6 @@
             <German>AUFGABE JAGEN</German>
             <Chinesesimp>搜寻任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_Tooltip">
-            <English>Randomised patrol within WP completion radius (Default 200m)\nNB will remove all existing waypoints from group</English>
-            <Czech>Náhodná patrola v rámci bodu oblasti dokončení (Výchozí 200m)\nNB odstraní veškeré existující body skupiny</Czech>
-            <Italian>Pattuglia randomizzata entro il raggio di completamento del WP (predefinito 200 m)\nNB rimuoverà tutti i waypoint esistenti dal gruppo</Italian>
-            <Polish>Losowy patrol w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 200m)\nWażne: Usuwa wszystkie istniejące punkty nawigacyjne</Polish>
-            <German>Zufällige Patrouille innerhalb des WP-Abschlussradius (Standard 200m)\nNB wird alle vorhandenen Wegpunkte der Gruppe entfernen</German>
-            <Chinesesimp>WP完成半径内的随机巡逻(默认200m)\nNB将从组中删除所有现有的路径点</Chinesesimp>
-        </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskPatrol_displayName">
             <English>TASK PATROL</English>
             <Czech>ÚKOL HLÍDKA</Czech>
@@ -1282,14 +1265,6 @@
             <Polish>ZADANIE PATROL</Polish>
             <German>AUFGABE PATROUILLE</German>
             <Chinesesimp>巡逻任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_Tooltip">
-            <English>Retreats to target position while ignoring enemies</English>
-            <Czech>Stáhne se na cílovou pozici a během toho bude ignorovat nepřátele</Czech>
-            <Italian>Si ritira nella posizione di destinazione ignorando i nemici</Italian>
-            <Polish>Wycofuje się na pozycję docelową, ignorując wrogów</Polish>
-            <German>Zieht sich zur Zielposition zurück, während Feinde ignoriert werden</German>
-            <Chinesesimp>在无视敌人的情况下撤退到目标位置</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
@@ -1299,14 +1274,6 @@
             <German>AUFGABE RÜCKZUG</German>
             <Chinesesimp>撤退任务</Chinesesimp>
         </Key>
-        <Key ID="STR_Lambs_WP_Waypoint_TaskRush_Tooltip">
-            <English>Rushes players within WP completion radius (Default 1000m)</English>
-            <Czech>Naběhne na hráče v rámci bodu oblasti dokončení (Výchozí 1000m)</Czech>
-            <Italian>Spinge i giocatori entro il raggio di completamento del WP (predefinito 1000 m)</Italian>
-            <Polish>Pędzi do graczy w promieniu zaliczenia punktu nawigacyjnego (Domyślnie 1000m)</Polish>
-            <German>Hetzt Spieler innerhalb des WP-Abschlussradius (Standard 1000m)</German>
-            <Chinesesimp>在WP完成半径内冲向玩家(默认1000m)</Chinesesimp>
-        </Key>
         <Key ID="STR_Lambs_WP_Waypoint_TaskRush_displayName">
             <English>TASK RUSH</English>
             <Czech>ÚKOL NÁBĚH</Czech>
@@ -1314,14 +1281,6 @@
             <Polish>ZADANIE SZTURM</Polish>
             <German>AUFGABE HETZEN</German>
             <Chinesesimp>冲锋任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Waypoints_displayName">
-            <English>Advanced AI [LAMBS]</English>
-            <Czech>Pokročilé UI[LAMBS]</Czech>
-            <Italian>IA avanzata [LAMBS]</Italian>
-            <Polish>Advanced AI [LAMBS]</Polish>
-            <German>Erweiterte KI [LAMBS]</German>
-            <Chinesesimp>高级AI [LAMBS]</Chinesesimp>
         </Key>
     </Package>
 </Project>
