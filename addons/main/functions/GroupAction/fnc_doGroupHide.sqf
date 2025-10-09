@@ -6,8 +6,7 @@
  * Arguments:
  * 0: units list <ARRAY>
  * 1: danger position <ARRAY> or <OBJECT>
- * 2: list of buildings <ARRAY>
- * 3: reason for hiding (used in debugging) <STRING>
+ * 2: reason for hiding (used in debugging) <STRING>
  *
  * Return Value:
  * bool
@@ -17,7 +16,7 @@
  *
  * Public: No
 */
-params ["_units", "_pos", ["_buildings", []], ["_action", "group"]];
+params ["_units", "_pos", ["_action", "group"]];
 
 // check units
 _units = _units select { _x call FUNC(isAlive) && { isNull objectParent _x } && { !isPlayer _x } };
