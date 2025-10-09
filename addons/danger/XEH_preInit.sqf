@@ -26,7 +26,7 @@ if (isNil QGVAR(fsmPriorities)) then {
 
 // FSM setting ~ minimum time for danger to last
 if (isNil QGVAR(dangerUntil)) then {
-    GVAR(dangerUntil) = 4;
+    GVAR(dangerUntil) = 3;
 };
 
 // EH handling reinforcement and combat mode

@@ -18,7 +18,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_cycle", 18], ["_delay", 85]];
+params ["_group", "_target", ["_units", []], ["_delay", 85]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -46,9 +46,7 @@ if ((_target select 2) > 6) then {
             _group setSpeedMode _speedMode;
             _group setFormation _formation;
             {
-                _x setVariable [QGVAR(forceMove), nil];
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
-                _x setUnitPos "AUTO";
                 _x doFollow leader _x;
                 _x forceSpeed -1;
             } forEach (units _group);
@@ -70,16 +68,15 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-private _buildings = [_target, 28, true, false, true] call EFUNC(main,findBuildings);
-_buildings = _buildings apply { [_unit distanceSqr _x, _x] };
-_buildings sort true;
-_buildings = _buildings apply { _x select 1 };
+private _buildings = [_target, 28, true, true, true] call EFUNC(main,findBuildings);
+
+// more than 25 building positions. Reduce size!
+if (count _buildings > 25) then {
+    _buildings resize 25
+};
 
 // add building positions to group memory
 _group setVariable [QEGVAR(main,groupMemory), _buildings];
-
-// add base position
-if (_buildings isEqualTo []) then {_buildings pushBack _target;};
 
 // find vehicles
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
@@ -102,7 +99,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Assaulting", EGVAR(main,debug_f
 
 // gesture
 [_unit, "gestureGo"] call EFUNC(main,doGesture);
-[_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
+[_units select -1, "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", "Advance", 125] call EFUNC(main,doCallout);
@@ -121,15 +118,12 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
 _units doWatch objNull;
-doStop _units;
+_units doFollow _unit;
 
 // check for reload
 {
     reload _x;
 } forEach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
-
-// execute function
-[{_this call EFUNC(main,doGroupAssault)}, [_cycle, _units + [_unit], _buildings], 2 + random 3] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {

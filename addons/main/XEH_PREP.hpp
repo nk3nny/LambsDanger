@@ -8,6 +8,7 @@ PREP(doShareInformation);
 PREP(getLauncherUnits);
 PREP(getShareInformationParams);
 PREP(shouldSuppressPosition);
+PREP(checkVisibilityList);
 
 PREP(eventCallback);
 PREP(findBuildings);
@@ -30,13 +31,14 @@ PREP(parseData);
 PREP(removeEventhandlers);
 PREP(getCompatibleThrowMuzzle);
 
-SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
 SUBPREP(GroupAction,doGroupHide);
 SUBPREP(GroupAction,doGroupSuppress);
 SUBPREP(GroupAction,doGroupStaticDeploy);
 SUBPREP(GroupAction,doGroupStaticFind);
 SUBPREP(GroupAction,doGroupStaticPack);
+SUBPREP(GroupAction,doGroupCommandoDeploy);
+SUBPREP(GroupAction,doGroupCommandoPack);
 
 SUBPREP(UnitAction,doAssault);
 SUBPREP(UnitAction,doAssaultCQB);
@@ -55,6 +57,7 @@ SUBPREP(UnitAction,doSuppress);
 SUBPREP(UnitAction,doUGL);
 
 SUBPREP(VehicleAction,doVehicleAssault);
+SUBPREP(VehicleAction,doVehicleAssaultMove);
 SUBPREP(VehicleAction,doVehicleJink);
 SUBPREP(VehicleAction,doVehicleRotate);
 SUBPREP(VehicleAction,doVehicleSuppress);

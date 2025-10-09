@@ -18,7 +18,7 @@
 params ["_unit", ["_target", objNull]];
 
 // speed
-if ((behaviour _unit) isEqualTo "STEALTH") exitWith {_unit forceSpeed 1; 1};
+if ( (getSuppression _unit) > 0.9 || (behaviour _unit) isEqualTo "STEALTH") exitWith {_unit forceSpeed 1; 1};
 private _distanceSqr = _unit distanceSqr _target;
 if ((speedMode _unit) isEqualTo "FULL") exitWith {private _speed = [24, 3] select (_distanceSqr < 144); _unit forceSpeed _speed; _speed};
 if (_distanceSqr > 6400) exitWith {_unit forceSpeed -1; -1};
