@@ -44,7 +44,7 @@ if (_units isEqualTo []) exitWith {false};
         [_unit, _pos],
         20 + random 40,
         {
-            params ["_unit", ["_pos", [0, 0, 0]]];
+            params ["_unit"];
             _unit setVariable [QEGVAR(danger,forceMove), nil];
         }
     ] call CBA_fnc_waitUntilAndExecute;
