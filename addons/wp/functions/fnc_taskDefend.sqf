@@ -172,7 +172,6 @@ if (_stealth) then {
 
 // teleport
 if (_teleport) then {
-
     private _units = (units _group) select { !(_x getVariable [QEGVAR(danger,forceMove), false ]) && { (vehicle _x) isKindOf "CAManBase" } };
     if (count _units > count _defensivePos) then {_units resize (count _defensivePos)};
     [_defensivePos, true] call CBA_fnc_shuffle;
@@ -212,7 +211,6 @@ private _handle = [
             // unit is outside zone -- return to zone or stacked
             private _nearby = _x nearEntities ["CAManBase", 1];
             if (_unit distance2D _pos > _radius || { count _nearby > 1 }) then {
-                // systemChat format ["%1 %2 %3!", side _unit, ["outside", "stacked"] select (count _nearby > 1), name _unit];
                 _unit doMove (_pos getPos [_radius * 0.9, _pos getDir _unit]);
                 _units deleteAt _forEachIndex;
             };
@@ -234,9 +232,6 @@ private _handle = [
 
         // give orders
         if (!isNull _target && _defendUpdate < time) then {
-
-            // debug
-            // systemChat format ["%1 Defend - %2 @ %3m - %4 units - hide %5", side _group, name _target, round _distance2D, count _units, count _defensivePos];
 
             // if enemy within range
             if (_distance2D < _radius) exitWith {
@@ -271,18 +266,11 @@ private _handle = [
                 // check available cover
                 if (count _units > count _defensivePos) then {_units resize (count _defensivePos)};
 
-                // debug
-                // systemChat format ["%1 units vs hides - ready units %2  - hides %3  - time %4", side _group, count _units, count _defensivePos, time];
-
                 // units move
                 {
                     private _unit = _x;
                     private _movePos = (_defensivePos select _forEachIndex);
                     private _moveDistance2D = _unit distance2D _movePos;
-
-
-                    // debug
-                    // systemChat format ["%1 unitMove %2 - %3m - %4", side _unit, name _unit, round _moveDistance2D, currentCommand _unit];
 
                     if (_moveDistance2D > 3 && {unitReady _unit || (currentCommand _unit) isEqualTo "STOP"}) then {
                         _unit doMove _movePos;
