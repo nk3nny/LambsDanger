@@ -16,7 +16,7 @@
  * success
  *
  * Example:
- * [bob, angryJoe] call lambs_main_fnc_doVehicleRotate;
+ * [bob, reallyAgryJoe] call lambs_main_fnc_doVehicleRotate;
  *
  * Public: No
 */
