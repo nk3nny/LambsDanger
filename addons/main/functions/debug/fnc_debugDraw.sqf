@@ -182,7 +182,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                 ];
             };
             //drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];  hide direct target lines to reduce clutter ~ nkenny
-            [name _currentTarget, "None"] select (isNull _currentTarget);
+            [typeOf _currentTarget, "None"] select (isNull _currentTarget);
         } else {
             if (_currentTarget isEqualType []) then {
                 drawLine3D [_renderPos, _currentTarget call CBA_fnc_getPos, _sideColor, 6];
