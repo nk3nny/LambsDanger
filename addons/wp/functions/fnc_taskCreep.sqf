@@ -118,15 +118,15 @@ waitUntil {
     private _target = [_group, _radius, _area, _pos, _onlyPlayers] call EFUNC(main,findClosestTarget);
 
     // act
-    if (!isNull _target) then {
+    if (isNull _target) then {
+        _group setCombatMode "GREEN";
+        sleep (_cycle * 4);
+    } else {
         [_group, _target] call _fnc_creepOrders;
         if (EGVAR(main,debug_functions)) then {
             ["%1 taskCreep: %2 targets %3 (%4) at %5 Meters -- Stealth %6/%7", side _group, groupId _group, name _target, _group knowsAbout _target, floor (leader _group distance2D _target), ((selectBestPlaces [getPos leader _group, 2, "(forest + trees)*0.5", 1, 1]) select 0) select 1, str(unitPos leader _group)] call EFUNC(main,debugLog);
         };
         sleep _cycle;
-    } else {
-        _group setCombatMode "GREEN";
-        sleep (_cycle * 4);
     };
     // end
     ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)

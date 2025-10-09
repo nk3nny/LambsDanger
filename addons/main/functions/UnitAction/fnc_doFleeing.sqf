@@ -21,10 +21,10 @@ params ["_unit"];
 
 // check disabled
 if (
-    _unit getVariable [QEGVAR(danger,disableAI), false]
+    GVAR(disableAIFleeing)
+    || {_unit getVariable [QEGVAR(danger,disableAI), false]}
     || {!(_unit checkAIFeature "PATH")}
     || {!(_unit checkAIFeature "MOVE")}
-    || {GVAR(disableAIFleeing)}
     || {(currentCommand _unit) in ["GET IN", "ACTION", "REARM", "HEAL"]}
 ) exitWith {false};
 
@@ -82,9 +82,9 @@ if (!_onFoot) exitWith {
     if (!canMove _vehicle || {fuel _vehicle < 0.1} || {_vehicle isKindOf "StaticWeapon"}) then { _abandonChance = _abandonChance * 0.25 };
     if (someAmmo _vehicle) then { _abandonChance = _abandonChance * 1.3 };
     if (
-        RND(_abandonChance)
+        _changeSeats
+        && {RND(_abandonChance)}
         && {canUnloadInCombat _vehicle || (damage _vehicle) > 0.9}
-        && {_changeSeats}
     ) exitWith {
         if (_abandonChance < 0.5) then {_unit leaveVehicle _vehicle;};
         [_unit] orderGetIn false;

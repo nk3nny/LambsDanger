@@ -30,7 +30,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE(_this call EFUNC(main,initModules));
+                init = QUOTE(call EFUNC(main,initModules));
             };
         };
     };
@@ -48,7 +48,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE(_this call EFUNC(main,initModules));
+                init = QUOTE(call EFUNC(main,initModules));
             };
         };
     };
@@ -65,7 +65,7 @@ class CfgVehicles {
         class EventHandlers {
             class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
             class ADDON {
-                init = QUOTE(_this call EFUNC(main,initModules));
+                init = QUOTE(call EFUNC(main,initModules));
             };
         };
     };

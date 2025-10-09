@@ -80,7 +80,7 @@ private _fnc_turretDir = {
 };
 
 // shoot cannon ~ random chance and turret pointed right way
-private _cannon = RND(0.2) && {_suppression} && {[_vehicle, _pos] call _fnc_turretDir};
+private _cannon = _suppression && {RND(0.2)} && {[_vehicle, _pos] call _fnc_turretDir};
 if (_cannon) then {
     _vehicle action ["useWeapon", _vehicle, gunner _vehicle, random 2];
 };
