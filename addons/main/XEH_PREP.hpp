@@ -30,7 +30,6 @@ PREP(parseData);
 PREP(removeEventhandlers);
 PREP(getCompatibleThrowMuzzle);
 
-SUBPREP(GroupAction,doGroupAssault);
 SUBPREP(GroupAction,doGroupFlank);
 SUBPREP(GroupAction,doGroupHide);
 SUBPREP(GroupAction,doGroupSuppress);
