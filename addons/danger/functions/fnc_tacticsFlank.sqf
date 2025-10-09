@@ -8,7 +8,7 @@
  * 1: group target <OBJECT> or position <ARRAY>
  * 2: units in group, default all <ARRAY>
  * 3: default overwatch destination <ARRAY>
- * 5: delay until unit is ready again <NUMBER>
+ * 4: delay until unit is ready again <NUMBER>
  *
  * Return Value:
  * Bool
@@ -79,9 +79,9 @@ if (_units isEqualTo []) exitWith {false};
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
-private _postList = [_target, 12, true, false] call EFUNC(main,findBuildings);
-_postList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
-_postList pushBack _target;
+private _posList = [_target, 12, true, false] call EFUNC(main,findBuildings);
+_posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
+_posList pushBack _target;
 
 // find overwatch position
 if (_overwatch isEqualTo []) then {
@@ -126,11 +126,11 @@ _group setFormation "FILE";
 if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
 
 // function
-[{_this call EFUNC(main,doGroupFlank)}, [_group, _units, _vehicles, _postList, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doGroupFlank)}, [_group, _units, _vehicles, _posList, _overwatch], 2 + random 8] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _postList, count _vehicles] call EFUNC(main,debugLog);
+    ["%1 TACTICS FLANK (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _overwatch), count _posList, count _vehicles] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics flank", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_overwatch, "", _unit call EFUNC(main,debugMarkerColor), "hd_objective"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];

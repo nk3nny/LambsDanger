@@ -20,9 +20,11 @@
 params [["_unit", objNull], ["_posList", []], ["_max", 4]];
 private _vehicle = vehicle _unit;
 private _eyePos = eyePos _vehicle;
-if ((count _posList) > _max) then {_posList resize _max};
+private _checkList = +_posList;
 
-private _return = _posList findIf {
+if ((count _checkList) > _max) then {_checkList resize _max};
+
+private _return = _checkList findIf {
 
     // get variables
     private _posASL = AGLToASL _x;
