@@ -266,6 +266,9 @@
             <German>Artillerie-Ziel erstellt für %1</German>
             <Chinesesimp>为%1创建火炮目标</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification_NoArtillery">
+            <English>No artillery is available to target this position!</English>
+        </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_CycleTime_DisplayName">
             <English>Script interval</English>
             <Czech>Interval skriptu</Czech>
@@ -1281,9 +1284,6 @@
             <Polish>ZADANIE SZTURM</Polish>
             <German>AUFGABE HETZEN</German>
             <Chinesesimp>冲锋任务</Chinesesimp>
-        </Key>
-        <Key ID="STR_Lambs_WP_Module_TaskArtillery_ZeusNotification_NoArtillery">
-            <English>No artillery is available to target this position!</English>
         </Key>
     </Package>
 </Project>
