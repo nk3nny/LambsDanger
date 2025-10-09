@@ -117,7 +117,7 @@ if (
 ) exitWith {
 
     // tactics
-    [_group, _enemy, true, _delay] call lambs_danger_fnc_tacticsHide;
+    [_group, _enemy, true, _delay] call FUNC(tacticsHide);
 
     // group variable
     _group setVariable [QEGVAR(main,currentTactic), "Contact! (tank/air)", EGVAR(main,debug_functions)];

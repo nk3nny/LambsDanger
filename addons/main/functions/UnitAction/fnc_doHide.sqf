@@ -51,7 +51,6 @@ _unit forceSpeed 24;
         if (alive _this) then {
             _this setUnitPos "AUTO";
             _this setUnitPosWeak "DOWN";
-            // systemChat format ["%1 reset stance %2", side _this, name _this];
         };
     },
     _unit,

@@ -98,13 +98,11 @@ if (_antiTank && { _vehicleIndex != -1 } && { _launchersAT isNotEqualTo [] || (_
         // extra impetuous to select launcher
         [_x, secondaryWeapon _x] call CBA_fnc_selectWeapon;
         _x setUnitPos "MIDDLE";
-        systemChat format ["%1 tacticsHide %2 changing weapons!", side _x, name _x];
         [
             {
                 params ["_unit", "_target"];
                 _unit doFire _target;
                 _unit setUnitPos "AUTO";
-                systemChat format ["%1 doFire! %2 @ %3m", side _unit, name _unit, round (_unit distance _target)];
             },
             [_x, _targetVehicle], 5 + random 3
         ] call CBA_fnc_waitAndExecute;
