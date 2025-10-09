@@ -21,10 +21,10 @@ private _vehicle = vehicle _unit;
 _pos = _pos call CBA_fnc_getPos;
 
 // exit if vehicle is moving too fast or target is too high
-if (speed _vehicle > 30 || {(_pos select 2) > 100}) exitWith {false};
+if (speed _vehicle > 30 || {(_pos select 2) > 100} || {!((gunner _vehicle) call FUNC(isAlive))}) exitWith {false};
 
 // pos
-private _eyePos = eyePos _unit;
+private _eyePos = eyePos _vehicle;
 _pos = (AGLToASL _pos) vectorAdd [0.5 - random 1, 0.5 - random 1, 0.3 + random 1.3];
 
 // target is close or terrain occludes target
@@ -34,7 +34,7 @@ if (
 ) exitWith {false};
 
 // artillery (no tactical options)
-if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configOf (vehicle _unit) >> "artilleryScanner") > 0]) exitWith {
+if (_vehicle getVariable [QGVAR(isArtillery), getNumber (configOf _vehicle >> "artilleryScanner") > 0]) exitWith {
     _vehicle setVariable [QGVAR(isArtillery), true];
     false
 };
@@ -44,7 +44,7 @@ _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Suppress", GVAR(debug_functions)];
 
 // trace
-private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, vehicle _unit, true, 1, "GEOM", "VIEW"];
+private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, _vehicle, true, 1, "GEOM", "VIEW"];
 if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // recheck

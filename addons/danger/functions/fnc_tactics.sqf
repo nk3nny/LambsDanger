@@ -29,7 +29,7 @@ if (_group getVariable [QGVAR(disableGroupAI), false]) exitWith {false};
 
 // Initated contact?
 private _contactState = _group getVariable [QGVAR(contact), 0];
-if (_contactState < time) exitWith {[_unit, _target] call FUNC(tacticsContact)};
+if (_contactState < time) exitWith {[_unit, _target] call FUNC(contact)};
 
 // ai profiles ~ here is where AI profiles will be extrapolated - nkenny
 // if (_unit call FUNC(tacticsProfiles)) exitWith {true};
