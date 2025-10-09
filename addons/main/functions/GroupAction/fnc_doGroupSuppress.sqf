@@ -30,9 +30,9 @@ _vehicles = _vehicles select { canFire _x };
 private _leader = leader _group;
 
 // infantry
+[_posList, true] call CBA_fnc_shuffle;
 {
     // find target
-    [_posList, true] call CBA_fnc_shuffle;
     private _index = [_x, _posList] call FUNC(checkVisibilityList);
 
     // execute suppression

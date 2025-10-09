@@ -6,6 +6,7 @@
  * Arguments:
  * 0: Unit doing looking <OBJECT>
  * 1: Array of possible locations in AGL <ARRAY>
+ * 2: Max arrays <NUMBER>, default 4
  *
  * Return Value:
  * index
@@ -16,9 +17,11 @@
  * Public: Yes
 */
 
-params [["_unit", objNull], ["_posList", []]];
+params [["_unit", objNull], ["_posList", []], ["_max", 4]];
+private _vehicle = vehicle _unit;
+private _eyePos = eyePos _vehicle;
+if ((count _posList) > _max) then {_posList resize _max};
 
-private _eyePos = eyePos (vehicle _unit);
 private _return = _posList findIf {
 
     // get variables
@@ -26,6 +29,6 @@ private _return = _posList findIf {
     _posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
 
     // check visibility
-    [vehicle _unit, "VIEW", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1
+    [_vehicle, "VIEW", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1
 };
 _return

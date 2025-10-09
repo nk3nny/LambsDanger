@@ -70,6 +70,9 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 if (_units isEqualTo []) then {
     _units = _unit call EFUNC(main,findReadyUnits);
 };
+
+// add loaded units
+_units append ((units _unit) select {((assignedVehicleRole _x) select 0) isEqualTo "cargo"});
 if (_units isEqualTo []) exitWith {false};
 
 // find vehicles
@@ -100,7 +103,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 
 // gesture
 [_unit, ["gestureGo"]] call EFUNC(main,doGesture);
-[_units select (count _units - 1), "gestureGoB"] call EFUNC(main,doGesture);
+[_units select -1, "gestureGoB"] call EFUNC(main,doGesture);
 
 // leader callout
 [_unit, "combat", "flank", 125] call EFUNC(main,doCallout);
@@ -109,7 +112,6 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 _unit setSpeedMode "FULL";
 
 // prevent units from being mounted!
-_units append ((units _unit) select {((assignedVehicleRole _x) select 0) isEqualTo "cargo"});
 _units allowGetIn false;
 
 // ready group
