@@ -4,7 +4,7 @@
  * Actualisation of Suppression cycle
  *
  * Arguments:
- * 0: cycles <NUMBER>
+ * 0: group conducting the suppression <GROUP>
  * 1: units list <ARRAY>
  * 2: list of group vehicles <ARRAY>
  * 3: list of building/enemy positions <ARRAY>
@@ -17,58 +17,80 @@
  *
  * Public: No
 */
-params ["_cycle", "_units", "_vehicles", "_pos"];
+params [["_group", grpNull], ["_units", []], ["_vehicles", []], ["_posList", []]];
+
+// exit!
+if !(_group getVariable [QEGVAR(danger,isExecutingTactic), false]) exitWith {false};
 
 // update
-_units = _units select {_x call FUNC(isAlive) && { !isPlayer _x }};
+_units = _units select { !( _x getVariable [QEGVAR(danger,disableAI), false] ) && { _x call FUNC(isAlive) } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
+// get leader
+private _leader = leader _group;
+
 // infantry
+[_posList, true] call CBA_fnc_shuffle;
 {
-    // ready
-    private _posAGL = selectRandom _pos;
-    _posAGL = _posAGL vectorAdd [0, 0, random 1];
+    // find target
+    private _index = [_x, _posList] call FUNC(checkVisibilityList);
 
-    // suppressive fire
-    _x forceSpeed 1;
-    _x setUnitPosWeak "MIDDLE";
-    private _suppress = [_x, AGLToASL _posAGL] call FUNC(doSuppress);
-    _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
+    // execute suppression
+    if (
+        _index isNotEqualTo -1
+    ) then {
 
-    // no LOS
-    if !(_suppress || {(currentCommand _x isEqualTo "Suppress")}) then {
+        // suppressive fire
+        _x forceSpeed 1;
+        _x setUnitPosWeak "MIDDLE";
+        [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
+
+    } else {
+
         // move forward
         _x forceSpeed 3;
-        _x doMove (_x getPos [20, _x getDir _posAGL]);
+        _x doMove (_x getPos [20, _x getDir (_posList select -1)]);
         _x setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
-    };
 
-    // follow-up fire
-    [
-        {
-            params ["_unit", "_posASL"];
-            if (_unit call FUNC(isAlive) && {(currentCommand _unit isNotEqualTo "Suppress")}) then {
-                [_unit, _posASL vectorAdd [2 - random 4, 2 - random 4, 0.8], true] call EFUNC(main,doSuppress);
-            };
-        },
-        [_x, AGLToASL _posAGL],
-        5
-    ] call CBA_fnc_waitAndExecute;
-} forEach _units;
+    };
+} forEach (_units select {(currentCommand _x) isNotEqualTo "Suppress"});
 
 // vehicles
 {
-    private _posAGL = selectRandom _pos;
-    _x doWatch _posAGL;
-    [_x, _posAGL] call FUNC(doVehicleSuppress);
-} forEach _vehicles;
+
+    // find target
+    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+
+    // execute suppression
+    if (
+        _index isNotEqualTo -1
+    ) then {
+
+        // vehicle suppress
+        [_x, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+
+    } else {
+
+        // move up behind leader
+        _x doWatch (_posList select _index);
+        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), (_posList select _index) getDir _leader];
+
+        // check for roads
+        private _roads = _leaderPos nearRoads 50;
+        if (_roads isNotEqualTo []) exitWith {_x doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
+        _x doMove _leaderPos;
+
+    };
+
+} forEach (_vehicles select {(currentCommand _x) isNotEqualTo "Suppress"});
 
 // recursive cyclic
-if !(_cycle <= 1 || {_units isEqualTo []}) then {
+if (_units isNotEqualTo [] && { _group getVariable [QEGVAR(danger,isExecutingTactic), false] }) then {
     [
         {_this call FUNC(doGroupSuppress)},
-        [_cycle - 1, _units, _vehicles, _pos],
-        16 + random 2
+        [_group, _units, _vehicles, _posList],
+        6 + random 2
     ] call CBA_fnc_waitAndExecute;
 };
 

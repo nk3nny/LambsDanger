@@ -8,6 +8,7 @@ PREP(doShareInformation);
 PREP(getLauncherUnits);
 PREP(getShareInformationParams);
 PREP(shouldSuppressPosition);
+PREP(checkVisibilityList);
 
 PREP(eventCallback);
 PREP(findBuildings);

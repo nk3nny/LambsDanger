@@ -246,7 +246,7 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_group, _pos, _units], 22 + random 8] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsFlank)}, [_group, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_GARRISON: {
         // garrison ~ nb units not carried here - nkenny
@@ -258,11 +258,11 @@ switch (_plan) do {
     };
     case TACTICS_SUPPRESS: {
         // suppress
-        [{_this call FUNC(tacticsSuppress)}, [_group, _pos, _units], 4 + random 4] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsSuppress)}, [_group, _pos], 2 + random 2] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ATTACK: {
         // group attacks as one
-        [{_this call FUNC(tacticsAttack)}, [_group, _pos, _units], 1 + random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAttack)}, [_group, _pos], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
