@@ -23,10 +23,31 @@ _units = _units select { _x call FUNC(isAlive) && { isNull objectParent _x } && 
 if (_units isEqualTo []) exitWith {false};
 
 {
-    [_x, _pos] call FUNC(doHide);
-    if (_action isNotEqualTo "") then {
-        _x setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
-    };
+    private _unit = _x;
+    [_unit, _pos] call FUNC(doHide);
+    _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
+
+    // force movement!
+    if (getSuppression _unit > 0.4 || {_unit distance2D _pos > 25}) then {_unit setUnitPos selectRandom ["MIDDLE", "DOWN", "DOWN"];};
+    _unit setVariable [QEGVAR(danger,forceMove), true];
+    [
+        {
+            params ["_unit"];
+            unitReady _unit
+        },
+        {
+            params ["_unit", ["_pos", [0, 0, 0]]];
+            _unit setVariable [QEGVAR(danger,forceMove), nil];
+            [_unit, _pos] call FUNC(doHide);
+            _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", "re-hide"], EGVAR(main,debug_functions)];
+        },
+        [_unit, _pos],
+        20 + random 40,
+        {
+            params ["_unit"];
+            _unit setVariable [QEGVAR(danger,forceMove), nil];
+        }
+    ] call CBA_fnc_waitUntilAndExecute;
 } forEach _units;
 
 // end

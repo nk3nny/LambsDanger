@@ -27,7 +27,7 @@ if (
 ) exitWith {false};
 
 // do nothing when already inside
-if (RND(GVAR(indoorMove)) && { private _eyePos = eyePos _unit; lineIntersects [ _eyePos, _eyePos vectorAdd [0, 0, 10] ] } ) exitWith {
+if (RND(GVAR(indoorMove)) && {_unit call FUNC(isIndoor)}) exitWith {
     _unit setUnitPosWeak "DOWN";
     doStop _unit;
     false
@@ -87,7 +87,7 @@ _cover = _cover select {_x distance2D _pos > _distance2D;};
 private _targetPos = if (_cover isEqualTo []) then {
     _unit getPos [25 + random _range, (_pos getDir _unit) + 20 - random 40]
 } else {
-    (_cover select 0) getPos [1.2, _pos getDir (_cover select 0)]
+    (_cover select 0) getPos [1, _pos getDir (_cover select 0)]
 };
 
 // water means hold
@@ -95,9 +95,13 @@ if (surfaceIsWater _targetPos) exitWith {
     false
 };
 
-// cover move
-doStop _unit;
-_unit doMove _targetPos;
+// cover move or stay put
+if (_unit distanceSqr _targetPos > 1.5) then {
+    _unit doMove _targetPos;
+    [{unitReady _this}, {doStop _this}, _unit, 2] call CBA_fnc_waitUntilAndExecute;
+} else {
+    doStop _unit;
+};
 
 // debug
 if (GVAR(debug_functions)) then {

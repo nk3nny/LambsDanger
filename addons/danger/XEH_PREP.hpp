@@ -11,11 +11,12 @@ PREP(isForced);
 PREP(isForcedExit);
 PREP(isLeader);
 
+PREP(contact);
+
 PREP(tactics);
 PREP(tacticsAssault);
 PREP(tacticsAssess);
 PREP(tacticsAttack);
-PREP(tacticsContact);
 PREP(tacticsCQB);
 PREP(tacticsFlank);
 PREP(tacticsGarrison);
