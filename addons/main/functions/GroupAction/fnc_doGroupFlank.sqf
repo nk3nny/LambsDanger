@@ -77,7 +77,7 @@ _vehicles doWatch (selectRandom _posList);
 {
 
     // loaded vehicles move quickly
-    if (count (crew _x) > 3 || {_leaderAlone} || { _x isNotEqualTo _leader && { _leader distance2D _overwatch < 35 } } ) exitWith {_vehicles doMove _overwatch;};
+    if (_leaderAlone || {count (crew _x) > 3} || { _x isNotEqualTo _leader && { _leader distance2D _overwatch < 35 } } ) exitWith {_vehicles doMove _overwatch;};
 
     // sort out vehicles
     private _index = [_x, _posList] call FUNC(checkVisibilityList);

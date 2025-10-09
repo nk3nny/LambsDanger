@@ -12,7 +12,7 @@ class GVAR(Target) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -31,7 +31,7 @@ class GVAR(ZeusTaskArtillery) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -50,7 +50,7 @@ class GVAR(ZeusTaskArtilleryRegister) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -69,7 +69,7 @@ class GVAR(ZeusTaskAssault) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -88,7 +88,7 @@ class GVAR(ZeusTaskCamp) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -107,7 +107,7 @@ class GVAR(ZeusTaskCQB) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -126,7 +126,7 @@ class GVAR(ZeusTaskGarrison) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -145,7 +145,7 @@ class GVAR(ZeusTaskPatrol) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -164,7 +164,7 @@ class GVAR(ZeusTaskReset) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -184,7 +184,7 @@ class GVAR(ZeusTaskCreep) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -203,7 +203,7 @@ class GVAR(ZeusTaskHunt) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -222,7 +222,7 @@ class GVAR(ZeusTaskRush) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };
@@ -242,7 +242,7 @@ class GVAR(ZeusTaskDefend) : Module_F {
     class EventHandlers {
         class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers_base {};
         class ADDON {
-            init = QUOTE(_this call EFUNC(main,initModules));
+            init = QUOTE(call EFUNC(main,initModules));
         };
     };
 };

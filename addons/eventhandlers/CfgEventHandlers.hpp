@@ -18,7 +18,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_Explosion_Eventhandlers {
     class CAManBase {
         class LAMBS_CAManBase_Explosion {
-            Explosion = QUOTE(_this call FUNC(delayExplosionEH));
+            Explosion = QUOTE(call FUNC(delayExplosionEH));
         };
     };
 };
