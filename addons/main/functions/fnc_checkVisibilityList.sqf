@@ -20,9 +20,7 @@
 params [["_unit", objNull], ["_posList", []], ["_max", 4]];
 private _vehicle = vehicle _unit;
 private _eyePos = eyePos _vehicle;
-private _checkList = +_posList;
-
-if ((count _checkList) > _max) then {_checkList resize _max};
+private _checkList = _posList select [0, _max];
 
 private _return = _checkList findIf {
 
@@ -31,6 +29,6 @@ private _return = _checkList findIf {
     _posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
 
     // check visibility
-    [_vehicle, "VIEW", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1
+    [_vehicle, "FIRE", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1
 };
 _return
