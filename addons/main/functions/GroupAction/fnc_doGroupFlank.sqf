@@ -36,6 +36,8 @@ if ( _leader distance2D _overwatch < 4 ) exitWith {
 
 // leader has no friendlies within 45 meters
 private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leader < 2025 } ) isEqualTo -1;
+private _posASL = AGLToASL (selectRandom _posList);
+private _visibility = false;
 
 {
     private _unit = _x;
@@ -49,20 +51,20 @@ private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leade
     _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
     // suppress
-    private _posASL = AGLToASL (selectRandom _posList);
     private _eyePos = eyePos _unit;
-    _posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
+    private _posTargetASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
 
     if (
         (_forEachIndex % 2) isEqualTo _teamAlpha
         && {!(_leaderAlone && {isNull (objectParent (effectiveCommander _leader))})}
         && {(currentCommand _unit) isNotEqualTo "Suppress"}
         && {_unit isNotEqualTo (leader _unit)}
-        && {[_unit, "VIEW", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1}
+        && {_visibility || {[_unit, "FIRE", objNull] checkVisibility [_eyePos, _posTargetASL] isEqualTo 1}}
     ) then {
 
         // shoot
-        [{_this call FUNC(doSuppress)}, [_unit, _posASL vectorAdd [0, 0, random 1], false], random 2] call CBA_fnc_waitAndExecute;
+        _visibility = true;
+        [_unit, _posTargetASL vectorAdd [0, 0, random 1], false] call FUNC(doSuppress);
 
     };
 
@@ -74,31 +76,38 @@ _teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
 // vehicles
 _vehicles doWatch (selectRandom _posList);
 [_posList, true] call CBA_fnc_shuffle;
+
+private _index = -1;
 {
 
     // loaded vehicles move quickly
-    if (_leaderAlone || {count (crew _x) > 3} || { _x isNotEqualTo _leader && { _leader distance2D _overwatch < 35 } } ) exitWith {_vehicles doMove _overwatch;};
+    if (_leaderAlone || {count (crew _x) > 3} || { (vehicle _leader) isNotEqualTo _x && { _leader distance2D _overwatch < 35 } } ) exitWith {_vehicles doMove _overwatch;};
 
     // sort out vehicles
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
 
-    if (
-        _index isEqualTo -1
-    ) then {
+    // found good target - do suppressive fire
+    if (_index isNotEqualTo -1) then {
+        private _suppressing = [_x, _posList select _index] call FUNC(doVehicleSuppress);
+        if (!_suppressing) then {_index isEqualTo -1};
+    };
+
+    // did not find a target
+    if (_index isEqualTo -1) then {
 
         // move up behind leader
-        private _leaderPos = _leader getPos [35 min (_leader distance2D _x), _overwatch getDir _leader];
-        if ((vehicle _leader) isEqualTo _x) then {_leaderPos = _x getPos [35, _x getDir _overwatch]};
+        private _leaderPos = call {
+            if ((vehicle _leader) isEqualTo (vehicle _x)) exitWith {
+                _x getPos [35, _x getDir _overwatch];
+            };
+            _leader getPos [35 min (_x distance2D _leader), _overwatch getDir _leader]
+        };
 
         // check for roads
         private _roads = _leaderPos nearRoads 50;
         if (_roads isNotEqualTo []) exitWith {_x doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
         _x doMove _leaderPos;
 
-    } else {
-
-        // do suppressive fire
-        [_x, _posList select _index] call FUNC(doVehicleSuppress);
     };
 } forEach _vehicles;
 

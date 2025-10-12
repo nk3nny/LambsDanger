@@ -80,13 +80,16 @@ private _index = -1;
     // failed to suppress
     if (_index isEqualTo -1) then {
 
-        if (_x isEqualTo _x) exitWith {
-            _x doMove (_x getPos [20, _x getDir (_posList select _index)]);
-        };
+        private _lookPos = _posList select _index;
 
         // move up behind leader
-        _x doWatch (_posList select _index);
-        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), (_posList select _index) getDir _leader];
+        _x doWatch _lookPos;
+        private _leaderPos = call {
+            if ((vehicle _leader) isEqualTo (vehicle _x)) exitWith {
+                _x getPos [20, _x getDir _lookPos];
+            };
+            _leader getPos [35 min (_x distance2D _leader), _lookPos getDir _leader]
+        };
 
         // check for roads
         private _roads = _leaderPos nearRoads 50;
