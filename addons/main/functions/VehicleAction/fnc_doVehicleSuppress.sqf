@@ -21,7 +21,7 @@ private _vehicle = vehicle _unit;
 _pos = _pos call CBA_fnc_getPos;
 
 // exit if vehicle is moving too fast or target is too high
-if (speed _vehicle > 30 || {(_pos select 2) > 100} || {!((gunner _vehicle) call FUNC(isAlive))}) exitWith {false};
+if (speed _vehicle > 30 || {(_pos select 2) > 100} || {!((gunner _vehicle) call FUNC(isAlive))} || {(currentCommand _vehicle) isEqualTo "Suppress"}) exitWith {false};
 
 // pos
 private _eyePos = eyePos _vehicle;
@@ -53,11 +53,18 @@ private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance
 if (_friendlies isNotEqualTo []) exitWith {false};
 
 // reAdjust
-private _distance = (_eyePos vectorDistance _pos) - 4;
-_pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
+_pos = _eyePos vectorAdd ((_pos vectorDiff _eyePos) vectorMultiply 0.9);
 
 // do it
+_vehicle doWatch (ASLToAGL _pos);
 _vehicle doSuppressiveFire _pos;
+
+// extra fire
+[{
+    if ((currentCommand _this) isEqualTo "Suppress") then {
+        _this action ["useWeapon", _this, gunner _this, random 2];
+    };
+}, _vehicle, 6] call CBA_fnc_waitAndExecute;
 
 // debug
 if (GVAR(debug_functions)) then {

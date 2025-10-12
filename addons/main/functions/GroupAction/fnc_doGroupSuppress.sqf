@@ -31,22 +31,27 @@ private _leader = leader _group;
 
 // infantry
 [_posList, true] call CBA_fnc_shuffle;
+private _index = -1;
+
 {
     // find target
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
 
-    // execute suppression
-    if (
-        _index isNotEqualTo -1
-    ) then {
+    // found good target
+    if (_index isNotEqualTo -1) then {
 
         // suppressive fire
         _x forceSpeed 1;
         _x setUnitPosWeak "MIDDLE";
-        [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        private _suppressing = [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
         _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
+        if (!_suppressing) then {
+            _index = -1;
+        };
+    };
 
-    } else {
+    // failed to suppress
+    if (_index isEqualTo -1) then {
 
         // move forward
         _x forceSpeed 3;
@@ -60,21 +65,31 @@ private _leader = leader _group;
 {
 
     // find target
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
 
     // execute suppression
-    if (
-        _index isNotEqualTo -1
-    ) then {
+    if (_index isNotEqualTo -1) then {
 
         // vehicle suppress
-        [_x, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        private _suppressing = [_x, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        if (!_suppressing) then {
+            _index = -1;
+        };
+    };
 
-    } else {
+    // failed to suppress
+    if (_index isEqualTo -1) then {
+
+        private _lookPos = _posList select _index;
 
         // move up behind leader
-        _x doWatch (_posList select _index);
-        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), (_posList select _index) getDir _leader];
+        _x doWatch _lookPos;
+        private _leaderPos = call {
+            if ((vehicle _leader) isEqualTo (vehicle _x)) exitWith {
+                _x getPos [20, _x getDir _lookPos];
+            };
+            _leader getPos [35 min (_x distance2D _leader), _lookPos getDir _leader]
+        };
 
         // check for roads
         private _roads = _leaderPos nearRoads 50;
