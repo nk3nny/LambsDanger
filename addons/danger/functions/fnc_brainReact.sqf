@@ -36,8 +36,8 @@ _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
 // cover move when explosion
 if (
     getSuppression _unit > 0.5
-    || {(getUnitState _unit) isEqualTo "REPLAN"}
-    || {(currentCommand _unit) isEqualTo "STOP"}
+    || (getUnitState _unit) isEqualTo "REPLAN"
+    || (currentCommand _unit) isEqualTo "STOP"
 ) exitWith {
     [_unit] call EFUNC(main,doCover);
     _timeout + 1

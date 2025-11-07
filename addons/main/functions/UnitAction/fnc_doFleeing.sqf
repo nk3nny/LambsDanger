@@ -22,10 +22,10 @@ params ["_unit"];
 // check disabled
 if (
     GVAR(disableAIFleeing)
-    || {_unit getVariable [QEGVAR(danger,disableAI), false]}
-    || {!(_unit checkAIFeature "PATH")}
-    || {!(_unit checkAIFeature "MOVE")}
-    || {(currentCommand _unit) in ["GET IN", "ACTION", "REARM", "HEAL"]}
+    || _unit getVariable [QEGVAR(danger,disableAI), false]
+    || !(_unit checkAIFeature "PATH")
+    || !(_unit checkAIFeature "MOVE")
+    || (currentCommand _unit) in ["GET IN", "ACTION", "REARM", "HEAL"]
 ) exitWith {false};
 
 // check for vehicle

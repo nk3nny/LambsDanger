@@ -15,8 +15,8 @@
  * Public: No
 */
 fleeing _this
-|| {_this getVariable [QGVAR(forceMove), false]}
-|| {currentCommand _this in ["ATTACK", "GET IN", "ACTION", "HEAL", "REARM", "JOIN"]}
-|| {!(_this call EFUNC(main,isAlive))}
-|| {(_this getVariable ["ace_medical_ai_healQueue", []]) isNotEqualTo []}
+|| _this getVariable [QGVAR(forceMove), false]
+|| currentCommand _this in ["ATTACK", "GET IN", "ACTION", "HEAL", "REARM", "JOIN"]
+|| !(_this call EFUNC(main,isAlive))
+|| (_this getVariable ["ace_medical_ai_healQueue", []]) isNotEqualTo []
 || {GVAR(disableAIPlayerGroup) && {isPlayer leader _this}}
