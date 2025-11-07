@@ -55,7 +55,7 @@ private _pos = call {
         };
 
         // forget targets when too close
-        if (_distanceSqr < 1.7) then {
+        if (_unit distance2D _getHide < 1.7) then {
             _unit forgetTarget _target;
         };
 
