@@ -272,7 +272,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     };
 
     // tank assault
-    if (_attack && _slow && {(getUnitState _unit) in ["OK", "DELAY"]}) then {
+    if (_attack && _slow && {(getUnitState _unit) in ["OK", "DELAY", "WAIT"]}) then {
 
         // rotate
         private _rotate = [_unit, _dangerPos] call EFUNC(main,doVehicleRotate);
