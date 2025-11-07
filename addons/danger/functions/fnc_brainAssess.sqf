@@ -54,7 +54,9 @@ if (RND(EGVAR(main,indoorMove)) && _notSuppressed && {_unit call EFUNC(main,isIn
 };
 
 // reset look
-_unit setUnitPosWeak "MIDDLE";
+if ((getSuppression _unit) isEqualTo 0) then {
+    _unit setUnitPosWeak "MIDDLE";
+};
 //_unit doWatch objNull;
 
 // end
