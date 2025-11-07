@@ -31,10 +31,10 @@ private _timeout = time + 3;
 // check if stopped
 if (
     !(_unit checkAIFeature "PATH")
-    || {((behaviour _unit)) isEqualTo "STEALTH"}
-    || {(currentCommand _unit) isEqualTo "STOP"}
-    || {(combatMode _unit) in ["BLUE", "GREEN"]}
-    || {(getUnitState _unit) in ["PLANNING", "DELAY"]}
+    || ((behaviour _unit)) isEqualTo "STEALTH"
+    || (currentCommand _unit) isEqualTo "STOP"
+    || (combatMode _unit) in ["BLUE", "GREEN"]
+    || (getUnitState _unit) in ["PLANNING", "DELAY"]
 ) exitWith {_timeout};
 
 // group memory

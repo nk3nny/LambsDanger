@@ -15,5 +15,5 @@
  * Public: No
 */
 _this getVariable [QGVAR(disableAI), false]
-|| {(behaviour _this) isEqualTo "CARELESS"}
-|| {!(_this checkAIFeature "MOVE")}
+|| (behaviour _this) isEqualTo "CARELESS"
+|| !(_this checkAIFeature "MOVE")
