@@ -35,6 +35,9 @@ private _onFoot = isNull (objectParent _unit);
 _unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _onFoot, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 
+// fleeing units loose all building memory
+(group _unit) setVariable [QGVAR(groupMemory), []];
+
 // eventhandler
 [QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
 
