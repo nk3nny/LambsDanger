@@ -26,9 +26,6 @@ if !(_group getVariable [QEGVAR(danger,isExecutingTactic), false]) exitWith {fal
 _units = _units select { !( _x getVariable [QEGVAR(danger,disableAI), false] ) && { _x call FUNC(isAlive) } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
-// get leader
-private _leader = leader _group;
-
 // infantry
 [_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
