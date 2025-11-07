@@ -27,7 +27,8 @@ if (_groupMemory isEqualTo []) then {
 };
 
 // exit or sort it!
-_groupMemory = _groupMemory select {_unit distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
+private _formPos = formationLeader _unit;
+_groupMemory = _groupMemory select {_formPos distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
 if (_groupMemory isEqualTo []) exitWith {
     _group setVariable [QGVAR(groupMemory), [], false];
     false
@@ -87,7 +88,6 @@ if (
 ) then {
     _unit lookAt (_pos vectorAdd [0, 0, 1.2]);
     _unit doMove _pos;
-    _unit setDestination [_pos, "LEADER PLANNED", _indoor];
 };
 
 // update variable - remove positions within 5 meters that the soldier can see are clear.
