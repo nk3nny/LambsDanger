@@ -74,9 +74,9 @@ if (_units isEqualTo []) exitWith {false};
 private _vehicles = ([_unit] call EFUNC(main,findReadyVehicles)) select {someAmmo _x};
 
 // sort building locations
-private _postList = [_target, 20, true, false] call EFUNC(main,findBuildings);
-_postList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
-_postList pushBack _target;
+private _posList = [_target, 20, true, false] call EFUNC(main,findBuildings);
+_posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
+_posList pushBack _target;
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
@@ -98,11 +98,11 @@ _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_
 _group setFormDir (_unit getDir _target);
 
 // execute recursive cycle
- [{_this call EFUNC(main,doGroupSuppress)}, [_group, _units, _vehicles, _postList], 1 + random 1] call CBA_fnc_waitAndExecute;
+ [{_this call EFUNC(main,doGroupSuppress)}, [_group, _units, _vehicles, _posList], 2 + random 2] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _postList, count _vehicles] call EFUNC(main,debugLog);
+    ["%1 TACTICS SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _posList, count _vehicles] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics suppress", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_destroy"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];

@@ -26,27 +26,29 @@ if !(_group getVariable [QEGVAR(danger,isExecutingTactic), false]) exitWith {fal
 _units = _units select { !( _x getVariable [QEGVAR(danger,disableAI), false] ) && { _x call FUNC(isAlive) } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
-// get leader
-private _leader = leader _group;
-
 // infantry
 [_posList, true] call CBA_fnc_shuffle;
+private _index = -1;
+
 {
     // find target
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
 
-    // execute suppression
-    if (
-        _index isNotEqualTo -1
-    ) then {
+    // found good target
+    if (_index isNotEqualTo -1) then {
 
         // suppressive fire
         _x forceSpeed 1;
         _x setUnitPosWeak "MIDDLE";
-        [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        private _suppressing = [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
         _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
+        if (!_suppressing) then {
+            _index = -1;
+        };
+    };
 
-    } else {
+    // failed to suppress
+    if (_index isEqualTo -1) then {
 
         // move forward
         _x forceSpeed 3;
@@ -59,27 +61,43 @@ private _leader = leader _group;
 // vehicles
 {
 
+    // get vehicle
+    private _vehicle = _x;
+
     // find target
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (_index isEqualTo -1)then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
 
     // execute suppression
-    if (
-        _index isNotEqualTo -1
-    ) then {
+    if (_index isNotEqualTo -1) then {
 
         // vehicle suppress
-        [_x, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        private _suppressing = [_vehicle, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        if (!_suppressing) then {
+            _index = -1;
+        } else {
+            // debug variable
+            (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
+        };
+    };
 
-    } else {
+    // failed to suppress
+    if (_index isEqualTo -1) then {
+
+        private _lookPos = _posList select _index;
+
+        // debug variable
+        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
 
         // move up behind leader
-        _x doWatch (_posList select _index);
-        private _leaderPos = _leader getPos [35 min (_x distance2D _leader), (_posList select _index) getDir _leader];
+        _vehicle doWatch _lookPos;
+        private _movePos = _vehicle getPos [50, _vehicle getDir _lookPos];
 
-        // check for roads
-        private _roads = _leaderPos nearRoads 50;
-        if (_roads isNotEqualTo []) exitWith {_x doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
-        _x doMove _leaderPos;
+        // adjust for vehicle
+        private _adjustPos = _movePos findEmptyPosition [5, 35, typeOf _vehicle];
+        if (_adjustPos isNotEqualTo []) then {_movePos = _adjustPos};
+
+        // execute move
+        (driver _vehicle) doMove _movePos;
 
     };
 

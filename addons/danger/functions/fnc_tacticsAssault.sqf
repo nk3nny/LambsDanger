@@ -118,7 +118,7 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
 _units doWatch objNull;
-_units doFollow _unit;
+_units doMove _target;
 
 // check for reload
 {

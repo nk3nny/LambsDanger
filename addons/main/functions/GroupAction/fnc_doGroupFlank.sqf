@@ -29,40 +29,57 @@ _vehicles = _vehicles select { canFire _x };
 
 // group has reached destination
 private _leader = leader _group;
-if ( _leader distance2D _overwatch < 4 ) exitWith {
+if ( _leader distance2D _overwatch < 10 ) exitWith {
     _group setVariable [QEGVAR(danger,isExecutingTactic), false];
     _group setVariable [QGVAR(groupMemory), _posList, false];
 };
 
-// leader has no friendlies within 45 meters
-private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leader < 2025 } ) isEqualTo -1;
+// leader has no friendlies within 35 meters
+private _distanceSqr = _leader distanceSqr _overwatch;
+private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leader < 1225 || { _x distanceSqr _overwatch < _distanceSqr }} ) isEqualTo -1;
 
+[_posList, true] call CBA_fnc_shuffle;
+private _index = -1;
 {
     private _unit = _x;
-    private _suppressed = (getSuppression _x) > 0.5;
-    _unit setUnitPos (["MIDDLE", "DOWN"] select (_suppressed || {_unit isEqualTo _leader && _leaderAlone}));
+    private _suppressed = (getSuppression _unit) > 0.5;
+    private _activeTeam = (_forEachIndex % 2) isEqualTo _teamAlpha;
+
+    // stance
+    private _unitPos = call {
+        if (_leaderAlone && {_unit isEqualTo _leader}) exitWith {"DOWN"};
+        private _crouched = (stance _unit) isEqualTo "CROUCH";
+        if (_suppressed) exitWith {["UP", "DOWN"] select _crouched};
+        if (_crouched && _activeTeam) exitWith {"UP"};
+        "MIDDLE"
+    };
+    _unit setUnitPos _unitPos;
     _unit setVariable [QEGVAR(danger,forceMove), !_suppressed];
 
     // move
-    _unit doMove _overwatch;
-    _unit setDestination [_overwatch, "LEADER PLANNED", false];
+    _unit doMove (_overwatch vectorAdd [_forEachIndex, _forEachIndex, 0]);
     _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
-    // suppress
-    private _posASL = AGLToASL (selectRandom _posList);
-    private _eyePos = eyePos _unit;
-    _posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
+    // check suppress position
+    if (_activeTeam && _index isEqualTo -1) then {
+        _index = [_x, _posList] call FUNC(checkVisibilityList);
+    };
 
+    // suppress
     if (
-        (_forEachIndex % 2) isEqualTo _teamAlpha
+        _activeTeam
         && {!(_leaderAlone && {isNull (objectParent (effectiveCommander _leader))})}
         && {(currentCommand _unit) isNotEqualTo "Suppress"}
-        && {_unit isNotEqualTo (leader _unit)}
-        && {[_unit, "VIEW", objNull] checkVisibility [_eyePos, _posASL] isEqualTo 1}
+        && {_unit isNotEqualTo _leader}
+        && {_index isNotEqualTo -1}
     ) then {
 
         // shoot
-        [{_this call FUNC(doSuppress)}, [_unit, _posASL vectorAdd [0, 0, random 1], false], random 2] call CBA_fnc_waitAndExecute;
+        private _suppressing = [_unit, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        _unit setVariable [QGVAR(currentTask), "Group Flank - Suppress", GVAR(debug_functions)];
+        if (!_suppressing) then {
+            _index = -1;
+        };
 
     };
 
@@ -74,32 +91,72 @@ _teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
 // vehicles
 _vehicles doWatch (selectRandom _posList);
 [_posList, true] call CBA_fnc_shuffle;
+
+// reset visibility index
+_index = -1;
 {
 
-    // loaded vehicles move quickly
-    if (_leaderAlone || {count (crew _x) > 3} || { _x isNotEqualTo _leader && { _leader distance2D _overwatch < 35 } } ) exitWith {_vehicles doMove _overwatch;};
+    // check if vehicle is 55m away from friendlies
+    private _vehicle = _x;
+    private _vehicleLeader = (vehicle _leader) isEqualTo _vehicle;
+    private _vehicleAlone = _vehicle distance2D _overwatch > 25 && {( _units findIf { _x distanceSqr _vehicle < 3025 } ) isEqualTo -1};
+    private _forceMove = false;
+
+    // check for aggressive vehicle usage
+    if (
+        ( _vehicleAlone && _vehicleLeader )
+        || { count (crew _vehicle) > 3 }
+        || { !_vehicleLeader && { _leader distance2D _overwatch < 65 } }
+    ) then {
+        _forceMove = true;
+    };
 
     // sort out vehicles
-    private _index = [_x, _posList] call FUNC(checkVisibilityList);
+    if (!_forceMove && {_index isEqualTo -1}) then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
 
-    if (
-        _index isEqualTo -1
-    ) then {
+    // found good target - do suppressive fire
+    if (!_forceMove && _index isNotEqualTo -1) then {
+
+        // debug variable
+        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Flank - Suppressing!", GVAR(debug_functions)];
+
+        // execute suppression - on failed- reset index
+        private _suppressing = [_vehicle, _posList select _index] call FUNC(doVehicleSuppress);
+        if (!_suppressing) then {
+            _index = -1;
+        };
+    };
+
+    // vehicles move up to support friendly troops
+    if (_forceMove || _vehicleAlone || _leaderAlone || {_index isEqualTo -1}) then {
+
+        // debug variable
+        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Flank - Manoeuvring!", GVAR(debug_functions)];
 
         // move up behind leader
-        private _leaderPos = _leader getPos [35 min (_leader distance2D _x), _overwatch getDir _leader];
-        if ((vehicle _leader) isEqualTo _x) then {_leaderPos = _x getPos [35, _x getDir _overwatch]};
+        private _movePos = call {
 
-        // check for roads
-        private _roads = _leaderPos nearRoads 50;
-        if (_roads isNotEqualTo []) exitWith {_x doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
-        _x doMove _leaderPos;
+            // forcemove
+            if (_forceMove) exitWith {_overwatch};
 
-    } else {
+            // leader vehicles move forward referring themselves
+            if (_vehicleLeader) exitWith {_vehicle getPos [35, _vehicle getDir _overwatch]};
 
-        // do suppressive fire
-        [_x, _posList select _index] call FUNC(doVehicleSuppress);
+            // vehicle closer than leader is
+            if ((_vehicle distance2D _overwatch) < (_leader distance2D _overwatch)) exitWith {_overwatch};
+
+            // if not. Find a position behind the leader
+            _leader getPos [35 min (_vehicle distance2D _leader), (_overwatch getDir _leader) + (90 * _forEachIndex)]
+        };
+
+        // adjust for vehicle
+        private _adjustPos = _movePos findEmptyPosition [5, 35, typeOf _vehicle];
+        if (_adjustPos isNotEqualTo []) then {_movePos = _adjustPos};
+
+        // give move order specifically to driver (seems to help for some reason)
+        (driver _vehicle) doMove _movePos;
     };
+
 } forEach _vehicles;
 
 // recursive cyclic
