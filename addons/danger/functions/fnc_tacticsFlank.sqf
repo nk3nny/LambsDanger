@@ -58,7 +58,6 @@ _group setVariable [QGVAR(isExecutingTactic), true];
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setUnitPos "AUTO";
-                [_x] allowGetIn true;
                 _x doFollow (leader _x);
             } forEach (units _group);
         };

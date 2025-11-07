@@ -64,16 +64,22 @@ private _index = -1;
 // vehicles
 {
 
+    // get vehicle
+    private _vehicle = _x;
+
     // find target
-    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
+    if (_index isEqualTo -1)then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
 
     // execute suppression
     if (_index isNotEqualTo -1) then {
 
         // vehicle suppress
-        private _suppressing = [_x, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        private _suppressing = [_vehicle, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
         if (!_suppressing) then {
             _index = -1;
+        } else {
+            // debug variable
+            (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
         };
     };
 
@@ -82,19 +88,19 @@ private _index = -1;
 
         private _lookPos = _posList select _index;
 
-        // move up behind leader
-        _x doWatch _lookPos;
-        private _leaderPos = call {
-            if ((vehicle _leader) isEqualTo (vehicle _x)) exitWith {
-                _x getPos [20, _x getDir _lookPos];
-            };
-            _leader getPos [35 min (_x distance2D _leader), _lookPos getDir _leader]
-        };
+        // debug variable
+        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
 
-        // check for roads
-        private _roads = _leaderPos nearRoads 50;
-        if (_roads isNotEqualTo []) exitWith {_x doMove (ASLToAGL (getPosASL (selectRandom _roads)));};
-        _x doMove _leaderPos;
+        // move up behind leader
+        _vehicle doWatch _lookPos;
+        private _movePos = _vehicle getPos [50, _vehicle getDir _lookPos];
+
+        // adjust for vehicle
+        private _adjustPos = _movePos findEmptyPosition [5, 35, typeOf _vehicle];
+        if (_adjustPos isNotEqualTo []) then {_movePos = _adjustPos};
+
+        // execute move
+        (driver _vehicle) doMove _movePos;
 
     };
 
