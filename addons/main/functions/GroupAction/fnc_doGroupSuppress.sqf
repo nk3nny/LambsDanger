@@ -72,11 +72,11 @@ private _index = -1;
 
         // vehicle suppress
         private _suppressing = [_vehicle, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
-        if (!_suppressing) then {
-            _index = -1;
-        } else {
+        if (_suppressing) then {
             // debug variable
             (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
+        } else {
+            _index = -1;
         };
     };
 
