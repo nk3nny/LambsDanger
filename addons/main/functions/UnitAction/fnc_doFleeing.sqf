@@ -36,7 +36,7 @@ _unit setVariable [QGVAR(currentTask), ["Fleeing (vehicle)", "Fleeing"] select _
 _unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 
 // fleeing units loose all building memory
-(group _unit) setVariable [QGVAR(groupMemory), [], false];
+(group _unit) setVariable [QGVAR(groupMemory), []];
 
 // eventhandler
 [QGVAR(OnFleeing), [_unit, group _unit]] call FUNC(eventCallback);
