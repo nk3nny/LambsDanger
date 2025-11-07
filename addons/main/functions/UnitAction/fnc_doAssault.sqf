@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe, 20] call lambs_main_fnc_assault;
+ * [bob, angryJoe, 20] call lambs_main_fnc_doAssault;
  *
  * Public: No
 */
@@ -24,19 +24,20 @@ if (!(_unit checkAIFeature "PATH")) exitWith {false};
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
-// get the hide
-private _getHide = _unit getHideFrom _target;
-
-// check visibility
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1;
+// check visibility and target within 15 meters
+private _vis = _unit distanceSqr _target < 225 && {[_unit, "FIRE", _target] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1};
 private _buildings = [];
 private _pos = call {
 
     // can see target!
     if (_vis) exitWith {
-        _unit lookAt (ASLToAGL (aimPos _target));
+        _unit lookAt _target;
+        _doMove = true;
         getPosATL _target
     };
+
+    // get the hide
+    private _getHide = _unit getHideFrom _target;
 
     // near buildings
     _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
@@ -59,12 +60,11 @@ private _pos = call {
         };
 
         // select target location
-        _doMove = true;
         _getHide
     };
 
-    // updates group memory variable
-    if (_unit distance2D _target < 40) then {
+    // updates group memory variable (assumed position within 40m)
+    if (_distanceSqr < 1600) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
         if (_groupMemory isEqualTo []) then {
@@ -89,6 +89,7 @@ private _pos = call {
     };
 
     // exit
+    _doMove = true;
     _movePos
 };
 
@@ -97,12 +98,14 @@ private _pos = call {
 _unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.3 || {_unit distance2D _pos < 2}));
 
 // execute move
-_unit setDestination [_pos, "LEADER PLANNED", false];
 if (
     ((expectedDestination _unit) select 0) distanceSqr _pos > 1
 ) then {
-    _unit moveTo _pos;
-    if (_doMove) then {_unit doMove _pos;};
+    if (_doMove) then {
+        _unit doMove _pos;
+    } else {
+        _unit setDestination [_pos, "LEADER PLANNED", false];
+    };
 };
 
 // debug
