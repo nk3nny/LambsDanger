@@ -40,6 +40,8 @@ private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leade
 
 [_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
+private _checkCount = 3;
+
 {
     private _unit = _x;
     private _suppressed = (getSuppression _unit) > 0.5;
@@ -61,8 +63,9 @@ private _index = -1;
     _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
     // check suppress position
-    if (_activeTeam && _index isEqualTo -1) then {
+    if (_activeTeam && _checkCount > 0 && _index isEqualTo -1) then {
         _index = [_x, _posList] call FUNC(checkVisibilityList);
+        _checkCount = _checkCount - 1;
     };
 
     // suppress
