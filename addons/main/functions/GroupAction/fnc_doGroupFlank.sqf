@@ -40,6 +40,8 @@ private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leade
 
 [_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
+private _checkCount = 3;
+
 {
     private _unit = _x;
     private _suppressed = (getSuppression _unit) > 0.5;
@@ -47,10 +49,10 @@ private _index = -1;
 
     // stance
     private _unitPos = call {
-        if (_leaderAlone && {_unit isEqualTo _leader}) exitWith {"DOWN"};
+        if (_suppressed) exitWith {"DOWN"};
+        if (_unit isEqualTo _leader) exitWith {["MIDDLE", "DOWN"] select _leaderAlone};
         private _crouched = (stance _unit) isEqualTo "CROUCH";
-        if (_suppressed) exitWith {["UP", "DOWN"] select _crouched};
-        if (_crouched && _activeTeam) exitWith {"UP"};
+        if (_crouched && !_activeTeam) exitWith {"UP"};
         "MIDDLE"
     };
     _unit setUnitPos _unitPos;
@@ -61,8 +63,9 @@ private _index = -1;
     _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
     // check suppress position
-    if (_activeTeam && _index isEqualTo -1) then {
+    if (_activeTeam && _checkCount > 0 && _index isEqualTo -1) then {
         _index = [_x, _posList] call FUNC(checkVisibilityList);
+        _checkCount = _checkCount - 1;
     };
 
     // suppress
