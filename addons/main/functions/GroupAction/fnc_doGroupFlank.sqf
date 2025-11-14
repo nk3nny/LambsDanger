@@ -49,10 +49,10 @@ private _checkCount = 3;
 
     // stance
     private _unitPos = call {
-        if (_leaderAlone && {_unit isEqualTo _leader}) exitWith {"DOWN"};
+        if (_suppressed) exitWith {"DOWN"};
+        if (_unit isEqualTo _leader) exitWith {["MIDDLE", "DOWN"] select _leaderAlone};
         private _crouched = (stance _unit) isEqualTo "CROUCH";
-        if (_suppressed) exitWith {["UP", "DOWN"] select _crouched};
-        if (_crouched && _activeTeam) exitWith {"UP"};
+        if (_crouched && !_activeTeam) exitWith {"UP"};
         "MIDDLE"
     };
     _unit setUnitPos _unitPos;
