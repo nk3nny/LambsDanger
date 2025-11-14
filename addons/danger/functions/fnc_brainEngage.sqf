@@ -93,7 +93,6 @@ if (
         _posASL = AGLToASL _posASL
     };
     _unit forceSpeed 1;
-    _unit suppressFor 4;
     [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 3
 };
