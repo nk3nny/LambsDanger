@@ -41,7 +41,17 @@ private _unit = _units findIf {
             // find flares
             if (_muzzle isNotEqualTo "") then {
                 private _findFlares = getArray (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
-                _findFlares = _findFlares arrayIntersect (magazines _x);
+
+                // add more magazines from magazineWell feature
+                private _magazineWell = getArray (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazineWell");
+                {
+                    private _ammoTypes = configProperties [configFile >> "CfgMagazineWells" >> _x];
+                    {
+                        _findFlares append (getArray _x);
+                    } forEach _ammoTypes;
+                } forEach _magazineWell;
+
+                _findFlares = (_findFlares apply {toLower _x}) arrayIntersect ((magazines _x) apply {toLower _x});
                 if (_findFlares isEqualTo []) exitWith {false};
 
                 // sort flares
