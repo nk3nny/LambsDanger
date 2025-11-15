@@ -27,7 +27,7 @@ private _return = _checkList findIf {
 
     // get variables
     private _posASL = AGLToASL _x;
-    _posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6);
+    //_posASL = _eyePos vectorAdd ((_posASL vectorDiff _eyePos) vectorMultiply 0.6); ~ uncommented until we may return to checkVisibility test ~ nk
 
     // check visibility
     !(terrainIntersectASL [_eyePos, _posASL])
