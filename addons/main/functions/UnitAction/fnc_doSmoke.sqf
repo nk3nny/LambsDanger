@@ -53,7 +53,6 @@ if (_muzzle isEqualTo "") then {
 // select muzzle
 if (_muzzle isEqualTo "") exitWith {false};
 
-_unit setVariable [QGVAR(currentTarget), objNull, GVAR(debug_functions)];
 // turn towards target
 if (_pos isNotEqualTo []) then {
     _unit doWatch _pos;
@@ -64,7 +63,12 @@ if (_pos isNotEqualTo []) then {
 _unit setVariable [QGVAR(currentTask), "Throwing smoke grenade", GVAR(debug_functions)];
 
 // execute
-[BIS_fnc_fire, [_unit, _muzzle], 1] call CBA_fnc_waitAndExecute;
+[
+    {
+        params ["_unit", "_muzzle"];
+        _unit forceWeaponFire [_muzzle, _muzzle];
+    }, [_unit, _muzzle], 1
+] call CBA_fnc_waitAndExecute;
 
 // end
 true
