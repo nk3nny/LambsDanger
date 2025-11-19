@@ -167,7 +167,6 @@ addMissionEventHandler ["GroupCreated", {
                     if (GVAR(autoAddDynamicReinforcement)) then {_this setVariable [QGVAR(enableGroupReinforce), true, true];};
                     if !(GVAR(disableAttackOverride)) then {_this enableAttack false;};
                     if (GVAR(disableFleeingOverride)) then {_this allowFleeing 0;};
-                    systemChat (groupId _this);
                 };
             },
             _group,
