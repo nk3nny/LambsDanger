@@ -104,7 +104,6 @@ if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) ex
 
     // return
     _return set [ACTION_ENGAGE, (side _group) isNotEqualTo side (group _dangerCausedBy)];
-    _return set [ACTION_HIDE, _unit knowsAbout _dangerCausedBy < 0.1 && {(typeOf _dangerCausedBy) isNotEqualTo "SuppressTarget"}];    // hide if target unknown!
     _return
 };
 

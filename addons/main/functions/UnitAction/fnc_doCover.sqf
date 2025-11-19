@@ -18,8 +18,8 @@
 
 params ["_unit", ["_pos", [], [[]]]];
 
-// stance change
-_unit setUnitPosWeak "DOWN";
+// stance change (one step lower)
+_unit setUnitPosWeak (["DOWN", "MIDDLE"] select ((stance _unit) isEqualTo "STAND"));
 
 // check if stopped or inside a building
 if (!(_unit checkAIFeature "PATH") || {(insideBuilding _unit) isEqualTo 1}) exitWith {false};

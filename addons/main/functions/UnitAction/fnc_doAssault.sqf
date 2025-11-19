@@ -12,7 +12,7 @@
  * boolean
  *
  * Example:
- * [bob, angryJoe, 20] call lambs_main_fnc_assault;
+ * [bob, angryJoe, 20] call lambs_main_fnc_doAssault;
  *
  * Public: No
 */
@@ -24,24 +24,25 @@ if (!(_unit checkAIFeature "PATH")) exitWith {false};
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
-// get the hide
-private _getHide = _unit getHideFrom _target;
-
-// check visibility
-private _vis = [objNull, "VIEW", objNull] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1;
+// check visibility and target within 15 meters
+private _vis = _unit distanceSqr _target < 225 && {[_unit, "FIRE", _target] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1};
 private _buildings = [];
 private _pos = call {
 
     // can see target!
     if (_vis) exitWith {
-        _unit lookAt (aimPos _target);
+        _unit lookAt _target;
+        _doMove = true;
         getPosATL _target
     };
 
+    // get the hide
+    private _getHide = _unit getHideFrom _target;
+
     // near buildings
-    private _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
+    _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
     private _distanceSqr = _unit distanceSqr _getHide;
-    _buildings = _buildings select {_x distanceSqr _getHide < _distanceSqr && {_x distanceSqr _unit > 2.25}};
+    _buildings = _buildings select {_x distanceSqr _unit < _distanceSqr && {_x distanceSqr _unit > 2.25}};
 
     // target outdoors
     if (_buildings isEqualTo []) exitWith {
@@ -49,6 +50,7 @@ private _pos = call {
         if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
             _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
             _unit setUnitPosWeak "MIDDLE";
+            _unit lookAt _getHide;
             getPosATL _unit
         };
 
@@ -58,12 +60,11 @@ private _pos = call {
         };
 
         // select target location
-        _doMove = true;
         _getHide
     };
 
-    // updates group memory variable
-    if (_unit distance2D _target < 40 && {count (units _unit) > random 4}) then {
+    // updates group memory variable (assumed position within 40m)
+    if (_distanceSqr < 1600) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
         if (_groupMemory isEqualTo []) then {
@@ -72,27 +73,49 @@ private _pos = call {
         };
     };
 
-    // select building position
-    // _doMove = true; ~ uncommented by nkenny. Retrying moveTo scheme. *sigh*
-    _buildings select 0
+    // look at target
+    private _movePos = selectRandom _buildings;
+    _unit lookAt _getHide;
+
+    // adjust movePos
+    private _nearMen = _movePos nearEntities ["CAManBase", 0.5];
+    if (_nearMen isNotEqualTo []) then {
+        private _nearMan = _nearMen select 0;
+        private _movePosASL = getPosASL _nearMan;
+        private _lineIntersect = lineIntersectsSurfaces [_movePosASL vectorAdd [0, 0, 2], _movePosASL vectorAdd [-5 + random 10, -5 + random 10, -4], _nearMan, objNull, true, 1, "GEOM", "VIEW"];
+        if (_lineIntersect isNotEqualTo []) then {
+            _movePos = ASLToAGL ( ( _lineIntersect select 0 ) select 0 );
+        };
+    };
+
+    // exit
+    _doMove = true;
+    _movePos
 };
 
 // stance and speed
 [_unit, _pos] call FUNC(doAssaultSpeed);
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.6 || {_unit distance2D _pos < 2}));
+_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.3 || {_unit distance2D _pos < 2}));
 
-// execute
-_unit setDestination [_pos, "LEADER PLANNED", false];
-_unit moveTo _pos;
-if (_doMove) then {_unit doMove _pos;};
+// execute move
+if (
+    ((expectedDestination _unit) select 0) distanceSqr _pos > 1
+) then {
+    if (_doMove) then {
+        _unit doMove _pos;
+    } else {
+        _unit setDestination [_pos, "LEADER PLANNED", false];
+    };
+};
 
 // debug
 if (GVAR(debug_functions)) then {
     [
-        "%1 %2 %3(%4 @ %5m)",
+        "%1 %2 %3%4(%5 @ %6m)",
         side _unit,
         ["assaulting ", "staying inside "] select (_unit distance2D _pos < 1),
         ["(building) ", ""] select (_buildings isEqualTo []),
+        ["", "(target visible) "] select _vis,
         name _unit,
         round (_unit distance _pos)
     ] call FUNC(debugLog);

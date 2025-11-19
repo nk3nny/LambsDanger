@@ -17,7 +17,7 @@
  *
  * Public: No
 */
-params ["_group", "_target", ["_units", []], ["_delay", 17]];
+params ["_group", "_target", ["_units", []], ["_delay", 45]];
 
 // group is missing
 if (isNull _group) exitWith {false};
@@ -38,22 +38,28 @@ if !([_unit, (ATLToASL _target) vectorAdd [0, 0, 5]] call EFUNC(main,shouldSuppr
     [_group, _target] call FUNC(tacticsFlank);
 };
 
-// sort cycles
-private _cycle = selectRandom [2, 3, 3, 4];
-
 // reset tactics
+_group setVariable [QGVAR(isExecutingTactic), true];
 [
     {
-        params ["_group", "_enableAttack"];
+        params [["_group", grpNull], ["_delay", 0]];
+        time > _delay || {isNull _group} || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
+    },
+    {
+        params ["_group", "", ["_enableAttack", false], ["_formation", "WEDGE"]];
         if (!isNull _group) then {
             _group setVariable [QGVAR(isExecutingTactic), nil];
-            _group enableAttack _enableAttack;
             _group setVariable [QEGVAR(main,currentTactic), nil];
+            _group enableAttack _enableAttack;
+            _group setFormation _formation;
+            {
+                _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
+                _x doFollow (leader _x);
+            } forEach (units _group);
         };
     },
-    [group _unit, attackEnabled _unit],
-    _delay * _cycle
-] call CBA_fnc_waitAndExecute;
+    [group _unit, time + _delay, attackEnabled _unit, formation _group]
+] call CBA_fnc_waitUntilAndExecute;
 
 // alive unit
 if !(_unit call EFUNC(main,isAlive)) exitWith {false};
@@ -64,13 +70,13 @@ if (_units isEqualTo []) then {
 };
 if (_units isEqualTo []) exitWith {false};
 
-// find vehicles
-private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
+// find vehicles with weapons
+private _vehicles = ([_unit] call EFUNC(main,findReadyVehicles)) select {someAmmo _x};
 
 // sort building locations
-private _pos = [_target, 20, true, false] call EFUNC(main,findBuildings);
-_pos append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
-_pos pushBack _target;
+private _posList = [_target, 20, true, false] call EFUNC(main,findBuildings);
+_posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
+_posList pushBack _target;
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
@@ -79,6 +85,7 @@ _unit setVariable [QEGVAR(main,currentTask), "Leader Suppress", EGVAR(main,debug
 // set group task
 _group = group _unit;
 _group enableAttack false;
+_group setFormation "LINE";
 _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_functions)];
 
 // gesture
@@ -91,11 +98,11 @@ _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_
 _group setFormDir (_unit getDir _target);
 
 // execute recursive cycle
-[_cycle, _units, _vehicles, _pos] call EFUNC(main,doGroupSuppress);
+ [{_this call EFUNC(main,doGroupSuppress)}, [_group, _units, _vehicles, _posList], 2 + random 2] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions for %7 cycles)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _pos, count _vehicles, _cycle] call EFUNC(main,debugLog);
+    ["%1 TACTICS SUPPRESS (%2 with %3 units and %6 vehicles @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _posList, count _vehicles] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics suppress", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_destroy"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];

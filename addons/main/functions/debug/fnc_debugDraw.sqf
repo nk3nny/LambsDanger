@@ -18,30 +18,9 @@
 if !(GVAR(debug_Drawing)) exitWith {};
 if (is3DEN) exitWith {};
 
-private _fnc_clearControls = {
-    params ["_variable"];
-    private _delete = false;
-    private _data = uiNamespace getVariable _variable;
-    {
-        if (isNull _x) then {
-            _delete = true;
-        } else {
-            _x ctrlSetFade 1;
-            _x ctrlCommit 0;
-        };
-    } forEach _data;
-    if (_delete) then {
-        uiNamespace setVariable [_variable, _data - [controlNull]];
-    };
-};
-
 private _displayGame = findDisplay 46;
 private _displayEGSpectator = findDisplay 60492;
 private _displayCurator = findDisplay 312;
-
-QGVAR(debug_drawRectCacheGame) call _fnc_clearControls;
-QGVAR(debug_drawRectCacheCurator) call _fnc_clearControls;
-QGVAR(debug_drawRectCacheEGSpectator) call _fnc_clearControls;
 
 private _gameCache = uiNamespace getVariable [QGVAR(debug_drawRectCacheGame), []];
 private _gameInUse = [];
@@ -127,7 +106,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
     private _renderPos = getPosATLVisual _unit;
     private _isLeader = _unit isEqualTo (leader _unit);
     private _sideColor = [side (group _unit), false] call BIS_fnc_sideColor;
-    if ((_posCam distance _renderPos) <= _viewDistance && {((units _unit - [_unit]) findIf {_x distanceSqr _unit < 1}) isEqualTo -1}) then {
+    if ((_posCam distance _renderPos) <= _viewDistance) then {
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
@@ -182,7 +161,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
                 ];
             };
             //drawLine3D [_renderPos, getPosATLVisual _currentTarget, [1, 0, 0, 1]];  hide direct target lines to reduce clutter ~ nkenny
-            [name _currentTarget, "None"] select (isNull _currentTarget);
+            [typeOf _currentTarget, "None"] select (isNull _currentTarget);
         } else {
             if (_currentTarget isEqualType []) then {
                 drawLine3D [_renderPos, _currentTarget call CBA_fnc_getPos, _sideColor, 6];
@@ -285,11 +264,21 @@ private _posCam = positionCameraToWorld [0, 0, 0];
     };
 } forEach (allUnits select {!(isPlayer _x)});
 
-_gameCache append _gameInUse;
+private _fnc_clearControls = {
+    {
+        ctrlDelete _x;
+    } forEach _this;
+};
 
-_spectatorCache append _spectatorInUse;
+_gameCache call _fnc_clearControls;
+_spectatorCache call _fnc_clearControls;
+_curatorCache call _fnc_clearControls;
 
-_curatorCache append _curatorInUse;
+_gameCache = _gameInUse;
+
+_spectatorCache = _spectatorInUse;
+
+_curatorCache = _curatorInUse;
 
 uiNamespace setVariable [QGVAR(debug_drawRectCacheGame), _gameCache];
 uiNamespace setVariable [QGVAR(debug_drawRectCacheEGSpectator), _spectatorCache];

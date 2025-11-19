@@ -21,7 +21,7 @@ jobs:
     - name: .editorconfig Checker
       uses: editorconfig-checker/action-editorconfig-checker@main
     - name: Setup Node.js environment
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
     - name: Run Stringtable Checker
       run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../ && node tools/nodejs_tools/stringTableChecker.js
     - name: Check Functions
@@ -35,7 +35,7 @@ jobs:
     - name: Lint (sqflint)
       uses: jokoho48/sqflint@master
       continue-on-error: true # No failure due to many false-positives
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v5
       with:
        name: 'sqfLint Log'
        path: 'sqf.log'
@@ -49,7 +49,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Setup Node tools
         run: cd tools/nodejs_tools && npm i &> /dev/null && cd ../../
       - name: Setup HEMTT
@@ -59,7 +59,7 @@ jobs:
       - name: Run HEMTT build
         run: hemtt release
       - name: Upload Release
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: '@LambsDanger'
           path: '.hemttout/release/*'

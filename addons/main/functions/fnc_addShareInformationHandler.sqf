@@ -13,6 +13,9 @@
  * 1: enemy target <OBJECT>
  * 2: range to share information, default 350 <NUMBER>
  * 3: override radio ranges, default false <BOOLEAN>
+ * 4: group member doing the actual radio call <OBJECT>
+ * 5: sharing range after adjusting for radio ranges <NUMBER> 	
+ * 6: unit has has a long range radio <BOOLEAN>
  *
  * Return Value:
  * None

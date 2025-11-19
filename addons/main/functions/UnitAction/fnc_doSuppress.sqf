@@ -24,7 +24,7 @@ if (
     || (_eyePos distance2D _pos) < GVAR(minSuppressionRange)
     || {(currentCommand _unit) isEqualTo "Suppress"}
     || {terrainIntersectASL [_eyePos, _pos]}
-    || {isPlayer (leader _unit) && {GVAR(disablePlayerGroupSuppression)}}
+    || {GVAR(disablePlayerGroupSuppression) && {isPlayer (leader _unit)}}
     || {_checkLOS && {!([_unit, _pos, false] call FUNC(shouldSuppressPosition))}}
 ) exitWith {false};
 

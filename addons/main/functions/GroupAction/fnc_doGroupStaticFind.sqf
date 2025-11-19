@@ -35,7 +35,7 @@ if (_units isEqualTo []) exitWith { _units };
 
 // man empty statics
 private _weapons = nearestObjects [_unit, ["StaticWeapon"], 75, true];
-_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } && { (count magazines _x) > 0 } };
+_weapons = _weapons select { simulationEnabled _x && { !isObjectHidden _x } && { locked _x != 2 } && { (_x emptyPositions "Gunner") > 0 } && { (magazines _x) isNotEqualTo [] } };
 
 // orders
 if !((_weapons isEqualTo []) || (_units isEqualTo [])) then { // De Morgan's laws FTW

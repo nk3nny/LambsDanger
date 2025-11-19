@@ -131,12 +131,12 @@ waitUntil {
     private _target = [_group, _radius, _area, _pos, _onlyPlayers] call EFUNC(main,findClosestTarget);
 
     // act
-    if (!isNull _target) then {
+    if (isNull _target) then {
+        sleep (_cycle * 4);
+    } else {
         [_group, _target] call _fnc_rushOrders;
         if (EGVAR(main,debug_functions)) then { ["%1 taskRush: %2 targets %3 at %4M", side _group, groupId _group, name _target, floor (leader _group distance2D _target)] call EFUNC(main,debugLog); };
         sleep (linearConversion [1000, 2000, (leader _group distance2D _target), _cycle, _cycle * 4, true]);
-    } else {
-        sleep (_cycle * 4);
     };
 
     // end

@@ -62,7 +62,7 @@ if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
 };
 
 // indoor units exit
-if (RND(0.05) && {_indoor} && {RND(EGVAR(main,indoorMove))}) exitWith {
+if (_indoor && { RND(0.05) } && { RND(EGVAR(main,indoorMove)) }) exitWith {
     [_unit, _pos] call EFUNC(main,doReposition);
     _timeout
 };
@@ -70,8 +70,12 @@ if (RND(0.05) && {_indoor} && {RND(EGVAR(main,indoorMove))}) exitWith {
 // check bodies ~ enemy group!
 if (_type isEqualTo DANGER_DEADBODY) exitWith {
 
-    // communicate danger!
-    [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
+    // if dead body found -- check nearby buildings!
+    private _group = group _unit;
+    private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
+    if (_groupMemory isEqualTo []) then {
+        _group setVariable [QEGVAR(main,groupMemory), [_pos, 15, true] call EFUNC(main,findBuildings)];
+    };
 
     // gesture
     _unit doWatch _pos;

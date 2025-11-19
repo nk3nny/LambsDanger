@@ -31,28 +31,32 @@ private _timeout = time + 3;
 // check if stopped
 if (
     !(_unit checkAIFeature "PATH")
-    || {((behaviour _unit)) isEqualTo "STEALTH"}
-    || {(currentCommand _unit) isEqualTo "STOP"}
-    || {(combatMode _unit) in ["BLUE", "GREEN"]}
+    || ((behaviour _unit)) isEqualTo "STEALTH"
+    || (currentCommand _unit) isEqualTo "STOP"
+    || (combatMode _unit) in ["BLUE", "GREEN"]
+    || (getUnitState _unit) in ["PLANNING", "DELAY"]
 ) exitWith {_timeout};
 
 // group memory
 private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
+private _notSuppressed = (getSuppression _unit) isEqualTo 0;
 
 // sympathetic CQB/suppressive fire
-if (_groupMemory isNotEqualTo [] && (getSuppression _unit) isEqualTo 0) exitWith {
+if (_groupMemory isNotEqualTo [] && _notSuppressed) exitWith {
     [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
     _timeout
 };
 
 // building
-if (RND(EGVAR(main,indoorMove)) && {_unit call EFUNC(main,isIndoor)}) exitWith {
+if (RND(EGVAR(main,indoorMove)) && _notSuppressed && {_unit call EFUNC(main,isIndoor)}) exitWith {
     [_unit, _target] call EFUNC(main,doReposition);
     _timeout - 1
 };
 
 // reset look
-_unit setUnitPosWeak "MIDDLE";
+if ((getSuppression _unit) isEqualTo 0) then {
+    _unit setUnitPosWeak "MIDDLE";
+};
 //_unit doWatch objNull;
 
 // end

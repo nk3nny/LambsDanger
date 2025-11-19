@@ -27,19 +27,31 @@
 params ["_unit", ["_type", -1], ["_target", objNull]];
 
 // timeout
-private _timeout = time + 0.5;
+private _timeout = time + 1.5;
+
+// hide when static and ordered to be stealthy
+private _stealth = (behaviour _unit) isEqualTo "STEALTH";
+private _holdFire = (combatMode _unit) in ["BLUE", "GREEN"];
+private _still = (speed _unit) isEqualTo 0;
+if (
+    _still
+    && _stealth
+    && _holdFire
+) exitWith {
+    [_unit, _target] call EFUNC(main,doHide);
+    _timeout + 2
+};
 
 // check
 if (
     isNull _target
+    || _stealth
+    || _holdFire
+    || (speed _target) > 20
     || {(_unit knowsAbout _target) isEqualTo 0}
-    || {(speed _target) > 20}
-    || {(weapons _unit) isEqualTo []}
-    || {(combatMode _unit) in ["BLUE", "GREEN"]}
-    || {(behaviour _unit) isEqualTo "STEALTH"}
-    || {(getUnitState _unit) in ["PLANNING", "BUSY"]}
+    || {(getUnitState _unit) isEqualTo "PLANNING"}
 ) exitWith {
-    _timeout + 1
+    _timeout
 };
 
 // distance + group memory
@@ -48,25 +60,31 @@ private _distance = _unit distance2D _target;
 // near, go for CQB
 if (
     _distance < GVAR(cqbRange)
-    && {_unit checkAIFeature "PATH"}
-    && {(vehicle _target) isKindOf "CAManBase"}
-    // && {_target call EFUNC(main,isAlive)}
+    && _unit checkAIFeature "PATH"
+    && (vehicle _target) isKindOf "CAManBase"
+    && {_target call EFUNC(main,isAlive)}
 ) exitWith {
     _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
     [_unit, _target] call EFUNC(main,doAssault);
-    _timeout + 1.4
+    _timeout + 0.4
 };
 
 // set low stance
-_unit setUnitPosWeak "MIDDLE";
+if ((getSuppression _unit) isEqualTo 0) then {
+    _unit setUnitPosWeak "MIDDLE";
+};
+
+// formation is tight
+if (formation _unit in ["FILE", "DIAMOND"]) exitWith {
+    _timeout
+};
 
 // far, try to suppress
 if (
-    _distance < 500
-    && {unitReady _unit}
-    && {speed _unit < 5}
-    && {RND(getSuppression _unit)}
-    && {_type isEqualTo DANGER_CANFIRE}
+    _still
+    && _distance > EGVAR(main,minSuppressionRange)
+    && unitReady _unit
+    && (_type isEqualTo DANGER_CANFIRE)
 ) exitWith {
     private _posASL = ATLToASL (_unit getHideFrom _target);
     if (((ASLToAGL _posASL) select 2) > 6) then {
@@ -77,7 +95,7 @@ if (
     _unit forceSpeed 1;
     _unit suppressFor 4;
     [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
-    _timeout + 4
+    _timeout + 3
 };
 
 // end

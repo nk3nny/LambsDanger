@@ -23,8 +23,8 @@ private _vehicle = vehicle _unit;
 // cannot move or moving
 if (
     !canMove _vehicle
-    || {currentCommand _vehicle isEqualTo "MOVE"
-    || currentCommand _vehicle isEqualTo "ATTACK"}
+    || { (fuel _vehicle) < 0.1 }
+    || { (currentCommand _vehicle) in ["MOVE", "ATTACK"] }
     ) exitWith {
     getPosASL _unit
 };

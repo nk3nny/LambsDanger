@@ -41,11 +41,11 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Assess", EGVAR(main,debug_
 
 // get max data range ~ reduced for forests or cities - nkenny
 private _pos = getPosATL _unit;
-private _range = (850 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max 120;
+private _range = (1000 * (1 - (_pos getEnvSoundController "houses") - (_pos getEnvSoundController "trees") - (_pos getEnvSoundController "forest") * 0.5)) max 120;
 
 // gather data
 private _unitCount = count units _unit;
-private _enemies = (_unit targets [true, _range]) select {_unit knowsAbout _x > 1};
+private _enemies = _unit targets [true, _range];
 private _plan = [];
 
 // leader assess EH
@@ -146,16 +146,16 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     if (_inside) exitWith {_plan = [];};
 
     // enemies far away and above height and has LOS and limited knowledge!
-    private _farHighertarget = _enemies findIf {
+    private _farHigherTarget = _enemies findIf {
         !_speedMode
         && {_unit distance2D _x > RANGE_LONG}
         && {_unit knowsAbout _x < 2}
         && {((getPosASL _x) select 2) > ((_eyePos select 2) + 15)}
         && {!(terrainIntersectASL [_eyePos vectorAdd [0, 0, 5], eyePos _x])}
     };
-    if (_farHighertarget != -1) exitWith {
+    if (_farHigherTarget isNotEqualTo -1) exitWith {
         _plan append [TACTICS_SUPPRESS, TACTICS_HIDE, TACTICS_HIDE];
-        _pos = _unit getHideFrom (_enemies select _farHighertarget);
+        _pos = _unit getHideFrom (_enemies select _farHigherTarget);
     };
 
     // enemies near and below
@@ -174,7 +174,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
 
     // enemy at inside buildings or fortified or far
     private _fortifiedTarget = _enemies findIf {
-        _unit distance2D _x > RANGE_LONG
+        _unit distance2D _x > RANGE_MID
         || {_x call EFUNC(main,isIndoor)}
         || {(nearestObjects [_x, ["Strategic", "StaticWeapon"], 2, true]) isNotEqualTo []}
     };
@@ -211,9 +211,10 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
     _units = [_units] call EFUNC(main,doUGL);
 };
 
-// man empty static weapons
+// man empty static weapons and deploy static weapons
 if !(GVAR(disableAIFindStaticWeapons)) then {
     _units = [_units, _unit] call EFUNC(main,doGroupStaticFind);
+    _units = [_units, _pos] call EFUNC(main,doGroupStaticDeploy);
 };
 
 // no plan ~ exit with no executable plan
@@ -240,17 +241,12 @@ if (
     _unit doWatch _pos;
 };
 
-// deploy static weapons
-if !(GVAR(disableAIDeployStaticWeapons)) then {
-    _units = [_units, _pos] call EFUNC(main,doGroupStaticDeploy);
-};
-
 // enact plan
 _plan = selectRandom _plan;
 switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_group, _pos, _units], 22 + random 8] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsFlank)}, [_group, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_GARRISON: {
         // garrison ~ nb units not carried here - nkenny
@@ -262,11 +258,11 @@ switch (_plan) do {
     };
     case TACTICS_SUPPRESS: {
         // suppress
-        [{_this call FUNC(tacticsSuppress)}, [_group, _pos, _units], 4 + random 4] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsSuppress)}, [_group, _pos], 2 + random 2] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ATTACK: {
         // group attacks as one
-        [{_this call FUNC(tacticsAttack)}, [_group, _pos, _units], 1 + random 1] call CBA_fnc_waitAndExecute;
+        [{_this call FUNC(tacticsAttack)}, [_group, _pos], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
