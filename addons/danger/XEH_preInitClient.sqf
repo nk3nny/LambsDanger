@@ -10,7 +10,7 @@ Here four buttons are added:
 These functions and buttons could conceivably be moved to their own module.
 They might also benefit from added interface and more nuanced functions handling.
 That said: within the current scope of the AI mod. They can make a comfortable
-home here. Until revisited by more capable personnell.
+home here. Until revisited by more capable people.
 - nkenny
 */
 
@@ -103,7 +103,7 @@ private _fnc_assault_AI = {
     } else {
         _cursorPos = getPos cursorObject;
     };
-    private _buildings = [_cursorPos, 50, true, false] call EFUNC(main,findBuildings);
+    private _buildings = [_cursorPos, 12, true, false] call EFUNC(main,findBuildings);
     (group player) setVariable [QEGVAR(main,groupMemory), _buildings];
     {
         private _enemy = _x findNearestEnemy _cursorPos;
