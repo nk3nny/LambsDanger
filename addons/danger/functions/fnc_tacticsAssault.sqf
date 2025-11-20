@@ -80,7 +80,7 @@ _group setVariable [QEGVAR(main,groupMemory), _buildings];
 
 // find vehicles
 private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
-private _overwatch = [ASLToAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target] call EFUNC(main,findOverwatch);
+private _overwatch = [ASLToAGL (getPosASL _unit), EGVAR(main,minSuppressionRange) * 2, EGVAR(main,minSuppressionRange), 4, _target, false] call EFUNC(main,findOverwatch);
 if (_overwatch isNotEqualTo []) then {
     {
         private _roads = _overwatch nearRoads 30;

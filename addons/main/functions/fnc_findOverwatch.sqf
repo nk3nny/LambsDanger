@@ -3,8 +3,6 @@
  * Author: jokoho482
  * Returns Overwatch Positions
  *
- * Warning:
- * It is possible that this function does not Generate any Posisions and Returns a Empty Array!
  *
  * Arguments:
  * 0: Target Position <ARRAY>
@@ -12,6 +10,7 @@
  * 2: Minimum distance from Target in meters <NUMBER>
  * 3: Minimum height in relation to Target in meters <NUMBER>
  * 4: Position to start looking from <ARRAY>
+ * 5: Select the lowest position <BOOL>
  *
  * Return Value:
  * Position of a Possible Overwatch Position
@@ -29,44 +28,44 @@ params [
     ["_maxRange", 50, [0]],
     ["_minRange", 10, [0]],
     ["_minHeight", 8, [0]],
-    ["_centerPos", [0,0,0], [[]]]
+    ["_centerPos", [0, 0, 0], [[]]],
+    ["_lowestPosition", true, [true]]
 ];
 private _refObj = nearestObject [_targetPos, "All"];
 private _result = [];
 private _selectedPositions = [];
 
+// sort found position(s)
 private _fnc_selectResult = {
-    //Found position(s)
+    _selectedPositions sort _lowestPosition;
 
-    private _heightSorted = _selectedPositions apply {[(_refObj worldToModel _x) select 2, _x]};
-    _heightSorted sort false;
-
-    _result = (_heightSorted param [0]) param [1, _centerPos];
+    _result = (_selectedPositions param [0]) param [1, _centerPos];
 
     _result breakOut QGVAR(findOverwatch);
 };
 
-for "_i" from 0 to 300 do {
-    private _checkPos = [_centerPos, 0, _maxRange, 3, 0, 50, 0, [], []] call BIS_fnc_findSafePos;
-    private _height = (_refObj worldToModel _checkPos) select 2;
-    private _dis = _checkPos distance _targetPos;
+for "_i" from 0 to 15 do {
+    private _checkPos = [_centerPos, 0, _maxRange, 0, 0, 50, 0, [], [_centerPos, _centerPos]] call BIS_fnc_findSafePos;
 
-    private _terrainBlocked = terrainIntersect [_targetPos,_checkPos];
+    private _distCheck = (_checkPos distance _targetPos) > _minRange;
+    private _terrainBlocked = terrainIntersect [_targetPos, _checkPos vectorAdd [0, 0, 2]];
+    if (_distCheck && !_terrainBlocked) then {
 
-    private _distCheck = (_dis > _minRange);
-    // Get atleast one Fallback Position
-    if (_result isEqualTo [] && _distCheck) then {
-        if !(_terrainBlocked) then {
+        // Get at least one Fallback Position
+        if (_result isEqualTo []) then {
             _result = _checkPos;
         };
+
+        // check height
+        private _height = (_refObj worldToModel _checkPos) select 2;
+        if (_height > _minHeight) then {
+            _selectedPositions pushBack [_height, _checkPos];
+        };
+
     };
 
-    if ((_height > _minHeight) && _distCheck) then {
-        if !(_terrainBlocked) then {
-            _selectedPositions pushBack _checkPos;
-        };
-    };
-    if (count _selectedPositions >= 5) then {
+    // exit on 3 positions
+    if ((count _selectedPositions) isEqualTo 3) then {
         call _fnc_selectResult;
     };
 };
