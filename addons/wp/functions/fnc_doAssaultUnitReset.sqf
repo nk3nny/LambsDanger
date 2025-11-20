@@ -23,7 +23,7 @@ _unit setVariable [QEGVAR(danger,forceMove), nil];
 // stance
 _unit forceSpeed -1;
 _unit setUnitPos "AUTO";
-_unit doMove (getPosATL _unit);
+_unit doMove (getPosASL _unit);
 _unit doFollow (leader _unit);
 
 // AI
@@ -31,6 +31,7 @@ _unit enableAI "FSM";
 _unit enableAI "COVER";
 _unit enableAI "SUPPRESSION";
 _unit enableAI "TARGET";
+_unit enableAI "WEAPONAIM";
 
 // eventhandlers
 [_unit, _unit getVariable [QGVAR(eventhandlers), []]] call EFUNC(main,removeEventhandlers);
@@ -44,7 +45,11 @@ if (_retreat) then {
     private _animation = ["AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon", "AmovPercMsprSnonWnonDf_AmovPpneMstpSnonWnonDnon"] select ((primaryWeapon _unit) isEqualTo "");
     [QEGVAR(main,doSwitchMove), [_unit, _animation]] call CBA_fnc_globalEvent;
     _unit enableAI "AUTOTARGET";
+    _unit enableAI "FIREWEAPON";
     _unit doWatch objNull;
 };
+
+// reset variable
+_unit setVariable [QEGVAR(main,currentTask), nil];
 
 _unit
