@@ -52,16 +52,6 @@ if (RND(0.3)) then {
 _unit doWatch _pos;
 _unit doSuppressiveFire _pos;
 
-// DEBUG INFORMATION - TO BE REMOVED BEFORE RELEASE - nkenny
-[
-    {
-        params ["_unit", "_distance"];
-        if ((currentCommand _unit) isNotEqualTo "Suppress") then {
-            systemChat format ["%1 doSuppress %2 - failed suppression! (%3m)", side _unit, name _unit, round _distance];
-        };
-    }, [_unit, _distance], 1.5
-] call CBA_fnc_waitAndExecute;
-
 // Suppressive fire
 _unit setVariable [QGVAR(currentTask), "Suppress!", GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
