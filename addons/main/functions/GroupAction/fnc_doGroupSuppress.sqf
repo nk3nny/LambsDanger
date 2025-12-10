@@ -29,10 +29,14 @@ _vehicles = _vehicles select { canFire _x };
 // infantry
 [_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
+private _checkCount = 3;
 
 {
     // find target
-    if (_index isEqualTo -1)then {_index = [_x, _posList] call FUNC(checkVisibilityList);};
+    if (_index isEqualTo -1 && _checkCount > 0) then {
+        _index = [_x, _posList] call FUNC(checkVisibilityList);
+        _checkCount = _checkCount - 1;
+    };
 
     // found good target
     if (_index isNotEqualTo -1) then {
@@ -65,7 +69,7 @@ private _index = -1;
     private _vehicle = _x;
 
     // find target
-    if (_index isEqualTo -1)then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
+    if (_index isEqualTo -1) then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
 
     // execute suppression
     if (_index isNotEqualTo -1) then {
