@@ -90,7 +90,7 @@ _group setFormation "LINE";
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
         ];
-        [{[QEGVAR(main,doSwitchMove), [_this select 0, _this select 1]] call CBA_fnc_globalEvent;}, [_x, _animation], 1 + random 1] call CBA_fnc_waitAndExecute;
+        [{[QEGVAR(main,doSwitchMove), _this] call CBA_fnc_globalEvent;}, [_x, _animation], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
 
     // fired EH
