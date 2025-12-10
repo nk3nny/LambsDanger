@@ -6,6 +6,7 @@
  * Arguments:
  * 0: unit suppressing <OBJECT>
  * 1: target position <ARRAY> (ASL position)
+ * 2: do extended visibility checks <BOOLEAN>, default false
  *
  * Return Value:
  * success
@@ -15,36 +16,35 @@
  *
  * Public: No
 */
-params ["_unit", "_pos", ["_checkLOS", false]];
+params [["_unit", objNull], [ "_pos", [0, 0, 0], [[]]], ["_checkLOS", false, [false]]];
 
 // no primary weapons exit? Player led groups do not auto-suppress
-private _eyePos = eyePos _unit;
+private _eyePos = getPosWorld _unit;
 if (
     (primaryWeapon _unit) isEqualTo ""
-    || (_eyePos distance2D _pos) < GVAR(minSuppressionRange)
-    || {(currentCommand _unit) isEqualTo "Suppress"}
-    || {terrainIntersectASL [_eyePos, _pos]}
-    || {GVAR(disablePlayerGroupSuppression) && {isPlayer (leader _unit)}}
+    || (currentCommand _unit) isEqualTo "Suppress"
+    || terrainIntersectASL [_eyePos, _pos]
+    || (isPlayer (leader _unit) && GVAR(disablePlayerGroupSuppression))
     || {_checkLOS && {!([_unit, _pos, false] call FUNC(shouldSuppressPosition))}}
 ) exitWith {false};
 
 // max range pos
-private _distance = (_eyePos vectorDistance _pos) min 200;
-_pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply _distance);
+private _distance = _eyePos vectorDistance _pos;
+if (_distance > 200) then {_pos = _eyePos vectorAdd ((_eyePos vectorFromTo _pos) vectorMultiply 200);};
 
 // adjust pos
-private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, objNull, true, 1, "GEOM", "VIEW"];
+private _vis = lineIntersectsSurfaces [_eyePos, _pos, _unit, objNull, true, 1, "VIEW", "NONE"];
 if (_vis isNotEqualTo []) then {_pos = (_vis select 0) select 0;};
 
 // final range check
-if ((_eyePos distance2D _pos) < GVAR(minSuppressionRange)) exitWith {false};
+if ((_eyePos vectorDistance _pos) < GVAR(minSuppressionRange)) exitWith {false};
 
 // check for friendlies
-private _friendlies = [_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);
+private _friendlies = if (_distance > 200) then {[]} else {[_unit, ASLToAGL _pos, GVAR(minFriendlySuppressionDistance)] call FUNC(findNearbyFriendlies);};
 if (_friendlies isNotEqualTo []) exitWith {false};
 
 // Callout!
-if (RND(0.4)) then {
+if (RND(0.3)) then {
     [_unit, "Combat", "suppress"] call FUNC(doCallout);
 };
 

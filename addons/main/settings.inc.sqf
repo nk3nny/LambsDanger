@@ -89,7 +89,7 @@ _curCat = LSTRING(Settings_SuppressionCat);
     "SLIDER",
     [LSTRING(Settings_minFriendlySuppressionDistance), LSTRING(Settings_minFriendlySuppressionDistance_ToolTip)],
     [COMPONENT_NAME, _curCat],
-    [0, 50, 5, 0],
+    [0, 50, 3, 0],
     1
 ] call CBA_fnc_addSetting;
 
