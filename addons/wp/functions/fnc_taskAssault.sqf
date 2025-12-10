@@ -52,6 +52,12 @@ _group setVariable [QGVAR(taskAssaultMembers), _units];
 
 // set group task
 _group setVariable [QEGVAR(main,currentTactic), ["taskAssault", "taskRetreat"] select _retreat, EGVAR(main,debug_functions)];
+_group setVariable [QEGVAR(danger,isExecutingTactic), false, true];
+_group setVariable [QEGVAR(main,groupMemory), [], true];
+
+// forget all targets!
+private _targets = _group targets [true];
+{_group forgetTarget _x} forEach _targets;
 
 // set group orders
 _group setBehaviourStrong (["AWARE", "CARELESS"] select _retreat);
@@ -66,10 +72,10 @@ _group setFormation "LINE";
     _x setVariable [QEGVAR(danger,disableAI), true];
     _x setVariable [QEGVAR(danger,forceMove), true];
     _x disableAI "TARGET";
+    _x disableAI "WEAPONAIM";
     _x disableAI "FSM";
     _x disableAI "COVER";
     _x disableAI "SUPPRESSION";
-    _x setUnitPos "UP";
 
     // variable
     _x setVariable [QEGVAR(main,currentTask), ["Rushing Assault", "Rushing Retreat"] select _retreat, EGVAR(main,debug_functions)];
@@ -77,13 +83,14 @@ _group setFormation "LINE";
     // check retreat
     if (_retreat) then {
         _x disableAI "AUTOTARGET";
+        _x disableAI "FIREWEAPON";
         [QEGVAR(main,doSwitchMove), [_x, "ApanPercMrunSnonWnonDf"]] call CBA_fnc_globalEvent;
         private _animation = selectRandom [
             "ApanPknlMsprSnonWnonDf",
             "ApanPknlMsprSnonWnonDf",
             "ApanPercMsprSnonWnonDf"
         ];
-        [QEGVAR(main,doSwitchMove), [_x, _animation]] call CBA_fnc_globalEvent;
+        [{[QEGVAR(main,doSwitchMove), _this] call CBA_fnc_globalEvent;}, [_x, _animation], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
 
     // fired EH
@@ -95,11 +102,11 @@ _group setFormation "LINE";
     // dodge hits
     private _hitEH = _x addEventHandler ["Hit", {
         params ["_unit", "", "", "_shooter"];
-        private _unitPos = unitPos _unit;
+        private _stance = stance _unit;
 
         // tune stance
-        if (_unitPos isEqualTo "Down") exitWith {};
-        if (_unitPos isEqualTo "Middle" && {_unit distance2D _shooter > 30}) exitWith {_unit setUnitPos "DOWN";};
+        if (_stance isEqualTo "PRONE") exitWith {};
+        if (_stance isEqualTo "CROUCH" && {_unit distanceSqr _shooter > 900}) exitWith {_unit setUnitPos "DOWN";};
         _unit setUnitPos "MIDDLE";
     }];
 
@@ -115,7 +122,7 @@ _group setFormation "LINE";
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
                 // exit
-                if (!(_unit call EFUNC(main,isAlive)) || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
+                if (!alive _unit || {_unit distance2D _destination < _threshold} || {_destination isEqualTo [0,0,0]}) exitWith {
 
                     // group
                     private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
@@ -140,37 +147,9 @@ _group setFormation "LINE";
                 };
 
                 // move
-                if ((expectedDestination _unit select 0) isNotEqualTo _destination) then {_unit doMove _destination};
+                _unit doMove (_unit getPos [(_unit distance2D _destination) * 0.5, _unit getDir _destination]);
                 _unit forceSpeed 24;
-                _unit setUnitPos (["UP", "MIDDLE"] select (RND(0.5) && (unitPos _unit) isEqualTo "Down"));
-
-                // no animation on retreat
-                if (_retreat) exitWith {};
-
-                // force move
-                private _dir = 360 - (_unit getRelDir _destination);
-                private _anim = call {
-                    // move right
-                    if (_dir > 240 && {_dir < 320}) exitWith {
-                        ["TactR", "TactRF"];
-                    };
-
-                    // move left
-                    if (_dir < 120 && {_dir > 40}) exitWith {
-                        ["TactL", "TactLF"];
-                    };
-
-                    // move back
-                    if (_dir > 120 && {_dir < 240}) exitWith {
-                        "TactB"
-                    };
-
-                    // forward
-                    "TactF"
-                };
-
-                // execute
-                [_unit, _anim, true] call EFUNC(main,doGesture);
+                _unit setUnitPos (["UP", "MIDDLE"] select (RND(0.85) || (stance _unit) isEqualTo "PRONE"));
             },
             _cycle - 0.5 + random 1.2,
             [_x, _group, _retreat, _threshold]
@@ -192,23 +171,28 @@ waitUntil {
     // end if WP is odd
     if (_wPos isEqualTo [0,0,0]) exitWith {true};
 
-    // get vehicles moving
-    {
-        private _vehicle = _x;
+    // adjust for vehicles
+    if (_vehicles isNotEqualTo []) then {
+        private _adjustPos = _wPos findEmptyPosition [0, 10];
+        if (_adjustPos isNotEqualTo []) then {_wPos = _adjustPos;};
 
-        // execute movement
-        _vehicle doWatch _wPos;
-        _vehicle doMove _wPos;
+        // get vehicles moving
+        {
+            private _vehicle = _x;
 
-        // unload vehicles
-        if (_vehicle distance _wPos < (_threshold * 2)) then {
-            private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
-            _cargo append ((fullCrew [_vehicle, "turret"] select {_x select 4}) apply {_x select 0});
-            _cargo orderGetIn false;
-            _cargo allowGetIn false;
-        };
+            // execute movement
+            _vehicle doWatch _wPos;
+            _vehicle doMove _wPos;
 
-    } forEach _vehicles;
+            // unload vehicles
+            if (_vehicle distance _wPos < (_threshold * 2)) then {
+                private _cargo =  ((fullCrew [_vehicle, "cargo"]) apply {_x select 0});
+                _cargo append ((fullCrew [_vehicle, "turret"] select {_x select 4}) apply {_x select 0});
+                _cargo orderGetIn false;
+                _cargo allowGetIn false;
+            };
+        } forEach (_vehicles select {unitReady _x});
+    };
 
     // debug
     if (EGVAR(main,debug_functions)) then {
