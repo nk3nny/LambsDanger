@@ -83,8 +83,7 @@ if (_artillery) exitWith {
 
     // mortars fire rounds
     private _mortarTime = _vehicle getVariable [QEGVAR(main,mortarTime), 0];
-    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time} && {isTouchingGround _dangerCausedBy}) then {
-
+    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time} && {isTouchingGround _dangerCausedBy} && {!(_dangerCausedBy isKindOf "ArtilleryTarget")}) then {
         // delay
         _timeout = _timeout + 2;
         _vehicle doWatch _dangerPos;
@@ -120,7 +119,7 @@ if (_artillery) exitWith {
         if ( _dangerRound || { !(_dangerPos inRangeOfArtillery [[_vehicle], _shell]) } ) exitWith {};
 
         // execute fire command
-        _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 80, (_dangerPos getDir _vehicle) - 10 + random 20], _shell, 1 + random 2];
+        _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 100, (_dangerPos getDir _vehicle) - 20 + random 40], _shell, 1 + random 2];
         _vehicle setVariable [QEGVAR(main,mortarTime), time + 24 + random 66];
         _unit setVariable [QEGVAR(main,currentTask), "Mortar Fire", EGVAR(main,debug_functions)];
         if (_repeatRounds) then {
@@ -131,8 +130,8 @@ if (_artillery) exitWith {
                         _vehicle commandArtilleryFire [_dangerPos, _shell, ( 2 + random 1 ) min ((gunner _vehicle) ammo (currentMuzzle (gunner _vehicle)))];
                     };
                 },
-                [_vehicle, _dangerPos, _shell],
-                18 + random 6
+                [_vehicle, _dangerPos getPos [15 + random 100, (_vehicle getDir _dangerPos) - 10 + random 20], _shell],
+                18 + random 8
             ] call CBA_fnc_waitAndExecute;
         };
     };
