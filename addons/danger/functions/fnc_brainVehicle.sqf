@@ -108,7 +108,7 @@ if (_artillery) exitWith {
         };
 
         // check night
-        if ( RND(0.2) && { _unit call EFUNC(main,isNight) } && { _flareIndex isNotEqualTo -1 } ) then {
+        if ( RND(0.2) && { ((getPos _unit) getEnvSoundController "night") isEqualTo 1 } && { _flareIndex isNotEqualTo -1 } ) then {
             _dangerPos = _dangerPos getPos [-50 + random 100, (_vehicle getDir _dangerPos) - 45 + random 90];
             _shell = _ammo select _flareIndex;
             _dangerRound = false;
