@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>LAMBS Danger.fsm - Documenation</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">  <style>
+    :root {
+      /* Reduce the font size */
+      --base-font-size: 14px;
+
+      /* Change the theme color hue */
+      --theme-hue: 150;
+
+      /* Plugin: Search
+      ============================================================================= */
+      --search-background                      : ;
+      --search-margin                          : 1.5rem 0 0;
+      --search-padding                         : ;
+
+      /* Clear Button */
+      --search-clear-icon-color1               : var(--mono-tint3);
+      --search-clear-icon-color2               : var(--mono-shade1);
+
+      /* Input */
+      --search-input-background-color          : ;
+      --search-input-background-color--focus   : ;
+      --search-input-background-image          : ;
+      --search-input-background-image--focus   : ;
+      --search-input-background-position       : ;
+      --search-input-background-position--focus: ;
+      --search-input-background-repeat         : no-repeat;
+      --search-input-background-size           : ;
+      --search-input-background-size--focus    : ;
+      --search-input-border-color              : var(--mono-tint1);
+      --search-input-border-radius             : ;
+      --search-input-border-width              : 1px;
+      --search-input-color                     : ;
+      --search-input-font-size                 : ;
+      --search-input-margin                    : ;
+      --search-input-padding                   : 0.5em;
+      --search-input-placeholder-color         : ;
+      --search-input-transition                : ;
+
+      /* Order */
+      --search-flex-order                      : 1;
+
+      /* Results */
+      --search-result-heading-color            : var(--heading-color);
+      --search-result-heading-font-size        : var(--base-font-size);
+      --search-result-heading-font-weight      : normal;
+      --search-result-heading-margin           : 0 0 0.25em;
+      --search-result-item-border-color        : var(--mono-tint2);
+      --search-result-item-border-style        : solid;
+      --search-result-item-border-width        : 0 0 1px 0;
+      --search-result-item-color               : ;
+      --search-result-item-font-size           : ;
+      --search-result-item-font-weight         : normal;
+      --search-result-item-margin              : ;
+      --search-result-item-padding             : 1em 0;
+      --search-result-keyword-background       : var(--mark-background);
+      --search-result-keyword-border-radius    : var(--border-radius-s);
+      --search-result-keyword-color            : var(--mark-color);
+      --search-result-keyword-font-weight      : normal;
+      --search-result-keyword-margin           : 0 0.1em;
+      --search-result-keyword-padding          : 0.2em 0;
+
+      /* Plugin: Docsify Tabs
+      ============================================================================= */
+      /* Tab blocks */
+      --docsifytabs-border-color    : var(--mono-tint2);
+      --docsifytabs-border-radius-px: var(--border-radius-s);
+
+      /* Tabs */
+      --docsifytabs-tab-background  : var(--mono-tint3);
+      --docsifytabs-tab-color       : var(--mono-tint1);
+
+      --code-inline-color           : var(--theme-color)
+    }
+    .alert.callout {
+      background: var(--blockquote-background) !important;
+      border-width: var(--blockquote-border-width, 0) !important;
+      border-radius: var(--blockquote-border-radius) !important;
+    }
+    .scroll-down {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .scroll-down a {
+      position: absolute;
+      bottom: calc( -45vh + 100px ); ;
+      left: 50%;
+      z-index: 2;
+      display: inline-block;
+      transform: translate(0, -50%);
+      color: #fff;
+      font: normal 400 20px/1 'Josefin Sans', sans-serif;
+      letter-spacing: .1em;
+      text-decoration: none;
+      transition: opacity .3s;
+    }
+    .scroll-down a span {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        border-left: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transform: rotateZ(-45deg);
+        animation: sdb05 2s infinite;
+        box-sizing: border-box;
+    }
+    @-webkit-keyframes sdb05 {
+      0% {
+        -webkit-transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+      }
+    }
+    @keyframes sdb05 {
+      0% {
+        transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="https://unpkg.com/docsify-edit-on-github/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+  <!-- JavaScript -->
+  <script>
+    window.$docsify = {
+      name: 'Lambs Danger',
+      repo: 'https://github.com/nk3nny/LambsDanger.git',
+      loadSidebar: '_navbar.md',
+      coverpage: "coverpage.md",
+      homepage: "gettingStarted.md",
+      plugins: [
+        EditOnGithubPlugin.create("https://github.com/nk3nny/LambsDanger/edit/master/doc/", null, "edit on git"),
+      ],
+      themeable: {
+          readyTransition : true, // default
+          responsiveTables: true  // default
+      },
+      // auto2top   : true,
+      maxLevel   : 3,
+      subMaxLevel: 3,
+      executeScript: true,
+      search: {
+        depth : 3,
+        noData : 'No results!',
+        placeholder : 'Search...'
+      },
+      pagination: {
+        crossChapter: true,
+        crossChapterText: true,
+      },
+    }
+
+    window.onload = () => {
+      const element = document.querySelector('.cover-main');
+      const div = document.createElement('div');
+      const a = document.createElement('a');
+      a.innerHTML = '<span></span>';
+      a.href = '#/?id=about-this-documentation';
+      div.classList.add('scroll-down');
+      div.append(a);
+      element.parentNode.insertBefore(div, element.nextSibling);
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sqf.min.js"></script>
+
+</body>
+</html>

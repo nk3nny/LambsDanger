@@ -1,0 +1,6 @@
+- [Getting Started](/)
+- [Event Handlers](event-handlers.md)
+- [Variables](variables.md)
+- [Waypoints](waypoints.md)
+- [Design and release plans](future-goals.md)
+- [Development Team](development-team.md)
