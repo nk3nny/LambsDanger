@@ -12,7 +12,7 @@
     <a href="https://forums.bohemia.net/forums/topic/225402-lambs-improved-dangerfsm/">
         <img src="https://img.shields.io/badge/BIF-Thread-lightgrey.svg?style=flat-square" alt="BIF Thread">
     </a>
-    <a href="https://discord.gg/4q9pTKP">
+    <a href="https://discord.gg/NFFApYb">
         <img src="https://img.shields.io/discord/681656029758488619?color=%237289da&label=Discord&logo=discord&style=flat-square" alt="Lambs Danger Discord">
     </a>
     <a href="https://github.com/nk3nny/LambsDanger/actions?query=workflow%3AArma">
