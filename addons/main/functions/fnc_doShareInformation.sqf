@@ -91,20 +91,20 @@ if (EGVAR(main,debug_functions)) then {
 
     // enemy units
     {
-        private _m = [_newUnit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
+        private _m = [_unit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
-        _m setMarkerTextLocal str (_newUnit knowsAbout _x);
+        _m setMarkerTextLocal str (_unit knowsAbout _x);
         _markers pushBack _m;
-    } forEach ((units _target) select {_newUnit knowsAbout _x > 0});
+    } forEach ((units _target) select {_unit knowsAbout _x > 0});
 
     // friendly units
     {
-        private _m = [_newUnit getHideFrom _x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
+        private _m = [_x, "", _x call FUNC(debugMarkerColor), "mil_triangle"] call FUNC(dotMarker);
         _m setMarkerSizeLocal [0.5, 0.5];
         _m setMarkerDirLocal (getDir _x);
         _markers pushBack _m;
-    } forEach units _newUnit;
+    } forEach units _unit;
     [{{deleteMarker _x;true} count _this;}, _markers, 60] call CBA_fnc_waitAndExecute;
 };
 

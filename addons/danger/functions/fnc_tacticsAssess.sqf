@@ -66,7 +66,7 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
     private _eyePos = eyePos _unit;
 
     // communicate
-    [_unit, selectRandom _enemies] call EFUNC(main,doShareInformation);
+    [_unit, _enemies select 0] call EFUNC(main,doShareInformation);
 
     // vehicle response
     private _tankTarget = _enemies findIf {
@@ -218,7 +218,7 @@ if !(GVAR(disableAIFindStaticWeapons)) then {
 };
 
 // no plan ~ exit with no executable plan
-if (_plan isEqualTo [] || {_pos isEqualTo []}) exitWith {
+if (_plan isEqualTo [] || {_pos isEqualTo []} || {_pos isEqualTo [0, 0, 0]}) exitWith {
 
     // holding tactics
     [_unit] call FUNC(tacticsHold);
@@ -246,27 +246,27 @@ _plan = selectRandom _plan;
 switch (_plan) do {
     case TACTICS_FLANK: {
         // flank
-        [{_this call FUNC(tacticsFlank)}, [_group, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsFlank)}, [_group, _pos], 22 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_GARRISON: {
         // garrison ~ nb units not carried here - nkenny
-        [{_this call FUNC(tacticsGarrison)}, [_group, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsGarrison)}, [_group, _pos], 10 + random 6] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ASSAULT: {
         // rush ~ assault
-        [{_this call FUNC(tacticsAssault)}, [_group, _pos], 6 + random 8] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsAssault)}, [_group, _pos], 6 + random 8] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_SUPPRESS: {
         // suppress
-        [{_this call FUNC(tacticsSuppress)}, [_group, _pos], 2 + random 2] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsSuppress)}, [_group, _pos], 2 + random 2] call CBA_fnc_waitAndExecute;
     };
     case TACTICS_ATTACK: {
         // group attacks as one
-        [{_this call FUNC(tacticsAttack)}, [_group, _pos], 1 + random 1] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsAttack)}, [_group, _pos], 1 + random 1] call CBA_fnc_waitAndExecute;
     };
     default {
         // hide from armor
-        [{_this call FUNC(tacticsHide)}, [_group, _pos, true], 1 + random 3] call CBA_fnc_waitAndExecute;
+        [{call FUNC(tacticsHide)}, [_group, _pos, true], 1 + random 3] call CBA_fnc_waitAndExecute;
     };
 };
 
