@@ -77,14 +77,14 @@ if (count _units > 2) then {
 ] call CBA_fnc_waitAndExecute;
 
 // units stealthy or indoor units stay inside
-if (_stealth || {[_unit] call EFUNC(main,isIndoor)}) then {
+if ((_unit checkAIFeature "PATH") && (_stealth || {[_unit] call EFUNC(main,isIndoor)})) then {
     private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
     _group setVariable [QEGVAR(main,groupMemory), _buildings, false];
 };
 
 // drop low
 {
-    if ((unitPos _x) isEqualTo "Auto") then {_x setUnitPosWeak "DOWN";};
+    if ((unitPos _x) isEqualTo "Auto") then {_x setUnitPosWeak "MIDDLE";};
 } forEach _units;
 
 // leader seeks cover

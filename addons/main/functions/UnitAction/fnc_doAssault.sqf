@@ -6,13 +6,13 @@
  * Arguments:
  * 0: unit assaulting <OBJECT>
  * 1: enemy <OBJECT>
- * 2: range to find buildings, default 20 <NUMBER>
+ * 2: range to find buildings, default 12 <NUMBER>
  *
  * Return Value:
  * boolean
  *
  * Example:
- * [bob, angryJoe, 20] call lambs_main_fnc_doAssault;
+ * [bob, angryJoe] call lambs_main_fnc_doAssault;
  *
  * Public: No
 */
@@ -24,33 +24,38 @@ if (!(_unit checkAIFeature "PATH")) exitWith {false};
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
-// check visibility and target within 15 meters
-private _vis = _unit distanceSqr _target < 225 && {[_unit, "FIRE", _target] checkVisibility [eyePos _unit, aimPos _target] isEqualTo 1};
+// check visibility and target within 20 meters
+private _vis = _unit distanceSqr _target < 400 && {[_unit, "FIRE", _target] checkVisibility [getPosWorld _unit, aimPos _target] isEqualTo 1};
 private _buildings = [];
+private _expectedDestination = (expectedDestination _unit) select 0;
 private _pos = call {
 
     // can see target!
     if (_vis) exitWith {
-        _unit lookAt _target;
+        _unit doWatch _target;
         _doMove = true;
-        getPosATL _target
+        getPosATL _unit
     };
 
     // get the hide
     private _getHide = _unit getHideFrom _target;
-
-    // near buildings
-    _buildings = [_getHide, _range, true, false] call FUNC(findBuildings);
     private _distanceSqr = _unit distanceSqr _getHide;
-    _buildings = _buildings select {_x distanceSqr _unit < _distanceSqr && {_x distanceSqr _unit > 2.25}};
 
-    // target outdoors
+    // busy units keep tracking their targets(!)
+    private _unitState = getUnitState _unit;
+    if (_unitState isEqualTo "BUSY" && (_expectedDestination distanceSqr _getHide < 6.25)) exitWith {
+        _expectedDestination
+    };
+
+    // get buildings near target
+    _buildings = [_getHide, _range, false, false] call FUNC(findBuildings);
+
+    // no valid buildings
     if (_buildings isEqualTo []) exitWith {
 
-        if (_unit call FUNC(isIndoor) && {RND(GVAR(indoorMove))}) exitWith {
+        if (_unit call FUNC(isIndoor) && RND(GVAR(indoorMove))) exitWith {
             _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
-            _unit setUnitPosWeak "MIDDLE";
-            _unit lookAt _getHide;
+            _unit doWatch _getHide;
             getPosATL _unit
         };
 
@@ -63,28 +68,35 @@ private _pos = call {
         _getHide
     };
 
+    // pick the closest building and find all positions
+    _buildings = (_buildings select 0) buildingPos -1;
+    if (_unitState in ["DELAY", "PLANNING"]) then {reverse _buildings};
+
     // updates group memory variable (assumed position within 40m)
     if (_distanceSqr < 1600) then {
         private _group = group _unit;
         private _groupMemory = _group getVariable [QGVAR(groupMemory), []];
         if (_groupMemory isEqualTo []) then {
-            _buildings pushBack _getHide;
             _group setVariable [QGVAR(groupMemory), _buildings];
         };
     };
 
-    // look at target
-    private _movePos = selectRandom _buildings;
-    _unit lookAt _getHide;
+    // find position on the same floor as target and look towards enemy
+    private _posASL2 = round ((getPosASL _target) select 2);
+    private _index = _buildings findIf {RND(0.15) && (_unit distanceSqr _x > 2.25) && (_posASL2 isEqualTo (round ((AGLToASL _x) select 2))) && (_getHide distanceSqr _x < _distanceSqr)};
+    private _movePos = [_buildings select _index, _getHide] select (_index isEqualTo -1);
+    _unit lookAt _movePos;
 
     // adjust movePos
-    private _nearMen = _movePos nearEntities ["CAManBase", 0.5];
-    if (_nearMen isNotEqualTo []) then {
-        private _nearMan = _nearMen select 0;
-        private _movePosASL = getPosASL _nearMan;
-        private _lineIntersect = lineIntersectsSurfaces [_movePosASL vectorAdd [0, 0, 2], _movePosASL vectorAdd [-5 + random 10, -5 + random 10, -4], _nearMan, objNull, true, 1, "GEOM", "VIEW"];
-        if (_lineIntersect isNotEqualTo []) then {
-            _movePos = ASLToAGL ( ( _lineIntersect select 0 ) select 0 );
+    if ((speed _unit) isEqualTo 0) then {
+        private _nearMen = _movePos nearEntities ["CAManBase", 1];
+        if (_nearMen isNotEqualTo []) then {
+            private _nearMan = _nearMen select 0;
+            private _movePosASL = getPosASL _nearMan;
+            private _lineIntersect = lineIntersectsSurfaces [_movePosASL vectorAdd [0, 0, 2], _movePosASL vectorAdd [-8 + random 16, -8 + random 16, -4], _nearMan, objNull, true, 1, "GEOM", "NONE"];
+            if (_lineIntersect isNotEqualTo []) then {
+                _movePos = ASLToAGL ( ( _lineIntersect select 0 ) select 0 );
+            };
         };
     };
 
@@ -93,14 +105,16 @@ private _pos = call {
     _movePos
 };
 
-// stance and speed
-[_unit, _pos] call FUNC(doAssaultSpeed);
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (getSuppression _unit > 0.3 || {_unit distance2D _pos < 2}));
-
 // execute move
 if (
-    ((expectedDestination _unit) select 0) distanceSqr _pos > 1
+    _expectedDestination distanceSqr _pos > 1
 ) then {
+
+    // set stance and speed
+    [_unit, _pos] call FUNC(doAssaultSpeed);
+    _unit setUnitPosWeak (["UP", "MIDDLE"] select ( (stance _unit) isEqualTo "PRONE" || (getSuppression _unit) isNotEqualTo 0 ) );
+
+    // set move
     if (_doMove) then {
         _unit doMove _pos;
     } else {

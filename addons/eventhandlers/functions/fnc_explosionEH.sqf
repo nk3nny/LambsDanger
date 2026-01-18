@@ -40,7 +40,7 @@ if (RND(0.5)) then {
 };
 
 // standing to Right prone
-if (_dir > 330 && { RND(0.2) }) exitWith {
+if (_dir > 330 && RND(0.2)) exitWith {
     [QEGVAR(main,doSwitchMove), [_unit, "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDleft"]] call CBA_fnc_globalEvent;
     [
         {
@@ -52,7 +52,7 @@ if (_dir > 330 && { RND(0.2) }) exitWith {
 };
 
 // standing to Left prone
-if (_dir < 30 && { RND(0.2) }) exitWith {
+if (_dir < 30 && RND(0.2)) exitWith {
     [QEGVAR(main,doSwitchMove), [_unit, "AmovPercMstpSrasWrflDnon_AadjPpneMstpSrasWrflDright"]] call CBA_fnc_globalEvent;
     [
         {
@@ -64,7 +64,7 @@ if (_dir < 30 && { RND(0.2) }) exitWith {
 };
 
 // update pos
-_pos = (_unit getPos [ 3, _pos getDir _unit ]);
+_pos = _unit getPos [ 3, _pos getDir _unit ];
 
 // execute move
 _unit setDestination [_pos, "FORMATION PLANNED", false];
@@ -72,16 +72,7 @@ _unit doWatch _pos;
 
 // all others ~ go straight down
 [QEGVAR(main,doSwitchMove), [_unit, "AmovPercMsprSlowWrflDf_AmovPpneMstpSrasWrflDnon"]] call CBA_fnc_globalEvent;
-_unit setUnitPos "DOWN";
-
-// get back
-[
-    {
-        if (_this call EFUNC(main,isAlive)) then {
-            _this setUnitPos "AUTO"
-        };
-    }, _unit, (GVAR(ExplosionReactionTime) - 3) + random 3
-] call CBA_fnc_waitAndExecute;
+_unit setUnitPosWeak "DOWN";
 
 // end
 true

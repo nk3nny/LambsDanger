@@ -18,12 +18,10 @@
 params ["_unit", ["_target", objNull]];
 
 // speed
-if ( (getSuppression _unit) > 0.9 || (behaviour _unit) isEqualTo "STEALTH") exitWith {_unit forceSpeed 1; 1};
-private _distanceSqr = _unit distanceSqr _target;
-if ((leader _unit) isEqualTo _unit) exitWith {private _speed = [3, 2] select (_distanceSqr < 144); _unit forceSpeed _speed; _speed};
-if ((speedMode _unit) isEqualTo "FULL") exitWith {private _speed = [24, 3] select (_distanceSqr < 144); _unit forceSpeed _speed; _speed};
-if (_distanceSqr > 6400) exitWith {_unit forceSpeed -1; -1};
-if (_distanceSqr > 36) exitWith {_unit forceSpeed 3; 3};
-if (_distanceSqr > 9) exitWith {_unit forceSpeed 2; 2};
-_unit forceSpeed 1;
-1
+if ((behaviour _unit) isEqualTo "STEALTH") exitWith {_unit forceSpeed 1; 1};
+private _speed = [3, 4] select (getSuppression _unit isEqualTo 0);
+if ((leader _unit) isEqualTo _unit || (morale _unit) < 0) then {_speed = _speed - 1;};
+if (_unit distance2D _target < 5) then {_speed = _speed - 1;};
+_unit forceSpeed _speed;
+_speed
+
