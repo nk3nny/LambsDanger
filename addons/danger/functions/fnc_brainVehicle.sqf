@@ -29,22 +29,15 @@ if !((effectiveCommander _vehicle) isEqualTo _unit && {_unit call EFUNC(main,isA
 // no queue
 if (_queue isEqualTo []) then {_queue pushBack [10, getPosWorld _vehicle, time + GVAR(dangerUntil), assignedTarget _unit];};
 
-// modify priorities ~ consider adding vehicle specific changes!
-private _priorities = _unit call FUNC(brainAdjust);
+// modify priorities ~ consider adding vehicle specific changes! - removed for performance ~ nkenny
+//private _priorities = _unit call FUNC(brainAdjust);
 
 // pick the most relevant danger cause
-private _priority = -1;
-private _index = -1;
-{
-    private _cause = _x select 0;
-    if ((_priorities select _cause) > _priority) then {
-        _index = _forEachIndex;
-        _priority = _priorities select _cause;
-    };
-} forEach _queue;
+_queue = _queue apply {[GVAR(fsmPriorities) select (_x select 0), _x]};
+_queue sort false;
 
 // select cause
-private _causeArray = _queue select _index;
+private _causeArray = (_queue select 0) select 1;
 _causeArray params ["_cause", "_dangerPos", "", "_dangerCausedBy"]; // "_dangerUntil" may be re-implemented in the future ~ nkenny
 
 // debug variable
