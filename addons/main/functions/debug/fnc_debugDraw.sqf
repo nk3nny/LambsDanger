@@ -248,7 +248,8 @@ private _posCam = positionCameraToWorld [0, 0, 0];
 
         if (GVAR(debug_RenderExpectedDestination)) then {
             (expectedDestination _unit) params ["_pos", "_planingMode", "_forceReplan"];
-            if (_unit distance _pos > _viewDistance) exitWith {};
+            if (_unit distance _pos > 6000) exitWith {};
+            _pos = (_pos) vectorAdd [0, 0, 0.1];
             drawLine3D [_renderPos, _pos, [1, 1, 1, 1]];
             private _iconSize = linearConversion [0, 30, speed _unit, 0.4, 1.2, true];
             drawIcon3D [
