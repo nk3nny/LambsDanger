@@ -41,7 +41,7 @@
             <English>Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range</English>
             <Czech>Jednotky vybavené rádio batohem(Vanilla, TFAR nebo nastavenou hodnotou) přidat tuto hodnotu do základu sdíleních informací v dosahu</Czech>
             <Italian>Le unità dotate di radio a zaino (vanilla, TFAR o configurate da variabile) aggiungono questo valore all'intervallo di condivisione delle informazioni di base</Italian>
-            <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami </Polish>
+            <Polish>Zasięg, który zostanie dodany do jednostek, które mają plecaki z radiem długim (vanilla, TFAR, lub skonfigurowane przez zmienną) w celu zwiększenia podstawowego zakresu dzielenia się informacjami</Polish>
             <Russian>Юниты, оснащенные радио рюкзаками (обычные, TFAR или настроенные переменной) добавляют это значение к базовой дальности обмена информацией</Russian>
             <German>Einheiten, die mit Rucksack Funkgeräten (Vanilla, TFAR oder konfiguriert durch Variablen) ausgestattet sind, addieren diesen Wert zum Basisbereich für den Informationsaustausch</German>
             <Chinesesimp>配备背包中的无线电(原版、TFAR 或由变量配置)的单位将此值添加到基础信息共享范围</Chinesesimp>
@@ -210,7 +210,7 @@
         </Key>
         <Key ID="STR_Lambs_Main_Settings_DisableCallouts_ToolTip">
             <English>Toggles extra unit callouts based on situations</English>
-            <Czech>Přepne extra zvolání jednotek na základě situace </Czech>
+            <Czech>Přepne extra zvolání jednotek na základě situace</Czech>
             <Italian>Attiva e disattiva i richiami di unità extra in base alle situazioni</Italian>
             <Polish>Wyłącza dodatkowe wywołania/okrzyki od jednostek w zależności od sytuacji</Polish>
             <Russian>Переключает дополнительные обозначения единиц в зависимости от ситуации</Russian>
@@ -266,7 +266,7 @@
             <English>Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI</English>
             <Czech>Přepne rychlé uhýbání jednotek nebo jejich měnění postojů jako reakci na zásah.\nOkamžité reakce přinutí spustit animaci. Bypnutí způsobí statičtější UI</Czech>
             <Italian>Consente all'unità di schivare rapidamente o cambiare posizione in risposta a un colpo.\nLe reazioni immediate forzano l'esecuzione di un'animazione. La disattivazione renderà l'IA più statica</Italian>
-            <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne </Polish>
+            <Polish>Przełącza zdolność jednostki do szybkich uników lub zmiany postawy w odpowiedzi na bycie trafionym.\nNatychmiastowe reakcje wymuszają na animacji by zadziałała. Wyłączenie tej opcji spowoduje, że AI będzie bardziej statyczne</Polish>
             <Russian>Переключает отряд, который быстро уклоняется или меняет стойку в ответ на попадание .\nМоментальные реакции заставляют запускать анимацию. Отключение сделает ИИ более статичным.</Russian>
             <German>Schaltet das schnelle Ausweichen oder Ändern der Haltung als Reaktion auf Treffer, um.\nSofortige KI-Aktionen zwingt die KI animationen auszuführen. Wenn ausgeschaltet verhält sie die KI eher statisch.</German>
             <Chinesesimp>切换单位快速躲避或改变姿态以回应被击中.\n立即反应使动画运行.禁用将产生更多静态的AI</Chinesesimp>

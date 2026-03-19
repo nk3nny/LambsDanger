@@ -20,3 +20,4 @@ tools/nodejs_tools/node_modules
 *.sqfc
 
 .hemttout/
+.hemttprivatekey

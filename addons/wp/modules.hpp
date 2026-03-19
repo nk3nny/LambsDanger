@@ -15,7 +15,6 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             defaultValue = 0;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
             control = QGVAR(Side);
             expression = "_this setVariable ['%s', _value, true];";
@@ -27,7 +26,6 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             defaultValue = TASK_ARTILLERY_ROUNDS;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(Spread): EditShort {
@@ -37,7 +35,6 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             defaultValue = TASK_ARTILLERY_SPREAD;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(SkipCheckRounds): Checkbox {
@@ -46,7 +43,6 @@ class GVAR(TaskArtillery) : GVAR(BaseModule) {
             property = QGVAR(SkipCheckRounds);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_ARTILLERY_SKIPCHECKROUNDS);
         };
@@ -96,7 +92,6 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             property = QGVAR(IsRetreat);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QGVAR(TASK_ASSAULT_ISRETREAT);
         };
@@ -106,7 +101,6 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             property = QGVAR(DeleteOnStartUp);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_ASSAULT_DELETEONSTARTUP);
         };
@@ -117,7 +111,6 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             defaultValue = TASK_ASSAULT_DISTANCETHRESHOLD;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(CycleTime): EditShort {
@@ -127,7 +120,6 @@ class GVAR(TaskAssault) : GVAR(BaseModule) {
             defaultValue = TASK_ASSAULT_CYCLETIME;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class ModuleDescription: ModuleDescription {};
@@ -159,7 +151,6 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             property = QGVAR(ExitWP);
             defaultValue = TASK_CAMP_EXITWP;
             unique = 0;
-            condition = "0";
             typeName = "NUMBER";
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
@@ -187,7 +178,6 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             property = QGVAR(Teleport);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_GARRISON_TELEPORT);
         };
@@ -197,7 +187,6 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
             property = QGVAR(Patrol);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_GARRISON_PATROL);
         };
@@ -233,7 +222,6 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             defaultValue = TASK_CQB_CYCLETIME;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(DeleteOnStartUp): Checkbox {
@@ -242,7 +230,6 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
             property = QGVAR(DeleteOnStartUp);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_CQB_DELETEONSTARTUP);
         };
@@ -276,7 +263,6 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             property = QGVAR(ExitConditions);
             defaultValue = TASK_GARRISON_EXITCONDITIONS;
             unique = 0;
-            condition = "0";
             typeName = "NUMBER";
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
@@ -316,7 +302,6 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             property = QGVAR(SortByHeight);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_GARRISON_SORTBYHEIGHT);
         };
@@ -326,7 +311,6 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             property = QGVAR(Teleport);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_GARRISON_TELEPORT);
         };
@@ -336,7 +320,6 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
             property = QGVAR(Patrol);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_GARRISON_PATROL);
         };
@@ -371,7 +354,6 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             defaultValue = TASK_PATROL_WAYPOINTCOUNT;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(MoveWaypoints): Checkbox {
@@ -380,7 +362,6 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             property = QGVAR(moveWaypoints);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_PATROL_MOVEWAYPOINTS);
         };
@@ -390,7 +371,6 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             property = QGVAR(enableReinforcement);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_PATROL_ENABLEREINFORCEMENT);
         };
@@ -401,7 +381,6 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
             property = QGVAR(teleport);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_PATROL_TELEPORT);
         };
@@ -453,7 +432,6 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
             property = QGVAR(useCover);
             defaultValue = TASK_DEFEND_USECOVER;
             unique = 0;
-            condition = "0";
             typeName = "NUMBER";
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
@@ -493,7 +471,6 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
             property = QGVAR(stealth);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_DEFEND_STEALTH);
         };
@@ -503,7 +480,6 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
             property = QGVAR(Teleport);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_DEFEND_TELEPORT);
         };
@@ -513,7 +489,6 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
             property = QGVAR(Patrol);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_DEFEND_PATROL);
         };
@@ -548,7 +523,6 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_CREEP_MOVINGCENTER);
         };
@@ -558,7 +532,6 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             property = QGVAR(PlayersOnly);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_CREEP_PLAYERSONLY);
         };
@@ -569,7 +542,6 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
             defaultValue = TASK_CREEP_CYCLETIME;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class ModuleDescription: ModuleDescription {};
@@ -602,7 +574,6 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_HUNT_MOVINGCENTER);
         };
@@ -612,7 +583,6 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             property = QGVAR(PlayersOnly);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_HUNT_PLAYERSONLY);
         };
@@ -623,7 +593,6 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             defaultValue = TASK_HUNT_CYCLETIME;
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class GVAR(EnableReinforcement): Checkbox {
@@ -632,7 +601,6 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             property = QGVAR(enableReinforcement);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_HUNT_ENABLEREINFORCEMENT);
         };
@@ -642,7 +610,6 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
             property = QGVAR(doUGL);
             defaultValue = TASK_HUNT_TRYUGLFLARE;
             unique = 0;
-            condition = "0";
             typeName = "NUMBER";
             expression = "_this setVariable ['%s', _value, true];";
             class Values {
@@ -690,7 +657,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             property = QGVAR(MovingCenter);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_RUSH_MOVINGCENTER);
         };
@@ -700,7 +666,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             property = QGVAR(PlayersOnly);
             unique = 0;
             validate = "none";
-            condition = "0";
             typeName = "BOOL";
             defaultValue = QUOTE(TASK_RUSH_PLAYERSONLY);
         };
@@ -711,7 +676,6 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
             defaultValue = QUOTE(TASK_RUSH_CYCLETIME);
             unique = 0;
             validate = "number";
-            condition = "0";
             typeName = "NUMBER";
         };
         class ModuleDescription: ModuleDescription {};
