@@ -33,9 +33,6 @@ private _timeout = time + 2;
 // check screams
 if (_type isEqualTo DANGER_SCREAM) exitWith {
 
-    // communicate danger!
-    [{_this call EFUNC(main,doShareInformation)}, [_unit, objNull, EGVAR(main,radioShout), true], 2 + random 3] call CBA_fnc_waitAndExecute;
-
     // check danger
     _unit doWatch _pos;
     _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
@@ -48,9 +45,6 @@ if (_type isEqualTo DANGER_SCREAM) exitWith {
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {-1};
 
-// is indoor
-private _indoor = _unit call EFUNC(main,isIndoor);
-
 // check bodies ~ own group!
 if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
 
@@ -60,6 +54,9 @@ if (_type isEqualTo DANGER_DEADBODYGROUP) exitWith {
     // end
     _timeout + 3
 };
+
+// is indoor
+private _indoor = _unit call EFUNC(main,isIndoor);
 
 // indoor units exit
 if (_indoor && { RND(0.05) } && { RND(EGVAR(main,indoorMove)) }) exitWith {
@@ -75,11 +72,13 @@ if (_type isEqualTo DANGER_DEADBODY) exitWith {
     private _groupMemory = _group getVariable [QEGVAR(main,groupMemory), []];
     if (_groupMemory isEqualTo []) then {
         _group setVariable [QEGVAR(main,groupMemory), [_pos, 15, true] call EFUNC(main,findBuildings)];
+
+        // gesture when building positions found
+        [_unit, "gestureGoB"] call EFUNC(main,doGesture);
     };
 
-    // gesture
-    _unit doWatch _pos;
-    [_unit, "gestureGoB"] call EFUNC(main,doGesture);
+    // look at body
+    _unit lookAt _pos;
 
     _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QEGVAR(main,currentTask), "Checking bodies (unknown)", EGVAR(main,debug_functions)];

@@ -38,6 +38,7 @@ if (
     getSuppression _unit > 0.5
     || (getUnitState _unit) isEqualTo "REPLAN"
     || (currentCommand _unit) isEqualTo "STOP"
+    || (_type isEqualTo DANGER_FIRE)
 ) exitWith {
     [_unit] call EFUNC(main,doCover);
     _timeout + 1
