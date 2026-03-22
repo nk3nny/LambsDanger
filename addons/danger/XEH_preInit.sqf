@@ -41,7 +41,17 @@ if (isNil QGVAR(dangerUntil)) then {
                 && {_x getVariable [QGVAR(enableGroupReinforce), false]}
                 && {(_x getVariable [QGVAR(enableGroupReinforceTime), -1]) < time }
             ) then {
-                [_leader, [getPosASL _unit, (_leader targetKnowledge _target) select 6] select (_leader knowsAbout _target > 1.5)] call FUNC(tacticsReinforce);
+                
+                // get pos of enemy if available
+                private _pos = [getPosASL _unit, (_unit targetKnowledge _target) select 6] select (_unit knowsAbout _target > 1.5);
+
+                // check for zero pos
+                if (_pos isEqualTo [0, 0, 0]) then {_pos = getPosASL _unit;};
+                
+                // find free space
+                private _adjustPos = _pos findEmptyPosition [5, 35, "Land_BagBunker_Large_F"];
+                if (_adjustPos isNotEqualTo []) then {_pos = _adjustPos;};
+                [_leader, _pos] call FUNC(tacticsReinforce);
             };
 
             // reorientate group

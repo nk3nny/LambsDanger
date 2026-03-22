@@ -32,7 +32,7 @@
             <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
             <Czech>S jednotkou se počítá jako by nosila batoh s rádiem pro šíření informací\n\nVAROVÁNÍ zaškrtnutí přidá závislost na tento mód</Czech>
             <Italian>L'unità conta come trasportare la radio nello zaino per la condivisione delle informazioni\n\nATTENZIONE controllando questo si aggiungerà la dipendenza dalla mod</Italian>
-            <Polish>Jednostka widziana jest jako posiadająca radio długie w plecaku w celu dzielenia się informacji\n\nUWAGA zaznaczenie tej opcji doda zależności modów.  </Polish>
+            <Polish>Jednostka widziana jest jako posiadająca radio długie w plecaku w celu dzielenia się informacji\n\nUWAGA zaznaczenie tej opcji doda zależności modów.</Polish>
             <Russian>Устройство считается переносчиком радиостанции для обмена информацией\n\nПРЕДУПРЕЖДЕНИЕ, включение этого пункта  добавит зависимость от мода</Russian>
             <German>Definiert die Einheit als würde sie ein Rucksack Funkgerät besitzten.\n\nWARNUNG! Das Setzten dieser Einstellung erstellt Mod-Abhängikeiten.</German>
             <Chinesesimp>数以为计的单位将携带背包中的无线电以共享信息\n\n警告检查此项将增加mod依赖性</Chinesesimp>
@@ -234,7 +234,7 @@
             <Chinesesimp>单位认为自己处于攻击范围内的范围</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
-            <English>Disable units using flares for illumination </English>
+            <English>Disable units using flares for illumination</English>
             <Czech>Vypíná schopnost jednotek používat světlice k osvětlení</Czech>
             <Italian>Disabilita le unità che utilizzano i bagliori per l'illuminazione</Italian>
             <Polish>Wyłącz autonomiczne używanie flar przez AI</Polish>
@@ -280,10 +280,10 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
             <English>Toggle advanced danger.fsm features on player group</English>
-            <Czech>Přepíná pokročilé funkce danger.fsm ve skupině hráčů </Czech>
+            <Czech>Přepíná pokročilé funkce danger.fsm ve skupině hráčů</Czech>
             <Italian>Attiva/disattiva le funzionalità avanzate di danger.fsm nel gruppo di giocatori</Italian>
             <Polish>Przełącz zaawansowane opcje danger.fsm na grupie gracza</Polish>
-            <Russian>Переключить особый danger.fsm для группы игрока </Russian>
+            <Russian>Переключить особый danger.fsm для группы игрока</Russian>
             <German>Erweiterte danger.fsm Funktionen für Spielergruppe umschalten</German>
             <Chinesesimp>为玩家所在小组切换高级danger.fsm功能</Chinesesimp>
         </Key>
@@ -307,7 +307,7 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
-            <Czech>Vypne reakční stav ve skupině hráčů </Czech>
+            <Czech>Vypne reakční stav ve skupině hráčů</Czech>
             <Italian>Disabilita lo stato di reazione sul gruppo di giocatori</Italian>
             <Polish>Wyłącz stan reakcji dla grupy gracza</Polish>
             <Russian>Отключить состояние реакции для группы игрока</Russian>
@@ -370,7 +370,7 @@
         </Key>
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
             <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
-            <Czech>Přepíná schopnost jednotek UI skrytý pohyb, které nejsou vybaveny k poškození tanků a letadel. Deaktivace tohoto nastavení způsobí, že skupiny budou lépe reagovat </Czech>
+            <Czech>Přepíná schopnost jednotek UI skrytý pohyb, které nejsou vybaveny k poškození tanků a letadel. Deaktivace tohoto nastavení způsobí, že skupiny budou lépe reagovat</Czech>
             <Italian>Attiva/disattiva la mossa di occultamento dell'IA per le unità non equipaggiate per danneggiare carri armati e aerei. La disabilitazione di questa impostazione renderà i gruppi più reattivi</Italian>
             <Polish>Przełącza ruch maskujący przez AI dla jednostek, które nie mają możliwości uszkodzenia czołgów lub pojazdów latających. Wyłączenie tej opcji sprawi, że grupy będą bardziej responsywne</Polish>
             <Russian>Переключает действие укрытия ИИ для юнитов, не оборудованных для поражения танков и самолетов. Отключение этого параметра сделает группы более отзывчивыми</Russian>

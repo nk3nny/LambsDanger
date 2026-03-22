@@ -118,6 +118,7 @@ _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
 {
     _x setUnitPos "DOWN";
+    _x forceSpeed -1;
     _x setVariable [QGVAR(forceMove), true];
 } forEach (_units select {isNull objectParent _x});
 

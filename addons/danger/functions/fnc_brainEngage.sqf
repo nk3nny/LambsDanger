@@ -47,8 +47,7 @@ if (
     isNull _target
     || _stealth
     || _holdFire
-    || (speed _target) > 20
-    || {(_unit knowsAbout _target) isEqualTo 0}
+    || {(speed _target) > 20 || (_unit knowsAbout _target) isEqualTo 0}
     || {(getUnitState _unit) isEqualTo "PLANNING"}
 ) exitWith {
     _timeout
@@ -66,11 +65,11 @@ if (
 ) exitWith {
     _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
     [_unit, _target] call EFUNC(main,doAssault);
-    _timeout + 0.4
+    _timeout
 };
 
 // set low stance
-if ((getSuppression _unit) isEqualTo 0) then {
+if ((getSuppression _unit) isNotEqualTo 0 && (stance _unit) isEqualTo "STAND") then {
     _unit setUnitPosWeak "MIDDLE";
 };
 
@@ -92,7 +91,6 @@ if (
         _posASL set [2, 0.5];
         _posASL = AGLToASL _posASL
     };
-    _unit forceSpeed 1;
     [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 3
 };
