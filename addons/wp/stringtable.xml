@@ -78,7 +78,7 @@
             <Czech>LAMBS Danger body hledání</Czech>
             <Italian>LAMBS Danger ricerca Waypoints</Italian>
             <Polish>LAMBS Danger Search Waypoints</Polish>
-            <Russian>Поисковые точки LAMBS Danger </Russian>
+            <Russian>Поисковые точки LAMBS Danger</Russian>
             <German>LAMBS Danger suchen Wegpunkt</German>
             <Chinesesimp>LAMBS Danger搜索路径点</Chinesesimp>
         </Key>
@@ -316,7 +316,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_DistanceThreshold_DisplayName">
             <English>Completion Threshold</English>
-            <Czech>Práh dokončení </Czech>
+            <Czech>Práh dokončení</Czech>
             <Italian>Soglia di completamento</Italian>
             <Polish>Zasięg ukończenia</Polish>
             <Russian>Порог завершения</Russian>
@@ -342,7 +342,7 @@
         </Key>
         <Key ID="STR_Lambs_WP_Module_TaskAssault_ModuleDescription">
             <English>Task Assault/Retreat is a multi-purpose module. It makes linked unit rush or retreat madly towards the module destination. The module can be moved to dynamically alter the final destination.</English>
-            <Czech>Úkol Útok/Ústup je víceúčelový modul. Připojená jednotka je donucena buď šíleně nabíhat nebo ustupovat vůči cíli modulu. Modul lze přesunout a dynamicky změnit konečný cíl. </Czech>
+            <Czech>Úkol Útok/Ústup je víceúčelový modul. Připojená jednotka je donucena buď šíleně nabíhat nebo ustupovat vůči cíli modulu. Modul lze přesunout a dynamicky změnit konečný cíl.</Czech>
             <Italian>Task Assalto/Ritirata è un modulo multiuso. Fa sì che le unità collegate si precipitino o si ritirino alla follia verso la destinazione del modulo. Il modulo può essere spostato per modificare dinamicamente la destinazione finale.</Italian>
             <Polish>Zadanie - Atak/Odwrót to moduł wielofunkcyjny. Powoduje, że wszystkie podłączone jednostki poruszają się na ślepo do punktu docelowego.</Polish>
             <Russian>Задача Нападение/Отступление - это многоцелевой модуль. Он заставляет связанного юнита бросаться или безумно отступать к месту назначения модуля. Модуль можно перемещать для динамического изменения конечного пункта назначения.</Russian>
@@ -1272,7 +1272,7 @@
         <Key ID="STR_Lambs_WP_Waypoint_TaskRetreat_displayName">
             <English>TASK RETREAT</English>
             <Czech>ÚKOL ÚSTUP</Czech>
-            <Italian>COMPITO RITIRO </Italian>
+            <Italian>COMPITO RITIRO</Italian>
             <Polish>ZADANIE ODWRÓT</Polish>
             <German>AUFGABE RÜCKZUG</German>
             <Chinesesimp>撤退任务</Chinesesimp>
