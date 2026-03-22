@@ -68,7 +68,7 @@ if (_units isEqualTo []) then {
 if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
-private _buildings = [_target, 28, true, true, true] call EFUNC(main,findBuildings);
+private _buildings = [_target, 28, true, true] call EFUNC(main,findBuildings);
 
 // more than 25 building positions. Reduce size!
 if (count _buildings > 25) then {
