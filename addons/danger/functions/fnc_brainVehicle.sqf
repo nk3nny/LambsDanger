@@ -29,22 +29,15 @@ if !((effectiveCommander _vehicle) isEqualTo _unit && {_unit call EFUNC(main,isA
 // no queue
 if (_queue isEqualTo []) then {_queue pushBack [10, getPosWorld _vehicle, time + GVAR(dangerUntil), assignedTarget _unit];};
 
-// modify priorities ~ consider adding vehicle specific changes!
-private _priorities = _unit call FUNC(brainAdjust);
+// modify priorities ~ consider adding vehicle specific changes! - removed for performance ~ nkenny
+//private _priorities = _unit call FUNC(brainAdjust);
 
 // pick the most relevant danger cause
-private _priority = -1;
-private _index = -1;
-{
-    private _cause = _x select 0;
-    if ((_priorities select _cause) > _priority) then {
-        _index = _forEachIndex;
-        _priority = _priorities select _cause;
-    };
-} forEach _queue;
+_queue = _queue apply {[GVAR(fsmPriorities) select (_x select 0), _x]};
+_queue sort false;
 
 // select cause
-private _causeArray = _queue select _index;
+private _causeArray = (_queue select 0) select 1;
 _causeArray params ["_cause", "_dangerPos", "", "_dangerCausedBy"]; // "_dangerUntil" may be re-implemented in the future ~ nkenny
 
 // debug variable
@@ -83,8 +76,7 @@ if (_artillery) exitWith {
 
     // mortars fire rounds
     private _mortarTime = _vehicle getVariable [QEGVAR(main,mortarTime), 0];
-    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time} && {isTouchingGround _dangerCausedBy}) then {
-
+    if (_attack && {_vehicle isKindOf "StaticMortar"} && {unitReady _vehicle} && {_mortarTime < time} && {isTouchingGround _dangerCausedBy} && {!(_dangerCausedBy isKindOf "ArtilleryTarget")}) then {
         // delay
         _timeout = _timeout + 2;
         _vehicle doWatch _dangerPos;
@@ -109,7 +101,7 @@ if (_artillery) exitWith {
         };
 
         // check night
-        if ( RND(0.2) && { _unit call EFUNC(main,isNight) } && { _flareIndex isNotEqualTo -1 } ) then {
+        if ( RND(0.2) && { ((getPos _unit) getEnvSoundController "night") isEqualTo 1 } && { _flareIndex isNotEqualTo -1 } ) then {
             _dangerPos = _dangerPos getPos [-50 + random 100, (_vehicle getDir _dangerPos) - 45 + random 90];
             _shell = _ammo select _flareIndex;
             _dangerRound = false;
@@ -120,7 +112,7 @@ if (_artillery) exitWith {
         if ( _dangerRound || { !(_dangerPos inRangeOfArtillery [[_vehicle], _shell]) } ) exitWith {};
 
         // execute fire command
-        _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 80, (_dangerPos getDir _vehicle) - 10 + random 20], _shell, 1 + random 2];
+        _vehicle commandArtilleryFire [_dangerPos getPos [30 + random 100, (_dangerPos getDir _vehicle) - 20 + random 40], _shell, 1 + random 2];
         _vehicle setVariable [QEGVAR(main,mortarTime), time + 24 + random 66];
         _unit setVariable [QEGVAR(main,currentTask), "Mortar Fire", EGVAR(main,debug_functions)];
         if (_repeatRounds) then {
@@ -131,8 +123,8 @@ if (_artillery) exitWith {
                         _vehicle commandArtilleryFire [_dangerPos, _shell, ( 2 + random 1 ) min ((gunner _vehicle) ammo (currentMuzzle (gunner _vehicle)))];
                     };
                 },
-                [_vehicle, _dangerPos, _shell],
-                18 + random 6
+                [_vehicle, _dangerPos getPos [15 + random 100, (_vehicle getDir _dangerPos) - 10 + random 20], _shell],
+                18 + random 8
             ] call CBA_fnc_waitAndExecute;
         };
     };

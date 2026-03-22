@@ -26,55 +26,58 @@ if (_groupMemory isEqualTo []) then {
     _groupMemory = _group getVariable [QGVAR(groupMemory), []];
 };
 
-// exit or sort it!
-private _formPos = formationLeader _unit;
-_groupMemory = _groupMemory select {_formPos distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
+// positions too far away from group leader are ignored
+private _leader = leader _unit;
+_groupMemory = _groupMemory select {_leader distanceSqr _x < 20164 && {_unit distanceSqr _x > 2.25}};
 if (_groupMemory isEqualTo []) exitWith {
+    (units _unit) doFollow _leader;
     _group setVariable [QGVAR(groupMemory), [], false];
     false
 };
 
-// sort positions from nearest to furthest prioritising positions on the same floor
-private _unitASL2 = round ( ( getPosASL _unit ) select 2 );
-_groupMemory = _groupMemory apply {[_unitASL2 + (round ((AGLToASL _x) select 2)), _x distanceSqr _unit, _x]};
+// sort positions from nearest to furthest, putting priority on low floors for superior pathfinding
+_groupMemory = _groupMemory apply {[floor (_x select 2), _x distance2D _leader, _x]};
 _groupMemory sort true;
 _groupMemory = _groupMemory apply {_x select 2};
 
 // get distance
-private _pos = _groupMemory select 0;
+private _unitState = getUnitState _unit;
+private _pos = [_groupMemory select 0, selectRandom _groupMemory] select (_unitState in ["PLANNING", "DELAY", "REPLAN", "WAIT"]);
 private _distance2D = _unit distance2D _pos;
+private _expectedDestination = (expectedDestination _unit) select 0;
 
-// check for nearby enemy
-private _targets = _unit targets [true, 71];
-private _index = _targets findIf {
-    private _getHideFrom = _unit getHideFrom _x;
-    _unit distance2D _getHideFrom < _distance2D || {_unit distanceSqr _getHideFrom < 26};
+// unit state exit - busy units keep folowing their targets(!)
+if (_unitState isEqualTo "BUSY" && (_expectedDestination distanceSqr _pos < 16)) exitWith {
+    true
 };
-if (_index isNotEqualTo -1) exitWith {
-    [_unit, _targets select _index, 12, true] call FUNC(doAssault);
+
+// update variable - remove position within 5 meters that the soldier can see is clear.
+if (_distance2D < 5) then {
+
+    private _unitASL = eyePos _unit;
+    private _index = _groupMemory findIf {_unit distanceSqr _x < 25 && {!lineIntersects [_unitASL, ((AGLToASL _x) vectorAdd [0, 0, 0.4]), _unit, objNull] || _unit distanceSqr _x < 4}};
+    if (_index isNotEqualTo -1) then {_groupMemory deleteAt _index;};
+
 };
+
+// update group variable
+_group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
 // adjust movePos if destination is far away
-private _indoor = _unit call FUNC(isIndoor);
-if (_distance2D > 20 && {!_indoor}) then {
-    _pos = _unit getPos [20, _unit getDir _pos];
+if (_distance2D > 20 && (insideBuilding _unit) isEqualTo 0) then {
+    _pos = _pos getPos [20, _pos getDir _unit];
 };
-if (_pos isEqualType objNull) then {_pos = getPosATL _pos;};
-
-// set stance
-_unit setUnitPosWeak (["UP", "MIDDLE"] select (_indoor || {_distance2D > 8} || {(getSuppression _unit) isNotEqualTo 0}));
-
-// set speed
-[_unit, _pos] call FUNC(doAssaultSpeed);
 
 // adjust movePos
-private _nearMen = _pos nearEntities ["CAManBase", 0.5];
-if (_nearMen isNotEqualTo []) then {
-    private _nearMan = _nearMen select 0;
-    private _movePosASL = AGLToASL _pos;
-    private _lineIntersect = lineIntersectsSurfaces [_movePosASL vectorAdd [0, 0, 2], _movePosASL vectorAdd [-5 + random 10, -5 + random 10, -4], _nearMan, objNull, true, 1, "GEOM", "VIEW"];
-    if (_lineIntersect isNotEqualTo [] && {_movePosASL vectorDistanceSqr ( ( _lineIntersect select 0 ) select 0 ) > 1}) then {
-        _pos = ASLToAGL ( ( _lineIntersect select 0 ) select 0 );
+if (_distance2D < 20) then {
+    private _nearMen = _pos nearEntities ["CAManBase", 0.5];
+    if (_nearMen isNotEqualTo []) then {
+        private _nearMan = _nearMen select 0;
+        private _movePosASL = getPosASL _nearMan;
+        private _lineIntersect = lineIntersectsSurfaces [_movePosASL vectorAdd [0, 0, 2], _movePosASL vectorAdd [-5 + random 10, -5 + random 10, -4], _nearMan, objNull, true, 1, "GEOM", "NONE"];
+        if (_lineIntersect isNotEqualTo []) then {
+            _pos = ASLToAGL ( ( _lineIntersect select 0 ) select 0 );
+        };
     };
 };
 
@@ -84,21 +87,19 @@ _unit setVariable [QGVAR(currentTask), "Assault (sympathetic)", GVAR(debug_funct
 
 // execute move
 if (
-    ((expectedDestination _unit) select 0) distanceSqr _pos > 1
+    _expectedDestination distanceSqr _pos > 4
 ) then {
+
+    // set stance
+    _unit setUnitPosWeak (["UP", "MIDDLE"] select (_distance2D > 8 || (getSuppression _unit) isNotEqualTo 0));
+
+    // set speed
+    [_unit, _pos] call FUNC(doAssaultSpeed);
+
+    // set move
     _unit lookAt (_pos vectorAdd [0, 0, 1.2]);
     _unit doMove _pos;
 };
-
-// update variable - remove positions within 5 meters that the soldier can see are clear.
-private _unitASL = (getPosASLVisual _unit) vectorAdd [0, 0, 0.25];
-_groupMemory = _groupMemory select {
-    _unit distanceSqr _x > 25
-    && {lineIntersects [_unitASL, AGLToASL (_x vectorAdd [0, 0, 0.25]), _unit, objNull]}
-};
-
-// variables
-_group setVariable [QGVAR(groupMemory), _groupMemory, false];
 
 // debug
 if (GVAR(debug_functions)) then {

@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: nkenny
- * Unit repositions to a new advantagous position inside a building
+ * Unit repositions to a new advantageous position inside a building
  *
  * Arguments:
  * 0: unit hiding <OBJECT>
@@ -23,15 +23,13 @@ if (!(_target isEqualType []) && {isNull _target}) then {
 };
 
 // get building positions
-private _buildingPos = [_unit, 21, true, true, true] call FUNC(findBuildings);
-[_buildingPos, true] call CBA_fnc_shuffle;
+private _buildingPos = [_unit, 8, true, true, true] call FUNC(findBuildings);
 
 // Check if there is a closer building position
 private _distance = (_unit distance2D _target) - 0.8;
 private _destination = _buildingPos findIf {_x distance2D _target < _distance};
-if (_destination != -1) then {
+if (_destination isNotEqualTo -1) then {
     _unit doMove (_buildingPos select _destination);
-    _unit setVariable [QGVAR(currentTarget), _buildingPos select _destination, GVAR(debug_functions)];
     _unit setVariable [QGVAR(currentTask), "Repositioning", GVAR(debug_functions)];
 } else {
     // stay indoors

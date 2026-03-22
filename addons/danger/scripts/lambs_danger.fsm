@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "G:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Danger">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"Start_Danger",0,250,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"Start Danger"};
@@ -16,7 +16,7 @@ item11[] = {"DEFINE_ENUM_BEG",-1,250,350.000000,-175.000000,700.000000,0.000000,
 item12[] = {"Immediate",4,218,-175.000000,425.000000,-75.000000,475.000000,6.000000,"Immediate"};
 item13[] = {"Hide",4,218,0.000000,425.000000,100.000000,475.000000,4.000000,"Hide"};
 item14[] = {"Engage",4,218,175.000000,425.000000,275.000000,475.000000,2.000000,"Engage"};
-item15[] = {"Roll_dodge",2,4346,-175.000000,600.000000,-75.000000,650.000000,0.000000,"Roll/dodge"};
+item15[] = {"Roll_dodge",2,250,-175.000000,600.000000,-75.000000,650.000000,0.000000,"Roll/dodge"};
 item16[] = {"Stay_firm",2,250,0.000000,600.000000,100.000000,650.000000,0.000000,"Stay firm"};
 item17[] = {"Attack",2,250,175.000000,600.000000,275.000000,650.000000,0.000000,"Attack"};
 item18[] = {"Check_self",2,250,175.000000,275.000000,275.000000,325.000000,0.000000,"Check self"};
@@ -112,8 +112,8 @@ link42[] = {36,24};
 link43[] = {37,3};
 link44[] = {38,39};
 link45[] = {41,40};
-globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1017.364929,1292.536743,1481.373169,-707.215454,933,884,1};
-window[] = {2,-1,-1,-1,-1,967,208,1648,208,3,951};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1051.298584,1485.311401,1723.900391,-657.740051,933,876,1};
+window[] = {2,-1,-1,-1,-1,811,52,1492,52,3,951};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -126,7 +126,6 @@ class FSM
                         name = "Start_Danger";
                         itemno = 0;
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 danger %2 %3s"", side _this, name _this, round time];" \n
-                         "private [""_timeout""];" \n
                          "" \n
                          "// add current data to queue for evaluation" \n
                          "_queue pushBack [_dangerCause, _dangerPos, _dangerUntil, _dangerCausedBy];" \n
@@ -290,7 +289,7 @@ class FSM
                          "private _evaluation = [_this, _queue] call lambs_danger_fnc_brain;" \n
                          "" \n
                          "// get variables" \n
-                         "_evaluation params [""_immediate"", ""_hide"", ""_engage"", ""_assess"", ""_cause""];" \n
+                         "_evaluation params [""_cause"", ""_immediate"", ""_hide"", ""_engage""];" \n
                          "_cause params [""_dangerCause"", ""_dangerPos"", ""_dangerUntil"", ""_dangerCausedBy""];" \n
                          "" \n
                          "// reset queue" \n
@@ -357,7 +356,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 immediate %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
+                         "_dangerUntil = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainReact;" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -369,7 +368,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -384,7 +383,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 hide %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainHide;"/*%FSM</STATEINIT""">*/;
+                         "_dangerUntil = [_this, _dangerCause, _dangerPos] call lambs_danger_fnc_brainHide;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -395,7 +394,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -410,7 +409,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 engage %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerCausedBy] call lambs_danger_fnc_brainEngage;"/*%FSM</STATEINIT""">*/;
+                         "_dangerUntil = [_this, _dangerCause, _dangerCausedBy] call lambs_danger_fnc_brainEngage;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -421,7 +420,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timeout" \n
+                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil" \n
                                          "|| {count _queue >3}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -578,7 +577,7 @@ class FSM
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 assess %2"", side _this, name _this];" \n
                          "" \n
                          "// brain" \n
-                         "_timeout = [_this, _dangerCause, _dangerPos, _dangerCausedby] call lambs_danger_fnc_brainAssess;"/*%FSM</STATEINIT""">*/;
+                         "_dangerUntil = [_this, _dangerCausedby] call lambs_danger_fnc_brainAssess;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -589,7 +588,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _timeout"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
