@@ -67,6 +67,7 @@ class GVAR(TaskArtilleryRegister) : GVAR(BaseModule) {
     portrait = "\A3\ui_f\data\igui\cfg\simpleTasks\types\intel_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {100, 100, -1};
         isRectangle = 0;
@@ -148,6 +149,7 @@ class GVAR(TaskCamp) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_CAMP_SIZE, TASK_CAMP_SIZE, -1};
         isRectangle = 0;
@@ -221,6 +223,7 @@ class GVAR(TaskCQB) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Scripted_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_CQB_SIZE, TASK_CQB_SIZE, -1};
         isRectangle = 0;
@@ -265,6 +268,7 @@ class GVAR(TaskGarrison) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Guard_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_GARRISON_SIZE, TASK_GARRISON_SIZE, -1};
         isRectangle = 0;
@@ -359,6 +363,7 @@ class GVAR(TaskPatrol) : GVAR(BaseModule) {
     portrait = "\A3\3DEN\Data\CfgWaypoints\Loiter_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_PATROL_SIZE, TASK_PATROL_SIZE, -1};
         isRectangle = 0;
@@ -442,6 +447,7 @@ class GVAR(TaskDefend) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Hold_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_DEFEND_SIZE, TASK_DEFEND_SIZE, -1};
         isRectangle = 0;
@@ -537,6 +543,7 @@ class GVAR(TaskCreep) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_CREEP_SIZE, TASK_CREEP_SIZE, -1};
         isRectangle = 0;
@@ -591,6 +598,7 @@ class GVAR(TaskHunt) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_HUNT_SIZE, TASK_HUNT_SIZE, -1};
         isRectangle = 0;
@@ -679,6 +687,7 @@ class GVAR(TaskRush) : GVAR(BaseModule) {
     portrait = "\a3\3DEN\Data\CfgWaypoints\Sentry_ca.paa";
     canSetArea = 1;
     canSetAreaShape = 1;
+    canSetAreaHeight = 1;
     class AttributeValues {
         size3[] = {TASK_RUSH_SIZE, TASK_RUSH_SIZE, -1};
         isRectangle = 0;
