@@ -127,6 +127,11 @@ waitUntil {
     // performance
     waitUntil { sleep 1; simulationEnabled (leader _group); };
 
+    if !(local leader _group) exitWith {
+        [QGVAR(taskRush), _this, leader _group] call CBA_fnc_targetEvent;
+        true
+    };
+
     // find
     private _target = [_group, _radius, _area, _pos, _onlyPlayers] call EFUNC(main,findClosestTarget);
 
@@ -145,4 +150,4 @@ waitUntil {
 };
 
 // end
-true
+local leader _group

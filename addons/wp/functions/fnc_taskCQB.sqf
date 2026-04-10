@@ -197,6 +197,11 @@ waitUntil {
     // performance
     waitUntil {sleep 1; simulationEnabled (leader _group)};
 
+    if !(local leader _group) exitWith {
+        [QGVAR(taskCQB), _this, leader _group] call CBA_fnc_targetEvent;
+        true
+    };
+
     // get wp position
     private _wPos = _pos call CBA_fnc_getPos;
 
@@ -227,6 +232,10 @@ waitUntil {
     _x setUnitPos "AUTO";
     _x doFollow (leader _x);
 } forEach units _group;
+
+if !(local leader _group) exitWith {
+    false
+};
 
 // debug
 if (EGVAR(main,debug_functions)) then {["%1 taskCQB: CQB DONE version 0.3", side _group] call EFUNC(main,debugLog);};
