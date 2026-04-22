@@ -32,7 +32,8 @@ if (isNil QGVAR(dangerUntil)) then {
 // EH handling reinforcement and combat mode
 [QEGVAR(main,OnInformationShared), {
     params [["_unit", objNull], "", ["_target", objNull], ["_groups", []]];
-    private _sideGroups = _groups select {(side _x) isEqualTo (side _unit)};
+    private _sideUnit = side _unit;
+    private _sideGroups = _groups select {(side _x) isEqualTo _sideUnit};
 
     // reinforce
     if (!isNull _target) then {
