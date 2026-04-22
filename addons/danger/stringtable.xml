@@ -377,6 +377,12 @@
             <German>Schaltet das verdeckte Bewegen von KI für Einheiten, die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
             <Chinesesimp>切换AI对未配备坦克和飞机的单位的隐藏动作.禁用此设置将使小组反应更激烈</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MaxReinforcementGroups">
+            <English>Max reinforcement groups per call</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_MaxReinforcementGroups_ToolTip">
+            <English>Limits how many eligible groups are ordered to reinforce per information-sharing event. Set to 0 for unlimited.</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementWest">
             <English>Auto-enable reinforcement for WEST</English>
         </Key>

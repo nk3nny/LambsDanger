@@ -84,6 +84,16 @@ private _curCat = ELSTRING(main,Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Limits number of groups called for reinforcement per information-sharing event. 0 means unlimited.
+[
+    QGVAR(maxReinforcementGroups),
+    "SLIDER",
+    [LSTRING(Settings_MaxReinforcementGroups), LSTRING(Settings_MaxReinforcementGroups_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    [0, 20, 0, 0],
+    1
+] call CBA_fnc_addSetting;
+
 // Automatically enable dynamic reinforcements for spawned WEST groups
 [
     QGVAR(dynamicReinforcementWest),
