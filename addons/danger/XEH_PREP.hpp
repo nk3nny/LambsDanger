@@ -10,6 +10,7 @@ PREP(fsmAllowAnimation);
 PREP(isForced);
 PREP(isForcedExit);
 PREP(isLeader);
+PREP(setDynamicReinforcement);
 
 PREP(contact);
 

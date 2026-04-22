@@ -377,6 +377,24 @@
             <German>Schaltet das verdeckte Bewegen von KI für Einheiten, die keine Ausrüstung zu Panzerabwehr oder Flugzeugabwehr besitzen, um. Durch das Ausschalten reagieren die Einheiten schneller.</German>
             <Chinesesimp>切换AI对未配备坦克和飞机的单位的隐藏动作.禁用此设置将使小组反应更激烈</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementWest">
+            <English>Auto-enable reinforcement for WEST</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementWest_ToolTip">
+            <English>Automatically enables LAMBS dynamic reinforcement on WEST groups when units initialize, including dynamically spawned units.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementEast">
+            <English>Auto-enable reinforcement for EAST</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementEast_ToolTip">
+            <English>Automatically enables LAMBS dynamic reinforcement on EAST groups when units initialize, including dynamically spawned units.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementIndependent">
+            <English>Auto-enable reinforcement for INDEPENDENT</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_DynamicReinforcementIndependent_ToolTip">
+            <English>Automatically enables LAMBS dynamic reinforcement on INDEPENDENT groups when units initialize, including dynamically spawned units.</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
             <English>General</English>
             <Czech>Všeobecné</Czech>

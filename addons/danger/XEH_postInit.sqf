@@ -19,3 +19,16 @@
     [_this select 0, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
+
+if (isServer) then {
+    {
+        [_x] call FUNC(setDynamicReinforcement);
+    } forEach allUnits;
+
+    addMissionEventHandler ["EntityCreated", {
+        params [["_entity", objNull, [objNull]]];
+        if (_entity isKindOf "CAManBase") then {
+            [_entity] call FUNC(setDynamicReinforcement);
+        };
+    }];
+};

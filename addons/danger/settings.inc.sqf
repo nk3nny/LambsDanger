@@ -84,6 +84,36 @@ private _curCat = ELSTRING(main,Settings_MainCat);
     0
 ] call CBA_fnc_addSetting;
 
+// Automatically enable dynamic reinforcements for spawned WEST groups
+[
+    QGVAR(dynamicReinforcementWest),
+    "CHECKBOX",
+    [LSTRING(Settings_DynamicReinforcementWest), LSTRING(Settings_DynamicReinforcementWest_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+// Automatically enable dynamic reinforcements for spawned EAST groups
+[
+    QGVAR(dynamicReinforcementEast),
+    "CHECKBOX",
+    [LSTRING(Settings_DynamicReinforcementEast), LSTRING(Settings_DynamicReinforcementEast_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+// Automatically enable dynamic reinforcements for spawned INDEPENDENT groups
+[
+    QGVAR(dynamicReinforcementIndependent),
+    "CHECKBOX",
+    [LSTRING(Settings_DynamicReinforcementIndependent), LSTRING(Settings_DynamicReinforcementIndependent_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
 
 _curCat = LSTRING(Settings_GeneralCat);
 
