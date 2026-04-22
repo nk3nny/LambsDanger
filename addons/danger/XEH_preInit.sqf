@@ -62,8 +62,9 @@ if (isNil QGVAR(dangerUntil)) then {
         private _adjustPos = _pos findEmptyPosition [5, 35, "Land_BagBunker_Large_F"];
         if (_adjustPos isNotEqualTo []) then {_pos = _adjustPos;};
 
+        private _fnc = FUNC(tacticsReinforce);
         {
-            [leader _x, _pos] call FUNC(tacticsReinforce);
+            [leader _x, _pos] spawn _fnc;
         } forEach _reinforceGroups;
     };
 
