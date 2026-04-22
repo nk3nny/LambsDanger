@@ -110,11 +110,11 @@
         <Key ID="STR_Lambs_Danger_Context_Main_DisplayName">
             <English>LAMBS Danger FSM</English>
             <Czech>LAMBS Danger FSM</Czech>
-            <Italian>Lamber Danger FSM</Italian>
+            <Italian>LAMBS Danger FSM</Italian>
             <Polish>LAMBS Danger FSM</Polish>
             <Russian>LAMBS Danger FSM</Russian>
             <German>LAMBS Danger FSM</German>
-            <Chinesesimp>Lambs Danger FSM</Chinesesimp>
+            <Chinesesimp>LAMBS Danger FSM</Chinesesimp>
         </Key>
         <Key ID="STR_Lambs_Danger_Module_ConfigureGroupAI_DisplayName">
             <English>Configure Group AI</English>
