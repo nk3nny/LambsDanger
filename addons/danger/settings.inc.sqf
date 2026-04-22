@@ -85,6 +85,39 @@ private _curCat = ELSTRING(main,Settings_MainCat);
 ] call CBA_fnc_addSetting;
 
 
+// Toggles dynamic reinforcement for newly spawned BLUFOR groups
+[
+    QGVAR(enableReinforceWest),
+    "CHECKBOX",
+    [LSTRING(Settings_EnableReinforcementWest), LSTRING(Settings_EnableReinforcementWest_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+
+// Toggles dynamic reinforcement for newly spawned OPFOR groups
+[
+    QGVAR(enableReinforceEast),
+    "CHECKBOX",
+    [LSTRING(Settings_EnableReinforcementEast), LSTRING(Settings_EnableReinforcementEast_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+
+// Toggles dynamic reinforcement for newly spawned INDFOR groups
+[
+    QGVAR(enableReinforceIndependent),
+    "CHECKBOX",
+    [LSTRING(Settings_EnableReinforcementIndependent), LSTRING(Settings_EnableReinforcementIndependent_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    1
+] call CBA_fnc_addSetting;
+
+
 _curCat = LSTRING(Settings_GeneralCat);
 
 // Range at which units consider themselves in CQB

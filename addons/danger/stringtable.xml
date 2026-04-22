@@ -215,6 +215,25 @@
             <German>Einheiten bei denen diese Option aktiviert ist haben eine erhöhte Kommunikationsreichweite.\n Dieser Effekt kann auch erzeugt werden durch das Ausrüsten der Einheit mit einem standard Radio-Rucksack oder einem TFAR-Mod kompatiblen Radio.</German>
             <Chinesesimp>共享信息时切换了无线电的装置提高了通信范围\n这种效果也可以通过为装置配备普通无线电背包或TFAR mod启用的无线电来实现</Chinesesimp>
         </Key>
+
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementWest">
+            <English>Enable dynamic reinforcement for BLUFOR</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementWest_ToolTip">
+            <English>Automatically enables dynamic reinforcement for newly created BLUFOR groups</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementEast">
+            <English>Enable dynamic reinforcement for OPFOR</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementEast_ToolTip">
+            <English>Automatically enables dynamic reinforcement for newly created OPFOR groups</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementIndependent">
+            <English>Enable dynamic reinforcement for INDFOR</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_EnableReinforcementIndependent_ToolTip">
+            <English>Automatically enables dynamic reinforcement for newly created INDFOR groups</English>
+        </Key>
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
             <Czech>Vzdálenost pro CQB</Czech>
