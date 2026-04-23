@@ -20,22 +20,24 @@
     [_this select 1, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
 
-GVAR(applySideReinforcementSetting) = {
-    params ["_group"];
-    if (isNull _group) exitWith {};
-
-    private _enabled = switch (side _group) do {
-        case west: {GVAR(enableReinforceWest)};
-        case east: {GVAR(enableReinforceEast)};
-        case independent: {GVAR(enableReinforceIndependent)};
-        default {false};
-    };
-
-    _group setVariable [QGVAR(enableGroupReinforce), _enabled, true];
-};
-
 addMissionEventHandler ["GroupCreated", {
     params ["_group"];
-    [_group] call GVAR(applySideReinforcementSetting);
+
+    [
+        {
+            params ["_group"];
+            !isNull _group && {local _group}
+        },
+        {
+            params ["_group"];
+            [_group] call FUNC(applySideReinforcementSetting);
+        },
+        [_group],
+        5
+    ] call CBA_fnc_waitUntilAndExecute;
 }];
+
+{
+    [_x] call FUNC(applySideReinforcementSetting);
+} forEach allGroups;
 
