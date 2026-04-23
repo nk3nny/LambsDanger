@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
- * Author: DreadedEntity
+ * Author: InfernoMDF
  * Applies side reinforcement settings to a group without overwriting mission-level disables.
  *
  * Arguments:
