@@ -24,8 +24,7 @@ addMissionEventHandler ["GroupCreated", {
     params ["_group"];
 
     [{
-        params ["_group"];
-        [_group] call FUNC(applySideReinforcementSetting);
+        [_this select 0] call FUNC(applySideReinforcementSetting);
     }, [_group], 1] call CBA_fnc_waitAndExecute;
 }];
 
