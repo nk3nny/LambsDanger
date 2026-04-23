@@ -119,6 +119,15 @@ _group setFormation "LINE";
             {
                 params ["_args", "_handle"];
                 _args params ["_unit", "_group", "_retreat", "_threshold"];
+                if !(local _unit) exitWith {
+                    _handle call CBA_fnc_removePerFrameHandler;
+                    _unit setVariable [QGVAR(taskAssault), nil];
+
+                    // group
+                    private _groupMembers = _group getVariable [QGVAR(taskAssaultMembers), []];
+                    _group setVariable [QGVAR(taskAssaultMembers), _groupMembers - [_unit]];
+                };
+
                 private _destination = (_group getVariable [QGVAR(taskAssaultDestination), getPos _unit]) call CBA_fnc_getPos;
 
                 // exit
@@ -161,6 +170,11 @@ _group setFormation "LINE";
 
 // execute move
 waitUntil {
+
+    if !(local leader _group) exitWith {
+        [QGVAR(taskAssault), _this, leader _group] call CBA_fnc_targetEvent;
+        true
+    };
 
     // reset option
     if ((units _group) isEqualTo []) exitWith {true};
@@ -212,6 +226,11 @@ waitUntil {
 // clean up
 _group setVariable [QGVAR(taskAssaultDestination), nil];
 _group setVariable [QGVAR(taskAssaultMembers), nil];
+
+if !(local leader _group) exitWith {
+    false
+};
+
 _group setFormation "WEDGE";
 _group setBehaviour "AWARE";
 _group setCombatMode "YELLOW";

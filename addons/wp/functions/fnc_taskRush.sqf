@@ -127,6 +127,11 @@ waitUntil {
     // performance
     waitUntil { sleep 1; simulationEnabled (leader _group); };
 
+    if !(local leader _group) exitWith {
+        [QGVAR(taskRush), _this, leader _group] call CBA_fnc_targetEvent;
+        true
+    };
+
     // find
     private _target = [_group, _radius, _area, _pos, _onlyPlayers] call EFUNC(main,findClosestTarget);
 
@@ -142,6 +147,17 @@ waitUntil {
     // end
     ((units _group) findIf {_x call EFUNC(main,isAlive)} == -1)
 
+};
+
+if !(local leader _group) exitWith {
+    {
+        private _unit = _x;
+        {
+            _unit removeEventHandler [_x select 0, _x select 1];
+        } forEach (_unit getVariable [QGVAR(eventhandlers), [["Fired", -1], ["Suppressed", -1]]]);
+        _unit setVariable [QGVAR(eventhandlers), nil];
+    } forEach (units _group);
+    false
 };
 
 // end
