@@ -19,3 +19,15 @@
     [_this select 0, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
     [_this select 1, QGVAR(OnReinforce), _this] call BIS_fnc_callScriptedEventHandler;
 }] call CBA_fnc_addEventHandler;
+
+addMissionEventHandler ["GroupCreated", {
+    params ["_group"]; 
+    [{
+        _this call FUNC(applySideReinforcementSetting);
+    }, _group, 1] call CBA_fnc_waitAndExecute;
+}];
+
+{
+    _x call FUNC(applySideReinforcementSetting);
+} forEach allGroups;
+
