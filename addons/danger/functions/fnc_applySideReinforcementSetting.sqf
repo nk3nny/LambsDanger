@@ -14,7 +14,7 @@
  *
  * Public: No
  */
-params ["_group", grpNull, [grpNull]];
+params [["_group", grpNull, [grpNull]]];
 if (isNull _group || {!local _group}) exitWith {};
 
 private _sideSettingEnabled = switch (side _group) do {
