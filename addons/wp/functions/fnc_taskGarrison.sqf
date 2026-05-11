@@ -4,7 +4,7 @@
  * Garrison
  *        Simple garrison script for Arma3
  *        Units may use static weapons
- *        Each garrisoned solider has one movement trigger (hit, fired, or fired Near)
+ *        Each garrisoned solider has one movement trigger (hit, fired, fired Near, or suppressed)
  *
  * Arguments:
  * 0: Group performing action, either unit <OBJECT> or group <GROUP>
@@ -13,7 +13,7 @@
  * 3: Area the AI garrisons, default [] <ARRAY>
  * 4: Teleport Units to Position <BOOL>
  * 5: Sort Based on Height <BOOL>
- * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear), default -2 <NUMBER>
+ * 6: Exit Conditions that breaks a Unit free (-2 Random, -1 All, 0 None, 1 Hit, 2 Fired, 3 FiredNear, 4 Suppressed), default -2 <NUMBER>
  * 7: Patrol <BOOL>
  *
  * Return Value:
@@ -34,7 +34,7 @@ params [
     ["_area", [], [[]]],
     ["_teleport", TASK_GARRISON_TELEPORT, [false]],
     ["_sortBasedOnHeight", TASK_GARRISON_SORTBYHEIGHT, [false]],
-    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS - 2, [0]],
+    ["_exitCondition", TASK_GARRISON_EXITCONDITIONS - 2, [0,[]]],
     ["_patrol", TASK_GARRISON_PATROL, [false]]
 ];
 
@@ -241,14 +241,12 @@ private _fnc_addEventHandler = {
         ] call CBA_fnc_waitUntilAndExecute;
     };
 
-    if (_exitCondition == -1) then {
-        for "_i" from 0 to 4 do {
-            [_x, _i] call _fnc_addEventHandler;
-        };
-    } else {
-        [_x, _exitCondition] call _fnc_addEventHandler;
+    if (_exitCondition == -1) then { _exitCondition = [1,2,3,4]; };
+    if !(_exitCondition isEqualType []) then { _exitCondition = [_exitCondition]; };
+    if (_exitCondition isEqualType []) then {
+        private _unit = _x;
+        { [_unit, _x] call _fnc_addEventHandler; } forEach _exitCondition;
     };
-
 } forEach _units;
 
 // waypoint
