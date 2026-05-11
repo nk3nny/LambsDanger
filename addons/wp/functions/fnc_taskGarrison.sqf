@@ -203,6 +203,12 @@ private _fnc_addEventHandler = {
     // set EH
     _unit setVariable [QGVAR(eventhandlers), _ehs];
 };
+// determine exit condition(s) to use
+if !(_exitCondition isEqualType []) then { 
+    if (_exitCondition == -1) then { _exitCondition = [1,2,3,4]; } else { _exitCondition = [_exitCondition]; };
+};
+
+
 // spread out
 {
     // prepare
@@ -241,12 +247,8 @@ private _fnc_addEventHandler = {
         ] call CBA_fnc_waitUntilAndExecute;
     };
 
-    if (_exitCondition == -1) then { _exitCondition = [1,2,3,4]; };
-    if !(_exitCondition isEqualType []) then { _exitCondition = [_exitCondition]; };
-    if (_exitCondition isEqualType []) then {
-        private _unit = _x;
-        { [_unit, _x] call _fnc_addEventHandler; } forEach _exitCondition;
-    };
+    private _unit = _x;
+    { [_unit, _x] call _fnc_addEventHandler; } forEach _exitCondition;
 } forEach _units;
 
 // waypoint
