@@ -208,7 +208,6 @@ if !(_exitCondition isEqualType []) then {
     if (_exitCondition == -1) then { _exitCondition = [1,2,3,4]; } else { _exitCondition = [_exitCondition]; };
 };
 
-
 // spread out
 {
     // prepare
