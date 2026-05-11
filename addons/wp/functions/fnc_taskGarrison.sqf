@@ -147,7 +147,7 @@ private _fnc_addEventHandler = {
     params ["_unit", "_type"];
     if (_type == 0) exitWith {};
     if (_type == -2) then {
-        _type = floor (random 4);
+        _type = floor (random 5);
     };
 
     // variables
