@@ -45,6 +45,7 @@ if (
 // check
 if (
     isNull _target
+    || diag_fps < 5
     || _stealth
     || _holdFire
     || {(speed _target) > 20 || (_unit knowsAbout _target) isEqualTo 0}

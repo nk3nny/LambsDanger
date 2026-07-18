@@ -111,9 +111,10 @@ if !(_enemies isEqualTo [] || {_unitCount < random 4}) then {
         };
     };
 
-    // no manoeuvres or no weapons -- exit
+    // no FPS or no manoeuvres or no weapons -- exit
     if (
         GVAR(disableAIAutonomousManoeuvres)
+        || diag_fps < 15
         || {weapons _unit isEqualTo []}
         || {!(_unit checkAIFeature "PATH")}
         || {!(_unit checkAIFeature "MOVE")}
