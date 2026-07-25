@@ -43,7 +43,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 [
     {
         params [["_group", grpNull], ["_delay", 0]];
-        time > _delay || {isNull _group} || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
+        time > _delay || { isNull _group } || { diag_fps < 10 } || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
     },
     {
         params ["_group", "", ["_enableAttack", false], ["_formation", "WEDGE"]];
