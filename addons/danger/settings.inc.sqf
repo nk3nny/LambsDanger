@@ -108,6 +108,74 @@ _curCat = LSTRING(Settings_GeneralCat);
     1
 ] call CBA_fnc_addSetting;
 
+// auto disable enableAttack on groups
+[
+    QGVAR(disableAttackOverride),
+    "CHECKBOX",
+    [LSTRING(Settings_AttackOverride), LSTRING(Settings_AttackOverride_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    false, {
+        params ["_value"];
+        if (_value) exitWith {};
+        if (!_value && time > 0) then {
+            {_x enableAttack false;} forEach (allGroups select {local _x});
+        };
+    }
+] call CBA_fnc_addSetting;
+
+// auto disable allowFleeing on groups
+[
+    QGVAR(disableFleeingOverride),
+    "CHECKBOX",
+    [LSTRING(Settings_FleeingOverride), LSTRING(Settings_FleeingOverride_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    false, {
+        params ["_value"];
+        if (_value) exitWith {};
+        if (!_value && time > 0) then {
+            {_x allowFleeing 0;} forEach (allGroups select {local _x});
+        };
+    }
+] call CBA_fnc_addSetting;
+
+// auto add dynamic reinforcement
+[
+    QGVAR(autoAddDynamicReinforcement),
+    "CHECKBOX",
+    [LSTRING(Settings_UniversalDynamicReinforcement), LSTRING(Settings_UniversalDynamicReinforcement_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    false,
+    false, {
+        params ["_value"];
+        if (!_value) exitWith {};
+        if (_value) then {
+            {_x setVariable [QGVAR(enableGroupReinforce), true, true];} forEach (allGroups select {local _x});
+        };
+    }
+] call CBA_fnc_addSetting;
+
+
+// add eventhandler to catch future groups made. 3 second delay to ensure groups are populated where relevant ~ nkenny
+addMissionEventHandler ["GroupCreated", {
+    params ["_group"];
+    if (GVAR(autoAddDynamicReinforcement) || !(GVAR(disableAttackOverride)) || GVAR(disableFleeingOverride)) then {
+        [
+            {
+                if (units _this isNotEqualTo []) then {
+                    if (GVAR(autoAddDynamicReinforcement)) then {_this setVariable [QGVAR(enableGroupReinforce), true, true];};
+                    if !(GVAR(disableAttackOverride)) then {_this enableAttack false;};
+                    if (GVAR(disableFleeingOverride)) then {_this allowFleeing 0;};
+                };
+            },
+            _group,
+            3
+        ] call CBA_fnc_waitAndExecute;
+    };
+}];
+
+
 /*
 TEMPORARILY DISABLED FOR VERSION 2.5 RELEASE
 WAITING BETTER OR OTHER SOLUTION

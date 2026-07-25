@@ -404,5 +404,23 @@
             <German>Die Wahrscheinlichkeit in Panik zu verfallen in Prozent.</German>
             <Chinesesimp>引起恐慌的百分比几率</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_Danger_Settings_AttackOverride">
+            <English>Disable LAMBS Danger.fsm Attack Override</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_AttackOverride_ToolTip">
+            <English>LAMBS Danger.fsm introduces new attack patterns that in many cases replace vanilla options. If, for some reason, you want to keep the vanilla Attack cycle check this box.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_UniversalDynamicReinforcement">
+            <English>Enable universal Dynamic Reinforcement</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_UniversalDynamicReinforcement_ToolTip">
+            <English>Enable this feature to apply Dynamic Reinforcement logic to all groups. This means all groups will respond to the Shared Information feature.\nBehaviours include: creating new waypoints, abandoning garrisons packing and claiming static weapons and vehicles.\nNB: This setting can dramatically alter missions. Use with care.</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_FleeingOverride">
+            <English>Disable vanilla fleeing feature</English>
+        </Key>
+        <Key ID="STR_Lambs_Danger_Settings_FleeingOverride_ToolTip">
+            <English>Checking this option prevents groups from initiating the default 'fleeing' mode. This can be particularly useful for ZEUS missions where the mission designer wants additional control of the group.\nThis setting is functionally identical with setting '(group) allowFleeing 0' in group inits</English>
+        </Key>
     </Package>
 </Project>
