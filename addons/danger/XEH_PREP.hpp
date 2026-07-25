@@ -12,6 +12,7 @@ PREP(isForcedExit);
 PREP(isLeader);
 
 PREP(contact);
+PREP(applySideReinforcementSetting);
 
 PREP(tactics);
 PREP(tacticsAssault);
