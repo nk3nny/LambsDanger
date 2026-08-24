@@ -4,6 +4,7 @@
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_DisplayName">
             <English>AI Disabled</English>
             <Czech>UI vypnuto</Czech>
+            <Spanish>IA desactivada</Spanish>
             <Italian>IA disabilitata</Italian>
             <Polish>AI Wyłączone</Polish>
             <Russian>ИИ выключен</Russian>
@@ -13,6 +14,7 @@
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_DisableAI_ToolTip">
             <English>Unit has advanced danger.fsm features disabled\n\nWARNING checking this will add mod dependency</English>
             <Czech>Jednotká má pokročilé danger.fsm vychytávky vypnuté\n\nVAROVÁNÍ zaškrtnutí přidá závislost na tento mód</Czech>
+            <Spanish>La unidad tiene desactivadas las funciones avanzadas de danger.fsm\n\nAVISO marcar esta casilla añadirá una dependencia del mod</Spanish>
             <Italian>L'unità ha funzioni avanzate di Danger.fsm disabilitate\n\nATTENZIONE controllando questo si aggiungerà dipendenza mod</Italian>
             <Polish>Jednostka posiada wyłączone zaawansowane opcje danger.fsm\n\nUWAGA zaznaczenie tej opcji doda zależności modów.</Polish>
             <Russian>Юниту отключены расширенные функции dangerous.fsm.\n\nРЕДУПРЕЖДЕНИЕ включение этого пункта  добавит зависимость от мода</Russian>
@@ -22,6 +24,7 @@
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_DisplayName">
             <English>Has Radio</English>
             <Czech>Má Rádio</Czech>
+            <Spanish>Tiene radio</Spanish>
             <Italian>Ha la radio</Italian>
             <Polish>Posiada radio</Polish>
             <Russian>Имеет радио</Russian>
@@ -31,6 +34,7 @@
         <Key ID="STR_Lambs_Danger_3DEN_Attributes_HasRadio_ToolTip">
             <English>Unit counts as carrying backpack radio for information sharing\n\nWARNING checking this will add mod dependency</English>
             <Czech>S jednotkou se počítá jako by nosila batoh s rádiem pro šíření informací\n\nVAROVÁNÍ zaškrtnutí přidá závislost na tento mód</Czech>
+            <Spanish>La unidad cuenta como portadora de radio de mochila para el intercambio de información\n\nAVISO marcar esta casilla añadirá una dependencia del mod</Spanish>
             <Italian>L'unità conta come trasportare la radio nello zaino per la condivisione delle informazioni\n\nATTENZIONE controllando questo si aggiungerà la dipendenza dalla mod</Italian>
             <Polish>Jednostka widziana jest jako posiadająca radio długie w plecaku w celu dzielenia się informacji\n\nUWAGA zaznaczenie tej opcji doda zależności modów.</Polish>
             <Russian>Устройство считается переносчиком радиостанции для обмена информацией\n\nПРЕДУПРЕЖДЕНИЕ, включение этого пункта  добавит зависимость от мода</Russian>
@@ -40,6 +44,7 @@
         <Key ID="STR_Lambs_Danger_Context_DisableAI">
             <English>Disable AI</English>
             <Czech>Vypnout UI</Czech>
+            <Spanish>Desactivar IA</Spanish>
             <Italian>Disabilita IA</Italian>
             <Polish>Wyłącz AI</Polish>
             <Russian>Отключить ИИ</Russian>
@@ -49,6 +54,7 @@
         <Key ID="STR_Lambs_Danger_Context_DisableGroupAI">
             <English>Disable Group AI</English>
             <Czech>Vypnout skupinovou UI</Czech>
+            <Spanish>Desactivar IA del grupo</Spanish>
             <Italian>Disabilita IA di gruppo</Italian>
             <Polish>Wyłącz AI dla grupy</Polish>
             <Russian>Отключить ИИ группы</Russian>
@@ -58,6 +64,7 @@
         <Key ID="STR_Lambs_Danger_Context_DisableReinforcement">
             <English>Disable Reinforcement</English>
             <Czech>Vypnout Posily</Czech>
+            <Spanish>Desactivar refuerzos</Spanish>
             <Italian>Disattiva rinforzo</Italian>
             <Polish>Wyłącz posiłki</Polish>
             <German>Deaktiviere Verstärkung</German>
@@ -66,6 +73,7 @@
         <Key ID="STR_Lambs_Danger_Context_EnableAI">
             <English>Enable AI</English>
             <Czech>Povolit UI</Czech>
+            <Spanish>Activar IA</Spanish>
             <Italian>Abilita IA</Italian>
             <Polish>Włącz AI</Polish>
             <Russian>Включить ИИ</Russian>
@@ -75,6 +83,7 @@
         <Key ID="STR_Lambs_Danger_Context_EnableGroupAI">
             <English>Enable Group AI</English>
             <Czech>Povolit skupinovou UI</Czech>
+            <Spanish>Activar IA del grupo</Spanish>
             <Italian>Abilita IA di gruppo</Italian>
             <Polish>Włącz AI dla grupy</Polish>
             <Russian>Включить ИИ группы</Russian>
@@ -84,6 +93,7 @@
         <Key ID="STR_Lambs_Danger_Context_EnableReinforcement">
             <English>Enable Reinforcement</English>
             <Czech>Povolit Posily</Czech>
+            <Spanish>Activar refuerzos</Spanish>
             <Italian>Abilita rinforzo</Italian>
             <Polish>Włącz posiłki</Polish>
             <German>Aktiviere Verstärkung</German>
@@ -92,6 +102,7 @@
         <Key ID="STR_Lambs_Danger_Context_HasNoRadio">
             <English>Has no Radio</English>
             <Czech>Nemá žádné rádio</Czech>
+            <Spanish>No tiene radio</Spanish>
             <Italian>Non ha la radio</Italian>
             <Polish>Nie posiada radia</Polish>
             <Russian>Не имеет радио</Russian>
@@ -101,6 +112,7 @@
         <Key ID="STR_Lambs_Danger_Context_HasRadio">
             <English>Has Radio</English>
             <Czech>Má rádio</Czech>
+            <Spanish>Tiene radio</Spanish>
             <Italian>Ha la radio</Italian>
             <Polish>Posiada radio</Polish>
             <Russian>Имеет радио</Russian>
@@ -110,6 +122,7 @@
         <Key ID="STR_Lambs_Danger_Context_Main_DisplayName">
             <English>LAMBS Danger FSM</English>
             <Czech>LAMBS Danger FSM</Czech>
+            <Spanish>LAMBS Danger FSM</Spanish>
             <Italian>LAMBS Danger FSM</Italian>
             <Polish>LAMBS Danger FSM</Polish>
             <Russian>LAMBS Danger FSM</Russian>
@@ -119,6 +132,7 @@
         <Key ID="STR_Lambs_Danger_Module_ConfigureGroupAI_DisplayName">
             <English>Configure Group AI</English>
             <Czech>Konfigurovat skupinu UI</Czech>
+            <Spanish>Configurar IA del grupo</Spanish>
             <Italian>Configura IA di gruppo</Italian>
             <Polish>Konfiguruj AI grupy</Polish>
             <Russian>Настроить группу ИИ</Russian>
@@ -128,6 +142,7 @@
         <Key ID="STR_Lambs_Danger_Module_DisableAI_DisplayName">
             <English>Disable Unit AI</English>
             <Czech>Vypne na jednotce UI</Czech>
+            <Spanish>Desactivar IA de la unidad</Spanish>
             <Italian>Disattiva IA dell'unità</Italian>
             <Polish>Wyłącz AI dla jednostek</Polish>
             <Russian>Отключить ИИ юнитов</Russian>
@@ -137,6 +152,7 @@
         <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingName">
             <English>Disable LAMBS unit AI</English>
             <Czech>Vypne na jednotce LAMBS UI</Czech>
+            <Spanish>Desactivar la IA LAMBS de la unidad</Spanish>
             <Italian>Spegnere il LAMBS IA dell'unità</Italian>
             <Polish>Wyłącz LAMBS AI dla jednostek</Polish>
             <Russian>Отключить LAMBS юнит ИИ</Russian>
@@ -146,6 +162,7 @@
         <Key ID="STR_Lambs_Danger_Module_DisableAI_SettingToolTip">
             <English>Toggle advanced danger.fsm features on this unit</English>
             <Czech>Přepíná pokročilý danger.fsm funkce na této jednotce</Czech>
+            <Spanish>Activa o desactiva las funciones avanzadas de danger.fsm en esta unidad</Spanish>
             <Italian>Attiva/disattiva le funzionalità avanzate di danger.fsm su questa unità</Italian>
             <Polish>Przełącza zaawansowane opcje danger.fsm na tej jednostce</Polish>
             <Russian>Переключить дополнительные настройки danger.fsm для этого юнита</Russian>
@@ -155,6 +172,7 @@
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingName">
             <English>Disable LAMBS group AI</English>
             <Czech>Vypnout LAMBS skupinové UI</Czech>
+            <Spanish>Desactivar la IA LAMBS del grupo</Spanish>
             <Italian>Disabilita LAMBS gruppo AI</Italian>
             <Polish>Wyłącz LAMBS AI dla grupy</Polish>
             <Russian>Отключить LAMBS группу ИИ</Russian>
@@ -164,6 +182,7 @@
         <Key ID="STR_Lambs_Danger_Module_DisableGroupAI_SettingToolTip">
             <English>Disables LAMBS group AI\nDisabling this feature prevents autonomous building assaults and clearing, as well as hiding from aircraft and tanks</English>
             <Czech>Vypne LAMBS skupinové UI\nVypnutím této funkce se zabrání samostatným útokům na budovy a jejich čištění a též skrývání se před letouny a tanky</Czech>
+            <Spanish>Desactiva la IA LAMBS del grupo\nDesactivar esta función impide los asaltos y despejes autónomos de edificios, así como ocultarse de aeronaves y carros de combate</Spanish>
             <Italian>Disabilita l'IA del gruppo LAMBS\nLa disabilitazione di questa funzione impedisce assalti e sgomberi autonomi di edifici, oltre a nascondersi da aerei e carri armati</Italian>
             <Polish>Wyłącza LAMBS AI dla grupy.\nWyłączenie tej funkcji zapobiega autonomicznym atakom na budynki i czyszeniu ich przez AI, a także ukrywaniu się przed samolotami i czołgami</Polish>
             <Russian>Отключает LAMBS группу ИИ\nОтключение этой функции предотвращает самостоятельную атаку и зачистку автономных помещений, а также прятание в укрытия от самолетов и танков.</Russian>
@@ -173,6 +192,7 @@
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingName">
             <English>Enable Dynamic Reinforcement</English>
             <Czech>Povolit dynamické posily</Czech>
+            <Spanish>Activar refuerzo dinámico</Spanish>
             <Italian>Abilita rinforzo dinamico</Italian>
             <Polish>Włącz Dynamiczne Posiłki</Polish>
             <Russian>Включить динамическое подкрепление</Russian>
@@ -182,6 +202,7 @@
         <Key ID="STR_Lambs_Danger_Module_EnableGroupReinforce_SettingToolTip">
             <English>Enable LAMBS dynamic reinforcement feature. This group will now move towards known enemy positions that are identified by the share information feature.\nWARNING The reinforcement feature may override existing waypoints on groups responding to calls</English>
             <Czech>Povolí funkci dynamických posil LAMBS. Tato skupina se přesune ke známým nepřátelským pozicím, které jsou identifikovány pomocí funkce sdílení informací. \nVAROVÁNÍ Funkce posil může přepsat stávající trasové body ve skupinách reagujících na volání</Czech>
+            <Spanish>Activa la función de refuerzo dinámico de LAMBS. Este grupo se desplazará ahora hacia las posiciones enemigas conocidas identificadas mediante el intercambio de información.\nAVISO la función de refuerzo puede anular los puntos de ruta existentes en los grupos que respondan a las llamadas</Spanish>
             <Italian>Abilita la funzione di rinforzo dinamico LAMBS. Questo gruppo ora si sposterà verso posizioni nemiche note identificate dalla funzione di condivisione delle informazioni.\nATTENZIONE La funzione di rinforzo potrebbe ignorare i waypoint esistenti sui gruppi che rispondono alle chiamate</Italian>
             <Polish>Włącza funkcję Dynamicznych Posiłków LAMBS. Ta grupa będzie się teraz przemieszczać w kierunku znanych pozycji wroga, które są identyfikowane przez funkcję udostępniania informacji.\nUWAGA Ta funkcja może zastąpić istniejące punkty trasy grup odpowiadających na wezwania.</Polish>
             <Russian>Включить LAMBS функцию динамического подкрепления . Эта группа теперь будет двигаться к известным позициям противника, которые идентифицировались с помощью функцией обмена информацией.\nПРЕДУПРЕЖДЕНИЕ Функция подкрепления может перезаписать существующие маршрутные точки в группах, отвечающих на вызов.</Russian>
@@ -191,6 +212,7 @@
         <Key ID="STR_Lambs_Danger_Module_SetRadio_DisplayName">
             <English>Configure Long-range Radio</English>
             <Czech>Konfigurovat dlouhovlnné rádio</Czech>
+            <Spanish>Configurar radio de largo alcance</Spanish>
             <Italian>Configura la radio a lungo raggio</Italian>
             <Polish>Konfiguruj długie radio</Polish>
             <Russian>Настроить радио для дальних переговоров</Russian>
@@ -200,6 +222,7 @@
         <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingName">
             <English>Toggle boosted communication range on unit</English>
             <Czech>Přepnout zvýšený komunikační dosah pro jednotku</Czech>
+            <Spanish>Alternar el alcance de comunicación ampliado en la unidad</Spanish>
             <Italian>Attiva/disattiva il raggio di comunicazione potenziato sull'unità</Italian>
             <Polish>Przełącza zwiększony zasięg komunikacji dla tej jednostki</Polish>
             <Russian>Переключить усиленную дальность коммуникации для юнита</Russian>
@@ -209,6 +232,7 @@
         <Key ID="STR_Lambs_Danger_Module_SetRadio_SettingToolTip">
             <English>Unit with radio toggled have boosted communications range when sharing information\nThis effect is also achieved by equipping the unit with a Vanilla Radio Backpack or TFAR-mod enabled radio.</English>
             <Czech>Jednotka s přepnutým rádiem má zvýšený komunikační dosah když sdílí informace\nTento efekt je také dosažen vybavením jednotky Vanilla Rádio batohem nebo rádiem podporujícím TFAR mod.</Czech>
+            <Spanish>Las unidades con la radio activada tienen un alcance de comunicación ampliado al compartir información\nEste efecto también se consigue equipando a la unidad con una radio de mochila vanilla o con una radio compatible con el mod TFAR.</Spanish>
             <Italian>L'unità con la radio attivata ha aumentato il raggio di comunicazione durante la condivisione delle informazioni\nQuesto effetto si ottiene anche dotando l'unità di uno zaino radio Vanilla o di una radio abilitata per TFAR.</Italian>
             <Polish>Jednostka z włączonym radiem ma zwiększony zasięg komunikacji podczas przekazywania informacji\nTen efekt może być również osiągnięty, poprzez wyekwipowanie jednostki w plecak z radiem lub plecak kompatybilny z modem TFAR.</Polish>
             <Russian>Юнит с включенным радио будет иметь усиленную дальностью коммуникации при передачи информации\nЭтого эффекта также можно добиться, оснастив юнита ванильным  рюкзаком с радио  или радио с поддержкой TFAR-мода.</Russian>
@@ -218,6 +242,7 @@
         <Key ID="STR_Lambs_Danger_Settings_CQBRange">
             <English>CQB Range</English>
             <Czech>Vzdálenost pro CQB</Czech>
+            <Spanish>Alcance de CQB</Spanish>
             <Italian>Gamma CQB</Italian>
             <Polish>Zasięg CQB</Polish>
             <Russian>Дальность режима ближнего боя CQB</Russian>
@@ -227,6 +252,7 @@
         <Key ID="STR_Lambs_Danger_Settings_CQBRange_ToolTip">
             <English>Range at which units consider themselves in assault range</English>
             <Czech>Vzdálenost, ve které se jednotky považují v útočném dosahu</Czech>
+            <Spanish>Distancia a la que las unidades se consideran dentro del alcance de asalto</Spanish>
             <Italian>Raggio al quale le unità si considerano nel raggio d'assalto</Italian>
             <Polish>Określa zasięg ataku</Polish>
             <Russian>Дальность, на которой юниты считают себя атакующими</Russian>
@@ -236,6 +262,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares">
             <English>Disable units using flares for illumination</English>
             <Czech>Vypíná schopnost jednotek používat světlice k osvětlení</Czech>
+            <Spanish>Desactivar el uso de bengalas para iluminar</Spanish>
             <Italian>Disabilita le unità che utilizzano i bagliori per l'illuminazione</Italian>
             <Polish>Wyłącz autonomiczne używanie flar przez AI</Polish>
             <Russian>Отключить способность ИИ использовать осветительные ракеты для освещения</Russian>
@@ -245,6 +272,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousFlares_ToolTip">
             <English>Toggles AI group ability to autonomously use flares for illumination at night time unless NVGs are available or unit is in stealth mode</English>
             <Czech>Přepíná schopnost skupin UI nezávisle použít světlice k osvětlení během noci pokud skupina nemá noční vidění a nebo není v režimu utajení</Czech>
+            <Spanish>Activa o desactiva la capacidad de los grupos de IA de usar bengalas de forma autónoma para iluminar de noche, salvo que dispongan de visión nocturna o la unidad esté en modo sigilo</Spanish>
             <Italian>Attiva o disattiva la capacità del gruppo IA di utilizzare autonomamente i bagliori per l'illuminazione di notte, a meno che non siano disponibili NVG o che l'unità sia in modalità invisibile</Italian>
             <Polish>Przełącza zdolność grupy AI do autonomicznego używania flar do oświetlania w czasie nocy, w razie gdy noktowizja nie jest dostępna lub gdy jednostka jest w trybie "stealth"</Polish>
             <Russian>Переключает способность группы ИИ автономно использовать осветительные ракеты для освещения в ночное время, если не доступны ПНВ или юнит находится в скрытом режиме.</Russian>
@@ -254,6 +282,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades">
             <English>Disable autonomous smoke usage</English>
             <Czech>Vypíná nezávislé používání kouřových granátů</Czech>
+            <Spanish>Desactivar el uso autónomo de humo</Spanish>
             <Italian>Disabilita l'uso autonomo del fumo</Italian>
             <Polish>Wyłącz autonomiczne używanie granatów dymnych</Polish>
             <Russian>Отключить автономное использование дыма</Russian>
@@ -263,6 +292,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableAutonomousSmokeGrenades_ToolTip">
             <English>Toggles AI group ability to autonomously use smoke to cover group manoeuvres</English>
             <Czech>Přepíná schopnost skupin UI nezávisle používat kouřové granáty ke krytí skupinových manévrů</Czech>
+            <Spanish>Activa o desactiva la capacidad de los grupos de IA de usar humo de forma autónoma para cubrir sus maniobras</Spanish>
             <Italian>Attiva/disattiva la capacità del gruppo IA di utilizzare autonomamente il fumo per coprire le manovre di gruppo</Italian>
             <Polish>Przełącza zdolność grupy AI do autonomicznego używania granatów dymnych w celu ukrycia manewrów grupy</Polish>
             <Russian>Переключает способность группы ИИ автономно использовать дым для прикрытия групповых маневров</Russian>
@@ -272,6 +302,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM">
             <English>Disable danger.fsm for player group</English>
             <Czech>Vypne danger.fsm pro hráčskou skupinu</Czech>
+            <Spanish>Desactivar danger.fsm para el grupo del jugador</Spanish>
             <Italian>Disabilitare danger.fsm per il gruppo di giocatori</Italian>
             <Polish>Wyłącz danger.fsm dla grupy gracza</Polish>
             <Russian>Отключить danger.fsm для группы игрока</Russian>
@@ -281,6 +312,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableDangerFSM_ToolTip">
             <English>Toggle advanced danger.fsm features on player group</English>
             <Czech>Přepíná pokročilé funkce danger.fsm ve skupině hráčů</Czech>
+            <Spanish>Activa o desactiva las funciones avanzadas de danger.fsm en el grupo del jugador</Spanish>
             <Italian>Attiva/disattiva le funzionalità avanzate di danger.fsm nel gruppo di giocatori</Italian>
             <Polish>Przełącz zaawansowane opcje danger.fsm na grupie gracza</Polish>
             <Russian>Переключить особый danger.fsm для группы игрока</Russian>
@@ -290,6 +322,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures">
             <English>Disable autonomous group manoeuvres</English>
             <Czech>Vypíná nezávislé skupinové manévry</Czech>
+            <Spanish>Desactivar las maniobras autónomas de grupo</Spanish>
             <Italian>Disabilita le manovre di gruppo autonome</Italian>
             <Polish>Wyłącz autonomiczne manewry grupowe</Polish>
             <Russian>Выключить автономные маевры группы</Russian>
@@ -299,6 +332,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableGroupManoevures_ToolTip">
             <English>Toggles group manoeuvre phase initiated by AI squad leader. Disabling this will prevent AI group leader from adding manoeuvre orders to flank and suppress buildings.</English>
             <Czech>Přepíná manévrovací fázi zahájenou velitelem družstva UI. Deaktivací této funkce zabráníte veliteli družstva UI přidávat rozkazy na obcházení a potlačování budov.</Czech>
+            <Spanish>Activa o desactiva la fase de maniobra iniciada por el líder de escuadra de la IA. Desactivarlo impedirá que el líder de grupo de la IA dé órdenes de maniobra para flanquear y suprimir edificios.</Spanish>
             <Italian>Attiva/disattiva la fase di manovra di gruppo avviata dal caposquadra AI. Disabilitarlo impedirà al leader del gruppo AI di aggiungere ordini di manovra per fiancheggiare e sopprimere gli edifici.</Italian>
             <Polish>Przełącza fazę manewru grupowego zainicjowaną przez dowódcę oddziału AI. Wyłączenie tej opcji uniemożliwi liderowi grupy AI wydawaniu nowych rozkazów do flankowania i ostrzeliwania budynków.</Polish>
             <Russian>Переключает фазу группового маневра, инициированную командиром отряда ИИ. Отключение этого  не позволит лидеру группы ИИ добавлять приказы о маневрах для обхода и подавления огнем зданий.</Russian>
@@ -308,6 +342,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup">
             <English>Disable reaction state on player group</English>
             <Czech>Vypne reakční stav ve skupině hráčů</Czech>
+            <Spanish>Desactivar el estado de reacción en el grupo del jugador</Spanish>
             <Italian>Disabilita lo stato di reazione sul gruppo di giocatori</Italian>
             <Polish>Wyłącz stan reakcji dla grupy gracza</Polish>
             <Russian>Отключить состояние реакции для группы игрока</Russian>
@@ -317,6 +352,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableReactPlayerGroup_ToolTip">
             <English>Toggle Reaction phase on units in player group</English>
             <Czech>Přepíná reakční stav jednotek ve skupině hráčů</Czech>
+            <Spanish>Activa o desactiva la fase de reacción en las unidades del grupo del jugador</Spanish>
             <Italian>Attiva/disattiva la fase di reazione sulle unità nel gruppo di giocatori</Italian>
             <Polish>Przełącza fazę reakcji dla jednostek w grupie gracza</Polish>
             <Russian>Переключить фазу реакции для юнитов в группе игрока</Russian>
@@ -326,6 +362,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment">
             <English>Disable units deploying static weapons</English>
             <Czech>Vypíná jednotkám možnost sestavovat statické zbraně</Czech>
+            <Spanish>Desactivar el despliegue de armas estáticas</Spanish>
             <Italian>Disabilita le unità che schierano armi statiche</Italian>
             <Polish>Wyłącz możliwość rozstawiania wieżyczek przez jednostki AI</Polish>
             <Russian>Отключить развертывани ИИ стационарных орудий</Russian>
@@ -335,6 +372,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticDeployment_ToolTip">
             <English>Toggles AI group ability to dynamically deploy static/backpack weapons</English>
             <Czech>Přepíná schopnost skupin UI dynamicky sestavit statické zbraně(Třeba z batohů)</Czech>
+            <Spanish>Activa o desactiva la capacidad de los grupos de IA de desplegar dinámicamente armas estáticas o de mochila</Spanish>
             <Italian>Attiva/disattiva la capacità del gruppo IA di schierare dinamicamente armi statiche/zaino</Italian>
             <Polish>Przełącza zdolność grupy AI do dynamicznego rozmieszczania broni statycznej</Polish>
             <Russian>Переключает способность группы ИИ динамически развертывать стационарное/ранцевое оружие</Russian>
@@ -344,6 +382,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding">
             <English>Disable units manning static weapons</English>
             <Czech>Vypíná schopnost jednotek osazovat statické zbraně</Czech>
+            <Spanish>Desactivar que las unidades ocupen armas estáticas</Spanish>
             <Italian>Disabilita le unità che gestiscono armi statiche</Italian>
             <Polish>Wyłącz obsadzanie broni statycznych przez AI</Polish>
             <Russian>Отключить использование ИИ свободных стационарных орудий</Russian>
@@ -353,6 +392,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableStaticFinding_ToolTip">
             <English>Toggles AI group ability to dynamically find and man vacant static turrets</English>
             <Czech>Přepíná schopnost skupin UI dynamicky vyhledávat a osazovat neosazené statické zbraně</Czech>
+            <Spanish>Activa o desactiva la capacidad de los grupos de IA de buscar y ocupar dinámicamente torretas estáticas libres</Spanish>
             <Italian>Attiva/disattiva l'abilità del gruppo IA di trovare dinamicamente e manovrare torrette statiche libere</Italian>
             <Polish>Przełącza zdolność grupy AI do dynamicznego znajdywania i obsadzania pustych wieżyczek statycznych</Polish>
             <Russian>Переключает способность группы ИИ динамически находить и занимать свободные стационарное установки.</Russian>
@@ -362,6 +402,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding">
             <English>Disable units hiding</English>
             <Czech>Vypíná jednotkám možnost skrývání</Czech>
+            <Spanish>Desactivar que las unidades se oculten</Spanish>
             <Italian>Disabilita le unità nascoste</Italian>
             <Polish>Wyłącz ukrywanie jednostek</Polish>
             <Russian>Выключить прятание юнитов от огня за укрытия</Russian>
@@ -371,6 +412,7 @@
         <Key ID="STR_Lambs_Danger_Settings_DisableUnitsHiding_ToolTip">
             <English>Toggles the concealment move by AI for units not equipped to damage tanks and aircraft. Disabling this setting will make groups more responsive</English>
             <Czech>Přepíná schopnost jednotek UI skrytý pohyb, které nejsou vybaveny k poškození tanků a letadel. Deaktivace tohoto nastavení způsobí, že skupiny budou lépe reagovat</Czech>
+            <Spanish>Activa o desactiva el movimiento de ocultación de la IA para las unidades sin equipo capaz de dañar carros de combate y aeronaves. Desactivar este ajuste hará que los grupos reaccionen con mayor rapidez</Spanish>
             <Italian>Attiva/disattiva la mossa di occultamento dell'IA per le unità non equipaggiate per danneggiare carri armati e aerei. La disabilitazione di questa impostazione renderà i gruppi più reattivi</Italian>
             <Polish>Przełącza ruch maskujący przez AI dla jednostek, które nie mają możliwości uszkodzenia czołgów lub pojazdów latających. Wyłączenie tej opcji sprawi, że grupy będą bardziej responsywne</Polish>
             <Russian>Переключает действие укрытия ИИ для юнитов, не оборудованных для поражения танков и самолетов. Отключение этого параметра сделает группы более отзывчивыми</Russian>
@@ -380,6 +422,7 @@
         <Key ID="STR_Lambs_Danger_Settings_GeneralCat">
             <English>General</English>
             <Czech>Všeobecné</Czech>
+            <Spanish>General</Spanish>
             <Italian>In genere</Italian>
             <Polish>Główne</Polish>
             <Russian>Главное</Russian>
@@ -389,6 +432,7 @@
         <Key ID="STR_Lambs_Danger_Settings_PanicChance">
             <English>Panic Chance</English>
             <Czech>Šance paniky</Czech>
+            <Spanish>Probabilidad de pánico</Spanish>
             <Italian>Possibilità di panico</Italian>
             <Polish>Szansa na panikę</Polish>
             <Russian>Шанс паники</Russian>
@@ -398,6 +442,7 @@
         <Key ID="STR_Lambs_Danger_Settings_PanicChance_ToolTip">
             <English>Chance to panic in percentage</English>
             <Czech>Šance na zpanikaření v procentech</Czech>
+            <Spanish>Probabilidad de entrar en pánico, en porcentaje</Spanish>
             <Italian>Possibilità di panico in percentuale</Italian>
             <Polish>Szansa, że jednostka spanikuje, wyrażona w procentach</Polish>
             <Russian>Шанс паники в процентах</Russian>

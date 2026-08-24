@@ -4,6 +4,7 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_Cat">
             <English>Explosion</English>
             <Czech>Exploze</Czech>
+            <Spanish>Explosión</Spanish>
             <Italian>Esplosione</Italian>
             <Polish>Wybuch</Polish>
             <Russian>Взрыв</Russian>
@@ -13,6 +14,7 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_DisplayName">
             <English>Enable Explosion Eventhandler</English>
             <Czech>Povolit Eventhandler explozí</Czech>
+            <Spanish>Activar el eventhandler de explosiones</Spanish>
             <Italian>Abilita Explosion Eventhandler</Italian>
             <Polish>Włącz obsługę zdarzeń wybuchu</Polish>
             <Russian>Включить обработчик событий взрыва</Russian>
@@ -22,6 +24,7 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledExplosionEH_ToolTip">
             <English>Toggle AI Reactions to nearby explosions</English>
             <Czech>Přepnout reakce UI na blízké exploze</Czech>
+            <Spanish>Activa o desactiva las reacciones de la IA a las explosiones cercanas</Spanish>
             <Italian>Attiva/disattiva le reazioni dell'IA alle esplosioni vicine</Italian>
             <Polish>Przełącza reakcję AI na pobliskie wybuchy</Polish>
             <Russian>Переключить реакцию ИИ на ближайшие взрывы</Russian>
@@ -31,6 +34,7 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
             <English>Explosion Eventhandler reset time</English>
             <Czech>Čas restartu Eventhandleru explozí</Czech>
+            <Spanish>Tiempo de reinicio del eventhandler de explosiones</Spanish>
             <Italian>Tempo di ripristino dell'Eventhandler di esplosione</Italian>
             <Polish>Czas resetowania reakcji na zdarzenie wybuchu</Polish>
             <Russian>Время сброса обработчика событий взрыва</Russian>
@@ -40,6 +44,7 @@
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_ToolTip">
             <English>Configures explosions reset time.</English>
             <Czech>Konfiguruje čas restartu explozí</Czech>
+            <Spanish>Configura el tiempo de reinicio de las explosiones.</Spanish>
             <Italian>Configura il tempo di ripristino delle esplosioni.</Italian>
             <Polish>Konfiguruje czas resetowania reakcji na zdarzenie wybuchu.</Polish>
             <Russian>Настраивает время сброса взрывов</Russian>
