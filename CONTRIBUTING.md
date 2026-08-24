@@ -15,3 +15,4 @@ Feel free to add yourself to this when creating a pull request.
 - R3voA3
 - YetheSamartaka
 - MiszczuZPolski
+- vgmarimon
