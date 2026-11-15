@@ -38,33 +38,36 @@ params [
 private _fnc_rushOrders = {
     params ["_group", "_target"];
 
-    private _distance = (leader _group) distance _target;
+    private _distance = (leader _group) distance2D _target;
+    private _units = units _group;
 
     // Helicopters -- suppress it!
-    if ((_distance < 200) && {(vehicle _target) isKindOf "Air"}) exitWith {
-        (units _group) commandSuppressiveFire _target;
+    if ((_distance < 200) && {(vehicle _target) isKindOf "Air" && (!isTouchingGround (vehicle _target))}) exitWith {
+        _units doSuppressiveFire _target;
     };
 
     // Tank -- hide or ready AT
     private _launcherUnits = [_group] call EFUNC(main,getLauncherUnits);
-    if ((_distance < 80) && {(vehicle _target) isKindOf "Tank"}) exitWith {
+    if ((_distance < 200) && {(vehicle _target) isKindOf "Tank"}) exitWith {
+        private _terrainIntersect = terrainIntersectASL [getPosWorld (leader _group), aimPos _target];
         {
             if (_x in _launcherUnits) then {
                 _x setUnitPos "MIDDLE";
-                _x selectWeapon (secondaryWeapon _x);
+                [_x, secondaryWeapon _x] call CBA_fnc_selectWeapon;
+                _x doTarget _target;
             } else {
                 _x setUnitPos "DOWN";
-                _x doSuppressiveFire _target;
+                if (!_terrainIntersect) then {_x doSuppressiveFire _target;};
             };
             true
-        } count (units _group);
+        } count _units;
         _group enableGunLights "forceOff";
     };
 
     // adjust pos
     private _posMove = call {
         private _posATL = getPosATL _target;
-        if ((insideBuilding _target) isEqualTo 1 || _distance < 20) exitWith {_posATL};
+        if (_distance < 20) exitWith {_posATL};
         private _posEmpty = _posATL findEmptyPosition [0, 20, "O_MRAP_02_F"];
         if (_posEmpty isEqualTo []) exitWith {_posATL};
         _posEmpty
@@ -74,9 +77,13 @@ private _fnc_rushOrders = {
     {
         _x forceSpeed -1;
         _x setUnitPos (["UP", "MIDDLE"] select ((unitPos _x) isEqualTo "Down"));
-        _x doMove _posMove;
+        if (_distance < 70) then {_x doMove _posMove;};
         true
-    } count (units _group);
+    } count _units;
+    if (_distance > 70) then {
+        _group enableIRLasers false;
+        _units doMove _posMove;
+    };
     _group enableGunLights "forceOn";
 };
 // functions end ---
@@ -98,6 +105,7 @@ _group allowFleeing 0;
     private _firedEH = _x addEventHandler ["Fired", {
         params ["_unit"];
         _unit forceSpeed 3;
+        _unit enableIRLasers true;
     }];
 
     // dodge
