@@ -30,13 +30,16 @@ if (_pos isEqualTo []) then {
     _pos = _groupLeader;
 };
 _pos = _pos call CBA_fnc_getPos;
-private _units = [allUnits ,switchableUnits + playableUnits] select _onlyPlayers;
+private _units = [allUnits, switchableUnits + playableUnits] select _onlyPlayers;
 
 _units = _units select {
-    !(side _x in _sideExclusion)
+    private _side = side group _x;
+    !(_side in _sideExclusion)
+    && _x call FUNC(isAlive)
+    && !unitIsUAV _x
     && { _x distance2D _pos < _radius }
     && { (getPosATL _x) select 2 < 200 }
-    && {[side _x, side _group] call BIS_fnc_sideIsEnemy}
+    && {[_side, side _group] call BIS_fnc_sideIsEnemy}
 };
 if (_area isNotEqualTo []) then {
     _area params ["_a", "_b", "_angle", "_isRectangle", ["_c", -1]];
