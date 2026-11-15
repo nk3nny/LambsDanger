@@ -87,9 +87,9 @@ _posList pushBack (_target vectorAdd [0, 0, 3.5]);
 if (_overwatch isEqualTo []) then {
 
     private _distance2D = ((_unit distance2D _target) * 0.66) min 250;
-    _overwatch = [
-        [ASLToAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch)
-    ];
+    _overwatch = [];
+    _overwatch pushBack ([ASLToAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));
+    systemChat str _overwatch;
 
     _overwatch append (
         (selectBestPlaces [
