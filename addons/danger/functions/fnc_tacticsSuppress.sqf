@@ -43,7 +43,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 [
     {
         params [["_group", grpNull], ["_delay", 0]];
-        time > _delay || {isNull _group} || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
+        time > _delay || { isNull _group } || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
     },
     {
         params ["_group", "", ["_enableAttack", false], ["_formation", "WEDGE"]];
@@ -52,13 +52,19 @@ _group setVariable [QGVAR(isExecutingTactic), true];
             _group setVariable [QEGVAR(main,currentTactic), nil];
             _group enableAttack _enableAttack;
             _group setFormation _formation;
+
+            // fire control
+            private _leader = leader _group;
+            [_leader, ["gestureCeaseFire"]] call EFUNC(main,doGesture);
             {
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
+                _x setVariable [QGVAR(forceMove), nil];
                 _x doFollow (leader _x);
+                _x enableAI "TARGET";
             } forEach (units _group);
         };
     },
-    [group _unit, time + _delay, attackEnabled _unit, formation _group]
+    [_group, time + _delay, attackEnabled _group, formation _group]
 ] call CBA_fnc_waitUntilAndExecute;
 
 // alive unit
@@ -76,17 +82,22 @@ private _vehicles = ([_unit] call EFUNC(main,findReadyVehicles)) select {someAmm
 // sort building locations
 private _posList = [_target, 20, true, false] call EFUNC(main,findBuildings);
 _posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
-_posList pushBack _target;
+_posList pushBack (_target vectorAdd [0, 0, 2]);
 
 // set tasks
 _unit setVariable [QEGVAR(main,currentTarget), _target, EGVAR(main,debug_functions)];
 _unit setVariable [QEGVAR(main,currentTask), "Leader Suppress", EGVAR(main,debug_functions)];
 
 // set group task
-_group = group _unit;
 _group enableAttack false;
 _group setFormation "LINE";
+_group setFormDir (_unit getDir _target);
 _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_functions)];
+_units doMove (_unit getPos [3, _unit getDir _target]);
+{
+    _x setVariable [QGVAR(forceMove), true];
+    _x disableAI "TARGET";
+} forEach units _group;
 
 // gesture
 [_unit, "gesturePoint"] call EFUNC(main,doGesture);
@@ -94,11 +105,8 @@ _group setVariable [QEGVAR(main,currentTactic), "Suppressing", EGVAR(main,debug_
 // leader callout
 [_unit, "combat", "SuppressiveFire", 125] call EFUNC(main,doCallout);
 
-// ready group
-_group setFormDir (_unit getDir _target);
-
 // execute recursive cycle
- [{_this call EFUNC(main,doGroupSuppress)}, [_group, _units, _vehicles, _posList], 2 + random 2] call CBA_fnc_waitAndExecute;
+[{_this call EFUNC(main,doGroupSuppress)}, [_group, _units, _vehicles, _posList], 6] call CBA_fnc_waitAndExecute;
 
 // debug
 if (EGVAR(main,debug_functions)) then {
