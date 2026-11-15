@@ -41,7 +41,7 @@ private _groupMemory = (group _unit) getVariable [QEGVAR(main,groupMemory), []];
 
 // sympathetic CQB/suppressive fire
 if (_groupMemory isNotEqualTo []) exitWith {
-    [_unit, _groupMemory] call EFUNC(main,doAssaultMemory);
+    [_unit, _groupMemory, _target] call EFUNC(main,doAssaultMemory);
     _timeout
 };
 

@@ -31,7 +31,7 @@ private _timeout = time + 1.5;
 
 // hide when static and ordered to be stealthy
 private _stealth = (behaviour _unit) isEqualTo "STEALTH";
-private _holdFire = (combatMode _unit) in ["BLUE", "GREEN"];
+private _holdFire = ((combatMode _unit) in ["BLUE", "GREEN"]) || ((weaponState _unit) select 6) isNotEqualTo 0;
 private _still = (speed _unit) isEqualTo 0;
 if (
     _still
@@ -57,15 +57,25 @@ if (
 private _distance = _unit distance2D _target;
 
 // near, go for CQB
+private _cqbRange = GVAR(cqbRange) * (1 - getSuppression _unit);
 if (
-    _distance < GVAR(cqbRange)
+    _distance < _cqbRange
     && _unit checkAIFeature "PATH"
     && (vehicle _target) isKindOf "CAManBase"
     && {_target call EFUNC(main,isAlive)}
 ) exitWith {
-    _unit setVariable ["ace_medical_ai_lastFired", CBA_missionTime]; // ACE3
+
+    // enemy outside-- but I'm inside
+    // use simpler inside calculation for performance
+    if (RND(EGVAR(main,indoorMove)) && { (insideBuilding _unit) isEqualTo 1 && (insideBuilding _target) isEqualTo 0 } ) exitWith {
+        [_unit, _target] call EFUNC(main,doReposition);
+        _timeout + 3
+    };
+
+    // execute assault!
     [_unit, _target] call EFUNC(main,doAssault);
     _timeout
+
 };
 
 // set low stance
@@ -83,15 +93,11 @@ if (
     _still
     && _distance > EGVAR(main,minSuppressionRange)
     && unitReady _unit
-    && (_type isEqualTo DANGER_CANFIRE)
+    && (_type in [DANGER_CANFIRE, DANGER_ENEMYNEAR])
 ) exitWith {
-    private _posASL = ATLToASL (_unit getHideFrom _target);
-    if (((ASLToAGL _posASL) select 2) > 6) then {
-        _posASL = ASLToAGL _posASL;
-        _posASL set [2, 0.5];
-        _posASL = AGLToASL _posASL
-    };
-    [_unit, _posASL vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
+    private _getHide = _unit getHideFrom _target;
+    _getHide set [2, (getPosATL _target) select 2];
+    [_unit, (ATLToASL _getHide) vectorAdd [0, 0, 0.8], true] call EFUNC(main,doSuppress);
     _timeout + 3
 };
 
