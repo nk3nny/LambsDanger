@@ -75,8 +75,6 @@ private _waitForMove = 5;
 // get vehicles
 private _assignedVehicles = assignedVehicles _group;
 
-// check waypoints -- if none add new?
-
 // commander vehicles? ~ future versions with setting ~ nkenny
 if (_assignedVehicles isEqualTo []) then {
     private _vehicles = nearestObjects [_unit, ["Landvehicle"], 75];
@@ -110,14 +108,8 @@ if (_weaponHolders isNotEqualTo -1) then {
 // has artillery? ~ if so fire in support?
 // is aircraft or tank? Different movement waypoint?
 
-// clear HOLD, GUARD and DISMISS waypoints
-private _waypoints = waypoints _group;
-if (_waypoints isNotEqualTo []) then {
-    private _currentWP = _waypoints select ((currentWaypoint _group) min ((count _waypoints) - 1));
-    if ((waypointType _currentWP) in ["HOLD", "GUARD", "DISMISS"]) then {
-        [_group] call CBA_fnc_clearWaypoints;
-    };
-};
+// always clear waypoints
+[_group] call CBA_fnc_clearWaypoints;
 
 // formation changes ~ allowed here as Reinforcing units have full autonomy - nkenny
 private _distance = _unit distance2D _target;
@@ -129,8 +121,7 @@ if (_distance > 500) then {
         _group setFormation selectRandom ["WEDGE", "VEE", "LINE"];
     };
     if (_distance < GVAR(cqbRange)) then {
-        // _group setFormation "FILE"; ~formation is set in tacticsAssault ~KRM
-        [_group, _target] call FUNC(tacticsAssault);
+        _group setFormation selectRandom ["FILE", "DIAMOND"];
     };
 };
 
@@ -154,7 +145,11 @@ if (!(GVAR(disableAutonomousFlares)) && {_unit call EFUNC(main,isNight)}) then {
 [
     {
         params ["_group", "_target"];
-        _group move _target;
+        //_group move _target;
+        private _wp1 = _group addWaypoint [_target, 10, 0, "LAMBS_Reinforce_SAD"];
+        _wp1 setWaypointType "SAD";
+        private _wp2 = _group addWaypoint [_target, 50, 1, "LAMBS_Reinforce_GUARD"];
+        _wp2 setWaypointType "GUARD";
     },
     [_group, _target],
     _waitForMove
