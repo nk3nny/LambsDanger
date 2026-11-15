@@ -5,7 +5,6 @@
  *
  * Arguments:
  * 0: unit doing the flight <OBJECT>
- * 1: position of cover <ARRAY>
  *
  * Return Value:
  * bool
@@ -16,26 +15,24 @@
  * Public: No
 */
 
-params ["_unit", ["_pos", [], [[]]]];
+params ["_unit"];
 
 // stance change (one step lower)
 _unit setUnitPosWeak (["DOWN", "MIDDLE"] select ((stance _unit) isEqualTo "STAND"));
 
-// check if stopped or inside a building
+// exit if stopped or inside a building
 if (!(_unit checkAIFeature "PATH") || {(insideBuilding _unit) isEqualTo 1}) exitWith {false};
 
-// find cover
-if (_pos isEqualTo []) then {
-    _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE"], 6, true, true];
-    _pos = if (_pos isEqualTo []) then {
-        getPosASL _unit
-    } else {
-        (_pos select 0) getPos [-1.2, _unit getDir (_pos select 0)]
-    };
-};
+// find cover - exit on no cover
+private _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE", "WALL"], 4, true, true];
+if (_pos isEqualTo []) exitWith {false};
+
+// adjust pos - exit if close
+_pos =_pos select 0;
+_pos = _pos getPos [-1.2, _unit getDir _pos];
+if (_unit distance2D _pos < 0.6) exitWith {false};
 
 // force anim
-if (_unit distance2D _pos < 0.6) exitWith {false};
 private _direction = _unit getRelDir _pos;
 private _anim = call {
     if (_direction > 315) exitWith {["WalkF", "WalkLF"]};
@@ -44,6 +41,10 @@ private _anim = call {
     if (_direction > 45) exitWith {["WalkR", "WalRF"]};
     ["WalkF", "WalkRF"]
 };
+
+// seek cover
+_unit setVariable [QGVAR(currentTask), "Seek cover!", GVAR(debug_functions)];
+_unit setVariable [QGVAR(currentTarget), _pos, GVAR(debug_functions)];
 
 // prevent run in place
 _unit moveTo _pos;

@@ -1,6 +1,7 @@
 class CfgFSMs {
     class Formation {
         class States {
+            /*
             // drop to ground ~ do nothing instead!
             class Drop_to_ground {
                 class Init {
@@ -17,6 +18,7 @@ class CfgFSMs {
                     thresholds[] = {};
                 };
             };
+            */
             class Search_path__Covering {
                 class Init {
                     function = "searchPath";
@@ -24,6 +26,7 @@ class CfgFSMs {
                     thresholds[] = {};
                 };
             };
+            /*
             class Reload {
                 class Init {
                     function = "nothing";
@@ -31,6 +34,7 @@ class CfgFSMs {
                     thresholds[] = {};
                 };
             };
+            */
         };
     };
 };

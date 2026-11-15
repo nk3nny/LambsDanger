@@ -26,9 +26,12 @@ if (
     || !(_unit checkAIFeature "MOVE")
 ) exitWith {false};
 
+// Reset stance hard stance changes
+[_unit, true] call FUNC(doStanceReset);
+
 // do nothing when already inside
 if (RND(GVAR(indoorMove)) && {_unit call FUNC(isIndoor)}) exitWith {
-    _unit setUnitPosWeak "DOWN";
+    _unit setUnitPos "DOWN";
     doStop _unit;
     false
 };
@@ -45,18 +48,6 @@ _unit setVariable [QGVAR(currentTask), "Hide!", GVAR(debug_functions)];
 // set speed
 _unit forceSpeed 24;
 
-// set stance reset
-[
-    {
-        if (alive _this) then {
-            _this setUnitPos "AUTO";
-            _this setUnitPosWeak "DOWN";
-        };
-    },
-    _unit,
-    6 + random 4
-] call CBA_fnc_waitAndExecute;
-
 // Randomly scatter into buildings or hide!
 if ( RND(0.2) && { _buildings isNotEqualTo [] } ) exitWith {
 
@@ -65,7 +56,7 @@ if ( RND(0.2) && { _buildings isNotEqualTo [] } ) exitWith {
 
     // execute move
     _unit setUnitPos "MIDDLE";
-    _unit doMove (_buildings selectRandomWeighted (_buildings apply { _unit distance2D _x }) );
+    _unit doMove (_buildings selectRandomWeighted (_buildings apply { 100 - ( _unit distance2D _x ) }) );
 
     // debug
     if (GVAR(debug_functions)) then {
@@ -73,15 +64,8 @@ if ( RND(0.2) && { _buildings isNotEqualTo [] } ) exitWith {
     };
 };
 
-// hide
-_unit setUnitPos "DOWN";
-
-// check for rear-cover
-private _cover = nearestTerrainObjects [ _unit getPos [5, _pos getDir _unit], ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, false, true ];
-
-// remove those close to danger
-private _distance2D = (_unit distance2D _pos) + 2;
-_cover = _cover select {_x distance2D _pos > _distance2D;};
+// check for cover
+private _cover = nearestTerrainObjects [ _unit, ["BUSH", "TREE", "SMALL TREE", "HIDE", "WALL", "FENCE"], 15, true, true ];
 
 // targetPos
 private _targetPos = if (_cover isEqualTo []) then {
@@ -98,7 +82,7 @@ if (surfaceIsWater _targetPos) exitWith {
 // cover move or stay put
 if (_unit distanceSqr _targetPos > 1.5) then {
     _unit doMove _targetPos;
-    [{unitReady _this}, {doStop _this}, _unit, 2] call CBA_fnc_waitUntilAndExecute;
+    [{unitReady _this}, {doStop _this; _this setUnitPos "DOWN";}, _unit, 2, {_this setUnitPos "DOWN";}] call CBA_fnc_waitUntilAndExecute;
 } else {
     doStop _unit;
 };

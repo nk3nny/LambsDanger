@@ -35,7 +35,7 @@ _unit setVariable ["ace_medical_ai_lastHit", CBA_missionTime];
 
 // cover move when explosion
 if (
-    getSuppression _unit > 0.5
+    getSuppression _unit > 0.5 && (_unit distanceSqr _pos > 64)
     || (getUnitState _unit) isEqualTo "REPLAN"
     || (currentCommand _unit) isEqualTo "STOP"
     || (_type isEqualTo DANGER_FIRE)

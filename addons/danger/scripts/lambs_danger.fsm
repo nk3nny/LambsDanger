@@ -112,8 +112,8 @@ link42[] = {36,24};
 link43[] = {37,3};
 link44[] = {38,39};
 link45[] = {41,40};
-globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-1051.298584,1485.311401,1723.900391,-657.740051,933,876,1};
-window[] = {2,-1,-1,-1,-1,811,52,1492,52,3,951};
+globals[] = {0.000000,0,0,0,0,640,480,1,67,6316128,1,-916.495728,1208.490112,1379.923462,-296.038757,1079,851,1};
+window[] = {0,-1,-1,-1,-1,1257,234,2154,234,1,1097};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -408,8 +408,11 @@ class FSM
                         itemno = 17;
                         init = /*%FSM<STATEINIT""">*/"//systemchat format [""%1 engage %2"", side _this, name _this];" \n
                          "" \n
+                         "private _formLeader = formLeader _this;" \n
+                         "" \n
                          "// brain" \n
-                         "_dangerUntil = [_this, _dangerCause, _dangerCausedBy] call lambs_danger_fnc_brainEngage;"/*%FSM</STATEINIT""">*/;
+                         "_dangerUntil = [_this, _dangerCause, _dangerCausedBy] call lambs_danger_fnc_brainEngage;" \n
+                         ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -420,9 +423,10 @@ class FSM
                                         priority = 0.000000;
                                         to="Reset_foot";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil" \n
-                                         "|| {count _queue >3}"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _dangerUntil"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"" \n
+                                         "// ready units reform on formation leader" \n
+                                         "if (unitReady _this && _this isNotEqualTo _formLeader) then {_this doFollow _formLeader;};"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -456,8 +460,7 @@ class FSM
                 {
                         name = "End_Danger";
                         itemno = 19;
-                        init = /*%FSM<STATEINIT""">*/"_this setVariable [""lambs_main_currentTask"", nil];" \n
-                         "_this forceSpeed -1;" \n
+                        init = /*%FSM<STATEINIT""">*/"_this forceSpeed -1;" \n
                          ""/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
@@ -470,11 +473,7 @@ class FSM
                 {
                         name = "Reset_foot";
                         itemno = 23;
-                        init = /*%FSM<STATEINIT""">*/"// has living cqb target" \n
-                         "if (_engage && {_dangerCausedBy call lambs_main_fnc_isAlive} && {_this distance2D _dangerCausedBy < 35}) then {" \n
-                         "    _queue pushBack [0, ASLtoAGL (getPosASL _dangerCausedBy), time + lambs_danger_dangerUntil, _dangerCausedBy];" \n
-                         "};" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"" \n
                          "//_text = format [""%1 : %2 :  %3"", name _this, _dangerCause call lambs_main_fnc_debugDangerType,_queue apply{[(_x select 0) call lambs_main_fnc_debugDangerType]}];" \n
                          "//systemchat _text;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -602,7 +601,7 @@ class FSM
                         itemno = 33;
                         init = /*%FSM<STATEINIT""">*/"" \n
                          "// reset queue" \n
-                         "_queue = _queue select {(_x select 2) < time};"/*%FSM</STATEINIT""">*/;
+                         "_queue = [];"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
