@@ -67,7 +67,7 @@ _unit setVariable [QGVAR(currentTask), "Throwing smoke grenade", GVAR(debug_func
     {
         params ["_unit", "_muzzle"];
         _unit forceWeaponFire [_muzzle, _muzzle];
-    }, [_unit, _muzzle], 1
+    }, [_unit, _muzzle], 1.5
 ] call CBA_fnc_waitAndExecute;
 
 // end

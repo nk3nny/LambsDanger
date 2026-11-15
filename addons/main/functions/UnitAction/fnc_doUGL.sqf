@@ -30,7 +30,7 @@ private _flare = "";
 private _muzzle = "";
 private _unit = _units findIf {
 
-    if (local _x && {!isPlayer _x}) then {
+    if (local _x && !isPlayer _x && !([_x] call FUNC(isIndoor))) then {
 
         private _weapon = primaryWeapon _x;
 
@@ -74,7 +74,6 @@ if (_unit == -1) exitWith {_units};
 _unit = _units deleteAt _unit;
 
 // force
-doStop _unit;
 _unit setUnitPosWeak "MIDDLE";
 _unit setVariable [QEGVAR(danger,forceMove), true];
 
