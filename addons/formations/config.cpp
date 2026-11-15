@@ -13,4 +13,4 @@ class CfgPatches {
 
 #include "CfgFSMs.hpp"
 #include "CfgVehicles.hpp"
-#include "CfgSurfaces.hpp"
+#include "cfgSurfaces.hpp"
