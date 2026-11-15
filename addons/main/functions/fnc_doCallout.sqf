@@ -42,10 +42,13 @@ if (toUpperANSI(_speaker) in ["", "ACE_NOVOICE"]) exitWith {}; // Early Exit if 
 
 switch (toLowerANSI(_callout)) do {
     case ("contact"): {
-        _callout = selectRandom ["ContactE_1", "ContactE_2", "ContactE_3", "Danger"];
+        _callout = selectRandom ["ContactE_1", "ContactE_2", "ContactE_3"];
     };
     case ("grenadeout"): {
         _callout = selectRandom ["ThrowingGrenadeE_1", "ThrowingGrenadeE_2", "ThrowingGrenadeE_3"];
+    };
+    case ("grenadein"): {
+        _callout = selectRandom ["IncomingGrenadeE_1", "IncomingGrenadeE_1",  "IncomingGrenadeE_2", "EndangeredE"];
     };
     case ("mandown"): {
         _callout = selectRandom ["ManDownE", "WeLostOneE", "WeGotAManDownE"];
@@ -62,6 +65,9 @@ switch (toLowerANSI(_callout)) do {
     case ("eject"): {
         _callout = selectRandom ["Eject", "EndangeredE"];
     };
+    case ("enemynear"): {
+        _callout = selectRandom ["Danger", "reportFront", "TargetInSight"];
+    }
 };
 
 private _cacheName = format ["%1_%2_%3_%4", QGVAR(callouts), _speaker, _behavior, _callout];
@@ -137,4 +143,4 @@ if (GVAR(debug_functions)) then {
 };
 
 // set time until next callout
-_unit setVariable [QGVAR(calloutTime), time + 4, true];
+_unit setVariable [QGVAR(calloutTime), time + 1, true];

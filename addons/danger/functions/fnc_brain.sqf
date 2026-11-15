@@ -70,7 +70,7 @@ if (_dangerCause isEqualTo DANGER_ASSESS) exitWith {
 // immediate actions
 private _group = group _unit;
 if (_dangerCause in [DANGER_HIT, DANGER_BULLETCLOSE, DANGER_EXPLOSION, DANGER_FIRE]) exitWith {
-    [_causeArray, (side _group) isNotEqualTo side (group _dangerCausedBy) && (getSuppression _unit < 0.9), false, false]
+    [_causeArray, (side _group) isNotEqualTo side (group _dangerCausedBy), false, false]
 };
 
 // engage actions
@@ -79,8 +79,17 @@ if (_dangerCause in [DANGER_ENEMYDETECTED, DANGER_ENEMYNEAR, DANGER_CANFIRE]) ex
     // share information
     if (_dangerCause isEqualTo DANGER_ENEMYNEAR) then {
         //[_unit, ["gestureFreeze", "gesturePoint"] select (_unit distance2D _dangerPos < 100)] call EFUNC(main,doGesture);
-        [_unit, ["Combat", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), "contact", 100] call EFUNC(main,doCallout);
-        [_unit, _dangerCausedBy, EGVAR(main,radioShout), true] call EFUNC(main,doShareInformation);
+        
+        private _nameSoundConfig = configOf (vehicle _dangerCausedBy) >> "nameSound";
+        private _callout = if (_unit knowsAbout _dangerCausedBy > 1.4 && isText _nameSoundConfig) then { getText _nameSoundConfig } else { "enemynear" };
+        [_unit, ["Danger", "Stealth"] select (behaviour _unit isEqualTo "STEALTH"), _callout] call EFUNC(main,doCallout);
+
+        // slight delay with sharing information
+        [
+            {
+                call EFUNC(main,doShareInformation);
+            }, [_unit, _dangerCausedBy, EGVAR(main,radioShout), true], 2 + random 4
+        ] call CBA_fnc_waitAndExecute;
     };
 
     // return
