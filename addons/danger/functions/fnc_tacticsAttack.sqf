@@ -24,21 +24,25 @@ if (isNull _group) exitWith {false};
 // get leader
 if (_group isEqualType objNull) then {_group = group _group;};
 if ((units _group) isEqualTo []) exitWith {false};
-private _unit = leader _group;
 
-// position
-if (_target isEqualType []) then {
-    _target = _unit findNearestEnemy _unit;
-};
+// get a list of enemies within 34 meters of position
+_target = _target call CBA_fnc_getPos;
+private _enemies = _group targets [true, 34, [], 0, _target];
+
+// get only one instance of each target
+_enemies = _enemies apply {vehicle _x};
+_enemies = _enemies arrayIntersect _enemies;
 
 // exit
-if (isNull _target) exitWith {false};
+if (_enemies isEqualTo []) exitWith {false};
 
 // update tactics and contact state
 _group setVariable [QGVAR(isExecutingTactic), true];
 _group setVariable [QEGVAR(main,currentTactic), "Attacking", EGVAR(main,debug_functions)];
+_group enableAttack true;
 
 // reset tactics
+private _unit = leader _group;
 [
     {
         params [["_group", grpNull, [grpNull]], ["_combatMode", "YELLOW"], ["_formation", "WEDGE"]];
@@ -68,17 +72,16 @@ _unit setVariable [QEGVAR(main,currentTask), "Tactics Attack", EGVAR(main,debug_
 // leader callout
 [_unit, "combat", "Attack", 125] call EFUNC(main,doCallout);
 
-// group settings
-_unit setCombatMode "RED";
-_unit setFormation "DIAMOND";
+// group settings - Diamond near buildings, line in open spaces
+_group setCombatMode "RED";
+_group setFormation (["LINE", "DIAMOND"] select (((getPos _unit) getEnvSoundController "houses") > 0.9));
 
 // the attack
-private _targetVehicle = vehicle _target;
 {
-    _x setUnitPosWeak "MIDDLE";
-    _x doWatch _targetVehicle;
-    _x doTarget _targetVehicle;
-    _x doFire _targetVehicle;
+    private _enemy = selectRandom _enemies;
+    _x doWatch (getPosATL _enemy);
+    _x doTarget _enemy;
+    _x doFire _enemy;
 } forEach _units;
 
 // debug
