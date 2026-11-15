@@ -78,14 +78,14 @@ private _fnc_debug_drawRect = {
     private _control = call _fnc_getRect;
     _textData pushBack "</t>";
 
-    private _text = "";
-    {
+    _textData = _textData apply {
         private _str = _x;
         if !(_str isEqualType "") then {
             _str = str _x;
         };
-        _text = _text + format [_str, GVAR(debug_TextFactor) * 1, GVAR(debug_TextFactor) * 1.5];
-    } forEach _textData;
+        format [_str, GVAR(debug_TextFactor) * 1, GVAR(debug_TextFactor) * 1.5];
+    };
+    private _text = _textData joinString "";
 
     _control ctrlSetStructuredText parseText _text;
 
@@ -110,7 +110,7 @@ private _posCam = positionCameraToWorld [0, 0, 0];
         if (!GVAR(debug_drawAllUnitsInVehicles) && {_unit isNotEqualTo (effectiveCommander (vehicle _unit))}) exitWith {};
         private _textData =  ["<t align='bottom' size='%1'>"];
 
-        if (_isLeader) then {
+        if (_isLeader || { _unit isEqualTo (effectiveCommander (vehicle _unit)) && (leader _unit) in (vehicle _unit) }) then {
             {
                 private _pos2 = getPosATLVisual _x;
                 drawLine3D [_renderPos, _pos2, [1, 1, 1, 0.5], 10];
