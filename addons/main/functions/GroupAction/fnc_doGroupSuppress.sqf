@@ -27,13 +27,13 @@ _units = _units select { !( _x getVariable [QEGVAR(danger,disableAI), false] ) &
 _vehicles = _vehicles select { canFire _x };
 
 // infantry
-[_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
 private _checkCount = 3;
 
 {
     // find target
     if (_index isEqualTo -1 && _checkCount > 0) then {
+        [_posList, true] call CBA_fnc_shuffle;
         _index = [_x, _posList] call FUNC(checkVisibilityList);
         _checkCount = _checkCount - 1;
     };
@@ -42,9 +42,8 @@ private _checkCount = 3;
     if (_index isNotEqualTo -1) then {
 
         // suppressive fire
-        _x forceSpeed 1;
         _x setUnitPosWeak "MIDDLE";
-        private _suppressing = [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        private _suppressing = [_x, AGLToASL ((_posList select _index) vectorAdd [0, 0, 1]), false, true] call FUNC(doSuppress);
         _x setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
         if (!_suppressing) then {
             _index = -1;
@@ -69,16 +68,19 @@ private _checkCount = 3;
     private _vehicle = _x;
 
     // find target
-    if (_index isEqualTo -1) then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
+    if (_index isEqualTo -1) then {
+        [_posList, true] call CBA_fnc_shuffle;
+        _index = [_vehicle, _posList] call FUNC(checkVisibilityList);
+    };
 
     // execute suppression
     if (_index isNotEqualTo -1) then {
 
         // vehicle suppress
-        private _suppressing = [_vehicle, (_posList select _index) vectorAdd [0, 0, random 1]] call FUNC(doVehicleSuppress);
+        private _suppressing = [_vehicle, (_posList select _index) vectorAdd [0, 0, 1 + random 2]] call FUNC(doVehicleSuppress);
         if (_suppressing) then {
             // debug variable
-            (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress (Move)", GVAR(debug_functions)];
+            (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Suppress", GVAR(debug_functions)];
         } else {
             _index = -1;
         };
@@ -112,7 +114,7 @@ if (_units isNotEqualTo [] && { _group getVariable [QEGVAR(danger,isExecutingTac
     [
         {_this call FUNC(doGroupSuppress)},
         [_group, _units, _vehicles, _posList],
-        6 + random 2
+        3 + random 2
     ] call CBA_fnc_waitAndExecute;
 };
 
