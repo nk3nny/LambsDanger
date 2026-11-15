@@ -45,7 +45,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
 [
     {
         params [["_group", grpNull], ["_delay", 0]];
-        time > _delay || {isNull _group} || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
+        time > _delay || { isNull _group } || { !(_group getVariable [QGVAR(isExecutingTactic), false]) }
     },
     {
         params [["_group", grpNull], "", ["_speedMode", "NORMAL"], ["_formation", "WEDGE"]];
@@ -58,6 +58,7 @@ _group setVariable [QGVAR(isExecutingTactic), true];
                 _x setVariable [QEGVAR(main,currentTask), nil, EGVAR(main,debug_functions)];
                 _x setVariable [QGVAR(forceMove), nil];
                 _x setUnitPos "AUTO";
+                _x enableAI "TARGET";
                 _x doFollow (leader _x);
             } forEach (units _group);
         };
@@ -79,18 +80,47 @@ private _vehicles = [_unit] call EFUNC(main,findReadyVehicles);
 
 // sort building locations
 private _posList = [_target, 12, true, false] call EFUNC(main,findBuildings);
-_posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, random 2] });
-_posList pushBack _target;
+_posList append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [0, 0, 1.5] });
+_posList pushBack (_target vectorAdd [0, 0, 3.5]);
 
 // find overwatch position
 if (_overwatch isEqualTo []) then {
+
     private _distance2D = ((_unit distance2D _target) * 0.66) min 250;
-    _overwatch = selectBestPlaces [_target, _distance2D, "(2 * hills) + (2 * (forest + trees + houses)) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)", 20 , 4] apply {[(_x select 0) distance2D _unit, _x select 0]};
-    _overwatch = _overwatch select {!(surfaceIsWater (_x select 1))};
-    _overwatch sort true;
-    _overwatch = _overwatch apply {_x select 1};
-    if (_overwatch isEqualTo []) then {_overwatch pushBack ([ASLToAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));};
-    _overwatch = _overwatch select 0;
+    _overwatch = [];
+    _overwatch pushBack ([ASLToAGL (getPosASL _unit), _distance2D, 100, 8, _target] call EFUNC(main,findOverwatch));
+    systemChat str _overwatch;
+
+    _overwatch append (
+        (selectBestPlaces [
+            _overwatch select 0,
+            _distance2D,
+            "(2 * hills) + (2 * (forest + trees)) - (2 * meadow) - (2 * windy) - (2 * sea) - (10 * deadBody)",
+            20,
+            4
+        ]) apply {_x select 0}
+    );
+
+    // reject water and positions beyond the target
+    private _approach = _target vectorDiff (getPosATL _unit);
+    _overwatch = _overwatch select {
+        !surfaceIsWater _x
+        && {
+            private _offset = _x vectorDiff _target;
+
+            ((_approach select 0) * (_offset select 0)
+            + (_approach select 1) * (_offset select 1)) <= 0
+        }
+    };
+
+    // prefer closest valid position, otherwise assault target directly
+    if (_overwatch isEqualTo []) then {
+        _overwatch = _target;
+    } else {
+        _overwatch = _overwatch apply {[_x distance2D _unit, _x]};
+        _overwatch sort true;
+        _overwatch = (_overwatch select 0) select 1;
+    };
 };
 
 // set tasks
@@ -108,7 +138,7 @@ _group setVariable [QEGVAR(main,currentTactic), "Flanking", EGVAR(main,debug_fun
 [_unit, "combat", "flank", 125] call EFUNC(main,doCallout);
 
 // set speedmode
-_unit setSpeedMode "FULL";
+_unit setSpeedMode "NORMAL";
 
 // prevent units from being mounted!
 _units allowGetIn false;
@@ -117,10 +147,11 @@ _units allowGetIn false;
 _group setFormDir (_unit getDir _target);
 _group setFormation "FILE";
 {
+    _x disableAI "TARGET";
     _x setUnitPos "DOWN";
     _x forceSpeed -1;
     _x setVariable [QGVAR(forceMove), true];
-} forEach (_units select {isNull objectParent _x});
+} forEach (units _group);
 
 // leader smoke ~ deploy concealment to enable movement
 if (!GVAR(disableAutonomousSmokeGrenades)) then {[_unit, _overwatch] call EFUNC(main,doSmoke);};
