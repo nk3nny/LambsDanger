@@ -16,7 +16,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", objNull], ["_range", 12], ["_doMove", false]];
+params ["_unit", ["_target", objNull], ["_range", 12]];
 
 // check if stopped
 if (!(_unit checkAIFeature "PATH")) exitWith {false};
@@ -25,25 +25,29 @@ _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Assault", GVAR(debug_functions)];
 
 // check visibility and target within 20 meters
-private _vis = _unit distanceSqr _target < 400 && {[_unit, "FIRE", _target] checkVisibility [getPosWorld _unit, aimPos _target] isEqualTo 1};
+private _vis = _unit distanceSqr _target < 400 && {[_unit, "FIRE", _target] checkVisibility [getPosWorld _unit, aimPos _target] > 0};
 private _buildings = [];
 private _expectedDestination = (expectedDestination _unit) select 0;
 private _pos = call {
 
-    // can see target!
+    // can see target! adjust the location right next to it
     if (_vis) exitWith {
         _unit doWatch _target;
-        _doMove = true;
-        getPosATL _unit
+        _unit lookAt _target;
+        private _dir = _target getDir _unit;
+        private _distance = 2;
+        (getPosATL _target) vectorAdd [(sin _dir) * _distance, (cos _dir) * _distance, 0]
     };
 
-    // get the hide
-    private _getHide = _unit getHideFrom _target;
+    // get the hide - or use target's actual location if close enough to guess (9m)
+    private _getHide = [_unit getHideFrom _target, ((getPosATL _unit) vectorAdd (getPosATL _target)) vectorMultiply 0.5] select (_unit distanceSqr _target < 81);
+    _getHide set [2, (getPosATL _target) select 2]; // tweak location. Call it intuition
+
     private _distanceSqr = _unit distanceSqr _getHide;
 
     // busy units keep tracking their targets(!)
     private _unitState = getUnitState _unit;
-    if (_unitState isEqualTo "BUSY" && (_expectedDestination distanceSqr _getHide < 6.25)) exitWith {
+    if (_unitState isEqualTo "BUSY" && (_expectedDestination distanceSqr _getHide < 16 || _expectedDestination distanceSqr _target < 16)) exitWith {
         _expectedDestination
     };
 
@@ -53,13 +57,7 @@ private _pos = call {
     // no valid buildings
     if (_buildings isEqualTo []) exitWith {
 
-        if (_unit call FUNC(isIndoor) && RND(GVAR(indoorMove))) exitWith {
-            _unit setVariable [QGVAR(currentTask), "Stay inside", GVAR(debug_functions)];
-            _unit doWatch _getHide;
-            getPosATL _unit
-        };
-
-        // forget targets when too close
+        // forget targets when too close (prevents loops)
         if (_unit distance2D _getHide < 1.7) then {
             _unit forgetTarget _target;
         };
@@ -101,39 +99,36 @@ private _pos = call {
     };
 
     // exit
-    _doMove = true;
     _movePos
 };
 
 // execute move
 if (
-    _expectedDestination distanceSqr _pos > 1
+    _expectedDestination distanceSqr _pos > 16
 ) then {
 
     // set stance and speed
     [_unit, _pos] call FUNC(doAssaultSpeed);
     _unit setUnitPosWeak (["UP", "MIDDLE"] select ( (stance _unit) isEqualTo "PRONE" || (getSuppression _unit) isNotEqualTo 0 ) );
 
-    // set move
-    if (_doMove) then {
-        _unit doMove _pos;
-    } else {
-        _unit setDestination [_pos, "LEADER PLANNED", false];
-    };
+    // set move - ensuring position is in ATL
+    _unit doMove (ASLToATL (AGLToASL _pos));
+
 };
 
 // debug
 if (GVAR(debug_functions)) then {
+    private _staying = _unit distanceSqr _pos < 1;
     [
         "%1 %2 %3%4(%5 @ %6m)",
         side _unit,
-        ["assaulting ", "staying inside "] select (_unit distance2D _pos < 1),
+        ["assaulting ", "staying "] select _staying,
         ["(building) ", ""] select (_buildings isEqualTo []),
         ["", "(target visible) "] select _vis,
         name _unit,
         round (_unit distance _pos)
     ] call FUNC(debugLog);
-    private _sphere = createSimpleObject ["Sign_Sphere10cm_F", AGLToASL _pos, true];
+    private _sphere = createSimpleObject [["Sign_Sphere10cm_F", "Sign_Arrow_F"] select _staying, AGLToASL _pos, true];
     _sphere setObjectTexture [0, [_unit] call FUNC(debugObjectColor)];
     [{deleteVehicle _this}, _sphere, 12] call CBA_fnc_waitAndExecute;
 };
