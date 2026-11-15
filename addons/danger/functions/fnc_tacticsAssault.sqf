@@ -59,7 +59,7 @@ if ((_target select 2) > 6) then {
 // set speed and enableAttack
 _group enableAttack false;
 _group setSpeedMode "FULL";
-_group setFormation "LINE";
+_group setFormation (["LINE", "FILE"] select (((getPos _unit) getEnvSoundController "houses") > 0.9));;
 
 // find units
 if (_units isEqualTo []) then {
@@ -69,6 +69,12 @@ if (_units isEqualTo []) exitWith {false};
 
 // sort potential targets
 private _buildings = [_target, 28, true, true] call EFUNC(main,findBuildings);
+
+// no buildings - populate with other things!
+if (_buildings isEqualTo []) then {
+    _buildings append ((nearestTerrainObjects [ _target, ["HIDE", "TREE", "BUSH", "SMALL TREE"], 8, false, true]) apply { (getPosATL _x) vectorAdd [2 - random 4, 2 - random 4, 2] });
+    _buildings pushBack (_target vectorAdd [0, 0, 2]);
+};
 
 // more than 25 building positions. Reduce size!
 if (count _buildings > 25) then {
@@ -86,7 +92,7 @@ if (_overwatch isNotEqualTo []) then {
         private _roads = _overwatch nearRoads 30;
         if (_roads isNotEqualTo []) then {_overwatch = ASLToAGL (getPosASL (selectRandom _roads))};
         _x doMove _overwatch;
-        _x doWatch (selectRandom _buildings);
+        _x doWatch (_target vectorAdd [0, 0, 2]);
     } forEach _vehicles;
 };
 
@@ -117,17 +123,12 @@ if (!GVAR(disableAutonomousSmokeGrenades)) then {
 // ready group
 _group setFormDir (_unit getDir _target);
 _group enableIRLasers true;
-_units doWatch objNull;
-_units doMove _target;
-
-// check for reload
-{
-    reload _x;
-} forEach (_units select {getSuppression _x < 0.7 && {needReload _x > 0.6}});
+_units doWatch (_target vectorAdd [0, 0, 2]);
+_units doMove ([_overwatch, _target] select (_overwatch isNotEqualTo []));
 
 // debug
 if (EGVAR(main,debug_functions)) then {
-    ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 buildings)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
+    ["%1 TACTICS ASSAULT (%2 with %3 units @ %4m with %5 positions)", side _unit, name _unit, count _units, round (_unit distance2D _target), count _buildings] call EFUNC(main,debugLog);
     private _m = [_unit, "tactics assault", _unit call EFUNC(main,debugMarkerColor), "hd_arrow"] call EFUNC(main,dotMarker);
     private _mt = [_target, "", _unit call EFUNC(main,debugMarkerColor), "hd_join"] call EFUNC(main,dotMarker);
     {_x setMarkerSizeLocal [0.6, 0.6];} forEach [_m, _mt];
