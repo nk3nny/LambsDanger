@@ -164,7 +164,7 @@ if (_vehicle isKindOf "StaticWeapon") exitWith {
 
 // Make leadership assessment as infantry
 private _leader = leader _unit;
-if (((vehicle _leader) isEqualTo _vehicle) && {_leader call FUNC(isLeader)}) then {
+if (_leader in _vehicle && local _leader && !isPlayer _leader && {_leader call FUNC(isLeader)}) then {
     [_leader, _dangerCausedBy] call FUNC(tactics);
 };
 
@@ -193,8 +193,9 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
     // delay + info
     private _delay = 2 + random 3;
-    private _validTarget = (side _unit) isNotEqualTo (side _dangerCausedBy);
+    private _validTarget = (side _unit) isNotEqualTo (side _dangerCausedBy) && ( _unit knowsAbout _dangerCausedBy > 1 );
     private _distance = _vehicle distance _dangerCausedBy;
+    private _slow = speed _vehicle < 10;
 
     // keep cargo aboard!
     _vehicle setUnloadInCombat [false, false];
@@ -206,10 +207,9 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     if (
         _validTarget
         && {_cargo isNotEqualTo []}
-        && {speed _vehicle < 10}
         && {_distance < 350}
-        && {_unit knowsAbout _dangerCausedBy > 2 || {_distance < 220}}
-        && {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 2]]) || {_distance < 200}}
+        && {_slow || _distance < (50 + random 50)}
+        //&& {_distance < 200 || {!(terrainIntersectASL [eyePos _vehicle, (eyePos _dangerCausedBy) vectorAdd [0, 0, 2]])}}
     ) exitWith {
 
         // use smoke if available
@@ -221,6 +221,7 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
 
         // define enemy direction
         _group setFormDir (_vehicle getDir _dangerCausedBy);
+        _group setFormation selectRandom ["ECH LEFT", "ECH RIGHT"];
 
         // delayed unload
         _unit setVariable [QEGVAR(main,currentTask), "Dismounting troops", EGVAR(main,debug_functions)];
@@ -242,7 +243,6 @@ if (_armored && {!isNull _dangerCausedBy}) exitWith {
     };
 
     // move into gunners seat ~ Enemy Detected, commander alive but gunner dead
-    private _slow = speed _vehicle < 20;
     if (
         RND(0.4)
         && _slow
