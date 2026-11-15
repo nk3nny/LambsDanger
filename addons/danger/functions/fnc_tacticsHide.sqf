@@ -72,8 +72,6 @@ _units = _units select {
     && {isNull objectParent _x}
     && {_x checkAIFeature "PATH"}
     && {_x checkAIFeature "MOVE"}
-    && {!(_x call EFUNC(main,isIndoor))}
-    && {!(_x getVariable [QGVAR(forceMove), false])}
 };
 if (_units isEqualTo []) exitWith {false};
 
@@ -92,7 +90,7 @@ if (_antiTank && { _vehicleIndex != -1 } && { _launchersAT isNotEqualTo [] || (_
     private _targetVehicle = vehicle (_enemies select _vehicleIndex);
     {
         // launcher units target air/tank
-        _x setCombatMode "RED";
+        _x setUnitCombatMode "RED";
         _x doTarget _targetVehicle;
 
         // extra impetuous to select launcher
