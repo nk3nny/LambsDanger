@@ -24,6 +24,7 @@ if (
     || isNull _unit
     || !(local _unit)
     || isPlayer _unit
+    || _unit getVariable [QEGVAR(danger,disableAI), false]
     || {!isNull objectParent _unit}
     || {(stance _unit) isEqualTo "PRONE"}
     || {_unit getVariable [QGVAR(explosionReactionTime), 0] > time}

@@ -15,10 +15,18 @@ class Extended_PostInit_EventHandlers {
     };
 };
 */
-class Extended_Explosion_Eventhandlers {
+class Extended_Explosion_EventHandlers {
     class CAManBase {
         class LAMBS_CAManBase_Explosion {
             Explosion = QUOTE(call FUNC(delayExplosionEH));
+        };
+    };
+};
+
+class Extended_Fired_EventHandlers {
+    class CAManBase {
+        class LAMBS_CAManBase_Fired {
+            Fired = QUOTE(call FUNC(firedEH));
         };
     };
 };

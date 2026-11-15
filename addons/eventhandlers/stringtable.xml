@@ -28,6 +28,12 @@
             <German>KI-Reaktionen auf umliegende Explosionen umschalten</German>
             <Chinesesimp>切换人AI对附近爆炸的反应</Chinesesimp>
         </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledGrenadeEH_DisplayName">
+            <English>Enable Grenade Eventhandler</English>
+        </Key>
+        <Key ID="STR_Lambs_Eventhandlers_Settings_EnabledGrenadeEH_ToolTip">
+            <English>Toggle AI calling out when throwing, or receiving dangerous grenades.</English>
+        </Key>
         <Key ID="STR_Lambs_Eventhandlers_Settings_ExplosionResetTime_DisplayName">
             <English>Explosion Eventhandler reset time</English>
             <Czech>Čas restartu Eventhandleru explozí</Czech>
