@@ -61,8 +61,17 @@ _vehicle doSuppressiveFire _pos;
 
 // extra fire
 [{
-    if ((currentCommand _this) isEqualTo "Suppress") then {
-        _this action ["useWeapon", _this, gunner _this, random 2];
+    params [["_vehicle", objNull]];
+    private _gunner = gunner _vehicle;
+    if (
+        (currentCommand _vehicle) isEqualTo "Suppress"
+        && {!isNull _gunner}
+    ) then {
+        private _weapon = _vehicle currentWeaponTurret (_vehicle unitTurret _gunner);
+        private _canLock = getNumber (configFile >> "CfgWeapons" >> _weapon >> "canLock");
+        if (_canLock isEqualTo 0) then {
+            _vehicle action ["useWeapon", _vehicle, _gunner, random 2];
+        };
     };
 }, _vehicle, 6] call CBA_fnc_waitAndExecute;
 

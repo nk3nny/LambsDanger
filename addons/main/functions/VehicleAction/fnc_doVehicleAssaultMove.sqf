@@ -40,9 +40,8 @@ if (
 
 private _destination = call {
 
-    // 25 meters ahead
+    // 50 meters ahead
     private _typeOf = typeOf _vehicle;
-    private _distance = _vehicle distance _pos;
     private _movePos = _vehicle getPos [50 min _distance, _vehicle getDir _pos];
     _movePos = _movePos findEmptyPosition [0, 15, _typeOf];
     if (_movePos isNotEqualTo [] && {[vehicle _target, "VIEW", objNull] checkVisibility [(AGLToASL _movePos) vectorAdd [0, 0, 3], AGLToASL _pos] > 0}) exitWith {

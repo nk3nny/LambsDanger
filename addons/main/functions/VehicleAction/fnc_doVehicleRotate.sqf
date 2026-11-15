@@ -20,7 +20,7 @@
  *
  * Public: No
 */
-params ["_unit", ["_target", []], ["_threshold", 18]];
+params ["_unit", ["_target", []], ["_threshold", 24]];
 
 if (_target isEqualTo []) then {
     _target = _unit getHideFrom (_unit findNearestEnemy _unit);
@@ -41,7 +41,7 @@ if (
 
 // CQB tweak -- target within 35m - look instead
 if (_unit distanceSqr _target < 1225) exitWith {
-    _vehicle doWatch (ATLToASL _target);
+    _vehicle doWatch _target;
     false
 };
 
@@ -97,7 +97,7 @@ if (_vehicle isKindOf "Tank") then {
     }, [_vehicle, _target, _threshold * 3], 4 + random 3,
     {
         params ["_vehicle", "_target"];
-        _vehicle doWatch (ATLToASL _target);
+        _vehicle doWatch _target;
         _vehicle sendSimpleCommand "STOPTURNING";
         _vehicle doMove (getPosASL _vehicle);
     }

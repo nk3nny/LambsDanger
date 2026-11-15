@@ -56,7 +56,7 @@ if (_buildings isEqualTo []) then {
 _pos = selectRandom _buildings;
 
 // look at position
-_vehicle doWatch (AGLToASL _pos);
+_vehicle doWatch _pos;
 
 // suppression
 private _suppression = [_unit, _pos] call FUNC(doVehicleSuppress);
@@ -65,8 +65,8 @@ private _suppression = [_unit, _pos] call FUNC(doVehicleSuppress);
 _unit setVariable [QGVAR(currentTarget), _target, GVAR(debug_functions)];
 _unit setVariable [QGVAR(currentTask), "Vehicle Assault", GVAR(debug_functions)];
 
-// minor jink if no suppression possible
-if (!_suppression) exitWith {[_unit, 35] call FUNC(doVehicleJink)};
+// assault move-  if no suppression possible
+if (!_suppression) exitWith {[_unit, _pos, _target, 50] call FUNC(doVehicleAssaultMove)};
 
 // cannon direction ~ threshold 30 degrees
 private _fnc_turretDir = {
