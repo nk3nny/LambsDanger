@@ -27,24 +27,26 @@ if !(_group getVariable [QEGVAR(danger,isExecutingTactic), false]) exitWith {fal
 _units = _units select { !( _x getVariable [QEGVAR(danger,disableAI), false] ) && { _x call FUNC(isAlive) } && { !isPlayer _x } };
 _vehicles = _vehicles select { canFire _x };
 
-// group has reached destination
+// group has reached destination or close to suppression-position
 private _leader = leader _group;
-if ( _leader distance2D _overwatch < 10 ) exitWith {
+if ( _leader distance2D _overwatch < 10 || ((_posList findIf {_leader distance2D _x < 10}) isNotEqualTo -1)) exitWith {
     _group setVariable [QEGVAR(danger,isExecutingTactic), false];
     _group setVariable [QGVAR(groupMemory), _posList, false];
 };
 
-// leader has no friendlies within 35 meters
+// leader has no friendlies within 30 meters
 private _distanceSqr = _leader distanceSqr _overwatch;
-private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leader < 1225 || { _x distanceSqr _overwatch < _distanceSqr }} ) isEqualTo -1;
+private _leaderAlone = ( ( _units - crew _leader) findIf { _x distanceSqr _leader < 900 || { _x distanceSqr _overwatch < _distanceSqr }} ) isEqualTo -1;
 
-[_posList, true] call CBA_fnc_shuffle;
 private _index = -1;
 private _checkCount = 3;
 
+// move
+_units doMove _overwatch;
+
 {
     private _unit = _x;
-    private _suppressed = (getSuppression _unit) > 0.5;
+    private _suppressed = (getSuppression _unit) > 0.35;
     private _activeTeam = (_forEachIndex % 2) isEqualTo _teamAlpha;
 
     // stance
@@ -56,14 +58,10 @@ private _checkCount = 3;
         "MIDDLE"
     };
     _unit setUnitPos _unitPos;
-    _unit setVariable [QEGVAR(danger,forceMove), !_suppressed];
-
-    // move
-    _unit doMove (_overwatch vectorAdd [_forEachIndex, _forEachIndex, 0]);
-    _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
     // check suppress position
     if (_activeTeam && _checkCount > 0 && _index isEqualTo -1) then {
+        [_posList, true] call CBA_fnc_shuffle;
         _index = [_x, _posList] call FUNC(checkVisibilityList);
         _checkCount = _checkCount - 1;
     };
@@ -78,11 +76,19 @@ private _checkCount = 3;
     ) then {
 
         // shoot
-        private _suppressing = [_unit, AGLToASL ((_posList select _index) vectorAdd [0, 0, random 1])] call FUNC(doSuppress);
+        private _suppressing = [_unit, AGLToASL ((_posList select _index) vectorAdd [0, 0, 1 + random 1])] call FUNC(doSuppress);
         _unit setVariable [QGVAR(currentTask), "Group Flank - Suppress", GVAR(debug_functions)];
         if (!_suppressing) then {
             _index = -1;
         };
+
+    } else {
+
+        // lower weapon!
+        if (!_suppressed) then {_unit action ["WeaponOnBack", _unit];};
+
+        // update variable
+        _unit setVariable [QGVAR(currentTask), "Group Flank", GVAR(debug_functions)];
 
     };
 
@@ -93,7 +99,6 @@ _teamAlpha = parseNumber (_teamAlpha isEqualTo 0);
 
 // vehicles
 _vehicles doWatch (selectRandom _posList);
-[_posList, true] call CBA_fnc_shuffle;
 
 // reset visibility index
 _index = -1;
@@ -115,7 +120,10 @@ _index = -1;
     };
 
     // sort out vehicles
-    if (!_forceMove && {_index isEqualTo -1}) then {_index = [_vehicle, _posList] call FUNC(checkVisibilityList);};
+    if (!_forceMove && {_index isEqualTo -1}) then {
+        [_posList, true] call CBA_fnc_shuffle;
+        _index = [_vehicle, _posList] call FUNC(checkVisibilityList);
+    };
 
     // found good target - do suppressive fire
     if (!_forceMove && _index isNotEqualTo -1) then {
@@ -134,7 +142,7 @@ _index = -1;
     if (_forceMove || _vehicleAlone || _leaderAlone || {_index isEqualTo -1}) then {
 
         // debug variable
-        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Flank - Manoeuvring!", GVAR(debug_functions)];
+        (effectiveCommander _vehicle) setVariable [QGVAR(currentTask), "Group Flank - Manoeuvering!", GVAR(debug_functions)];
 
         // move up behind leader
         private _movePos = call {
