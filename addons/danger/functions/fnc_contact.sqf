@@ -21,15 +21,15 @@ params [["_unit", objNull, [objNull]], ["_enemy", objNull, [objNull]]];
 if !((leader _unit) isEqualTo _unit || {_unit call EFUNC(main,isAlive)}) exitWith {false};
 
 // identify enemy
-if (isNull _enemy) then {
+private _group = group _unit;
+if (isNull _enemy || { (side _group) isEqualTo (side group _enemy) } ) then {
     private _enemies = _unit targets [true];
     if (_enemies isNotEqualTo []) exitWith {_enemy = _enemies select 0};
     _enemy = objNull
 };
 
 // no enemy -- minor pause
-private _group = group _unit;
-if (isNull _enemy || { (side _group) isEqualTo (side group _enemy) } ) exitWith {
+if (isNull _enemy) exitWith {
     _group setVariable [QGVAR(contact), time + 10 + random 10];
     _group setFormDir random 360;
     false
@@ -60,8 +60,8 @@ if (count _units > 2) then {
     // supporting unit
     private _unitCaller = _units select -1;
 
-    // point
-    [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gesturePoint"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
+    // mirror gesture
+    [{_this call EFUNC(main,doGesture)}, [_unitCaller, "gestureFreeze"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
 
     // contact!
     [{_this call EFUNC(main,doCallout)}, [_unitCaller, ["Combat", "Stealth"] select _stealth, "contact"], 0.3 + random 4] call CBA_fnc_waitAndExecute;
@@ -76,11 +76,6 @@ if (count _units > 2) then {
     }, [_unit, _enemy, _stealth], 1 + random 4
 ] call CBA_fnc_waitAndExecute;
 
-// units stealthy or indoor units stay inside
-if ((_unit checkAIFeature "PATH") && (_stealth || {[_unit] call EFUNC(main,isIndoor)})) then {
-    private _buildings = [leader _unit, 35, true, true] call EFUNC(main,findBuildings);
-    _group setVariable [QEGVAR(main,groupMemory), _buildings, false];
-};
 
 // drop low
 {
@@ -89,12 +84,12 @@ if ((_unit checkAIFeature "PATH") && (_stealth || {[_unit] call EFUNC(main,isInd
 
 // leader seeks cover
 if (
-    ((expectedDestination _unit) select 1) isEqualTo "DoNotPlan"
+    ((expectedDestination _unit) select 1) isEqualTo "DoNotPlan" && !([_unit] call EFUNC(main,isIndoor))
 ) then {
-    private _cover = nearestTerrainObjects [ _unit, ["BUSH", "TREE", "SMALL TREE", "HOUSE", "ROCK", "WALL", "FENCE"], 35, false, true ];
+    private _cover = nearestTerrainObjects [ _unit, ["BUSH", "TREE", "SMALL TREE", "HOUSE", "ROCK", "WALL", "FENCE"], 35, true, true ];
     if (_cover isNotEqualTo []) then {
-        _cover = selectRandom _cover;
-        _unit doMove ( ( _cover getPos [1, _enemy getDir _cover]) );
+        _cover = _cover select 0;
+        _unit doMove ( ( _cover getPos [2, _enemy getDir _cover]) );
     };
 };
 
@@ -105,9 +100,12 @@ _unit setVariable [QEGVAR(main,currentTask), "Contact!", EGVAR(main,debug_functi
 // debug
 if (EGVAR(main,debug_functions)) then {
     ["%1 CONTACT! %2 @ %3m", side _unit, groupId _group, round (_unit distance2D _enemy)] call EFUNC(main,debugLog);
-    private _m = [_unit, "contact!", _unit call EFUNC(main,debugMarkerColor), "mil_warning"] call EFUNC(main,dotMarker);
-    _m setMarkerSizeLocal [0.8, 0.8];
-    [{{deleteMarker _x;true} count _this;}, [_m], 45] call CBA_fnc_waitAndExecute;
+    private _m = [_unit, "contact!", _unit call EFUNC(main,debugMarkerColor), "loc_Attack"] call EFUNC(main,dotMarker);
+    _m setMarkerSizeLocal [1.5, 1.5];
+    private _arrow = [_unit getPos [22, _unit getDir _enemy], format ["%1m", round (_unit distance2D _enemy)], _unit call EFUNC(main,debugMarkerColor), "mil_arrow2"] call EFUNC(main,dotMarker);
+    _arrow setMarkerDirLocal (_unit getDir _enemy);
+    _arrow setMarkerSizeLocal [0.8, 0.8];
+    [{{deleteMarker _x;true} count _this;}, [_m, _arrow], 60] call CBA_fnc_waitAndExecute;
 };
 
 // end
