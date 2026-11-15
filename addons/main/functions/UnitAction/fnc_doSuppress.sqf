@@ -5,9 +5,9 @@
  *
  * Arguments:
  * 0: unit suppressing <OBJECT>
- * 1: target position <ARRAY> (ASL position)
+ * 1: target position <OBJECT>, <ARRAY> (ASL position)
  * 2: do extended visibility checks <BOOLEAN>, default false
- * 3: do higher rate of fire, default false
+ * 3: do higher rate of fire <BOOLEAN>, default false
  *
  * Return Value:
  * success
