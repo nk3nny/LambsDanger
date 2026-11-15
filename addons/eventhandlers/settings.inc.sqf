@@ -17,3 +17,11 @@ private _curCat = LSTRING(Settings_Cat);
     [0, 25, 9, 2],
     true         // players may configure their own preferences
 ] call CBA_fnc_addSetting;
+[
+    QGVAR(GrenadeEventHandlerEnabled),
+    "CHECKBOX",
+    [LSTRING(Settings_EnabledGrenadeEH_DisplayName), LSTRING(Settings_EnabledGrenadeEH_ToolTip)],
+    [COMPONENT_NAME, _curCat],
+    true,
+    true         // players may configure their own preferences
+] call CBA_fnc_addSetting;
