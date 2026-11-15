@@ -30,9 +30,12 @@ private _body = allDeadMen select _weaponHolders;
 
 // execute
 _unit setUnitPosWeak "MIDDLE";
+_unit forceSpeed 24;
 _unit doMove (getPosATL _body);
+_unit setDestination [(getPosATL _body), "LEADER DIRECT", true];
 _unit doWatch _body;
 _unit setVariable [QEGVAR(danger,forceMove), true];
+_unit disableAI "TARGET";
 [
     {
         // condition
@@ -65,8 +68,16 @@ _unit setVariable [QEGVAR(danger,forceMove), true];
                 };
             };
 
-            _unit doFollow leader _unit;
-            _unit setVariable [QEGVAR(danger,forceMove), nil];
+            [
+                {
+                    params [["_unit", objNull]];
+                    _unit doFollow (leader _unit);
+                    _unit setVariable [QEGVAR(danger,forceMove), nil];
+                    _unit enableAI "TARGET";
+                },
+                _unit,
+                1
+            ] call CBA_fnc_waitAndExecute;
         };
     },
     [_unit, _body], 8,
@@ -76,6 +87,7 @@ _unit setVariable [QEGVAR(danger,forceMove), true];
         if (_unit call FUNC(isAlive)) then {
             _unit doFollow leader _unit;
             _unit setVariable [QEGVAR(danger,forceMove), nil];
+            _unit enableAI "TARGET";
         };
     }
 ] call CBA_fnc_waitUntilAndExecute;
