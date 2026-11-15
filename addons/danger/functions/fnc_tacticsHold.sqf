@@ -51,7 +51,7 @@ private _units = units _unit;
 if (count _units > 2) then {
 
     // callout
-    [_unit, "combat", selectRandom ["KeepFocused", "StayAlert"], 100] call EFUNC(main,doCallout);
+    [_unit, "combat", selectRandom ["KeepFocused", "StayAlert", "StayBack"]] call EFUNC(main,doCallout);
 
     // has taken casualties and no real orders: hide
     if (
@@ -71,8 +71,8 @@ if (count _units > 2) then {
             // set group task
             _group setVariable [QEGVAR(main,currentTactic), "Holding!", EGVAR(main,debug_functions)];
 
-            // gesture wildly!
-            [_unit, "gestureCeaseFire"] call EFUNC(main,doGesture);
+            // gesture hold
+            [_unit, "gestureFreeze"] call EFUNC(main,doGesture);
 
             // execute hiding
             [_units, _pos, "holding"] call EFUNC(main,doGroupHide);
