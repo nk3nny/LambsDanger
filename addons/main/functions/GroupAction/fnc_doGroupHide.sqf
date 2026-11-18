@@ -18,17 +18,23 @@
 */
 params ["_units", "_pos", ["_action", "group"]];
 
+// pass any argument
+if (_units isEqualTypeAny [grpNull, objNull]) then {_units = units _units;};
+
 // check units
 _units = _units select { _x call FUNC(isAlive) && { isNull objectParent _x } && { !isPlayer _x } };
 if (_units isEqualTo []) exitWith {false};
 
+// get buildings
+private _buildings = [selectRandom _units, 35, true, true] call FUNC(findBuildings);
+
 {
     private _unit = _x;
-    [_unit, _pos] call FUNC(doHide);
+    [_unit, _pos, nil, _buildings] call FUNC(doHide);
     _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", _action], EGVAR(main,debug_functions)];
 
     // force movement!
-    if (getSuppression _unit > 0.4 || {_unit distance2D _pos > 25}) then {_unit setUnitPos selectRandom ["MIDDLE", "DOWN", "DOWN"];};
+    _unit forceSpeed 24;
     _unit setVariable [QEGVAR(danger,forceMove), true];
     [
         {
@@ -39,6 +45,7 @@ if (_units isEqualTo []) exitWith {false};
             params ["_unit", ["_pos", [0, 0, 0]]];
             _unit setVariable [QEGVAR(danger,forceMove), nil];
             [_unit, _pos] call FUNC(doHide);
+            _unit doWatch _pos;
             _unit setVariable [QEGVAR(main,currentTask), format ["Hide (%1)", "re-hide"], EGVAR(main,debug_functions)];
         },
         [_unit, _pos],

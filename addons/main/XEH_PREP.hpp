@@ -53,6 +53,7 @@ SUBPREP(UnitAction,doHide);
 SUBPREP(UnitAction,doPanic);
 SUBPREP(UnitAction,doReposition);
 SUBPREP(UnitAction,doSmoke);
+SUBPREP(UnitAction,doStanceReset);
 SUBPREP(UnitAction,doSuppress);
 SUBPREP(UnitAction,doUGL);
 

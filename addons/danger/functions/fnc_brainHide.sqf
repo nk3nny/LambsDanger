@@ -34,7 +34,7 @@ private _timeout = time + 2;
 if (_type isEqualTo DANGER_SCREAM) exitWith {
 
     // check danger
-    _unit doWatch _pos;
+    _unit glanceAt _pos;
     _unit setVariable [QEGVAR(main,currentTarget), _pos, EGVAR(main,debug_functions)];
     _unit setVariable [QEGVAR(main,currentTask), "Heard scream!", EGVAR(main,debug_functions)];
 
