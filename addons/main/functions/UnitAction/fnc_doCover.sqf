@@ -28,7 +28,7 @@ private _pos = nearestTerrainObjects [_unit, ["BUSH", "TREE", "HIDE", "WALL"], 4
 if (_pos isEqualTo []) exitWith {false};
 
 // adjust pos - exit if close
-_pos =_pos select 0;
+_pos = _pos select 0;
 _pos = _pos getPos [-1.2, _unit getDir _pos];
 if (_unit distance2D _pos < 0.6) exitWith {false};
 
